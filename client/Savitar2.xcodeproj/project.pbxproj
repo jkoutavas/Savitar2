@@ -1,0 +1,771 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08DFF98B1A3108BCC3EB4A38 /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */; };
+		44976AE3E7EFC75F1DDE1F36 /* Pods_Savitar2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */; };
+		693C343020311308004AA3D5 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693C342F20311308004AA3D5 /* InputViewController.swift */; };
+		695484A01FC4E6E400A6983F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954849F1FC4E6E400A6983F /* AppDelegate.swift */; };
+		695484A21FC4E6E400A6983F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484A11FC4E6E400A6983F /* ViewController.swift */; };
+		695484A41FC4E6E400A6983F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484A31FC4E6E400A6983F /* Document.swift */; };
+		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
+		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
+		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
+		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
+		69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DDFD0A1FC67D530072F404 /* SplitViewController.swift */; };
+		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		695484B11FC4E6E400A6983F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 695484941FC4E6E400A6983F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6954849B1FC4E6E400A6983F;
+			remoteInfo = Savitar2;
+		};
+		695484BC1FC4E6E400A6983F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 695484941FC4E6E400A6983F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6954849B1FC4E6E400A6983F;
+			remoteInfo = Savitar2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		693C342F20311308004AA3D5 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6954849F1FC4E6E400A6983F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		695484A11FC4E6E400A6983F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		695484A31FC4E6E400A6983F /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		695484A81FC4E6E400A6983F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		695484AA1FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		695484AB1FC4E6E400A6983F /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
+		695484B01FC4E6E400A6983F /* Savitar2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		695484B41FC4E6E400A6983F /* Savitar2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2Tests.swift; sourceTree = "<group>"; };
+		695484B61FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
+		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69DDFD0A1FC67D530072F404 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
+		9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		695484991FC4E6E400A6983F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44976AE3E7EFC75F1DDE1F36 /* Pods_Savitar2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484AD1FC4E6E400A6983F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08DFF98B1A3108BCC3EB4A38 /* Pods_Savitar2Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484B81FC4E6E400A6983F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30ADD603982D99EAF07BD7B9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */,
+				8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */,
+				092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */,
+				82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */,
+				9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */,
+				C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		695484931FC4E6E400A6983F = {
+			isa = PBXGroup;
+			children = (
+				6954849E1FC4E6E400A6983F /* Savitar2 */,
+				695484B31FC4E6E400A6983F /* Savitar2Tests */,
+				695484BE1FC4E6E400A6983F /* Savitar2UITests */,
+				6954849D1FC4E6E400A6983F /* Products */,
+				30ADD603982D99EAF07BD7B9 /* Pods */,
+				9052CD0F565ACCCBED44FEE0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6954849D1FC4E6E400A6983F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6954849C1FC4E6E400A6983F /* Savitar2.app */,
+				695484B01FC4E6E400A6983F /* Savitar2Tests.xctest */,
+				695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6954849E1FC4E6E400A6983F /* Savitar2 */ = {
+			isa = PBXGroup;
+			children = (
+				6954849F1FC4E6E400A6983F /* AppDelegate.swift */,
+				693C342F20311308004AA3D5 /* InputViewController.swift */,
+				695484A11FC4E6E400A6983F /* ViewController.swift */,
+				695484A31FC4E6E400A6983F /* Document.swift */,
+				695484A51FC4E6E400A6983F /* Assets.xcassets */,
+				695484A71FC4E6E400A6983F /* Main.storyboard */,
+				695484AA1FC4E6E400A6983F /* Info.plist */,
+				695484AB1FC4E6E400A6983F /* Savitar2.entitlements */,
+				69DDFD0A1FC67D530072F404 /* SplitViewController.swift */,
+			);
+			path = Savitar2;
+			sourceTree = "<group>";
+		};
+		695484B31FC4E6E400A6983F /* Savitar2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				695484B41FC4E6E400A6983F /* Savitar2Tests.swift */,
+				695484B61FC4E6E400A6983F /* Info.plist */,
+			);
+			path = Savitar2Tests;
+			sourceTree = "<group>";
+		};
+		695484BE1FC4E6E400A6983F /* Savitar2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */,
+				695484C11FC4E6E400A6983F /* Info.plist */,
+			);
+			path = Savitar2UITests;
+			sourceTree = "<group>";
+		};
+		9052CD0F565ACCCBED44FEE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */,
+				565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */,
+				43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6954849B1FC4E6E400A6983F /* Savitar2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 695484C41FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2" */;
+			buildPhases = (
+				B0B10D36ACBAFE1567D46532 /* [CP] Check Pods Manifest.lock */,
+				695484981FC4E6E400A6983F /* Sources */,
+				695484991FC4E6E400A6983F /* Frameworks */,
+				6954849A1FC4E6E400A6983F /* Resources */,
+				9A6ED5B7A46F0EA0E172798A /* [CP] Embed Pods Frameworks */,
+				D3BE9588D633C4C1F4755233 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Savitar2;
+			productName = Savitar2;
+			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		695484AF1FC4E6E400A6983F /* Savitar2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 695484C71FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2Tests" */;
+			buildPhases = (
+				A49F0B7CDC331EB0B2D918DD /* [CP] Check Pods Manifest.lock */,
+				695484AC1FC4E6E400A6983F /* Sources */,
+				695484AD1FC4E6E400A6983F /* Frameworks */,
+				695484AE1FC4E6E400A6983F /* Resources */,
+				1AC2E078598884E98D79FFE1 /* [CP] Embed Pods Frameworks */,
+				A14CBFFE8C1DF59DD45E59B1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				695484B21FC4E6E400A6983F /* PBXTargetDependency */,
+			);
+			name = Savitar2Tests;
+			productName = Savitar2Tests;
+			productReference = 695484B01FC4E6E400A6983F /* Savitar2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		695484BA1FC4E6E400A6983F /* Savitar2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 695484CA1FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2UITests" */;
+			buildPhases = (
+				8D40E123ADFEC263E643A35B /* [CP] Check Pods Manifest.lock */,
+				695484B71FC4E6E400A6983F /* Sources */,
+				695484B81FC4E6E400A6983F /* Frameworks */,
+				695484B91FC4E6E400A6983F /* Resources */,
+				F51A60B37A5983F361117EDC /* [CP] Embed Pods Frameworks */,
+				2F8A69E5217C900CD8B580C1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				695484BD1FC4E6E400A6983F /* PBXTargetDependency */,
+			);
+			name = Savitar2UITests;
+			productName = Savitar2UITests;
+			productReference = 695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		695484941FC4E6E400A6983F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Heynow Software";
+				TargetAttributes = {
+					6954849B1FC4E6E400A6983F = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					695484AF1FC4E6E400A6983F = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6954849B1FC4E6E400A6983F;
+					};
+					695484BA1FC4E6E400A6983F = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6954849B1FC4E6E400A6983F;
+					};
+				};
+			};
+			buildConfigurationList = 695484971FC4E6E400A6983F /* Build configuration list for PBXProject "Savitar2" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 695484931FC4E6E400A6983F;
+			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6954849B1FC4E6E400A6983F /* Savitar2 */,
+				695484AF1FC4E6E400A6983F /* Savitar2Tests */,
+				695484BA1FC4E6E400A6983F /* Savitar2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6954849A1FC4E6E400A6983F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
+				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484AE1FC4E6E400A6983F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484B91FC4E6E400A6983F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AC2E078598884E98D79FFE1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F8A69E5217C900CD8B580C1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D40E123ADFEC263E643A35B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Savitar2UITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A6ED5B7A46F0EA0E172798A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A14CBFFE8C1DF59DD45E59B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A49F0B7CDC331EB0B2D918DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Savitar2Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0B10D36ACBAFE1567D46532 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Savitar2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3BE9588D633C4C1F4755233 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F51A60B37A5983F361117EDC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		695484981FC4E6E400A6983F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				695484A21FC4E6E400A6983F /* ViewController.swift in Sources */,
+				693C343020311308004AA3D5 /* InputViewController.swift in Sources */,
+				695484A01FC4E6E400A6983F /* AppDelegate.swift in Sources */,
+				695484A41FC4E6E400A6983F /* Document.swift in Sources */,
+				69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484AC1FC4E6E400A6983F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		695484B71FC4E6E400A6983F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		695484B21FC4E6E400A6983F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6954849B1FC4E6E400A6983F /* Savitar2 */;
+			targetProxy = 695484B11FC4E6E400A6983F /* PBXContainerItemProxy */;
+		};
+		695484BD1FC4E6E400A6983F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6954849B1FC4E6E400A6983F /* Savitar2 */;
+			targetProxy = 695484BC1FC4E6E400A6983F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		695484A71FC4E6E400A6983F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				695484A81FC4E6E400A6983F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		695484C21FC4E6E400A6983F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		695484C31FC4E6E400A6983F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		695484C51FC4E6E400A6983F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		695484C61FC4E6E400A6983F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		695484C81FC4E6E400A6983F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
+			};
+			name = Debug;
+		};
+		695484C91FC4E6E400A6983F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
+			};
+			name = Release;
+		};
+		695484CB1FC4E6E400A6983F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = Savitar2;
+			};
+			name = Debug;
+		};
+		695484CC1FC4E6E400A6983F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RFE485QN84;
+				INFOPLIST_FILE = Savitar2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = Savitar2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		695484971FC4E6E400A6983F /* Build configuration list for PBXProject "Savitar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				695484C21FC4E6E400A6983F /* Debug */,
+				695484C31FC4E6E400A6983F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		695484C41FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				695484C51FC4E6E400A6983F /* Debug */,
+				695484C61FC4E6E400A6983F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		695484C71FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				695484C81FC4E6E400A6983F /* Debug */,
+				695484C91FC4E6E400A6983F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		695484CA1FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				695484CB1FC4E6E400A6983F /* Debug */,
+				695484CC1FC4E6E400A6983F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 695484941FC4E6E400A6983F /* Project object */;
+}

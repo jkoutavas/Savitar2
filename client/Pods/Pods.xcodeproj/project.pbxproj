@@ -1,0 +1,878 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10059B985DF20E1E88831F8C2E9F647C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		18A039E3597948477101FD96DE62BDC3 /* Pods-Savitar2-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 753370AEB29F29350859950F0EB21444 /* Pods-Savitar2-dummy.m */; };
+		24B6656F5497464E60AADCA28936F71B /* SocketUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFA77A5FABE74663EEC0DA35C518FD1 /* SocketUtils.swift */; };
+		2C0C6A8FD45638C5A8ED011C51CD18F6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		2E1A2D967C45F640F5DE6BC8AEDB69DB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3E52EDED6F843ADAC33A207A34C5C /* Socket.swift */; };
+		5EE2228BBAB5622594FE123098054E99 /* SocketProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10751A3F3870DCA759F0804326BE253F /* SocketProtocols.swift */; };
+		70119679E2ECF3FA522075C2050D96F3 /* BlueSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CB4E7265A0CF0F9E8BEBAD2913FB7D /* BlueSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73CBFF6FA28BBDB21B6D725B907E9F4B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		816BA5B8B6767F81C3934B661E1071AC /* BlueSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0EA4069418E82D1DF81E31DFAF9AE8 /* BlueSocket-dummy.m */; };
+		A0DA1D6323687FF36176EA6DDADD015D /* Pods-Savitar2-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3739C474650712320E7098EC727EFEF5 /* Pods-Savitar2-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A475B45412D9C7AE55ABEE2D103F60B9 /* Pods-Savitar2Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C1AA78299EC535D0CC2A0199E8D600 /* Pods-Savitar2Tests-dummy.m */; };
+		AECD2CE2685523B16120848F055D13B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */; };
+		C90D49715A785183366712DA0227D7B6 /* Pods-Savitar2UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B832FFBC0A4129059AEDFABEB6FE616 /* Pods-Savitar2UITests-dummy.m */; };
+		E2A32C4DD4266AF3B5486B4F34459892 /* Pods-Savitar2Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 44EF458AFF267875CE05A6C6C4E32D32 /* Pods-Savitar2Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E618BEABAFC05F2BF1DFD3B47210B3B0 /* Pods-Savitar2UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1BE5257DE554901FC536C351BD43CAA /* Pods-Savitar2UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DEB1EE30A41986705B2A2DBB6C84F0F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1053405F1F7488B4AD94BD05AC90814D;
+			remoteInfo = BlueSocket;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0694C29319FAA4175B1375F223EC771D /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2UITests.framework; path = "Pods-Savitar2UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10751A3F3870DCA759F0804326BE253F /* SocketProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketProtocols.swift; path = Sources/Socket/SocketProtocols.swift; sourceTree = "<group>"; };
+		10CB193A003DFCFECB562BCADE9B6158 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11CB4E7265A0CF0F9E8BEBAD2913FB7D /* BlueSocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BlueSocket-umbrella.h"; sourceTree = "<group>"; };
+		15668F86293DE7E8185BA774D4D65538 /* Pods_Savitar2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2Tests.framework; path = "Pods-Savitar2Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CF4322CD526422844B957402B12767 /* Pods-Savitar2UITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2UITests-frameworks.sh"; sourceTree = "<group>"; };
+		27F09438ACFAA2A9F5413E26DAAFFB71 /* Socket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Socket.framework; path = BlueSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FE922616F12CC8A7BEB6F5A18E02EF5 /* BlueSocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BlueSocket.xcconfig; sourceTree = "<group>"; };
+		3739C474650712320E7098EC727EFEF5 /* Pods-Savitar2-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2-umbrella.h"; sourceTree = "<group>"; };
+		3ABC527A6DC99522250B77B73A512336 /* Pods-Savitar2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2.modulemap"; sourceTree = "<group>"; };
+		44EF458AFF267875CE05A6C6C4E32D32 /* Pods-Savitar2Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2Tests-umbrella.h"; sourceTree = "<group>"; };
+		454B72D8A84DB197C79ADBC0B3B5129D /* BlueSocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BlueSocket.modulemap; sourceTree = "<group>"; };
+		467A1ADD1A6B151F6FD90FC88FDFBDB8 /* Pods-Savitar2Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2Tests-frameworks.sh"; sourceTree = "<group>"; };
+		47C1AA78299EC535D0CC2A0199E8D600 /* Pods-Savitar2Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2Tests-dummy.m"; sourceTree = "<group>"; };
+		4BA12440D9B5EFED2B338FF8A5C0C0C2 /* Pods-Savitar2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.debug.xcconfig"; sourceTree = "<group>"; };
+		4C20B7DF70C88334A4DBA6BCB9F198E5 /* Pods-Savitar2UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2UITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		5D796782C4166CF6C8B164E99817F68C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6747A4E5187360590B41F9EBD24DBB1B /* Pods-Savitar2Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6B0EA4069418E82D1DF81E31DFAF9AE8 /* BlueSocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BlueSocket-dummy.m"; sourceTree = "<group>"; };
+		753370AEB29F29350859950F0EB21444 /* Pods-Savitar2-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2-dummy.m"; sourceTree = "<group>"; };
+		75A5AB2C9C259FFFAC28E9955DFF7028 /* Pods-Savitar2UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		81DBCD7524216F275C99631FD4104B8D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96402F4C584C8D96D7DDAC0CEFBEBDD8 /* Pods-Savitar2-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2-frameworks.sh"; sourceTree = "<group>"; };
+		9B832FFBC0A4129059AEDFABEB6FE616 /* Pods-Savitar2UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2UITests-dummy.m"; sourceTree = "<group>"; };
+		9F8F0C962F0BA5A3373E7757E50576B0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0B73F0285FCC27AFF5E95E91FDD64F4 /* Pods-Savitar2-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A475F1D648F48C1D283E032A7A96D2BD /* Pods-Savitar2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		A713C49A5A899216DE6E0F6F729B56C7 /* Pods-Savitar2UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2UITests.modulemap"; sourceTree = "<group>"; };
+		ACC1D71F5191EA342D37A304BDA0BFF4 /* Pods-Savitar2Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2Tests-resources.sh"; sourceTree = "<group>"; };
+		AFDA08DE64E0234686EF3ADE4BFBF27C /* Pods_Savitar2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2.framework; path = "Pods-Savitar2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9E3E52EDED6F843ADAC33A207A34C5C /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = Sources/Socket/Socket.swift; sourceTree = "<group>"; };
+		BBFA77A5FABE74663EEC0DA35C518FD1 /* SocketUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketUtils.swift; path = Sources/Socket/SocketUtils.swift; sourceTree = "<group>"; };
+		BF2F0BD45A9B682D54B6EB1FB1496FCD /* Pods-Savitar2Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2Tests.modulemap"; sourceTree = "<group>"; };
+		C1BE5257DE554901FC536C351BD43CAA /* Pods-Savitar2UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2UITests-umbrella.h"; sourceTree = "<group>"; };
+		C2F0DD96F6EB5B30BD83A3627E8383CD /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		C48CBEBA9A2DF44A5D1D7403FD414D17 /* Pods-Savitar2UITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2UITests-resources.sh"; sourceTree = "<group>"; };
+		C55534724A6A05D256489EB922E86E6B /* Pods-Savitar2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		CCDE18EB0E346F9F89F1CC75DCE082ED /* Pods-Savitar2-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2-acknowledgements.plist"; sourceTree = "<group>"; };
+		DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		ED37FE613BF1957A42AD435BA8BDAF54 /* BlueSocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BlueSocket-prefix.pch"; sourceTree = "<group>"; };
+		F0DF58AEA5B510A3CBC45BDC6A9A1C1E /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
+		F5A93C2DF9B8593585E9756FA0AC4C17 /* Pods-Savitar2Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		F6B58747D46C792731B616DBE8FAF3EE /* Pods-Savitar2-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2-resources.sh"; sourceTree = "<group>"; };
+		FF62A22F511DD3E373B990B1565D8C42 /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0FA710B8B0094D30B6F4AB298436B6AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73CBFF6FA28BBDB21B6D725B907E9F4B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46540C650BDA0221E30B67939906BD9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C0C6A8FD45638C5A8ED011C51CD18F6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82BCC93CDB451C792DBF7516A94EE77B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AECD2CE2685523B16120848F055D13B3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2CD1AC95F04EFB7FAF31E6DF379735E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10059B985DF20E1E88831F8C2E9F647C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05FF2FAF502886FEAD4FCF31453F2322 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABBA672A17A3754E3EEE683E3A461BB3 /* BlueSocket */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2934F1CF57B91990B945ABAD4012D772 /* Pods-Savitar2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				9F8F0C962F0BA5A3373E7757E50576B0 /* Info.plist */,
+				A713C49A5A899216DE6E0F6F729B56C7 /* Pods-Savitar2UITests.modulemap */,
+				75A5AB2C9C259FFFAC28E9955DFF7028 /* Pods-Savitar2UITests-acknowledgements.markdown */,
+				4C20B7DF70C88334A4DBA6BCB9F198E5 /* Pods-Savitar2UITests-acknowledgements.plist */,
+				9B832FFBC0A4129059AEDFABEB6FE616 /* Pods-Savitar2UITests-dummy.m */,
+				15CF4322CD526422844B957402B12767 /* Pods-Savitar2UITests-frameworks.sh */,
+				C48CBEBA9A2DF44A5D1D7403FD414D17 /* Pods-Savitar2UITests-resources.sh */,
+				C1BE5257DE554901FC536C351BD43CAA /* Pods-Savitar2UITests-umbrella.h */,
+				FF62A22F511DD3E373B990B1565D8C42 /* Pods-Savitar2UITests.debug.xcconfig */,
+				A475F1D648F48C1D283E032A7A96D2BD /* Pods-Savitar2UITests.release.xcconfig */,
+			);
+			name = "Pods-Savitar2UITests";
+			path = "Target Support Files/Pods-Savitar2UITests";
+			sourceTree = "<group>";
+		};
+		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA7AC8429882A95AA0810A9DCDED54FF /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		79725BD3D70A569F06C41F668553BE84 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				454B72D8A84DB197C79ADBC0B3B5129D /* BlueSocket.modulemap */,
+				2FE922616F12CC8A7BEB6F5A18E02EF5 /* BlueSocket.xcconfig */,
+				6B0EA4069418E82D1DF81E31DFAF9AE8 /* BlueSocket-dummy.m */,
+				ED37FE613BF1957A42AD435BA8BDAF54 /* BlueSocket-prefix.pch */,
+				11CB4E7265A0CF0F9E8BEBAD2913FB7D /* BlueSocket-umbrella.h */,
+				81DBCD7524216F275C99631FD4104B8D /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BlueSocket";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
+				05FF2FAF502886FEAD4FCF31453F2322 /* Pods */,
+				AF90CCF104FD41656886E9A1B2FBC44C /* Products */,
+				B4B9D761A88D44795E92A4348F73956C /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		ABBA672A17A3754E3EEE683E3A461BB3 /* BlueSocket */ = {
+			isa = PBXGroup;
+			children = (
+				B9E3E52EDED6F843ADAC33A207A34C5C /* Socket.swift */,
+				10751A3F3870DCA759F0804326BE253F /* SocketProtocols.swift */,
+				BBFA77A5FABE74663EEC0DA35C518FD1 /* SocketUtils.swift */,
+				79725BD3D70A569F06C41F668553BE84 /* Support Files */,
+			);
+			name = BlueSocket;
+			path = BlueSocket;
+			sourceTree = "<group>";
+		};
+		AF90CCF104FD41656886E9A1B2FBC44C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFDA08DE64E0234686EF3ADE4BFBF27C /* Pods_Savitar2.framework */,
+				15668F86293DE7E8185BA774D4D65538 /* Pods_Savitar2Tests.framework */,
+				0694C29319FAA4175B1375F223EC771D /* Pods_Savitar2UITests.framework */,
+				27F09438ACFAA2A9F5413E26DAAFFB71 /* Socket.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4B9D761A88D44795E92A4348F73956C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C87A49875A48421A8B4B8B63D88136EC /* Pods-Savitar2 */,
+				F116E476B0363D5ECBDC6FE4B283D4B1 /* Pods-Savitar2Tests */,
+				2934F1CF57B91990B945ABAD4012D772 /* Pods-Savitar2UITests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C87A49875A48421A8B4B8B63D88136EC /* Pods-Savitar2 */ = {
+			isa = PBXGroup;
+			children = (
+				10CB193A003DFCFECB562BCADE9B6158 /* Info.plist */,
+				3ABC527A6DC99522250B77B73A512336 /* Pods-Savitar2.modulemap */,
+				A0B73F0285FCC27AFF5E95E91FDD64F4 /* Pods-Savitar2-acknowledgements.markdown */,
+				CCDE18EB0E346F9F89F1CC75DCE082ED /* Pods-Savitar2-acknowledgements.plist */,
+				753370AEB29F29350859950F0EB21444 /* Pods-Savitar2-dummy.m */,
+				96402F4C584C8D96D7DDAC0CEFBEBDD8 /* Pods-Savitar2-frameworks.sh */,
+				F6B58747D46C792731B616DBE8FAF3EE /* Pods-Savitar2-resources.sh */,
+				3739C474650712320E7098EC727EFEF5 /* Pods-Savitar2-umbrella.h */,
+				4BA12440D9B5EFED2B338FF8A5C0C0C2 /* Pods-Savitar2.debug.xcconfig */,
+				F0DF58AEA5B510A3CBC45BDC6A9A1C1E /* Pods-Savitar2.release.xcconfig */,
+			);
+			name = "Pods-Savitar2";
+			path = "Target Support Files/Pods-Savitar2";
+			sourceTree = "<group>";
+		};
+		F116E476B0363D5ECBDC6FE4B283D4B1 /* Pods-Savitar2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5D796782C4166CF6C8B164E99817F68C /* Info.plist */,
+				BF2F0BD45A9B682D54B6EB1FB1496FCD /* Pods-Savitar2Tests.modulemap */,
+				6747A4E5187360590B41F9EBD24DBB1B /* Pods-Savitar2Tests-acknowledgements.markdown */,
+				F5A93C2DF9B8593585E9756FA0AC4C17 /* Pods-Savitar2Tests-acknowledgements.plist */,
+				47C1AA78299EC535D0CC2A0199E8D600 /* Pods-Savitar2Tests-dummy.m */,
+				467A1ADD1A6B151F6FD90FC88FDFBDB8 /* Pods-Savitar2Tests-frameworks.sh */,
+				ACC1D71F5191EA342D37A304BDA0BFF4 /* Pods-Savitar2Tests-resources.sh */,
+				44EF458AFF267875CE05A6C6C4E32D32 /* Pods-Savitar2Tests-umbrella.h */,
+				C55534724A6A05D256489EB922E86E6B /* Pods-Savitar2Tests.debug.xcconfig */,
+				C2F0DD96F6EB5B30BD83A3627E8383CD /* Pods-Savitar2Tests.release.xcconfig */,
+			);
+			name = "Pods-Savitar2Tests";
+			path = "Target Support Files/Pods-Savitar2Tests";
+			sourceTree = "<group>";
+		};
+		FA7AC8429882A95AA0810A9DCDED54FF /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				DF428FC7C7A6555B2B02D8E238C8D8F2 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3643004170D0231239CD5946AF0EB5AB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2A32C4DD4266AF3B5486B4F34459892 /* Pods-Savitar2Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D4D3139A8AE3B027E150B0CA36DE95B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70119679E2ECF3FA522075C2050D96F3 /* BlueSocket-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3D64283BCA1D346FC4FCB62DAB4D39A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0DA1D6323687FF36176EA6DDADD015D /* Pods-Savitar2-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E00FE53B51E7EE9435CF7ABB41192444 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E618BEABAFC05F2BF1DFD3B47210B3B0 /* Pods-Savitar2UITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0CE5A382384508EAB8B45345A9CE0502 /* Pods-Savitar2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 704E76A7525CF1F921EF3FA0C377AB66 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */;
+			buildPhases = (
+				C3C0A16660A34A694E3D5C255C33CF7F /* Sources */,
+				46540C650BDA0221E30B67939906BD9A /* Frameworks */,
+				A3D64283BCA1D346FC4FCB62DAB4D39A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A961A0BBD40CB2F497AB6581D5B8069 /* PBXTargetDependency */,
+			);
+			name = "Pods-Savitar2";
+			productName = "Pods-Savitar2";
+			productReference = AFDA08DE64E0234686EF3ADE4BFBF27C /* Pods_Savitar2.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1053405F1F7488B4AD94BD05AC90814D /* BlueSocket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 144F6878767568E5277D30049E90B28D /* Build configuration list for PBXNativeTarget "BlueSocket" */;
+			buildPhases = (
+				E6AD96B4663FB4D22595F718A09A0B1E /* Sources */,
+				82BCC93CDB451C792DBF7516A94EE77B /* Frameworks */,
+				6D4D3139A8AE3B027E150B0CA36DE95B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlueSocket;
+			productName = BlueSocket;
+			productReference = 27F09438ACFAA2A9F5413E26DAAFFB71 /* Socket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C76EE9F302319F35E1010005C058C16E /* Pods-Savitar2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16B92DE967D74119D8492F4E71A5FD67 /* Build configuration list for PBXNativeTarget "Pods-Savitar2UITests" */;
+			buildPhases = (
+				0D981F6101C651CB7584AA39FA61377D /* Sources */,
+				0FA710B8B0094D30B6F4AB298436B6AD /* Frameworks */,
+				E00FE53B51E7EE9435CF7ABB41192444 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Savitar2UITests";
+			productName = "Pods-Savitar2UITests";
+			productReference = 0694C29319FAA4175B1375F223EC771D /* Pods_Savitar2UITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EA03B2F052D9AAD82DD2198AEA59BBC3 /* Pods-Savitar2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F47EB0FE2C20F0312D19318C3C4B714 /* Build configuration list for PBXNativeTarget "Pods-Savitar2Tests" */;
+			buildPhases = (
+				FBCB52206246C22910FE76DED5255704 /* Sources */,
+				D2CD1AC95F04EFB7FAF31E6DF379735E /* Frameworks */,
+				3643004170D0231239CD5946AF0EB5AB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Savitar2Tests";
+			productName = "Pods-Savitar2Tests";
+			productReference = 15668F86293DE7E8185BA774D4D65538 /* Pods_Savitar2Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = AF90CCF104FD41656886E9A1B2FBC44C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1053405F1F7488B4AD94BD05AC90814D /* BlueSocket */,
+				0CE5A382384508EAB8B45345A9CE0502 /* Pods-Savitar2 */,
+				EA03B2F052D9AAD82DD2198AEA59BBC3 /* Pods-Savitar2Tests */,
+				C76EE9F302319F35E1010005C058C16E /* Pods-Savitar2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0D981F6101C651CB7584AA39FA61377D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C90D49715A785183366712DA0227D7B6 /* Pods-Savitar2UITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3C0A16660A34A694E3D5C255C33CF7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A039E3597948477101FD96DE62BDC3 /* Pods-Savitar2-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6AD96B4663FB4D22595F718A09A0B1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				816BA5B8B6767F81C3934B661E1071AC /* BlueSocket-dummy.m in Sources */,
+				2E1A2D967C45F640F5DE6BC8AEDB69DB /* Socket.swift in Sources */,
+				5EE2228BBAB5622594FE123098054E99 /* SocketProtocols.swift in Sources */,
+				24B6656F5497464E60AADCA28936F71B /* SocketUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBCB52206246C22910FE76DED5255704 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A475B45412D9C7AE55ABEE2D103F60B9 /* Pods-Savitar2Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A961A0BBD40CB2F497AB6581D5B8069 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BlueSocket;
+			target = 1053405F1F7488B4AD94BD05AC90814D /* BlueSocket */;
+			targetProxy = DEB1EE30A41986705B2A2DBB6C84F0F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1EEE2B53229DA5230D721E9DF8CB3334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF62A22F511DD3E373B990B1565D8C42 /* Pods-Savitar2UITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2UITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2UITests;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2C794478D1CED6FAB504BF29DA1114C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FE922616F12CC8A7BEB6F5A18E02EF5 /* BlueSocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/BlueSocket/BlueSocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BlueSocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULEMAP_FILE = "Target Support Files/BlueSocket/BlueSocket.modulemap";
+				PRODUCT_NAME = Socket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3BC3AD91EA83C208BD20B4BA1421CF89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		57326BC558B8685461310C5B244739F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FE922616F12CC8A7BEB6F5A18E02EF5 /* BlueSocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/BlueSocket/BlueSocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BlueSocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULEMAP_FILE = "Target Support Files/BlueSocket/BlueSocket.modulemap";
+				PRODUCT_NAME = Socket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7751ADF644940E0328C8366BAB6460B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2F0DD96F6EB5B30BD83A3627E8383CD /* Pods-Savitar2Tests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2Tests;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A6B1AF1795295E8DE7D88492EFCEA58C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C55534724A6A05D256489EB922E86E6B /* Pods-Savitar2Tests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2Tests;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AFFBAF118349084C74A327241A527A9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0DF58AEA5B510A3CBC45BDC6A9A1C1E /* Pods-Savitar2.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BFC9B05991EE41A604021F5FC4D2AE96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		D0B5DA551C93A0AE089941B7F0C41B40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BA12440D9B5EFED2B338FF8A5C0C0C2 /* Pods-Savitar2.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EDADAF4415C8592D7C263F711F845518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A475F1D648F48C1D283E032A7A96D2BD /* Pods-Savitar2UITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2UITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Savitar2UITests;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		144F6878767568E5277D30049E90B28D /* Build configuration list for PBXNativeTarget "BlueSocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57326BC558B8685461310C5B244739F4 /* Debug */,
+				2C794478D1CED6FAB504BF29DA1114C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16B92DE967D74119D8492F4E71A5FD67 /* Build configuration list for PBXNativeTarget "Pods-Savitar2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EEE2B53229DA5230D721E9DF8CB3334 /* Debug */,
+				EDADAF4415C8592D7C263F711F845518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BC3AD91EA83C208BD20B4BA1421CF89 /* Debug */,
+				BFC9B05991EE41A604021F5FC4D2AE96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F47EB0FE2C20F0312D19318C3C4B714 /* Build configuration list for PBXNativeTarget "Pods-Savitar2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6B1AF1795295E8DE7D88492EFCEA58C /* Debug */,
+				7751ADF644940E0328C8366BAB6460B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		704E76A7525CF1F921EF3FA0C377AB66 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0B5DA551C93A0AE089941B7F0C41B40 /* Debug */,
+				AFFBAF118349084C74A327241A527A9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
