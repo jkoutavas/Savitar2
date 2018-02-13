@@ -50,7 +50,7 @@ class EchoServer {
                     let newSocket = try socket.acceptClientConnection()
 
                     print("Accepted connection from: \(newSocket.remoteHostname) on port \(newSocket.remotePort)")
-                    print("Socket Signature: \(newSocket.signature?.description)")
+//                    print("Socket Signature: \(newSocket.signature?.description)")
 
                     self.addNewConnection(socket: newSocket)
 
@@ -113,7 +113,7 @@ class EchoServer {
 
                             return
                         }
-                        print("Server received from connection at \(socket.remoteHostname):\(socket.remotePort): \(response) ")
+ //                       print("Server received from connection at \(socket.remoteHostname):\(socket.remotePort): \(response) ")
                         let reply = "Server response: \n\(response)\n"
                         try socket.write(from: reply)
 
