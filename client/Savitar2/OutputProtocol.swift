@@ -8,7 +8,14 @@
 
 import Foundation
 
+// TODO: eventually may want to move this into its own module
+enum Result<T, E> {
+  case success(T)
+  case error(E)
+}
+
+typealias OutputResult = Result<String, String>
+
 protocol OutputProtocol {
-    func output(message: String)
-    func output(error: String)
+    func output(result : OutputResult)
 }

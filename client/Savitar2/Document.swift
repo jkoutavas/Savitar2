@@ -60,24 +60,24 @@ class Document: NSDocument, OutputProtocol {
         // If you override either of these, you should also override -isEntireFileLoaded to return false if the contents are lazily loaded.
         throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
-
-    private func safeOutput(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
-        // can be safely called via the connection run loop
-        DispatchQueue.main.async { [unowned self] in
-            let outputView = self.splitViewController?.outputViewController.textView
-        
-            outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
+    
+    func output(result : OutputResult) {
+        func safeOutput(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
+            // can be safely called via the connection run loop
+            DispatchQueue.main.async { [unowned self] in
+                let outputView = self.splitViewController?.outputViewController.textView
+            
+                outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
+            }
         }
-    }
-    
-    func output(message: String) {
-        safeOutput(string: message)
-    }
-    
-    func output(error: String) {
-        var attributes = [NSAttributedStringKey: AnyObject]()
-        attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
         
-        safeOutput(string: error, attributes: attributes)
+        switch result {
+            case .success(let message):
+                safeOutput(string: message)
+            case .error(let error):
+                var attributes = [NSAttributedStringKey: AnyObject]()
+                attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
+                safeOutput(string: error, attributes: attributes)
+        }
     }
 }

@@ -50,7 +50,7 @@ public class Endpoint: NSObject, StreamDelegate {
             inputStream.open()
             outputStream.open()
         } else {
-            outputter.output(error: "[SAVITAR] Failed Getting Streams")
+            outputter.output(result:.error("[SAVITAR] Failed Getting Streams"))
         }
     }
     
@@ -73,7 +73,7 @@ public class Endpoint: NSObject, StreamDelegate {
                                      encoding: .ascii,
                                      freeWhenDone: true)
             else { return }
-            outputter.output(message:message)
+            outputter.output(result:.success(message))
         }
     }
 
@@ -84,7 +84,7 @@ public class Endpoint: NSObject, StreamDelegate {
         case Stream.Event.endEncountered:
           print("new message received")
         case Stream.Event.errorOccurred:
-          self.outputter.output(error:"[SAVITAR] stream error occurred")
+          self.outputter.output(result:.error("[SAVITAR] stream error occurred"))
         case Stream.Event.hasSpaceAvailable:
           print("has space available")
         default:
