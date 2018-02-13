@@ -60,8 +60,8 @@ public class Endpoint: NSObject, StreamDelegate {
     }
     
     private func readAvailableBytes(stream: InputStream) {
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)
         while stream.hasBytesAvailable {
+            let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)
             let numberOfBytesRead = inputStream.read(buffer, maxLength: maxReadLength)
             if numberOfBytesRead < 0 {
                 if let _ = stream.streamError {
