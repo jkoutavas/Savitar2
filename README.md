@@ -2,6 +2,9 @@
 
 Welcome to the Savitar 2.0 git repository
 
+Last updated: February 13th, 2018
+
+
 ## How do I get set up? ##
 
 Things are pretty basic right now. A server connection is hard-wired into the client.
@@ -20,4 +23,11 @@ $ .build/debug/echoserver
 ```
 
 Don't sweat the build's compiler's warnings, those are just copy/paste results from the rip-off.
+
+If you want to generate an xcode project for the echoserver, do this:
+
+``````bash
+$ cd server/echoserver
+$ swift package generate-xcodeproj
+```
 
