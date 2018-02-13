@@ -10,6 +10,8 @@ import Cocoa
 
 class InputViewController: ViewController {
 
+    public weak var endpoint: Endpoint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +26,8 @@ class InputViewController: ViewController {
              // we're wrapping this in an async call so we call unwind the
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
-               if self.textView.string.count > 1 {
-                    // TODO: tie this into the connection run loop, so as to
-                    // have it send this text to the server
-                    print("Sending: \(self.textView.string)")
+                if self.textView.string.count > 1 {
+                    self.endpoint?.sendMessage(message:self.textView.string)
                 }
 
                 self.textView.string = ""
