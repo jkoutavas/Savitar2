@@ -14,7 +14,7 @@ class Document: NSDocument, OutputProtocol {
     var splitViewController : SplitViewController?
   
     // TODO: just some hard-coded connection settings right now
-    let port: Int32 = 1337
+    let port: UInt32 = 1337
     let host = "::1"
     
     override func close() {
@@ -39,7 +39,10 @@ class Document: NSDocument, OutputProtocol {
         
         // TODO: ya-ya, this call should be elsewhere
         endpoint = Endpoint(port:port, host:host, outputter:self)
+        self.splitViewController?.inputViewController.endpoint = endpoint
+        
         endpoint?.connectAndRun()
+        endpoint?.sendMessage(message: "Welcome to Savitar 2.0!")
         
         // TODO: add some kind os a listening mechanism to the splitViewController?.inputViewController
         // so as to pass along an inputted line of text once it has been entered
