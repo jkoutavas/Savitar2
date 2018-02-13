@@ -17,6 +17,8 @@
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
 		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
+		69CB87242033379B006346F7 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB87232033379B006346F7 /* Endpoint.swift */; };
+		69CB872620333BB5006346F7 /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB872520333BB5006346F7 /* OutputProtocol.swift */; };
 		69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DDFD0A1FC67D530072F404 /* SplitViewController.swift */; };
 		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
 		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69CB87232033379B006346F7 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		69CB872520333BB5006346F7 /* OutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
 		69DDFD0A1FC67D530072F404 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,14 +137,16 @@
 			isa = PBXGroup;
 			children = (
 				6954849F1FC4E6E400A6983F /* AppDelegate.swift */,
-				693C342F20311308004AA3D5 /* InputViewController.swift */,
-				695484A11FC4E6E400A6983F /* ViewController.swift */,
 				695484A31FC4E6E400A6983F /* Document.swift */,
+				69CB87232033379B006346F7 /* Endpoint.swift */,
+				693C342F20311308004AA3D5 /* InputViewController.swift */,
+				69CB872520333BB5006346F7 /* OutputProtocol.swift */,
+				695484A11FC4E6E400A6983F /* ViewController.swift */,
+				69DDFD0A1FC67D530072F404 /* SplitViewController.swift */,
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				695484AA1FC4E6E400A6983F /* Info.plist */,
 				695484AB1FC4E6E400A6983F /* Savitar2.entitlements */,
-				69DDFD0A1FC67D530072F404 /* SplitViewController.swift */,
 			);
 			path = Savitar2;
 			sourceTree = "<group>";
@@ -469,6 +475,8 @@
 				693C343020311308004AA3D5 /* InputViewController.swift in Sources */,
 				695484A01FC4E6E400A6983F /* AppDelegate.swift in Sources */,
 				695484A41FC4E6E400A6983F /* Document.swift in Sources */,
+				69CB872620333BB5006346F7 /* OutputProtocol.swift in Sources */,
+				69CB87242033379B006346F7 /* Endpoint.swift in Sources */,
 				69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,23 +7,18 @@
 //
 
 import Cocoa
-import Socket
 
-class Document: NSDocument {
+class Document: NSDocument, OutputProtocol {
 
+    var endpoint: Endpoint?
+    var splitViewController : SplitViewController?
+  
     // TODO: just some hard-coded connection settings right now
     let port: Int32 = 1337
     let host = "::1"
     
-    // TODO: eventually move the connection related code to its own module
-    var socket: Socket?
-    let bufferSize = 4096
-    var splitViewController : SplitViewController?
-    var connectionIsUp = false
-    
     override func close() {
-        socket?.close()
-        connectionIsUp = false
+        endpoint?.close()
     }
 
     override class var autosavesInPlace: Bool {
@@ -42,7 +37,9 @@ class Document: NSDocument {
         splitViewController = windowController.contentViewController as? SplitViewController
         windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
         
-        connectAndRun() // TODO: ya-ya, this call should be elsewhere
+        // TODO: ya-ya, this call should be elsewhere
+        endpoint = Endpoint(port:port, host:host, outputter:self)
+        endpoint?.connectAndRun()
         
         // TODO: add some kind os a listening mechanism to the splitViewController?.inputViewController
         // so as to pass along an inputted line of text once it has been entered
@@ -80,39 +77,4 @@ class Document: NSDocument {
         
         safeOutput(string: error, attributes: attributes)
     }
-    
-    func connectAndRun() {
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        queue.async { [unowned self] in
-            do {
-                // Create an IPV6 socket...
-                self.socket = try Socket.create(family: .inet)
-                try self.socket?.connect(to:self.host, port:self.port, timeout:0)
-                self.connectionIsUp = true
-                
-                try self.socket?.write(from: "Welcome to Savitar 2.0!")
-                
-                repeat {
-                    var readData = Data(capacity: self.bufferSize)
-                    let bytesRead = try self.socket?.read(into: &readData)
-                    if bytesRead! > 1 {
-                        guard let response = String(data: readData, encoding: .utf8) else {
-                            self.output(error:"Error decoding response...")
-                            readData.count = 0
-                            break
-                        }
-                        self.output(message: response)
-                    }
-                } while(self.connectionIsUp)
-            }
-            catch let error {
-                guard let socketError = error as? Socket.Error else {
-                    self.output(error:"Unexpected error...")
-                    return
-                }
-                self.output(error:"Error reported:\n \(socketError.description)")
-            }
-        }
-    }
 }
-
