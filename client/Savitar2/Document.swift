@@ -62,22 +62,20 @@ class Document: NSDocument, OutputProtocol {
     }
     
     func output(result : OutputResult) {
-        func safeOutput(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
-            // can be safely called via the connection run loop
-            DispatchQueue.main.async { [unowned self] in
-                let outputView = self.splitViewController?.outputViewController.textView
-            
-                outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
-            }
+        func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
+            let outputView = self.splitViewController?.outputViewController.textView
+        
+            outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
+            outputView?.scrollToEndOfDocument(nil)
         }
         
         switch result {
             case .success(let message):
-                safeOutput(string: message)
+                output(string: message)
             case .error(let error):
                 var attributes = [NSAttributedStringKey: AnyObject]()
                 attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
-                safeOutput(string: error, attributes: attributes)
+                output(string: error, attributes: attributes)
         }
     }
 }
