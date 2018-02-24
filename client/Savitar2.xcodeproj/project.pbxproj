@@ -17,6 +17,7 @@
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
 		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
+		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69CB87242033379B006346F7 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB87232033379B006346F7 /* Endpoint.swift */; };
 		69CB872620333BB5006346F7 /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB872520333BB5006346F7 /* OutputProtocol.swift */; };
 		69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DDFD0A1FC67D530072F404 /* SplitViewController.swift */; };
@@ -60,6 +61,7 @@
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
 		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		69CB87232033379B006346F7 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		69CB872520333BB5006346F7 /* OutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
 		69DDFD0A1FC67D530072F404 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
+				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
 				695484BE1FC4E6E400A6983F /* Savitar2UITests */,
@@ -295,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6994602E2041124800409308 /* World.icns in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);
