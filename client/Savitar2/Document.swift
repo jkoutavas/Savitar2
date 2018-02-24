@@ -80,9 +80,6 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         splitViewController = windowController.contentViewController as? SplitViewController
         windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
 
-        // TODO: add some kind os a listening mechanism to the splitViewController?.inputViewController
-        // so as to pass along an inputted line of text once it has been entered
-        
         self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
         self.splitViewController?.inputViewController.endpoint = endpoint
