@@ -62,7 +62,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     }
 
     override class var autosavesInPlace: Bool {
-        return false // TODO: eventually will want to enable this
+        return true
     }
     
     override var isDocumentEdited: Bool {
