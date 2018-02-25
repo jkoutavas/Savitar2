@@ -8,16 +8,9 @@
 
 import Cocoa
 
-// TODO: move this to its own module
-extension String {
-    func dropPrefix(_ prefix: String) -> String {
-        guard self.hasPrefix(prefix) else { return self }
-        return String(self.dropFirst(prefix.count))
-    }
-}
-
 class Document: NSDocument, XMLParserDelegate, OutputProtocol {
 
+    // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
         case name = "NAME"
         case URL = "URL"
