@@ -24,10 +24,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         case monoSize = "MONOSIZE"
         case MCPFont = "MCPFONT"
         case MCPFontSize = "MCPFONTSIZE"
-        case resolution = "RESOLUTION"
-        case position = "POSITION"
-        case windowSize = "WINDOWSIZE"
-        case zoomed = "ZOOMED"
+        case resolution = "RESOLUTION" // obsoleted for Sav 2.0
+        case position = "POSITION" // obsoleted for Sav 2.0
+        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0
+        case zoomed = "ZOOMED" // obsoleted for Sav 2.0
         case foreColor = "FORECOLOR"
         case backColor = "BACKCOLOR"
         case linkColor = "LINKCOLOR"
@@ -53,6 +53,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var port: UInt32 = 1337
     var host = "::1"
     
+    // world settings with defaults
+    var backColor = NSColor.white
+    var foreColor = NSColor.black
+    
     override func close() {
         endpoint?.close()
     }
@@ -73,6 +77,11 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         splitViewController = windowController.contentViewController as? SplitViewController
         windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
 
+        splitViewController?.inputViewController.foreColor = foreColor
+        splitViewController?.inputViewController.backColor = backColor
+        splitViewController?.outputViewController.foreColor = foreColor
+        splitViewController?.outputViewController.backColor = backColor
+        
         self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
         self.splitViewController?.inputViewController.endpoint = endpoint
@@ -105,6 +114,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                             host = parts[0]
                             port = UInt32(parts[1])!
                         }
+                    case WorldAttribIdentifier.backColor.rawValue:
+                        backColor = NSColor(hex: attribute.value)!
+                    case WorldAttribIdentifier.foreColor.rawValue:
+                        foreColor = NSColor(hex: attribute.value)!
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
@@ -120,11 +133,12 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
             outputView?.scrollToEndOfDocument(nil)
         }
         
+        var attributes = [NSAttributedStringKey: AnyObject]()
         switch result {
             case .success(let message):
-                output(string: message)
+                attributes[NSAttributedStringKey.foregroundColor] = foreColor
+                output(string: message, attributes: attributes)
             case .error(let error):
-                var attributes = [NSAttributedStringKey: AnyObject]()
                 attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
                 output(string: error, attributes: attributes)
         }

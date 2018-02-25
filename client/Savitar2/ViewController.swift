@@ -11,5 +11,23 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
-}
+    
+    public var backColor : NSColor {
+        get {
+            return textView.backgroundColor
+        }
+        set {
+            textView.backgroundColor = newValue
+        }
+    }
+    
+    public var foreColor : NSColor {
+        get {
+            return textView.textColor!
+        }
+        set {
+            textView.textColor = newValue
+        }
+    }
+ }
 
