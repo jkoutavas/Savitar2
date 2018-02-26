@@ -710,7 +710,7 @@
                         <splitViewItem id="p8T-2f-63T"/>
                         <splitViewItem id="yjR-bu-alr"/>
                     </splitViewItems>
-                    <splitView key="splitView" misplaced="YES" dividerStyle="paneSplitter" id="8xE-Pl-uBd">
+                    <splitView key="splitView" misplaced="YES" dividerStyle="thin" id="8xE-Pl-uBd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <connections>
