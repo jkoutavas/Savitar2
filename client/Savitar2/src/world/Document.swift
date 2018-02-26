@@ -160,7 +160,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                             let parts = body.components(separatedBy: ":")
                             if parts.count == 2 {
                                 host = parts[0]
-                                port = UInt32(parts[1])!
+                                guard let p1 = UInt32(parts[1]) else { break }
+                                port = p1
                             }
                         }
                     case WorldAttribIdentifier.backColor.rawValue:
