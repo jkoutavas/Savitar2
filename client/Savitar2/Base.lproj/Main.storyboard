@@ -690,6 +690,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="480" height="270"/>
                         <connections>
                             <outlet property="delegate" destination="jGA-0Y-lOj" id="98r-iN-zZc"/>
                         </connections>
@@ -710,7 +711,7 @@
                         <splitViewItem id="p8T-2f-63T"/>
                         <splitViewItem id="yjR-bu-alr"/>
                     </splitViewItems>
-                    <splitView key="splitView" misplaced="YES" dividerStyle="paneSplitter" id="8xE-Pl-uBd">
+                    <splitView key="splitView" misplaced="YES" dividerStyle="thin" id="8xE-Pl-uBd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <connections>

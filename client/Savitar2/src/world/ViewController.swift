@@ -29,5 +29,20 @@ class ViewController: NSViewController {
             textView.textColor = newValue
         }
     }
+    
+    public var font : NSFont {
+        get {
+            return textView.font!
+        }
+        set {
+            textView.font = newValue
+        }
+    }
+
+    public var rowHeight : CGFloat {
+        get {
+            return textView.layoutManager!.defaultLineHeight(for: font)
+        }
+    }
  }
 

@@ -8,6 +8,20 @@
 
 import Cocoa
 
+// TODO: move these to extensions modules
+extension NSWindow {
+    var titlebarHeight: CGFloat {
+        let contentHeight = contentRect(forFrameRect: frame).height
+        return frame.height - contentHeight
+    }
+}
+extension CGFloat {
+    init?(_ str: String) {
+        guard let float = Float(str) else { return nil }
+        self = CGFloat(float)
+    }
+}
+
 class Document: NSDocument, XMLParserDelegate, OutputProtocol {
 
     // these define the "WORLD" attributes found in Savitar 1.x world documents
@@ -24,10 +38,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         case monoSize = "MONOSIZE"
         case MCPFont = "MCPFONT"
         case MCPFontSize = "MCPFONTSIZE"
-        case resolution = "RESOLUTION" // obsoleted for Sav 2.0
-        case position = "POSITION" // obsoleted for Sav 2.0
-        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0
-        case zoomed = "ZOOMED" // obsoleted for Sav 2.0
+        case resolution = "RESOLUTION" // obsoleted for Sav 2.0 writing
+        case position = "POSITION" // obsoleted for Sav 2.0 writing
+        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0 writing
+        case zoomed = "ZOOMED" // obsoleted for Sav 2.0 writing
         case foreColor = "FORECOLOR"
         case backColor = "BACKCOLOR"
         case linkColor = "LINKCOLOR"
@@ -56,8 +70,17 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     // world settings with defaults
     var backColor = NSColor.white
     var foreColor = NSColor.black
+    var fontName = "Monaco"
+    var fontSize: CGFloat = 9
+    var inputRows = 2
+    var outputRows = 24
+    var columns = 80
+    var position = NSMakePoint(44, 0)
+    var windowSize = NSMakeSize(480,270)
+    var zoomed = false
     
     override func close() {
+        super.close()
         endpoint?.close()
     }
 
@@ -72,19 +95,43 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
-        self.addWindowController(windowController)
-        splitViewController = windowController.contentViewController as? SplitViewController
-        windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
-
-        splitViewController?.inputViewController.foreColor = foreColor
-        splitViewController?.inputViewController.backColor = backColor
-        splitViewController?.outputViewController.foreColor = foreColor
-        splitViewController?.outputViewController.backColor = backColor
+        guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? NSWindowController else { return }
         
-        self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
+        self.addWindowController(windowController)
+        
+        splitViewController = windowController.contentViewController as? SplitViewController
+        guard let svc = splitViewController else { return }
+        
+        guard let window = windowController.window else { return }
+        window.makeFirstResponder(svc.inputViewController.textView)
+
+        svc.inputViewController.foreColor = foreColor
+        svc.inputViewController.backColor = backColor
+        svc.outputViewController.foreColor = foreColor
+        svc.outputViewController.backColor = backColor
+        
+        if let font = NSFont(name: fontName, size: fontSize) {
+            svc.inputViewController.font = font
+            svc.outputViewController.font = font
+        }
+        
+        window.setContentSize(windowSize)
+        if let titleHeight = (windowController.window?.titlebarHeight) {
+            if let screenSize = NSScreen.main?.frame.size {
+                window.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
+            }
+        }
+        
+        let dividerHeight: CGFloat = svc.splitView.dividerThickness
+        let rowHeight = svc.inputViewController.rowHeight
+        let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
+        svc.splitView.setPosition(split, ofDividerAt: 0)
+        
+        window.setIsZoomed(zoomed)
+
+        output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
-        self.splitViewController?.inputViewController.endpoint = endpoint
+        svc.inputViewController.endpoint = endpoint
         endpoint?.connectAndRun()
     }
 
@@ -111,13 +158,43 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         if (attribute.value.hasPrefix(TelnetIdentifier)) {
                             let body = attribute.value.dropPrefix(TelnetIdentifier)
                             let parts = body.components(separatedBy: ":")
-                            host = parts[0]
-                            port = UInt32(parts[1])!
+                            if parts.count == 2 {
+                                host = parts[0]
+                                guard let p1 = UInt32(parts[1]) else { break }
+                                port = p1
+                            }
                         }
                     case WorldAttribIdentifier.backColor.rawValue:
                         backColor = NSColor(hex: attribute.value)!
                     case WorldAttribIdentifier.foreColor.rawValue:
                         foreColor = NSColor(hex: attribute.value)!
+                    case WorldAttribIdentifier.font.rawValue:
+                        fontName = attribute.value
+                    case WorldAttribIdentifier.fontSize.rawValue:
+                        guard let size = CGFloat(attribute.value) else { break }
+                        fontSize = size
+                    case WorldAttribIdentifier.position.rawValue:
+                        let parts = attribute.value.components(separatedBy: ",")
+                        if parts.count == 2 {
+                            guard let x = CGFloat(parts[1]) else { break }
+                            guard let y = CGFloat(parts[0]) else { break }
+                            position = NSMakePoint(x, y)
+                        }
+                    case WorldAttribIdentifier.windowSize.rawValue:
+                        let parts = attribute.value.components(separatedBy: ",")
+                        windowSize = NSMakeSize(CGFloat(Int(parts[0])!), CGFloat(Int(parts[1])!))
+                    case WorldAttribIdentifier.resolution.rawValue:
+                        let parts = attribute.value.components(separatedBy: "x")
+                        if parts.count == 3 {
+                            guard let n0 = Int(parts[0]) else { break }
+                            guard let n1 = Int(parts[1]) else { break }
+                            guard let n2 = Int(parts[2]) else { break }
+                            outputRows = n0
+                            columns = n1
+                            inputRows = n2
+                        }
+                    case WorldAttribIdentifier.zoomed.rawValue:
+                        zoomed = attribute.value == "TRUE"
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
@@ -134,6 +211,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         }
         
         var attributes = [NSAttributedStringKey: AnyObject]()
+        attributes[NSAttributedStringKey.font] = NSFont(name: fontName, size: fontSize)
         switch result {
             case .success(let message):
                 attributes[NSAttributedStringKey.foregroundColor] = foreColor
