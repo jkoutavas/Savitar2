@@ -30,8 +30,19 @@ class ViewController: NSViewController {
         }
     }
     
-    public func setFont(name:String, size:CGFloat) {
-        textView.font = NSFont(name: name, size: size)
+    public var font : NSFont {
+        get {
+            return textView.font!
+        }
+        set {
+            textView.font = newValue
+        }
+    }
+
+    public var rowHeight : CGFloat {
+        get {
+            return textView.layoutManager!.defaultLineHeight(for: font)
+        }
     }
  }
 

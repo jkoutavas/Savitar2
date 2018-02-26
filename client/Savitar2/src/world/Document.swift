@@ -8,6 +8,13 @@
 
 import Cocoa
 
+extension NSWindow {
+    var titlebarHeight: CGFloat {
+        let contentHeight = contentRect(forFrameRect: frame).height
+        return frame.height - contentHeight
+    }
+}
+
 class Document: NSDocument, XMLParserDelegate, OutputProtocol {
 
     // these define the "WORLD" attributes found in Savitar 1.x world documents
@@ -24,10 +31,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         case monoSize = "MONOSIZE"
         case MCPFont = "MCPFONT"
         case MCPFontSize = "MCPFONTSIZE"
-        case resolution = "RESOLUTION" // obsoleted for Sav 2.0
-        case position = "POSITION" // obsoleted for Sav 2.0
-        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0
-        case zoomed = "ZOOMED" // obsoleted for Sav 2.0
+        case resolution = "RESOLUTION" // obsoleted for Sav 2.0 writing
+        case position = "POSITION" // obsoleted for Sav 2.0 writing
+        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0 writing
+        case zoomed = "ZOOMED" // obsoleted for Sav 2.0 writing
         case foreColor = "FORECOLOR"
         case backColor = "BACKCOLOR"
         case linkColor = "LINKCOLOR"
@@ -58,6 +65,12 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var foreColor = NSColor.black
     var fontName = "Monaco"
     var fontSize: CGFloat = 9
+    var inputRows = 2
+    var outputRows = 24
+    var columns = 80
+    var position = NSMakePoint(44, 0)
+    var windowSize = NSMakeSize(502,320)
+    var zoomed = false
     
     override func close() {
         super.close()
@@ -80,13 +93,27 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         splitViewController = windowController.contentViewController as? SplitViewController
         windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
 
+        let font =  NSFont(name: fontName, size: fontSize)
+        
         splitViewController?.inputViewController.foreColor = foreColor
         splitViewController?.inputViewController.backColor = backColor
         splitViewController?.outputViewController.foreColor = foreColor
         splitViewController?.outputViewController.backColor = backColor
-        splitViewController?.inputViewController.setFont(name:fontName, size:fontSize)
-        splitViewController?.outputViewController.setFont(name:fontName, size:fontSize)
+        splitViewController?.inputViewController.font = font!
+        splitViewController?.outputViewController.font = font!
         
+        windowController.window?.setContentSize(windowSize)
+        let screenSize = NSScreen.main?.frame.size
+        let titleHeight: CGFloat = (windowController.window?.titlebarHeight)!
+        windowController.window?.setFrameTopLeftPoint(NSMakePoint(position.x, (screenSize?.height)!-position.y+titleHeight))
+        
+        let dividerHeight: CGFloat = (splitViewController?.splitView.dividerThickness)!
+        let rowHeight = (splitViewController?.inputViewController.rowHeight)!
+        let split: CGFloat = windowSize.height-dividerHeight-rowHeight*CGFloat(inputRows+1)
+        splitViewController?.splitView.setPosition(split, ofDividerAt: 0)
+        
+        windowController.window?.setIsZoomed(zoomed)
+
         self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
         self.splitViewController?.inputViewController.endpoint = endpoint
@@ -127,6 +154,19 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         fontName = attribute.value
                     case WorldAttribIdentifier.fontSize.rawValue:
                         fontSize = CGFloat(Int(attribute.value)!)
+                    case WorldAttribIdentifier.position.rawValue:
+                        let parts = attribute.value.components(separatedBy: ",")
+                        position = NSMakePoint(CGFloat(Int(parts[1])!), CGFloat(Int(parts[0])!))
+                    case WorldAttribIdentifier.windowSize.rawValue:
+                        let parts = attribute.value.components(separatedBy: ",")
+                        windowSize = NSMakeSize(CGFloat(Int(parts[0])!), CGFloat(Int(parts[1])!))
+                    case WorldAttribIdentifier.resolution.rawValue:
+                        let parts = attribute.value.components(separatedBy: "x")
+                        outputRows = Int(parts[0])!
+                        columns = Int(parts[1])!
+                        inputRows = Int(parts[2])!
+                    case WorldAttribIdentifier.zoomed.rawValue:
+                        zoomed = attribute.value == "TRUE"
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
