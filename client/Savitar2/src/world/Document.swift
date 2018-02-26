@@ -92,15 +92,16 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         self.addWindowController(windowController)
         splitViewController = windowController.contentViewController as? SplitViewController
         windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
-
-        let font =  NSFont(name: fontName, size: fontSize)
         
         splitViewController?.inputViewController.foreColor = foreColor
         splitViewController?.inputViewController.backColor = backColor
         splitViewController?.outputViewController.foreColor = foreColor
         splitViewController?.outputViewController.backColor = backColor
-        splitViewController?.inputViewController.font = font!
-        splitViewController?.outputViewController.font = font!
+        
+        if let font = NSFont(name: fontName, size: fontSize) {
+            splitViewController?.inputViewController.font = font
+            splitViewController?.outputViewController.font = font
+        }
         
         windowController.window?.setContentSize(windowSize)
         let screenSize = NSScreen.main?.frame.size
