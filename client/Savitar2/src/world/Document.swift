@@ -8,10 +8,17 @@
 
 import Cocoa
 
+// TODO: move these to extensions modules
 extension NSWindow {
     var titlebarHeight: CGFloat {
         let contentHeight = contentRect(forFrameRect: frame).height
         return frame.height - contentHeight
+    }
+}
+extension CGFloat {
+    init?(_ str: String) {
+        guard let float = Float(str) else { return nil }
+        self = CGFloat(float)
     }
 }
 
@@ -151,8 +158,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         if (attribute.value.hasPrefix(TelnetIdentifier)) {
                             let body = attribute.value.dropPrefix(TelnetIdentifier)
                             let parts = body.components(separatedBy: ":")
-                            host = parts[0]
-                            port = UInt32(parts[1])!
+                            if parts.count == 2 {
+                                host = parts[0]
+                                port = UInt32(parts[1])!
+                            }
                         }
                     case WorldAttribIdentifier.backColor.rawValue:
                         backColor = NSColor(hex: attribute.value)!
@@ -161,18 +170,28 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                     case WorldAttribIdentifier.font.rawValue:
                         fontName = attribute.value
                     case WorldAttribIdentifier.fontSize.rawValue:
-                        fontSize = CGFloat(Int(attribute.value)!)
+                        guard let size = CGFloat(attribute.value) else { break }
+                        fontSize = size
                     case WorldAttribIdentifier.position.rawValue:
                         let parts = attribute.value.components(separatedBy: ",")
-                        position = NSMakePoint(CGFloat(Int(parts[1])!), CGFloat(Int(parts[0])!))
+                        if parts.count == 2 {
+                            guard let x = CGFloat(parts[1]) else { break }
+                            guard let y = CGFloat(parts[0]) else { break }
+                            position = NSMakePoint(x, y)
+                        }
                     case WorldAttribIdentifier.windowSize.rawValue:
                         let parts = attribute.value.components(separatedBy: ",")
                         windowSize = NSMakeSize(CGFloat(Int(parts[0])!), CGFloat(Int(parts[1])!))
                     case WorldAttribIdentifier.resolution.rawValue:
                         let parts = attribute.value.components(separatedBy: "x")
-                        outputRows = Int(parts[0])!
-                        columns = Int(parts[1])!
-                        inputRows = Int(parts[2])!
+                        if parts.count == 3 {
+                            guard let n0 = Int(parts[0]) else { break }
+                            guard let n1 = Int(parts[1]) else { break }
+                            guard let n2 = Int(parts[2]) else { break }
+                            outputRows = n0
+                            columns = n1
+                            inputRows = n2
+                        }
                     case WorldAttribIdentifier.zoomed.rawValue:
                         zoomed = attribute.value == "TRUE"
                     default:
