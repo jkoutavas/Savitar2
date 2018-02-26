@@ -182,7 +182,11 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         }
                     case WorldAttribIdentifier.windowSize.rawValue:
                         let parts = attribute.value.components(separatedBy: ",")
-                        windowSize = NSMakeSize(CGFloat(Int(parts[0])!), CGFloat(Int(parts[1])!))
+                        if parts.count == 2 {
+                            guard let width = CGFloat(parts[0]) else { break }
+                            guard let height = CGFloat(parts[1]) else { break }
+                            windowSize = NSMakeSize(width, height)
+                        }
                     case WorldAttribIdentifier.resolution.rawValue:
                         let parts = attribute.value.components(separatedBy: "x")
                         if parts.count == 3 {
