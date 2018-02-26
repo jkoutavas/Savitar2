@@ -114,10 +114,9 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         }
         
         let dividerHeight: CGFloat = svc.splitView.dividerThickness
-        if let rowHeight = (self.splitViewController?.inputViewController.rowHeight) {
-            let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
-            svc.splitView.setPosition(split, ofDividerAt: 0)
-        }
+        let rowHeight = svc.inputViewController.rowHeight
+        let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
+        svc.splitView.setPosition(split, ofDividerAt: 0)
         
         windowController.window?.setIsZoomed(zoomed)
 
