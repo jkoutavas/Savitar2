@@ -95,7 +95,9 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         splitViewController = windowController.contentViewController as? SplitViewController
         guard let svc = splitViewController else { return }
         
-        windowController.window?.makeFirstResponder(svc.inputViewController.textView)
+        guard let window = windowController.window else { return }
+        window.makeFirstResponder(svc.inputViewController.textView)
+
         svc.inputViewController.foreColor = foreColor
         svc.inputViewController.backColor = backColor
         svc.outputViewController.foreColor = foreColor
@@ -106,10 +108,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
             svc.outputViewController.font = font
         }
         
-        windowController.window?.setContentSize(windowSize)
+        window.setContentSize(windowSize)
         if let titleHeight = (windowController.window?.titlebarHeight) {
             if let screenSize = NSScreen.main?.frame.size {
-                windowController.window?.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
+                window.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
             }
         }
         
@@ -118,7 +120,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
         svc.splitView.setPosition(split, ofDividerAt: 0)
         
-        windowController.window?.setIsZoomed(zoomed)
+        window.setIsZoomed(zoomed)
 
         output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
