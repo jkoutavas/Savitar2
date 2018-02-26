@@ -88,36 +88,42 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
-        self.addWindowController(windowController)
-        splitViewController = windowController.contentViewController as? SplitViewController
-        windowController.window?.makeFirstResponder(splitViewController?.inputViewController.textView)
+        guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? NSWindowController else { return }
         
-        splitViewController?.inputViewController.foreColor = foreColor
-        splitViewController?.inputViewController.backColor = backColor
-        splitViewController?.outputViewController.foreColor = foreColor
-        splitViewController?.outputViewController.backColor = backColor
+        self.addWindowController(windowController)
+        
+        splitViewController = windowController.contentViewController as? SplitViewController
+        guard let svc = splitViewController else { return }
+        
+        windowController.window?.makeFirstResponder(svc.inputViewController.textView)
+        svc.inputViewController.foreColor = foreColor
+        svc.inputViewController.backColor = backColor
+        svc.outputViewController.foreColor = foreColor
+        svc.outputViewController.backColor = backColor
         
         if let font = NSFont(name: fontName, size: fontSize) {
-            splitViewController?.inputViewController.font = font
-            splitViewController?.outputViewController.font = font
+            svc.inputViewController.font = font
+            svc.outputViewController.font = font
         }
         
         windowController.window?.setContentSize(windowSize)
-        let screenSize = NSScreen.main?.frame.size
-        let titleHeight: CGFloat = (windowController.window?.titlebarHeight)!
-        windowController.window?.setFrameTopLeftPoint(NSMakePoint(position.x, (screenSize?.height)!-position.y+titleHeight))
+        if let titleHeight = (windowController.window?.titlebarHeight) {
+            if let screenSize = NSScreen.main?.frame.size {
+                windowController.window?.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
+            }
+        }
         
-        let dividerHeight: CGFloat = (splitViewController?.splitView.dividerThickness)!
-        let rowHeight = (splitViewController?.inputViewController.rowHeight)!
-        let split: CGFloat = windowSize.height-dividerHeight-rowHeight*CGFloat(inputRows+1)
-        splitViewController?.splitView.setPosition(split, ofDividerAt: 0)
+        let dividerHeight: CGFloat = svc.splitView.dividerThickness
+        if let rowHeight = (self.splitViewController?.inputViewController.rowHeight) {
+            let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
+            svc.splitView.setPosition(split, ofDividerAt: 0)
+        }
         
         windowController.window?.setIsZoomed(zoomed)
 
-        self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
+        output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
-        self.splitViewController?.inputViewController.endpoint = endpoint
+        svc.inputViewController.endpoint = endpoint
         endpoint?.connectAndRun()
     }
 
