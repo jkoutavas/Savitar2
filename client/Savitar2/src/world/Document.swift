@@ -60,6 +60,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var fontSize: CGFloat = 9
     
     override func close() {
+        super.close()
         endpoint?.close()
     }
 
