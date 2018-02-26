@@ -29,5 +29,9 @@ class ViewController: NSViewController {
             textView.textColor = newValue
         }
     }
+    
+    public func setFont(name:String, size:CGFloat) {
+        textView.font = NSFont(name: name, size: size)
+    }
  }
 

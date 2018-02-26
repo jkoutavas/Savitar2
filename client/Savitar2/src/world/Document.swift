@@ -56,6 +56,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     // world settings with defaults
     var backColor = NSColor.white
     var foreColor = NSColor.black
+    var fontName = "Monaco"
+    var fontSize: CGFloat = 9
     
     override func close() {
         endpoint?.close()
@@ -81,6 +83,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         splitViewController?.inputViewController.backColor = backColor
         splitViewController?.outputViewController.foreColor = foreColor
         splitViewController?.outputViewController.backColor = backColor
+        splitViewController?.inputViewController.setFont(name:fontName, size:fontSize)
+        splitViewController?.outputViewController.setFont(name:fontName, size:fontSize)
         
         self.output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
@@ -118,6 +122,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         backColor = NSColor(hex: attribute.value)!
                     case WorldAttribIdentifier.foreColor.rawValue:
                         foreColor = NSColor(hex: attribute.value)!
+                    case WorldAttribIdentifier.font.rawValue:
+                        fontName = attribute.value
+                    case WorldAttribIdentifier.fontSize.rawValue:
+                        fontSize = CGFloat(Int(attribute.value)!)
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
@@ -134,6 +142,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         }
         
         var attributes = [NSAttributedStringKey: AnyObject]()
+        attributes[NSAttributedStringKey.font] = NSFont(name: fontName, size: fontSize)
         switch result {
             case .success(let message):
                 attributes[NSAttributedStringKey.foregroundColor] = foreColor
