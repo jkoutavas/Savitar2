@@ -69,7 +69,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var outputRows = 24
     var columns = 80
     var position = NSMakePoint(44, 0)
-    var windowSize = NSMakeSize(502,320)
+    var windowSize = NSMakeSize(480,270)
     var zoomed = false
     
     override func close() {
