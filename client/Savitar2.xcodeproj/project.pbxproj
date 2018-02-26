@@ -9,20 +9,20 @@
 /* Begin PBXBuildFile section */
 		08DFF98B1A3108BCC3EB4A38 /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */; };
 		44976AE3E7EFC75F1DDE1F36 /* Pods_Savitar2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */; };
-		693C343020311308004AA3D5 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693C342F20311308004AA3D5 /* InputViewController.swift */; };
-		695484A01FC4E6E400A6983F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6954849F1FC4E6E400A6983F /* AppDelegate.swift */; };
-		695484A21FC4E6E400A6983F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484A11FC4E6E400A6983F /* ViewController.swift */; };
-		695484A41FC4E6E400A6983F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484A31FC4E6E400A6983F /* Document.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
 		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
+		69662B27204367BD00E7CC7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1D204367BD00E7CC7B /* ViewController.swift */; };
+		69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SplitViewController.swift */; };
+		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
+		69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B20204367BD00E7CC7B /* OutputProtocol.swift */; };
+		69662B2B204367BD00E7CC7B /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B21204367BD00E7CC7B /* Document.swift */; };
+		69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B22204367BD00E7CC7B /* Endpoint.swift */; };
+		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
+		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
+		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
-		69A1002920431E4D0056EDE9 /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A1002820431E4D0056EDE9 /* NSColor+Extensions.swift */; };
-		69A1002B20431EC00056EDE9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A1002A20431EC00056EDE9 /* String+Extensions.swift */; };
-		69CB87242033379B006346F7 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB87232033379B006346F7 /* Endpoint.swift */; };
-		69CB872620333BB5006346F7 /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CB872520333BB5006346F7 /* OutputProtocol.swift */; };
-		69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DDFD0A1FC67D530072F404 /* SplitViewController.swift */; };
 		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,27 +48,27 @@
 		29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		693C342F20311308004AA3D5 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6954849F1FC4E6E400A6983F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		695484A11FC4E6E400A6983F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		695484A31FC4E6E400A6983F /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695484A81FC4E6E400A6983F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		695484AA1FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		695484AB1FC4E6E400A6983F /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
 		695484B01FC4E6E400A6983F /* Savitar2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484B41FC4E6E400A6983F /* Savitar2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2Tests.swift; sourceTree = "<group>"; };
 		695484B61FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
 		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69662B1D204367BD00E7CC7B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		69662B1E204367BD00E7CC7B /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		69662B20204367BD00E7CC7B /* OutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
+		69662B21204367BD00E7CC7B /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		69662B22204367BD00E7CC7B /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
+		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
-		69A1002820431E4D0056EDE9 /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSColor+Extensions.swift"; path = "Savitar2/NSColor+Extensions.swift"; sourceTree = SOURCE_ROOT; };
-		69A1002A20431EC00056EDE9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Savitar2/String+Extensions.swift"; sourceTree = SOURCE_ROOT; };
-		69CB87232033379B006346F7 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		69CB872520333BB5006346F7 /* OutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
-		69DDFD0A1FC67D530072F404 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
 		9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,18 +143,11 @@
 		6954849E1FC4E6E400A6983F /* Savitar2 */ = {
 			isa = PBXGroup;
 			children = (
-				6954849F1FC4E6E400A6983F /* AppDelegate.swift */,
-				695484A31FC4E6E400A6983F /* Document.swift */,
-				69CB87232033379B006346F7 /* Endpoint.swift */,
-				693C342F20311308004AA3D5 /* InputViewController.swift */,
-				69CB872520333BB5006346F7 /* OutputProtocol.swift */,
-				695484A11FC4E6E400A6983F /* ViewController.swift */,
-				69DDFD0A1FC67D530072F404 /* SplitViewController.swift */,
-				69A1002720431E220056EDE9 /* extensions */,
+				69662B302043A6E100E7CC7B /* Savitar2.entitlements */,
+				69662B1B204367BD00E7CC7B /* src */,
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				695484AA1FC4E6E400A6983F /* Info.plist */,
-				695484AB1FC4E6E400A6983F /* Savitar2.entitlements */,
 			);
 			path = Savitar2;
 			sourceTree = "<group>";
@@ -177,11 +170,34 @@
 			path = Savitar2UITests;
 			sourceTree = "<group>";
 		};
-		69A1002720431E220056EDE9 /* extensions */ = {
+		69662B1B204367BD00E7CC7B /* src */ = {
 			isa = PBXGroup;
 			children = (
-				69A1002820431E4D0056EDE9 /* NSColor+Extensions.swift */,
-				69A1002A20431EC00056EDE9 /* String+Extensions.swift */,
+				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
+				69662B23204367BD00E7CC7B /* extensions */,
+				69662B1C204367BD00E7CC7B /* world */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		69662B1C204367BD00E7CC7B /* world */ = {
+			isa = PBXGroup;
+			children = (
+				69662B21204367BD00E7CC7B /* Document.swift */,
+				69662B22204367BD00E7CC7B /* Endpoint.swift */,
+				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
+				69662B20204367BD00E7CC7B /* OutputProtocol.swift */,
+				69662B1E204367BD00E7CC7B /* SplitViewController.swift */,
+				69662B1D204367BD00E7CC7B /* ViewController.swift */,
+			);
+			path = world;
+			sourceTree = "<group>";
+		};
+		69662B23204367BD00E7CC7B /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */,
+				69662B25204367BD00E7CC7B /* String+Extensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -274,6 +290,11 @@
 					6954849B1FC4E6E400A6983F = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					695484AF1FC4E6E400A6983F = {
 						CreatedOnToolsVersion = 9.1;
@@ -489,15 +510,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				695484A21FC4E6E400A6983F /* ViewController.swift in Sources */,
-				693C343020311308004AA3D5 /* InputViewController.swift in Sources */,
-				695484A01FC4E6E400A6983F /* AppDelegate.swift in Sources */,
-				695484A41FC4E6E400A6983F /* Document.swift in Sources */,
-				69A1002B20431EC00056EDE9 /* String+Extensions.swift in Sources */,
-				69CB872620333BB5006346F7 /* OutputProtocol.swift in Sources */,
-				69CB87242033379B006346F7 /* Endpoint.swift in Sources */,
-				69A1002920431E4D0056EDE9 /* NSColor+Extensions.swift in Sources */,
-				69DDFD0B1FC67D530072F404 /* SplitViewController.swift in Sources */,
+				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
+				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
+				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
+				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
+				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
+				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
+				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
+				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
+				69662B2B204367BD00E7CC7B /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +677,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = RFE485QN84;
@@ -663,6 +685,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -673,6 +696,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = RFE485QN84;
@@ -680,6 +704,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
