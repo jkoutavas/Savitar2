@@ -56,7 +56,12 @@ extension NSColor {
         guard let components = cgColor.components else {
             return nil
         }
-        var r: Float = 0.0, g: Float = 0.0, b: Float = 0.0, a: Float = 1.0
+        
+        var r: Float = 0.0
+        var g: Float = 0.0
+        var b: Float = 0.0
+        var a: Float = 1.0
+
         if components.count == 2 {
             r = Float(components[0])
             g = Float(components[0])
