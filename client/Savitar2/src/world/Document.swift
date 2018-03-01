@@ -26,6 +26,13 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
 
     // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
+        // these are obsoleted in v2
+        case resolution = "RESOLUTION"
+        case position = "POSITION"
+        case windowSize = "WINDOWSIZE"
+        case zoomed = "ZOOMED"
+        
+        // these are shared between v1 and v2
         case name = "NAME"
         case URL = "URL"
         case flags = "FLAGS"
@@ -38,10 +45,6 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         case monoSize = "MONOSIZE"
         case MCPFont = "MCPFONT"
         case MCPFontSize = "MCPFONTSIZE"
-        case resolution = "RESOLUTION" // obsoleted for Sav 2.0 writing
-        case position = "POSITION" // obsoleted for Sav 2.0 writing
-        case windowSize = "WINDOWSIZE" // obsoleted for Sav 2.0 writing
-        case zoomed = "ZOOMED" // obsoleted for Sav 2.0 writing
         case foreColor = "FORECOLOR"
         case backColor = "BACKCOLOR"
         case linkColor = "LINKCOLOR"
@@ -55,9 +58,13 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         case keepaliveMins = "KEEPALIVEMINS"
         case logonCmd = "LOGONCMD"
         case logoffCmd = "LOGOFFCMD"
+        
+        // these are new for v2
+        case version = "VERSION"
     }
     
     let TelnetIdentifier = "telnet://"
+    let DocumentElemIdentifier = "DOCUMENT"
     let WorldElemIdentifier = "WORLD"
     
     var endpoint: Endpoint?
@@ -79,6 +86,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var windowSize = NSMakeSize(480,270)
     var zoomed = false
     
+    var version = 1
+    
     override func close() {
         super.close()
         endpoint?.close()
@@ -90,6 +99,10 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     
     override var isDocumentEdited: Bool {
         return false // TODO: eventually enable this
+    }
+
+    override var isInViewingMode: Bool {
+        return shouldBeMigrated()
     }
 
     override func makeWindowControllers() {
@@ -133,25 +146,66 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         endpoint = Endpoint(port:port, host:host, outputter:self)
         svc.inputViewController.endpoint = endpoint
         endpoint?.connectAndRun()
+        
+        if shouldBeMigrated() {
+            // TODO: pop-up an alert to explain to user that "Save As..." should
+            // be done to properly migrate to v2 document, thus gaining auto save
+            // and save in place support
+        }
     }
 
     override func data(ofType typeName: String) throws -> Data {
-        // Insert code here to write your document to data of the specified type. If outError != nil, ensure that you create and set an appropriate error when returning nil.
-        // You can also choose to override fileWrapperOfType:error:, writeToURL:ofType:error:, or writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-        throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
+        /*
+         * Write-out XML for a v2 Savitar world document
+         *
+         * You may wonder, why XML in this modern age? Why not do a PLIST or codable thing? Or use JSON?
+         * Answer: We stay away from Apple specific formats like PLIST and codable because we want the
+         * world document to be easily readable from anywhere, any platform. True, in this modern age,
+         * JSON would fit that requirement, but, there's something to be said about having some semblence
+         * still with the v1 document's format, and it's not that hard to read and write XML. So: XML it is
+         */
+        
+        if shouldBeMigrated() {
+            // yikes! the document should be modern if we're doing a save. Throw a fit
+            throw NSError(domain: "attempted to write obsolete world document", code: 1, userInfo: nil) // TODO: provide a Savitar error model?
+        }
+        
+        let root = XMLElement(name: DocumentElemIdentifier)
+        root.addAttribute(XMLNode.attribute(withName:"TYPE", stringValue:"Savitar World") as! XMLNode)
+        let worldElem: XMLElement = XMLNode.element(withName: WorldElemIdentifier) as! XMLElement
+        
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue, stringValue:"\(version)") as! XMLNode)
+        
+        let url = "\(TelnetIdentifier)\(host):\(port)"
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue, stringValue:url) as! XMLNode)
+        
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue:fontName) as! XMLNode)
+        
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue, stringValue:"\(fontSize)") as! XMLNode)
+        
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue:foreColor.toHex()!) as! XMLNode)
+        
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:backColor.toHex()!) as! XMLNode)
+        
+        root.addChild(worldElem)
+        
+        
+        let xml = XMLDocument(rootElement: root)
+        Swift.print(xml.xmlString)
+        return xml.xmlString.data(using: String.Encoding.utf8)!
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
-        // Insert code here to read your document from the given data of the specified type. If outError != nil, ensure that you create and set an appropriate error when returning false.
-        // You can also choose to override readFromFileWrapper:ofType:error: or readFromURL:ofType:error: instead.
-        // If you override either of these, you should also override -isEntireFileLoaded to return false if the contents are lazily loaded.
+        /*
+         * Parse XML for a v1 or v2 Savitar world document
+         */
         let parser = XMLParser(data: data)
         parser.delegate = self;
         parser.parse()
     }
-    
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == WorldElemIdentifier {
+            version = 1 // start with the assumption that a v1 document is being read
             for attribute in attributeDict {
                 switch attribute.key {
                     case WorldAttribIdentifier.URL.rawValue:
@@ -199,6 +253,9 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                         }
                     case WorldAttribIdentifier.zoomed.rawValue:
                         zoomed = attribute.value == "TRUE"
+                    case WorldAttribIdentifier.version.rawValue:
+                        guard let v = Int(attribute.value) else { break }
+                        version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
@@ -206,6 +263,11 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         }
     }
 
+
+    func shouldBeMigrated() -> Bool {
+        return version == 1
+    }
+    
     func output(result : OutputResult) {
         func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
             let outputView = self.splitViewController?.outputViewController.textView
