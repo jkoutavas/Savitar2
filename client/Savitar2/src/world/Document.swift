@@ -183,9 +183,9 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         
         worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue, stringValue:"\(fontSize)") as! XMLNode)
         
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue:foreColor.toHex()!) as! XMLNode)
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue:"#\(foreColor.toHex()!)") as! XMLNode)
         
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:backColor.toHex()!) as! XMLNode)
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:"#\(backColor.toHex()!)") as! XMLNode)
         
         root.addChild(worldElem)
         
