@@ -61,6 +61,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         
         // these are new for v2
         case version = "VERSION"
+        case GUID = "GUID"
     }
     
     let TelnetIdentifier = "telnet://"
@@ -87,6 +88,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     var zoomed = false
     
     var version = 1
+    var GUID = NSUUID().uuidString
     
     override func close() {
         super.close()
@@ -139,6 +141,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         let rowHeight = svc.inputViewController.rowHeight
         let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
         svc.splitView.setPosition(split, ofDividerAt: 0)
+        windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: GUID)
+        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: GUID)
         
         window.setIsZoomed(zoomed)
 
@@ -176,6 +180,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         
         worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue, stringValue:"\(version)") as! XMLNode)
         
+        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue, stringValue:"\(GUID)") as! XMLNode)
+       
         let url = "\(TelnetIdentifier)\(host):\(port)"
         worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue, stringValue:url) as! XMLNode)
         
@@ -256,6 +262,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
                     case WorldAttribIdentifier.version.rawValue:
                         guard let v = Int(attribute.value) else { break }
                         version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
+                    case WorldAttribIdentifier.GUID.rawValue:
+                        GUID = attribute.value
                     default:
                         Swift.print("skipping \(attribute.key)")
                 }
