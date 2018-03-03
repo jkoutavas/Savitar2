@@ -206,7 +206,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
          * Parse XML for a v1 or v2 Savitar world document
          */
         let parser = XMLParser(data: data)
-        parser.delegate = self;
+        parser.delegate = self
         parser.parse()
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
