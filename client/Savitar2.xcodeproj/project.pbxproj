@@ -28,6 +28,7 @@
 		69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E0204B872400301A8D /* CGFloat+Extensions.swift */; };
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
+		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
 		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
 		9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				69662B20204367BD00E7CC7B /* OutputProtocol.swift */,
 				69662B1E204367BD00E7CC7B /* SplitViewController.swift */,
 				69662B1D204367BD00E7CC7B /* ViewController.swift */,
+				69F620E6204BC19100301A8D /* WindowController.swift */,
 				69F620E4204B889200301A8D /* World.swift */,
 			);
 			path = world;
@@ -526,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
+				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,

@@ -22,9 +22,10 @@ class Document: NSDocument, OutputProtocol {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? NSWindowController else { return }
+        guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? WindowController else { return }
         
         self.addWindowController(windowController)
+        windowController.readOnly = world.version != 2
         
         splitViewController = windowController.contentViewController as? SplitViewController
         guard let svc = splitViewController else { return }
