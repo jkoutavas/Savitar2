@@ -20,6 +20,14 @@ class DocumentV1: Document {
     }
 
     override func writableTypes(for saveOperation: NSDocument.SaveOperationType) -> [String] {
+        // we only Save As v2
         return [DocumentV2.FileType]
     }
+    
+    override func duplicate() throws -> NSDocument {
+        // switch over to v2 document type when duplicating
+        fileType = DocumentV2.FileType
+        return try super.duplicate()
+    }
+    
 }
