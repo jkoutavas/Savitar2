@@ -679,13 +679,13 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-323" y="-16"/>
+            <point key="canvasLocation" x="-371" y="-303"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
+                    <window key="window" title="World" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -701,7 +701,45 @@
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-296" y="223"/>
+            <point key="canvasLocation" x="-344" y="-63"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0CC-sY-jBD">
+            <objects>
+                <viewController storyboardIdentifier="SheetViewController" id="jDw-vT-1Fu" sceneMemberID="viewController">
+                    <view key="view" id="Fr0-8A-gQ7">
+                        <rect key="frame" x="0.0" y="0.0" width="405" height="165"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vCf-1s-S1b">
+                                <rect key="frame" x="18" y="43" width="369" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="nw0-FA-RB7">
+                                    <font key="font" metaFont="system"/>
+                                    <string key="title">This is a v1 world document. Savitar 2.x does not overwrite v1 documents.
+
+If you want to save changes to this document, use the File:Duplicate menu item to create a v2 document.</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9tz-Ql-V73">
+                                <rect key="frame" x="167" y="19" width="71" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Okay" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8XN-Ic-Kqv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="miniSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="jDw-vT-1Fu" id="yLQ-an-cGY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="FV5-Cq-alr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146.5" y="-132.5"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="8Dm-Bd-g8u">
@@ -726,12 +764,12 @@
                 </splitViewController>
                 <customObject id="Zhx-cr-xnX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-236" y="724"/>
+            <point key="canvasLocation" x="-284" y="438"/>
         </scene>
-        <!--View Controller-->
+        <!--Output View Controller-->
         <scene sceneID="AML-N3-59t">
             <objects>
-                <viewController id="Umb-Bj-yZ8" customClass="ViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Umb-Bj-yZ8" customClass="OutputViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="jtg-Vt-Va2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -771,7 +809,7 @@
                 </viewController>
                 <customObject id="eJ4-na-aGV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="253"/>
+            <point key="canvasLocation" x="388" y="271"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="Ozo-wY-4AX">
@@ -816,7 +854,7 @@
                 </viewController>
                 <customObject id="Uqr-JY-xEG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="642"/>
+            <point key="canvasLocation" x="436" y="824"/>
         </scene>
     </scenes>
 </document>

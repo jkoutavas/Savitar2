@@ -15,9 +15,9 @@ class SplitViewController: NSSplitViewController {
         return item.viewController as! InputViewController
     }
     
-    var outputViewController: ViewController {
+    var outputViewController: OutputViewController {
         let item = splitViewItems[0]
-        return item.viewController as! ViewController
+        return item.viewController as! OutputViewController
     }
     
     override func viewDidLoad() {

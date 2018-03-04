@@ -95,6 +95,8 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
         endpoint?.close()
     }
 
+/*
+TODO: when this class gets subclassed into "v1Document" and "v2Document", these will be revisited
     override class var autosavesInPlace: Bool {
         return true
     }
@@ -102,11 +104,7 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
     override var isDocumentEdited: Bool {
         return false // TODO: eventually enable this
     }
-
-    override var isInViewingMode: Bool {
-        return shouldBeMigrated()
-    }
-
+*/
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
@@ -130,34 +128,47 @@ class Document: NSDocument, XMLParserDelegate, OutputProtocol {
             svc.outputViewController.font = font
         }
         
-        window.setContentSize(windowSize)
-        if let titleHeight = (windowController.window?.titlebarHeight) {
-            if let screenSize = NSScreen.main?.frame.size {
-                window.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
+        if version == 1 {
+            window.setContentSize(windowSize)
+            if let titleHeight = (windowController.window?.titlebarHeight) {
+                if let screenSize = NSScreen.main?.frame.size {
+                    window.setFrameTopLeftPoint(NSMakePoint(position.x, screenSize.height - position.y + titleHeight))
+                }
             }
+            
+            let dividerHeight: CGFloat = svc.splitView.dividerThickness
+            let rowHeight = svc.inputViewController.rowHeight
+            let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
+            svc.splitView.setPosition(split, ofDividerAt: 0)
+            
+            window.setIsZoomed(zoomed)
         }
         
-        let dividerHeight: CGFloat = svc.splitView.dividerThickness
-        let rowHeight = svc.inputViewController.rowHeight
-        let split: CGFloat = windowSize.height - dividerHeight - rowHeight * CGFloat(inputRows+1)
-        svc.splitView.setPosition(split, ofDividerAt: 0)
         windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: GUID)
         splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: GUID)
         
-        window.setIsZoomed(zoomed)
-
         output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:port, host:host, outputter:self)
         svc.inputViewController.endpoint = endpoint
         endpoint?.connectAndRun()
         
-        if shouldBeMigrated() {
-            // TODO: pop-up an alert to explain to user that "Save As..." should
-            // be done to properly migrate to v2 document, thus gaining auto save
-            // and save in place support
-        }
+        svc.outputViewController.showSheet = shouldBeMigrated()
     }
 
+    override func save(to url: URL,
+              ofType typeName: String,
+            for saveOperation: NSDocument.SaveOperationType,
+            completionHandler: @escaping (Error?) -> Void) {
+        
+            // check to see that we're not trying to overwrite a v1 document. We only want to support
+            // "Save As..." type saves for v1 documents, which results in producing v2 documents.
+            if shouldBeMigrated() && url != fileURL {
+                version = 2
+            }
+        
+        super.save(to:url, ofType:typeName, for:saveOperation, completionHandler: completionHandler)
+    }
+    
     override func data(ofType typeName: String) throws -> Data {
         /*
          * Write-out XML for a v2 Savitar world document
