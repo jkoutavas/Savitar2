@@ -29,5 +29,4 @@ class DocumentV1: Document {
         fileType = DocumentV2.FileType
         return try super.duplicate()
     }
-    
 }

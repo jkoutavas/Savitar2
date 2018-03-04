@@ -179,7 +179,6 @@ class World : NSObject, XMLParserDelegate {
         
         root.addChild(worldElem)
         
-        
         let xml = XMLDocument(rootElement: root)
         Swift.print(xml.xmlString)
         return xml.xmlString.data(using: String.Encoding.utf8)!
