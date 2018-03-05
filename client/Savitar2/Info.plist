@@ -7,10 +7,12 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array/>
 			<key>CFBundleTypeIconFile</key>
-			<string>World</string>
+			<string>World.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>v1 World Document</string>
+			<string>Savitar v1 World</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>DATA</string>
@@ -20,27 +22,25 @@
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Document</string>
+			<string>$(PRODUCT_MODULE_NAME).DocumentV1</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>world</string>
-			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>World</string>
+			<string>World.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>World Document</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>SVTR</string>
-			</array>
+			<string>Savitar v2 World</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.heynow.savitar.world</string>
+			</array>
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Document</string>
+			<string>$(PRODUCT_MODULE_NAME).DocumentV2</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -69,5 +69,29 @@
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticTermination</key>
 	<true/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Savitar v2 world</string>
+			<key>UTTypeIconFile</key>
+			<string>World.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.heynow.savitar.world</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://www.heynow.com/savitar</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>world</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
