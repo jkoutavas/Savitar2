@@ -29,6 +29,7 @@
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
 		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
+		69F620EA204CD6DF00301A8D /* WorldSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69F620E8204CD6DF00301A8D /* WorldSettings.storyboard */; };
 		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		69F620E9204CD6DF00301A8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldSettings.storyboard; sourceTree = "<group>"; };
 		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
 		9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				695484AA1FC4E6E400A6983F /* Info.plist */,
+				69F620E8204CD6DF00301A8D /* WorldSettings.storyboard */,
 			);
 			path = Savitar2;
 			sourceTree = "<group>";
@@ -302,7 +305,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Heynow Software";
 				TargetAttributes = {
 					6954849B1FC4E6E400A6983F = {
@@ -351,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F620EA204CD6DF00301A8D /* WorldSettings.storyboard in Resources */,
 				6994602E2041124800409308 /* World.icns in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
@@ -586,6 +590,14 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		69F620E8204CD6DF00301A8D /* WorldSettings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69F620E9204CD6DF00301A8D /* Base */,
+			);
+			name = WorldSettings.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -603,6 +615,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -610,6 +623,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -660,6 +674,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -667,6 +682,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
