@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="q3K-wp-zd6">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
@@ -7,10 +7,52 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="bfJ-FJ-bd6">
+            <objects>
+                <viewController storyboardIdentifier="Root" id="q3K-wp-zd6" sceneMemberID="viewController">
+                    <view key="view" id="DoO-AN-7Au">
+                        <rect key="frame" x="0.0" y="0.0" width="454" height="454"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <containerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNC-3a-IUj">
+                                <rect key="frame" x="0.0" y="52" width="454" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <segue destination="D3s-9Z-los" kind="embed" id="rsV-68-8U3"/>
+                                </connections>
+                            </containerView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJg-zH-SHG">
+                                <rect key="frame" x="369" y="13" width="71" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Okay" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NUD-dx-pPK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="closeWorldSetting:" target="qHp-YX-zle" id="Svy-r7-uAi"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VSV-NV-H0U">
+                                <rect key="frame" x="0.0" y="431" width="456" height="17"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Settings" id="7Cx-cc-n81">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="qHp-YX-zle" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1670" y="-698"/>
+        </scene>
         <!--Tab View Controller-->
         <scene sceneID="qPf-UZ-UTJ">
             <objects>
-                <tabViewController storyboardIdentifier="TabViewController" selectedTabViewItemIndex="0" id="D3s-9Z-los" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" id="D3s-9Z-los" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="xMo-hb-D03"/>
                         <tabViewItem identifier="" id="8WY-z8-bj2"/>

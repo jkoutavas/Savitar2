@@ -10,6 +10,7 @@ import Cocoa
 
 class WindowController : NSWindowController {
     var readOnly = false
+    var sheet: NSViewController?
     
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
         let components = displayName.components(separatedBy: ".")
@@ -21,7 +22,12 @@ class WindowController : NSWindowController {
     
     @IBAction func openWorldSetting(_ sender: Any) {
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "WorldSettings"), bundle: nil)
-        let controller = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "TabViewController")) as! NSTabViewController
-        self.contentViewController?.presentViewControllerAsSheet(controller)
+        sheet = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Root")) as? NSViewController
+        self.contentViewController?.presentViewControllerAsSheet(sheet!)
+    }
+    
+    @IBAction func closeWorldSetting(_ sender: Any) {
+        self.contentViewController?.dismissViewController(sheet!)
+        sheet = nil
     }
 }
