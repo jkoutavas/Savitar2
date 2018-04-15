@@ -18,4 +18,10 @@ class WindowController : NSWindowController {
         // world is read-only (v1.0) then append an indication of that.
         return components[0] + (readOnly ? " [READ ONLY]" : "")
     }
+    
+    @IBAction func openWorldSetting(_ sender: Any) {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "WorldSettings"), bundle: nil)
+        let controller = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "TabViewController")) as! NSTabViewController
+        self.contentViewController?.presentViewControllerAsSheet(controller)
+    }
 }
