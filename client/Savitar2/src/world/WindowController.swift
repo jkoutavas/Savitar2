@@ -10,14 +10,14 @@ import Cocoa
 
 class WindowController : NSWindowController {
     var readOnly = false
+    var titlebarController : NSTitlebarAccessoryViewController?
     
     override func windowDidLoad() {
-        if let titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
-        as? NSTitlebarAccessoryViewController {
-            titlebarController.layoutAttribute = .right
-            // layoutAttribute has to be set before added to window
-            self.window?.addTitlebarAccessoryViewController(titlebarController)
-        }
+        titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
+            as? NSTitlebarAccessoryViewController
+        titlebarController?.layoutAttribute = .right
+        // layoutAttribute has to be set before added to window
+        self.window?.addTitlebarAccessoryViewController(titlebarController!)
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -29,7 +29,7 @@ class WindowController : NSWindowController {
     }
     
     @IBAction func showWorldSetting(_ sender: Any) {
-        self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "ShowWorldSettings"), sender: self)
+        titlebarController?.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "ShowWorldSettings"), sender: self)
     }
  /*
     @IBAction func closeWorldSetting(_ sender: Any) {

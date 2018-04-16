@@ -1053,8 +1053,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="8" y="4" width="99" height="25"/>
-                                <buttonCell key="cell" type="roundTextured" title="Button in Title" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
+                                <rect key="frame" x="38" y="4" width="65" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1065,8 +1065,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="9TJ-w7-3SB" secondAttribute="bottom" constant="6" id="Hrt-nq-4C7"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9TJ-w7-3SB" secondAttribute="trailing" id="fbb-3M-2tn"/>
-                            <constraint firstItem="9TJ-w7-3SB" firstAttribute="leading" secondItem="n85-aq-ZEl" secondAttribute="leading" constant="8" id="fqL-co-UHx"/>
+                            <constraint firstAttribute="trailing" secondItem="9TJ-w7-3SB" secondAttribute="trailing" constant="16" id="fbb-3M-2tn"/>
+                            <constraint firstItem="9TJ-w7-3SB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="n85-aq-ZEl" secondAttribute="leading" id="fqL-co-UHx"/>
                             <constraint firstItem="9TJ-w7-3SB" firstAttribute="top" secondItem="n85-aq-ZEl" secondAttribute="top" constant="6" id="t6b-3l-FAY"/>
                         </constraints>
                     </view>
