@@ -43,6 +43,6 @@ class ViewController: NSViewController {
         get {
             return textView.layoutManager!.defaultLineHeight(for: font)
         }
-    }
+    } 
  }
 

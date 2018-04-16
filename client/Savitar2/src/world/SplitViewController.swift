@@ -9,7 +9,6 @@
 import Cocoa
 
 class SplitViewController: NSSplitViewController {
-
     var inputViewController: InputViewController {
         let item = splitViewItems[1]
         return item.viewController as! InputViewController
@@ -24,5 +23,4 @@ class SplitViewController: NSSplitViewController {
         super.viewDidLoad()
         // Do view setup here.
     }
-    
 }

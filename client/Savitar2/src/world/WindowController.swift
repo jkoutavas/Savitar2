@@ -10,8 +10,16 @@ import Cocoa
 
 class WindowController : NSWindowController {
     var readOnly = false
-    var sheet: NSViewController?
     
+    override func windowDidLoad() {
+        if let titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
+        as? NSTitlebarAccessoryViewController {
+            titlebarController.layoutAttribute = .right
+            // layoutAttribute has to be set before added to window
+            self.window?.addTitlebarAccessoryViewController(titlebarController)
+        }
+    }
+
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
         let components = displayName.components(separatedBy: ".")
         
@@ -20,14 +28,13 @@ class WindowController : NSWindowController {
         return components[0] + (readOnly ? " [READ ONLY]" : "")
     }
     
-    @IBAction func openWorldSetting(_ sender: Any) {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "WorldSettings"), bundle: nil)
-        sheet = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Root")) as? NSViewController
-        self.contentViewController?.presentViewControllerAsSheet(sheet!)
+    @IBAction func showWorldSetting(_ sender: Any) {
+        self.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "ShowWorldSettings"), sender: self)
     }
-    
+ /*
     @IBAction func closeWorldSetting(_ sender: Any) {
-        self.contentViewController?.dismissViewController(sheet!)
-        sheet = nil
+        self.dismissViewController(settingsSheet!)
+        settingsSheet = nil
     }
+*/   
 }
