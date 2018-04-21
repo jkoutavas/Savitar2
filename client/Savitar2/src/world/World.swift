@@ -55,7 +55,7 @@ class World : NSObject, XMLParserDelegate {
 
     // TODO: just some hard-coded connection settings right now
     var port: UInt32 = 1337
-    var host = "::1"
+    @objc dynamic var host = "::1"
     
     // world settings with defaults
     var backColor = NSColor.white

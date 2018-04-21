@@ -25,7 +25,7 @@ class Document: NSDocument, OutputProtocol {
         guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? WindowController else { return }
         
         self.addWindowController(windowController)
-        windowController.readOnly = world.version != 2
+        windowController.world = world
         
         splitViewController = windowController.contentViewController as? SplitViewController
         guard let svc = splitViewController else { return }
