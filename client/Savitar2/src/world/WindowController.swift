@@ -27,17 +27,12 @@ class WindowController : NSWindowController {
         // world is read-only (v1.0) then append an indication of that.
         return components[0] + (world?.version != 2 ? " [READ ONLY]" : "")
     }
-    
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.destinationController is WorldSettingsController
-        {
-            let vc = segue.destinationController as? WorldSettingsController
-            vc?.world = world
-        }
-    }
 
     @IBAction func showWorldSetting(_ sender: Any) {
-        titlebarController?.performSegue(withIdentifier:NSStoryboardSegue.Identifier(rawValue: "ShowWorldSettings"), sender: self)
+        let vc = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WorldSettings")) as! WorldSettingsController
+        vc.world = world
+        titlebarController?.presentViewControllerAsSheet(vc)
+ 
     }
  /*
     @IBAction func closeWorldSetting(_ sender: Any) {

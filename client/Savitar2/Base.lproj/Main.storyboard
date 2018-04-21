@@ -918,12 +918,9 @@
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                <connections>
-                                                    <binding destination="Dhe-ko-nR0" name="value" keyPath="self.representedObject.host" id="AR3-YS-iql"/>
-                                                </connections>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="self.representedObject.host" id="xz1-dx-Au5"/>
+                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.host" id="qwx-wm-vew"/>
                                             </connections>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PnB-Dc-Cig">
@@ -934,6 +931,9 @@
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <connections>
+                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.port" id="gfJ-qU-fkI"/>
+                                            </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QOo-6N-YlP">
                                             <rect key="frame" x="18" y="25" width="66" height="17"/>
@@ -1065,7 +1065,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="eRF-G2-hMy" kind="sheet" identifier="ShowWorldSettings" id="l4h-jQ-xsb"/>
+                                    <action selector="showWorldSetting:" target="iLh-qn-Ycd" id="A52-mR-SxS"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -15,9 +15,8 @@ class WorldSettingsController: NSViewController {
      if segue.destinationController is NSTabViewController
         {
             let tabViewController = segue.destinationController as? NSTabViewController
-            for object in (tabViewController?.childViewControllers)! {
-                let childViewController = object as NSViewController
-                childViewController.representedObject = world
+            for vc in (tabViewController?.childViewControllers)! {
+                vc.representedObject = world
             }
         }
     }

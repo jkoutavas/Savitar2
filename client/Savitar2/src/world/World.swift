@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class World : NSObject, XMLParserDelegate {
+class World : NSController, XMLParserDelegate {
     // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
         // these are obsoleted in v2
@@ -54,7 +54,7 @@ class World : NSObject, XMLParserDelegate {
     let WorldElemIdentifier = "WORLD"
 
     // TODO: just some hard-coded connection settings right now
-    var port: UInt32 = 1337
+    @objc dynamic var port: UInt32 = 1337
     @objc dynamic var host = "::1"
     
     // world settings with defaults
