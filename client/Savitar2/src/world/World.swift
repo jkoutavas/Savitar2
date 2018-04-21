@@ -53,6 +53,12 @@ class World : NSController, XMLParserDelegate {
     let DocumentElemIdentifier = "DOCUMENT"
     let WorldElemIdentifier = "WORLD"
 
+    @objc dynamic var editable: Bool {
+        get {
+            return version != 1
+        }
+    }
+    
     // TODO: just some hard-coded connection settings right now
     @objc dynamic var port: UInt32 = 1337
     @objc dynamic var host = "::1"

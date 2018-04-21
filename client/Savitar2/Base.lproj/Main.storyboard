@@ -920,6 +920,7 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
+                                                <binding destination="Dhe-ko-nR0" name="editable" keyPath="representedObject.editable" id="mnS-jJ-4Py"/>
                                                 <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.host" id="qwx-wm-vew"/>
                                             </connections>
                                         </textField>
@@ -932,6 +933,7 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
+                                                <binding destination="Dhe-ko-nR0" name="editable" keyPath="representedObject.editable" id="Wmp-qx-y3c"/>
                                                 <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.port" id="gfJ-qU-fkI"/>
                                             </connections>
                                         </textField>
