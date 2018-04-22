@@ -30,19 +30,21 @@ class Document: NSDocument, OutputProtocol {
         windowController.world = world
         
         splitViewController = windowController.contentViewController as? SplitViewController
-        guard let svc = splitViewController else { return }
-        
-        guard let window = windowController.window else { return }
-        window.makeFirstResponder(svc.inputViewController.textView)
 
-        svc.inputViewController.foreColor = world.foreColor
-        svc.inputViewController.backColor = world.backColor
-        svc.outputViewController.foreColor = world.foreColor
-        svc.outputViewController.backColor = world.backColor
+        guard let window = windowController.window else { return }
+        guard let svc = splitViewController else { return }
+        guard let inputVC = svc.inputViewController else { return }
+        guard let outputVC = svc.outputViewController else { return }
+        window.makeFirstResponder(inputVC.textView)
+
+        inputVC.foreColor = world.foreColor
+        inputVC.backColor = world.backColor
+        outputVC.foreColor = world.foreColor
+        outputVC.backColor = world.backColor
         
         if let font = NSFont(name: world.fontName, size: world.fontSize) {
-            svc.inputViewController.font = font
-            svc.outputViewController.font = font
+            inputVC.font = font
+            outputVC.font = font
         }
         
         if world.version == 1 {
@@ -55,7 +57,7 @@ class Document: NSDocument, OutputProtocol {
             }
             
             let dividerHeight: CGFloat = svc.splitView.dividerThickness
-            let rowHeight = svc.inputViewController.rowHeight
+            let rowHeight = inputVC.rowHeight
             let split: CGFloat = world.windowSize.height - dividerHeight - rowHeight * CGFloat(world.inputRows+1)
             svc.splitView.setPosition(split, ofDividerAt: 0)
             
@@ -67,7 +69,7 @@ class Document: NSDocument, OutputProtocol {
         
         output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:world.port, host:world.host, outputter:self)
-        svc.inputViewController.endpoint = endpoint
+        inputVC.endpoint = endpoint
         endpoint?.connectAndRun()
     }
 
@@ -77,7 +79,9 @@ class Document: NSDocument, OutputProtocol {
 
     func output(result : OutputResult) {
         func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
-            let outputView = self.splitViewController?.outputViewController.textView
+            guard let svc = splitViewController else { return }
+             guard let outputVC = svc.outputViewController else { return }
+            let outputView = outputVC.textView
         
             outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
             outputView?.scrollToEndOfDocument(nil)

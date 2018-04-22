@@ -9,14 +9,20 @@
 import Cocoa
 
 class SplitViewController: NSSplitViewController {
-    var inputViewController: InputViewController {
+    var inputViewController: InputViewController? {
         let item = splitViewItems[1]
-        return item.viewController as! InputViewController
+        guard let vc = item.viewController as? InputViewController else {
+            return nil
+        }
+        return vc
     }
     
-    var outputViewController: ViewController {
+    var outputViewController: ViewController? {
         let item = splitViewItems[0]
-        return item.viewController as! ViewController
+        guard let vc = item.viewController as? ViewController else {
+            return nil
+        }
+        return vc
     }
 
 }
