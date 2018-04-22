@@ -50,7 +50,7 @@ public class Endpoint: NSObject, StreamDelegate {
             inputStream.open()
             outputStream.open()
         } else {
-            outputter.output(result:.error("[SAVITAR] Failed Getting Streams"))
+            outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
     }
 
@@ -73,23 +73,23 @@ public class Endpoint: NSObject, StreamDelegate {
                                      encoding: .ascii,
                                      freeWhenDone: true)
             else { return }
-            outputter.output(result:.success(message))
+            outputter.output(result: .success(message))
         }
     }
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
-          readAvailableBytes(stream: aStream as! InputStream)
+            guard let inputStream = aStream as? InputStream else { break }
+            readAvailableBytes(stream: inputStream)
         case Stream.Event.endEncountered:
-          print("new message received")
+            print("new message received")
         case Stream.Event.errorOccurred:
-          self.outputter.output(result:.error("[SAVITAR] stream error occurred"))
+            self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
         case Stream.Event.hasSpaceAvailable:
-          print("has space available")
+            print("has space available")
         default:
-          print("some other event...")
-          break
+            print("some other event...")
         }
     }
 }

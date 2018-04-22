@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class WindowController : NSWindowController {
+class WindowController: NSWindowController {
     var world : World?
 
     override func windowDidLoad() {

@@ -12,7 +12,7 @@ class Document: NSDocument, OutputProtocol {
     let world = World()
 
     var endpoint: Endpoint?
-    var splitViewController : SplitViewController?
+    var splitViewController: SplitViewController?
 
     override func close() {
         super.close()
@@ -67,8 +67,8 @@ class Document: NSDocument, OutputProtocol {
         windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: world.GUID)
         splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: world.GUID)
 
-        output(result:.success("Welcome to Savitar 2.0!\n\n"))
-        endpoint = Endpoint(port:world.port, host:world.host, outputter:self)
+        output(result: .success("Welcome to Savitar 2.0!\n\n"))
+        endpoint = Endpoint(port: world.port, host: world.host, outputter: self)
         inputVC.endpoint = endpoint
         endpoint?.connectAndRun()
     }
@@ -77,8 +77,8 @@ class Document: NSDocument, OutputProtocol {
         try world.read(from: data)
     }
 
-    func output(result : OutputResult) {
-        func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
+    func output(result: OutputResult) {
+        func output(string:String, attributes:[NSAttributedStringKey:Any]? = nil) {
             guard let svc = splitViewController else { return }
              guard let outputVC = svc.outputViewController else { return }
             let outputView = outputVC.textView
@@ -90,12 +90,12 @@ class Document: NSDocument, OutputProtocol {
         var attributes = [NSAttributedStringKey: AnyObject]()
         attributes[NSAttributedStringKey.font] = NSFont(name: world.fontName, size: world.fontSize)
         switch result {
-            case .success(let message):
-                attributes[NSAttributedStringKey.foregroundColor] = world.foreColor
-                output(string: message, attributes: attributes)
-            case .error(let error):
-                attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
-                output(string: error, attributes: attributes)
+        case .success(let message):
+            attributes[NSAttributedStringKey.foregroundColor] = world.foreColor
+            output(string: message, attributes: attributes)
+        case .error(let error):
+            attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
+            output(string: error, attributes: attributes)
         }
     }
 

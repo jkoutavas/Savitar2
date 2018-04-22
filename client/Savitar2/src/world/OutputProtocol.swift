@@ -17,5 +17,5 @@ enum Result<T, E> {
 typealias OutputResult = Result<String, String>
 
 protocol OutputProtocol {
-    func output(result : OutputResult)
+    func output(result: OutputResult)
 }
