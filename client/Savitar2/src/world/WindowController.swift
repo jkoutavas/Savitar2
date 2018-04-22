@@ -10,7 +10,7 @@ import Cocoa
 
 class WindowController : NSWindowController {
     var world : World?
-    
+
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
@@ -22,7 +22,7 @@ class WindowController : NSWindowController {
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
         let components = displayName.components(separatedBy: ".")
-        
+
         // display just the world's file name, with no extension. And, if the
         // world is read-only (v1.0) then append an indication of that.
         var status = ""
@@ -42,7 +42,7 @@ class WindowController : NSWindowController {
         guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
         vc.world = world
         vc.docController = self
-        
+
         self.window?.beginSheet(wc.window!, completionHandler: { (returnCode) in
             print("world settings sheet has been dismissed") // TODO: work-out save vs. cancel, etc.
         })

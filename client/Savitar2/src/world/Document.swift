@@ -10,10 +10,10 @@ import Cocoa
 
 class Document: NSDocument, OutputProtocol {
     let world = World()
-    
+
     var endpoint: Endpoint?
     var splitViewController : SplitViewController?
-    
+
     override func close() {
         super.close()
         endpoint?.close()
@@ -25,10 +25,10 @@ class Document: NSDocument, OutputProtocol {
         guard let windowController = storyboard.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("Document Window Controller"))
             as? WindowController else { return }
-        
+
         self.addWindowController(windowController)
         windowController.world = world
-        
+
         splitViewController = windowController.contentViewController as? SplitViewController
 
         guard let window = windowController.window else { return }
@@ -41,12 +41,12 @@ class Document: NSDocument, OutputProtocol {
         inputVC.backColor = world.backColor
         outputVC.foreColor = world.foreColor
         outputVC.backColor = world.backColor
-        
+
         if let font = NSFont(name: world.fontName, size: world.fontSize) {
             inputVC.font = font
             outputVC.font = font
         }
-        
+
         if world.version == 1 {
             window.setContentSize(world.windowSize)
             if let titleHeight = (windowController.window?.titlebarHeight) {
@@ -55,18 +55,18 @@ class Document: NSDocument, OutputProtocol {
                                                             screenSize.height - world.position.y + titleHeight))
                 }
             }
-            
+
             let dividerHeight: CGFloat = svc.splitView.dividerThickness
             let rowHeight = inputVC.rowHeight
             let split: CGFloat = world.windowSize.height - dividerHeight - rowHeight * CGFloat(world.inputRows+1)
             svc.splitView.setPosition(split, ofDividerAt: 0)
-            
+
             window.setIsZoomed(world.zoomed)
         }
-        
+
         windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: world.GUID)
         splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: world.GUID)
-        
+
         output(result:.success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port:world.port, host:world.host, outputter:self)
         inputVC.endpoint = endpoint
@@ -82,11 +82,11 @@ class Document: NSDocument, OutputProtocol {
             guard let svc = splitViewController else { return }
              guard let outputVC = svc.outputViewController else { return }
             let outputView = outputVC.textView
-        
+
             outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
             outputView?.scrollToEndOfDocument(nil)
         }
-        
+
         var attributes = [NSAttributedStringKey: AnyObject]()
         attributes[NSAttributedStringKey.font] = NSFont(name: world.fontName, size: world.fontSize)
         switch result {
@@ -98,7 +98,7 @@ class Document: NSDocument, OutputProtocol {
                 output(string: error, attributes: attributes)
         }
     }
-    
+
     override func data(ofType typeName: String) throws -> Data {
         world.version = 2
         return try world.data()

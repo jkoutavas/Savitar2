@@ -11,7 +11,7 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
-    
+
     public var backColor : NSColor {
         get {
             return textView.backgroundColor
@@ -20,7 +20,7 @@ class ViewController: NSViewController {
             textView.backgroundColor = newValue
         }
     }
-    
+
     public var foreColor : NSColor {
         get {
             return textView.textColor!
@@ -29,7 +29,7 @@ class ViewController: NSViewController {
             textView.textColor = newValue
         }
     }
-    
+
     public var font : NSFont {
         get {
             return textView.font!
@@ -43,6 +43,6 @@ class ViewController: NSViewController {
         get {
             return textView.layoutManager!.defaultLineHeight(for: font)
         }
-    } 
+    }
  }
 

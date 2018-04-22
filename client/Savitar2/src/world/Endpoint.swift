@@ -12,7 +12,7 @@ public class Endpoint: NSObject, StreamDelegate {
     let port: UInt32
     let host: String
     let outputter: OutputProtocol
-    
+
     var inputStream: InputStream!
     var outputStream: OutputStream!
     let maxReadLength = 4096
@@ -22,17 +22,17 @@ public class Endpoint: NSObject, StreamDelegate {
         self.host = host
         self.outputter = outputter
     }
-    
+
     func close() {
         inputStream.close()
         outputStream.close()
     }
-    
+
     func connectAndRun() {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
-        
-        
+
+
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                  host as CFString,
                                  port,
@@ -40,10 +40,10 @@ public class Endpoint: NSObject, StreamDelegate {
                                  &writeStream)
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
-        
+
         if inputStream != nil && outputStream != nil {
             inputStream.delegate = self
-            
+
             inputStream.schedule(in: .current, forMode: .commonModes)
             outputStream.schedule(in: .current, forMode: .commonModes)
 
@@ -53,12 +53,12 @@ public class Endpoint: NSObject, StreamDelegate {
             outputter.output(result:.error("[SAVITAR] Failed Getting Streams"))
         }
     }
-    
+
     func sendMessage(message: String) {
         let data = message.data(using: .ascii)!
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }
-    
+
     private func readAvailableBytes(stream: InputStream) {
         while stream.hasBytesAvailable {
             let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)

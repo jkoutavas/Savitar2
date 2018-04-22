@@ -11,10 +11,10 @@ import Cocoa
 class InputViewController: ViewController {
 
     public weak var endpoint: Endpoint?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
