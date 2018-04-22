@@ -9,11 +9,10 @@
 import Cocoa
 
 class WindowController : NSWindowController {
-    var titlebarController : NSTitlebarAccessoryViewController?
     var world : World?
     
     override func windowDidLoad() {
-        titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
+        let titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
@@ -35,15 +34,14 @@ class WindowController : NSWindowController {
     }
 
     @IBAction func showWorldSetting(_ sender: Any) {
-        let vc = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WorldSettings")) as! WorldSettingsController
+        // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
+        let wc = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "World Settings Window Controller")) as! NSWindowController
+        let vc = wc.window?.contentViewController as! WorldSettingsController
         vc.world = world
-        titlebarController?.presentViewControllerAsSheet(vc)
- 
+        vc.docController = self
+        
+        self.window?.beginSheet(wc.window!, completionHandler: { (returnCode) in
+            print("world settings sheet has been dismissed") // TODO: work-out save vs. cancel, etc.
+        })
     }
- /*
-    @IBAction func closeWorldSetting(_ sender: Any) {
-        self.dismissViewController(settingsSheet!)
-        settingsSheet = nil
-    }
-*/   
 }
