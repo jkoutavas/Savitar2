@@ -147,7 +147,7 @@ class World : NSController, XMLParserDelegate {
             }
         }
     }
-    
+
     func data() throws -> Data {
         /*
          * Write-out XML for a v2 Savitar world document
@@ -158,33 +158,63 @@ class World : NSController, XMLParserDelegate {
          * JSON would fit that requirement, but, there's something to be said about having some semblence
          * still with the v1 document's format, and it's not that hard to read and write XML. So: XML it is
          */
-        
+
+         // TODO: provide a Savitar error model?
+
         if version != 2 {
             // yikes! the document should be modern if we're doing a save. Throw a fit
-            throw NSError(domain: "attempted to write obsolete world document", code: 1, userInfo: nil) // TODO: provide a Savitar error model?
+            throw NSError(domain: "attempted to write obsolete world document", code: 1, userInfo: nil)
         }
-        
+
         let root = XMLElement(name: DocumentElemIdentifier)
-        root.addAttribute(XMLNode.attribute(withName:"TYPE", stringValue:"Savitar World") as! XMLNode)
-        let worldElem: XMLElement = XMLNode.element(withName: WorldElemIdentifier) as! XMLElement
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue, stringValue:"\(version)") as! XMLNode)
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue, stringValue:"\(GUID)") as! XMLNode)
-       
-        let url = "\(TelnetIdentifier)\(host):\(port)"
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue, stringValue:url) as! XMLNode)
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue:fontName) as! XMLNode)
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue, stringValue:"\(fontSize)") as! XMLNode)
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue:"#\(foreColor.toHex()!)") as! XMLNode)
-        
-        worldElem.addAttribute(XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:"#\(backColor.toHex()!)") as! XMLNode)
-        
+        guard let type = XMLNode.attribute(withName: "TYPE", stringValue: "Savitar World") as? XMLNode else {
+            throw NSError()
+        }
+        root.addAttribute(type)
+
+        guard let elem = XMLNode.element(withName: WorldElemIdentifier) as? XMLElement else {
+            throw NSError()
+        }
+        let worldElem: XMLElement = elem
+
+        guard let version = XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue, stringValue: "\(version)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(version)
+
+        guard let guid = XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue, stringValue: "\(GUID)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(guid)
+
+        let urlStr = "\(TelnetIdentifier)\(host):\(port)"
+        guard let url = XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue, stringValue: urlStr) as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(url)
+
+        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue:fontName) as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(font)
+
+        guard let fontSize = XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue, stringValue: "\(fontSize)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(fontSize)
+
+        guard let foreColor = XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue: "#\(foreColor.toHex()!)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(foreColor)
+
+        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:"#\(backColor.toHex()!)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(backColor)
+
         root.addChild(worldElem)
-        
+
         let xml = XMLDocument(rootElement: root)
         Swift.print(xml.xmlString)
         return xml.xmlString.data(using: String.Encoding.utf8)!
