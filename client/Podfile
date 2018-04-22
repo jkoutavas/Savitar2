@@ -7,7 +7,7 @@ target 'Savitar2' do
   use_frameworks!
 
   # Pods for Savitar2
-  pod 'BlueSocket'
+#  pod 'BlueSocket'
 
   target 'Savitar2Tests' do
     inherit! :search_paths
