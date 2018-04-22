@@ -11,8 +11,8 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet var textView: NSTextView!
-    
-    public var backColor : NSColor {
+
+    public var backColor: NSColor {
         get {
             return textView.backgroundColor
         }
@@ -20,8 +20,8 @@ class ViewController: NSViewController {
             textView.backgroundColor = newValue
         }
     }
-    
-    public var foreColor : NSColor {
+
+    public var foreColor: NSColor {
         get {
             return textView.textColor!
         }
@@ -29,8 +29,8 @@ class ViewController: NSViewController {
             textView.textColor = newValue
         }
     }
-    
-    public var font : NSFont {
+
+    public var font: NSFont {
         get {
             return textView.font!
         }
@@ -39,10 +39,9 @@ class ViewController: NSViewController {
         }
     }
 
-    public var rowHeight : CGFloat {
+    public var rowHeight: CGFloat {
         get {
             return textView.layoutManager!.defaultLineHeight(for: font)
         }
-    } 
+    }
  }
-

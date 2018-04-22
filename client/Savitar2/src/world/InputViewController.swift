@@ -11,10 +11,10 @@ import Cocoa
 class InputViewController: ViewController {
 
     public weak var endpoint: Endpoint?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
@@ -27,7 +27,7 @@ class InputViewController: ViewController {
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
                 if self.textView.string.count > 1 {
-                    self.endpoint?.sendMessage(message:self.textView.string)
+                    self.endpoint?.sendMessage(message: self.textView.string)
                 }
 
                 self.textView.string = ""

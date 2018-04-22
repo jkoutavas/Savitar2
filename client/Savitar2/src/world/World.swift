@@ -16,7 +16,7 @@ class World : NSController, XMLParserDelegate {
         case position = "POSITION"
         case windowSize = "WINDOWSIZE"
         case zoomed = "ZOOMED"
-        
+
         // these are shared between v1 and v2
         case name = "NAME"
         case URL = "URL"
@@ -43,12 +43,12 @@ class World : NSController, XMLParserDelegate {
         case keepaliveMins = "KEEPALIVEMINS"
         case logonCmd = "LOGONCMD"
         case logoffCmd = "LOGOFFCMD"
-        
+
         // these are new for v2
         case version = "VERSION"
         case GUID = "GUID"
     }
-    
+
     let TelnetIdentifier = "telnet://"
     let DocumentElemIdentifier = "DOCUMENT"
     let WorldElemIdentifier = "WORLD"
@@ -58,11 +58,11 @@ class World : NSController, XMLParserDelegate {
             return version != 1
         }
     }
-    
+
     // TODO: just some hard-coded connection settings right now
     @objc dynamic var port: UInt32 = 1337
     @objc dynamic var host = "::1"
-    
+
     // world settings with defaults
     var backColor = NSColor.white
     var foreColor = NSColor.black
@@ -72,12 +72,12 @@ class World : NSController, XMLParserDelegate {
     var outputRows = 24
     var columns = 80
     var position = NSMakePoint(44, 0)
-    var windowSize = NSMakeSize(480,270)
+    var windowSize = NSMakeSize(480, 270)
     var zoomed = false
-    
+
     var version = 0
     var GUID = NSUUID().uuidString
-    
+
     func read(from data: Data) throws {
         /*
          * Parse XML for a v1 or v2 Savitar world document
@@ -91,58 +91,58 @@ class World : NSController, XMLParserDelegate {
             version = 1 // start with the assumption that a v1 document is being read
             for attribute in attributeDict {
                 switch attribute.key {
-                    case WorldAttribIdentifier.URL.rawValue:
-                        if (attribute.value.hasPrefix(TelnetIdentifier)) {
-                            let body = attribute.value.dropPrefix(TelnetIdentifier)
-                            let parts = body.components(separatedBy: ":")
-                            if parts.count == 2 {
-                                host = parts[0]
-                                guard let p1 = UInt32(parts[1]) else { break }
-                                port = p1
-                            }
-                        }
-                    case WorldAttribIdentifier.backColor.rawValue:
-                        backColor = NSColor(hex: attribute.value)!
-                    case WorldAttribIdentifier.foreColor.rawValue:
-                        foreColor = NSColor(hex: attribute.value)!
-                    case WorldAttribIdentifier.font.rawValue:
-                        fontName = attribute.value
-                    case WorldAttribIdentifier.fontSize.rawValue:
-                        guard let size = CGFloat(attribute.value) else { break }
-                        fontSize = size
-                    case WorldAttribIdentifier.position.rawValue:
-                        let parts = attribute.value.components(separatedBy: ",")
+                case WorldAttribIdentifier.URL.rawValue:
+                    if (attribute.value.hasPrefix(TelnetIdentifier)) {
+                        let body = attribute.value.dropPrefix(TelnetIdentifier)
+                        let parts = body.components(separatedBy: ":")
                         if parts.count == 2 {
-                            guard let x = CGFloat(parts[1]) else { break }
-                            guard let y = CGFloat(parts[0]) else { break }
-                            position = NSMakePoint(x, y)
+                            host = parts[0]
+                            guard let p1 = UInt32(parts[1]) else { break }
+                            port = p1
                         }
-                    case WorldAttribIdentifier.windowSize.rawValue:
-                        let parts = attribute.value.components(separatedBy: ",")
-                        if parts.count == 2 {
-                            guard let width = CGFloat(parts[0]) else { break }
-                            guard let height = CGFloat(parts[1]) else { break }
-                            windowSize = NSMakeSize(width, height)
-                        }
-                    case WorldAttribIdentifier.resolution.rawValue:
-                        let parts = attribute.value.components(separatedBy: "x")
-                        if parts.count == 3 {
-                            guard let n0 = Int(parts[0]) else { break }
-                            guard let n1 = Int(parts[1]) else { break }
-                            guard let n2 = Int(parts[2]) else { break }
-                            outputRows = n0
-                            columns = n1
-                            inputRows = n2
-                        }
-                    case WorldAttribIdentifier.zoomed.rawValue:
-                        zoomed = attribute.value == "TRUE"
-                    case WorldAttribIdentifier.version.rawValue:
-                        guard let v = Int(attribute.value) else { break }
-                        version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
-                    case WorldAttribIdentifier.GUID.rawValue:
-                        GUID = attribute.value
-                    default:
-                        Swift.print("skipping \(attribute.key)")
+                    }
+                case WorldAttribIdentifier.backColor.rawValue:
+                    backColor = NSColor(hex: attribute.value)!
+                case WorldAttribIdentifier.foreColor.rawValue:
+                    foreColor = NSColor(hex: attribute.value)!
+                case WorldAttribIdentifier.font.rawValue:
+                    fontName = attribute.value
+                case WorldAttribIdentifier.fontSize.rawValue:
+                    guard let size = CGFloat(attribute.value) else { break }
+                    fontSize = size
+                case WorldAttribIdentifier.position.rawValue:
+                    let parts = attribute.value.components(separatedBy: ",")
+                    if parts.count == 2 {
+                        guard let x = CGFloat(parts[1]) else { break }
+                        guard let y = CGFloat(parts[0]) else { break }
+                        position = NSMakePoint(x, y)
+                    }
+                case WorldAttribIdentifier.windowSize.rawValue:
+                    let parts = attribute.value.components(separatedBy: ",")
+                    if parts.count == 2 {
+                        guard let width = CGFloat(parts[0]) else { break }
+                        guard let height = CGFloat(parts[1]) else { break }
+                        windowSize = NSMakeSize(width, height)
+                    }
+                case WorldAttribIdentifier.resolution.rawValue:
+                    let parts = attribute.value.components(separatedBy: "x")
+                    if parts.count == 3 {
+                        guard let n0 = Int(parts[0]) else { break }
+                        guard let n1 = Int(parts[1]) else { break }
+                        guard let n2 = Int(parts[2]) else { break }
+                        outputRows = n0
+                        columns = n1
+                        inputRows = n2
+                    }
+                case WorldAttribIdentifier.zoomed.rawValue:
+                    zoomed = attribute.value == "TRUE"
+                case WorldAttribIdentifier.version.rawValue:
+                    guard let v = Int(attribute.value) else { break }
+                    version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
+                case WorldAttribIdentifier.GUID.rawValue:
+                    GUID = attribute.value
+                default:
+                    Swift.print("skipping \(attribute.key)")
                 }
             }
         }
@@ -193,7 +193,7 @@ class World : NSController, XMLParserDelegate {
         }
         worldElem.addAttribute(url)
 
-        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue:fontName) as? XMLNode else {
+        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue: fontName) as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(font)
@@ -208,7 +208,7 @@ class World : NSController, XMLParserDelegate {
         }
         worldElem.addAttribute(foreColor)
 
-        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue:"#\(backColor.toHex()!)") as? XMLNode else {
+        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue: "#\(backColor.toHex()!)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(backColor)

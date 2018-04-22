@@ -56,7 +56,7 @@ extension NSColor {
         guard let components = cgColor.components else {
             return nil
         }
-        
+
         var r: Float = 0.0
         var g: Float = 0.0
         var b: Float = 0.0
@@ -75,7 +75,7 @@ extension NSColor {
         if components.count >= 4 {
             a = Float(components[3])
         }
-        
+
         if alpha {
             return String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
         } else {

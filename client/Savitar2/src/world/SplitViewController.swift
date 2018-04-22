@@ -16,7 +16,7 @@ class SplitViewController: NSSplitViewController {
         }
         return vc
     }
-    
+
     var outputViewController: ViewController? {
         let item = splitViewItems[0]
         guard let vc = item.viewController as? ViewController else {

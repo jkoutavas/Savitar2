@@ -12,7 +12,7 @@ public class Endpoint: NSObject, StreamDelegate {
     let port: UInt32
     let host: String
     let outputter: OutputProtocol
-    
+
     var inputStream: InputStream!
     var outputStream: OutputStream!
     let maxReadLength = 4096
@@ -22,17 +22,17 @@ public class Endpoint: NSObject, StreamDelegate {
         self.host = host
         self.outputter = outputter
     }
-    
+
     func close() {
         inputStream.close()
         outputStream.close()
     }
-    
+
     func connectAndRun() {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
-        
-        
+
+
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                  host as CFString,
                                  port,
@@ -40,25 +40,25 @@ public class Endpoint: NSObject, StreamDelegate {
                                  &writeStream)
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
-        
+
         if inputStream != nil && outputStream != nil {
             inputStream.delegate = self
-            
+
             inputStream.schedule(in: .current, forMode: .commonModes)
             outputStream.schedule(in: .current, forMode: .commonModes)
 
             inputStream.open()
             outputStream.open()
         } else {
-            outputter.output(result:.error("[SAVITAR] Failed Getting Streams"))
+            outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
     }
-    
+
     func sendMessage(message: String) {
         let data = message.data(using: .ascii)!
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }
-    
+
     private func readAvailableBytes(stream: InputStream) {
         while stream.hasBytesAvailable {
             let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)
@@ -73,23 +73,23 @@ public class Endpoint: NSObject, StreamDelegate {
                                      encoding: .ascii,
                                      freeWhenDone: true)
             else { return }
-            outputter.output(result:.success(message))
+            outputter.output(result: .success(message))
         }
     }
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
-          readAvailableBytes(stream: aStream as! InputStream)
+            guard let inputStream = aStream as? InputStream else { break }
+            readAvailableBytes(stream: inputStream)
         case Stream.Event.endEncountered:
-          print("new message received")
+            print("new message received")
         case Stream.Event.errorOccurred:
-          self.outputter.output(result:.error("[SAVITAR] stream error occurred"))
+            self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
         case Stream.Event.hasSpaceAvailable:
-          print("has space available")
+            print("has space available")
         default:
-          print("some other event...")
-          break
+            print("some other event...")
         }
     }
 }
