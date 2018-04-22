@@ -9,7 +9,7 @@
 import Cocoa
 
 class WindowController: NSWindowController {
-    var world : World?
+    var world: World?
 
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:

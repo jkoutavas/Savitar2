@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class World : NSController, XMLParserDelegate {
+class World: NSController, XMLParserDelegate {
     // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
         // these are obsoleted in v2
@@ -71,8 +71,8 @@ class World : NSController, XMLParserDelegate {
     var inputRows = 2
     var outputRows = 24
     var columns = 80
-    var position = NSMakePoint(44, 0)
-    var windowSize = NSMakeSize(480, 270)
+    var position = NSPoint(x: 44, y: 0)
+    var windowSize = NSSize(width: 480, height: 270)
     var zoomed = false
 
     var version = 0
@@ -86,13 +86,17 @@ class World : NSController, XMLParserDelegate {
         parser.delegate = self
         parser.parse()
     }
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    func parser(_ parser: XMLParser,
+                didStartElement elementName: String,
+                namespaceURI: String?,
+                qualifiedName qName: String?,
+                attributes attributeDict: [String: String]) {
         if elementName == WorldElemIdentifier {
             version = 1 // start with the assumption that a v1 document is being read
             for attribute in attributeDict {
                 switch attribute.key {
                 case WorldAttribIdentifier.URL.rawValue:
-                    if (attribute.value.hasPrefix(TelnetIdentifier)) {
+                    if attribute.value.hasPrefix(TelnetIdentifier) {
                         let body = attribute.value.dropPrefix(TelnetIdentifier)
                         let parts = body.components(separatedBy: ":")
                         if parts.count == 2 {
@@ -115,14 +119,14 @@ class World : NSController, XMLParserDelegate {
                     if parts.count == 2 {
                         guard let x = CGFloat(parts[1]) else { break }
                         guard let y = CGFloat(parts[0]) else { break }
-                        position = NSMakePoint(x, y)
+                        position = NSPoint(x: x, y: y)
                     }
                 case WorldAttribIdentifier.windowSize.rawValue:
                     let parts = attribute.value.components(separatedBy: ",")
                     if parts.count == 2 {
                         guard let width = CGFloat(parts[0]) else { break }
                         guard let height = CGFloat(parts[1]) else { break }
-                        windowSize = NSMakeSize(width, height)
+                        windowSize = NSSize(width: width, height: height)
                     }
                 case WorldAttribIdentifier.resolution.rawValue:
                     let parts = attribute.value.components(separatedBy: "x")
@@ -177,38 +181,45 @@ class World : NSController, XMLParserDelegate {
         }
         let worldElem: XMLElement = elem
 
-        guard let version = XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue, stringValue: "\(version)") as? XMLNode else {
+        guard let version = XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue,
+                                              stringValue: "\(version)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(version)
 
-        guard let guid = XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue, stringValue: "\(GUID)") as? XMLNode else {
+        guard let guid = XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue,
+                                           stringValue: "\(GUID)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(guid)
 
         let urlStr = "\(TelnetIdentifier)\(host):\(port)"
-        guard let url = XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue, stringValue: urlStr) as? XMLNode else {
+        guard let url = XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue,
+                                          stringValue: urlStr) as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(url)
 
-        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue, stringValue: fontName) as? XMLNode else {
+        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue,
+                                           stringValue: fontName) as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(font)
 
-        guard let fontSize = XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue, stringValue: "\(fontSize)") as? XMLNode else {
+        guard let fontSize = XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue,
+                                               stringValue: "\(fontSize)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(fontSize)
 
-        guard let foreColor = XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue, stringValue: "#\(foreColor.toHex()!)") as? XMLNode else {
+        guard let foreColor = XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue,
+                                                stringValue: "#\(foreColor.toHex()!)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(foreColor)
 
-        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue, stringValue: "#\(backColor.toHex()!)") as? XMLNode else {
+        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue,
+                                                stringValue: "#\(backColor.toHex()!)") as? XMLNode else {
             throw NSError()
         }
         worldElem.addAttribute(backColor)

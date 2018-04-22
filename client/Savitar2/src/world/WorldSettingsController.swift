@@ -9,9 +9,9 @@
 import Cocoa
 
 class WorldSettingsController: NSViewController {
-    var docController : NSWindowController? // needed for closeWorldSettings
+    var docController: NSWindowController? // needed for closeWorldSettings
 
-    var world : World? {
+    var world: World? {
         get {
             return _world
         }

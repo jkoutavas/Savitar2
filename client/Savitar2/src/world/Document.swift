@@ -51,14 +51,14 @@ class Document: NSDocument, OutputProtocol {
             window.setContentSize(world.windowSize)
             if let titleHeight = (windowController.window?.titlebarHeight) {
                 if let screenSize = NSScreen.main?.frame.size {
-                    window.setFrameTopLeftPoint(NSMakePoint(world.position.x,
-                                                            screenSize.height - world.position.y + titleHeight))
+                    window.setFrameTopLeftPoint(NSPoint(x: world.position.x,
+                                                        y: screenSize.height - world.position.y + titleHeight))
                 }
             }
 
             let dividerHeight: CGFloat = svc.splitView.dividerThickness
             let rowHeight = inputVC.rowHeight
-            let split: CGFloat = world.windowSize.height - dividerHeight - rowHeight * CGFloat(world.inputRows+1)
+            let split: CGFloat = world.windowSize.height - dividerHeight - rowHeight() * CGFloat(world.inputRows+1)
             svc.splitView.setPosition(split, ofDividerAt: 0)
 
             window.setIsZoomed(world.zoomed)
@@ -78,7 +78,7 @@ class Document: NSDocument, OutputProtocol {
     }
 
     func output(result: OutputResult) {
-        func output(string:String, attributes:[NSAttributedStringKey:Any]? = nil) {
+        func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
             guard let svc = splitViewController else { return }
              guard let outputVC = svc.outputViewController else { return }
             let outputView = outputVC.textView
