@@ -12,7 +12,8 @@ class WindowController : NSWindowController {
     var world : World?
     
     override func windowDidLoad() {
-        let titlebarController = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
+        let titlebarController = self.storyboard?.instantiateController(withIdentifier:
+            NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
@@ -35,7 +36,9 @@ class WindowController : NSWindowController {
 
     @IBAction func showWorldSetting(_ sender: Any) {
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
-        let wc = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "World Settings Window Controller")) as! NSWindowController
+        let wc = storyboard?.instantiateController(withIdentifier:
+            NSStoryboard.SceneIdentifier(rawValue: "World Settings Window Controller"))
+            as! NSWindowController
         let vc = wc.window?.contentViewController as! WorldSettingsController
         vc.world = world
         vc.docController = self

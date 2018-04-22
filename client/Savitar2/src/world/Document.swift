@@ -22,7 +22,9 @@ class Document: NSDocument, OutputProtocol {
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
-        guard let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as? WindowController else { return }
+        guard let windowController = storyboard.instantiateController(withIdentifier:
+            NSStoryboard.SceneIdentifier("Document Window Controller"))
+            as? WindowController else { return }
         
         self.addWindowController(windowController)
         windowController.world = world
@@ -47,7 +49,8 @@ class Document: NSDocument, OutputProtocol {
             window.setContentSize(world.windowSize)
             if let titleHeight = (windowController.window?.titlebarHeight) {
                 if let screenSize = NSScreen.main?.frame.size {
-                    window.setFrameTopLeftPoint(NSMakePoint(world.position.x, screenSize.height - world.position.y + titleHeight))
+                    window.setFrameTopLeftPoint(NSMakePoint(world.position.x,
+                                                            screenSize.height - world.position.y + titleHeight))
                 }
             }
             

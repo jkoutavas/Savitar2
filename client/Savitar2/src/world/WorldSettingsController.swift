@@ -19,8 +19,8 @@ class WorldSettingsController: NSViewController {
             _world = newValue
             // we set the tab controllers' world here in the world setter
             // instead of prepare(for segue:) because prepare(for segue:)
-            // gets called at storyboard instantiation, before we have the
-            // chance to pass along the world
+            // gets called at storyboard instantiation, before we have
+            // the chance to set the world value
             for vc in (_tabViewController?.childViewControllers)! {
                 vc.representedObject = _world
             }
