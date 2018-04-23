@@ -32,7 +32,6 @@ public class Endpoint: NSObject, StreamDelegate {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
 
-
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                  host as CFString,
                                  port,
