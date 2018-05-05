@@ -64,8 +64,9 @@ class World: NSController, XMLParserDelegate {
     @objc dynamic var host = "::1"
 
     // world settings with defaults
-    var backColor = NSColor.white
-    var foreColor = NSColor.black
+    @objc dynamic var backColor = NSColor.white
+    @objc dynamic var foreColor = NSColor.black
+    @objc dynamic var linkColor = NSColor.blue
     var fontName = "Monaco"
     var fontSize: CGFloat = 9
     var inputRows = 2
@@ -109,6 +110,8 @@ class World: NSController, XMLParserDelegate {
                     backColor = NSColor(hex: attribute.value)!
                 case WorldAttribIdentifier.foreColor.rawValue:
                     foreColor = NSColor(hex: attribute.value)!
+                case WorldAttribIdentifier.linkColor.rawValue:
+                    linkColor = NSColor(hex: attribute.value)!
                 case WorldAttribIdentifier.font.rawValue:
                     fontName = attribute.value
                 case WorldAttribIdentifier.fontSize.rawValue:
@@ -223,6 +226,12 @@ class World: NSController, XMLParserDelegate {
             throw NSError()
         }
         worldElem.addAttribute(backColor)
+
+        guard let linkColor = XMLNode.attribute(withName: WorldAttribIdentifier.linkColor.rawValue,
+                                                stringValue: "#\(linkColor.toHex()!)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(linkColor)
 
         root.addChild(worldElem)
 
