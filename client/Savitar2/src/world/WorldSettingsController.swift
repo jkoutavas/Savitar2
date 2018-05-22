@@ -9,7 +9,7 @@
 import Cocoa
 
 class WorldSettingsController: NSViewController {
-    var docController: NSWindowController? // needed for closeWorldSettings
+    var windowController: WindowController? // needed for closeWorldSettings
 
     var world: World? {
         get {
@@ -44,10 +44,11 @@ class WorldSettingsController: NSViewController {
     }
 
     @IBAction func applyWorldSetting(_ sender: Any) {
-        docController?.window!.endSheet(self.view.window!, returnCode:NSApplication.ModalResponse(rawValue: 1))
+        windowController?.window!.endSheet(self.view.window!, returnCode: NSApplication.ModalResponse(rawValue: 1))
+        windowController?.world = _editedWorld
     }
 
     @IBAction func cancelWorldSetting(_ sender: Any) {
-        docController?.window!.endSheet(self.view.window!, returnCode:NSApplication.ModalResponse(rawValue: 0))
+        windowController?.window!.endSheet(self.view.window!, returnCode: NSApplication.ModalResponse(rawValue: 0))
     }
 }

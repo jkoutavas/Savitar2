@@ -29,46 +29,10 @@ class Document: NSDocument, OutputProtocol {
         self.addWindowController(windowController)
         windowController.world = world
 
-        splitViewController = windowController.contentViewController as? SplitViewController
-
-        guard let window = windowController.window else { return }
-        guard let svc = splitViewController else { return }
-        guard let inputVC = svc.inputViewController else { return }
-        guard let outputVC = svc.outputViewController else { return }
-        window.makeFirstResponder(inputVC.textView)
-
-        inputVC.foreColor = world.foreColor
-        inputVC.backColor = world.backColor
-        outputVC.foreColor = world.foreColor
-        outputVC.backColor = world.backColor
-
-        if let font = NSFont(name: world.fontName, size: world.fontSize) {
-            inputVC.font = font
-            outputVC.font = font
-        }
-
-        if world.version == 1 {
-            window.setContentSize(world.windowSize)
-            if let titleHeight = (windowController.window?.titlebarHeight) {
-                if let screenSize = NSScreen.main?.frame.size {
-                    window.setFrameTopLeftPoint(NSPoint(x: world.position.x,
-                                                        y: screenSize.height - world.position.y + titleHeight))
-                }
-            }
-
-            let dividerHeight: CGFloat = svc.splitView.dividerThickness
-            let rowHeight = inputVC.rowHeight
-            let split: CGFloat = world.windowSize.height - dividerHeight - rowHeight() * CGFloat(world.inputRows+1)
-            svc.splitView.setPosition(split, ofDividerAt: 0)
-
-            window.setIsZoomed(world.zoomed)
-        }
-
-        windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: world.GUID)
-        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: world.GUID)
-
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port: world.port, host: world.host, outputter: self)
+        splitViewController = windowController.contentViewController as? SplitViewController
+        guard let inputVC = splitViewController?.inputViewController else { return }
         inputVC.endpoint = endpoint
         endpoint?.connectAndRun()
     }
