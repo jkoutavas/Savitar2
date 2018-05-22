@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class World: NSController, XMLParserDelegate {
+class World: NSController, NSCopying, XMLParserDelegate {
     // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
         // these are obsoleted in v2
@@ -78,6 +78,37 @@ class World: NSController, XMLParserDelegate {
 
     var version = 0
     var GUID = NSUUID().uuidString
+
+    init(world: World) {
+        super.init()
+
+        port = world.port
+        host = world.host
+        backColor = world.backColor
+        foreColor = world.foreColor
+        linkColor = world.linkColor
+        fontName = world.fontName
+        fontSize = world.fontSize
+        inputRows = world.inputRows
+        columns = world.columns
+        position = world.position
+        windowSize = world.windowSize
+        zoomed = world.zoomed
+        version = world.version
+        GUID = world.GUID
+    }
+
+    override init() {
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        return World(world: self)
+    }
 
     func read(from data: Data) throws {
         /*
