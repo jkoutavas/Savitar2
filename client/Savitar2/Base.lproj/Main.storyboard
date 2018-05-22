@@ -844,13 +844,27 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6u-4a-63f">
-                                <rect key="frame" x="369" y="13" width="71" height="32"/>
+                                <rect key="frame" x="367" y="13" width="75" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="push" title="Okay" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eP5-Qv-t7F">
+                                <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eP5-Qv-t7F">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <connections>
-                                        <action selector="closeWorldSetting:" target="hRj-4x-OSq" id="25K-xj-8Kg"/>
+                                        <action selector="applyWorldSetting:" target="hRj-4x-OSq" id="YNK-5q-Ldt"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ROo-sN-H40">
+                                <rect key="frame" x="289" y="13" width="82" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aYM-ln-8z0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                    <connections>
+                                        <action selector="cancelWorldSetting:" target="hRj-4x-OSq" id="spf-K5-Ve4"/>
                                     </connections>
                                 </buttonCell>
                             </button>
@@ -1013,7 +1027,7 @@
         <!--Appearance-->
         <scene sceneID="Yc4-nI-2mR">
             <objects>
-                <viewController title="Appearance" id="lgo-as-i7Z" sceneMemberID="viewController">
+                <viewController title="Appearance" id="lgo-as-i7Z" customClass="AppearanceSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4u5-EN-L1Z">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1032,6 +1046,9 @@
                                             <size key="minSize" width="413" height="157"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <binding destination="lgo-as-i7Z" name="valueURL" keyPath="self.appearanceTextUrl" id="qfD-bY-fi4"/>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1050,6 +1067,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="4H1-fA-EiD"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.foreColor" id="4Dp-nD-nHN"/>
                                 </connections>
                             </colorWell>
@@ -1067,6 +1085,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="NI3-tU-g8q"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.backColor" id="mSP-ln-00e"/>
                                 </connections>
                             </colorWell>
@@ -1084,6 +1103,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="8hY-XV-k9r"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.linkColor" id="eZ8-uL-blP"/>
                                 </connections>
                             </colorWell>
@@ -1098,6 +1118,9 @@
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="iRd-re-16V" id="ZWV-W4-BiI"/>
+                    </connections>
                 </viewController>
                 <customObject id="yJY-r4-A1N" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="fnI-nK-upe"/>

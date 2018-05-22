@@ -44,7 +44,7 @@ class WindowController: NSWindowController {
         vc.docController = self
 
         self.window?.beginSheet(wc.window!, completionHandler: { (returnCode) in
-            print("world settings sheet has been dismissed") // TODO: work-out save vs. cancel, etc.
+            print("world settings sheet has been dismissed. returnCode=\(returnCode)") // TODO: work-out save vs. cancel, etc.
         })
     }
 }

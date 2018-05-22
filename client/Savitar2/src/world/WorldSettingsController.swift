@@ -13,21 +13,26 @@ class WorldSettingsController: NSViewController {
 
     var world: World? {
         get {
-            return _world
+            return _editedWorld
         }
         set {
-            _world = newValue
+            _origWorld = newValue
+            // copy the world. We'll manipulate it in settings, and if the
+            // user hits 'apply' we'll copy the changes back.
+            _editedWorld = _origWorld?.copy() as? World
+
             // we set the tab controllers' world here in the world setter
             // instead of prepare(for segue:) because prepare(for segue:)
             // gets called at storyboard instantiation, before we have
             // the chance to set the world value
             for vc in (_tabViewController?.childViewControllers)! {
-                vc.representedObject = _world
+                vc.representedObject = _editedWorld
             }
         }
     }
 
-    private var _world: World?
+    private var _origWorld: World?
+    private var _editedWorld: World?
     private var _tabViewController: NSTabViewController?
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -38,7 +43,11 @@ class WorldSettingsController: NSViewController {
         }
     }
 
-    @IBAction func closeWorldSetting(_ sender: Any) {
-        docController?.window!.endSheet(self.view.window!)
+    @IBAction func applyWorldSetting(_ sender: Any) {
+        docController?.window!.endSheet(self.view.window!, returnCode:NSApplication.ModalResponse(rawValue: 1))
+    }
+
+    @IBAction func cancelWorldSetting(_ sender: Any) {
+        docController?.window!.endSheet(self.view.window!, returnCode:NSApplication.ModalResponse(rawValue: 0))
     }
 }
