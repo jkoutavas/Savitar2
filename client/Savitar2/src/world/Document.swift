@@ -42,7 +42,7 @@ class Document: NSDocument, OutputProtocol {
     }
 
     func output(result: OutputResult) {
-        func output(string: String, attributes: [NSAttributedStringKey : Any]? = nil) {
+        func output(string: String, attributes: [NSAttributedString.Key : Any]? = nil) {
             guard let svc = splitViewController else { return }
              guard let outputVC = svc.outputViewController else { return }
             let outputView = outputVC.textView
@@ -51,14 +51,14 @@ class Document: NSDocument, OutputProtocol {
             outputView?.scrollToEndOfDocument(nil)
         }
 
-        var attributes = [NSAttributedStringKey: AnyObject]()
-        attributes[NSAttributedStringKey.font] = NSFont(name: world.fontName, size: world.fontSize)
+        var attributes = [NSAttributedString.Key: AnyObject]()
+        attributes[NSAttributedString.Key.font] = NSFont(name: world.fontName, size: world.fontSize)
         switch result {
         case .success(let message):
-            attributes[NSAttributedStringKey.foregroundColor] = world.foreColor
+            attributes[NSAttributedString.Key.foregroundColor] = world.foreColor
             output(string: message, attributes: attributes)
         case .error(let error):
-            attributes[NSAttributedStringKey.foregroundColor] = NSColor.red
+            attributes[NSAttributedString.Key.foregroundColor] = NSColor.red
             output(string: error, attributes: attributes)
         }
     }

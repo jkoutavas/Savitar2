@@ -22,7 +22,7 @@ class WindowController: NSWindowController {
 
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
-            NSStoryboard.SceneIdentifier(rawValue: "titlebarViewController"))
+            NSStoryboard.SceneIdentifier("titlebarViewController"))
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
@@ -46,7 +46,7 @@ class WindowController: NSWindowController {
     @IBAction func showWorldSetting(_ sender: Any) {
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
         guard let wc = storyboard?.instantiateController(withIdentifier:
-            NSStoryboard.SceneIdentifier(rawValue: "World Settings Window Controller"))
+            NSStoryboard.SceneIdentifier("World Settings Window Controller"))
             as? NSWindowController else { return }
         guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
         vc.world = world
@@ -96,7 +96,7 @@ class WindowController: NSWindowController {
             window?.setIsZoomed(w.zoomed)
         }
 
-        windowFrameAutosaveName = NSWindow.FrameAutosaveName(rawValue: w.GUID)
-        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(rawValue: w.GUID)
+        windowFrameAutosaveName = NSWindow.FrameAutosaveName(w.GUID)
+        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(w.GUID)
     }
 }

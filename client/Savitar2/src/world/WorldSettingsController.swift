@@ -25,7 +25,7 @@ class WorldSettingsController: NSViewController {
             // instead of prepare(for segue:) because prepare(for segue:)
             // gets called at storyboard instantiation, before we have
             // the chance to set the world value
-            for vc in (_tabViewController?.childViewControllers)! {
+            for vc in (_tabViewController?.children)! {
                 vc.representedObject = _editedWorld
             }
         }
