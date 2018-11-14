@@ -43,8 +43,8 @@ public class Endpoint: NSObject, StreamDelegate {
         if inputStream != nil && outputStream != nil {
             inputStream.delegate = self
 
-            inputStream.schedule(in: .current, forMode: .commonModes)
-            outputStream.schedule(in: .current, forMode: .commonModes)
+            inputStream.schedule(in: .main, forMode: .common)
+            outputStream.schedule(in: .main, forMode: .common)
 
             inputStream.open()
             outputStream.open()
@@ -63,7 +63,7 @@ public class Endpoint: NSObject, StreamDelegate {
             let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)
             let numberOfBytesRead = inputStream.read(buffer, maxLength: maxReadLength)
             if numberOfBytesRead < 0 {
-                if let _ = stream.streamError {
+                if stream.streamError != nil {
                     break
                 }
             }
