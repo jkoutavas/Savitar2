@@ -67,8 +67,8 @@ class World: NSController, NSCopying, XMLParserDelegate {
     @objc dynamic var backColor = NSColor.white
     @objc dynamic var foreColor = NSColor.black
     @objc dynamic var linkColor = NSColor.blue
-    var fontName = "Monaco"
-    var fontSize: CGFloat = 9
+    @objc dynamic var fontName = "Monaco"
+    @objc dynamic var fontSize: CGFloat = 9
     var inputRows = 2
     var outputRows = 24
     var columns = 80

@@ -42,7 +42,7 @@ class Document: NSDocument, OutputProtocol {
     }
 
     func output(result: OutputResult) {
-        func output(string: String, attributes: [NSAttributedString.Key : Any]? = nil) {
+        func output(string: String, attributes: [NSAttributedString.Key: Any]? = nil) {
             guard let svc = splitViewController else { return }
              guard let outputVC = svc.outputViewController else { return }
             let outputView = outputVC.textView
