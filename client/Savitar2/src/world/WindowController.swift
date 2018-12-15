@@ -9,17 +9,6 @@
 import Cocoa
 
 class WindowController: NSWindowController {
-    var world: World? {
-        get {
-            return _world
-        }
-        set {
-            updateWorld(newValue)
-        }
-    }
-
-    private var _world: World?
-
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
@@ -35,10 +24,9 @@ class WindowController: NSWindowController {
         // display just the world's file name, with no extension. And, if the
         // world is read-only (v1.0) then append an indication of that.
         var status = ""
-        if let editable = world?.editable {
-            if !editable {
-                status = " [READ ONLY]"
-            }
+        guard let doc = document as? Document else { return "" }
+        if !doc.world.editable {
+            status = " [READ ONLY]"
         }
         return components[0] + status
     }
@@ -49,7 +37,8 @@ class WindowController: NSWindowController {
             NSStoryboard.SceneIdentifier("World Settings Window Controller"))
             as? NSWindowController else { return }
         guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
-        vc.world = world
+        guard let doc = document as? Document else { return }
+        vc.world = doc.world
         vc.windowController = self
 
         self.window?.beginSheet(wc.window!, completionHandler: { (returnCode) in
@@ -58,8 +47,7 @@ class WindowController: NSWindowController {
         })
     }
 
-    func updateWorld(_ newValue: World?) {
-        _world = newValue
+    func updateViews(_ newValue: World?) {
 
         let splitViewController = contentViewController as? SplitViewController
 
@@ -68,7 +56,7 @@ class WindowController: NSWindowController {
         guard let outputVC = svc.outputViewController else { return }
         window?.makeFirstResponder(inputVC.textView)
 
-        guard let w = _world else { return }
+        guard let w = newValue else { return }
 
         inputVC.foreColor = w.foreColor
         inputVC.backColor = w.backColor

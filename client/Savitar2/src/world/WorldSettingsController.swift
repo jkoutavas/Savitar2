@@ -45,7 +45,9 @@ class WorldSettingsController: NSViewController {
 
     @IBAction func applyWorldSetting(_ sender: Any) {
         windowController?.window!.endSheet(self.view.window!, returnCode: NSApplication.ModalResponse(rawValue: 1))
-        windowController?.world = _editedWorld
+        guard let doc = windowController?.document as? Document else { return }
+        doc.world = _editedWorld!
+        windowController?.updateViews(_editedWorld!)
     }
 
     @IBAction func cancelWorldSetting(_ sender: Any) {

@@ -9,7 +9,7 @@
 import Cocoa
 
 class Document: NSDocument, OutputProtocol {
-    let world = World()
+    var world = World()
 
     var endpoint: Endpoint?
     var splitViewController: SplitViewController?
@@ -27,7 +27,7 @@ class Document: NSDocument, OutputProtocol {
             as? WindowController else { return }
 
         self.addWindowController(windowController)
-        windowController.world = world
+        windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
         endpoint = Endpoint(port: world.port, host: world.host, outputter: self)
