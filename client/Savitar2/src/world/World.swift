@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class World: NSController, XMLParserDelegate {
+class World: NSController, NSCopying, XMLParserDelegate {
     // these define the "WORLD" attributes found in Savitar 1.x world documents
     enum WorldAttribIdentifier: String {
         // these are obsoleted in v2
@@ -64,10 +64,11 @@ class World: NSController, XMLParserDelegate {
     @objc dynamic var host = "::1"
 
     // world settings with defaults
-    var backColor = NSColor.white
-    var foreColor = NSColor.black
-    var fontName = "Monaco"
-    var fontSize: CGFloat = 9
+    @objc dynamic var backColor = NSColor.white
+    @objc dynamic var foreColor = NSColor.black
+    @objc dynamic var linkColor = NSColor.blue
+    @objc dynamic var fontName = "Monaco"
+    @objc dynamic var fontSize: CGFloat = 9
     var inputRows = 2
     var outputRows = 24
     var columns = 80
@@ -77,6 +78,37 @@ class World: NSController, XMLParserDelegate {
 
     var version = 0
     var GUID = NSUUID().uuidString
+
+    init(world: World) {
+        super.init()
+
+        port = world.port
+        host = world.host
+        backColor = world.backColor
+        foreColor = world.foreColor
+        linkColor = world.linkColor
+        fontName = world.fontName
+        fontSize = world.fontSize
+        inputRows = world.inputRows
+        columns = world.columns
+        position = world.position
+        windowSize = world.windowSize
+        zoomed = world.zoomed
+        version = world.version
+        GUID = world.GUID
+    }
+
+    override init() {
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        return World(world: self)
+    }
 
     func read(from data: Data) throws {
         /*
@@ -109,6 +141,8 @@ class World: NSController, XMLParserDelegate {
                     backColor = NSColor(hex: attribute.value)!
                 case WorldAttribIdentifier.foreColor.rawValue:
                     foreColor = NSColor(hex: attribute.value)!
+                case WorldAttribIdentifier.linkColor.rawValue:
+                    linkColor = NSColor(hex: attribute.value)!
                 case WorldAttribIdentifier.font.rawValue:
                     fontName = attribute.value
                 case WorldAttribIdentifier.fontSize.rawValue:
@@ -223,6 +257,12 @@ class World: NSController, XMLParserDelegate {
             throw NSError()
         }
         worldElem.addAttribute(backColor)
+
+        guard let linkColor = XMLNode.attribute(withName: WorldAttribIdentifier.linkColor.rawValue,
+                                                stringValue: "#\(linkColor.toHex()!)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(linkColor)
 
         root.addChild(worldElem)
 

@@ -24,6 +24,8 @@
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
+		69DE2D22209D40A900A4D3F2 /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69DE2D21209D40A900A4D3F2 /* Appearance.txt */; };
+		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
 		69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E0204B872400301A8D /* CGFloat+Extensions.swift */; };
@@ -77,6 +79,8 @@
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
+		69DE2D21209D40A900A4D3F2 /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
+		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			children = (
 				69662B302043A6E100E7CC7B /* Savitar2.entitlements */,
 				69662B1B204367BD00E7CC7B /* src */,
+				69DE2D20209D40A900A4D3F2 /* resources */,
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				695484AA1FC4E6E400A6983F /* Info.plist */,
@@ -197,6 +202,7 @@
 		69662B1C204367BD00E7CC7B /* world */ = {
 			isa = PBXGroup;
 			children = (
+				69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */,
 				69662B21204367BD00E7CC7B /* Document.swift */,
 				69F620DC204B86A000301A8D /* DocumentV1.swift */,
 				69F620E2204B881600301A8D /* DocumentV2.swift */,
@@ -221,6 +227,14 @@
 				69662B25204367BD00E7CC7B /* String+Extensions.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		69DE2D20209D40A900A4D3F2 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				69DE2D21209D40A900A4D3F2 /* Appearance.txt */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 		9052CD0F565ACCCBED44FEE0 /* Frameworks */ = {
@@ -311,6 +325,7 @@
 				TargetAttributes = {
 					6954849B1FC4E6E400A6983F = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -320,11 +335,13 @@
 					};
 					695484AF1FC4E6E400A6983F = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6954849B1FC4E6E400A6983F;
 					};
 					695484BA1FC4E6E400A6983F = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6954849B1FC4E6E400A6983F;
 					};
@@ -355,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69DE2D22209D40A900A4D3F2 /* Appearance.txt in Resources */,
 				6994602E2041124800409308 /* World.icns in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
@@ -420,7 +438,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		8D40E123ADFEC263E643A35B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -558,6 +576,7 @@
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
+				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
@@ -639,7 +658,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -664,6 +683,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -698,7 +718,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -715,6 +735,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -724,7 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = RFE485QN84;
@@ -733,7 +754,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -743,7 +764,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = RFE485QN84;
@@ -752,7 +773,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -769,7 +790,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
 			};
 			name = Debug;
@@ -787,7 +808,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
 			};
 			name = Release;
@@ -804,7 +825,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Savitar2;
 			};
 			name = Debug;
@@ -821,7 +842,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Savitar2;
 			};
 			name = Release;
