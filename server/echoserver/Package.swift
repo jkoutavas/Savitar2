@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "echoserver",
     dependencies: [
-        .package(url: "https://github.com/IBM-Swift/BlueSocket.git", .upToNextMajor(from: "0.12.90")),
+        .package(url: "https://github.com/IBM-Swift/BlueSocket.git", from: "1.0.48"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

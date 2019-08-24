@@ -10,9 +10,21 @@ class EchoServer {
 
     let port: Int
     var listenSocket: Socket? = nil
-    var continueRunning = true
+    var continueRunningValue = true
     var connectedSockets = [Int32: Socket]()
     let socketLockQueue = DispatchQueue(label: "com.ibm.serverSwift.socketLockQueue")
+    var continueRunning: Bool {
+        set(newValue) {
+            socketLockQueue.sync {
+                self.continueRunningValue = newValue
+            }
+        }
+        get {
+            return socketLockQueue.sync {
+                self.continueRunningValue
+            }
+        }
+    }
 
     init(port: Int) {
         self.port = port
@@ -50,7 +62,7 @@ class EchoServer {
                     let newSocket = try socket.acceptClientConnection()
 
                     print("Accepted connection from: \(newSocket.remoteHostname) on port \(newSocket.remotePort)")
-//                    print("Socket Signature: \(newSocket.signature?.description)")
+//                    print("Socket Signature: \(String(describing: newSocket.signature?.description))")
 
                     self.addNewConnection(socket: newSocket)
 
@@ -113,7 +125,7 @@ class EchoServer {
 
                             return
                         }
- //                       print("Server received from connection at \(socket.remoteHostname):\(socket.remotePort): \(response) ")
+//                        print("Server received from connection at \(socket.remoteHostname):\(socket.remotePort): \(response) ")
                         let reply = "Server response: \n\(response)\n"
                         try socket.write(from: reply)
 
@@ -165,10 +177,11 @@ class EchoServer {
 
         // Close all open sockets...
         for socket in connectedSockets.values {
-            socket.close()
+            self.socketLockQueue.sync { [unowned self, socket] in
+                self.connectedSockets[socket.socketfd] = nil
+                socket.close()
+            }
         }
-
-        listenSocket?.close()
 
         DispatchQueue.main.sync {
             exit(0)
