@@ -258,8 +258,6 @@
 				695484981FC4E6E400A6983F /* Sources */,
 				695484991FC4E6E400A6983F /* Frameworks */,
 				6954849A1FC4E6E400A6983F /* Resources */,
-				9A6ED5B7A46F0EA0E172798A /* [CP] Embed Pods Frameworks */,
-				D3BE9588D633C4C1F4755233 /* [CP] Copy Pods Resources */,
 				6918D0AB208D362F00990F7D /* SwiftLint */,
 			);
 			buildRules = (
@@ -279,8 +277,6 @@
 				695484AC1FC4E6E400A6983F /* Sources */,
 				695484AD1FC4E6E400A6983F /* Frameworks */,
 				695484AE1FC4E6E400A6983F /* Resources */,
-				1AC2E078598884E98D79FFE1 /* [CP] Embed Pods Frameworks */,
-				A14CBFFE8C1DF59DD45E59B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -300,8 +296,6 @@
 				695484B71FC4E6E400A6983F /* Sources */,
 				695484B81FC4E6E400A6983F /* Frameworks */,
 				695484B91FC4E6E400A6983F /* Resources */,
-				F51A60B37A5983F361117EDC /* [CP] Embed Pods Frameworks */,
-				2F8A69E5217C900CD8B580C1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -396,36 +390,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1AC2E078598884E98D79FFE1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2F8A69E5217C900CD8B580C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6918D0AB208D362F00990F7D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,39 +420,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A6ED5B7A46F0EA0E172798A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A14CBFFE8C1DF59DD45E59B1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A49F0B7CDC331EB0B2D918DD /* [CP] Check Pods Manifest.lock */ = {
@@ -525,36 +456,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D3BE9588D633C4C1F4755233 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F51A60B37A5983F361117EDC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
