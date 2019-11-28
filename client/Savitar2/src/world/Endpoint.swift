@@ -54,7 +54,7 @@ public class Endpoint: NSObject, StreamDelegate {
     }
 
     func sendMessage(message: String) {
-        let data = message.data(using: .ascii)!
+        let data = message.data(using: .utf8)!
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }
 
