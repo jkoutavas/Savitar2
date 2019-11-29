@@ -44,12 +44,9 @@ class Document: NSDocument, OutputProtocol {
     func output(result: OutputResult) {
         func output(string: String, attributes: [NSAttributedString.Key: Any]? = nil) {
             guard let svc = splitViewController else { return }
-             guard let outputVC = svc.outputViewController else { return }
-            let outputView = outputVC.textView
-
-            outputView?.textStorage?.append(NSAttributedString(string: string, attributes: attributes))
-            outputView?.scrollToEndOfDocument(nil)
-        }
+            guard let outputVC = svc.outputViewController else { return }
+            outputVC.output(string: string, attributes: attributes)
+         }
 
         var attributes = [NSAttributedString.Key: AnyObject]()
         attributes[NSAttributedString.Key.font] = NSFont(name: world.fontName, size: world.fontSize)
