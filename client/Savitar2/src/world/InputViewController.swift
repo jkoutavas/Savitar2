@@ -14,7 +14,7 @@ class InputViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Not setting the checkmark in the interface builder doesn't seem to work since OS X 10.9 Mavericks.
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
         self.textView.isAutomaticQuoteSubstitutionEnabled = false

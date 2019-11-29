@@ -16,26 +16,31 @@ extension WKWebView {
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
             .replacingOccurrences(of: "\\", with: "\\\\")
-    
+
         // Convert any ANSI escape codes to HTML spans
-        var resultCStrQ: UnsafeMutablePointer<CChar>? = nil
+        var resultCStrQ: UnsafeMutablePointer<CChar>?
         let unsafeInput = UnsafeMutablePointer<CChar>(mutating: cleanString)
         ahamain(0, nil, unsafeInput, &resultCStrQ)
         if let resultCStr = resultCStrQ {
             let result = String(cString: resultCStr)
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             // Now append this output as a new <div>
-            run(javaScript: "var i=document.createElement('div'); i.setAttribute('class', 'reset bg-reset'); i.innerHTML=\"\(htmlStr)\";document.body.appendChild(i);")
+            let js = """
+                var i=document.createElement('div');
+                i.setAttribute('class', 'reset bg-reset');
+                i.innerHTML=\"<pre>\(htmlStr)</pre>\";document.body.appendChild(i);
+            """
+            run(javaScript: js)
 
             printDOM(element: "document.body.innerHTML")
         }
     }
-    
+
     func setStyle(world: World) {
         let backColor = world.backColor.toHex ?? "black"
         let foreColor = world.foreColor.toHex ?? "white"
         let linkColor = world.linkColor.toHex ?? "blue"
-         
+
          let ss = """
          <style type="text/css">
              body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
@@ -73,12 +78,12 @@ extension WKWebView {
              .highlighted {filter: contrast(70%) brightness(190%);}
          </style>
          """
-         
+
          run(javaScript: "document.head.insertAdjacentHTML('beforeend', `\(ss)`)") // TODO: do a replace of the style
-         
+
          printDOM(element: "document.head.innerHTML")
     }
-    
+
     func run(javaScript: String) {
         evaluateJavaScript("(function() {\(javaScript); })();") { (result, error) in
             if error != nil {
