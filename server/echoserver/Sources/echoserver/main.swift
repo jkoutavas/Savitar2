@@ -86,7 +86,10 @@ class EchoServer {
     }
 
     func addNewConnection(socket: Socket) {
-
+    
+        let esc = "\u{1B}"
+        let ansiTestStr = "^[34m^[1mANSI Intense^[0m, ^[5mANSI Blink^[25m, ^[7mANSI Reverse^[27m".replacingOccurrences(of: "^[", with: "\(esc)[")
+  
         // Add the new socket to the list of connected sockets...
         socketLockQueue.sync { [unowned self, socket] in
             self.connectedSockets[socket.socketfd] = socket
@@ -104,6 +107,7 @@ class EchoServer {
 
             do {
                 // Write the welcome string...
+                try socket.write(from: "\(ansiTestStr)\n")
                 try socket.write(from: "Hello, type 'QUIT' to end session\nor 'SHUTDOWN' to stop server.\n")
 
                 repeat {
@@ -131,7 +135,6 @@ class EchoServer {
 
                         if (response.uppercased().hasPrefix(EchoServer.quitCommand) || response.uppercased().hasPrefix(EchoServer.shutdownCommand)) &&
                             (!response.hasPrefix(EchoServer.quitCommand) && !response.hasPrefix(EchoServer.shutdownCommand)) {
-
                             try socket.write(from: "If you want to QUIT or SHUTDOWN, please type the name in all caps. 😃\n")
                         }
 
