@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -916,7 +916,14 @@ Gw
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="Dhe-ko-nR0" name="editable" keyPath="representedObject.editable" id="mnS-jJ-4Py"/>
-                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.host" id="qwx-wm-vew"/>
+                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.host" id="fem-pz-OKo">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QOo-6N-YlP">
@@ -942,7 +949,14 @@ Gw
                                             </textFieldCell>
                                             <connections>
                                                 <binding destination="Dhe-ko-nR0" name="editable" keyPath="representedObject.editable" id="pat-4v-3mk"/>
-                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.port" id="BXM-F0-3SZ"/>
+                                                <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.port" id="Plf-ZP-KSP">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </textField>
                                     </subviews>
@@ -992,6 +1006,16 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="Dhe-ko-nR0" name="value" keyPath="representedObject.name" id="GfU-lD-ZSZ">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKw-o7-Xxx">
                                 <rect key="frame" x="18" y="218" width="218" height="17"/>
@@ -1006,6 +1030,7 @@ Gw
                     </view>
                 </viewController>
                 <customObject id="8Ec-iW-Cry" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="l6N-44-AYJ"/>
             </objects>
             <point key="canvasLocation" x="-630" y="-10789"/>
         </scene>
@@ -1096,17 +1121,25 @@ Gw
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2KO-7V-alE">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KO-7V-alE">
                                         <rect key="frame" x="323" y="10" width="32" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="JKd-F5-PXE">
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="JKd-F5-PXE">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="WCc-RK-1gY"/>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="QW7-2y-9Po"/>
+                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="FBQ-wg-WHy"/>
+                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="K6L-Ya-lj7">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dc7-xc-i2a">
@@ -1115,7 +1148,13 @@ Gw
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="6Tf-Ey-5ud"/>
                                         <connections>
                                             <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="i3n-mS-ulp"/>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="O3h-9l-9w0"/>
+                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="pdS-7v-XEb">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </stepper>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MbD-Wm-Mqj">
@@ -1165,14 +1204,22 @@ Gw
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0N-dB-uev">
                                         <rect key="frame" x="323" y="10" width="32" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="WNy-DW-2tS">
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="WNy-DW-2tS">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="8Ez-Ls-9I9"/>
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="iFU-MD-2Ew"/>
+                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="8TP-Zj-qbw"/>
+                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="SmO-UG-JeK">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qxl-dQ-mKn">
@@ -1181,7 +1228,13 @@ Gw
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="ST5-5E-GqA"/>
                                         <connections>
                                             <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="p5m-SP-KCs"/>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="ZQ3-b7-wjR"/>
+                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="VyT-Cg-tGv">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </stepper>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VEN-OA-97v">
@@ -1239,7 +1292,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="38.5" y="5" width="65" height="23"/>
+                                <rect key="frame" x="38" y="5" width="65" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

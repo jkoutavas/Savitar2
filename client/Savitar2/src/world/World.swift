@@ -69,6 +69,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
     @objc dynamic var linkColor = NSColor.blue
     @objc dynamic var fontName = "Monaco"
     @objc dynamic var fontSize: CGFloat = 9
+    @objc dynamic var name: String = ""
     @objc dynamic var monoFontName = "Monaco"
     @objc dynamic var monoFontSize: CGFloat = 9
     var inputRows = 2
@@ -86,6 +87,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
 
         port = world.port
         host = world.host
+        name = world.name
         backColor = world.backColor
         foreColor = world.foreColor
         linkColor = world.linkColor
@@ -153,10 +155,12 @@ class World: NSController, NSCopying, XMLParserDelegate {
                     guard let size = CGFloat(attribute.value) else { break }
                     fontSize = size
                 case WorldAttribIdentifier.monoFont.rawValue:
-                     monoFontName = attribute.value
+                    monoFontName = attribute.value
                 case WorldAttribIdentifier.monoFontSize.rawValue:
-                     guard let size = CGFloat(attribute.value) else { break }
-                     monoFontSize = size
+                    guard let size = CGFloat(attribute.value) else { break }
+                    monoFontSize = size
+                case WorldAttribIdentifier.name.rawValue:
+                    name = attribute.value
                 case WorldAttribIdentifier.position.rawValue:
                     let parts = attribute.value.components(separatedBy: ",")
                     if parts.count == 2 {
@@ -243,6 +247,12 @@ class World: NSController, NSCopying, XMLParserDelegate {
         }
         worldElem.addAttribute(url)
 
+        guard let name = XMLNode.attribute(withName: WorldAttribIdentifier.name.rawValue,
+                                           stringValue: name) as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(name)
+
         guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue,
                                            stringValue: fontName) as? XMLNode else {
             throw NSError()
@@ -254,6 +264,18 @@ class World: NSController, NSCopying, XMLParserDelegate {
             throw NSError()
         }
         worldElem.addAttribute(fontSize)
+
+        guard let monoFont = XMLNode.attribute(withName: WorldAttribIdentifier.monoFont.rawValue,
+                                           stringValue: monoFontName) as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(monoFont)
+
+        guard let monoFontSize = XMLNode.attribute(withName: WorldAttribIdentifier.monoFontSize.rawValue,
+                                               stringValue: "\(monoFontSize)") as? XMLNode else {
+            throw NSError()
+        }
+        worldElem.addAttribute(monoFontSize)
 
         guard let foreColor = XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue,
                                                 stringValue: "#\(foreColor.toHex()!)") as? XMLNode else {
