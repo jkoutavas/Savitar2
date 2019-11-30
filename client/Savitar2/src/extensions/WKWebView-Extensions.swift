@@ -1,5 +1,5 @@
 //
-//  WebViewFunctions.swift
+//  WkWebView-extensions.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 11/28/19.
@@ -24,16 +24,22 @@ extension WKWebView {
         if let resultCStr = resultCStrQ {
             let result = String(cString: resultCStr)
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
-            // Now append this output as a new <div>
-            let js = """
-                var i=document.createElement('div');
-                i.setAttribute('class', 'reset bg-reset');
-                i.innerHTML=\"<pre>\(htmlStr)</pre>\";document.body.appendChild(i);
-            """
-            run(javaScript: js)
-
-            printDOM(element: "document.body.innerHTML")
+            output(html: htmlStr)
         }
+    }
+
+    func output(html: String) {
+        // append this output as a new <div>
+
+        let js = """
+            var i=document.createElement('div');
+            i.setAttribute('class', 'reset bg-reset');
+            i.innerHTML=\"<pre>\(html)</pre>\";
+            document.body.appendChild(i);
+        """
+        run(javaScript: js)
+
+        printDOM(element: "document.body.innerHTML")
     }
 
     func setStyle(world: World) {
@@ -107,6 +113,8 @@ extension WKWebView {
         evaluateJavaScript(element) { (result, error) in
             if error != nil {
                 print(error!)
+            } else {
+                print(result!)
             }
         }
     }
