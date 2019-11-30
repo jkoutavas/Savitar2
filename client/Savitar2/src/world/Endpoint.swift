@@ -55,7 +55,10 @@ public class Endpoint: NSObject, StreamDelegate {
 
     func sendMessage(message: String) {
         let data = message.data(using: .utf8)!
-        _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
+        _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+            let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+            outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
+        }
     }
 
     private func readAvailableBytes(stream: InputStream) {
