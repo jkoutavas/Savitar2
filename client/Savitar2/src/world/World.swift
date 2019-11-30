@@ -154,7 +154,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
                     fontSize = size
                 case WorldAttribIdentifier.monoFont.rawValue:
                      monoFontName = attribute.value
-                 case WorldAttribIdentifier.monoFontSize.rawValue:
+                case WorldAttribIdentifier.monoFontSize.rawValue:
                      guard let size = CGFloat(attribute.value) else { break }
                      monoFontSize = size
                 case WorldAttribIdentifier.position.rawValue:

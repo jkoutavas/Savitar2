@@ -64,7 +64,7 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
             attributeChanged()
         }
     }
-    
+
     @IBAction func monoFontPopUpButtonWasSelected(sender: AnyObject) {
         guard let world = self.representedObject as? World else {
             return
