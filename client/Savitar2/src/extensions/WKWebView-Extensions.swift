@@ -46,6 +46,15 @@ extension WKWebView {
              body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
              body * {font: \(world.fontSize)px \(world.fontName);}
              a { color: #\(linkColor); }
+             code {font: \(world.monoFontSize)px \(world.monoFontName);}
+             pre {
+                overflow-x: auto;
+                white-space: pre-wrap;
+                white-space: -moz-pre-wrap;
+                white-space: -pre-wrap;
+                white-space: -o-pre-wrap;
+                word-wrap: break-word;
+             }
              .reset       {color: #\(foreColor);}
              .bg-reset    {background-color: #\(backColor);}
              .inverted    {color: #\(backColor);}
