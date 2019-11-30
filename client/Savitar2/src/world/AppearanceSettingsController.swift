@@ -12,16 +12,22 @@ import WebKit
 class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
 
     @IBOutlet var fontPopup: NSPopUpButton!
+    @IBOutlet var monoFontPopup: NSPopUpButton!
     @IBOutlet var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         for family in NSFontManager.shared.availableFontFamilies {
-            let font = NSFont(name: family, size: 13)
-            let attrs = [NSAttributedString.Key.font: font ?? NSFont.systemFont(ofSize: 13)]
+            let font = NSFont(name: family, size: 11)
+            let attrs = [NSAttributedString.Key.font: font ?? NSFont.systemFont(ofSize: 11)]
             let menuItem = NSMenuItem.init()
-            menuItem.attributedTitle = NSMutableAttributedString(string: family, attributes: attrs)
+            menuItem.title = family
             fontPopup.menu?.addItem(menuItem)
+            if font!.isFixedPitch {
+                let menuItem = NSMenuItem.init()
+                menuItem.title = family
+                monoFontPopup.menu?.addItem(menuItem)
+            }
         }
 
         guard let world = self.representedObject as? World else {
@@ -29,9 +35,11 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         }
         fontPopup.selectItem(withTitle: world.fontName)
 
+        monoFontPopup.selectItem(withTitle: world.monoFontName)
+
         attributeChanged()
 
-        if let filepath = Bundle.main.path(forResource: "Appearance", ofType: "html") {
+        if let filepath = Bundle.main.path(forResource: "Appearance", ofType: "txt") {
             do {
                 let contents = try String(contentsOfFile: filepath)
                 let esc = "\u{1B}"
@@ -53,6 +61,17 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
             world.fontName = family
+            attributeChanged()
+        }
+    }
+    
+    @IBAction func monoFontPopUpButtonWasSelected(sender: AnyObject) {
+        guard let world = self.representedObject as? World else {
+            return
+        }
+
+        if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
+            world.monoFontName = family
             attributeChanged()
         }
     }
