@@ -48,7 +48,7 @@ extension WKWebView {
         let linkColor = world.linkColor.toHex ?? "blue"
 
          let ss = """
-         <style type="text/css">
+         <style id='head-style' type="text/css">
              body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
              body * {font: \(world.fontSize)px \(world.fontName);}
              a { color: #\(linkColor); }
@@ -95,15 +95,24 @@ extension WKWebView {
          </style>
          """
 
-         run(javaScript: "document.head.insertAdjacentHTML('beforeend', `\(ss)`)") // TODO: do a replace of the style
+        // update the head <style> element
+        run(javaScript: """
+        var ss = document.getElementById('head-style');
+        if (ss !== null) {
+            ss.remove();
+        }
+        document.head.insertAdjacentHTML('beforeend', `\(ss)`)
+        """)
 
-         printDOM(element: "document.head.innerHTML")
+        printDOM(element: "document.head.innerHTML")
     }
 
     func run(javaScript: String) {
         evaluateJavaScript("(function() {\(javaScript); })();") { (result, error) in
             if error != nil {
                 print(error!)
+            } else if result != nil {
+                print(result!)
             }
          }
     }
@@ -113,7 +122,7 @@ extension WKWebView {
         evaluateJavaScript(element) { (result, error) in
             if error != nil {
                 print(error!)
-            } else {
+            } else if result != nil {
                 print(result!)
             }
         }
