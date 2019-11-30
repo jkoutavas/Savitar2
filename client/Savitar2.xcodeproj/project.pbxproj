@@ -23,8 +23,11 @@
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
+		696F77442390CFF2005E45EB /* aha.c in Sources */ = {isa = PBXBuildFile; fileRef = 696F77432390CFF2005E45EB /* aha.c */; };
+		696F77462390D22A005E45EB /* WKWebView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77452390D22A005E45EB /* WKWebView-Extensions.swift */; };
+		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
+		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
-		69DE2D22209D40A900A4D3F2 /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69DE2D21209D40A900A4D3F2 /* Appearance.txt */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
@@ -78,8 +81,13 @@
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
+		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		696F77422390CFF2005E45EB /* aha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aha.h; sourceTree = "<group>"; };
+		696F77432390CFF2005E45EB /* aha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aha.c; sourceTree = "<group>"; };
+		696F77452390D22A005E45EB /* WKWebView-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView-Extensions.swift"; sourceTree = "<group>"; };
+		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
+		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
-		69DE2D21209D40A900A4D3F2 /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
@@ -162,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				69662B302043A6E100E7CC7B /* Savitar2.entitlements */,
+				696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */,
 				69662B1B204367BD00E7CC7B /* src */,
 				69DE2D20209D40A900A4D3F2 /* resources */,
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
@@ -194,6 +203,7 @@
 			children = (
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
+				696F77402390CFF2005E45EB /* thirdparty */,
 				69662B1C204367BD00E7CC7B /* world */,
 			);
 			path = src;
@@ -209,6 +219,7 @@
 				69662B22204367BD00E7CC7B /* Endpoint.swift */,
 				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
 				69662B20204367BD00E7CC7B /* OutputProtocol.swift */,
+				696F77492390D2D2005E45EB /* OutputViewController.swift */,
 				69662B1E204367BD00E7CC7B /* SplitViewController.swift */,
 				69662B1D204367BD00E7CC7B /* ViewController.swift */,
 				69F620E6204BC19100301A8D /* WindowController.swift */,
@@ -225,14 +236,32 @@
 				69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */,
 				69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */,
 				69662B25204367BD00E7CC7B /* String+Extensions.swift */,
+				696F77452390D22A005E45EB /* WKWebView-Extensions.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		696F77402390CFF2005E45EB /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				696F77412390CFF2005E45EB /* aha */,
+			);
+			path = thirdparty;
+			sourceTree = "<group>";
+		};
+		696F77412390CFF2005E45EB /* aha */ = {
+			isa = PBXGroup;
+			children = (
+				696F77422390CFF2005E45EB /* aha.h */,
+				696F77432390CFF2005E45EB /* aha.c */,
+			);
+			path = aha;
 			sourceTree = "<group>";
 		};
 		69DE2D20209D40A900A4D3F2 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				69DE2D21209D40A900A4D3F2 /* Appearance.txt */,
+				696F77472390D256005E45EB /* Appearance.txt */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -366,9 +395,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69DE2D22209D40A900A4D3F2 /* Appearance.txt in Resources */,
 				6994602E2041124800409308 /* World.icns in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
+				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,13 +499,16 @@
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
+				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69F620E3204B881600301A8D /* DocumentV2.swift in Sources */,
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
+				696F77462390D22A005E45EB /* WKWebView-Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
+				696F77442390CFF2005E45EB /* aha.c in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
@@ -655,6 +687,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -674,6 +707,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

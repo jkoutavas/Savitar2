@@ -26,8 +26,8 @@ class World: NSController, NSCopying, XMLParserDelegate {
         case wildMarker = "WILDMARKER"
         case font = "FONT"
         case fontSize = "FONTSIZE"
-        case mono = "MONO"
-        case monoSize = "MONOSIZE"
+        case monoFont = "MONO"
+        case monoFontSize = "MONOSIZE"
         case MCPFont = "MCPFONT"
         case MCPFontSize = "MCPFONTSIZE"
         case foreColor = "FORECOLOR"
@@ -69,6 +69,8 @@ class World: NSController, NSCopying, XMLParserDelegate {
     @objc dynamic var linkColor = NSColor.blue
     @objc dynamic var fontName = "Monaco"
     @objc dynamic var fontSize: CGFloat = 9
+    @objc dynamic var monoFontName = "Monaco"
+    @objc dynamic var monoFontSize: CGFloat = 9
     var inputRows = 2
     var outputRows = 24
     var columns = 80
@@ -89,6 +91,8 @@ class World: NSController, NSCopying, XMLParserDelegate {
         linkColor = world.linkColor
         fontName = world.fontName
         fontSize = world.fontSize
+        monoFontName = world.monoFontName
+        monoFontSize = world.monoFontSize
         inputRows = world.inputRows
         columns = world.columns
         position = world.position
@@ -148,6 +152,11 @@ class World: NSController, NSCopying, XMLParserDelegate {
                 case WorldAttribIdentifier.fontSize.rawValue:
                     guard let size = CGFloat(attribute.value) else { break }
                     fontSize = size
+                case WorldAttribIdentifier.monoFont.rawValue:
+                     monoFontName = attribute.value
+                 case WorldAttribIdentifier.monoFontSize.rawValue:
+                     guard let size = CGFloat(attribute.value) else { break }
+                     monoFontSize = size
                 case WorldAttribIdentifier.position.rawValue:
                     let parts = attribute.value.components(separatedBy: ",")
                     if parts.count == 2 {
