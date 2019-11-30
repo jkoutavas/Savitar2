@@ -19,7 +19,6 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         super.viewDidLoad()
         for family in NSFontManager.shared.availableFontFamilies {
             let font = NSFont(name: family, size: 11)
-            let attrs = [NSAttributedString.Key.font: font ?? NSFont.systemFont(ofSize: 11)]
             let menuItem = NSMenuItem.init()
             menuItem.title = family
             fontPopup.menu?.addItem(menuItem)
