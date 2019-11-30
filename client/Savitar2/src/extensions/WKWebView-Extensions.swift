@@ -44,6 +44,7 @@ extension WKWebView {
          let ss = """
          <style type="text/css">
              body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
+             body * {font: \(world.fontSize)px \(world.fontName);}
              a { color: #\(linkColor); }
              .reset       {color: #\(foreColor);}
              .bg-reset    {background-color: #\(backColor);}
