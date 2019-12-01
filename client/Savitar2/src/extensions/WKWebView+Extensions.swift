@@ -39,7 +39,9 @@ extension WKWebView {
         """
         run(javaScript: js)
 
+        #if DEBUG_WKWEBKIT
         printDOM(element: "document.body.innerHTML")
+        #endif
     }
 
     func setStyle(world: World) {
@@ -104,15 +106,19 @@ extension WKWebView {
         document.head.insertAdjacentHTML('beforeend', `\(ss)`)
         """)
 
+        #if DEBUG_WKWEBKIT
         printDOM(element: "document.head.innerHTML")
+        #endif
     }
 
     func run(javaScript: String) {
         evaluateJavaScript("(function() {\(javaScript); })();") { (result, error) in
             if error != nil {
-                print(error!)
+                print("javascript run error: \(error!)")
             } else if result != nil {
+                #if DEBUG_WKWEBKIT
                 print(result!)
+                #endif
             }
          }
     }
@@ -121,7 +127,7 @@ extension WKWebView {
     func printDOM(element: String) {
         evaluateJavaScript(element) { (result, error) in
             if error != nil {
-                print(error!)
+                print("javascript print error: \(error!)")
             } else if result != nil {
                 print(result!)
             }
