@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 // Based on the PowerPlant based LTelnetParser by Paul D. Ferguson
 
@@ -48,7 +49,9 @@ let kSubBufferMax = 80            // max size of subnegotiation buffer, plenty b
 let TERMINAL_TYPE_STRING = "ANSI"
 
 struct TelnetParser {
+    // these get set by the user of TelnetParser
     public var mEndpoint: Endpoint?
+    public var logger: Logger?
 
     private var mCommand: CommandsEnum
     private var mState: StateEnum
@@ -118,6 +121,7 @@ struct TelnetParser {
     private mutating func receivedIAC(command: CommandsEnum) -> Bool {
         switch command {
         case .escSE:
+            logger?.info("sub-buffer got its SE. len=\(mSubBufferIndex)")
             mSubBuffer[mSubBufferIndex] = 0
             mState = .normalChar
             var data = Data()
@@ -131,6 +135,7 @@ struct TelnetParser {
                 data.append(CommandsEnum.escSE.rawValue)
 
                 mEndpoint!.sendData(data: data)
+                logger?.info("Sent TERMINAL-TYPE \(TERMINAL_TYPE_STRING)")
             }
         case .escDM, .escNOP, .escBRK, .escIP, .escAO, .escAYT, .escEC, .escEL, .escGA:
             mState = .normalChar
@@ -151,6 +156,7 @@ struct TelnetParser {
                 mSubBuffer[mSubBufferIndex] = command.rawValue
                 mSubBufferIndex += 1
                 mState = .gotIAC
+                logger?.info("sub-buffer got an IAC. len=\(mSubBufferIndex)")
             } else {
                 mState = .normalChar
                 return false
@@ -166,6 +172,7 @@ struct TelnetParser {
     //        to just send a "DONT" response using the ReceivedWont() function.
     // ---------------------------------------------------------------------------
     private mutating func receivedWill(option: UInt8) {
+        telnetLog(message: "ReceivedWill", option: option)
         receivedWont(option: option)
     }
 
@@ -175,6 +182,7 @@ struct TelnetParser {
     //        a "DONT" response.
     // ---------------------------------------------------------------------------
     private mutating func receivedWont(option: UInt8) {
+        telnetLog(message: "ReceivedWont", option: option)
         if mDidDont[Int(option)] == false {
             var data = Data()
             data.append(CommandsEnum.escIAC.rawValue)
@@ -192,6 +200,7 @@ struct TelnetParser {
     //        to just send a "WONT" response using the ReceivedDont() function.
     // ---------------------------------------------------------------------------
     private mutating func receivedDo(option: UInt8) {
+        telnetLog(message: "ReceivedDo", option: option)
         switch option {
         case CommandsEnum.escTerminalType.rawValue:
             mCommand = CommandsEnum.escTerminalType
@@ -201,6 +210,7 @@ struct TelnetParser {
             data.append(option)
 
             mEndpoint!.sendData(data: data)
+            telnetLog(message: "SentWill", option: option)
         default:
             receivedDont(option: option)
         }
@@ -221,5 +231,38 @@ struct TelnetParser {
             mEndpoint!.sendData(data: data)
             mDidWont[Int(option)] = true
         }
+    }
+
+    private func telnetLog(message: String, option: UInt8) {
+    #if DEBUG_TELNET
+        var label: String
+        switch option {
+        case 0:
+            label = "binary xfer"
+        case 1:
+            label = "local echo"
+        case 3:
+            label = "go ahead"
+        case 5:
+            label = "status"
+        case 24:
+            label = "term type"
+        case 31:
+            label = "window size"
+        case 32:
+            label = "term speed"
+        case 33:
+            label = "remote flow"
+        case 34:
+            label = "line mode"
+        case 37:
+            label = "authentication"
+        case 38:
+            label = "encryption"
+        default:
+            label = String(option)
+        }
+        logger?.info("\(message) \(label)")
+    #endif
     }
 }

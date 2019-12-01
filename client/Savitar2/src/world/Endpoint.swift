@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logging
 
 public class Endpoint: NSObject, StreamDelegate {
     let port: UInt32
@@ -38,6 +39,8 @@ public class Endpoint: NSObject, StreamDelegate {
         var writeStream: Unmanaged<CFWriteStream>?
 
         telnetParser!.mEndpoint = self
+        telnetParser!.logger = Logger(label: "\(String(describing: Bundle.main.bundleIdentifier)).TelnetParser")
+        telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                  host as CFString,
