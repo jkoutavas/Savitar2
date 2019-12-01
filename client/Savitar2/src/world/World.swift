@@ -7,6 +7,14 @@
 //
 
 import Cocoa
+import Logging
+
+private func initLogger() -> Logger {
+    var logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
+    logger[metadataKey: "m"] = "World" // "m" is for "module"
+
+    return logger
+}
 
 class World: NSController, NSCopying, XMLParserDelegate {
     // these define the "WORLD" attributes found in Savitar 1.x world documents
@@ -82,29 +90,35 @@ class World: NSController, NSCopying, XMLParserDelegate {
     var version = 0
     var GUID = NSUUID().uuidString
 
-    init(world: World) {
-        super.init()
+    var logger: Logger
 
-        port = world.port
-        host = world.host
-        name = world.name
-        backColor = world.backColor
-        foreColor = world.foreColor
-        linkColor = world.linkColor
-        fontName = world.fontName
-        fontSize = world.fontSize
-        monoFontName = world.monoFontName
-        monoFontSize = world.monoFontSize
-        inputRows = world.inputRows
-        columns = world.columns
-        position = world.position
-        windowSize = world.windowSize
-        zoomed = world.zoomed
-        version = world.version
-        GUID = world.GUID
+    init(world: World) {
+        self.logger = initLogger()
+
+        self.port = world.port
+        self.host = world.host
+        self.name = world.name
+        self.backColor = world.backColor
+        self.foreColor = world.foreColor
+        self.linkColor = world.linkColor
+        self.fontName = world.fontName
+        self.fontSize = world.fontSize
+        self.monoFontName = world.monoFontName
+        self.monoFontSize = world.monoFontSize
+        self.inputRows = world.inputRows
+        self.columns = world.columns
+        self.position = world.position
+        self.windowSize = world.windowSize
+        self.zoomed = world.zoomed
+        self.version = world.version
+        self.GUID = world.GUID
+
+        super.init()
     }
 
     override init() {
+         self.logger = initLogger()
+
         super.init()
     }
 
@@ -117,6 +131,8 @@ class World: NSController, NSCopying, XMLParserDelegate {
     }
 
     func read(from data: Data) throws {
+        logger.info("reading \(String(decoding: data, as: UTF8.self))")
+
         /*
          * Parse XML for a v1 or v2 Savitar world document
          */
@@ -193,7 +209,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
                 case WorldAttribIdentifier.GUID.rawValue:
                     GUID = attribute.value
                 default:
-                    Swift.print("skipping \(attribute.key)")
+                    logger.info("skipping \(attribute.key)")
                 }
             }
         }
@@ -298,7 +314,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
         root.addChild(worldElem)
 
         let xml = XMLDocument(rootElement: root)
-        Swift.print(xml.xmlString)
+        logger.info("XML data representation \(String(xml.xmlString))")
         return xml.xmlString.data(using: String.Encoding.utf8)!
     }
 }

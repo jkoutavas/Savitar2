@@ -17,6 +17,7 @@ public class Endpoint: NSObject, StreamDelegate {
     var inputStream: InputStream!
     var outputStream: OutputStream!
 
+    var logger: Logger
     var telnetParser: TelnetParser?
 
     init(port: UInt32, host: String, outputter: OutputProtocol) {
@@ -24,6 +25,9 @@ public class Endpoint: NSObject, StreamDelegate {
         self.port = port
         self.host = host
         self.outputter = outputter
+        self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
+        self.logger[metadataKey: "a"] = "\(host):\(port)" // "a" is for "address"
+        self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
 
         super.init()
@@ -32,14 +36,17 @@ public class Endpoint: NSObject, StreamDelegate {
     func close() {
         inputStream.close()
         outputStream.close()
+        logger.info("closed connection")
     }
 
     func connectAndRun() {
+        logger.info("connecting...")
+
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
 
         telnetParser!.mEndpoint = self
-        telnetParser!.logger = Logger(label: "\(String(describing: Bundle.main.bundleIdentifier)).TelnetParser")
+        telnetParser!.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
@@ -112,17 +119,19 @@ public class Endpoint: NSObject, StreamDelegate {
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
+        case Stream.Event.openCompleted:
+            logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }
             acceptText(stream: inputStream)
         case Stream.Event.endEncountered:
-            print("new message received")
+            logger.info("new message received")
         case Stream.Event.errorOccurred:
             self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
         case Stream.Event.hasSpaceAvailable:
-            print("has space available")
+            logger.info("has space available")
         default:
-            print("some other event...")
+            logger.info("some other event...")
         }
     }
 }
