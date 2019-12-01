@@ -15,12 +15,17 @@ public class Endpoint: NSObject, StreamDelegate {
 
     var inputStream: InputStream!
     var outputStream: OutputStream!
-    let maxReadLength = 4096
+
+    var telnetParser: TelnetParser?
 
     init(port: UInt32, host: String, outputter: OutputProtocol) {
+
         self.port = port
         self.host = host
         self.outputter = outputter
+        self.telnetParser = TelnetParser()
+
+        super.init()
     }
 
     func close() {
@@ -31,6 +36,8 @@ public class Endpoint: NSObject, StreamDelegate {
     func connectAndRun() {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
+
+        telnetParser!.mEndpoint = self
 
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                  host as CFString,
@@ -53,37 +60,58 @@ public class Endpoint: NSObject, StreamDelegate {
         }
     }
 
-    func sendMessage(message: String) {
-        let data = message.data(using: .utf8)!
-        _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
-            let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
-            outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
+    func sendData(data: Data) {
+         _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+             let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+             outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
         }
     }
 
-    private func readAvailableBytes(stream: InputStream) {
-        while stream.hasBytesAvailable {
-            let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxReadLength)
-            let numberOfBytesRead = inputStream.read(buffer, maxLength: maxReadLength)
-            if numberOfBytesRead < 0 {
-                if stream.streamError != nil {
-                    break
+    func sendString(string: String) {
+        sendData(data: string.data(using: .utf8)!)
+     }
+
+    private func processAcceptedText(buffer: [UInt8]) -> Data {
+        var data = Data()
+        for char in buffer {
+            if !telnetParser!.isTelnetByte(char: char) {
+                data.append(char)
+            }
+        }
+        return data
+    }
+
+    private func acceptText(stream: InputStream) {
+        // Some data came in from the network. Queue its processing on a block thread.
+        let blockOperation = { [weak self] in
+            var data = Data()
+            let maxReadLength = 4096
+            while stream.hasBytesAvailable {
+                var buffer = [UInt8](repeating: 0, count: maxReadLength)
+                let read = stream.read(&buffer, maxLength: maxReadLength)
+                if read > 0 {
+                    if let result = self?.processAcceptedText(buffer: buffer) {
+                        if result.count > 0 {
+                            data.append(result)
+                        }
+                    }
                 }
             }
-            guard let message = String(bytesNoCopy: buffer,
-                                     length: numberOfBytesRead,
-                                     encoding: .ascii,
-                                     freeWhenDone: true)
-            else { return }
-            outputter.output(result: .success(message))
+
+            // Processing is complete. Queue output on the main thread
+            OperationQueue.main.addOperation {
+                let message = String(decoding: data, as: UTF8.self)
+                self?.outputter.output(result: .success(message))
+            }
         }
+        OperationQueue().addOperation(blockOperation)
     }
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }
-            readAvailableBytes(stream: inputStream)
+            acceptText(stream: inputStream)
         case Stream.Event.endEncountered:
             print("new message received")
         case Stream.Event.errorOccurred:

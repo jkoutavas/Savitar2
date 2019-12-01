@@ -32,7 +32,7 @@ class InputViewController: ViewController {
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
                 if self.textView.string.count > 1 {
-                    self.endpoint?.sendMessage(message: self.textView.string)
+                    self.endpoint?.sendString(string: self.textView.string)
                 }
 
                 self.textView.string = ""
