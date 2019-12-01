@@ -9,7 +9,69 @@
 import Foundation
 import Logging
 
-// Based on the PowerPlant based LTelnetParser by Paul D. Ferguson
+// A Swift rewrite of the PowerPlant-based LTelnetParser by Paul D. Ferguson.
+// Here are his original header comments:
+
+// ===========================================================================
+//    LTelnetParser.cp    ©1996 Paul D. Ferguson. All rights reserved.
+//                            fergy@best.com
+//
+// A very rudimentary telnet implementation for PowerPlant's networking
+// classes.  I wrote this so that PowerTelnet could actually do a telnet
+// session (what a concept!)
+//
+// ••••••• NOTE ••• NOTE ••• NOTE ••• NOTE ••• NOTE ••• NOTE ••• NOTE •••••••
+//
+// This class is unsupported and virtually untested.  Use at your own risk.
+// If you find bugs in it, please let me know at the email address above.
+//
+// I cannot provide any support for these classes.  If you are unfamiliar
+// with telnet, I suggest you visit your local bookstore or search the Web
+// for information about how telnet works and about the various negotiations
+// and subnegotiations that telnet implements.  Just please don't ask me,
+// because I don't know!
+//
+//
+// Theory of operation
+// -------------------
+// This class does no telnet protocols, it defaults to refusing any DO
+// requests, and negating any WILL requests.  If you have more sophisticated
+// telnet needs, you can override or modify this class accordingly.
+//
+// To use this class with PowerTelnet, do the following (this description is
+// for the threads implementation):
+//
+// (1) in CTelnetViaThreads.h, add a LTelnetParser member object to
+//     CTelnetClientThread:
+//
+//            LTelnetParser    mTelnetParser;
+//
+// (2) in the CTelnetClientThread::CTelnetClientThread initializer list, add:
+//
+//            mTelnetParser(inNetworkEndpoint),
+//
+// (3) in the while loop in CTelnetThread::Run, add this if() clause:
+//
+//            if (mTelnetParser.IsTelnetByte(theChar) == false)
+//                mTerminalPane->DoWriteChar(theChar);
+//
+// The steps for the event loop version of PowerTelnet are similar, but have
+// one important difference due to how the classes are created:
+//
+// (1) add a member object to CTelnetViaEventLoop
+//
+//            LTelnetParser        mTelnetParser;
+//
+// (2) in CTelnetViaEventLoop::Connect, add the statement:
+//
+//            mTelnetParser.SetEndpoint(mEndpoint);
+//
+// (3) munge CTelnetViaEventLoop::AcceptText to iterate through the text
+//     buffer and call mTelnetParser.IsTelnetByte() for each byte.  This
+//     is left as an exercise for you.
+//
+// ===========================================================================
+//
 
 enum CommandsEnum: UInt8 {
     case escIS = 0
@@ -158,12 +220,13 @@ struct TelnetParser {
                 mState = .gotIAC
                 logger?.info("sub-buffer got an IAC. len=\(mSubBufferIndex)")
             } else {
+                // for case of escIAC escIAC
                 mState = .normalChar
-                return false
+                return false  // pass second escIAC to higher level protocol
             }
         }
 
-        return true
+        return true // for most cases, this byte is a part of the telnet protocol
     }
 
     // ---------------------------------------------------------------------------
