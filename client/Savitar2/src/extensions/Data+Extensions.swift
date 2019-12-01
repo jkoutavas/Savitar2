@@ -13,7 +13,7 @@ extension Data {
         let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
         append(data!)
     }
-  
+
     var hexString: String {
         return self.reduce("", { $0 + String(format: "%02x, ", $1) })
     }

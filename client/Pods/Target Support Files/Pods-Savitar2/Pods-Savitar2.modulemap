@@ -1,6 +1,0 @@
-framework module Pods_Savitar2 {
-  umbrella header "Pods-Savitar2-umbrella.h"
-
-  export *
-  module * { export * }
-}
