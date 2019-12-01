@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08DFF98B1A3108BCC3EB4A38 /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */; };
-		44976AE3E7EFC75F1DDE1F36 /* Pods_Savitar2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -37,7 +35,6 @@
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
 		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
-		E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,10 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,11 +92,6 @@
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2Tests/Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
-		8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
-		9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2UITests/Pods-Savitar2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savitar2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savitar2/Pods-Savitar2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44976AE3E7EFC75F1DDE1F36 /* Pods_Savitar2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08DFF98B1A3108BCC3EB4A38 /* Pods_Savitar2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,26 +113,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0C4D35F9E11A1A2C5DB6A48 /* Pods_Savitar2UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30ADD603982D99EAF07BD7B9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */,
-				8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */,
-				092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */,
-				82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */,
-				9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */,
-				C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
@@ -155,8 +127,6 @@
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
 				695484BE1FC4E6E400A6983F /* Savitar2UITests */,
 				6954849D1FC4E6E400A6983F /* Products */,
-				30ADD603982D99EAF07BD7B9 /* Pods */,
-				9052CD0F565ACCCBED44FEE0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,16 +242,6 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
-		9052CD0F565ACCCBED44FEE0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29AE980A45A9AB291B9B3F07 /* Pods_Savitar2.framework */,
-				565866C44CC64E3DA7D235F1 /* Pods_Savitar2Tests.framework */,
-				43F8127E6CD25546C0FC6543 /* Pods_Savitar2UITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -289,17 +249,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 695484C41FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2" */;
 			buildPhases = (
-				B0B10D36ACBAFE1567D46532 /* [CP] Check Pods Manifest.lock */,
 				695484981FC4E6E400A6983F /* Sources */,
 				695484991FC4E6E400A6983F /* Frameworks */,
 				6954849A1FC4E6E400A6983F /* Resources */,
-				6918D0AB208D362F00990F7D /* SwiftLint */,
+				6991F4682393F20B00E2BFDB /* SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Savitar2;
+			packageProductDependencies = (
+			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
 			productType = "com.apple.product-type.application";
@@ -308,7 +269,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 695484C71FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2Tests" */;
 			buildPhases = (
-				A49F0B7CDC331EB0B2D918DD /* [CP] Check Pods Manifest.lock */,
 				695484AC1FC4E6E400A6983F /* Sources */,
 				695484AD1FC4E6E400A6983F /* Frameworks */,
 				695484AE1FC4E6E400A6983F /* Resources */,
@@ -327,7 +287,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 695484CA1FC4E6E400A6983F /* Build configuration list for PBXNativeTarget "Savitar2UITests" */;
 			buildPhases = (
-				8D40E123ADFEC263E643A35B /* [CP] Check Pods Manifest.lock */,
 				695484B71FC4E6E400A6983F /* Sources */,
 				695484B81FC4E6E400A6983F /* Frameworks */,
 				695484B91FC4E6E400A6983F /* Resources */,
@@ -385,6 +344,8 @@
 				Base,
 			);
 			mainGroup = 695484931FC4E6E400A6983F;
+			packageReferences = (
+			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -425,73 +386,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6918D0AB208D362F00990F7D /* SwiftLint */ = {
+		6991F4682393F20B00E2BFDB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
 			name = SwiftLint;
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
-		8D40E123ADFEC263E643A35B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Savitar2UITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A49F0B7CDC331EB0B2D918DD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Savitar2Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0B10D36ACBAFE1567D46532 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Savitar2-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -682,7 +593,6 @@
 		};
 		695484C51FC4E6E400A6983F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2BF420B1E5A8D44909B649E /* Pods-Savitar2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
@@ -702,7 +612,6 @@
 		};
 		695484C61FC4E6E400A6983F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DFED7A07AA906418A60F2AB /* Pods-Savitar2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Savitar2/Savitar2.entitlements;
@@ -722,7 +631,6 @@
 		};
 		695484C81FC4E6E400A6983F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 092B7830E90B10352F31E984 /* Pods-Savitar2Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -740,7 +648,6 @@
 		};
 		695484C91FC4E6E400A6983F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82B6F3AE667CDC01D969593D /* Pods-Savitar2Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -758,7 +665,6 @@
 		};
 		695484CB1FC4E6E400A6983F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AF2F39280646419868E901F /* Pods-Savitar2UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -775,7 +681,6 @@
 		};
 		695484CC1FC4E6E400A6983F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4A938906FB11335EBAB84BB /* Pods-Savitar2UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -2,14 +2,13 @@
 
 Welcome to the Savitar 2.0 git repository
 
-Last updated: February 13th, 2018
-
+Last updated: Decemember 1st, 2019
 
 ## How do I get set up? ##
 
-Things are pretty basic right now. A server connection is hard-wired into the client.
+In the `client` directory you'll find `Savitar200.xcodeproj`. You'll want to `brew install swiftlint` to ensure coding style correctness.
 
-In the `client` directory you'll find the xcode workspace for building the macOS target of the client app.
+### The echoserver
 
 There is a test echo server you'll need to have running before you can run the client. The echo server was a direct rip-off from here:
 http://masteringswift.blogspot.com/2017/01/using-bluesocket-framework-to-create.html
