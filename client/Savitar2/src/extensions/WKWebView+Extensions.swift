@@ -38,6 +38,7 @@ extension WKWebView {
             document.body.appendChild(i);
         """
         run(javaScript: js)
+        scrollToEndOfDocument(nil)
 
         #if DEBUG_WKWEBKIT
         printDOM(element: "document.body.innerHTML")
