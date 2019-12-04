@@ -12,8 +12,8 @@ import WebKit
 class OutputViewController: NSViewController {
     @IBOutlet var webView: WKWebView!
 
-    func output(string: String, attributes: [NSAttributedString.Key: Any]? = nil) {
-        webView.output(string: string, attributes: attributes)
+    func output(string: String) {
+        webView.output(string: string)
     }
 
     func setStyle(world: World) {
