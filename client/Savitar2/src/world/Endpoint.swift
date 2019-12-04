@@ -81,9 +81,12 @@ public class Endpoint: NSObject, StreamDelegate {
         sendData(data: string.data(using: .utf8)!)
      }
 
-    private func processAcceptedText(buffer: [UInt8]) -> Data {
+    private func process(buffer: [UInt8]) -> Data {
         var data = Data()
         for char in buffer {
+            if char == 0 {
+                break
+            }
             if !telnetParser!.isTelnetByte(char: char) {
                 data.append(char)
             }
@@ -91,7 +94,37 @@ public class Endpoint: NSObject, StreamDelegate {
         return data
     }
 
-    private func acceptText(stream: InputStream) {
+    private func processAcceptedText(text: String) {
+        let lines = text.split(omittingEmptySubsequences: false) {
+            $0 == "\r\n" || $0 == "\n"
+        }
+
+        let triggers: [Trigger] = [
+            Trigger(name: "ell", flags: [.caseSensitive, .exact]),
+            Trigger(name: "test", flags: .exact),
+            Trigger(name: "TO END", flags: .wholeLine),
+            Trigger(name: "bang*", flags: .useRegex),
+            Trigger(name: "boom*", flags: [.caseSensitive, .useRegex])
+            ]
+
+        for thisLine in lines {
+            var line = String(thisLine)
+            if line.count > 0 {
+                for trigger in triggers {
+                    line = trigger.reactionTo(line: line)
+                }
+            } else {
+                line = "<br>"
+            }
+
+            // Processing is complete. Queue output on the main thread.
+            OperationQueue.main.addOperation({ [weak self] in
+                self?.outputter.output(result: .success(line))
+            })
+        }
+    }
+
+    private func read(stream: InputStream) {
         // Some data came in from the network. Queue its processing on a block thread.
         let blockOperation = { [weak self] in
             var data = Data()
@@ -100,19 +133,14 @@ public class Endpoint: NSObject, StreamDelegate {
                 var buffer = [UInt8](repeating: 0, count: maxReadLength)
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    if let result = self?.processAcceptedText(buffer: buffer) {
+                    if let result = self?.process(buffer: buffer) {
                         if result.count > 0 {
                             data.append(result)
                         }
                     }
                 }
             }
-
-            // Processing is complete. Queue output on the main thread
-            OperationQueue.main.addOperation {
-                let message = String(decoding: data, as: UTF8.self)
-                self?.outputter.output(result: .success(message))
-            }
+            self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
         }
         OperationQueue().addOperation(blockOperation)
     }
@@ -123,7 +151,7 @@ public class Endpoint: NSObject, StreamDelegate {
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }
-            acceptText(stream: inputStream)
+            read(stream: inputStream)
         case Stream.Event.endEncountered:
             logger.info("new message received")
         case Stream.Event.errorOccurred:
