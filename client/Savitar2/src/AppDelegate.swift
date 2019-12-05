@@ -12,7 +12,12 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        // TODO: load these from v1 or v2 settings
+        AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact]))
+        AppContext.triggerMan.add(Trigger(name: "test", flags: .exact))
+        AppContext.triggerMan.add(Trigger(name: "TO END", flags: .wholeLine))
+        AppContext.triggerMan.add(Trigger(name: "bang*", flags: .useRegex))
+        AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex]))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

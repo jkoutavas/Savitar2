@@ -99,22 +99,17 @@ public class Endpoint: NSObject, StreamDelegate {
             $0 == "\r\n" || $0 == "\n"
         }
 
-        let triggers: [Trigger] = [
-            Trigger(name: "ell", flags: [.caseSensitive, .exact]),
-            Trigger(name: "test", flags: .exact),
-            Trigger(name: "TO END", flags: .wholeLine),
-            Trigger(name: "bang*", flags: .useRegex),
-            Trigger(name: "boom*", flags: [.caseSensitive, .useRegex])
-            ]
-
         for thisLine in lines {
             var line = String(thisLine)
-            if line.count > 0 {
-                for trigger in triggers {
-                    line = trigger.reactionTo(line: line)
-                }
-            } else {
+            if line.count == 0 {
+                // This was an empty subsequence, cause a line feed
                 line = "<br>"
+                continue
+            }
+
+            // Handle trigger reactions. Often it'll result in a modification of the line
+            for trigger in AppContext.triggerMan.get() {
+                line = trigger.reactionTo(line: line)
             }
 
             // Processing is complete. Queue output on the main thread.
