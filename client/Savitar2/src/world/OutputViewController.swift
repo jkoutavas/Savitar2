@@ -12,6 +12,12 @@ import WebKit
 class OutputViewController: NSViewController {
     @IBOutlet var webView: WKWebView!
 
+    override func viewDidLoad() {
+        // we add a layer so we can set background color
+        view.wantsLayer = true
+        super.viewDidLoad()
+    }
+
     func output(string: String) {
         webView.output(string: string)
     }
