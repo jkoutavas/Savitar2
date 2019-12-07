@@ -15,8 +15,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // TODO: load these from v1 or v2 settings
         AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact]))
         AppContext.triggerMan.add(Trigger(name: "test", flags: .exact))
+        AppContext.triggerMan.add(Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag]))
+        AppContext.triggerMan.add(Trigger(name: "line", flags: [.wholeLine, .gag]))
         AppContext.triggerMan.add(Trigger(name: "TO END", flags: .wholeLine))
-        AppContext.triggerMan.add(Trigger(name: "bang*", flags: .useRegex))
+        AppContext.triggerMan.add(Trigger(name: "bang*", flags: [.useRegex, .useSubstitution], substitution: "HEYNOW"))
         AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex]))
     }
 

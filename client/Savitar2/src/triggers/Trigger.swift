@@ -81,38 +81,31 @@ struct Trigger: Equatable {
         self.substitution = substitution
     }
 
-    public func reactionTo(line: String, options: String.CompareOptions = []) -> String {
-        switch flags! {
-        case [.caseSensitive, .exact]:
-            return reactTo(line: line)
-        case .exact:
-             return reactTo(line: line, options: .caseInsensitive)
-        case .useRegex:
-            return reactTo(line: line, options: [.regularExpression, .caseInsensitive])
-        case [.useRegex, .caseSensitive]:
-            return reactTo(line: line, options: .regularExpression)
-        case .wholeLine:
-            let found = (flags?.contains([.exact]))!
-                ? line.contains(name!) : line.localizedCaseInsensitiveContains(name!)
-            if found {
-                return ansiUnderline + line + ansiUnderlineOff
-            }
-        default:
-            // TODO: add logging
-            print("trigger '\(name!)' was skipped.")
+    public func reactionTo(line: String) -> String {
+        var options: String.CompareOptions = []
+        if flags!.contains(.caseSensitive) == false {
+            options = .caseInsensitive
         }
-        return line
-    }
-
-    private func reactTo(line: String, options: String.CompareOptions = []) -> String {
-        let ranges = line.ranges(of: name!, options: options)
+        if flags!.contains(.useRegex) {
+            options = [options, .regularExpression]
+        }
+        var ranges = line.ranges(of: name!, options: options)
+        if ranges.count > 0 && flags!.contains(.wholeLine) {
+            ranges = [line.fullRange]
+        }
         var reassembledLine = ""
         var position = line.startIndex
         for range in ranges {
             if position != range.lowerBound {
                 reassembledLine += line[position..<range.lowerBound]
             }
-            reassembledLine += ansiBlink + line[range] + ansiBlinkOff
+            if flags!.contains(.gag) == false {
+                if flags!.contains(.useSubstitution) {
+                    reassembledLine += ansiBlink + substitution! + ansiBlinkOff
+                } else {
+                    reassembledLine += ansiBlink + line[range] + ansiBlinkOff
+                }
+            }
             position = range.upperBound
         }
         if position < line.endIndex {
