@@ -39,16 +39,7 @@ struct Trigger: Equatable {
     let style: TrigTextStyle?
     let wordEnding: String?
     let substitution: String?
-/*
-    static func == (lhs: Trigger, rhs: Trigger) -> Bool {
-        return lhs.name == rhs.name &&
-               lhs.type == rhs.type &&
-               lhs.flags == rhs.flags &&
-               lhs.style == rhs.style &&
-               lhs.wordEnding == rhs.wordEnding &&
-               lhs.substitution == rhs.substitution
-    }
-*/
+
     init(name: String? = nil,
          type: TrigType? = nil,
          flags: TrigFlags? = nil,
@@ -65,6 +56,10 @@ struct Trigger: Equatable {
     }
 
     public func reactionTo(line: String) -> String {
+        guard let match = self.name else {
+            return line
+        }
+
         var options: String.CompareOptions = []
         if let flags = self.flags {
             if flags.contains(.caseSensitive) == false {
@@ -74,28 +69,34 @@ struct Trigger: Equatable {
                 options = [options, .regularExpression]
             }
         }
-        var ranges = line.ranges(of: name!, options: options)
+        var ranges = line.ranges(of: match, options: options)
         if let flags = self.flags, ranges.count > 0 && flags.contains(.wholeLine) {
             ranges = [line.fullRange]
         }
-        var reassembledLine = ""
-        var position = line.startIndex
+        var resultLine = ""
+        var pos = line.startIndex
         for range in ranges {
-            if position != range.lowerBound {
-                reassembledLine += line[position..<range.lowerBound]
+            if pos != range.lowerBound {
+                resultLine += line[pos..<range.lowerBound]
             }
             if let flags = self.flags, flags.contains(.gag) == false {
-                if flags.contains(.useSubstitution) {
-                    reassembledLine += style!.on + substitution! + style!.off
+                if let subst = self.substitution, flags.contains(.useSubstitution) {
+                    if let style = self.style {
+                        resultLine += style.on + subst + style.off
+                    } else {
+                        resultLine = subst
+                    }
+                } else if let style = self.style {
+                    resultLine += style.on + line[range] + style.off
                 } else {
-                    reassembledLine += style!.on + line[range] + style!.off
+                    resultLine = String(line[range])
                 }
             }
-            position = range.upperBound
+            pos = range.upperBound
         }
-        if position < line.endIndex {
-             reassembledLine += line[position..<line.endIndex]
+        if pos < line.endIndex {
+             resultLine += line[pos..<line.endIndex]
         }
-        return reassembledLine
+        return resultLine
     }
 }
