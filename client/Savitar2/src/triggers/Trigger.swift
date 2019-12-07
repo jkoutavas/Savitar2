@@ -15,21 +15,6 @@ enum TrigType {
     case AnyText
 }
 
-struct TrigFace: OptionSet {
-    let rawValue: Int
-
-    static let normal = TrigFace(rawValue: 1 << 0)
-    static let bold = TrigFace(rawValue: 1 << 1)
-    static let italic = TrigFace(rawValue: 1 << 2)
-    static let underline = TrigFace(rawValue: 1 << 3)
-}
-
-struct TrigTextStyle {
-    let face: TrigFace
-    let foreColor: String
-    let backColor: String
-}
-
 struct TrigFlags: OptionSet {
     let rawValue: Int
 
@@ -48,49 +33,49 @@ struct TrigFlags: OptionSet {
 }
 
 struct Trigger: Equatable {
-    let ansiBlink = "\u{1B}[5m"
-    let ansiBlinkOff = "\u{1B}[25m"
-    let ansiReset = "\u{1B}[0m"
-    let ansiUnderline = "\u{1B}[4m"
-    let ansiUnderlineOff = "\u{1B}[23m"
-
     let name: String?
     let type: TrigType?
     let flags: TrigFlags?
+    let style: TrigTextStyle?
     let wordEnding: String?
     let substitution: String?
-
+/*
     static func == (lhs: Trigger, rhs: Trigger) -> Bool {
         return lhs.name == rhs.name &&
                lhs.type == rhs.type &&
                lhs.flags == rhs.flags &&
+               lhs.style == rhs.style &&
                lhs.wordEnding == rhs.wordEnding &&
                lhs.substitution == rhs.substitution
     }
-
+*/
     init(name: String? = nil,
          type: TrigType? = nil,
          flags: TrigFlags? = nil,
+         style: TrigTextStyle? = nil,
          wordEnding: String? = nil,
          substitution: String? = nil) {
 
         self.name = name
         self.type = type
         self.flags = flags
+        self.style = style
         self.wordEnding = wordEnding
         self.substitution = substitution
     }
 
     public func reactionTo(line: String) -> String {
         var options: String.CompareOptions = []
-        if flags!.contains(.caseSensitive) == false {
-            options = .caseInsensitive
-        }
-        if flags!.contains(.useRegex) {
-            options = [options, .regularExpression]
+        if let flags = self.flags {
+            if flags.contains(.caseSensitive) == false {
+                options = .caseInsensitive
+            }
+            if flags.contains(.useRegex) {
+                options = [options, .regularExpression]
+            }
         }
         var ranges = line.ranges(of: name!, options: options)
-        if ranges.count > 0 && flags!.contains(.wholeLine) {
+        if let flags = self.flags, ranges.count > 0 && flags.contains(.wholeLine) {
             ranges = [line.fullRange]
         }
         var reassembledLine = ""
@@ -99,11 +84,11 @@ struct Trigger: Equatable {
             if position != range.lowerBound {
                 reassembledLine += line[position..<range.lowerBound]
             }
-            if flags!.contains(.gag) == false {
-                if flags!.contains(.useSubstitution) {
-                    reassembledLine += ansiBlink + substitution! + ansiBlinkOff
+            if let flags = self.flags, flags.contains(.gag) == false {
+                if flags.contains(.useSubstitution) {
+                    reassembledLine += style!.on + substitution! + style!.off
                 } else {
-                    reassembledLine += ansiBlink + line[range] + ansiBlinkOff
+                    reassembledLine += style!.on + line[range] + style!.off
                 }
             }
             position = range.upperBound

@@ -13,13 +13,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // TODO: load these from v1 or v2 settings
-        AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact]))
-        AppContext.triggerMan.add(Trigger(name: "test", flags: .exact))
+
+        // gag tests
         AppContext.triggerMan.add(Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag]))
         AppContext.triggerMan.add(Trigger(name: "line", flags: [.wholeLine, .gag]))
-        AppContext.triggerMan.add(Trigger(name: "TO END", flags: .wholeLine))
+
+        // substitution tests
         AppContext.triggerMan.add(Trigger(name: "bang*", flags: [.useRegex, .useSubstitution], substitution: "HEYNOW"))
-        AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex]))
+
+        // styling tests
+        AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact],
+            style: TrigTextStyle(face: .bold)))
+        
+        AppContext.triggerMan.add(Trigger(name: "test", flags: .exact,
+            style: TrigTextStyle(face: .blink)))
+
+        AppContext.triggerMan.add(Trigger(name: "TO END", flags: .wholeLine,
+            style: TrigTextStyle(face: .underline)))
+
+        AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex],
+            style: TrigTextStyle(face: .italic)))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
