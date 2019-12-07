@@ -107,12 +107,35 @@ public class Endpoint: NSObject, StreamDelegate {
                 continue
             }
 
-            // Handle trigger reactions. Often it'll result in a modification of the line
+            // Handle trigger reactions. Often it'll result in a modification of the line, so let's
+            // process triggers in this order:
+            //    1. gagging triggers
+            //    2. subsitution triggers
+            //    3. all the rest
+            var processedTriggers: [Trigger] = []
             for trigger in AppContext.triggerMan.get() {
-                line = trigger.reactionTo(line: line)
+                if trigger.flags!.contains(.gag) {
+                    line = trigger.reactionTo(line: line)
+                    processedTriggers.append(trigger)
+                }
+            }
+            if line.count > 0 {
+                for trigger in AppContext.triggerMan.get() {
+                    if trigger.flags!.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                        line = trigger.reactionTo(line: line)
+                        processedTriggers.append(trigger)
+                    }
+                }
+            }
+            if line.count > 0 {
+                for trigger in AppContext.triggerMan.get() {
+                    if !processedTriggers.contains(trigger) {
+                        line = trigger.reactionTo(line: line)
+                    }
+                }
             }
 
-            // Processing is complete. Queue output on the main thread.
+            // Processing is complete. Send the line off to the output view
             OperationQueue.main.addOperation({ [weak self] in
                 self?.outputter.output(result: .success(line))
             })

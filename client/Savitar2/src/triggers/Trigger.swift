@@ -43,28 +43,42 @@ struct TrigFlags: OptionSet {
     static let echoReply = TrigFlags(rawValue: 1 << 7)
     static let caseSensitive = TrigFlags(rawValue: 1 << 8)
     static let dontUseStyle = TrigFlags(rawValue: 1 << 9)
-    static let useSubsitution = TrigFlags(rawValue: 1 << 10)
+    static let useSubstitution = TrigFlags(rawValue: 1 << 10)
     static let useRegex = TrigFlags(rawValue: 1 << 11)
 }
 
-struct Trigger {
+struct Trigger: Equatable {
+    let ansiBlink = "\u{1B}[5m"
+    let ansiBlinkOff = "\u{1B}[25m"
+    let ansiReset = "\u{1B}[0m"
+    let ansiUnderline = "\u{1B}[4m"
+    let ansiUnderlineOff = "\u{1B}[23m"
+
     let name: String?
     let type: TrigType?
     let flags: TrigFlags?
     let wordEnding: String?
-    let subsitution: String?
+    let substitution: String?
+
+    static func == (lhs: Trigger, rhs: Trigger) -> Bool {
+        return lhs.name == rhs.name &&
+               lhs.type == rhs.type &&
+               lhs.flags == rhs.flags &&
+               lhs.wordEnding == rhs.wordEnding &&
+               lhs.substitution == rhs.substitution
+    }
 
     init(name: String? = nil,
          type: TrigType? = nil,
          flags: TrigFlags? = nil,
          wordEnding: String? = nil,
-         subsitution: String? = nil) {
+         substitution: String? = nil) {
 
         self.name = name
         self.type = type
         self.flags = flags
         self.wordEnding = wordEnding
-        self.subsitution = subsitution
+        self.substitution = substitution
     }
 
     public func reactionTo(line: String, options: String.CompareOptions = []) -> String {
@@ -81,7 +95,7 @@ struct Trigger {
             let found = (flags?.contains([.exact]))!
                 ? line.contains(name!) : line.localizedCaseInsensitiveContains(name!)
             if found {
-                return "<span class=green>\(line)</span>"
+                return ansiUnderline + line + ansiUnderlineOff
             }
         default:
             // TODO: add logging
@@ -98,7 +112,7 @@ struct Trigger {
             if position != range.lowerBound {
                 reassembledLine += line[position..<range.lowerBound]
             }
-            reassembledLine += "<span class='blink'>\(line[range])</span>"
+            reassembledLine += ansiBlink + line[range] + ansiBlinkOff
             position = range.upperBound
         }
         if position < line.endIndex {
