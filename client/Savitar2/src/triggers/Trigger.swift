@@ -19,7 +19,7 @@ struct TrigFlags: OptionSet {
     let rawValue: Int
 
     static let exact = TrigFlags(rawValue: 1 << 0)
-    static let endOfWord = TrigFlags(rawValue: 1 << 1) // TODO: obsolete this?
+    static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
     static let useFore = TrigFlags(rawValue: 1 << 4)
@@ -64,15 +64,26 @@ struct Trigger: Equatable {
     }
 
     public func reactionTo(line: String) -> String {
+        var pattern = name
+
+        // TODO: optimization: form the options at trigger init / setting
         var options: String.CompareOptions = []
         if flags.contains(.caseSensitive) == false {
             options = .caseInsensitive
         }
         if flags.contains(.useRegex) {
             options = [options, .regularExpression]
+        } else if flags.contains(.toEndOfWord) {
+            // end of word matching is easiest with a regex...
+            pattern += "\\w*"
+            options = [options, .regularExpression]
+        } else if let wordEnding = self.wordEnding, wordEnding.count > 0 {
+            // word ending matching is easiest with a regex...
+            pattern += "\\w*[\(wordEnding)]"
+            options = [options, .regularExpression]
         }
 
-        var ranges = line.ranges(of: name, options: options)
+        var ranges = line.ranges(of: pattern, options: options)
         if ranges.count > 0 && flags.contains(.wholeLine) {
             ranges = [line.fullRange]
         }
@@ -87,7 +98,7 @@ struct Trigger: Equatable {
                     if let style = self.style {
                         resultLine += style.on + subst + style.off
                     } else {
-                        resultLine = subst
+                        resultLine += subst
                     }
                 } else if let style = self.style {
                     resultLine += style.on + line[range] + style.off

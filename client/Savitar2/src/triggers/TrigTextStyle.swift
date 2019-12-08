@@ -11,13 +11,35 @@ import Cocoa
 // https://en.wikipedia.org/wiki/ANSI_escape_code
 
 extension NSColor {
+    // This is kind of specific to what we need for generating ANSI color sequences,
+    // thus it's not part of our generic `NSColor+Extensions` class. (We're ignoring
+    // the alpha component, for example)
+    func toIntArray() -> [Int] {
+        var result: [Int] = []
+        guard let components = cgColor.components else {
+            return result
+        }
+        if components.count >= 3 {
+            result.append(Int(components[0]*255.0))
+            result.append(Int(components[1]*255.0))
+            result.append(Int(components[2]*255.0))
+        } else {
+            // colors such as black and white have two components (color and alpha)
+            result.append(Int(components[0]*255.0))
+            result.append(Int(components[0]*255.0))
+            result.append(Int(components[0]*255.0))
+        }
+
+        return result
+    }
+
     func formOnFGColorANSICode() -> String {
         let rgb = self.toIntArray()
         return rgb.count >= 3 ? ";38:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
     }
 
     func formOffFGColorANSICode() -> String {
-        return "39" // default foreground color
+        return ";39" // default foreground color
     }
 
     func formOnBGColorANSICode() -> String {
@@ -26,7 +48,7 @@ extension NSColor {
      }
 
     func formOffBGColorANSICode() -> String {
-        return "49" // default background color
+        return ";49" // default background color
     }
 }
 
@@ -42,7 +64,7 @@ struct TrigFace: OptionSet, Hashable {
 
     private func formANSICodes(dict: [TrigFace: Int]) -> String {
         var result = ""
-        for (key, value) in dict {
+        for (key, value) in dict.sorted(by: { $0.1 < $1.1 }) {
             if self.contains(key) {
                 result += ";\(value)"
             }
@@ -110,6 +132,5 @@ struct TrigTextStyle: Equatable {
 
         self.on = formEscapeSequence(codes: faceOn + fgColorOn + bgColorOn)
         self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
-
     }
 }
