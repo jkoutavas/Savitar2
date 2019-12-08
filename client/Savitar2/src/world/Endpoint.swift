@@ -114,14 +114,14 @@ public class Endpoint: NSObject, StreamDelegate {
             //    3. all the rest
             var processedTriggers: [Trigger] = []
             for trigger in AppContext.triggerMan.get() {
-                if trigger.flags!.contains(.gag) {
+                if trigger.flags.contains(.gag) {
                     line = trigger.reactionTo(line: line)
                     processedTriggers.append(trigger)
                 }
             }
             if line.count > 0 {
                 for trigger in AppContext.triggerMan.get() {
-                    if trigger.flags!.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                    if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
                         line = trigger.reactionTo(line: line)
                         processedTriggers.append(trigger)
                     }

@@ -33,14 +33,17 @@ struct TrigFlags: OptionSet {
 }
 
 struct Trigger: Equatable {
-    let name: String?
-    let type: TrigType?
-    let flags: TrigFlags?
-    let style: TrigTextStyle?
-    let wordEnding: String?
-    let substitution: String?
+    // default settings
+    var name: String = "<new trigger>"
+    var type: TrigType = .Outgoing
+    var flags: TrigFlags = .exact
 
-    init(name: String? = nil,
+    // optional settings
+    var style: TrigTextStyle?
+    var wordEnding: String?
+    var substitution: String?
+
+    init(name: String,
          type: TrigType? = nil,
          flags: TrigFlags? = nil,
          style: TrigTextStyle? = nil,
@@ -48,29 +51,29 @@ struct Trigger: Equatable {
          substitution: String? = nil) {
 
         self.name = name
-        self.type = type
-        self.flags = flags
+
+        if let t = type {
+            self.type = t
+        }
+        if let f = flags {
+            self.flags = f
+        }
         self.style = style
         self.wordEnding = wordEnding
         self.substitution = substitution
     }
 
     public func reactionTo(line: String) -> String {
-        guard let match = self.name else {
-            return line
+        var options: String.CompareOptions = []
+        if flags.contains(.caseSensitive) == false {
+            options = .caseInsensitive
+        }
+        if flags.contains(.useRegex) {
+            options = [options, .regularExpression]
         }
 
-        var options: String.CompareOptions = []
-        if let flags = self.flags {
-            if flags.contains(.caseSensitive) == false {
-                options = .caseInsensitive
-            }
-            if flags.contains(.useRegex) {
-                options = [options, .regularExpression]
-            }
-        }
-        var ranges = line.ranges(of: match, options: options)
-        if let flags = self.flags, ranges.count > 0 && flags.contains(.wholeLine) {
+        var ranges = line.ranges(of: name, options: options)
+        if ranges.count > 0 && flags.contains(.wholeLine) {
             ranges = [line.fullRange]
         }
         var resultLine = ""
@@ -79,7 +82,7 @@ struct Trigger: Equatable {
             if pos != range.lowerBound {
                 resultLine += line[pos..<range.lowerBound]
             }
-            if let flags = self.flags, flags.contains(.gag) == false {
+            if flags.contains(.gag) == false {
                 if let subst = self.substitution, flags.contains(.useSubstitution) {
                     if let style = self.style {
                         resultLine += style.on + subst + style.off

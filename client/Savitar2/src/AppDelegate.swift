@@ -36,6 +36,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         AppContext.triggerMan.add(Trigger(name: "combo", flags: [.caseSensitive, .useRegex],
             style: TrigTextStyle(face: [.italic, .underline])))
+
+        AppContext.triggerMan.add(Trigger(name: "inverse",
+            style: TrigTextStyle(face: .inverse)))
+
+        AppContext.triggerMan.add(Trigger(name: "purple",
+            style: TrigTextStyle(foreColor: NSColor.purple)))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
