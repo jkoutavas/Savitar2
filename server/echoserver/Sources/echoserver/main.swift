@@ -88,7 +88,7 @@ class EchoServer {
     func addNewConnection(socket: Socket) {
     
         let esc = "\u{1B}"
-        let ansiTestStr = "^[34m^[1mANSI Intense^[0m, ^[5mANSI Blink^[25m, ^[7mANSI Reverse^[27m".replacingOccurrences(of: "^[", with: "\(esc)[")
+        let ansiTestStr = "^[34;1mANSI Intense^[0m, ^[5mANSI Blink^[25m, ^[7mANSI Reverse^[27m, ^[3;4mitalic and underline^[0m".replacingOccurrences(of: "^[", with: "\(esc)[")
   
         // Add the new socket to the list of connected sockets...
         socketLockQueue.sync { [unowned self, socket] in

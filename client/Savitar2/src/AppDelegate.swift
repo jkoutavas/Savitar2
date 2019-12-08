@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // gag tests
         AppContext.triggerMan.add(Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag]))
-        AppContext.triggerMan.add(Trigger(name: "line", flags: [.wholeLine, .gag]))
+        AppContext.triggerMan.add(Trigger(name: "wholeline", flags: [.wholeLine, .gag]))
 
         // substitution tests
         AppContext.triggerMan.add(Trigger(name: "bang*", flags: [.useRegex, .useSubstitution], substitution: "HEYNOW"))
@@ -33,6 +33,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex],
             style: TrigTextStyle(face: .italic)))
+
+        AppContext.triggerMan.add(Trigger(name: "combo", flags: [.caseSensitive, .useRegex],
+            style: TrigTextStyle(face: [.italic, .underline])))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

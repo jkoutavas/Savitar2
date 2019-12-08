@@ -10,12 +10,12 @@ import Foundation
 
 class TriggerMan {
     private var triggers: [Trigger] = []
-    
+
     func add(_ trigger: Trigger) {
         triggers.append(trigger)
     }
-    
+
     func get() -> [Trigger] {
         return triggers
     }
-};
+}
