@@ -2,7 +2,7 @@
 
 Welcome to the Savitar 2.0 git repository
 
-Last updated: Decemember 1st, 2019
+Last updated: December 8th, 2019
 
 ## How do I get set up? ##
 
@@ -25,8 +25,7 @@ Don't sweat the build's compiler's warnings, those are just copy/paste results f
 
 If you want to generate an xcode project for the echoserver, do this:
 
-``````bash
+```bash
 $ cd server/echoserver
 $ swift package generate-xcodeproj
 ```
-
