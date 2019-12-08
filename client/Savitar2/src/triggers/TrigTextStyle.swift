@@ -8,6 +8,28 @@
 
 import Cocoa
 
+// https://en.wikipedia.org/wiki/ANSI_escape_code
+
+extension NSColor {
+    func formOnFGColorANSICode() -> String {
+        let rgb = self.toIntArray()
+        return rgb.count >= 3 ? ";38:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
+    }
+
+    func formOffFGColorANSICode() -> String {
+        return "39" // default foreground color
+    }
+
+    func formOnBGColorANSICode() -> String {
+        let rgb = self.toIntArray()
+        return rgb.count >= 3 ? ";48:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
+     }
+
+    func formOffBGColorANSICode() -> String {
+        return "49" // default background color
+    }
+}
+
 struct TrigFace: OptionSet, Hashable {
     let rawValue: Int
 
@@ -17,6 +39,39 @@ struct TrigFace: OptionSet, Hashable {
     static let underline = TrigFace(rawValue: 1 << 3)
     static let blink = TrigFace(rawValue: 1 << 4) // new with version 2.0
     static let inverse = TrigFace(rawValue: 1 << 5) // new with version 2.0
+
+    private func formANSICodes(dict: [TrigFace: Int]) -> String {
+        var result = ""
+        for (key, value) in dict {
+            if self.contains(key) {
+                result += ";\(value)"
+            }
+        }
+
+        return result
+    }
+
+    public func formOnANSICode() -> String {
+        let styleOnDict: [TrigFace: Int] = [
+            .blink: 5,
+            .bold: 1,
+            .inverse: 7,
+            .italic: 3,
+            .underline: 4
+        ]
+        return formANSICodes(dict: styleOnDict)
+    }
+
+    public func formOffANSICode() -> String {
+        let styleOffDict: [TrigFace: Int] = [
+            .blink: 25,
+            .bold: 21,
+            .inverse: 27,
+            .italic: 23,
+            .underline: 23
+        ]
+        return formANSICodes(dict: styleOffDict)
+    }
 }
 
 struct TrigTextStyle: Equatable {
@@ -25,46 +80,12 @@ struct TrigTextStyle: Equatable {
     var foreColor: NSColor?
     var backColor: NSColor? // new with version 2.0
 
-    let styleOnDict: [TrigFace: Int] = [
-        .blink: 5,
-        .bold: 1,
-        .inverse: 7,
-        .italic: 3,
-        .underline: 4
-    ]
-
-    let styleOffDict: [TrigFace: Int] = [
-        .blink: 25,
-        .bold: 21,
-        .inverse: 27,
-        .italic: 23,
-        .underline: 23
-    ]
-
     public var on: String = ""
     public var off: String = ""
 
-    private func buildEscapeCode(dict: [TrigFace: Int]) -> String {
-        // https://en.wikipedia.org/wiki/ANSI_escape_code
-        var result = ""
-        if let face = self.face {
-            for (key, value) in dict {
-                if face.contains(key) {
-                    result += ";\(value)"
-                }
-            }
-        }
-        if let fgColor = self.foreColor {
-            let rgb = fgColor.toIntArray()
-            if rgb.count >= 3 {
-                result += ";38:2;\(rgb[0]);\(rgb[1]);\(rgb[2])"
-            }
-        }
-        if result.count > 0 {
-            let esc = "\u{1B}"
-            result = esc + "[" + result + "m"
-        }
-        return result
+    private func formEscapeSequence(codes: String) -> String {
+        let esc = "\u{1B}"
+        return codes.count > 0 ? esc + "[" + codes + "m" : ""
     }
 
     init(face: TrigFace? = nil,
@@ -75,7 +96,20 @@ struct TrigTextStyle: Equatable {
         self.foreColor = foreColor
         self.backColor = backColor
 
-        self.on = buildEscapeCode(dict: styleOnDict)
-        self.off = buildEscapeCode(dict: styleOffDict)
+        /*
+         * For perfomance reasons, formulate the on and off escape sequences as they are set
+         */
+        let faceOn = face?.formOnANSICode() ?? ""
+        let faceOff = face?.formOffANSICode() ?? ""
+
+        let fgColorOn = foreColor?.formOnFGColorANSICode() ?? ""
+        let fgColorOff = foreColor?.formOffFGColorANSICode() ?? ""
+
+        let bgColorOn = backColor?.formOnBGColorANSICode() ?? ""
+        let bgColorOff = backColor?.formOffBGColorANSICode() ?? ""
+
+        self.on = formEscapeSequence(codes: faceOn + fgColorOn + bgColorOn)
+        self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
+
     }
 }

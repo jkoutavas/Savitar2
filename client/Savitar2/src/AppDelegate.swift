@@ -42,6 +42,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         AppContext.triggerMan.add(Trigger(name: "purple",
             style: TrigTextStyle(foreColor: NSColor.purple)))
+
+        AppContext.triggerMan.add(Trigger(name: "warning", flags: .wholeLine,
+            style: TrigTextStyle(face: .underline, backColor: NSColor.red)))
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
