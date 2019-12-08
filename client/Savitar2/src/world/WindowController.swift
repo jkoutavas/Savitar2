@@ -60,6 +60,7 @@ class WindowController: NSWindowController {
 
         inputVC.foreColor = w.foreColor
         inputVC.backColor = w.backColor
+        outputVC.view.layer?.backgroundColor = w.backColor.cgColor
         outputVC.setStyle(world: w)
 
         if let font = NSFont(name: w.fontName, size: w.fontSize) {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69000EDC23942523009976E0 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EDB23942523009976E0 /* Trigger.swift */; };
+		69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EDF2397CE30009976E0 /* TriggerMan.swift */; };
+		69000EE22397CF09009976E0 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EE12397CF09009976E0 /* AppContext.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -21,6 +24,7 @@
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
+		69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69683027239C22550066CC48 /* TrigTextStyle.swift */; };
 		696F77442390CFF2005E45EB /* aha.c in Sources */ = {isa = PBXBuildFile; fileRef = 696F77432390CFF2005E45EB /* aha.c */; };
 		696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77452390D22A005E45EB /* WKWebView+Extensions.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
@@ -56,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69000EDB23942523009976E0 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
+		69000EDF2397CE30009976E0 /* TriggerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMan.swift; sourceTree = "<group>"; };
+		69000EE12397CF09009976E0 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +84,7 @@
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
+		69683027239C22550066CC48 /* TrigTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigTextStyle.swift; sourceTree = "<group>"; };
 		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		696F77422390CFF2005E45EB /* aha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aha.h; sourceTree = "<group>"; };
 		696F77432390CFF2005E45EB /* aha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aha.c; sourceTree = "<group>"; };
@@ -121,6 +129,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69000EDA23942513009976E0 /* triggers */ = {
+			isa = PBXGroup;
+			children = (
+				69000EDB23942523009976E0 /* Trigger.swift */,
+				69000EDF2397CE30009976E0 /* TriggerMan.swift */,
+				69683027239C22550066CC48 /* TrigTextStyle.swift */,
+			);
+			path = triggers;
+			sourceTree = "<group>";
+		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
@@ -177,9 +195,11 @@
 		69662B1B204367BD00E7CC7B /* src */ = {
 			isa = PBXGroup;
 			children = (
+				69000EE12397CF09009976E0 /* AppContext.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
 				696F77402390CFF2005E45EB /* thirdparty */,
+				69000EDA23942513009976E0 /* triggers */,
 				69662B1C204367BD00E7CC7B /* world */,
 			);
 			path = src;
@@ -416,10 +436,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
+				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
+				69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
+				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
@@ -430,6 +453,7 @@
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
 				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
+				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
 				696F77442390CFF2005E45EB /* aha.c in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
@@ -614,7 +638,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET DEBUG_WKWEBKIT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

@@ -42,10 +42,10 @@ class Document: NSDocument, OutputProtocol {
     }
 
     func output(result: OutputResult) {
-        func output(string: String, attributes: [NSAttributedString.Key: Any]? = nil) {
+        func output(string: String) {
             guard let svc = splitViewController else { return }
             guard let outputVC = svc.outputViewController else { return }
-            outputVC.output(string: string, attributes: attributes)
+            outputVC.output(string: string)
          }
 
         var attributes = [NSAttributedString.Key: AnyObject]()
@@ -53,10 +53,10 @@ class Document: NSDocument, OutputProtocol {
         switch result {
         case .success(let message):
             attributes[NSAttributedString.Key.foregroundColor] = world.foreColor
-            output(string: message, attributes: attributes)
+            output(string: message)
         case .error(let error):
             attributes[NSAttributedString.Key.foregroundColor] = NSColor.red
-            output(string: error, attributes: attributes)
+            output(string: error)
         }
     }
 

@@ -81,9 +81,12 @@ public class Endpoint: NSObject, StreamDelegate {
         sendData(data: string.data(using: .utf8)!)
      }
 
-    private func processAcceptedText(buffer: [UInt8]) -> Data {
+    private func process(buffer: [UInt8]) -> Data {
         var data = Data()
         for char in buffer {
+            if char == 0 {
+                break
+            }
             if !telnetParser!.isTelnetByte(char: char) {
                 data.append(char)
             }
@@ -91,7 +94,55 @@ public class Endpoint: NSObject, StreamDelegate {
         return data
     }
 
-    private func acceptText(stream: InputStream) {
+    private func processAcceptedText(text: String) {
+        let lines = text.split(omittingEmptySubsequences: false) {
+            $0 == "\r\n" || $0 == "\n"
+        }
+
+        for thisLine in lines {
+            var line = String(thisLine)
+            if line.count == 0 {
+                // This was an empty subsequence, cause a line feed
+                line = "<br>"
+                continue
+            }
+
+            // Handle trigger reactions. Often it'll result in a modification of the line, so let's
+            // process triggers in this order:
+            //    1. gagging triggers
+            //    2. subsitution triggers
+            //    3. all the rest
+            var processedTriggers: [Trigger] = []
+            for trigger in AppContext.triggerMan.get() {
+                if trigger.flags.contains(.gag) {
+                    line = trigger.reactionTo(line: line)
+                    processedTriggers.append(trigger)
+                }
+            }
+            if line.count > 0 {
+                for trigger in AppContext.triggerMan.get() {
+                    if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                        line = trigger.reactionTo(line: line)
+                        processedTriggers.append(trigger)
+                    }
+                }
+            }
+            if line.count > 0 {
+                for trigger in AppContext.triggerMan.get() {
+                    if !processedTriggers.contains(trigger) {
+                        line = trigger.reactionTo(line: line)
+                    }
+                }
+            }
+
+            // Processing is complete. Send the line off to the output view
+            OperationQueue.main.addOperation({ [weak self] in
+                self?.outputter.output(result: .success(line))
+            })
+        }
+    }
+
+    private func read(stream: InputStream) {
         // Some data came in from the network. Queue its processing on a block thread.
         let blockOperation = { [weak self] in
             var data = Data()
@@ -100,19 +151,14 @@ public class Endpoint: NSObject, StreamDelegate {
                 var buffer = [UInt8](repeating: 0, count: maxReadLength)
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    if let result = self?.processAcceptedText(buffer: buffer) {
+                    if let result = self?.process(buffer: buffer) {
                         if result.count > 0 {
                             data.append(result)
                         }
                     }
                 }
             }
-
-            // Processing is complete. Queue output on the main thread
-            OperationQueue.main.addOperation {
-                let message = String(decoding: data, as: UTF8.self)
-                self?.outputter.output(result: .success(message))
-            }
+            self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
         }
         OperationQueue().addOperation(blockOperation)
     }
@@ -123,7 +169,7 @@ public class Endpoint: NSObject, StreamDelegate {
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }
-            acceptText(stream: inputStream)
+            read(stream: inputStream)
         case Stream.Event.endEncountered:
             logger.info("new message received")
         case Stream.Event.errorOccurred:

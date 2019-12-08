@@ -38,9 +38,11 @@ extension WKWebView {
             document.body.appendChild(i);
         """
         run(javaScript: js)
+        scrollToEndOfDocument(nil)
 
         #if DEBUG_WKWEBKIT
-        printDOM(element: "document.body.innerHTML")
+//        print(html)
+//        printDOM(element: "document.body.innerHTML")
         #endif
     }
 
@@ -62,6 +64,8 @@ extension WKWebView {
                 white-space: -pre-wrap;
                 white-space: -o-pre-wrap;
                 word-wrap: break-word;
+                display: inline;
+                margin: 0;
              }
              .reset       {color: #\(foreColor);}
              .bg-reset    {background-color: #\(backColor);}
