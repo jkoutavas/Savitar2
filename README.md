@@ -1,8 +1,10 @@
 # README #
 
+Last updated: December 8th, 2019
+
 Welcome to the Savitar 2.0 git repository
 
-Last updated: December 8th, 2019
+[![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
 ## How do I get set up? ##
 
