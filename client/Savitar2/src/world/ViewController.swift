@@ -10,36 +10,36 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    @IBOutlet var textView: NSTextView!
+    @IBOutlet var textView: NSTextView?
 
     public var backColor: NSColor {
         get {
-            return textView.backgroundColor
+            return textView?.backgroundColor ?? NSColor.black
         }
         set {
-            textView.backgroundColor = newValue
+            textView?.backgroundColor = newValue
         }
     }
 
     public var foreColor: NSColor {
         get {
-            return textView.textColor!
+            return textView?.textColor ?? NSColor.white
         }
         set {
-            textView.textColor = newValue
+            textView?.textColor = newValue
         }
     }
 
     public var font: NSFont {
         get {
-            return textView.font!
+            return textView?.font ?? NSFont.systemFont(ofSize: 9)
         }
         set {
-            textView.font = newValue
+            textView?.font = newValue
         }
     }
 
     func rowHeight() -> CGFloat {
-        return textView.layoutManager!.defaultLineHeight(for: font)
+        return textView?.layoutManager?.defaultLineHeight(for: font) ?? 0
     }
  }

@@ -17,8 +17,8 @@ class InputViewController: ViewController {
 
         // Not setting the checkmark in the interface builder doesn't seem to work since OS X 10.9 Mavericks.
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
-        self.textView.isAutomaticQuoteSubstitutionEnabled = false
-        self.textView.isAutomaticDashSubstitutionEnabled = false
+        self.textView?.isAutomaticQuoteSubstitutionEnabled = false
+        self.textView?.isAutomaticDashSubstitutionEnabled = false
 
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
@@ -31,11 +31,11 @@ class InputViewController: ViewController {
              // we're wrapping this in an async call so we call unwind the
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
-                if self.textView.string.count > 1 {
-                    self.endpoint?.sendString(string: self.textView.string)
+                if let textView = self.textView, textView.string.count > 1 {
+                    self.endpoint?.sendString(string: textView.string)
                 }
 
-                self.textView.string = ""
+                self.textView?.string = ""
             }
         }
     }

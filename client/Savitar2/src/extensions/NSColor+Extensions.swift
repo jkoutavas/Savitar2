@@ -84,18 +84,4 @@ extension NSColor {
                 lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
     }
-
-    func toIntArray() -> [Int] {
-        var result: [Int] = []
-        guard let components = cgColor.components else {
-            return result
-        }
-        if components.count >= 3 {
-            result.append(Int(components[0]*255.0))
-            result.append(Int(components[1]*255.0))
-            result.append(Int(components[2]*255.0))
-        }
-
-        return result
-    }
 }
