@@ -24,8 +24,8 @@ extension String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
     }
-    
-    var fullRange:Range<String.Index> { return startIndex..<endIndex }
+
+    var fullRange: Range<String.Index> { return startIndex..<endIndex }
 
     func ranges(of occurrence: String, options mask: String.CompareOptions = []) -> [Range<String.Index>] {
         var ranges = [Range<String.Index>]()
