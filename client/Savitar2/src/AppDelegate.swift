@@ -7,11 +7,20 @@
 //
 
 import Cocoa
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
+          MSAnalytics.self,
+          MSCrashes.self
+        ])
+
         // TODO: load these from v1 or v2 settings
 
         // gag tests
@@ -24,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // styling tests
         AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact],
             style: TrigTextStyle(face: .bold)))
-        
+
         AppContext.triggerMan.add(Trigger(name: "test", flags: .exact,
             style: TrigTextStyle(face: .blink)))
 
