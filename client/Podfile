@@ -1,0 +1,20 @@
+platform :macos, '10.12'
+
+target 'Savitar2' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Savitar2
+  pod 'AppCenter'
+
+  target 'Savitar2Tests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Savitar2UITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
