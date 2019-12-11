@@ -9,6 +9,8 @@
 import Cocoa
 
 class Document: NSDocument, OutputProtocol {
+    let DocumentElemIdentifier = "DOCUMENT"
+
     var world = World()
 
     var endpoint: Endpoint?
@@ -38,7 +40,7 @@ class Document: NSDocument, OutputProtocol {
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
-        try world.read(from: data)
+        try world.parseXML(from: data)
     }
 
     func output(result: OutputResult) {
@@ -61,7 +63,27 @@ class Document: NSDocument, OutputProtocol {
     }
 
     override func data(ofType typeName: String) throws -> Data {
+        /*
+         * Write-out XML for a v2 Savitar world document
+         *
+         * You may wonder "why XML in this modern age? Why not do a PLIST or codable thing? Or use JSON?"
+         * Answer: We stay away from Apple specific formats like PLIST and codable because we want the
+         * world document to be easily readable from anywhere, any platform. True, in this modern age,
+         * JSON would fit that requirement, but, there's something to be said about having some semblence
+         * still with the v1 document's format, and it's not that hard to read and write XML. So: XML it is
+         */
+
+        let docElem = XMLElement(name: DocumentElemIdentifier)
+        guard let type = XMLNode.attribute(withName: "TYPE", stringValue: "Savitar World") as? XMLNode else {
+            throw NSError()
+        }
+        docElem.addAttribute(type)
+
         world.version = 2
-        return try world.data()
+        let worldElem = try world.toXMLElement()
+        docElem.addChild(worldElem)
+
+        let xml = XMLDocument(rootElement: docElem)
+        return xml.xmlString.data(using: String.Encoding.utf8)!
     }
 }

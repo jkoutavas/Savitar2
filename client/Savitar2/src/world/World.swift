@@ -58,7 +58,6 @@ class World: NSController, NSCopying, XMLParserDelegate {
     }
 
     let TelnetIdentifier = "telnet://"
-    let DocumentElemIdentifier = "DOCUMENT"
     let WorldElemIdentifier = "WORLD"
 
     @objc dynamic var editable: Bool {
@@ -130,12 +129,12 @@ class World: NSController, NSCopying, XMLParserDelegate {
         return World(world: self)
     }
 
-    func read(from data: Data) throws {
-        logger.info("reading \(String(decoding: data, as: UTF8.self))")
+    /*
+     * Parse XML from v1 or v2 Savitar world data
+     */
+    func parseXML(from data: Data) throws {
+        logger.info("parsing \(String(decoding: data, as: UTF8.self))")
 
-        /*
-         * Parse XML for a v1 or v2 Savitar world document
-         */
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()
@@ -215,7 +214,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
         }
     }
 
-    func data() throws -> Data {
+    func toXMLElement() throws -> XMLElement {
         /*
          * Write-out XML for a v2 Savitar world document
          *
@@ -233,16 +232,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
             throw NSError(domain: "attempted to write obsolete world document", code: 1, userInfo: nil)
         }
 
-        let root = XMLElement(name: DocumentElemIdentifier)
-        guard let type = XMLNode.attribute(withName: "TYPE", stringValue: "Savitar World") as? XMLNode else {
-            throw NSError()
-        }
-        root.addAttribute(type)
-
-        guard let elem = XMLNode.element(withName: WorldElemIdentifier) as? XMLElement else {
-            throw NSError()
-        }
-        let worldElem: XMLElement = elem
+        let worldElem = XMLElement(name: WorldElemIdentifier)
 
         guard let version = XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue,
                                               stringValue: "\(version)") as? XMLNode else {
@@ -311,10 +301,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
         }
         worldElem.addAttribute(linkColor)
 
-        root.addChild(worldElem)
-
-        let xml = XMLDocument(rootElement: root)
-        logger.info("XML data representation \(String(xml.xmlString))")
-        return xml.xmlString.data(using: String.Encoding.utf8)!
+        logger.info("XML data representation \(String(worldElem.xmlString))")
+        return worldElem
     }
 }
