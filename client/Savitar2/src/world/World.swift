@@ -16,50 +16,7 @@ private func initLogger() -> Logger {
     return logger
 }
 
-class World: NSController, NSCopying, XMLParserDelegate {
-    // these define the "WORLD" attributes found in Savitar 1.x world documents
-    enum WorldAttribIdentifier: String {
-        // these are obsoleted in v2
-        case resolution = "RESOLUTION"
-        case position = "POSITION"
-        case windowSize = "WINDOWSIZE"
-        case zoomed = "ZOOMED"
-
-        // these are shared between v1 and v2
-        case name = "NAME"
-        case URL = "URL"
-        case flags = "FLAGS"
-        case cmdMarker = "CMDMARKER"
-        case varMarker = "VARMARKER"
-        case wildMarker = "WILDMARKER"
-        case font = "FONT"
-        case fontSize = "FONTSIZE"
-        case monoFont = "MONO"
-        case monoFontSize = "MONOSIZE"
-        case MCPFont = "MCPFONT"
-        case MCPFontSize = "MCPFONTSIZE"
-        case foreColor = "FORECOLOR"
-        case backColor = "BACKCOLOR"
-        case linkColor = "LINKCOLOR"
-        case echoBackColor = "ECHOBGCOLOR"
-        case intenseColor = "INTENSECOLOR"
-        case intenseType = "INTENSETYPE"
-        case outputMax = "OUTPUTMAX"
-        case outputMin = "OUTPUTMIN"
-        case flushTicks = "FLUSHTICKS"
-        case retrySecs = "RETRYSECS"
-        case keepaliveMins = "KEEPALIVEMINS"
-        case logonCmd = "LOGONCMD"
-        case logoffCmd = "LOGOFFCMD"
-
-        // these are new for v2
-        case version = "VERSION"
-        case GUID = "GUID"
-    }
-
-    let TelnetIdentifier = "telnet://"
-    let WorldElemIdentifier = "WORLD"
-
+class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var editable: Bool {
         get {
             return version != 1
@@ -129,9 +86,53 @@ class World: NSController, NSCopying, XMLParserDelegate {
         return World(world: self)
     }
 
-    /*
-     * Parse XML from v1 or v2 Savitar world data
-     */
+    //***************************
+    // MARK: - SavitarXMLProtocol
+    //***************************
+    
+    let TelnetIdentifier = "telnet://"
+    let WorldElemIdentifier = "WORLD"
+
+    // These define the "WORLD" attributes found in Savitar 1.x <WORLD> XML
+    enum WorldAttribIdentifier: String {
+        // these are obsoleted in v2
+        case resolution = "RESOLUTION"
+        case position = "POSITION"
+        case windowSize = "WINDOWSIZE"
+        case zoomed = "ZOOMED"
+
+        // these are shared between v1 and v2
+        case name = "NAME"
+        case URL = "URL"
+        case flags = "FLAGS"
+        case cmdMarker = "CMDMARKER"
+        case varMarker = "VARMARKER"
+        case wildMarker = "WILDMARKER"
+        case font = "FONT"
+        case fontSize = "FONTSIZE"
+        case monoFont = "MONO"
+        case monoFontSize = "MONOSIZE"
+        case MCPFont = "MCPFONT"
+        case MCPFontSize = "MCPFONTSIZE"
+        case foreColor = "FORECOLOR"
+        case backColor = "BACKCOLOR"
+        case linkColor = "LINKCOLOR"
+        case echoBackColor = "ECHOBGCOLOR"
+        case intenseColor = "INTENSECOLOR"
+        case intenseType = "INTENSETYPE"
+        case outputMax = "OUTPUTMAX"
+        case outputMin = "OUTPUTMIN"
+        case flushTicks = "FLUSHTICKS"
+        case retrySecs = "RETRYSECS"
+        case keepaliveMins = "KEEPALIVEMINS"
+        case logonCmd = "LOGONCMD"
+        case logoffCmd = "LOGOFFCMD"
+
+        // these are new for v2
+        case version = "VERSION"
+        case GUID = "GUID"
+    }
+
     func parseXML(from data: Data) throws {
         logger.info("parsing \(String(decoding: data, as: UTF8.self))")
 
@@ -215,17 +216,7 @@ class World: NSController, NSCopying, XMLParserDelegate {
     }
 
     func toXMLElement() throws -> XMLElement {
-        /*
-         * Write-out XML for a v2 Savitar world document
-         *
-         * You may wonder, why XML in this modern age? Why not do a PLIST or codable thing? Or use JSON?
-         * Answer: We stay away from Apple specific formats like PLIST and codable because we want the
-         * world document to be easily readable from anywhere, any platform. True, in this modern age,
-         * JSON would fit that requirement, but, there's something to be said about having some semblence
-         * still with the v1 document's format, and it's not that hard to read and write XML. So: XML it is
-         */
-
-         // TODO: provide a Savitar error model?
+        // TODO: provide a Savitar error model?
 
         if version != 2 {
             // yikes! the document should be modern if we're doing a save. Throw a fit
