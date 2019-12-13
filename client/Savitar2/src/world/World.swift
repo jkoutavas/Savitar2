@@ -89,11 +89,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
-    
+
     let TelnetIdentifier = "telnet://"
     let WorldElemIdentifier = "WORLD"
 
-    // These define the "WORLD" attributes found in Savitar 1.x <WORLD> XML
+    // These are the <WORLD> XML element attributes
     enum WorldAttribIdentifier: String {
         // these are obsoleted in v2
         case resolution = "RESOLUTION"
@@ -145,8 +145,9 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
                 namespaceURI: String?,
                 qualifiedName qName: String?,
                 attributes attributeDict: [String: String]) {
-        if elementName == WorldElemIdentifier {
-            version = 1 // start with the assumption that a v1 document is being read
+        switch elementName {
+        case WorldElemIdentifier:
+            version = 1 // start with the assumption that v1 world XML is being parsed
             for attribute in attributeDict {
                 switch attribute.key {
                 case WorldAttribIdentifier.URL.rawValue:
@@ -209,9 +210,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
                 case WorldAttribIdentifier.GUID.rawValue:
                     GUID = attribute.value
                 default:
-                    logger.info("skipping \(attribute.key)")
+                    logger.info("skipping \(elementName) attribute \(attribute.key)")
                 }
             }
+        default:
+            logger.info("skipping element \(elementName)")
         }
     }
 
@@ -219,8 +222,8 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         // TODO: provide a Savitar error model?
 
         if version != 2 {
-            // yikes! the document should be modern if we're doing a save. Throw a fit
-            throw NSError(domain: "attempted to write obsolete world document", code: 1, userInfo: nil)
+            // yikes! this worls should be modern if we're produce XML. Throw a fit
+            throw NSError(domain: "wrong world version", code: 1, userInfo: nil)
         }
 
         let worldElem = XMLElement(name: WorldElemIdentifier)
