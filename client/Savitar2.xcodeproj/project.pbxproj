@@ -32,7 +32,7 @@
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
-		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
+		6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
@@ -126,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6991F46B2393F71700E2BFDB /* Logging in Frameworks */,
+				6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +325,7 @@
 				695484991FC4E6E400A6983F /* Frameworks */,
 				6954849A1FC4E6E400A6983F /* Resources */,
 				6991F4682393F20B00E2BFDB /* SwiftLint */,
+				53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -332,7 +333,7 @@
 			);
 			name = Savitar2;
 			packageProductDependencies = (
-				6991F46A2393F71700E2BFDB /* Logging */,
+				6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -418,7 +419,7 @@
 			);
 			mainGroup = 695484931FC4E6E400A6983F;
 			packageReferences = (
-				6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */,
+				6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -502,6 +503,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6991F4682393F20B00E2BFDB /* SwiftLint */ = {
@@ -924,7 +942,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */ = {
+		6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -935,9 +953,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6991F46A2393F71700E2BFDB /* Logging */ = {
+		6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */;
+			package = 6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */;
 			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */
