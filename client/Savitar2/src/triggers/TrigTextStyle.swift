@@ -134,3 +134,23 @@ struct TrigTextStyle: Equatable {
         self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
     }
 }
+
+extension TrigFace: StrOptionSet {
+    // TODO: I wonder if there's a DRY-er way to do these
+    static var labels: [Label] { return [
+        (.normal, "normal"),
+        (.bold, "bold"),
+        (.italic, "italic"),
+        (.underline, "underline"),
+        (.blink, "blink"),
+        (.inverse, "inverse")
+    ]}
+    static var labelDict: [String: Self] { return [
+        "normal": .normal,
+        "bold": .bold,
+        "italic": .italic,
+        "underline": .underline,
+        "blink": .blink,
+        "inverse": inverse
+    ]}
+}

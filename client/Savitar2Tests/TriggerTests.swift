@@ -62,7 +62,7 @@ class TriggerTests: XCTestCase {
     }
 
     func testSubst() {
-        var t = Trigger(name: "{company}", flags: [.caseSensitive, .exact, .useSubstitution], substitution: "HEYNOW")
+        let t = Trigger(name: "{company}", flags: [.caseSensitive, .exact, .useSubstitution], substitution: "HEYNOW")
         XCTAssertEqual(t.reactionTo(line: "{company} is cool"),
                                           "HEYNOW is cool")
         XCTAssertEqual(t.reactionTo(line: "{COMPANY} is cool, {CoMpAnY}"),
@@ -132,5 +132,17 @@ class TriggerTests: XCTestCase {
                                          backColor: NSColor.black))
         XCTAssertEqual(t.reactionTo(line: "a super combo match"),
                                           "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;23;25;39;49m match")
+    }
+
+    func testTextFaceFrom() {
+        // TODO: make this exhaustive
+        let faces = TrigFace.from(string: "normal+bold")
+        XCTAssertEqual(faces.union(.italic).description, "normal+bold+italic")
+    }
+
+    func testFlagsFrom() {
+        // TODO: make this exhaustive
+        let flags = TrigFlags.from(string: "useRegex")
+        XCTAssertEqual(flags.union(.exact).description, "exact+useRegex")
     }
 }
