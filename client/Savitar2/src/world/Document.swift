@@ -7,9 +7,11 @@
 //
 
 import Cocoa
+import SwiftyXMLParser
 
 class Document: NSDocument, OutputProtocol {
     let DocumentElemIdentifier = "DOCUMENT"
+    let WorldElemIdentifier = "WORLD"
 
     var world = World()
 
@@ -40,7 +42,13 @@ class Document: NSDocument, OutputProtocol {
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
-        try world.parseXML(from: data)
+        let xml = XML.parse(data)
+        let document = xml[DocumentElemIdentifier]
+        if let type = document.attributes["TYPE"] {
+            if type == "Savitar World" {
+                try world.parse(xml: document[WorldElemIdentifier])
+            }
+        }
     }
 
     func output(result: OutputResult) {

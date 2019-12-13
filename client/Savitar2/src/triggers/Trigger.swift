@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftyXMLParser
 
 enum TrigType {
     case Unknown
@@ -157,76 +158,52 @@ class Trigger: NSObject, SavitarXMLProtocol {
         "both": .Both
     ]
 
-    var currentString = ""
-    var storingCharacters = false
-    func parseXML(from data: Data) throws {
-
-        let parser = XMLParser(data: data)
-        parser.delegate = self
-        parser.parse()
-    }
-    func parser(_ parser: XMLParser,
-                didStartElement elementName: String,
-                namespaceURI: String?,
-                qualifiedName qName: String?,
-                attributes attributeDict: [String: String]) {
-        switch elementName {
-        case TriggerElemIdentifier:
-            for attribute in attributeDict {
-                switch attribute.key {
-                case TriggerAttribIdentifier.bgColor.rawValue:
-                    if self.style == nil {
-                        self.style = TrigTextStyle()
-                    }
-                    self.style!.backColor = NSColor(hex: attribute.value)
-                case TriggerAttribIdentifier.color.rawValue, TriggerAttribIdentifier.fgColor.rawValue:
-                    if self.style == nil {
-                        self.style = TrigTextStyle()
-                    }
-                    self.style!.foreColor = NSColor(hex: attribute.value)
-                case TriggerAttribIdentifier.face.rawValue:
-                    if self.style == nil {
-                        self.style = TrigTextStyle()
-                    }
-                    self.style!.face = TrigFace.from(string: attribute.value)
-                case TriggerAttribIdentifier.flags.rawValue:
-                    self.flags = TrigFlags.from(string: attribute.value)
-                case TriggerAttribIdentifier.name.rawValue:
-                    self.name = attribute.value
-                case TriggerAttribIdentifier.type.rawValue:
-                    if let type = typeLabels[attribute.value] {
-                        self.type = type
-                    } else {
-                        self.type = .Unknown
-                    }
-                default:
-                    print("skipping trigger attribute \(attribute.key)")
+    func parse(xml: XML.Accessor) throws {
+        for attribute in xml.attributes {
+            switch attribute.key {
+            case TriggerAttribIdentifier.bgColor.rawValue:
+                if self.style == nil {
+                    self.style = TrigTextStyle()
                 }
+                self.style!.backColor = NSColor(hex: attribute.value)
+            case TriggerAttribIdentifier.color.rawValue, TriggerAttribIdentifier.fgColor.rawValue:
+                if self.style == nil {
+                    self.style = TrigTextStyle()
+                }
+                self.style!.foreColor = NSColor(hex: attribute.value)
+            case TriggerAttribIdentifier.face.rawValue:
+                if self.style == nil {
+                    self.style = TrigTextStyle()
+                }
+                self.style!.face = TrigFace.from(string: attribute.value)
+            case TriggerAttribIdentifier.flags.rawValue:
+                self.flags = TrigFlags.from(string: attribute.value)
+            case TriggerAttribIdentifier.name.rawValue:
+                self.name = attribute.value
+            case TriggerAttribIdentifier.type.rawValue:
+                if let type = typeLabels[attribute.value] {
+                    self.type = type
+                } else {
+                    self.type = .Unknown
+                }
+            default:
+                print("skipping trigger attribute \(attribute.key)")
             }
-        case ReplyElemIdentifier, SubsitutionElemIdentifier, SubstitutionElemIdentifier, WordEndElemIdentifier:
-            currentString = ""
-            storingCharacters = true
-        default:
-            // TODO: pass a logging object into Trigger
-            print("skipping XML element \(elementName) start")
         }
-    }
-    func parser(_ parser: XMLParser,
-                didEndElement elementName: String,
-                namespaceURI: String?,
-                qualifiedName qName: String?) {
-        switch elementName {
-        case ReplyElemIdentifier:
-             self.reply = currentString
-        case SubsitutionElemIdentifier, SubstitutionElemIdentifier:
-            self.substitution = currentString
-        case WordEndElemIdentifier:
-            self.wordEnding = currentString
-        default:
-            // TODO: pass a logging object into Trigger
-            print("skipping XML element \(elementName) end")
+
+        if let text = xml[ReplyElemIdentifier].text {
+             self.reply = text
         }
-        storingCharacters = false
+
+        if let text = xml[SubsitutionElemIdentifier].text {
+             self.substitution = text
+        } else if let text = xml[SubstitutionElemIdentifier].text {
+            self.substitution = text
+        }
+
+        if let text = xml[WordEndElemIdentifier].text {
+             self.wordEnding = text
+        }
     }
 
     func toXMLElement() throws -> XMLElement {

@@ -8,6 +8,7 @@
 
 import Cocoa
 import Logging
+import SwiftyXMLParser
 
 private func initLogger() -> Logger {
     var logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
@@ -133,88 +134,74 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         case GUID = "GUID"
     }
 
-    func parseXML(from data: Data) throws {
-        logger.info("parsing \(String(decoding: data, as: UTF8.self))")
+    func parse(xml: XML.Accessor) throws {
+        logger.info("parsing \(String(describing: xml))")
 
-        let parser = XMLParser(data: data)
-        parser.delegate = self
-        parser.parse()
-    }
-    func parser(_ parser: XMLParser,
-                didStartElement elementName: String,
-                namespaceURI: String?,
-                qualifiedName qName: String?,
-                attributes attributeDict: [String: String]) {
-        switch elementName {
-        case WorldElemIdentifier:
-            version = 1 // start with the assumption that v1 world XML is being parsed
-            for attribute in attributeDict {
-                switch attribute.key {
-                case WorldAttribIdentifier.URL.rawValue:
-                    if attribute.value.hasPrefix(TelnetIdentifier) {
-                        let body = attribute.value.dropPrefix(TelnetIdentifier)
-                        let parts = body.components(separatedBy: ":")
-                        if parts.count == 2 {
-                            host = parts[0]
-                            guard let p1 = UInt32(parts[1]) else { break }
-                            port = p1
-                        }
-                    }
-                case WorldAttribIdentifier.backColor.rawValue:
-                    backColor = NSColor(hex: attribute.value)!
-                case WorldAttribIdentifier.foreColor.rawValue:
-                    foreColor = NSColor(hex: attribute.value)!
-                case WorldAttribIdentifier.linkColor.rawValue:
-                    linkColor = NSColor(hex: attribute.value)!
-                case WorldAttribIdentifier.font.rawValue:
-                    fontName = attribute.value
-                case WorldAttribIdentifier.fontSize.rawValue:
-                    guard let size = CGFloat(attribute.value) else { break }
-                    fontSize = size
-                case WorldAttribIdentifier.monoFont.rawValue:
-                    monoFontName = attribute.value
-                case WorldAttribIdentifier.monoFontSize.rawValue:
-                    guard let size = CGFloat(attribute.value) else { break }
-                    monoFontSize = size
-                case WorldAttribIdentifier.name.rawValue:
-                    name = attribute.value
-                case WorldAttribIdentifier.position.rawValue:
-                    let parts = attribute.value.components(separatedBy: ",")
+        version = 1 // start with the assumption that v1 world XML is being parsed
+        for attribute in xml.attributes {
+            switch attribute.key {
+            case WorldAttribIdentifier.URL.rawValue:
+                if attribute.value.hasPrefix(TelnetIdentifier) {
+                    let body = attribute.value.dropPrefix(TelnetIdentifier)
+                    let parts = body.components(separatedBy: ":")
                     if parts.count == 2 {
-                        guard let x = CGFloat(parts[1]) else { break }
-                        guard let y = CGFloat(parts[0]) else { break }
-                        position = NSPoint(x: x, y: y)
+                        host = parts[0]
+                        guard let p1 = UInt32(parts[1]) else { break }
+                        port = p1
                     }
-                case WorldAttribIdentifier.windowSize.rawValue:
-                    let parts = attribute.value.components(separatedBy: ",")
-                    if parts.count == 2 {
-                        guard let width = CGFloat(parts[0]) else { break }
-                        guard let height = CGFloat(parts[1]) else { break }
-                        windowSize = NSSize(width: width, height: height)
-                    }
-                case WorldAttribIdentifier.resolution.rawValue:
-                    let parts = attribute.value.components(separatedBy: "x")
-                    if parts.count == 3 {
-                        guard let n0 = Int(parts[0]) else { break }
-                        guard let n1 = Int(parts[1]) else { break }
-                        guard let n2 = Int(parts[2]) else { break }
-                        outputRows = n0
-                        columns = n1
-                        inputRows = n2
-                    }
-                case WorldAttribIdentifier.zoomed.rawValue:
-                    zoomed = attribute.value == "TRUE"
-                case WorldAttribIdentifier.version.rawValue:
-                    guard let v = Int(attribute.value) else { break }
-                    version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
-                case WorldAttribIdentifier.GUID.rawValue:
-                    GUID = attribute.value
-                default:
-                    logger.info("skipping \(elementName) attribute \(attribute.key)")
                 }
+            case WorldAttribIdentifier.backColor.rawValue:
+                backColor = NSColor(hex: attribute.value)!
+            case WorldAttribIdentifier.foreColor.rawValue:
+                foreColor = NSColor(hex: attribute.value)!
+            case WorldAttribIdentifier.linkColor.rawValue:
+                linkColor = NSColor(hex: attribute.value)!
+            case WorldAttribIdentifier.font.rawValue:
+                fontName = attribute.value
+            case WorldAttribIdentifier.fontSize.rawValue:
+                guard let size = CGFloat(attribute.value) else { break }
+                fontSize = size
+            case WorldAttribIdentifier.monoFont.rawValue:
+                monoFontName = attribute.value
+            case WorldAttribIdentifier.monoFontSize.rawValue:
+                guard let size = CGFloat(attribute.value) else { break }
+                monoFontSize = size
+            case WorldAttribIdentifier.name.rawValue:
+                name = attribute.value
+            case WorldAttribIdentifier.position.rawValue:
+                let parts = attribute.value.components(separatedBy: ",")
+                if parts.count == 2 {
+                    guard let x = CGFloat(parts[1]) else { break }
+                    guard let y = CGFloat(parts[0]) else { break }
+                    position = NSPoint(x: x, y: y)
+                }
+            case WorldAttribIdentifier.windowSize.rawValue:
+                let parts = attribute.value.components(separatedBy: ",")
+                if parts.count == 2 {
+                    guard let width = CGFloat(parts[0]) else { break }
+                    guard let height = CGFloat(parts[1]) else { break }
+                    windowSize = NSSize(width: width, height: height)
+                }
+            case WorldAttribIdentifier.resolution.rawValue:
+                let parts = attribute.value.components(separatedBy: "x")
+                if parts.count == 3 {
+                    guard let n0 = Int(parts[0]) else { break }
+                    guard let n1 = Int(parts[1]) else { break }
+                    guard let n2 = Int(parts[2]) else { break }
+                    outputRows = n0
+                    columns = n1
+                    inputRows = n2
+                }
+            case WorldAttribIdentifier.zoomed.rawValue:
+                zoomed = attribute.value == "TRUE"
+            case WorldAttribIdentifier.version.rawValue:
+                guard let v = Int(attribute.value) else { break }
+                version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
+            case WorldAttribIdentifier.GUID.rawValue:
+                GUID = attribute.value
+            default:
+                logger.info("skipping XML attribute \(attribute.key)")
             }
-        default:
-            logger.info("skipping element \(elementName)")
         }
     }
 
