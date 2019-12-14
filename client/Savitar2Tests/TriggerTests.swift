@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SwiftyXMLParser
+
 @testable import Savitar2
 
 class TriggerTests: XCTestCase {
@@ -144,5 +146,43 @@ class TriggerTests: XCTestCase {
         // TODO: make this exhaustive
         let flags = TrigFlags.from(string: "useRegex")
         XCTAssertEqual(flags.union(.exact).description, "exact+useRegex")
+    }
+
+    func testXMLParseV1Trigger() throws {
+        let xmlString = """
+        <TRIGGER
+            NAME="russ"
+            TYPE="output"
+            FLAGS="matchWholeLine+matchAtStart"
+            COLOR="#26C9EE"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Ralph">
+            <WORDEND>
+                &amp;-&quot;
+            </WORDEND>
+            <SAY>
+                 Select a voice from the menu to hear this.
+            </SAY>
+            <SUBSITUTION>
+                oh boy, oh boy
+            </SUBSITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml["TRIGGER"])
+
+        XCTAssertEqual(t1.name, "russ")
+        XCTAssertEqual(t1.type, .Output)
+        XCTAssertEqual(t1.flags, [.wholeLine, .startsWith])
+        XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#26C9EE"))
+        XCTAssertEqual(t1.audioCue, .SpeakEvent)
+        XCTAssertEqual(t1.sound, "Click")
+        XCTAssertEqual(t1.voice, "Ralph")
+        XCTAssertEqual(t1.wordEnding, "&-\"")
+        XCTAssertEqual(t1.say, "Select a voice from the menu to hear this.")
+        XCTAssertEqual(t1.substitution, "oh boy, oh boy")
     }
 }
