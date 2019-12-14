@@ -149,6 +149,7 @@ class TriggerTests: XCTestCase {
     }
 
     func testXMLParseV1Trigger() throws {
+        // note the misspelled <SUBSITUTION> element
         let xmlString = """
         <TRIGGER
             NAME="russ"
@@ -185,4 +186,58 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(t1.say, "Select a voice from the menu to hear this.")
         XCTAssertEqual(t1.substitution, "oh boy, oh boy")
     }
+
+    func testXMLParseV2Trigger() throws {
+        // note the correctly spelled <SUBSTITUTION> element
+        // note COLOR attribute has been renamed to FGCOLOR
+        // note new BGCOLOR attribute
+        let xmlString = """
+        <TRIGGER
+            NAME="^kira"
+            TYPE="output"
+            FLAGS="matchWholeLine+useRegex"
+            FGCOLOR="#EE42BB"
+            BGCOLOR="#000000"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Princess">
+            <WORDEND>&amp;-&quot;</WORDEND>
+            <SAY>Select a voice from the menu to hear this.</SAY>
+            <SUBSTITUTION>heynow!</SUBSTITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml["TRIGGER"])
+
+        XCTAssertEqual(t1.name, "^kira")
+        XCTAssertEqual(t1.type, .Output)
+        XCTAssertEqual(t1.flags, [.wholeLine, .useRegex])
+        XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#EE42BB"))
+        XCTAssertEqual(t1.style!.backColor, NSColor(hex: "#000000"))
+        XCTAssertEqual(t1.audioCue, .SpeakEvent)
+        XCTAssertEqual(t1.sound, "Click")
+        XCTAssertEqual(t1.voice, "Princess")
+        XCTAssertEqual(t1.wordEnding, "&-\"")
+        XCTAssertEqual(t1.say, "Select a voice from the menu to hear this.")
+        XCTAssertEqual(t1.substitution, "heynow!")
+    }
+
+    func testXMLParseMinimalV2Trigger() throws {
+        let xmlString = """
+        <TRIGGER
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml["TRIGGER"])
+
+        XCTAssertEqual(t1.name, "<new trigger>")
+        XCTAssertEqual(t1.type, .Output)
+        XCTAssertEqual(t1.flags, .exact)
+        XCTAssertEqual(t1.audioCue, .Silent)
+    }
+
 }
