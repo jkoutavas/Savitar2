@@ -10,17 +10,17 @@ import Cocoa
 import SwiftyXMLParser
 
 enum TrigType {
-    case Unknown
-    case Input
-    case Output
-    case Both
+    case unknown
+    case input
+    case output
+    case both
 }
 
 enum AudioType {
-    case Silent
-    case Sound
-    case SpeakEvent
-    case SayText
+    case silent
+    case sound
+    case speakEvent
+    case sayText
 };
 
 struct TrigFlags: OptionSet {
@@ -42,10 +42,10 @@ struct TrigFlags: OptionSet {
 
 class Trigger: NSObject, SavitarXMLProtocol {
     // default settings
-    var audioCue: AudioType = .Silent
+    var audioCue: AudioType = .silent
     var flags: TrigFlags = .exact
     var name: String = "<new trigger>"
-    var type: TrigType = .Output
+    var type: TrigType = .output
 
     // optional settings
     var reply: String?
@@ -175,17 +175,17 @@ class Trigger: NSObject, SavitarXMLProtocol {
     }
 
     let audioLabels: [String: AudioType] = [
-        "silent": .Silent,
-        "sound": .Sound,
-        "speakEvent": .SpeakEvent,
-        "sayText": .SayText
+        "silent": .silent,
+        "sound": .sound,
+        "speakEvent": .speakEvent,
+        "sayText": .sayText
     ]
     
     let typeLabels: [String: TrigType] = [
-        "unknown": .Unknown,
-        "input": .Input,
-        "output": .Output,
-        "both": .Both
+        "unknown": .unknown,
+        "input": .input,
+        "output": .output,
+        "both": .both
     ]
 
     func parse(xml: XML.Accessor) throws {
@@ -195,7 +195,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
                 if let type = audioLabels[attribute.value] {
                     self.audioCue = type
                 } else {
-                    self.audioCue = .Silent
+                    self.audioCue = .silent
                 }
             case TriggerAttribIdentifier.bgColor.rawValue:
                 if self.style == nil {
@@ -222,7 +222,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
                 if let type = typeLabels[attribute.value] {
                     self.type = type
                 } else {
-                    self.type = .Unknown
+                    self.type = .unknown
                 }
             case TriggerAttribIdentifier.voice.rawValue:
                 self.voice = attribute.value
