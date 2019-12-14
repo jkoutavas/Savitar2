@@ -16,6 +16,13 @@ enum TrigType {
     case Both
 }
 
+enum AudioType {
+    case Silent
+    case Sound
+    case SpeakEvent
+    case SayText
+};
+
 struct TrigFlags: OptionSet {
     let rawValue: Int
 
@@ -35,26 +42,38 @@ struct TrigFlags: OptionSet {
 
 class Trigger: NSObject, SavitarXMLProtocol {
     // default settings
+    var audioCue: AudioType = .Silent
+    var flags: TrigFlags = .exact
     var name: String = "<new trigger>"
     var type: TrigType = .Output
-    var flags: TrigFlags = .exact
 
     // optional settings
     var reply: String?
+    var say: String?
+    var sound: String?
     var style: TrigTextStyle?
     var substitution: String?
+    var voice: String?
     var wordEnding: String?
 
-    init(name: String,
-         type: TrigType? = nil,
+    init(name: String? = nil,
+         audio: AudioType? = nil,
          flags: TrigFlags? = nil,
          reply: String? = nil,
+         say: String? = nil,
+         sound: String? = nil,
          style: TrigTextStyle? = nil,
          substitution: String? = nil,
+         type: TrigType? = nil,
+         voice: String? = nil,
          wordEnding: String? = nil) {
 
-        self.name = name
-
+        if let a = audio {
+            self.audioCue = a
+        }
+        if let n = name {
+            self.name = n
+        }
         if let t = type {
             self.type = t
         }
@@ -63,7 +82,10 @@ class Trigger: NSObject, SavitarXMLProtocol {
         }
         self.reply = reply
         self.style = style
+        self.say = say
+        self.sound = sound
         self.substitution = substitution
+        self.voice = voice
         self.wordEnding = wordEnding
     }
 
@@ -124,6 +146,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
 
     let TriggerElemIdentifier = "TRIGGER"
     let ReplyElemIdentifier = "REPLY"
+    let SayElemIdentifier = "SAY"
     let SubsitutionElemIdentifier = "SUBSITUTION" // note v1 misspelling
     let SubstitutionElemIdentifier = "SUBSTITUTION" // note v2 correct spelling
     let WordEndElemIdentifier = "WORDEND"
@@ -151,6 +174,13 @@ class Trigger: NSObject, SavitarXMLProtocol {
         case subst = "SUBST" // replaces SUBSITUTION (sic)
     }
 
+    let audioLabels: [String: AudioType] = [
+        "silent": .Silent,
+        "sound": .Sound,
+        "speakEvent": .SpeakEvent,
+        "sayText": .SayText
+    ]
+    
     let typeLabels: [String: TrigType] = [
         "unknown": .Unknown,
         "input": .Input,
@@ -161,6 +191,12 @@ class Trigger: NSObject, SavitarXMLProtocol {
     func parse(xml: XML.Accessor) throws {
         for attribute in xml.attributes {
             switch attribute.key {
+            case TriggerAttribIdentifier.audio.rawValue:
+                if let type = audioLabels[attribute.value] {
+                    self.audioCue = type
+                } else {
+                    self.audioCue = .Silent
+                }
             case TriggerAttribIdentifier.bgColor.rawValue:
                 if self.style == nil {
                     self.style = TrigTextStyle()
@@ -180,12 +216,16 @@ class Trigger: NSObject, SavitarXMLProtocol {
                 self.flags = TrigFlags.from(string: attribute.value)
             case TriggerAttribIdentifier.name.rawValue:
                 self.name = attribute.value
+            case TriggerAttribIdentifier.sound.rawValue:
+                 self.sound = attribute.value
             case TriggerAttribIdentifier.type.rawValue:
                 if let type = typeLabels[attribute.value] {
                     self.type = type
                 } else {
                     self.type = .Unknown
                 }
+            case TriggerAttribIdentifier.voice.rawValue:
+                self.voice = attribute.value
             default:
                 print("skipping trigger attribute \(attribute.key)")
             }
@@ -195,14 +235,18 @@ class Trigger: NSObject, SavitarXMLProtocol {
              self.reply = text
         }
 
+        if let text = xml[SayElemIdentifier].text {
+             self.say = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
         if let text = xml[SubsitutionElemIdentifier].text {
-             self.substitution = text
+             self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         } else if let text = xml[SubstitutionElemIdentifier].text {
-            self.substitution = text
+            self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[WordEndElemIdentifier].text {
-             self.wordEnding = text
+             self.wordEnding = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
@@ -226,11 +270,11 @@ extension TrigFlags: StrOptionSet {
     static var labels: [Label] { return [
         (.exact, "exact"),
         (.toEndOfWord, "matchToEndOfWord"),
-        (.wholeLine, "wholeLine"),
+        (.wholeLine, "matchWholeLine"),
         (.disabled, "disabled"),
         (.useFore, "useFore"), // TODO: obsolete this
         (.gag, "gag"),
-        (.startsWith, "startsWith"),
+        (.startsWith, "matchAtStart"),
         (.echoReply, "echoReply"),
         (.caseSensitive, "caseSensitive"),
         (.dontUseStyle, "dontUseStyle"),
@@ -240,11 +284,11 @@ extension TrigFlags: StrOptionSet {
     static var labelDict: [String: Self] { return [
         "exact": .exact,
         "matchToEndOfWord": .toEndOfWord,
-        "wholeLine": .wholeLine,
+        "matchWholeLine": .wholeLine,
         "disabled": .disabled,
         // intentially skipping "useFore"
         "gag": .gag,
-        "startsWith": .startsWith,
+        "matchAtStart": .startsWith,
         "echoReply": .echoReply,
         "caseSensitive": .caseSensitive,
         "dontUseStyle": .dontUseStyle,
