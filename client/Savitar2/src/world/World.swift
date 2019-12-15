@@ -217,78 +217,40 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         // TODO: provide a Savitar error model?
 
         if version != 2 {
-            // yikes! this worls should be modern if we're produce XML. Throw a fit
+            // yikes! this world should be modern if we're produce XML. Throw a fit
             throw NSError(domain: "wrong world version", code: 1, userInfo: nil)
         }
 
         let worldElem = XMLElement(name: WorldElemIdentifier)
 
-        guard let version = XMLNode.attribute(withName: WorldAttribIdentifier.version.rawValue,
-                                              stringValue: "\(version)") as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(version)
+        worldElem.addAttribute(name: WorldAttribIdentifier.version.rawValue, stringValue: "\(version)")
 
-        guard let guid = XMLNode.attribute(withName: WorldAttribIdentifier.GUID.rawValue,
-                                           stringValue: "\(GUID)") as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(guid)
+        worldElem.addAttribute(name: WorldAttribIdentifier.GUID.rawValue, stringValue: GUID)
 
-        let urlStr = "\(TelnetIdentifier)\(host):\(port)"
-        guard let url = XMLNode.attribute(withName: WorldAttribIdentifier.URL.rawValue,
-                                          stringValue: urlStr) as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(url)
+        worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,
+                        stringValue: "\(TelnetIdentifier)\(host):\(port)")
 
-        guard let name = XMLNode.attribute(withName: WorldAttribIdentifier.name.rawValue,
-                                           stringValue: name) as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(name)
+        worldElem.addAttribute(name: WorldAttribIdentifier.name.rawValue, stringValue: name)
 
-        guard let font = XMLNode.attribute(withName: WorldAttribIdentifier.font.rawValue,
-                                           stringValue: fontName) as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(font)
+        worldElem.addAttribute(name: WorldAttribIdentifier.font.rawValue, stringValue: fontName)
 
-        guard let fontSize = XMLNode.attribute(withName: WorldAttribIdentifier.fontSize.rawValue,
-                                               stringValue: "\(fontSize)") as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(fontSize)
+        worldElem.addAttribute(name: WorldAttribIdentifier.fontSize.rawValue, stringValue: "\(fontSize)")
 
-        guard let monoFont = XMLNode.attribute(withName: WorldAttribIdentifier.monoFont.rawValue,
-                                           stringValue: monoFontName) as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(monoFont)
+        worldElem.addAttribute(name: WorldAttribIdentifier.monoFont.rawValue, stringValue: monoFontName)
 
-        guard let monoFontSize = XMLNode.attribute(withName: WorldAttribIdentifier.monoFontSize.rawValue,
-                                               stringValue: "\(monoFontSize)") as? XMLNode else {
-            throw NSError()
-        }
-        worldElem.addAttribute(monoFontSize)
+        worldElem.addAttribute(name: WorldAttribIdentifier.monoFontSize.rawValue, stringValue: "\(monoFontSize)")
 
-        guard let foreColor = XMLNode.attribute(withName: WorldAttribIdentifier.foreColor.rawValue,
-                                                stringValue: "#\(foreColor.toHex()!)") as? XMLNode else {
-            throw NSError()
+        if let colorStr = foreColor.toHex() {
+            worldElem.addAttribute(name: WorldAttribIdentifier.foreColor.rawValue, stringValue: "#\(colorStr)")
         }
-        worldElem.addAttribute(foreColor)
 
-        guard let backColor = XMLNode.attribute(withName: WorldAttribIdentifier.backColor.rawValue,
-                                                stringValue: "#\(backColor.toHex()!)") as? XMLNode else {
-            throw NSError()
+        if let colorStr = backColor.toHex() {
+            worldElem.addAttribute(name: WorldAttribIdentifier.backColor.rawValue, stringValue: "#\(colorStr)")
         }
-        worldElem.addAttribute(backColor)
 
-        guard let linkColor = XMLNode.attribute(withName: WorldAttribIdentifier.linkColor.rawValue,
-                                                stringValue: "#\(linkColor.toHex()!)") as? XMLNode else {
-            throw NSError()
+        if let colorStr = linkColor.toHex() {
+            worldElem.addAttribute(name: WorldAttribIdentifier.linkColor.rawValue, stringValue: "#\(colorStr)")
         }
-        worldElem.addAttribute(linkColor)
 
         logger.info("XML data representation \(String(worldElem.xmlString))")
         return worldElem
