@@ -131,8 +131,10 @@ class TriggerTests: XCTestCase {
                     style: TrigTextStyle(face: [.underline, .bold, .blink, .italic],
                                          foreColor: NSColor.white,
                                          backColor: NSColor.black))
+        // swiftlint:disable line_length
         XCTAssertEqual(t.reactionTo(line: "a super combo match"),
                                           "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;23;25;39;49m match")
+        // swiftlint:enable line_length
     }
 
     func testTrigFaceFrom() {
@@ -234,4 +236,47 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(t1.audioCue, .silent)
     }
 
+    func testTriggerToXML() throws {
+        // note the misspelled <SUBSITUTION> element
+        let xmlInString = """
+        <TRIGGER
+            NAME="russ"
+            TYPE="output"
+            FLAGS="matchWholeLine+matchAtStart"
+            COLOR="#26C9EE"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Ralph">
+            <WORDEND>
+                &amp;-&quot;
+            </WORDEND>
+            <SAY>
+                Select a voice from the menu to hear this.
+            </SAY>
+            <SUBSITUTION>
+                oh boy, oh boy
+            </SUBSITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlInString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml["TRIGGER"])
+
+        let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
+
+        // swiftlint:disable line_length
+        let expectedOutput = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <TRIGGER FGCOLOR="#26C9EE" FLAGS="matchWholeLine+matchAtStart" NAME="russ" SOUND="Click" TYPE="output" VOICE="Ralph">
+            <AUDIO>speakEvent</AUDIO>
+            <WORDEND>&amp;-"</WORDEND>
+            <SAY>Select a voice from the menu to hear this.</SAY>
+            <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
+        </TRIGGER>
+        """
+        // swiftlint:enable line_length
+
+        XCTAssertEqual(xmlOutString, expectedOutput)
+    }
 }

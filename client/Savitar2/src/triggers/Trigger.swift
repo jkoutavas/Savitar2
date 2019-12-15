@@ -42,7 +42,7 @@ struct TrigFlags: OptionSet {
 
 class Trigger: NSObject, SavitarXMLProtocol {
     public static let defaultName = "<new trigger>"
-    
+
     // default settings
     var audioCue: AudioType = .silent
     var flags: TrigFlags = .exact
@@ -176,21 +176,21 @@ class Trigger: NSObject, SavitarXMLProtocol {
         case subst = "SUBST" // replaces SUBSITUTION (sic)
     }
 
-    let audioLabels: [String: AudioType] = [
-        "silent": .silent,
-        "sound": .sound,
-        "speakEvent": .speakEvent,
-        "sayText": .sayText
-    ]
-
-    let typeLabels: [String: TrigType] = [
-        "unknown": .unknown,
-        "input": .input,
-        "output": .output,
-        "both": .both
-    ]
-
     func parse(xml: XML.Accessor) throws {
+        let audioLabels: [String: AudioType] = [
+            "silent": .silent,
+            "sound": .sound,
+            "speakEvent": .speakEvent,
+            "sayText": .sayText
+        ]
+
+        let typeLabels: [String: TrigType] = [
+            "unknown": .unknown,
+            "input": .input,
+            "output": .output,
+            "both": .both
+        ]
+
         for attribute in xml.attributes {
             switch attribute.key {
             case TriggerAttribIdentifier.audio.rawValue:
@@ -253,16 +253,70 @@ class Trigger: NSObject, SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
+        let audioCueDict: [AudioType: String] = [
+            .silent: "silent",
+            .sound: "sound",
+            .speakEvent: "speakEvent",
+            .sayText: "sayText"
+        ]
+
+        let typeDict: [TrigType: String] = [
+            .unknown: "unknown",
+            .input: "input",
+            .output: "output",
+            .both: "both"
+        ]
+
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
-        // TODO: need to do XML escaping here?
-        guard let name = XMLNode.attribute(withName: TriggerAttribIdentifier.name.rawValue,
-                                           stringValue: "\(name)") as? XMLNode else {
-            throw NSError()
+         if let value = audioCueDict[self.audioCue] {
+            trigElem.addChild(
+                XMLElement.init(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value))
         }
-        trigElem.addAttribute(name)
 
-//        logger.info("XML data representation \(String(worldElem.xmlString))")
+        if let value = self.style?.backColor?.toHex() {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.bgColor.rawValue, stringValue: "#\(value)")
+        }
+
+        if let value = self.style?.foreColor?.toHex() {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.fgColor.rawValue, stringValue: "#\(value)")
+        }
+
+        if let value = self.style?.face?.description {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
+        }
+
+        trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue, stringValue: self.flags.description)
+
+        trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: self.name)
+
+        if let value = self.sound {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.sound.rawValue, stringValue: value)
+        }
+
+        if let value = typeDict[self.type] {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.type.rawValue, stringValue: value)
+        }
+
+        if let value = self.voice {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.voice.rawValue, stringValue: value)
+        }
+
+         if let value = self.wordEnding {
+            trigElem.addChild(
+                XMLElement.init(name: WordEndElemIdentifier, stringValue: value))
+        }
+
+        if let value = self.say {
+            trigElem.addChild(
+                XMLElement.init(name: SayElemIdentifier, stringValue: value))
+        }
+
+        if let value = self.substitution {
+            trigElem.addChild(
+                XMLElement.init(name: SubstitutionElemIdentifier, stringValue: value))
+        }
+
         return trigElem
     }
 }
