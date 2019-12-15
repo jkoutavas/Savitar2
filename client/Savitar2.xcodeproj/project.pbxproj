@@ -10,6 +10,8 @@
 		69000EDC23942523009976E0 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EDB23942523009976E0 /* Trigger.swift */; };
 		69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EDF2397CE30009976E0 /* TriggerMan.swift */; };
 		69000EE22397CF09009976E0 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EE12397CF09009976E0 /* AppContext.swift */; };
+		69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3823A52A7B001C58B1 /* TriggerManTests.swift */; };
+		69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -32,7 +34,7 @@
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
-		6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */; };
+		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
@@ -72,6 +74,8 @@
 		69000EDB23942523009976E0 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
 		69000EDF2397CE30009976E0 /* TriggerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMan.swift; sourceTree = "<group>"; };
 		69000EE12397CF09009976E0 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		69071B3823A52A7B001C58B1 /* TriggerManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManTests.swift; sourceTree = "<group>"; };
+		69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyXMLParserTests.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */,
+				6991F46B2393F71700E2BFDB /* Logging in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +219,9 @@
 			children = (
 				695484B61FC4E6E400A6983F /* Info.plist */,
 				695484B41FC4E6E400A6983F /* Savitar2Tests.swift */,
+				69071B3823A52A7B001C58B1 /* TriggerManTests.swift */,
 				697D14A5239D828900BBF33C /* TriggerTests.swift */,
+				69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */,
 			);
 			path = Savitar2Tests;
 			sourceTree = "<group>";
@@ -333,7 +339,7 @@
 			);
 			name = Savitar2;
 			packageProductDependencies = (
-				6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */,
+				6991F46A2393F71700E2BFDB /* Logging */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -419,7 +425,7 @@
 			);
 			mainGroup = 695484931FC4E6E400A6983F;
 			packageReferences = (
-				6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */,
+				6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -604,8 +610,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */,
 				697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */,
 				695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */,
+				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,7 +950,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */ = {
+		6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -953,9 +961,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */ = {
+		6991F46A2393F71700E2BFDB /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */;
+			package = 6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
 		};
 /* End XCSwiftPackageProductDependency section */

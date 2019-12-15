@@ -17,7 +17,6 @@ class TriggerTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testGag() {
@@ -136,13 +135,13 @@ class TriggerTests: XCTestCase {
                                           "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;23;25;39;49m match")
     }
 
-    func testTextFaceFrom() {
+    func testTrigFaceFrom() {
         // TODO: make this exhaustive
         let faces = TrigFace.from(string: "normal+bold")
         XCTAssertEqual(faces.union(.italic).description, "normal+bold+italic")
     }
 
-    func testFlagsFrom() {
+    func testTrigFlagsFrom() {
         // TODO: make this exhaustive
         let flags = TrigFlags.from(string: "useRegex")
         XCTAssertEqual(flags.union(.exact).description, "exact+useRegex")
@@ -225,16 +224,11 @@ class TriggerTests: XCTestCase {
     }
 
     func testXMLParseMinimalV2Trigger() throws {
-        let xmlString = """
-        <TRIGGER
-        </TRIGGER>
-        """
-
-        let xml = try XML.parse(xmlString)
+        let xml = try XML.parse("<TRIGGER/>")
         let t1 = Trigger()
         try t1.parse(xml: xml["TRIGGER"])
 
-        XCTAssertEqual(t1.name, "<new trigger>")
+        XCTAssertEqual(t1.name, Trigger.defaultName)
         XCTAssertEqual(t1.type, .output)
         XCTAssertEqual(t1.flags, .exact)
         XCTAssertEqual(t1.audioCue, .silent)

@@ -47,6 +47,9 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var version = 0
     var GUID = NSUUID().uuidString
 
+    var triggerMan = TriggerMan()
+
+    // utility, not persistent
     var logger: Logger
 
     init(world: World) {
@@ -92,6 +95,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     //***************************
 
     let TelnetIdentifier = "telnet://"
+    let TriggersElemIdentifier = "TRIGGERS"
     let WorldElemIdentifier = "WORLD"
 
     // These are the <WORLD> XML element attributes
@@ -202,6 +206,10 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
             default:
                 logger.info("skipping XML attribute \(attribute.key)")
             }
+        }
+
+        if case .singleElement = xml[TriggersElemIdentifier] {
+            try triggerMan.parse(xml: xml)
         }
     }
 

@@ -21,7 +21,7 @@ enum AudioType {
     case sound
     case speakEvent
     case sayText
-};
+}
 
 struct TrigFlags: OptionSet {
     let rawValue: Int
@@ -41,10 +41,12 @@ struct TrigFlags: OptionSet {
  }
 
 class Trigger: NSObject, SavitarXMLProtocol {
+    public static let defaultName = "<new trigger>"
+    
     // default settings
     var audioCue: AudioType = .silent
     var flags: TrigFlags = .exact
-    var name: String = "<new trigger>"
+    var name: String = defaultName
     var type: TrigType = .output
 
     // optional settings
@@ -180,7 +182,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
         "speakEvent": .speakEvent,
         "sayText": .sayText
     ]
-    
+
     let typeLabels: [String: TrigType] = [
         "unknown": .unknown,
         "input": .input,
@@ -232,7 +234,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
         }
 
         if let text = xml[ReplyElemIdentifier].text {
-             self.reply = text
+             self.reply = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[SayElemIdentifier].text {

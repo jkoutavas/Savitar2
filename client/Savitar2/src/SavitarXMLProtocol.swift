@@ -17,7 +17,7 @@ import SwiftyXMLParser
  * still with the v1 document's format, and it's not that hard to read and write XML. So: XML it is
  */
 
-protocol SavitarXMLProtocol: XMLParserDelegate {
+protocol SavitarXMLProtocol {
     /*
      * Parse XML from Savitar v1 or v2 data
      */
