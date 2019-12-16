@@ -1,6 +1,6 @@
 # README #
 
-Last updated: December 10th, 2019
+Last updated: December 15th, 2019
 
 Welcome to the Savitar 2.0 git repository
 
@@ -62,7 +62,9 @@ _ ???
 
 ## How to setup development ##
 
-In the `client` directory you'll find `Savitar200.xcodeproj`. You'll want to `brew install swiftlint` to ensure coding style correctness.
+In the `client` directory you'll find `Savitar2.xcworkspace`. 
+
+You'll want to `brew install swiftlint` to ensure coding style correctness.
 
 ### The echoserver
 
