@@ -80,7 +80,6 @@ class Document: NSDocument, OutputProtocol {
         }
         docElem.addAttribute(type)
 
-        world.version = 2
         let worldElem = try world.toXMLElement()
         docElem.addChild(worldElem)
 
