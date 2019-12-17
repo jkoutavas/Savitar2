@@ -236,7 +236,8 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(t1.audioCue, .silent)
     }
 
-    func testTriggerToXML() throws {
+    func testv1TriggerXMLtoV2() throws {
+        // v1 XML
         // note the misspelled <SUBSITUTION> element
         let xmlInString = """
         <TRIGGER
@@ -265,6 +266,7 @@ class TriggerTests: XCTestCase {
 
         let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
 
+        // v2 XML
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>

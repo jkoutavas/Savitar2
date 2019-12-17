@@ -95,6 +95,25 @@ struct TrigFace: OptionSet, Hashable {
         return formANSICodes(dict: styleOffDict)
     }
 }
+extension TrigFace: StrOptionSet {
+    // TODO: I wonder if there's a DRY-er way to do these
+    static var labels: [Label] { return [
+        (.normal, "normal"),
+        (.bold, "bold"),
+        (.italic, "italic"),
+        (.underline, "underline"),
+        (.blink, "blink"),
+        (.inverse, "inverse")
+    ]}
+    static var labelDict: [String: Self] { return [
+        "normal": .normal,
+        "bold": .bold,
+        "italic": .italic,
+        "underline": .underline,
+        "blink": .blink,
+        "inverse": inverse
+    ]}
+}
 
 struct TrigTextStyle: Equatable {
     // optional settings (at least one is set though to be effective)
@@ -135,22 +154,3 @@ struct TrigTextStyle: Equatable {
     }
 }
 
-extension TrigFace: StrOptionSet {
-    // TODO: I wonder if there's a DRY-er way to do these
-    static var labels: [Label] { return [
-        (.normal, "normal"),
-        (.bold, "bold"),
-        (.italic, "italic"),
-        (.underline, "underline"),
-        (.blink, "blink"),
-        (.inverse, "inverse")
-    ]}
-    static var labelDict: [String: Self] { return [
-        "normal": .normal,
-        "bold": .bold,
-        "italic": .italic,
-        "underline": .underline,
-        "blink": .blink,
-        "inverse": inverse
-    ]}
-}
