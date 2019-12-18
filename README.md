@@ -1,6 +1,6 @@
 # README #
 
-Last updated: December 15th, 2019
+Last updated: December 18th, 2019
 
 Welcome to the Savitar 2.0 git repository
 
@@ -23,7 +23,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ World settings Appearance tab is operational
 √ Output triggers are working
 _ Load Sav 1.x app settings (includes triggers)
-_ Load Sav 1.x world triggers
+√ Load Sav 1.x world triggers
 _ Input pane command recall and local commands supported
 _ Triggers Window implemented
 _ Implement World settings Starting tab
