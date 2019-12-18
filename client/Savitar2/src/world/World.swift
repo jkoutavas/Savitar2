@@ -10,6 +10,8 @@ import Cocoa
 import Logging
 import SwiftyXMLParser
 
+let WorldElemIdentifier = "WORLD"
+
 private func initLogger() -> Logger {
     var logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
     logger[metadataKey: "m"] = "World" // "m" is for "module"
@@ -147,7 +149,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     //***************************
 
     let TelnetIdentifier = "telnet://"
-    let WorldElemIdentifier = "WORLD"
 
     // These are the <WORLD> XML element attributes
     enum WorldAttribIdentifier: String {

@@ -49,7 +49,7 @@ class WorldTests: XCTestCase {
 
         let xml = try XML.parse(xmlInString)
         let w1 = World()
-        try w1.parse(xml: xml["WORLD"])
+        try w1.parse(xml: xml[WorldElemIdentifier])
 
         w1.GUID = "test"
         let xmlOutString = try w1.toXMLElement().xmlString.prettyXMLFormat()
@@ -118,7 +118,7 @@ class WorldTests: XCTestCase {
 
         let xml = try XML.parse(xmlInString)
         let w1 = World()
-        try w1.parse(xml: xml["WORLD"])
+        try w1.parse(xml: xml[WorldElemIdentifier])
 
         w1.GUID = "test"
         let xmlOutString = try w1.toXMLElement().xmlString.prettyXMLFormat()

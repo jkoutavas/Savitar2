@@ -11,7 +11,6 @@ import SwiftyXMLParser
 
 class Document: NSDocument, OutputProtocol {
     let DocumentElemIdentifier = "DOCUMENT"
-    let WorldElemIdentifier = "WORLD"
 
     var world = World()
 
