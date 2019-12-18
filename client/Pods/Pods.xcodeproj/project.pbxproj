@@ -20,23 +20,38 @@
 
 /* Begin PBXBuildFile section */
 		1E6378E7468F777374310BEDA94FED42 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
-		490EAD52CBF38FD4277EBC4EED989157 /* Pods-Savitar2-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1EEA415F3917C1461908E2512825DBE /* Pods-Savitar2-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77744FB88F9684D9FDBF1FDAE324603D /* Pods-Savitar2UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 533210F8427EAE5BED763E8660305FA9 /* Pods-Savitar2UITests-dummy.m */; };
-		8C90EE715D1A2EEBA0F7DD4C11D2697E /* Pods-Savitar2Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD8D5065B73867B7FA5A2B2BB03E1AB /* Pods-Savitar2Tests-dummy.m */; };
+		2A7DA5381A8A3CBB596B952FF064D786 /* Pods-Savitar2-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B33232BF9F692134F77E5F651DC3744 /* Pods-Savitar2-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37831711A9BFF260B36AE192457E457E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07201D6179BB8BA4C872B12C30B94D6D /* Parser.swift */; };
+		694AB51A74C16FAA6BAD6FF8DF55C82D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F7C40905A6E0F8A4B7B91E5DF2ABC /* XML.swift */; };
+		77744FB88F9684D9FDBF1FDAE324603D /* Pods-Savitar2UITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AED37809D4F6C15AF169DBCBB9BF438 /* Pods-Savitar2UITests-dummy.m */; };
+		8C90EE715D1A2EEBA0F7DD4C11D2697E /* Pods-Savitar2Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4B5710D2643431806C5AF9622BB4B /* Pods-Savitar2Tests-dummy.m */; };
+		91508C677786E3A67952E2F152395944 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		919A2BF0A2E670511134CC2E75EAFCE0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
 		93812CCD0B458047303F1453BE2D1DED /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
-		AC0CE8EBC3727BEA62CDAB98FAD72DD4 /* Pods-Savitar2-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 880F15338E46B6BD45C45F884E9BBBE3 /* Pods-Savitar2-dummy.m */; };
-		D359EBE33C9630E4CFC2E3A82E99F4BB /* Pods-Savitar2UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EE94B75478CF491C96C9795C2A61608 /* Pods-Savitar2UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F27BDCD48C4862299D5D9711C2EE0D6D /* Pods-Savitar2Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F9274E99BDFB992343DE118DF4FC8F /* Pods-Savitar2Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F40AF77412E7087FECD732EEE42E16A0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		9451E35B7EBA2AF73FF5B6A184358CE5 /* Accessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15055197D7A629335595E71994F0524B /* Accessor.swift */; };
+		AC1CFBD999586025DFCF402A81409EFB /* SwiftyXMLParser-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EE2F6027CC92F75F83E7342BB8AC765 /* SwiftyXMLParser-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B20CC04AC2C8149CD900423E9710BA48 /* Pods-Savitar2-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AB17FD8483A0DC3FC180631BE91AFF /* Pods-Savitar2-dummy.m */; };
+		C45C45653436B5A7FE4A8D30EC5F20BF /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47675D90DA1FB089D66587DBB41EE30 /* Element.swift */; };
+		CEA1B8E13BFFA6E7E80D1C31B3A5EA07 /* SwiftyXMLParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E96E830D27D8019021E0EB85A2FC4C33 /* SwiftyXMLParser-dummy.m */; };
+		D359EBE33C9630E4CFC2E3A82E99F4BB /* Pods-Savitar2UITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C43172B1D1E850691CFC7287A10197F /* Pods-Savitar2UITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F27BDCD48C4862299D5D9711C2EE0D6D /* Pods-Savitar2Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 165BD4F3000175881EB5357C2D67A5F6 /* Pods-Savitar2Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FBE2CEBD95DBCF60367CE505238F00C4 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A6408379B361C86C79629775D517EF /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BD25F2E8FC0671149E52F674BB0E0FED /* PBXContainerItemProxy */ = {
+		28985AC857056FBBA63B804DF1C77DAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A3282A5B2437E609EEB85861D7ECE717;
 			remoteInfo = AppCenter;
+		};
+		8339D58BBF928D68607CCFE8CEC96712 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C96998A189BC645DB45F2AFFF9D802BD;
+			remoteInfo = SwiftyXMLParser;
 		};
 		C406F91834D197B55C85566A3445C88E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -55,38 +70,51 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11D55098E692639F785DA5F20C6E2047 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = "AppCenter-SDK-Apple/macOS/AppCenterCrashes.framework"; sourceTree = "<group>"; };
+		041627A03363C77A06B425AD3873841E /* Pods-Savitar2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2.modulemap"; sourceTree = "<group>"; };
+		063DC8A04C3D91EE6695867A813A7C67 /* Pods-Savitar2-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Savitar2-frameworks.sh"; sourceTree = "<group>"; };
+		07201D6179BB8BA4C872B12C30B94D6D /* Parser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = SwiftyXMLParser/Parser.swift; sourceTree = "<group>"; };
 		136EA77EDD9B87143DB6CE968E21CA1A /* Pods_Savitar2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2.framework; path = "Pods-Savitar2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15055197D7A629335595E71994F0524B /* Accessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Accessor.swift; path = SwiftyXMLParser/Accessor.swift; sourceTree = "<group>"; };
+		165BD4F3000175881EB5357C2D67A5F6 /* Pods-Savitar2Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2Tests-umbrella.h"; sourceTree = "<group>"; };
 		1737993ECEA54C49441130C6EB348CC1 /* Pods_Savitar2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2Tests.framework; path = "Pods-Savitar2Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A4497AAC3CCF614A7882151DA101CA7 /* Pods-Savitar2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		1C604773FC0DBB219AA4D3BF81B68E51 /* Pods-Savitar2Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2Tests-Info.plist"; sourceTree = "<group>"; };
-		216BE209520CC832AFA0D9F06C6C6743 /* Pods-Savitar2UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2UITests.modulemap"; sourceTree = "<group>"; };
-		247D98BC815A53381521C776D93876E6 /* Pods-Savitar2UITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2UITests-Info.plist"; sourceTree = "<group>"; };
-		2BD8D5065B73867B7FA5A2B2BB03E1AB /* Pods-Savitar2Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2Tests-dummy.m"; sourceTree = "<group>"; };
-		36C311C4E46E709077FD4337B3A86E88 /* Pods-Savitar2-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2-Info.plist"; sourceTree = "<group>"; };
-		4790CCD0022C36A31F131D68B9E4B0A8 /* Pods-Savitar2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.debug.xcconfig"; sourceTree = "<group>"; };
-		4EE94B75478CF491C96C9795C2A61608 /* Pods-Savitar2UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2UITests-umbrella.h"; sourceTree = "<group>"; };
-		4F1A492D34583B7FCFCB5C3EE65FC31D /* Pods-Savitar2UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2UITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		533210F8427EAE5BED763E8660305FA9 /* Pods-Savitar2UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2UITests-dummy.m"; sourceTree = "<group>"; };
-		67737C9DE3445C1421AFEA89179C9B64 /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
-		68F9274E99BDFB992343DE118DF4FC8F /* Pods-Savitar2Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2Tests-umbrella.h"; sourceTree = "<group>"; };
-		82EEE3D48BE77205EFAEED38A5CEBDAC /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = "AppCenter-SDK-Apple/macOS/AppCenter.framework"; sourceTree = "<group>"; };
+		26D0858F77FEB3A8779B9F3968BA479A /* Pods-Savitar2-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2-acknowledgements.plist"; sourceTree = "<group>"; };
+		280C5AC7FDD8E397E2EE367935358644 /* Pods-Savitar2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		29EE33C8580B53037EBCD7712A90EB7F /* Pods-Savitar2-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2-acknowledgements.markdown"; sourceTree = "<group>"; };
+		366B086B6C5D6B6F19403E2CFDA7345B /* Pods-Savitar2Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2Tests.modulemap"; sourceTree = "<group>"; };
+		3AED37809D4F6C15AF169DBCBB9BF438 /* Pods-Savitar2UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2UITests-dummy.m"; sourceTree = "<group>"; };
+		3B86FFB2F6B132EFF063B566BF5374CA /* SwiftyXMLParser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyXMLParser.xcconfig; sourceTree = "<group>"; };
+		4232468C2A600E06589CDB95C9D2FF29 /* SwiftyXMLParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyXMLParser.framework; path = SwiftyXMLParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42A6408379B361C86C79629775D517EF /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = SwiftyXMLParser/Error.swift; sourceTree = "<group>"; };
+		4FB4B5710D2643431806C5AF9622BB4B /* Pods-Savitar2Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2Tests-dummy.m"; sourceTree = "<group>"; };
+		556ED3999A48D5BD025BB91172DEBCA5 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = "AppCenter-SDK-Apple/macOS/AppCenterCrashes.framework"; sourceTree = "<group>"; };
+		5CFE73D40DE6678E6B5CC79707F0F015 /* SwiftyXMLParser-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyXMLParser-Info.plist"; sourceTree = "<group>"; };
+		5EE2F6027CC92F75F83E7342BB8AC765 /* SwiftyXMLParser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyXMLParser-umbrella.h"; sourceTree = "<group>"; };
+		6C43172B1D1E850691CFC7287A10197F /* Pods-Savitar2UITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2UITests-umbrella.h"; sourceTree = "<group>"; };
+		6DF6E676A90681FA2833782DD00BF5B3 /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		7A28F169F01161A22D1DB2CE1E1BD552 /* Pods-Savitar2UITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2UITests.modulemap"; sourceTree = "<group>"; };
+		7C2086839D7112FA4255C512B819CB4E /* AppCenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
+		840F7C40905A6E0F8A4B7B91E5DF2ABC /* XML.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XML.swift; path = SwiftyXMLParser/XML.swift; sourceTree = "<group>"; };
 		8791365EF23B00E19B7209BA076453B4 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Savitar2UITests.framework; path = "Pods-Savitar2UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		880F15338E46B6BD45C45F884E9BBBE3 /* Pods-Savitar2-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2-dummy.m"; sourceTree = "<group>"; };
-		8C6F294DF17BA7DD17F7A8AE523313B1 /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = "AppCenter-SDK-Apple/macOS/AppCenterAnalytics.framework"; sourceTree = "<group>"; };
-		8F02B24970B4D0B581AA604F6F95F836 /* Pods-Savitar2Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2Tests.modulemap"; sourceTree = "<group>"; };
-		9AE7973E226EF3F5048C1CB7AB0091E0 /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		9CF220142EF407E34660D0A274703A9B /* Pods-Savitar2Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		8C0A246B31370E5213FFEA0BCFB820CE /* Pods-Savitar2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		953361AEBF09B1084BDC6142783B34C5 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = "AppCenter-SDK-Apple/macOS/AppCenter.framework"; sourceTree = "<group>"; };
+		95ABAD2A830D8F011FA7C1512374260C /* Pods-Savitar2UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		986E24F3230EB7194C97444391358C1A /* SwiftyXMLParser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyXMLParser-prefix.pch"; sourceTree = "<group>"; };
+		9A658A25131A4026FEF5D38EBC7337AE /* Pods-Savitar2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		9B33232BF9F692134F77E5F651DC3744 /* Pods-Savitar2-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2-umbrella.h"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9EBAF31B39AEF27CFF4B8604384D68BE /* Pods-Savitar2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2Tests.release.xcconfig"; sourceTree = "<group>"; };
-		AE146D4DBF4FCFD24A5C97DDB506616D /* AppCenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AppCenter.xcconfig; sourceTree = "<group>"; };
-		BE15D901E15972E4F4788E1181B335A3 /* Pods-Savitar2-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C1EEA415F3917C1461908E2512825DBE /* Pods-Savitar2-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Savitar2-umbrella.h"; sourceTree = "<group>"; };
-		C2EC62E44A34BEAB09811110A22041F6 /* Pods-Savitar2.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Savitar2.modulemap"; sourceTree = "<group>"; };
-		C530AE3366F05DCA0A49F53355DEE6CC /* Pods-Savitar2-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2-acknowledgements.plist"; sourceTree = "<group>"; };
-		D7CB25CAC2FFB266292975F08B32196C /* Pods-Savitar2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		DA5B1CB242684E9F94EF9071CEEE502F /* Pods-Savitar2Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F3C443A571C1A8945BBD22CE3641998D /* Pods-Savitar2UITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2UITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A061C2EF6D4D8D46A220741B6303E233 /* SwiftyXMLParser.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyXMLParser.modulemap; sourceTree = "<group>"; };
+		B3944F386778929BCEDBB13ED95ADFAF /* Pods-Savitar2-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2-Info.plist"; sourceTree = "<group>"; };
+		C47675D90DA1FB089D66587DBB41EE30 /* Element.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Element.swift; path = SwiftyXMLParser/Element.swift; sourceTree = "<group>"; };
+		C64272542C0C407A28CC1EB5B25FB3E0 /* Pods-Savitar2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.release.xcconfig"; sourceTree = "<group>"; };
+		CA6992F084E3278F6F02DF6DE3FE0B22 /* Pods-Savitar2Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2Tests-Info.plist"; sourceTree = "<group>"; };
+		CA812913003BA380063759F1D4C5F786 /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterAnalytics.framework; path = "AppCenter-SDK-Apple/macOS/AppCenterAnalytics.framework"; sourceTree = "<group>"; };
+		CD501F4D3F0D804E6ABA9191A8F2633B /* Pods-Savitar2Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		D2EFADA1863A47A7076665DC28258B30 /* Pods-Savitar2UITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2UITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		DB75F29BF53232D72000758922B0A764 /* Pods-Savitar2UITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Savitar2UITests-Info.plist"; sourceTree = "<group>"; };
+		E51CDE225833A666211AEF5B04679BB0 /* Pods-Savitar2Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Savitar2Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E6AB17FD8483A0DC3FC180631BE91AFF /* Pods-Savitar2-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Savitar2-dummy.m"; sourceTree = "<group>"; };
+		E96E830D27D8019021E0EB85A2FC4C33 /* SwiftyXMLParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyXMLParser-dummy.m"; sourceTree = "<group>"; };
+		F2BDAC5A005CAE198B48B434FB3DCC9A /* Pods-Savitar2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Savitar2.debug.xcconfig"; sourceTree = "<group>"; };
 		F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +127,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1E88AFDF93D0D5F50DC6D5A58DD7ECDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91508C677786E3A67952E2F152395944 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5932E894FB7D540CA1125C608A7FF179 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				919A2BF0A2E670511134CC2E75EAFCE0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABFD9DD9CE373387A0489052C42323C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,152 +151,159 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0B560D5F8018C3CEC591FE42A678CC7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F40AF77412E7087FECD732EEE42E16A0 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		065E176B0379DF44263FCA42CFEA7E15 /* Products */ = {
+		2DE25EB01B5254EB6E432013B7034FEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				136EA77EDD9B87143DB6CE968E21CA1A /* Pods_Savitar2.framework */,
-				1737993ECEA54C49441130C6EB348CC1 /* Pods_Savitar2Tests.framework */,
-				8791365EF23B00E19B7209BA076453B4 /* Pods_Savitar2UITests.framework */,
+				CA812913003BA380063759F1D4C5F786 /* AppCenterAnalytics.framework */,
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		11B559F885472545C038EA00908809CB /* Targets Support Files */ = {
+		309D92B74CBC3B344D5F1EC5950C9AF7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3E1DA0A1FE9CA5BBC2414BD547E02845 /* Pods-Savitar2 */,
-				3A3D7254DAF0E48E96D9ADC49865D7D2 /* Pods-Savitar2Tests */,
-				4CD6BF7BCE9CDE8305DFACC763BFF239 /* Pods-Savitar2UITests */,
+				9F6A186AF10FFCA0183E62313B49CFF2 /* AppCenter */,
+				99D9C5ECBA8077EE27B141506150E33A /* SwiftyXMLParser */,
 			);
-			name = "Targets Support Files";
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		126FFB397A9CB69EB94B45933BD8F0CE /* AppCenter */ = {
+		319AC3F1581C5A926E93E27C677F9421 /* Pods-Savitar2UITests */ = {
 			isa = PBXGroup;
 			children = (
-				4E719473D1F0C677F684CD950C300442 /* Analytics */,
-				78237BF1D9A1E14483E67C231EA24492 /* Core */,
-				C8A998CC47F12DC073FCF1059B8647DE /* Crashes */,
-				74E1E2013DA1AE0DE4601FBBD8CE0FFA /* Support Files */,
-			);
-			name = AppCenter;
-			path = AppCenter;
-			sourceTree = "<group>";
-		};
-		3A3D7254DAF0E48E96D9ADC49865D7D2 /* Pods-Savitar2Tests */ = {
-			isa = PBXGroup;
-			children = (
-				8F02B24970B4D0B581AA604F6F95F836 /* Pods-Savitar2Tests.modulemap */,
-				DA5B1CB242684E9F94EF9071CEEE502F /* Pods-Savitar2Tests-acknowledgements.markdown */,
-				9CF220142EF407E34660D0A274703A9B /* Pods-Savitar2Tests-acknowledgements.plist */,
-				2BD8D5065B73867B7FA5A2B2BB03E1AB /* Pods-Savitar2Tests-dummy.m */,
-				1C604773FC0DBB219AA4D3BF81B68E51 /* Pods-Savitar2Tests-Info.plist */,
-				68F9274E99BDFB992343DE118DF4FC8F /* Pods-Savitar2Tests-umbrella.h */,
-				1A4497AAC3CCF614A7882151DA101CA7 /* Pods-Savitar2Tests.debug.xcconfig */,
-				9EBAF31B39AEF27CFF4B8604384D68BE /* Pods-Savitar2Tests.release.xcconfig */,
-			);
-			name = "Pods-Savitar2Tests";
-			path = "Target Support Files/Pods-Savitar2Tests";
-			sourceTree = "<group>";
-		};
-		3E1DA0A1FE9CA5BBC2414BD547E02845 /* Pods-Savitar2 */ = {
-			isa = PBXGroup;
-			children = (
-				C2EC62E44A34BEAB09811110A22041F6 /* Pods-Savitar2.modulemap */,
-				BE15D901E15972E4F4788E1181B335A3 /* Pods-Savitar2-acknowledgements.markdown */,
-				C530AE3366F05DCA0A49F53355DEE6CC /* Pods-Savitar2-acknowledgements.plist */,
-				880F15338E46B6BD45C45F884E9BBBE3 /* Pods-Savitar2-dummy.m */,
-				36C311C4E46E709077FD4337B3A86E88 /* Pods-Savitar2-Info.plist */,
-				C1EEA415F3917C1461908E2512825DBE /* Pods-Savitar2-umbrella.h */,
-				4790CCD0022C36A31F131D68B9E4B0A8 /* Pods-Savitar2.debug.xcconfig */,
-				67737C9DE3445C1421AFEA89179C9B64 /* Pods-Savitar2.release.xcconfig */,
-			);
-			name = "Pods-Savitar2";
-			path = "Target Support Files/Pods-Savitar2";
-			sourceTree = "<group>";
-		};
-		4CD6BF7BCE9CDE8305DFACC763BFF239 /* Pods-Savitar2UITests */ = {
-			isa = PBXGroup;
-			children = (
-				216BE209520CC832AFA0D9F06C6C6743 /* Pods-Savitar2UITests.modulemap */,
-				F3C443A571C1A8945BBD22CE3641998D /* Pods-Savitar2UITests-acknowledgements.markdown */,
-				4F1A492D34583B7FCFCB5C3EE65FC31D /* Pods-Savitar2UITests-acknowledgements.plist */,
-				533210F8427EAE5BED763E8660305FA9 /* Pods-Savitar2UITests-dummy.m */,
-				247D98BC815A53381521C776D93876E6 /* Pods-Savitar2UITests-Info.plist */,
-				4EE94B75478CF491C96C9795C2A61608 /* Pods-Savitar2UITests-umbrella.h */,
-				9AE7973E226EF3F5048C1CB7AB0091E0 /* Pods-Savitar2UITests.debug.xcconfig */,
-				D7CB25CAC2FFB266292975F08B32196C /* Pods-Savitar2UITests.release.xcconfig */,
+				7A28F169F01161A22D1DB2CE1E1BD552 /* Pods-Savitar2UITests.modulemap */,
+				95ABAD2A830D8F011FA7C1512374260C /* Pods-Savitar2UITests-acknowledgements.markdown */,
+				D2EFADA1863A47A7076665DC28258B30 /* Pods-Savitar2UITests-acknowledgements.plist */,
+				3AED37809D4F6C15AF169DBCBB9BF438 /* Pods-Savitar2UITests-dummy.m */,
+				DB75F29BF53232D72000758922B0A764 /* Pods-Savitar2UITests-Info.plist */,
+				6C43172B1D1E850691CFC7287A10197F /* Pods-Savitar2UITests-umbrella.h */,
+				8C0A246B31370E5213FFEA0BCFB820CE /* Pods-Savitar2UITests.debug.xcconfig */,
+				9A658A25131A4026FEF5D38EBC7337AE /* Pods-Savitar2UITests.release.xcconfig */,
 			);
 			name = "Pods-Savitar2UITests";
 			path = "Target Support Files/Pods-Savitar2UITests";
 			sourceTree = "<group>";
 		};
-		4E719473D1F0C677F684CD950C300442 /* Analytics */ = {
+		5C0E5D31B1DA8DAC03B7C8BA924FFF01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E6CB47F68408EB507CBD42D57E1A5CC1 /* Frameworks */,
+				953361AEBF09B1084BDC6142783B34C5 /* AppCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E2DF67F25A5554FDF5BB2BF8411F92E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5C0E5D31B1DA8DAC03B7C8BA924FFF01 /* Frameworks */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		737CD1D77A429B708E8149D85807B166 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				2DE25EB01B5254EB6E432013B7034FEB /* Frameworks */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
 		};
-		5A8752593C0BFF50FC35035F559BBBD2 /* Frameworks */ = {
+		75AA85B55A07A58C96FF6B043BD693A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				11D55098E692639F785DA5F20C6E2047 /* AppCenterCrashes.framework */,
+				556ED3999A48D5BD025BB91172DEBCA5 /* AppCenterCrashes.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5D4F96FA9EEC07479236194B77933113 /* Frameworks */ = {
+		8E695F2CC4B107A738E071E5B87EF926 /* Pods-Savitar2 */ = {
 			isa = PBXGroup;
 			children = (
-				82EEE3D48BE77205EFAEED38A5CEBDAC /* AppCenter.framework */,
+				041627A03363C77A06B425AD3873841E /* Pods-Savitar2.modulemap */,
+				29EE33C8580B53037EBCD7712A90EB7F /* Pods-Savitar2-acknowledgements.markdown */,
+				26D0858F77FEB3A8779B9F3968BA479A /* Pods-Savitar2-acknowledgements.plist */,
+				E6AB17FD8483A0DC3FC180631BE91AFF /* Pods-Savitar2-dummy.m */,
+				063DC8A04C3D91EE6695867A813A7C67 /* Pods-Savitar2-frameworks.sh */,
+				B3944F386778929BCEDBB13ED95ADFAF /* Pods-Savitar2-Info.plist */,
+				9B33232BF9F692134F77E5F651DC3744 /* Pods-Savitar2-umbrella.h */,
+				F2BDAC5A005CAE198B48B434FB3DCC9A /* Pods-Savitar2.debug.xcconfig */,
+				C64272542C0C407A28CC1EB5B25FB3E0 /* Pods-Savitar2.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = "Pods-Savitar2";
+			path = "Target Support Files/Pods-Savitar2";
 			sourceTree = "<group>";
 		};
-		74E1E2013DA1AE0DE4601FBBD8CE0FFA /* Support Files */ = {
+		92CA2015D444CF8BFBDC774FE8D8A766 /* Crashes */ = {
 			isa = PBXGroup;
 			children = (
-				AE146D4DBF4FCFD24A5C97DDB506616D /* AppCenter.xcconfig */,
+				75AA85B55A07A58C96FF6B043BD693A1 /* Frameworks */,
+			);
+			name = Crashes;
+			sourceTree = "<group>";
+		};
+		99D9C5ECBA8077EE27B141506150E33A /* SwiftyXMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				15055197D7A629335595E71994F0524B /* Accessor.swift */,
+				C47675D90DA1FB089D66587DBB41EE30 /* Element.swift */,
+				42A6408379B361C86C79629775D517EF /* Error.swift */,
+				07201D6179BB8BA4C872B12C30B94D6D /* Parser.swift */,
+				840F7C40905A6E0F8A4B7B91E5DF2ABC /* XML.swift */,
+				DE311891777DA272FD7290AAE629ACE2 /* Support Files */,
+			);
+			name = SwiftyXMLParser;
+			path = SwiftyXMLParser;
+			sourceTree = "<group>";
+		};
+		9F6A186AF10FFCA0183E62313B49CFF2 /* AppCenter */ = {
+			isa = PBXGroup;
+			children = (
+				737CD1D77A429B708E8149D85807B166 /* Analytics */,
+				5E2DF67F25A5554FDF5BB2BF8411F92E /* Core */,
+				92CA2015D444CF8BFBDC774FE8D8A766 /* Crashes */,
+				BDC7023457577D3CC06175BFD5D045A2 /* Support Files */,
+			);
+			name = AppCenter;
+			path = AppCenter;
+			sourceTree = "<group>";
+		};
+		B094A59F1F4AA43293760FA34D969672 /* Pods-Savitar2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				366B086B6C5D6B6F19403E2CFDA7345B /* Pods-Savitar2Tests.modulemap */,
+				E51CDE225833A666211AEF5B04679BB0 /* Pods-Savitar2Tests-acknowledgements.markdown */,
+				CD501F4D3F0D804E6ABA9191A8F2633B /* Pods-Savitar2Tests-acknowledgements.plist */,
+				4FB4B5710D2643431806C5AF9622BB4B /* Pods-Savitar2Tests-dummy.m */,
+				CA6992F084E3278F6F02DF6DE3FE0B22 /* Pods-Savitar2Tests-Info.plist */,
+				165BD4F3000175881EB5357C2D67A5F6 /* Pods-Savitar2Tests-umbrella.h */,
+				280C5AC7FDD8E397E2EE367935358644 /* Pods-Savitar2Tests.debug.xcconfig */,
+				6DF6E676A90681FA2833782DD00BF5B3 /* Pods-Savitar2Tests.release.xcconfig */,
+			);
+			name = "Pods-Savitar2Tests";
+			path = "Target Support Files/Pods-Savitar2Tests";
+			sourceTree = "<group>";
+		};
+		BDC7023457577D3CC06175BFD5D045A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7C2086839D7112FA4255C512B819CB4E /* AppCenter.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AppCenter";
 			sourceTree = "<group>";
 		};
-		78237BF1D9A1E14483E67C231EA24492 /* Core */ = {
+		C6BC87C1ECFA462B1396FBDB9C0F0AD7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5D4F96FA9EEC07479236194B77933113 /* Frameworks */,
+				136EA77EDD9B87143DB6CE968E21CA1A /* Pods_Savitar2.framework */,
+				1737993ECEA54C49441130C6EB348CC1 /* Pods_Savitar2Tests.framework */,
+				8791365EF23B00E19B7209BA076453B4 /* Pods_Savitar2UITests.framework */,
+				4232468C2A600E06589CDB95C9D2FF29 /* SwiftyXMLParser.framework */,
 			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		847EBDDE94B66B5A82F61EB451C88447 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				126FFB397A9CB69EB94B45933BD8F0CE /* AppCenter */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C8A998CC47F12DC073FCF1059B8647DE /* Crashes */ = {
-			isa = PBXGroup;
-			children = (
-				5A8752593C0BFF50FC35035F559BBBD2 /* Frameworks */,
-			);
-			name = Crashes;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CBD43E0947D94E318A0ED1350CFF29ED /* OS X */ = {
@@ -268,10 +319,24 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */,
-				847EBDDE94B66B5A82F61EB451C88447 /* Pods */,
-				065E176B0379DF44263FCA42CFEA7E15 /* Products */,
-				11B559F885472545C038EA00908809CB /* Targets Support Files */,
+				309D92B74CBC3B344D5F1EC5950C9AF7 /* Pods */,
+				C6BC87C1ECFA462B1396FBDB9C0F0AD7 /* Products */,
+				EE4DAB7685D57B3F5FA75EE7B5A8F3FB /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		DE311891777DA272FD7290AAE629ACE2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A061C2EF6D4D8D46A220741B6303E233 /* SwiftyXMLParser.modulemap */,
+				3B86FFB2F6B132EFF063B566BF5374CA /* SwiftyXMLParser.xcconfig */,
+				E96E830D27D8019021E0EB85A2FC4C33 /* SwiftyXMLParser-dummy.m */,
+				5CFE73D40DE6678E6B5CC79707F0F015 /* SwiftyXMLParser-Info.plist */,
+				986E24F3230EB7194C97444391358C1A /* SwiftyXMLParser-prefix.pch */,
+				5EE2F6027CC92F75F83E7342BB8AC765 /* SwiftyXMLParser-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyXMLParser";
 			sourceTree = "<group>";
 		};
 		E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */ = {
@@ -282,22 +347,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E6CB47F68408EB507CBD42D57E1A5CC1 /* Frameworks */ = {
+		EE4DAB7685D57B3F5FA75EE7B5A8F3FB /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8C6F294DF17BA7DD17F7A8AE523313B1 /* AppCenterAnalytics.framework */,
+				8E695F2CC4B107A738E071E5B87EF926 /* Pods-Savitar2 */,
+				B094A59F1F4AA43293760FA34D969672 /* Pods-Savitar2Tests */,
+				319AC3F1581C5A926E93E27C677F9421 /* Pods-Savitar2UITests */,
 			);
-			name = Frameworks;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		05B8430844E5F52E7EF2F1BC37250A95 /* Headers */ = {
+		34823C5B57AE8C1BA9F5E6690186A55E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490EAD52CBF38FD4277EBC4EED989157 /* Pods-Savitar2-umbrella.h in Headers */,
+				2A7DA5381A8A3CBB596B952FF064D786 /* Pods-Savitar2-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +373,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27BDCD48C4862299D5D9711C2EE0D6D /* Pods-Savitar2Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3F31EFAF5C023640C3B60F1E0C35DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC1CFBD999586025DFCF402A81409EFB /* SwiftyXMLParser-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,17 +397,18 @@
 /* Begin PBXNativeTarget section */
 		03442015C68D42FAA4A2ECE3036D8C85 /* Pods-Savitar2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA837B017EBADF7BF73AF7DF552BEE38 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */;
+			buildConfigurationList = 18968BE871C6546067F3B2D3F3040A01 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */;
 			buildPhases = (
-				05B8430844E5F52E7EF2F1BC37250A95 /* Headers */,
-				D577AEF50C32A1EDA6A8C2EA5BD991C5 /* Sources */,
-				D0B560D5F8018C3CEC591FE42A678CC7 /* Frameworks */,
-				5B770FF4ED985CEBA91FD012BDED40A2 /* Resources */,
+				34823C5B57AE8C1BA9F5E6690186A55E /* Headers */,
+				05507CC424FA3AB7E9AB2EC0794D2364 /* Sources */,
+				1E88AFDF93D0D5F50DC6D5A58DD7ECDB /* Frameworks */,
+				FE23D7B465884CC89B73C5C4C3613ADB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0D21A657D0AC1363015EF60AE2FDEABC /* PBXTargetDependency */,
+				D9B6C7F449228F4F29E6326CB842166C /* PBXTargetDependency */,
+				86176F7743A892B70FFE4C8513F6D21B /* PBXTargetDependency */,
 			);
 			name = "Pods-Savitar2";
 			productName = "Pods-Savitar2";
@@ -377,6 +453,24 @@
 			productReference = 1737993ECEA54C49441130C6EB348CC1 /* Pods_Savitar2Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		C96998A189BC645DB45F2AFFF9D802BD /* SwiftyXMLParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 673F526225EE4358878EFF12A9C39536 /* Build configuration list for PBXNativeTarget "SwiftyXMLParser" */;
+			buildPhases = (
+				7F3F31EFAF5C023640C3B60F1E0C35DF /* Headers */,
+				46D4D9F8C26D3F8C900EAF39D5D120AD /* Sources */,
+				5932E894FB7D540CA1125C608A7FF179 /* Frameworks */,
+				00FFA3CC511D331B50B31BDAB6895011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyXMLParser;
+			productName = SwiftyXMLParser;
+			productReference = 4232468C2A600E06589CDB95C9D2FF29 /* SwiftyXMLParser.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -394,7 +488,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 065E176B0379DF44263FCA42CFEA7E15 /* Products */;
+			productRefGroup = C6BC87C1ECFA462B1396FBDB9C0F0AD7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -402,19 +496,20 @@
 				03442015C68D42FAA4A2ECE3036D8C85 /* Pods-Savitar2 */,
 				1F0D58123297127444222F8A96319F13 /* Pods-Savitar2Tests */,
 				1783E84F22FB6B0B96EC506D7838C916 /* Pods-Savitar2UITests */,
+				C96998A189BC645DB45F2AFFF9D802BD /* SwiftyXMLParser */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2AC01C31D87BABB79BD317FDF6B1DC3A /* Resources */ = {
+		00FFA3CC511D331B50B31BDAB6895011 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B770FF4ED985CEBA91FD012BDED40A2 /* Resources */ = {
+		2AC01C31D87BABB79BD317FDF6B1DC3A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -428,9 +523,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE23D7B465884CC89B73C5C4C3613ADB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		05507CC424FA3AB7E9AB2EC0794D2364 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20CC04AC2C8149CD900423E9710BA48 /* Pods-Savitar2-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46D4D9F8C26D3F8C900EAF39D5D120AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9451E35B7EBA2AF73FF5B6A184358CE5 /* Accessor.swift in Sources */,
+				C45C45653436B5A7FE4A8D30EC5F20BF /* Element.swift in Sources */,
+				FBE2CEBD95DBCF60367CE505238F00C4 /* Error.swift in Sources */,
+				37831711A9BFF260B36AE192457E457E /* Parser.swift in Sources */,
+				CEA1B8E13BFFA6E7E80D1C31B3A5EA07 /* SwiftyXMLParser-dummy.m in Sources */,
+				694AB51A74C16FAA6BAD6FF8DF55C82D /* XML.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B3F626043AF4576FA6D1E685F713487 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,28 +570,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D577AEF50C32A1EDA6A8C2EA5BD991C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC0CE8EBC3727BEA62CDAB98FAD72DD4 /* Pods-Savitar2-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0D21A657D0AC1363015EF60AE2FDEABC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AppCenter;
-			target = A3282A5B2437E609EEB85861D7ECE717 /* AppCenter */;
-			targetProxy = BD25F2E8FC0671149E52F674BB0E0FED /* PBXContainerItemProxy */;
-		};
 		24E81A5A3909967E8DFA41B2D9682466 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Savitar2";
 			target = 03442015C68D42FAA4A2ECE3036D8C85 /* Pods-Savitar2 */;
 			targetProxy = C406F91834D197B55C85566A3445C88E /* PBXContainerItemProxy */;
+		};
+		86176F7743A892B70FFE4C8513F6D21B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyXMLParser;
+			target = C96998A189BC645DB45F2AFFF9D802BD /* SwiftyXMLParser */;
+			targetProxy = 8339D58BBF928D68607CCFE8CEC96712 /* PBXContainerItemProxy */;
 		};
 		B4C4A3A876BA46A0204D47E4D843AF2B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -476,14 +591,19 @@
 			target = 03442015C68D42FAA4A2ECE3036D8C85 /* Pods-Savitar2 */;
 			targetProxy = DB2F344AC576D778131A727915B87B34 /* PBXContainerItemProxy */;
 		};
+		D9B6C7F449228F4F29E6326CB842166C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AppCenter;
+			target = A3282A5B2437E609EEB85861D7ECE717 /* AppCenter */;
+			targetProxy = 28985AC857056FBBA63B804DF1C77DAF /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		259C5A61966FB523A0EDFBE78F9F51D9 /* Release */ = {
+		2635B89DC94F39743492A77F74F6EDE8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67737C9DE3445C1421AFEA89179C9B64 /* Pods-Savitar2.release.xcconfig */;
+			baseConfigurationReference = 3B86FFB2F6B132EFF063B566BF5374CA /* SwiftyXMLParser.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -497,23 +617,22 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyXMLParser;
+				PRODUCT_NAME = SwiftyXMLParser;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -579,9 +698,49 @@
 			};
 			name = Release;
 		};
+		3106716C3175F4F7B249D6031CF6F2D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C64272542C0C407A28CC1EB5B25FB3E0 /* Pods-Savitar2.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3A2D624BA2C570212FD4D51212FD4A81 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EBAF31B39AEF27CFF4B8604384D68BE /* Pods-Savitar2Tests.release.xcconfig */;
+			baseConfigurationReference = 6DF6E676A90681FA2833782DD00BF5B3 /* Pods-Savitar2Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -619,9 +778,87 @@
 			};
 			name = Release;
 		};
+		44DA01EED89CFD987F43B435931F65A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B86FFB2F6B132EFF063B566BF5374CA /* SwiftyXMLParser.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/SwiftyXMLParser/SwiftyXMLParser.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyXMLParser;
+				PRODUCT_NAME = SwiftyXMLParser;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5130995A5F32040E75811A589F3424E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2BDAC5A005CAE198B48B434FB3DCC9A /* Pods-Savitar2.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		67EA6253D87A88F86D31070F1217699A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE146D4DBF4FCFD24A5C97DDB506616D /* AppCenter.xcconfig */;
+			baseConfigurationReference = 7C2086839D7112FA4255C512B819CB4E /* AppCenter.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -638,7 +875,7 @@
 		};
 		775FD5D7AC4768602C6C05E6DAAD496E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A4497AAC3CCF614A7882151DA101CA7 /* Pods-Savitar2Tests.debug.xcconfig */;
+			baseConfigurationReference = 280C5AC7FDD8E397E2EE367935358644 /* Pods-Savitar2Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -742,7 +979,7 @@
 		};
 		BEB5EC31692F29FB2447B85386FFA22B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7CB25CAC2FFB266292975F08B32196C /* Pods-Savitar2UITests.release.xcconfig */;
+			baseConfigurationReference = 9A658A25131A4026FEF5D38EBC7337AE /* Pods-Savitar2UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -780,49 +1017,9 @@
 			};
 			name = Release;
 		};
-		D53A1F100FB262C2D0E834EE1BE2AB1F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4790CCD0022C36A31F131D68B9E4B0A8 /* Pods-Savitar2.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-Savitar2/Pods-Savitar2.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		F085403A011C3A8E6FCEF50F8CB2287D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AE7973E226EF3F5048C1CB7AB0091E0 /* Pods-Savitar2UITests.debug.xcconfig */;
+			baseConfigurationReference = 8C0A246B31370E5213FFEA0BCFB820CE /* Pods-Savitar2UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -862,7 +1059,7 @@
 		};
 		FA056057BD419BAD4CFD1C4F408058BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE146D4DBF4FCFD24A5C97DDB506616D /* AppCenter.xcconfig */;
+			baseConfigurationReference = 7C2086839D7112FA4255C512B819CB4E /* AppCenter.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -880,6 +1077,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		18968BE871C6546067F3B2D3F3040A01 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5130995A5F32040E75811A589F3424E8 /* Debug */,
+				3106716C3175F4F7B249D6031CF6F2D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		456D603A0EDC93D18CB5F8F54C1F27C9 /* Build configuration list for PBXNativeTarget "Pods-Savitar2UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -898,6 +1104,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		673F526225EE4358878EFF12A9C39536 /* Build configuration list for PBXNativeTarget "SwiftyXMLParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44DA01EED89CFD987F43B435931F65A1 /* Debug */,
+				2635B89DC94F39743492A77F74F6EDE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A2E65F5242B7BBF2FFAF20DDA4C7D787 /* Build configuration list for PBXNativeTarget "Pods-Savitar2Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -912,15 +1127,6 @@
 			buildConfigurations = (
 				FA056057BD419BAD4CFD1C4F408058BB /* Debug */,
 				67EA6253D87A88F86D31070F1217699A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FA837B017EBADF7BF73AF7DF552BEE38 /* Build configuration list for PBXNativeTarget "Pods-Savitar2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D53A1F100FB262C2D0E834EE1BE2AB1F /* Debug */,
-				259C5A61966FB523A0EDFBE78F9F51D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

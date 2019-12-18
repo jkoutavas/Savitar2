@@ -7,8 +7,12 @@
 //
 
 import Cocoa
+import SwiftyXMLParser
 
 class Document: NSDocument, OutputProtocol {
+    let DocumentElemIdentifier = "DOCUMENT"
+    let WorldElemIdentifier = "WORLD"
+
     var world = World()
 
     var endpoint: Endpoint?
@@ -38,7 +42,13 @@ class Document: NSDocument, OutputProtocol {
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
-        try world.read(from: data)
+        let xml = XML.parse(data)
+        let document = xml[DocumentElemIdentifier]
+        if let type = document.attributes["TYPE"] {
+            if type == "Savitar World" {
+                try world.parse(xml: document[WorldElemIdentifier])
+            }
+        }
     }
 
     func output(result: OutputResult) {
@@ -60,8 +70,20 @@ class Document: NSDocument, OutputProtocol {
         }
     }
 
+    /*
+     * Produce XML-based data for a v2 Savitar world document
+     */
     override func data(ofType typeName: String) throws -> Data {
-        world.version = 2
-        return try world.data()
+        let docElem = XMLElement(name: DocumentElemIdentifier)
+        guard let type = XMLNode.attribute(withName: "TYPE", stringValue: "Savitar World") as? XMLNode else {
+            throw NSError()
+        }
+        docElem.addAttribute(type)
+
+        let worldElem = try world.toXMLElement()
+        docElem.addChild(worldElem)
+
+        let xml = XMLDocument(rootElement: docElem)
+        return xml.xmlString.data(using: String.Encoding.utf8)!
     }
 }

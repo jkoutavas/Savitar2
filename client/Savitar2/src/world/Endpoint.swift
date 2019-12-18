@@ -29,8 +29,6 @@ public class Endpoint: NSObject, StreamDelegate {
         self.logger[metadataKey: "a"] = "\(host):\(port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
-
-        super.init()
     }
 
     func close() {

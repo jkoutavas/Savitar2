@@ -43,4 +43,17 @@ extension String {
         }
         return ranges
     }
-}
+
+    func prettyXMLFormat() -> String? {
+        do {
+            let xml = try XMLDocument.init(xmlString: self)
+            let data = xml.xmlData(options: .nodePrettyPrint)
+            let str: String? = String(data: data, encoding: .utf8)
+            return str
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        return nil
+        }
+    }

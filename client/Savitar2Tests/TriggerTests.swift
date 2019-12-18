@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SwiftyXMLParser
+
 @testable import Savitar2
 
 class TriggerTests: XCTestCase {
@@ -15,7 +17,6 @@ class TriggerTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testGag() {
@@ -62,7 +63,7 @@ class TriggerTests: XCTestCase {
     }
 
     func testSubst() {
-        var t = Trigger(name: "{company}", flags: [.caseSensitive, .exact, .useSubstitution], substitution: "HEYNOW")
+        let t = Trigger(name: "{company}", flags: [.caseSensitive, .exact, .useSubstitution], substitution: "HEYNOW")
         XCTAssertEqual(t.reactionTo(line: "{company} is cool"),
                                           "HEYNOW is cool")
         XCTAssertEqual(t.reactionTo(line: "{COMPANY} is cool, {CoMpAnY}"),
@@ -130,7 +131,154 @@ class TriggerTests: XCTestCase {
                     style: TrigTextStyle(face: [.underline, .bold, .blink, .italic],
                                          foreColor: NSColor.white,
                                          backColor: NSColor.black))
+        // swiftlint:disable line_length
         XCTAssertEqual(t.reactionTo(line: "a super combo match"),
                                           "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;23;25;39;49m match")
+        // swiftlint:enable line_length
+    }
+
+    func testTrigFaceFrom() {
+        // TODO: make this exhaustive
+        let faces = TrigFace.from(string: "normal+bold")
+        XCTAssertEqual(faces.union(.italic).description, "normal+bold+italic")
+    }
+
+    func testTrigFlagsFrom() {
+        // TODO: make this exhaustive
+        let flags = TrigFlags.from(string: "useRegex")
+        XCTAssertEqual(flags.union(.exact).description, "exact+useRegex")
+    }
+
+    func testXMLParseV1Trigger() throws {
+        // note the misspelled <SUBSITUTION> element
+        let xmlString = """
+        <TRIGGER
+            NAME="russ"
+            TYPE="output"
+            FLAGS="matchWholeLine+matchAtStart"
+            COLOR="#26C9EE"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Ralph">
+            <WORDEND>
+                &amp;-&quot;
+            </WORDEND>
+            <SAY>
+                 Select a voice from the menu to hear this.
+            </SAY>
+            <SUBSITUTION>
+                oh boy, oh boy
+            </SUBSITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml[TriggerElemIdentifier])
+
+        XCTAssertEqual(t1.name, "russ")
+        XCTAssertEqual(t1.type, .output)
+        XCTAssertEqual(t1.flags, [.wholeLine, .startsWith])
+        XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#26C9EE"))
+        XCTAssertEqual(t1.audioCue, .speakEvent)
+        XCTAssertEqual(t1.sound, "Click")
+        XCTAssertEqual(t1.voice, "Ralph")
+        XCTAssertEqual(t1.wordEnding, "&-\"")
+        XCTAssertEqual(t1.say, "Select a voice from the menu to hear this.")
+        XCTAssertEqual(t1.substitution, "oh boy, oh boy")
+    }
+
+    func testXMLParseV2Trigger() throws {
+        // note the correctly spelled <SUBSTITUTION> element
+        // note COLOR attribute has been renamed to FGCOLOR
+        // note new BGCOLOR attribute
+        let xmlString = """
+        <TRIGGER
+            NAME="^kira"
+            TYPE="output"
+            FLAGS="matchWholeLine+useRegex"
+            FGCOLOR="#EE42BB"
+            BGCOLOR="#000000"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Princess">
+            <WORDEND>&amp;-&quot;</WORDEND>
+            <SAY>Select a voice from the menu to hear this.</SAY>
+            <SUBSTITUTION>heynow!</SUBSTITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml[TriggerElemIdentifier])
+
+        XCTAssertEqual(t1.name, "^kira")
+        XCTAssertEqual(t1.type, .output)
+        XCTAssertEqual(t1.flags, [.wholeLine, .useRegex])
+        XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#EE42BB"))
+        XCTAssertEqual(t1.style!.backColor, NSColor(hex: "#000000"))
+        XCTAssertEqual(t1.audioCue, .speakEvent)
+        XCTAssertEqual(t1.sound, "Click")
+        XCTAssertEqual(t1.voice, "Princess")
+        XCTAssertEqual(t1.wordEnding, "&-\"")
+        XCTAssertEqual(t1.say, "Select a voice from the menu to hear this.")
+        XCTAssertEqual(t1.substitution, "heynow!")
+    }
+
+    func testXMLParseMinimalV2Trigger() throws {
+        let xml = try XML.parse("<TRIGGER/>")
+        let t1 = Trigger()
+        try t1.parse(xml: xml[TriggerElemIdentifier])
+
+        XCTAssertEqual(t1.name, Trigger.defaultName)
+        XCTAssertEqual(t1.type, .output)
+        XCTAssertEqual(t1.flags, .exact)
+        XCTAssertEqual(t1.audioCue, .silent)
+    }
+
+    func testv1TriggerXMLtoV2() throws {
+        // v1 XML
+        // note the misspelled <SUBSITUTION> element
+        let xmlInString = """
+        <TRIGGER
+            NAME="russ"
+            TYPE="output"
+            FLAGS="matchWholeLine+matchAtStart"
+            COLOR="#26C9EE"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Ralph">
+            <WORDEND>
+                &amp;-&quot;
+            </WORDEND>
+            <SAY>
+                Select a voice from the menu to hear this.
+            </SAY>
+            <SUBSITUTION>
+                oh boy, oh boy
+            </SUBSITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlInString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml[TriggerElemIdentifier])
+
+        let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
+
+        // v2 XML
+        // swiftlint:disable line_length
+        let expectedOutput = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <TRIGGER FGCOLOR="#26C9EE" FLAGS="matchWholeLine+matchAtStart" NAME="russ" SOUND="Click" TYPE="output" VOICE="Ralph">
+            <AUDIO>speakEvent</AUDIO>
+            <WORDEND>&amp;-"</WORDEND>
+            <SAY>Select a voice from the menu to hear this.</SAY>
+            <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
+        </TRIGGER>
+        """
+        // swiftlint:enable line_length
+
+        XCTAssertEqual(xmlOutString, expectedOutput)
     }
 }
