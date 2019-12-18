@@ -147,7 +147,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     //***************************
 
     let TelnetIdentifier = "telnet://"
-    let TriggersElemIdentifier = "TRIGGERS"
     let WorldElemIdentifier = "WORLD"
 
     // These are the <WORLD> XML element attributes
@@ -307,7 +306,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
 
             case WorldAttribIdentifier.zoomed.rawValue:
                 zoomed = attribute.value == "TRUE"
-                
+
             case WorldAttribIdentifier.outputMax.rawValue:
                 if let value = Int(attribute.value) {
                     outputMax = value
@@ -425,6 +424,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         worldElem.addAttribute(name: WorldAttribIdentifier.retrySecs.rawValue, stringValue: String(retrySecs))
 
         worldElem.addAttribute(name: WorldAttribIdentifier.keepAliveMins.rawValue, stringValue: String(keepAliveMins))
+
+        let triggersElem = try triggerMan.toXMLElement()
+        if triggersElem.childCount > 0 {
+            worldElem.addChild(triggersElem)
+        }
 
         logger.info("XML data representation \(String(worldElem.xmlString))")
         return worldElem

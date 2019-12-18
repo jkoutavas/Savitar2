@@ -174,7 +174,7 @@ class TriggerTests: XCTestCase {
 
         let xml = try XML.parse(xmlString)
         let t1 = Trigger()
-        try t1.parse(xml: xml["TRIGGER"])
+        try t1.parse(xml: xml[TriggerElemIdentifier])
 
         XCTAssertEqual(t1.name, "russ")
         XCTAssertEqual(t1.type, .output)
@@ -210,7 +210,7 @@ class TriggerTests: XCTestCase {
 
         let xml = try XML.parse(xmlString)
         let t1 = Trigger()
-        try t1.parse(xml: xml["TRIGGER"])
+        try t1.parse(xml: xml[TriggerElemIdentifier])
 
         XCTAssertEqual(t1.name, "^kira")
         XCTAssertEqual(t1.type, .output)
@@ -228,7 +228,7 @@ class TriggerTests: XCTestCase {
     func testXMLParseMinimalV2Trigger() throws {
         let xml = try XML.parse("<TRIGGER/>")
         let t1 = Trigger()
-        try t1.parse(xml: xml["TRIGGER"])
+        try t1.parse(xml: xml[TriggerElemIdentifier])
 
         XCTAssertEqual(t1.name, Trigger.defaultName)
         XCTAssertEqual(t1.type, .output)
@@ -262,7 +262,7 @@ class TriggerTests: XCTestCase {
 
         let xml = try XML.parse(xmlInString)
         let t1 = Trigger()
-        try t1.parse(xml: xml["TRIGGER"])
+        try t1.parse(xml: xml[TriggerElemIdentifier])
 
         let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
 

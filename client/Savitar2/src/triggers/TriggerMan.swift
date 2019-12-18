@@ -9,7 +9,10 @@
 import Foundation
 import SwiftyXMLParser
 
+let TriggersElemIdentifier = "TRIGGERS"
+
 class TriggerMan: SavitarXMLProtocol {
+
     private var triggers: [Trigger] = []
 
     func add(_ trigger: Trigger) {
@@ -25,7 +28,7 @@ class TriggerMan: SavitarXMLProtocol {
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-        for trigElem in xml["TRIGGERS"]["TRIGGER"] {
+        for trigElem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
             let trigger = Trigger()
             try trigger.parse(xml: trigElem)
             add(trigger)
@@ -33,6 +36,16 @@ class TriggerMan: SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
-        return XMLElement() // TODO
+        if triggers.count > 0 {
+            let triggersElem = XMLElement(name: TriggersElemIdentifier)
+            for trigger in triggers {
+                let trigElem = try trigger.toXMLElement()
+                triggersElem.addChild(trigElem)
+            }
+
+            return triggersElem
+        } else {
+            return XMLElement()
+        }
     }
 }

@@ -9,6 +9,8 @@
 import Cocoa
 import SwiftyXMLParser
 
+let TriggerElemIdentifier = "TRIGGER"
+
 enum TrigType {
     case unknown
     case input
@@ -146,7 +148,6 @@ class Trigger: NSObject, SavitarXMLProtocol {
     // MARK: - SavitarXMLProtocol
     //***************************
 
-    let TriggerElemIdentifier = "TRIGGER"
     let ReplyElemIdentifier = "REPLY"
     let SayElemIdentifier = "SAY"
     let SubsitutionElemIdentifier = "SUBSITUTION" // note v1 misspelling
