@@ -9,5 +9,10 @@
 import Foundation
 
 struct AppContext {
+    static var prefs = AppPreferences()
     static var triggerMan = TriggerMan()
+
+    static func load() throws {
+        try prefs.load()
+    }
 }

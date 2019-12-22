@@ -153,4 +153,3 @@ struct TrigTextStyle: Equatable {
         self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
     }
 }
-

@@ -14,6 +14,9 @@
 		69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */; };
 		69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */; };
 		69071B3F23A6EA51001C58B1 /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3E23A6EA51001C58B1 /* WorldTests.swift */; };
+		690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462223AA4CB0000445E4 /* AppPreferences.swift */; };
+		690B462523AD82CE000445E4 /* WorldMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462423AD82CE000445E4 /* WorldMan.swift */; };
+		690B462723B0063F000445E4 /* SavitarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462623B0063F000445E4 /* SavitarManager.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -80,6 +83,9 @@
 		69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyXMLParserTests.swift; sourceTree = "<group>"; };
 		69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XMLElement+Extensions.swift"; sourceTree = "<group>"; };
 		69071B3E23A6EA51001C58B1 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
+		690B462223AA4CB0000445E4 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
+		690B462423AD82CE000445E4 /* WorldMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMan.swift; sourceTree = "<group>"; };
+		690B462623B0063F000445E4 /* SavitarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarManager.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -245,6 +251,8 @@
 			children = (
 				69000EE12397CF09009976E0 /* AppContext.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
+				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
+				690B462623B0063F000445E4 /* SavitarManager.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
 				696F77402390CFF2005E45EB /* thirdparty */,
@@ -270,6 +278,7 @@
 				69662B1D204367BD00E7CC7B /* ViewController.swift */,
 				69F620E6204BC19100301A8D /* WindowController.swift */,
 				69F620E4204B889200301A8D /* World.swift */,
+				690B462423AD82CE000445E4 /* WorldMan.swift */,
 				6946AB79208435320075610C /* WorldSettingsController.swift */,
 			);
 			path = world;
@@ -585,10 +594,13 @@
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
+				690B462723B0063F000445E4 /* SavitarManager.swift in Sources */,
 				69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
+				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
+				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,

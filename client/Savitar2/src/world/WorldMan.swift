@@ -1,30 +1,30 @@
 //
-//  TriggerMan.swift
+//  WorldMan.swift
 //  Savitar2
 //
-//  Created by Jay Koutavas on 12/4/19.
+//  Created by Jay Koutavas on 12/20/19.
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
 import SwiftyXMLParser
 
-let TriggersElemIdentifier = "TRIGGERS"
+let WorldsElemIdentifier = "WORLDS"
 
-class TriggerMan: SavitarManager<Trigger>, SavitarXMLProtocol {
+class WorldMan: SavitarManager<World>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
-            let object = Trigger()
+         for elem in xml[WorldsElemIdentifier][WorldElemIdentifier] {
+            let object = World()
             try object.parse(xml: elem)
             add(object)
         }
     }
 
     func toXMLElement() throws -> XMLElement {
-        return try toXMLElement(groupId: TriggersElemIdentifier)
+        return try toXMLElement(groupId: WorldsElemIdentifier)
     }
 }

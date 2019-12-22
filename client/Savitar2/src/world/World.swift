@@ -43,6 +43,7 @@ enum IntensityType: Int {
     case color
 }
 
+// TODO: make World an NSObject, SabvitarXMLProtocol, then subclass WorldController
 class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var editable: Bool {
         get {
