@@ -17,6 +17,9 @@
 		690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462223AA4CB0000445E4 /* AppPreferences.swift */; };
 		690B462523AD82CE000445E4 /* WorldMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462423AD82CE000445E4 /* WorldMan.swift */; };
 		690B462723B0063F000445E4 /* SavitarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462623B0063F000445E4 /* SavitarManager.swift */; };
+		690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */; };
+		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
+		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -86,6 +89,8 @@
 		690B462223AA4CB0000445E4 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		690B462423AD82CE000445E4 /* WorldMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMan.swift; sourceTree = "<group>"; };
 		690B462623B0063F000445E4 /* SavitarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarManager.swift; sourceTree = "<group>"; };
+		690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesTests.swift; sourceTree = "<group>"; };
+		690B462C23B16B54000445E4 /* StartupPreferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StartupPreferences.xml; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				695484B61FC4E6E400A6983F /* Info.plist */,
+				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				695484B41FC4E6E400A6983F /* Savitar2Tests.swift */,
 				69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */,
 				69071B3823A52A7B001C58B1 /* TriggerManTests.swift */,
@@ -320,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				696F77472390D256005E45EB /* Appearance.txt */,
+				690B462C23B16B54000445E4 /* StartupPreferences.xml */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -460,6 +467,7 @@
 			files = (
 				6994602E2041124800409308 /* World.icns in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
+				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);
@@ -469,6 +477,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +642,7 @@
 				697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */,
 				69071B3F23A6EA51001C58B1 /* WorldTests.swift in Sources */,
 				695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */,
+				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
