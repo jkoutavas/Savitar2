@@ -43,21 +43,23 @@ enum IntensityType: Int {
     case color
 }
 
-// TODO: make World an NSObject, SabvitarXMLProtocol, then subclass WorldController
+// World is a NSController and has NSCopying because it is using KVO bindings
+// for editing in World Settings.
+// TODO: work out a means to have World be purely a data model object
 class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var editable: Bool {
         get {
             return version != 1
         }
     }
+    
+    // KVO-based world settings with their defaults
 
     // TODO: just some hard-coded connection settings right now
     @objc dynamic var port: UInt32 = 1337
     @objc dynamic var host = "::1"
 
-    // world settings with defaults
     @objc dynamic var name: String = ""
-    var flags: WorldFlags = [.ansi, .html]
     @objc dynamic var cmdMarker = "##"
     @objc dynamic var varMarker = "%%"
     @objc dynamic var wildMarker = "$$"
@@ -72,6 +74,9 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var monoFontSize: CGFloat = 9
     @objc dynamic var MCPFontName = "Monaco"
     @objc dynamic var MCPFontSize: CGFloat = 9
+    
+    // other world settings, not tied directly to KVO
+    var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
     var inputRows = 2
     var outputRows = 24
