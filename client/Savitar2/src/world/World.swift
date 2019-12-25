@@ -74,7 +74,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var monoFontSize: CGFloat = 9
     @objc dynamic var MCPFontName = "Monaco"
     @objc dynamic var MCPFontSize: CGFloat = 9
-    
+
     // other world settings, not tied directly to KVO
     var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
@@ -94,6 +94,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var GUID = NSUUID().uuidString
 
     var triggerMan = TriggerMan()
+    var variableMan = VariableMan()
 
     // utility, not persistent
     var logger: Logger
@@ -354,6 +355,10 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         if case .singleElement = xml[TriggersElemIdentifier] {
             try triggerMan.parse(xml: xml)
         }
+        
+        if case .singleElement = xml[VariablesElemIdentifier] {
+            try variableMan.parse(xml: xml)
+        }
     }
 
     func toXMLElement() throws -> XMLElement {
@@ -435,6 +440,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         let triggersElem = try triggerMan.toXMLElement()
         if triggersElem.childCount > 0 {
             worldElem.addChild(triggersElem)
+        }
+
+        let variablesElem = try variableMan.toXMLElement()
+        if variablesElem.childCount > 0 {
+            worldElem.addChild(variablesElem)
         }
 
         logger.info("XML data representation \(String(worldElem.xmlString))")

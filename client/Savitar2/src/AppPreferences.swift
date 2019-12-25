@@ -40,10 +40,10 @@ class AppPreferences: SavitarXMLProtocol {
     var flags: PrefsFlags = [.startupPicker, .useKeypad]
     var lastUpdateSecs = 0
     var updatingEnabled = true
-    
+
     var worldMan = WorldMan()
-    
     var triggerMan = TriggerMan()
+    var variableMan = VariableMan()
 
     init() {
         self.version = latestPrefsVersion
@@ -169,7 +169,7 @@ class AppPreferences: SavitarXMLProtocol {
 
         try prefs.triggerMan.parse(xml: xml)
 
-        // variables
+        try prefs.variableMan.parse(xml: xml)
 
         // aliases
 

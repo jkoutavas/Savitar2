@@ -63,6 +63,10 @@ class WorldTests: XCTestCase {
         // swiftlint:enable line_length
 
         XCTAssertEqual(xmlOutString, expectedOutput)
+
+        XCTAssertEqual(w1.triggerMan.get().count, 0)
+
+        XCTAssertEqual(w1.variableMan.get().count, 0)
     }
 
     func testv1WorldXMLWithTriggersToV2() throws {
