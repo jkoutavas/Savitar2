@@ -173,7 +173,47 @@ class AppPreferences: SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
-         return XMLElement() // TODO
+        let prefsElem = XMLElement(name: PreferencesElemIdentifier)
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.version.rawValue,
+            stringValue: "\(version)")
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechEnabled.rawValue,
+            stringValue: continuousSpeechEnabled ? "TRUE" : "FALSE")
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechRate.rawValue,
+            stringValue: "\(continuousSpeechRate)")
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.flags.rawValue,
+            stringValue: flags.description)
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.lastUpdateCheck.rawValue,
+            stringValue: "\(lastUpdateSecs)")
+
+        prefsElem.addAttribute(name: PrefsAttribIdentifier.updatingEnabled.rawValue,
+            stringValue: updatingEnabled ? "TRUE" : "FALSE")
+
+        let worldsElem = try worldMan.toXMLElement()
+        if worldsElem.childCount > 0 {
+            prefsElem.addChild(worldsElem)
+        }
+
+        let triggersElem = try triggerMan.toXMLElement()
+        if triggersElem.childCount > 0 {
+            prefsElem.addChild(triggersElem)
+        }
+
+        let variablesElem = try variableMan.toXMLElement()
+        if variablesElem.childCount > 0 {
+            prefsElem.addChild(variablesElem)
+        }
+
+        let colorsElem = try colorMan.toXMLElement()
+        if colorsElem.childCount > 0 {
+            prefsElem.addChild(colorsElem)
+        }
+
+         return prefsElem
     }
 }
 
