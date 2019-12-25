@@ -7,17 +7,9 @@
 //
 
 import Cocoa
-import Logging
 import SwiftyXMLParser
 
 let WorldElemIdentifier = "WORLD"
-
-private func initLogger() -> Logger {
-    var logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
-    logger[metadataKey: "m"] = "World" // "m" is for "module"
-
-    return logger
-}
 
 struct WorldFlags: OptionSet, Hashable {
     let rawValue: Int
@@ -96,12 +88,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var triggerMan = TriggerMan()
     var variableMan = VariableMan()
 
-    // utility, not persistent
-    var logger: Logger
-
     init(world: World) {
-        self.logger = initLogger()
-
         self.port = world.port
         self.host = world.host
         self.name = world.name
@@ -138,8 +125,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     }
 
     override init() {
-         self.logger = initLogger()
-
         super.init()
     }
 
@@ -198,8 +183,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     }
 
     func parse(xml: XML.Accessor) throws {
-        logger.info("parsing \(String(describing: xml))")
-
         let intensityLabels: [String: IntensityType] = [
             "auto": .auto,
             "bold": .bold,
@@ -348,14 +331,14 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
                 GUID = attribute.value
 
             default:
-                logger.info("skipping XML attribute \(attribute.key)")
+                print("skipping world XML attribute \(attribute.key)")
             }
         }
 
         if case .singleElement = xml[TriggersElemIdentifier] {
             try triggerMan.parse(xml: xml)
         }
-        
+
         if case .singleElement = xml[VariablesElemIdentifier] {
             try variableMan.parse(xml: xml)
         }
@@ -447,7 +430,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
             worldElem.addChild(variablesElem)
         }
 
-        logger.info("XML data representation \(String(worldElem.xmlString))")
         return worldElem
     }
 }
