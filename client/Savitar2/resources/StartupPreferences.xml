@@ -1,6 +1,3 @@
-<!DOCTYPE doc [
-	<!ENTITY ret "&#38;#13;">
-]>
 <PREFERENCES
 	VERSION="200"
 	FLAGS="startupPicker+useKeypad"
@@ -453,7 +450,7 @@
 			NAME="MACRO_5"
 			KEY="F5">
 			<VALUE>
-				say Here is command one...&ret;say ...and here is command two!
+				say Here is command one...&#13;say ...and here is command two!
 			</VALUE>
 		</MACRO>
 	</VARIABLES>
