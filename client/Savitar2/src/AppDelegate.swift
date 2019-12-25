@@ -11,11 +11,18 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 
+var isRunningTests: Bool {
+    return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+}
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
+        if isRunningTests {
+            return
+        }
+        
         MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
           MSAnalytics.self,
           MSCrashes.self
