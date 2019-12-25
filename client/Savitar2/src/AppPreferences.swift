@@ -44,6 +44,7 @@ class AppPreferences: SavitarXMLProtocol {
     var worldMan = WorldMan()
     var triggerMan = TriggerMan()
     var variableMan = VariableMan()
+    var colorMan = ColorMan()
 
     init() {
         self.version = latestPrefsVersion
@@ -166,14 +167,9 @@ class AppPreferences: SavitarXMLProtocol {
         }
 
         try prefs.worldMan.parse(xml: xml)
-
         try prefs.triggerMan.parse(xml: xml)
-
         try prefs.variableMan.parse(xml: xml)
-
-        // aliases
-
-        // colors
+        try prefs.colorMan.parse(xml: xml)
     }
 
     func toXMLElement() throws -> XMLElement {
