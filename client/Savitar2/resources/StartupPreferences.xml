@@ -454,83 +454,6 @@
 			</VALUE>
 		</MACRO>
 	</VARIABLES>
-	<ALIASES>
-		<ALIAS
-			NAME="MACRO_NORTH"
-		/>
-		<ALIAS
-			NAME="MACRO_NEAST"
-		/>
-		<ALIAS
-			NAME="MACRO_EAST"
-		/>
-		<ALIAS
-			NAME="MACRO_SEAST"
-		/>
-		<ALIAS
-			NAME="MACRO_SOUTH"
-		/>
-		<ALIAS
-			NAME="MACRO_SWEST"
-		/>
-		<ALIAS
-			NAME="MACRO_WEST"
-		/>
-		<ALIAS
-			NAME="MACRO_NWEST"
-		/>
-		<ALIAS
-			NAME="MACRO_1"
-		/>
-		<ALIAS
-			NAME="MACRO_2"
-		/>
-		<ALIAS
-			NAME="MACRO_3"
-		/>
-		<ALIAS
-			NAME="MACRO_4"
-		/>
-		<ALIAS
-			NAME="MACRO_5"
-		/>
-		<ALIAS
-			NAME="MACRO_6"
-		/>
-		<ALIAS
-			NAME="MACRO_7"
-		/>
-		<ALIAS
-			NAME="MACRO_8"
-		/>
-		<ALIAS
-			NAME="MACRO_9"
-		/>
-		<ALIAS
-			NAME="MACRO_A"
-		/>
-		<ALIAS
-			NAME="MACRO_B"
-		/>
-		<ALIAS
-			NAME="MACRO_C"
-		/>
-		<ALIAS
-			NAME="MACRO_D"
-		/>
-		<ALIAS
-			NAME="MACRO_E"
-		/>
-		<ALIAS
-			NAME="MACRO_F"
-		/>
-		<ALIAS
-			NAME="MACRO_UP"
-		/>
-		<ALIAS
-			NAME="MACRO_DOWN"
-		/>
-	</ALIASES>
 	<COLORS>
 		<COLOR
 			NAME="black"
@@ -629,25 +552,4 @@
 			RGB="#FFFFFF"
 		/>
 	</COLORS>
-	<RECT
-		NAME="EventWindowPos"
-		TOP="0"
-		LEFT="-32768"
-		BOTTOM="0"
-		RIGHT="0"
-	/>
-	<RECT
-		NAME="WorldPickerPos"
-		TOP="0"
-		LEFT="0"
-		BOTTOM="0"
-		RIGHT="0"
-	/>
-	<RECT
-		NAME="ClickerPos"
-		TOP="0"
-		LEFT="0"
-		BOTTOM="0"
-		RIGHT="0"
-	/>
 </PREFERENCES>
