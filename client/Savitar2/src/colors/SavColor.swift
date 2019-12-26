@@ -40,6 +40,14 @@ class SavColor: NSObject, SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
-        return XMLElement()
+        let colorElem = XMLElement(name: ColorElemIdentifier)
+
+        if let colorStr = self.color?.toHex() {
+            colorElem.addAttribute(name: ColorAttribIdentifier.name.rawValue, stringValue: self.name)
+
+            colorElem.addAttribute(name: ColorAttribIdentifier.rgb.rawValue, stringValue: "#\(colorStr)")
+        }
+
+        return colorElem
     }
 }

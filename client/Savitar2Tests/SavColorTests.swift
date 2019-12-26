@@ -14,8 +14,6 @@ import SwiftyXMLParser
 class SavColorTests: XCTestCase {
 
      func testV2CarriageReturn() throws {
-        // Here we're simply inlining a &#13; entity to indicate a line feed. (Where as v1 Savitar macros
-        // would use a "&ret;" custom entity
         let xmlString = """
         <COLOR
             NAME="red"
