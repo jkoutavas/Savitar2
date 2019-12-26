@@ -270,9 +270,8 @@ class Trigger: NSObject, SavitarXMLProtocol {
 
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
-         if let value = audioCueDict[self.audioCue] {
-            trigElem.addChild(
-                XMLElement.init(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value))
+        if let value = audioCueDict[self.audioCue] {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
         }
 
         if let value = self.style?.backColor?.toHex() {

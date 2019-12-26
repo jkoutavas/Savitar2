@@ -270,8 +270,7 @@ class TriggerTests: XCTestCase {
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <TRIGGER FGCOLOR="#26C9EE" FLAGS="matchWholeLine+matchAtStart" NAME="russ" SOUND="Click" TYPE="output" VOICE="Ralph">
-            <AUDIO>speakEvent</AUDIO>
+        <TRIGGER AUDIO="speakEvent" FGCOLOR="#26C9EE" FLAGS="matchWholeLine+matchAtStart" NAME="russ" SOUND="Click" TYPE="output" VOICE="Ralph">
             <WORDEND>&amp;-"</WORDEND>
             <SAY>Select a voice from the menu to hear this.</SAY>
             <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
