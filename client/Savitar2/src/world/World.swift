@@ -7,15 +7,9 @@
 //
 
 import Cocoa
-import Logging
 import SwiftyXMLParser
 
-private func initLogger() -> Logger {
-    var logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
-    logger[metadataKey: "m"] = "World" // "m" is for "module"
-
-    return logger
-}
+let WorldElemIdentifier = "WORLD"
 
 struct WorldFlags: OptionSet, Hashable {
     let rawValue: Int
@@ -41,20 +35,18 @@ enum IntensityType: Int {
     case color
 }
 
+// World is a NSController and has NSCopying because it is using KVO bindings
+// for editing in World Settings.
+// TODO: work out a means to have World be purely a data model object
 class World: NSController, NSCopying, SavitarXMLProtocol {
-    @objc dynamic var editable: Bool {
-        get {
-            return version != 1
-        }
-    }
+    // KVO-based world settings with their defaults
+    @objc dynamic var editable = true
 
     // TODO: just some hard-coded connection settings right now
     @objc dynamic var port: UInt32 = 1337
     @objc dynamic var host = "::1"
 
-    // world settings with defaults
     @objc dynamic var name: String = ""
-    var flags: WorldFlags = [.ansi, .html]
     @objc dynamic var cmdMarker = "##"
     @objc dynamic var varMarker = "%%"
     @objc dynamic var wildMarker = "$$"
@@ -69,6 +61,9 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     @objc dynamic var monoFontSize: CGFloat = 9
     @objc dynamic var MCPFontName = "Monaco"
     @objc dynamic var MCPFontSize: CGFloat = 9
+
+    // other world settings, not tied directly to KVO
+    var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
     var inputRows = 2
     var outputRows = 24
@@ -82,17 +77,10 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var retrySecs = 0
     var keepAliveMins = 0
 
-    var version = 0
-    var GUID = NSUUID().uuidString
-
     var triggerMan = TriggerMan()
-
-    // utility, not persistent
-    var logger: Logger
+    var variableMan = VariableMan()
 
     init(world: World) {
-        self.logger = initLogger()
-
         self.port = world.port
         self.host = world.host
         self.name = world.name
@@ -122,15 +110,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         self.flushTicks = world.flushTicks
         self.retrySecs = world.retrySecs
         self.keepAliveMins = world.keepAliveMins
-        self.version = world.version
-        self.GUID = world.GUID
 
         super.init()
     }
 
     override init() {
-         self.logger = initLogger()
-
         super.init()
     }
 
@@ -147,7 +131,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     //***************************
 
     let TelnetIdentifier = "telnet://"
-    let WorldElemIdentifier = "WORLD"
 
     // These are the <WORLD> XML element attributes
     enum WorldAttribIdentifier: String {
@@ -183,22 +166,15 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         case keepAliveMins = "KEEPALIVEMINS"
         case logonCmd = "LOGONCMD"
         case logoffCmd = "LOGOFFCMD"
-
-        // these are new for v2
-        case version = "VERSION"
-        case GUID = "GUID"
     }
 
     func parse(xml: XML.Accessor) throws {
-        logger.info("parsing \(String(describing: xml))")
-
         let intensityLabels: [String: IntensityType] = [
             "auto": .auto,
             "bold": .bold,
             "color": .color
         ]
 
-        version = 1 // start with the assumption that v1 world XML is being parsed
         for attribute in xml.attributes {
             switch attribute.key {
             case WorldAttribIdentifier.name.rawValue:
@@ -332,31 +308,22 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
                     keepAliveMins = value
                 }
 
-            case WorldAttribIdentifier.version.rawValue:
-                guard let v = Int(attribute.value) else { break }
-                version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
-
-            case WorldAttribIdentifier.GUID.rawValue:
-                GUID = attribute.value
-
             default:
-                logger.info("skipping XML attribute \(attribute.key)")
+                print("skipping world XML attribute \(attribute.key)")
             }
         }
 
         if case .singleElement = xml[TriggersElemIdentifier] {
             try triggerMan.parse(xml: xml)
         }
+
+        if case .singleElement = xml[VariablesElemIdentifier] {
+            try variableMan.parse(xml: xml)
+        }
     }
 
     func toXMLElement() throws -> XMLElement {
-        version = 2
-
         let worldElem = XMLElement(name: WorldElemIdentifier)
-
-        worldElem.addAttribute(name: WorldAttribIdentifier.version.rawValue, stringValue: "\(version)")
-
-        worldElem.addAttribute(name: WorldAttribIdentifier.GUID.rawValue, stringValue: GUID)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,
                         stringValue: "\(TelnetIdentifier)\(host):\(port)")
@@ -430,7 +397,11 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
             worldElem.addChild(triggersElem)
         }
 
-        logger.info("XML data representation \(String(worldElem.xmlString))")
+        let variablesElem = try variableMan.toXMLElement()
+        if variablesElem.childCount > 0 {
+            worldElem.addChild(variablesElem)
+        }
+
         return worldElem
     }
 }

@@ -1,30 +1,30 @@
 //
-//  TriggerMan.swift
+//  ColorMan.swift
 //  Savitar2
 //
-//  Created by Jay Koutavas on 12/4/19.
+//  Created by Jay Koutavas on 12/25/19.
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
 import SwiftyXMLParser
 
-let TriggersElemIdentifier = "TRIGGERS"
+let ColorsElemIdentifier = "COLORS"
 
-class TriggerMan: SavitarManager<Trigger>, SavitarXMLProtocol {
+class ColorMan: SavitarManager<SavColor>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
-            let object = Trigger()
+         for elem in xml[ColorsElemIdentifier][ColorElemIdentifier] {
+            let object = SavColor()
             try object.parse(xml: elem)
             add(object)
         }
     }
 
     func toXMLElement() throws -> XMLElement {
-        return try toXMLElement(groupId: TriggersElemIdentifier)
+        return try toXMLElement(groupId: ColorsElemIdentifier)
     }
 }

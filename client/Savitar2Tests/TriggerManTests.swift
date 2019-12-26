@@ -13,12 +13,6 @@ import SwiftyXMLParser
 
 class TriggerManTests: XCTestCase {
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testParseV1Triggers() throws {
         // These are the triggers lifted directly from Jay's "The Camp" v1 world document
         let xmlString = """

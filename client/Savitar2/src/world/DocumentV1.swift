@@ -10,11 +10,6 @@ import Cocoa
 
 class DocumentV1: Document {
 
-      override init() {
-        super.init()
-        world.version = 1
-    }
-
     override class var autosavesInPlace: Bool {
         return false
     }

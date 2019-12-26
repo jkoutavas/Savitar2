@@ -270,9 +270,8 @@ class Trigger: NSObject, SavitarXMLProtocol {
 
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
-         if let value = audioCueDict[self.audioCue] {
-            trigElem.addChild(
-                XMLElement.init(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value))
+        if let value = audioCueDict[self.audioCue] {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
         }
 
         if let value = self.style?.backColor?.toHex() {
@@ -325,7 +324,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
 extension TrigFlags: StrOptionSet {
     // TODO: I wonder if there's a DRY-er way to do these
     static var labels: [Label] { return [
-        (.exact, "exact"),
+        (.exact, "matchExactly"),
         (.toEndOfWord, "matchToEndOfWord"),
         (.wholeLine, "matchWholeLine"),
         (.disabled, "disabled"),
@@ -339,7 +338,7 @@ extension TrigFlags: StrOptionSet {
         (.useRegex, "useRegex")
     ]}
     static var labelDict: [String: Self] { return [
-        "exact": .exact,
+        "matchExactly": .exact,
         "matchToEndOfWord": .toEndOfWord,
         "matchWholeLine": .wholeLine,
         "disabled": .disabled,
