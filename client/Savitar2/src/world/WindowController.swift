@@ -25,6 +25,7 @@ class WindowController: NSWindowController {
         // world is read-only (v1.0) then append an indication of that.
         var status = ""
         guard let doc = document as? Document else { return "" }
+        doc.world.editable = doc.version != 1
         if !doc.world.editable {
             status = " [READ ONLY]"
         }
@@ -67,7 +68,8 @@ class WindowController: NSWindowController {
             inputVC.font = font
         }
 
-        if w.version == 1 {
+        guard let doc = document as? Document else { return }
+        if doc.version == 1 {
             window?.setContentSize(w.windowSize)
             if let titleHeight = window?.titlebarHeight {
                 if let screenSize = NSScreen.main?.frame.size {
@@ -84,7 +86,7 @@ class WindowController: NSWindowController {
             window?.setIsZoomed(w.zoomed)
         }
 
-        windowFrameAutosaveName = NSWindow.FrameAutosaveName(w.GUID)
-        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(w.GUID)
+        windowFrameAutosaveName = NSWindow.FrameAutosaveName(doc.GUID)
+        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(doc.GUID)
     }
 }

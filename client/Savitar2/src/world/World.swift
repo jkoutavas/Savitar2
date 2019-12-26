@@ -39,13 +39,8 @@ enum IntensityType: Int {
 // for editing in World Settings.
 // TODO: work out a means to have World be purely a data model object
 class World: NSController, NSCopying, SavitarXMLProtocol {
-    @objc dynamic var editable: Bool {
-        get {
-            return version != 1
-        }
-    }
-    
     // KVO-based world settings with their defaults
+    @objc dynamic var editable = true
 
     // TODO: just some hard-coded connection settings right now
     @objc dynamic var port: UInt32 = 1337
@@ -82,9 +77,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var retrySecs = 0
     var keepAliveMins = 0
 
-    var version = 0
-    var GUID = NSUUID().uuidString
-
     var triggerMan = TriggerMan()
     var variableMan = VariableMan()
 
@@ -118,8 +110,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         self.flushTicks = world.flushTicks
         self.retrySecs = world.retrySecs
         self.keepAliveMins = world.keepAliveMins
-        self.version = world.version
-        self.GUID = world.GUID
 
         super.init()
     }
@@ -176,10 +166,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         case keepAliveMins = "KEEPALIVEMINS"
         case logonCmd = "LOGONCMD"
         case logoffCmd = "LOGOFFCMD"
-
-        // these are new for v2
-        case version = "VERSION"
-        case GUID = "GUID"
     }
 
     func parse(xml: XML.Accessor) throws {
@@ -189,7 +175,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
             "color": .color
         ]
 
-        version = 1 // start with the assumption that v1 world XML is being parsed
         for attribute in xml.attributes {
             switch attribute.key {
             case WorldAttribIdentifier.name.rawValue:
@@ -323,13 +308,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
                     keepAliveMins = value
                 }
 
-            case WorldAttribIdentifier.version.rawValue:
-                guard let v = Int(attribute.value) else { break }
-                version = v // found a version attribute? Then we're v2 or later (version attribute got added in v2)
-
-            case WorldAttribIdentifier.GUID.rawValue:
-                GUID = attribute.value
-
             default:
                 print("skipping world XML attribute \(attribute.key)")
             }
@@ -345,13 +323,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
-        version = 2
-
         let worldElem = XMLElement(name: WorldElemIdentifier)
-
-        worldElem.addAttribute(name: WorldAttribIdentifier.version.rawValue, stringValue: "\(version)")
-
-        worldElem.addAttribute(name: WorldAttribIdentifier.GUID.rawValue, stringValue: GUID)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,
                         stringValue: "\(TelnetIdentifier)\(host):\(port)")
