@@ -69,7 +69,9 @@ class Variable: NSObject, SavitarXMLProtocol {
             }
             flags = "\(flags)readOnly"
         }
-        varElem.addAttribute(name: VariableAttribIdentifier.flags.rawValue, stringValue: flags)
+        if flags.count > 0 {
+            varElem.addAttribute(name: VariableAttribIdentifier.flags.rawValue, stringValue: flags)
+        }
 
         varElem.addChild(XMLElement.init(name: ValueElemIdentifier, stringValue: value))
 
