@@ -14,12 +14,13 @@ import SwiftyXMLParser
 class AppPreferencesTests: XCTestCase {
     let startingPrefs = AppPreferences()
     let defaultPrefs = AppPreferences()
+    var xmlInputStr = ""
 
     override func setUp() {
         if let filepath = Bundle.main.path(forResource: "StartupPreferences", ofType: "xml") {
             do {
-                let contents = try String(contentsOfFile: filepath)
-                let xml = try XML.parse(contents)
+                xmlInputStr = try String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
+                let xml = try XML.parse(xmlInputStr)
                 try startingPrefs.parse(xml: xml[PreferencesElemIdentifier])
             } catch {
                 XCTFail("Error thrown")
@@ -55,4 +56,12 @@ class AppPreferencesTests: XCTestCase {
     func testColorMan() {
         XCTAssertEqual(startingPrefs.colorMan.get().count, 24)
     }
+
+    func testXMLOutput() throws {
+        let xmlOutputStr = try startingPrefs.toXMLElement().xmlString.prettyXMLFormat()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        XCTAssertEqual(xmlOutputStr, xmlInputStr)
+    }
+
 }

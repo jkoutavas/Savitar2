@@ -31,6 +31,9 @@ struct PrefsFlags: OptionSet {
 }
 
 class AppPreferences: SavitarXMLProtocol {
+    let v1PrefsPath = "~/Library/Preferences/Savitar 2.0 Prefs"
+    let v2PrefsPath = "~/Library/Preferences/Savitar2 Prefs"
+
     let prevPrefsVersion = 140
     let latestPrefsVersion = 200
     var version = 0
@@ -51,74 +54,61 @@ class AppPreferences: SavitarXMLProtocol {
     }
 
     func load() throws {
-        let prefs = self
-
         // An interesting bit of Savitar history trivia... Savitar v1.x named its prefs file as "2.0"
         // during a significant change in the content of the preferences during minor releases, and I was
         // anticipating bumping Savitar's major version, but that didn't come to pass.
 
+        var loaded = false
+
         // Try to load v2 preferences, if any.
         do {
-            let v2PrefsPath = "~/Library/Preferences/Savitar2 Prefs"
-            // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
+             // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
             let xmlStr = try String(contentsOfFile: NSString(string: v2PrefsPath).expandingTildeInPath)
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
+            loaded = true
         } catch {
             // It's okay if loading v2 prefs failed. It simply means Savitar v2 is not installed, or the v2 preferences
             // are corrupt.
         }
 
+        if loaded == true {
+            return
+        }
+
         // Try to load v1 preferences, if any.
         do {
-            let v1PrefsPath = "~/Library/Preferences/Savitar 2.0 Prefs"
             // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
-            let xmlStr = try String(contentsOfFile: NSString(string: v1PrefsPath).expandingTildeInPath)
+            var xmlStr = try String(contentsOfFile: NSString(string: v1PrefsPath).expandingTildeInPath)
+
+            // v1 Savitar variables use the "&ret;" custom entity to separate lines of text.
+            // XMLParser has a known bug with handling custom entities (of which SwiftyXMLParser is based)
+            // See: https://stackoverflow.com/questions/44680734/parsing-xml-with-entities-in-swift-with-xmlparser
+            // Here we're simply replace it with a \n to indicate a line feed
+            xmlStr = xmlStr.replacingOccurrences(of: "&ret;", with: "\n")
+
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
+            loaded = true
         } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.
         }
+    }
 
-        if prefs.version < prefs.latestPrefsVersion {
-            // write-out v2 preferences
+    func save() throws {
+        let xmlOutputStr = try self.toXMLElement().xmlString.prettyXMLFormat()
+
+        // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
+        let filename = NSString(string: v2PrefsPath).expandingTildeInPath
+        let fileURL = URL(fileURLWithPath: filename)
+        do {
+            try xmlOutputStr.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be
+            // converted to the encoding
         }
-
-        // TODO: load these from v1 or v2 settings
-
-        // gag tests
-        AppContext.triggerMan.add(Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag]))
-        AppContext.triggerMan.add(Trigger(name: "wholeline", flags: [.wholeLine, .gag]))
-
-        // substitution tests
-        AppContext.triggerMan.add(Trigger(name: "bang*", flags: [.useRegex, .useSubstitution], substitution: "HEYNOW"))
-
-        // styling tests
-        AppContext.triggerMan.add(Trigger(name: "ell", flags: [.caseSensitive, .exact],
-             style: TrigTextStyle(face: .bold)))
-
-        AppContext.triggerMan.add(Trigger(name: "test", flags: .exact,
-             style: TrigTextStyle(face: .blink)))
-
-        AppContext.triggerMan.add(Trigger(name: "TO END", flags: .wholeLine,
-             style: TrigTextStyle(face: .underline)))
-
-        AppContext.triggerMan.add(Trigger(name: "boom*", flags: [.caseSensitive, .useRegex],
-             style: TrigTextStyle(face: .italic)))
-
-        AppContext.triggerMan.add(Trigger(name: "combo", flags: [.caseSensitive, .useRegex],
-             style: TrigTextStyle(face: [.italic, .underline])))
-
-        AppContext.triggerMan.add(Trigger(name: "inverse",
-             style: TrigTextStyle(face: .inverse)))
-
-        AppContext.triggerMan.add(Trigger(name: "purple",
-             style: TrigTextStyle(foreColor: NSColor.purple)))
-
-        AppContext.triggerMan.add(Trigger(name: "warning", flags: .wholeLine,
-             style: TrigTextStyle(face: .underline, backColor: NSColor.red)))
-}
+    }
 
     //***************************
     // MARK: - SavitarXMLProtocol
@@ -174,6 +164,8 @@ class AppPreferences: SavitarXMLProtocol {
 
     func toXMLElement() throws -> XMLElement {
         let prefsElem = XMLElement(name: PreferencesElemIdentifier)
+
+        version = latestPrefsVersion
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.version.rawValue,
             stringValue: "\(version)")

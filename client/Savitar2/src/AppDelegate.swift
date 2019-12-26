@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if isRunningTests {
             return
         }
-        
+
         MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
           MSAnalytics.self,
           MSCrashes.self
@@ -34,7 +34,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
      }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        if isRunningTests {
+            return
+        }
+
+        do {
+            try AppContext.save()
+        } catch {}
     }
 
     func applicationOpenUntitledFile(_ sender: NSApplication) -> Bool {
