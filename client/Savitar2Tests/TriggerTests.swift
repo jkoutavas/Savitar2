@@ -146,7 +146,7 @@ class TriggerTests: XCTestCase {
     func testTrigFlagsFrom() {
         // TODO: make this exhaustive
         let flags = TrigFlags.from(string: "useRegex")
-        XCTAssertEqual(flags.union(.exact).description, "exact+useRegex")
+        XCTAssertEqual(flags.union(.exact).description, "matchExactly+useRegex")
     }
 
     func testXMLParseV1Trigger() throws {
