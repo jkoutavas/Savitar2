@@ -111,14 +111,14 @@ public class Endpoint: NSObject, StreamDelegate {
             //    2. subsitution triggers
             //    3. all the rest
             var processedTriggers: [Trigger] = []
-            for trigger in AppContext.triggerMan.get() {
+            for trigger in AppContext.prefs.triggerMan.get() {
                 if trigger.flags.contains(.gag) {
                     line = trigger.reactionTo(line: line)
                     processedTriggers.append(trigger)
                 }
             }
             if line.count > 0 {
-                for trigger in AppContext.triggerMan.get() {
+                for trigger in AppContext.prefs.triggerMan.get() {
                     if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
                         line = trigger.reactionTo(line: line)
                         processedTriggers.append(trigger)
@@ -126,7 +126,7 @@ public class Endpoint: NSObject, StreamDelegate {
                 }
             }
             if line.count > 0 {
-                for trigger in AppContext.triggerMan.get() {
+                for trigger in AppContext.prefs.triggerMan.get() {
                     if !processedTriggers.contains(trigger) {
                         line = trigger.reactionTo(line: line)
                     }

@@ -10,12 +10,13 @@ import Cocoa
 
 struct AppContext {
     static var prefs = AppPreferences()
-    static var triggerMan = TriggerMan()
 
     static func load() throws {
         try prefs.load()
 
+/*
         // TODO: load these from a test world document
+        let triggerMan = prefs.triggerMan
 
         // gag tests
         triggerMan.add(Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag]))
@@ -48,6 +49,7 @@ struct AppContext {
 
         triggerMan.add(Trigger(name: "warning", flags: .wholeLine,
              style: TrigTextStyle(face: .underline, backColor: NSColor.red)))
+*/
     }
 
     static func save() throws {

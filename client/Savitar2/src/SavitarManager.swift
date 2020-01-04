@@ -9,6 +9,7 @@
 import SwiftyXMLParser
 
 class SavitarManager<Object: SavitarXMLProtocol> {
+    var name = ""
     private var objects: [Object] = []
 
     func add(_ object: Object) {
