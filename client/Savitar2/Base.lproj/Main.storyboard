@@ -331,7 +331,7 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
-                                        <menuItem title="World Settings…" keyEquivalent="j" id="MEz-75-Dnr">
+                                        <menuItem title="World Settings…" keyEquivalent="J" id="MEz-75-Dnr">
                                             <connections>
                                                 <action selector="showWorldSetting:" target="Ady-hI-5gd" id="25J-Hm-ccm"/>
                                             </connections>
@@ -655,6 +655,12 @@
                                                 <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="wl3-W1-gTE"/>
+                                        <menuItem title="Show Events Window" keyEquivalent="E" id="kRU-49-nfY">
+                                            <connections>
+                                                <action selector="showEventsWindowAction:" target="Voe-Tx-rLC" id="7mA-cl-DqA"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -770,7 +776,7 @@
                                     <rect key="frame" x="1" y="1" width="583" height="98"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" continuousSpellChecking="YES" allowsDocumentBackgroundColorChange="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="z73-YD-nRv">
+                                        <textView ambiguous="YES" importsGraphics="NO" verticallyResizable="YES" findStyle="bar" continuousSpellChecking="YES" allowsDocumentBackgroundColorChange="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="z73-YD-nRv">
                                             <rect key="frame" x="0.0" y="0.0" width="583" height="98"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>

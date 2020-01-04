@@ -52,6 +52,8 @@
 		69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD523B4011500E9F087 /* SavColor.swift */; };
 		69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD723B4064D00E9F087 /* ColorManTests.swift */; };
 		69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD923B4078400E9F087 /* SavColorTests.swift */; };
+		69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */; };
+		69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
@@ -139,6 +141,8 @@
 		69CEEDD523B4011500E9F087 /* SavColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColor.swift; sourceTree = "<group>"; };
 		69CEEDD723B4064D00E9F087 /* ColorManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManTests.swift; sourceTree = "<group>"; };
 		69CEEDD923B4078400E9F087 /* SavColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColorTests.swift; sourceTree = "<group>"; };
+		69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsWindow.storyboard; sourceTree = "<group>"; };
+		69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				690B462623B0063F000445E4 /* SavitarManager.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
+				69CEEDE023BEDA7900E9F087 /* events */,
 				69662B23204367BD00E7CC7B /* extensions */,
 				696F77402390CFF2005E45EB /* thirdparty */,
 				69000EDA23942513009976E0 /* triggers */,
@@ -360,6 +365,15 @@
 				69CEEDD523B4011500E9F087 /* SavColor.swift */,
 			);
 			path = colors;
+			sourceTree = "<group>";
+		};
+		69CEEDE023BEDA7900E9F087 /* events */ = {
+			isa = PBXGroup;
+			children = (
+				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
+				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
+			);
+			path = events;
 			sourceTree = "<group>";
 		};
 		69DE2D20209D40A900A4D3F2 /* resources */ = {
@@ -506,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6994602E2041124800409308 /* World.icns in Resources */,
+				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
@@ -674,6 +689,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
+				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
 				69662B2B204367BD00E7CC7B /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

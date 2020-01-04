@@ -144,6 +144,20 @@ class Trigger: NSObject, SavitarXMLProtocol {
         return resultLine
     }
 
+    let audioCueDict: [AudioType: String] = [
+        .silent: "silent",
+        .sound: "sound",
+        .speakEvent: "speakEvent",
+        .sayText: "sayText"
+    ]
+
+    let typeDict: [TrigType: String] = [
+        .unknown: "unknown",
+        .input: "input",
+        .output: "output",
+        .both: "both"
+    ]
+    
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
@@ -254,20 +268,6 @@ class Trigger: NSObject, SavitarXMLProtocol {
     }
 
     func toXMLElement() throws -> XMLElement {
-        let audioCueDict: [AudioType: String] = [
-            .silent: "silent",
-            .sound: "sound",
-            .speakEvent: "speakEvent",
-            .sayText: "sayText"
-        ]
-
-        let typeDict: [TrigType: String] = [
-            .unknown: "unknown",
-            .input: "input",
-            .output: "output",
-            .both: "both"
-        ]
-
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
         if let value = audioCueDict[self.audioCue] {

@@ -1,6 +1,6 @@
 # README #
 
-Last updated: December 26th, 2019
+Last updated: January 2nd, 2020
 
 Welcome to the Savitar 2.0 git repository
 
@@ -16,7 +16,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 
 ```
 √ Started a private github repo
-√ App is 64bit only, runs on Catalina
+√ App is 64bit only, runs on macOS 10.12 and later, including Catalina
 √ App is integrated with AppCenter, handles crash reporting and basic analytics
 √ Reading Sav 1.x world settings, opening sessions
 √ Integerated WKWebView as the output pane
@@ -25,14 +25,15 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Load Sav 1.x app settings (includes triggers)
 √ Load Sav 1.x world triggers
 _ Input pane command recall and local commands supported
-_ Triggers Window implemented
+_ Implement input triggers
+_ Implement Triggers Window
 _ Implement World settings Starting tab
 _ Connect/disconnect session handling
 _ Implement remaining World settings tabs
+_ Menubar finalized
 _ Logging
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
-_ Enhanced analytics
 ```
 
 ### start of beta
@@ -41,8 +42,8 @@ _ Enhanced analytics
 _ Move github repo to public
 _ Release alpha to select testers, start geting feedback
 _ rewrite Aha
+_ Enhanced analytics
 _ ANSI Color Settings window implemented
-_ input triggers (? does anyone use these?)
 _ Macro Clicker
 _ MCP (? does anyone use this?)
 _ Audio & Speech
@@ -56,7 +57,8 @@ These features take Savitar 2.0 beyond what 1.6.x provides:
 
 ```
 _ SSL support
-_ Javascript ?
+_ Dark Mode support
+_ Javascript scripting?
 _ ???
 ```
 
