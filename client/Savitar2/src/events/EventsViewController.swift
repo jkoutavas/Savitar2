@@ -8,31 +8,73 @@
 
 import Cocoa
 
-class EventsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    @IBOutlet var triggerTable: NSTableView!
+class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+    @IBOutlet var triggerTable: NSOutlineView!
 
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return AppContext.triggerMan.get().count
-    }
+    let triggerMen = [AppContext.prefs.triggerMan, TriggerMan.init()]
 
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-      let trigger = AppContext.triggerMan.get()[row]
-
-      guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
-        as? NSTableCellView else { return nil }
-
-      if (tableColumn?.identifier)!.rawValue == "name" {
-          cell.textField?.stringValue = trigger.name
-      } else if (tableColumn?.identifier)!.rawValue == "type" {
-        if let value = trigger.typeDict[trigger.type] {
-            cell.textField?.stringValue = value
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        triggerMen[1].name = "foo"
+        for tm in triggerMen {
+            triggerTable.expandItem(tm)
         }
-      } else {
-          if let value = trigger.audioCueDict[trigger.audioCue] {
-              cell.textField?.stringValue = value
-          }
-      }
-
-      return cell
     }
-}
+
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if let triggerMan = item as? TriggerMan {
+            return triggerMan.get().count
+        }
+        return triggerMen.count
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if let triggerMan = item as? TriggerMan {
+            return triggerMan.get()[index]
+        }
+
+        return triggerMen[index]
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        if let triggerMan = item as? TriggerMan {
+            return triggerMan.get().count > 0
+        }
+
+        return false
+    }
+
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        guard let cell = outlineView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+            as? NSTableCellView else { return nil }
+
+        if let triggerMan = item as? TriggerMan {
+            if tableColumn!.identifier.rawValue == "name" {
+                cell.textField?.stringValue = triggerMan.name
+            } else {
+                cell.textField?.stringValue = ""
+            }
+        } else if let trigger = item as? Trigger {
+            if (tableColumn?.identifier)!.rawValue == "name" {
+                cell.textField?.stringValue = trigger.name
+            } else if (tableColumn?.identifier)!.rawValue == "type" {
+              if let value = trigger.typeDict[trigger.type] {
+                  cell.textField?.stringValue = value
+              }
+            } else {
+                if let value = trigger.audioCueDict[trigger.audioCue] {
+                    cell.textField?.stringValue = value
+                }
+            }
+        }
+
+        return cell
+    }
+    
+    @IBAction func doubleClickedTrigger(_ sender: NSOutlineView) {
+        let item = sender.item(atRow: sender.clickedRow)
+        if item is Trigger {
+            print("heynow")
+        }
+    }
+ }
