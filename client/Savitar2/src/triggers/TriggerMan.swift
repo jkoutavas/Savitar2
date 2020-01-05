@@ -18,9 +18,17 @@ class TriggerMan: SavitarManager<Trigger>, SavitarXMLProtocol {
 
     func parse(xml: XML.Accessor) throws {
          for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
-            let object = Trigger()
-            try object.parse(xml: elem)
-            add(object)
+            let trigger = Trigger()
+            try trigger.parse(xml: elem)
+
+            /*
+             * For perfomance reasons, formulate the on and off escape sequences as they are set
+             */
+            if trigger.style != nil {
+                trigger.style!.formOnOff()
+            }
+
+            add(trigger)
         }
     }
 

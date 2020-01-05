@@ -136,10 +136,9 @@ struct TrigTextStyle: Equatable {
         self.face = face
         self.foreColor = foreColor
         self.backColor = backColor
+    }
 
-        /*
-         * For perfomance reasons, formulate the on and off escape sequences as they are set
-         */
+    mutating func formOnOff() {
         let faceOn = face?.formOnANSICode() ?? ""
         let faceOff = face?.formOffANSICode() ?? ""
 
