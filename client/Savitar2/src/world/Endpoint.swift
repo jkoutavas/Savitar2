@@ -26,12 +26,16 @@ public class Endpoint: NSObject, StreamDelegate {
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
+
+        AppContext.worldMan.add(world)
     }
 
     func close() {
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
+        
+        AppContext.worldMan.remove(world)
     }
 
     func connectAndRun() {
@@ -102,7 +106,7 @@ public class Endpoint: NSObject, StreamDelegate {
                 continue
             }
 
-//            line = processTriggers(inputLine: line, triggerMan: AppContext.prefs.triggerMan)
+            line = processTriggers(inputLine: line, triggerMan: AppContext.prefs.triggerMan)
             if line.count > 0 {
                 line = processTriggers(inputLine: line, triggerMan: world.triggerMan)
             }

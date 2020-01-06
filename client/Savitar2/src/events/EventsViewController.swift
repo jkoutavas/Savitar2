@@ -11,11 +11,17 @@ import Cocoa
 class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
     @IBOutlet var triggerTable: NSOutlineView!
 
-    let triggerMen = [AppContext.prefs.triggerMan, TriggerMan.init()]
+    var triggerMen: [TriggerMan] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        triggerMen[1].name = "foo"
+
+        triggerMen.append(AppContext.prefs.triggerMan)
+        for world in AppContext.worldMan.get() {
+            triggerMen.append(world.triggerMan)
+        }
+        triggerTable.reloadData()
+
         for tm in triggerMen {
             triggerTable.expandItem(tm)
         }
@@ -70,7 +76,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
         return cell
     }
-    
+
     @IBAction func doubleClickedTrigger(_ sender: NSOutlineView) {
         let item = sender.item(atRow: sender.clickedRow)
         if item is Trigger {

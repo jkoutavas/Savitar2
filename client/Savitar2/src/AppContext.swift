@@ -10,6 +10,7 @@ import Cocoa
 
 struct AppContext {
     static var prefs = AppPreferences()
+    static var worldMan = WorldMan()
 
     static func load() throws {
         try prefs.load()
