@@ -54,6 +54,9 @@
 		69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD923B4078400E9F087 /* SavColorTests.swift */; };
 		69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */; };
 		69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */; };
+		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
+		69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */; };
+		69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE923C2C8B900E9F087 /* WorldController.swift */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
@@ -143,6 +146,9 @@
 		69CEEDD923B4078400E9F087 /* SavColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColorTests.swift; sourceTree = "<group>"; };
 		69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsWindow.storyboard; sourceTree = "<group>"; };
 		69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObject.swift; sourceTree = "<group>"; };
+		69CEEDE923C2C8B900E9F087 /* WorldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldController.swift; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
@@ -283,6 +289,7 @@
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				690B462623B0063F000445E4 /* SavitarManager.swift */,
+				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
 				69CEEDE023BEDA7900E9F087 /* events */,
@@ -311,6 +318,7 @@
 				69662B1D204367BD00E7CC7B /* ViewController.swift */,
 				69F620E6204BC19100301A8D /* WindowController.swift */,
 				69F620E4204B889200301A8D /* World.swift */,
+				69CEEDE923C2C8B900E9F087 /* WorldController.swift */,
 				690B462423AD82CE000445E4 /* WorldMan.swift */,
 				6946AB79208435320075610C /* WorldSettingsController.swift */,
 			);
@@ -320,6 +328,7 @@
 		69662B23204367BD00E7CC7B /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */,
 				69F620E0204B872400301A8D /* CGFloat+Extensions.swift */,
 				6991F4632393245B00E2BFDB /* Data+Extensions.swift */,
 				69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */,
@@ -674,6 +683,7 @@
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
+				69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */,
 				69F620E3204B881600301A8D /* DocumentV2.swift in Sources */,
@@ -685,11 +695,13 @@
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
 				696F77442390CFF2005E45EB /* aha.c in Sources */,
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
+				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
+				69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */,
 				69662B2B204367BD00E7CC7B /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
