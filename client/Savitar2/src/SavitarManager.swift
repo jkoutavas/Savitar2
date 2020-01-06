@@ -8,7 +8,7 @@
 
 import SwiftyXMLParser
 
-class SavitarManager<Object: SavitarXMLProtocol> {
+class SavitarManager<Object: SavitarObject> {
     var name = ""
     private var objects: [Object] = []
 
@@ -19,6 +19,10 @@ class SavitarManager<Object: SavitarXMLProtocol> {
     func get() -> [Object] {
         return objects
     }
+    
+    func remove(_ object: Object) {
+        objects.remove(object: object)
+    }
 
     func toXMLElement(groupId: String) throws -> XMLElement {
         if objects.count > 0 {
@@ -27,7 +31,6 @@ class SavitarManager<Object: SavitarXMLProtocol> {
                 let objectElem = try object.toXMLElement()
                 objectsElem.addChild(objectElem)
             }
-
             return objectsElem
         } else {
             return XMLElement()

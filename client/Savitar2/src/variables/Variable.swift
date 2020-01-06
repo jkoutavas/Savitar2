@@ -11,14 +11,13 @@ import SwiftyXMLParser
 
 let VariableElemIdentifier = "MACRO"
 
-class Variable: NSObject, SavitarXMLProtocol {
+class Variable: SavitarObject {
     public static let defaultName = "<new macro>"
     public static let defaultValue = "<new value>"
 
     // default settings
     var enabled = true
     var readOnly = false
-    var name = defaultName
     var value = defaultValue
     var keySequence = ""
 
@@ -35,7 +34,13 @@ class Variable: NSObject, SavitarXMLProtocol {
         case key = "KEY"
     }
 
-    func parse(xml: XML.Accessor) throws {
+    override init() {
+        super.init()
+        
+        name = Self.defaultName
+    }
+    
+    override func parse(xml: XML.Accessor) throws {
         for attribute in xml.attributes {
             switch attribute.key {
             case VariableAttribIdentifier.name.rawValue:
@@ -55,7 +60,7 @@ class Variable: NSObject, SavitarXMLProtocol {
         }
     }
 
-    func toXMLElement() throws -> XMLElement {
+    override func toXMLElement() throws -> XMLElement {
         let varElem = XMLElement(name: VariableElemIdentifier)
 
         varElem.addAttribute(name: VariableAttribIdentifier.name.rawValue, stringValue: self.name)

@@ -42,13 +42,12 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
  }
 
-class Trigger: NSObject, SavitarXMLProtocol {
+class Trigger: SavitarObject {
     public static let defaultName = "<new trigger>"
 
     // default settings
     var audioCue: AudioType = .silent
     var flags: TrigFlags = .exact
-    var name: String = defaultName
     var type: TrigType = .output
 
     // optional settings
@@ -72,11 +71,12 @@ class Trigger: NSObject, SavitarXMLProtocol {
          voice: String? = nil,
          wordEnding: String? = nil) {
 
+        super.init()
+        
+        self.name = name ?? Self.defaultName
+    
         if let a = audio {
             self.audioCue = a
-        }
-        if let n = name {
-            self.name = n
         }
         if let t = type {
             self.type = t
@@ -191,7 +191,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
         case subst = "SUBST" // replaces SUBSITUTION (sic)
     }
 
-    func parse(xml: XML.Accessor) throws {
+    override func parse(xml: XML.Accessor) throws {
         let audioLabels: [String: AudioType] = [
             "silent": .silent,
             "sound": .sound,
@@ -267,7 +267,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
         }
     }
 
-    func toXMLElement() throws -> XMLElement {
+    override func toXMLElement() throws -> XMLElement {
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
         trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: self.name)
