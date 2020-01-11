@@ -42,7 +42,7 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
  }
 
-class Trigger: SavitarObject {
+class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
     // default settings
@@ -58,6 +58,17 @@ class Trigger: SavitarObject {
     var substitution: String?
     var voice: String?
     var wordEnding: String?
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        return Trigger(trigger: self)
+    }
+
+    init(trigger: Trigger) {
+        super.init()
+
+        self.name = trigger.name
+        // TODO: the rest of the fields
+     }
 
     init(name: String? = nil,
          audio: AudioType? = nil,
