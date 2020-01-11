@@ -20,6 +20,10 @@ class SavitarManager<Object: SavitarObject> {
         return objects
     }
     
+    func set(index: Int, object: Object) {
+        objects[index] = object
+    }
+    
     func remove(_ object: Object) {
         objects.remove(object: object)
     }
