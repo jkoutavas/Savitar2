@@ -1,6 +1,6 @@
 # README #
 
-Last updated: January 2nd, 2020
+Last updated: January 10th, 2020
 
 Welcome to the Savitar 2.0 git repository
 
@@ -90,3 +90,34 @@ $ cd server/echoserver
 $ swift package generate-xcodeproj
 ```
 
+
+## Tracking lines of code
+
+`cloc . --exclude-dir=Pods`
+
+### January 10th
+
+```
+     162 text files.
+     156 unique files.                                          
+      58 files ignored.
+
+github.com/AlDanial/cloc v 1.84  T=0.44 s (249.4 files/s, 35503.2 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Swift                           62           2107           2110           6439
+XML                             13              0             17           2067
+C                                1             76             52           1008
+Markdown                         5            165              0            473
+Bourne Shell                    10             66            173            287
+YAML                             4             11              5            158
+JSON                             5              0              0            104
+Perl                             1             19             30             65
+Ruby                             1              1              0             18
+D                                4              0              0             12
+C/C++ Header                     3             10             35             11
+-------------------------------------------------------------------------------
+SUM:                           109           2455           2422          10642
+-------------------------------------------------------------------------------
+```

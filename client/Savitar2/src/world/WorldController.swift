@@ -34,7 +34,7 @@ class WorldController: NSController {
 
     init(world: World) {
         self.world = world
- 
+
         super.init()
     }
 
