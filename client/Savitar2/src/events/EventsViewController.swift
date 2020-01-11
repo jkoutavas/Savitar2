@@ -79,8 +79,30 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
     @IBAction func doubleClickedTrigger(_ sender: NSOutlineView) {
         let item = sender.item(atRow: sender.clickedRow)
-        if item is Trigger {
-            print("heynow")
+        if let trigger = item as? Trigger {
+            let bundle = Bundle(for: Self.self)
+            let storyboard = NSStoryboard(name: "TriggersWindow", bundle: bundle)
+            guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
+                return
+            }
+            guard let myWindow = controller.window else {
+                return
+            }
+            NSApp.activate(ignoringOtherApps: true)
+            myWindow.makeKeyAndOrderFront(self)
+            let wc = NSWindowController(window: myWindow)
+
+            guard let triggerWindow = wc.window else { return }
+            guard let vc = triggerWindow.contentViewController as? TriggerSettingsController else { return }
+            vc.trigger = trigger
+            NSApplication.shared.runModal(for: triggerWindow)
+            triggerWindow.close()
+            if vc.applyChange {
+                if let triggerMan = sender.parent(forItem: item) as? TriggerMan {
+                    triggerMan.set(index: sender.childIndex(forItem: item!), object: vc.trigger!)
+                    triggerTable.reloadData()
+                }
+            }
         }
     }
  }
