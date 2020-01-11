@@ -81,22 +81,26 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         let item = sender.item(atRow: sender.clickedRow)
         if let trigger = item as? Trigger {
             let bundle = Bundle(for: Self.self)
-            let storyboard = NSStoryboard(name: "TriggersWindow", bundle: bundle)
+            let storyboard = NSStoryboard(name: "TriggerWindow", bundle: bundle)
             guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
                 return
             }
-            guard let myWindow = controller.window else {
+            guard let triggerWindow = controller.window else {
                 return
             }
-            NSApp.activate(ignoringOtherApps: true)
-            myWindow.makeKeyAndOrderFront(self)
-            let wc = NSWindowController(window: myWindow)
 
-            guard let triggerWindow = wc.window else { return }
+            // Have the trigger window's view controller get a copy of the trigger
             guard let vc = triggerWindow.contentViewController as? TriggerSettingsController else { return }
             vc.trigger = trigger
+
+            // Open the trigger window modally
+            triggerWindow.makeKeyAndOrderFront(self)
             NSApplication.shared.runModal(for: triggerWindow)
+
+            // Run til the window is signaled to close and close the window
             triggerWindow.close()
+
+            // If there are changes to apply, apply them now to the corresponding triggerMan
             if vc.applyChange {
                 if let triggerMan = sender.parent(forItem: item) as? TriggerMan {
                     triggerMan.set(index: sender.childIndex(forItem: item!), object: vc.trigger!)
