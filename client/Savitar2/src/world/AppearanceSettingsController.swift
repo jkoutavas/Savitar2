@@ -29,12 +29,12 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
             }
         }
 
-        guard let world = self.representedObject as? World else {
+        guard let wc = self.representedObject as? WorldController else {
             return
         }
-        fontPopup.selectItem(withTitle: world.fontName)
+        fontPopup.selectItem(withTitle: wc.world.fontName)
 
-        monoFontPopup.selectItem(withTitle: world.monoFontName)
+        monoFontPopup.selectItem(withTitle: wc.world.monoFontName)
 
         attributeChanged()
 
@@ -54,31 +54,31 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
     }
 
     @IBAction func fontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let world = self.representedObject as? World else {
+        guard let wc = self.representedObject as? WorldController else {
             return
         }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
-            world.fontName = family
+            wc.world.fontName = family
             attributeChanged()
         }
     }
 
     @IBAction func monoFontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let world = self.representedObject as? World else {
+        guard let wc = self.representedObject as? WorldController else {
             return
         }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
-            world.monoFontName = family
+            wc.world.monoFontName = family
             attributeChanged()
         }
     }
 
     func attributeChanged() {
-        guard let world = self.representedObject as? World else {
+        guard let wc = self.representedObject as? WorldController else {
             return
         }
-        webView.setStyle(world: world)
+        webView.setStyle(world: wc.world)
     }
 }

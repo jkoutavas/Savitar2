@@ -46,4 +46,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return true
     }
+
+    @IBAction func showEventsWindowAction(_ sender: Any) {
+        let bundle = Bundle(for: Self.self)
+        let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
+        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
+            return
+        }
+        guard let myWindow = controller.window else {
+            return
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        myWindow.makeKeyAndOrderFront(self)
+        let vc = NSWindowController(window: myWindow)
+        vc.showWindow(self)
+    }
 }

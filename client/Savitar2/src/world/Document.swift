@@ -38,7 +38,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
-        endpoint = Endpoint(port: world.port, host: world.host, outputter: self)
+        endpoint = Endpoint(world: world, outputter: self)
         splitViewController = windowController.contentViewController as? SplitViewController
         guard let inputVC = splitViewController?.inputViewController else { return }
         inputVC.endpoint = endpoint

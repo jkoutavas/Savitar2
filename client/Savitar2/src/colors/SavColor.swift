@@ -11,9 +11,7 @@ import SwiftyXMLParser
 
 let ColorElemIdentifier = "COLOR"
 
-class SavColor: NSObject, SavitarXMLProtocol {
-
-    var name = ""
+class SavColor: SavitarObject {
     var color: NSColor?
 
     //***************************
@@ -26,7 +24,7 @@ class SavColor: NSObject, SavitarXMLProtocol {
         case rgb = "RGB"
     }
 
-    func parse(xml: XML.Accessor) throws {
+    override func parse(xml: XML.Accessor) throws {
         for attribute in xml.attributes {
             switch attribute.key {
             case ColorAttribIdentifier.name.rawValue:
@@ -39,7 +37,7 @@ class SavColor: NSObject, SavitarXMLProtocol {
         }
     }
 
-    func toXMLElement() throws -> XMLElement {
+    override func toXMLElement() throws -> XMLElement {
         let colorElem = XMLElement(name: ColorElemIdentifier)
 
         if let colorStr = self.color?.toHex() {

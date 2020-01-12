@@ -10,8 +10,7 @@ import Foundation
 import Logging
 
 public class Endpoint: NSObject, StreamDelegate {
-    let port: UInt32
-    let host: String
+    let world: World
     let outputter: OutputProtocol
 
     var inputStream: InputStream!
@@ -20,21 +19,23 @@ public class Endpoint: NSObject, StreamDelegate {
     var logger: Logger
     var telnetParser: TelnetParser?
 
-    init(port: UInt32, host: String, outputter: OutputProtocol) {
-
-        self.port = port
-        self.host = host
+    init(world: World, outputter: OutputProtocol) {
+        self.world = world
         self.outputter = outputter
         self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
-        self.logger[metadataKey: "a"] = "\(host):\(port)" // "a" is for "address"
+        self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
+
+        AppContext.worldMan.add(world)
     }
 
     func close() {
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
+        
+        AppContext.worldMan.remove(world)
     }
 
     func connectAndRun() {
@@ -48,8 +49,8 @@ public class Endpoint: NSObject, StreamDelegate {
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
-                                 host as CFString,
-                                 port,
+                                 world.host as CFString,
+                                 world.port,
                                  &readStream,
                                  &writeStream)
         inputStream = readStream!.takeRetainedValue()
@@ -105,32 +106,9 @@ public class Endpoint: NSObject, StreamDelegate {
                 continue
             }
 
-            // Handle trigger reactions. Often it'll result in a modification of the line, so let's
-            // process triggers in this order:
-            //    1. gagging triggers
-            //    2. subsitution triggers
-            //    3. all the rest
-            var processedTriggers: [Trigger] = []
-            for trigger in AppContext.triggerMan.get() {
-                if trigger.flags.contains(.gag) {
-                    line = trigger.reactionTo(line: line)
-                    processedTriggers.append(trigger)
-                }
-            }
+            line = processTriggers(inputLine: line, triggerMan: AppContext.prefs.triggerMan)
             if line.count > 0 {
-                for trigger in AppContext.triggerMan.get() {
-                    if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
-                        line = trigger.reactionTo(line: line)
-                        processedTriggers.append(trigger)
-                    }
-                }
-            }
-            if line.count > 0 {
-                for trigger in AppContext.triggerMan.get() {
-                    if !processedTriggers.contains(trigger) {
-                        line = trigger.reactionTo(line: line)
-                    }
-                }
+                line = processTriggers(inputLine: line, triggerMan: world.triggerMan)
             }
 
             // Processing is complete. Send the line off to the output view
@@ -138,6 +116,40 @@ public class Endpoint: NSObject, StreamDelegate {
                 self?.outputter.output(result: .success(line))
             })
         }
+    }
+
+    private func processTriggers(inputLine: String, triggerMan: TriggerMan) -> String {
+        var line = inputLine
+
+         // Handle trigger reactions. Often it'll result in a modification of the line, so let's
+         // process triggers in this order:
+         //    1. gagging triggers
+         //    2. subsitution triggers
+         //    3. all the rest
+         var processedTriggers: [Trigger] = []
+         for trigger in triggerMan.get() {
+             if trigger.flags.contains(.gag) {
+                 line = trigger.reactionTo(line: line)
+                 processedTriggers.append(trigger)
+             }
+         }
+         if line.count > 0 {
+             for trigger in triggerMan.get() {
+                 if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                     line = trigger.reactionTo(line: line)
+                     processedTriggers.append(trigger)
+                 }
+             }
+         }
+         if line.count > 0 {
+             for trigger in triggerMan.get() {
+                 if !processedTriggers.contains(trigger) {
+                     line = trigger.reactionTo(line: line)
+                 }
+             }
+         }
+
+         return line
     }
 
     private func read(stream: InputStream) {

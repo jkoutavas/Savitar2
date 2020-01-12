@@ -35,34 +35,29 @@ enum IntensityType: Int {
     case color
 }
 
-// World is a NSController and has NSCopying because it is using KVO bindings
-// for editing in World Settings.
-// TODO: work out a means to have World be purely a data model object
-class World: NSController, NSCopying, SavitarXMLProtocol {
+class World: SavitarObject, NSCopying {
     // KVO-based world settings with their defaults
     @objc dynamic var editable = true
 
     // TODO: just some hard-coded connection settings right now
-    @objc dynamic var port: UInt32 = 1337
-    @objc dynamic var host = "::1"
+    var port: UInt32 = 1337
+    var host = "::1"
 
-    @objc dynamic var name: String = ""
-    @objc dynamic var cmdMarker = "##"
-    @objc dynamic var varMarker = "%%"
-    @objc dynamic var wildMarker = "$$"
-    @objc dynamic var backColor = NSColor.white
-    @objc dynamic var foreColor = NSColor.black
-    @objc dynamic var linkColor = NSColor.blue
-    @objc dynamic var echoBackColor = NSColor.init(hex: "9CA6FF")!
-    @objc dynamic var intenseColor = NSColor.white
-    @objc dynamic var fontName = "Monaco"
-    @objc dynamic var fontSize: CGFloat = 9
-    @objc dynamic var monoFontName = "Monaco"
-    @objc dynamic var monoFontSize: CGFloat = 9
-    @objc dynamic var MCPFontName = "Monaco"
-    @objc dynamic var MCPFontSize: CGFloat = 9
+    var cmdMarker = "##"
+    var varMarker = "%%"
+    var wildMarker = "$$"
+    var backColor = NSColor.white
+    var foreColor = NSColor.black
+    var linkColor = NSColor.blue
+    var echoBackColor = NSColor.init(hex: "9CA6FF")!
+    var intenseColor = NSColor.white
+    var fontName = "Monaco"
+    var fontSize: CGFloat = 9
+    var monoFontName = "Monaco"
+    var monoFontSize: CGFloat = 9
+    var MCPFontName = "Monaco"
+    var MCPFontSize: CGFloat = 9
 
-    // other world settings, not tied directly to KVO
     var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
     var inputRows = 2
@@ -81,6 +76,8 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
     var variableMan = VariableMan()
 
     init(world: World) {
+        super.init()
+        
         self.port = world.port
         self.host = world.host
         self.name = world.name
@@ -110,8 +107,6 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         self.flushTicks = world.flushTicks
         self.retrySecs = world.retrySecs
         self.keepAliveMins = world.keepAliveMins
-
-        super.init()
     }
 
     override init() {
@@ -168,7 +163,7 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
         case logoffCmd = "LOGOFFCMD"
     }
 
-    func parse(xml: XML.Accessor) throws {
+    override func parse(xml: XML.Accessor) throws {
         let intensityLabels: [String: IntensityType] = [
             "auto": .auto,
             "bold": .bold,
@@ -315,14 +310,16 @@ class World: NSController, NSCopying, SavitarXMLProtocol {
 
         if case .singleElement = xml[TriggersElemIdentifier] {
             try triggerMan.parse(xml: xml)
+            triggerMan.name = self.name
         }
 
         if case .singleElement = xml[VariablesElemIdentifier] {
             try variableMan.parse(xml: xml)
+            variableMan.name = self.name
         }
     }
 
-    func toXMLElement() throws -> XMLElement {
+    override func toXMLElement() throws -> XMLElement {
         let worldElem = XMLElement(name: WorldElemIdentifier)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,

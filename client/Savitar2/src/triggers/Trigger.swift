@@ -42,13 +42,12 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
  }
 
-class Trigger: NSObject, SavitarXMLProtocol {
+class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
     // default settings
     var audioCue: AudioType = .silent
     var flags: TrigFlags = .exact
-    var name: String = defaultName
     var type: TrigType = .output
 
     // optional settings
@@ -59,6 +58,17 @@ class Trigger: NSObject, SavitarXMLProtocol {
     var substitution: String?
     var voice: String?
     var wordEnding: String?
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        return Trigger(trigger: self)
+    }
+
+    init(trigger: Trigger) {
+        super.init()
+
+        self.name = trigger.name
+        // TODO: the rest of the fields
+     }
 
     init(name: String? = nil,
          audio: AudioType? = nil,
@@ -72,11 +82,12 @@ class Trigger: NSObject, SavitarXMLProtocol {
          voice: String? = nil,
          wordEnding: String? = nil) {
 
+        super.init()
+        
+        self.name = name ?? Self.defaultName
+    
         if let a = audio {
             self.audioCue = a
-        }
-        if let n = name {
-            self.name = n
         }
         if let t = type {
             self.type = t
@@ -144,6 +155,20 @@ class Trigger: NSObject, SavitarXMLProtocol {
         return resultLine
     }
 
+    let audioCueDict: [AudioType: String] = [
+        .silent: "silent",
+        .sound: "sound",
+        .speakEvent: "speakEvent",
+        .sayText: "sayText"
+    ]
+
+    let typeDict: [TrigType: String] = [
+        .unknown: "unknown",
+        .input: "input",
+        .output: "output",
+        .both: "both"
+    ]
+
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
@@ -177,7 +202,7 @@ class Trigger: NSObject, SavitarXMLProtocol {
         case subst = "SUBST" // replaces SUBSITUTION (sic)
     }
 
-    func parse(xml: XML.Accessor) throws {
+    override func parse(xml: XML.Accessor) throws {
         let audioLabels: [String: AudioType] = [
             "silent": .silent,
             "sound": .sound,
@@ -253,25 +278,24 @@ class Trigger: NSObject, SavitarXMLProtocol {
         }
     }
 
-    func toXMLElement() throws -> XMLElement {
-        let audioCueDict: [AudioType: String] = [
-            .silent: "silent",
-            .sound: "sound",
-            .speakEvent: "speakEvent",
-            .sayText: "sayText"
-        ]
-
-        let typeDict: [TrigType: String] = [
-            .unknown: "unknown",
-            .input: "input",
-            .output: "output",
-            .both: "both"
-        ]
-
+    override func toXMLElement() throws -> XMLElement {
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
-        if let value = audioCueDict[self.audioCue] {
-            trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
+        trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: self.name)
+
+        if let value = typeDict[self.type] {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.type.rawValue, stringValue: value)
+        }
+
+        trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue, stringValue: self.flags.description)
+
+         if let value = self.wordEnding {
+            trigElem.addChild(
+                XMLElement.init(name: WordEndElemIdentifier, stringValue: value))
+        }
+
+        if let value = self.style?.face?.description {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
         }
 
         if let value = self.style?.backColor?.toHex() {
@@ -282,29 +306,16 @@ class Trigger: NSObject, SavitarXMLProtocol {
             trigElem.addAttribute(name: TriggerAttribIdentifier.fgColor.rawValue, stringValue: "#\(value)")
         }
 
-        if let value = self.style?.face?.description {
-            trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
-        }
-
-        trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue, stringValue: self.flags.description)
-
-        trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: self.name)
-
         if let value = self.sound {
             trigElem.addAttribute(name: TriggerAttribIdentifier.sound.rawValue, stringValue: value)
         }
 
-        if let value = typeDict[self.type] {
-            trigElem.addAttribute(name: TriggerAttribIdentifier.type.rawValue, stringValue: value)
+        if let value = audioCueDict[self.audioCue] {
+            trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
         }
 
         if let value = self.voice {
             trigElem.addAttribute(name: TriggerAttribIdentifier.voice.rawValue, stringValue: value)
-        }
-
-         if let value = self.wordEnding {
-            trigElem.addChild(
-                XMLElement.init(name: WordEndElemIdentifier, stringValue: value))
         }
 
         if let value = self.say {
