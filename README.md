@@ -1,14 +1,19 @@
-# README #
+# Savitar v2.0 #
 
-Last updated: January 10th, 2020
+![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
-Welcome to the Savitar 2.0 git repository
+
+README last updated: January 12th, 2020
 
 ## Current state of the application
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
-Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha). Although the first release of Savitar 2.0 is aimed at feature parity with current production Savitar, v1.6.3, future releases of Savitar 2 will start taking advantages with all the goodies of having an HTML engine for output.
+With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha). 
+
+Although the first release of Savitar 2.0 is aimed at feature parity with current production Savitar, v1.6.3, future releases of Savitar 2 will start taking advantages with all the goodies of having an HTML engine for output.
+
+To expediate the migration to 64-bit, the initial release of Savitar 2.0 will import existing Savitar v1.6.3 world documents and settings, and will have basically the same user interface too. If interest in the application continues/grows, subsequent 2.x versions of the app will see a redesign of the user interface of Savitar.
 
 Here is the current state of getting to Savitar v1.6.3 feature parity, broken into two delivery parts:
 
@@ -19,7 +24,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ App is 64bit only, runs on macOS 10.12 and later, including Catalina
 √ App is integrated with AppCenter, handles crash reporting and basic analytics
 √ Reading Sav 1.x world settings, opening sessions
-√ Integerated WKWebView as the output pane
+√ Integrated WKWebView as the output pane
 √ World settings Appearance tab is operational
 √ Output triggers are working
 √ Load Sav 1.x app settings (includes triggers)
