@@ -13,7 +13,7 @@ With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit 
 
 Although the first release of Savitar 2.0 is aimed at feature parity with current production Savitar, v1.6.3, future releases of Savitar 2 will start taking advantages with all the goodies of having an HTML engine for output.
 
-To expediate the migration to 64-bit, the initial release of Savitar 2.0 will import existing Savitar v1.6.3 world documents and settings, and will have basically the same user interface too. If interest in the application continues/grows, subsequent 2.x versions of the app will see a redesign of the user interface of Savitar.
+To expediate the migration to 64-bit, the initial release of Savitar 2.0 will import existing Savitar v1.6.3 world documents and settings, and will have basically the same user interface too. If interest in the application continues/grows, subsequent 2.x versions of the app will see a redesign of the user interface of Savitar. I have also conciously avoided moving to new (to Savitar 1's timeframe) Apple technologies such as Core Data and SwiftUI. Those technologies can arrive after the first release of v2.0, and in fact, may even signal a 3.0 effort.
 
 Here is the current state of getting to Savitar v1.6.3 feature parity, broken into two delivery parts:
 
