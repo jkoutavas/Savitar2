@@ -10,7 +10,7 @@ import SwiftyXMLParser
 
 let WorldsElemIdentifier = "WORLDS"
 
-class WorldMan: SavitarManager<World>, SavitarXMLProtocol {
+class WorldMan: ModelManager<World>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol

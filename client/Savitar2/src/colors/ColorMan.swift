@@ -10,7 +10,7 @@ import SwiftyXMLParser
 
 let ColorsElemIdentifier = "COLORS"
 
-class ColorMan: SavitarManager<SavColor>, SavitarXMLProtocol {
+class ColorMan: ModelManager<SavColor>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol

@@ -67,7 +67,16 @@ class Trigger: SavitarObject, NSCopying {
         super.init()
 
         self.name = trigger.name
-        // TODO: the rest of the fields
+        self.audioCue = trigger.audioCue
+        self.flags = trigger.flags
+        self.reply = trigger.reply
+        self.say = trigger.say
+        self.sound = trigger.sound
+        self.style = trigger.style
+        self.substitution = trigger.substitution
+        self.type = trigger.type
+        self.voice = trigger.voice
+        self.wordEnding = trigger.wordEnding
      }
 
     init(name: String? = nil,
@@ -83,9 +92,9 @@ class Trigger: SavitarObject, NSCopying {
          wordEnding: String? = nil) {
 
         super.init()
-        
+
         self.name = name ?? Self.defaultName
-    
+
         if let a = audio {
             self.audioCue = a
         }

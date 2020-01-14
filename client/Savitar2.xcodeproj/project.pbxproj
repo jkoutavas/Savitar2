@@ -16,7 +16,7 @@
 		69071B3F23A6EA51001C58B1 /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3E23A6EA51001C58B1 /* WorldTests.swift */; };
 		690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462223AA4CB0000445E4 /* AppPreferences.swift */; };
 		690B462523AD82CE000445E4 /* WorldMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462423AD82CE000445E4 /* WorldMan.swift */; };
-		690B462723B0063F000445E4 /* SavitarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462623B0063F000445E4 /* SavitarManager.swift */; };
+		690B462723B0063F000445E4 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462623B0063F000445E4 /* ModelManager.swift */; };
 		690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */; };
 		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
@@ -104,7 +104,7 @@
 		69071B3E23A6EA51001C58B1 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
 		690B462223AA4CB0000445E4 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		690B462423AD82CE000445E4 /* WorldMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMan.swift; sourceTree = "<group>"; };
-		690B462623B0063F000445E4 /* SavitarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarManager.swift; sourceTree = "<group>"; };
+		690B462623B0063F000445E4 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesTests.swift; sourceTree = "<group>"; };
 		690B462C23B16B54000445E4 /* StartupPreferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StartupPreferences.xml; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 				69000EE12397CF09009976E0 /* AppContext.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
-				690B462623B0063F000445E4 /* SavitarManager.swift */,
+				690B462623B0063F000445E4 /* ModelManager.swift */,
 				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
@@ -680,7 +680,7 @@
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
 				69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */,
-				690B462723B0063F000445E4 /* SavitarManager.swift in Sources */,
+				690B462723B0063F000445E4 /* ModelManager.swift in Sources */,
 				69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */,
