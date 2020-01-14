@@ -34,7 +34,7 @@ public class Endpoint: NSObject, StreamDelegate {
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
-        
+
         AppContext.worldMan.remove(world)
     }
 
@@ -126,30 +126,39 @@ public class Endpoint: NSObject, StreamDelegate {
          //    1. gagging triggers
          //    2. subsitution triggers
          //    3. all the rest
-         var processedTriggers: [Trigger] = []
-         for trigger in triggerMan.get() {
-             if trigger.flags.contains(.gag) {
-                 line = trigger.reactionTo(line: line)
-                 processedTriggers.append(trigger)
-             }
-         }
-         if line.count > 0 {
-             for trigger in triggerMan.get() {
-                 if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
-                     line = trigger.reactionTo(line: line)
-                     processedTriggers.append(trigger)
-                 }
-             }
-         }
-         if line.count > 0 {
-             for trigger in triggerMan.get() {
-                 if !processedTriggers.contains(trigger) {
-                     line = trigger.reactionTo(line: line)
-                 }
-             }
-         }
+        var processedTriggers: [Trigger] = []
+        for trigger in triggerMan.get() {
+            if trigger.flags.contains(.disabled) {
+                continue
+            }
+            if trigger.flags.contains(.gag) {
+                line = trigger.reactionTo(line: line)
+                processedTriggers.append(trigger)
+            }
+        }
+        if line.count > 0 {
+            for trigger in triggerMan.get() {
+                if trigger.flags.contains(.disabled) {
+                    continue
+                }
+                if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                    line = trigger.reactionTo(line: line)
+                    processedTriggers.append(trigger)
+                }
+            }
+        }
+        if line.count > 0 {
+            for trigger in triggerMan.get() {
+                if trigger.flags.contains(.disabled) {
+                    continue
+                }
+                if !processedTriggers.contains(trigger) {
+                    line = trigger.reactionTo(line: line)
+                }
+            }
+        }
 
-         return line
+        return line
     }
 
     private func read(stream: InputStream) {
