@@ -10,6 +10,8 @@ import SwiftyXMLParser
 
 class SavitarManager<Object: SavitarObject> {
     var name = ""
+    var undoManager: UndoManager?
+
     private var objects: [Object] = []
 
     func add(_ object: Object) {
@@ -19,11 +21,11 @@ class SavitarManager<Object: SavitarObject> {
     func get() -> [Object] {
         return objects
     }
-    
+
     func set(index: Int, object: Object) {
         objects[index] = object
     }
-    
+
     func remove(_ object: Object) {
         objects.remove(object: object)
     }

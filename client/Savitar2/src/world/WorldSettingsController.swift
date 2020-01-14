@@ -9,17 +9,16 @@
 import Cocoa
 
 class WorldSettingsController: NSViewController {
-    var windowController: WindowController? // needed for closeWorldSettings
+    var completionHandler: ((Bool, World?) -> Void)?
 
     var world: World? {
         get {
             return _editedWorld
         }
         set {
-            _origWorld = newValue
             // copy the world. We'll manipulate it in settings, and if the
             // user hits 'apply' we'll copy the changes back.
-            _editedWorld = _origWorld?.copy() as? World
+            _editedWorld = newValue?.copy() as? World
 
             // we set the tab controllers' world here in the world setter
             // instead of prepare(for segue:) because prepare(for segue:)
@@ -31,7 +30,6 @@ class WorldSettingsController: NSViewController {
         }
     }
 
-    private var _origWorld: World?
     private var _editedWorld: World?
     private var _tabViewController: NSTabViewController?
 
@@ -44,13 +42,10 @@ class WorldSettingsController: NSViewController {
     }
 
     @IBAction func applyWorldSetting(_ sender: Any) {
-        windowController?.window!.endSheet(self.view.window!, returnCode: NSApplication.ModalResponse(rawValue: 1))
-        guard let doc = windowController?.document as? Document else { return }
-        doc.world = _editedWorld!
-        windowController?.updateViews(_editedWorld!)
+        completionHandler?(true, _editedWorld)
     }
 
     @IBAction func cancelWorldSetting(_ sender: Any) {
-        windowController?.window!.endSheet(self.view.window!, returnCode: NSApplication.ModalResponse(rawValue: 0))
+        completionHandler?(false, nil)
     }
 }

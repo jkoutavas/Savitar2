@@ -40,12 +40,26 @@ class WindowController: NSWindowController {
         guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
         vc.world = doc.world
-        vc.windowController = self
+        vc.completionHandler = { apply, editedWorld in
+            if apply == true {
+                self.worldDidChange(from: editedWorld!)
+            }
+            self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
+        }
+        self.window?.beginSheet(wc.window!)
+    }
 
-        self.window?.beginSheet(wc.window!, completionHandler: { (returnCode) in
-            // TODO: work-out save vs. cancel, etc.
-            print("world settings sheet has been dismissed. returnCode=\(returnCode)")
+    private func worldDidChange(from fromWorld: World) {
+        guard let doc = document as? Document else { return }
+        doc.undoManager?.registerUndo(withTarget: self, handler: { [oldWorld = doc.world] (_) in
+            self.worldDidChange(from: oldWorld)
         })
+
+        doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
+            comment: "Change World Settings"))
+
+        doc.world = fromWorld
+        self.updateViews(fromWorld)
     }
 
     func updateViews(_ newValue: World?) {

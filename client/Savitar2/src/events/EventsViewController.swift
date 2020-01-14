@@ -15,6 +15,8 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        triggerTable.action = #selector(onItemClicked)
 
         triggerMen.append(AppContext.prefs.triggerMan)
         for world in AppContext.worldMan.get() {
@@ -53,28 +55,68 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let cell = outlineView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
             as? NSTableCellView else { return nil }
+        guard let textField = cell.textField else { return nil }
 
         if let triggerMan = item as? TriggerMan {
-            if tableColumn!.identifier.rawValue == "name" {
-                cell.textField?.stringValue = triggerMan.name
+            if tableColumn!.identifier == kNameColumn {
+                textField.stringValue = triggerMan.name
             } else {
-                cell.textField?.stringValue = ""
+                textField.stringValue = ""
             }
         } else if let trigger = item as? Trigger {
-            if (tableColumn?.identifier)!.rawValue == "name" {
-                cell.textField?.stringValue = trigger.name
-            } else if (tableColumn?.identifier)!.rawValue == "type" {
-              if let value = trigger.typeDict[trigger.type] {
-                  cell.textField?.stringValue = value
-              }
-            } else {
-                if let value = trigger.audioCueDict[trigger.audioCue] {
-                    cell.textField?.stringValue = value
+            switch (tableColumn?.identifier)! {
+            case kEnabledColumn:
+                textField.stringValue = trigger.flags.contains(.disabled) ? "x" : "√"
+            case kNameColumn:
+                textField.stringValue = trigger.name
+            case kTypeColumn:
+                if let value = trigger.typeDict[trigger.type] {
+                    textField.stringValue = value
                 }
+            case kAudioCueColumn:
+                if let value = trigger.audioCueDict[trigger.audioCue] {
+                    textField.stringValue = value
+                }
+            default:
+                print("Skipping \((tableColumn?.identifier)!.rawValue) column")
             }
         }
 
         return cell
+    }
+
+    @objc private func onItemClicked() {
+        if triggerTable.clickedColumn == 0 {
+            let item = triggerTable.item(atRow: triggerTable.clickedRow)
+            doUndoableToggle(item: item)
+        }
+    }
+
+    private func doUndoableToggle(item: Any?) {
+        // always register the undo with this window's undo manager.
+        undoManager?.registerUndo(withTarget: self, handler: { (_) in
+            self.doUndoableToggle(item: item)
+        })
+        toggleEnabled(item: item)
+    }
+
+    private func toggleEnabled(item: Any?) {
+        // if the trigger manager has its own undomanager (like in the case of a world document)
+        // then inform that undo manager of the change too
+        if let triggerMan = triggerTable.parent(forItem: item) as? TriggerMan {
+            triggerMan.undoManager?.registerUndo(withTarget: self, handler: { (_) in
+                self.toggleEnabled(item: item)
+            })
+        }
+
+        // now do the actual toggle
+        guard let trigger = item as? Trigger else { return }
+        if trigger.flags.contains(.disabled) {
+            trigger.flags.remove(.disabled)
+        } else {
+            trigger.flags.insert(.disabled)
+        }
+        triggerTable.reloadData()
     }
 
     @IBAction func doubleClickedTrigger(_ sender: NSOutlineView) {
@@ -109,4 +151,9 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
             }
         }
     }
+
+    private let kAudioCueColumn = NSUserInterfaceItemIdentifier(rawValue: "audioCue")
+    private let kEnabledColumn = NSUserInterfaceItemIdentifier(rawValue: "enabled")
+    private let kNameColumn = NSUserInterfaceItemIdentifier(rawValue: "name")
+    private let kTypeColumn = NSUserInterfaceItemIdentifier(rawValue: "type")
  }
