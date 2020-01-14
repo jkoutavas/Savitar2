@@ -103,14 +103,14 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     // MARK: - NSOutlineViewDataSource
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let man = item as? ModelManager {
+        if let man = item as? TriggerMan {
             return man.get().count
         }
         return triggerMen.count
     }
 
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let man = item as? ModelManager {
+        if let man = item as? TriggerMan {
             return man.get()[index]
         }
 
@@ -120,7 +120,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     // MARK: - NSOutlineViewDelegate
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        if let man = item as? ModelManager {
+        if let man = item as? TriggerMan {
             return man.get().count > 0
         }
 
