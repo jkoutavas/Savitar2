@@ -10,12 +10,16 @@ import Cocoa
 
 class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
     @IBOutlet var triggerTable: NSOutlineView!
+    @IBOutlet var audioCueColumn: NSTableColumn!
+    @IBOutlet var enabledColumn: NSTableColumn!
+    @IBOutlet var nameColumn: NSTableColumn!
+    @IBOutlet var typeColumn: NSTableColumn!
 
     var triggerMen: [TriggerMan] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         triggerTable.action = #selector(onItemClicked)
 
         triggerMen.append(AppContext.prefs.triggerMan)
@@ -58,22 +62,22 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         guard let textField = cell.textField else { return nil }
 
         if let triggerMan = item as? TriggerMan {
-            if tableColumn!.identifier == kNameColumn {
+            if tableColumn! == nameColumn {
                 textField.stringValue = triggerMan.name
             } else {
                 textField.stringValue = ""
             }
         } else if let trigger = item as? Trigger {
-            switch (tableColumn?.identifier)! {
-            case kEnabledColumn:
+            switch tableColumn {
+            case enabledColumn:
                 textField.stringValue = trigger.flags.contains(.disabled) ? "x" : "√"
-            case kNameColumn:
+            case nameColumn:
                 textField.stringValue = trigger.name
-            case kTypeColumn:
+            case typeColumn:
                 if let value = trigger.typeDict[trigger.type] {
                     textField.stringValue = value
                 }
-            case kAudioCueColumn:
+            case audioCueColumn:
                 if let value = trigger.audioCueDict[trigger.audioCue] {
                     textField.stringValue = value
                 }
@@ -151,9 +155,4 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
             }
         }
     }
-
-    private let kAudioCueColumn = NSUserInterfaceItemIdentifier(rawValue: "audioCue")
-    private let kEnabledColumn = NSUserInterfaceItemIdentifier(rawValue: "enabled")
-    private let kNameColumn = NSUserInterfaceItemIdentifier(rawValue: "name")
-    private let kTypeColumn = NSUserInterfaceItemIdentifier(rawValue: "type")
  }

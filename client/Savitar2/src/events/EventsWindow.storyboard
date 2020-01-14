@@ -229,7 +229,11 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="audioCueColumn" destination="n30-V3-EyF" id="LBB-i6-CKb"/>
+                        <outlet property="enabledColumn" destination="cb9-4z-84F" id="rr9-Zy-Xdg"/>
+                        <outlet property="nameColumn" destination="enf-nH-jFy" id="zmr-A0-2PS"/>
                         <outlet property="triggerTable" destination="7j6-51-dBf" id="PqD-T6-ucu"/>
+                        <outlet property="typeColumn" destination="vxV-d7-874" id="L7B-jB-pua"/>
                     </connections>
                 </viewController>
                 <customObject id="kBT-Jl-4KA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
