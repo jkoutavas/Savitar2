@@ -1,5 +1,5 @@
 //
-//  SavitarManager.swift
+//  ModelManager.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 12/22/19.
@@ -8,7 +8,7 @@
 
 import SwiftyXMLParser
 
-class SavitarManager<Object: SavitarObject> {
+class ModelManager<Object: SavitarObject> {
     var name = ""
     var undoManager: UndoManager?
 

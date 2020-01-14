@@ -33,27 +33,35 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         }
     }
 
+    // MARK: - NSOutlineViewDataSource
+
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let triggerMan = item as? TriggerMan {
-            return triggerMan.get().count
+        if let man = item as? ModelManager {
+            return man.get().count
         }
         return triggerMen.count
     }
 
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let triggerMan = item as? TriggerMan {
-            return triggerMan.get()[index]
+        if let man = item as? ModelManager {
+            return man.get()[index]
         }
 
         return triggerMen[index]
     }
 
+    // MARK: - NSOutlineViewDelegate
+
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        if let triggerMan = item as? TriggerMan {
-            return triggerMan.get().count > 0
+        if let man = item as? ModelManager {
+            return man.get().count > 0
         }
 
         return false
+    }
+
+    func outlineView(_ outlineVIew: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        return !(item is ModelManager)
     }
 
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {

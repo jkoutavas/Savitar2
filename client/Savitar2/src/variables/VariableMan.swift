@@ -10,7 +10,7 @@ import SwiftyXMLParser
 
 let VariablesElemIdentifier = "VARIABLES"
 
-class VariableMan: SavitarManager<Variable>, SavitarXMLProtocol {
+class VariableMan: ModelManager<Variable>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol

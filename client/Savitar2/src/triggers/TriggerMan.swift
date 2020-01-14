@@ -10,7 +10,7 @@ import SwiftyXMLParser
 
 let TriggersElemIdentifier = "TRIGGERS"
 
-class TriggerMan: SavitarManager<Trigger>, SavitarXMLProtocol {
+class TriggerMan: ModelManager<Trigger>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol
