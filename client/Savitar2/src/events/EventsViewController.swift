@@ -15,6 +15,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet var nameColumn: NSTableColumn!
     @IBOutlet var typeColumn: NSTableColumn!
 
+    var groupNames: [String] = []
     var triggerMen: [TriggerMan] = []
 
     override func viewDidLoad() {
@@ -22,8 +23,11 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
         triggerTable.action = #selector(onItemClicked)
 
+        groupNames.append("Universal Triggers")
         triggerMen.append(AppContext.prefs.triggerMan)
+        
         for world in AppContext.worldMan.get() {
+            groupNames.append(world.name)
             triggerMen.append(world.triggerMan)
         }
         triggerTable.reloadData()
@@ -138,7 +142,9 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
         if let triggerMan = item as? TriggerMan {
             if tableColumn! == nameColumn {
-                textField.stringValue = triggerMan.name
+                if let index = triggerMen.firstIndex(where: {$0 === triggerMan}) {
+                    textField.stringValue = groupNames[index]
+                }
             } else {
                 textField.stringValue = ""
             }
