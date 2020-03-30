@@ -25,7 +25,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
         groupNames.append("Universal Triggers")
         triggerMen.append(AppContext.prefs.triggerMan)
-        
+
         for world in AppContext.worldMan.get() {
             groupNames.append(world.name)
             triggerMen.append(world.triggerMan)

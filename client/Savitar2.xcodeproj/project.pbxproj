@@ -60,6 +60,8 @@
 		69CEEDEC23C57EE500E9F087 /* TriggerWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */; };
 		69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */; };
 		69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDEF23C94EE400E9F087 /* TriggerController.swift */; };
+		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
+		69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
@@ -155,6 +157,7 @@
 		69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TriggerWindow.storyboard; sourceTree = "<group>"; };
 		69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSettingsController.swift; sourceTree = "<group>"; };
 		69CEEDEF23C94EE400E9F087 /* TriggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerController.swift; sourceTree = "<group>"; };
+		69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObjectId.swift; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */,
 				6991F46B2393F71700E2BFDB /* Logging in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
 			);
@@ -233,7 +237,6 @@
 				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
-				695484BE1FC4E6E400A6983F /* Savitar2UITests */,
 				6954849D1FC4E6E400A6983F /* Products */,
 				2EF3ACDB1F9E5AA4D43744E6 /* Pods */,
 				87B55DDC3EAE7840CA6BA5B4 /* Frameworks */,
@@ -267,6 +270,7 @@
 		695484B31FC4E6E400A6983F /* Savitar2Tests */ = {
 			isa = PBXGroup;
 			children = (
+				695484BE1FC4E6E400A6983F /* Savitar2UITests */,
 				695484B61FC4E6E400A6983F /* Info.plist */,
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
@@ -299,6 +303,7 @@
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				690B462623B0063F000445E4 /* ModelManager.swift */,
 				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
+				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
 				69CEEDE023BEDA7900E9F087 /* events */,
@@ -434,6 +439,7 @@
 			name = Savitar2;
 			packageProductDependencies = (
 				6991F46A2393F71700E2BFDB /* Logging */,
+				69CEEDF223D6213900E9F087 /* ReSwift */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -520,6 +526,7 @@
 			mainGroup = 695484931FC4E6E400A6983F;
 			packageReferences = (
 				6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */,
+				69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -708,6 +715,7 @@
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
+				69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
@@ -1076,6 +1084,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1083,6 +1099,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		69CEEDF223D6213900E9F087 /* ReSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */;
+			productName = ReSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

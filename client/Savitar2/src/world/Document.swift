@@ -48,7 +48,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     override func read(from data: Data, ofType typeName: String) throws {
         let xml = XML.parse(data)
         try self.parse(xml: xml[DocumentElemIdentifier])
-        
+
         world.triggerMan.undoManager = undoManager
         world.variableMan.undoManager = undoManager
     }

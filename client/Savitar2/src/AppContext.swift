@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ReSwift
 
 struct AppContext {
     static var prefs = AppPreferences()
