@@ -10,7 +10,7 @@ import Cocoa
 
 class WorldController: NSController {
     var world: World
- 
+
     @objc dynamic var editable = true
 
     // TODO: is there a more elegant way of representing this?

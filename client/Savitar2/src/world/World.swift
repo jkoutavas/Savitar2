@@ -77,7 +77,7 @@ class World: SavitarObject, NSCopying {
 
     init(world: World) {
         super.init()
-        
+
         self.port = world.port
         self.host = world.host
         self.name = world.name
@@ -310,12 +310,10 @@ class World: SavitarObject, NSCopying {
 
         if case .singleElement = xml[TriggersElemIdentifier] {
             try triggerMan.parse(xml: xml)
-            triggerMan.name = self.name
         }
 
         if case .singleElement = xml[VariablesElemIdentifier] {
             try variableMan.parse(xml: xml)
-            variableMan.name = self.name
         }
     }
 

@@ -51,7 +51,6 @@ class AppPreferences: SavitarXMLProtocol {
 
     init() {
         self.version = latestPrefsVersion
-        triggerMan.name = "Universal Triggers"
     }
 
     func load() throws {

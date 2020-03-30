@@ -9,7 +9,6 @@
 import SwiftyXMLParser
 
 class ModelManager<Object: SavitarObject> {
-    var name = ""
     var undoManager: UndoManager?
 
     private var objects: [Object] = []
