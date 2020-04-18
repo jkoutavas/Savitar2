@@ -8,8 +8,9 @@
 
 import Foundation
 import Logging
+import ReSwift
 
-public class Endpoint: NSObject, StreamDelegate {
+class Endpoint: NSObject, StreamDelegate {
     let world: World
     let outputter: OutputProtocol
 
@@ -18,6 +19,8 @@ public class Endpoint: NSObject, StreamDelegate {
 
     var logger: Logger
     var telnetParser: TelnetParser?
+
+    var universalTriggers: [Trigger] = []
 
     init(world: World, outputter: OutputProtocol) {
         self.world = world
@@ -31,6 +34,7 @@ public class Endpoint: NSObject, StreamDelegate {
     }
 
     func close() {
+        globalStore.unsubscribe(self)
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
@@ -39,6 +43,8 @@ public class Endpoint: NSObject, StreamDelegate {
     }
 
     func connectAndRun() {
+        globalStore.subscribe(self)
+
         logger.info("connecting...")
 
         var readStream: Unmanaged<CFReadStream>?
@@ -106,9 +112,9 @@ public class Endpoint: NSObject, StreamDelegate {
                 continue
             }
 
-            line = processTriggers(inputLine: line, triggerMan: AppContext.prefs.triggerMan)
+            line = processTriggers(inputLine: line, triggers: universalTriggers)
             if line.count > 0 {
-                line = processTriggers(inputLine: line, triggerMan: world.triggerMan)
+                line = processTriggers(inputLine: line, triggers: world.triggerMan.get())
             }
 
             // Processing is complete. Send the line off to the output view
@@ -118,7 +124,7 @@ public class Endpoint: NSObject, StreamDelegate {
         }
     }
 
-    private func processTriggers(inputLine: String, triggerMan: TriggerMan) -> String {
+    private func processTriggers(inputLine: String, triggers: [Trigger]) -> String {
         var line = inputLine
 
          // Handle trigger reactions. Often it'll result in a modification of the line, so let's
@@ -127,7 +133,7 @@ public class Endpoint: NSObject, StreamDelegate {
          //    2. subsitution triggers
          //    3. all the rest
         var processedTriggers: [Trigger] = []
-        for trigger in triggerMan.get() {
+        for trigger in triggers {
             if trigger.flags.contains(.disabled) {
                 continue
             }
@@ -137,7 +143,7 @@ public class Endpoint: NSObject, StreamDelegate {
             }
         }
         if line.count > 0 {
-            for trigger in triggerMan.get() {
+            for trigger in triggers {
                 if trigger.flags.contains(.disabled) {
                     continue
                 }
@@ -148,7 +154,7 @@ public class Endpoint: NSObject, StreamDelegate {
             }
         }
         if line.count > 0 {
-            for trigger in triggerMan.get() {
+            for trigger in triggers {
                 if trigger.flags.contains(.disabled) {
                     continue
                 }
@@ -198,5 +204,11 @@ public class Endpoint: NSObject, StreamDelegate {
         default:
             logger.info("some other event...")
         }
+    }
+}
+
+extension Endpoint: StoreSubscriber {
+    func newState(state: AppState) {
+        self.universalTriggers = state.universalTriggers
     }
 }

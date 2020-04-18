@@ -39,6 +39,7 @@
 		696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77452390D22A005E45EB /* WKWebView+Extensions.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
+		697417E82436B6E300D00785 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697417E72436B6E300D00785 /* AppState.swift */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
@@ -137,6 +138,7 @@
 		696F77452390D22A005E45EB /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
 		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
 		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
+		697417E72436B6E300D00785 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				69000EE12397CF09009976E0 /* AppContext.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
+				697417E72436B6E300D00785 /* AppState.swift */,
 				690B462623B0063F000445E4 /* ModelManager.swift */,
 				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
 				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
@@ -719,6 +722,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
+				697417E82436B6E300D00785 /* AppState.swift in Sources */,
 				69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
 				69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */,

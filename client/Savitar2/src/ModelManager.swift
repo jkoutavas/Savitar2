@@ -11,7 +11,11 @@ import SwiftyXMLParser
 class ModelManager<Object: SavitarObject> {
     var undoManager: UndoManager?
 
-    private var objects: [Object] = []
+    private var objects: [Object]
+
+    init(_ objects: [Object] = []) {
+        self.objects = objects
+    }
 
     func add(_ object: Object) {
         objects.append(object)

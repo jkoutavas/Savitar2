@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ReSwift
 
 class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
     @IBOutlet var triggerTable: NSOutlineView!
@@ -24,17 +25,23 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         triggerTable.action = #selector(onItemClicked)
 
         groupNames.append("Universal Triggers")
-        triggerMen.append(AppContext.prefs.triggerMan)
+        triggerMen.append(TriggerMan()) // we'll get this from the globalStore
 
+        // TODO: get these from the globalStore
         for world in AppContext.worldMan.get() {
-            groupNames.append(world.name)
+            groupNames.append("\"\(world.name)\" Triggers")
             triggerMen.append(world.triggerMan)
         }
-        triggerTable.reloadData()
+    }
 
-        for tm in triggerMen {
-            triggerTable.expandItem(tm)
-        }
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        globalStore.subscribe(self)
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        globalStore.unsubscribe(self)
     }
 
     @objc private func onItemClicked() {
@@ -170,3 +177,14 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         return cell
     }
  }
+
+extension EventsViewController: StoreSubscriber {
+    func newState(state: AppState) {
+        self.triggerMen[0] = TriggerMan(state.universalTriggers)
+        triggerTable.reloadData()
+
+        for tm in triggerMen {
+            triggerTable.expandItem(tm)
+        }
+    }
+}
