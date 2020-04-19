@@ -11,15 +11,32 @@ import ReSwift
 
 struct AppState: StateType {
     var universalTriggers: [Trigger] = []
+    var worldDocuments: [Document] = []
 }
 
 typealias AppStore = Store<AppState>
 
+struct AddWorldDocumentAction: Action {
+    let document: Document
+
+    init(document: Document) {
+        self.document = document
+    }
+}
+
+struct RemoveWorldDocumentAction: Action {
+    let document: Document
+
+    init(document: Document) {
+        self.document = document
+    }
+}
+
 struct SetUniversalTriggersAction: Action {
-    let newTriggers: [Trigger]
+    let triggers: [Trigger]
 
     init(triggers: [Trigger]) {
-        self.newTriggers = triggers
+        self.triggers = triggers
     }
 }
 
@@ -27,8 +44,12 @@ func appReducer(action: Action, state: AppState?) -> AppState {
     var state = state ?? AppState()
 
     switch action {
-    case let setUniversalTriggersAction as SetUniversalTriggersAction:
-        state.universalTriggers = setUniversalTriggersAction.newTriggers
+    case let action as AddWorldDocumentAction:
+        state.worldDocuments.append(action.document)
+    case let action as RemoveWorldDocumentAction:
+        state.worldDocuments.remove(object: action.document)
+    case let action as SetUniversalTriggersAction:
+        state.universalTriggers = action.triggers
     default: break
     }
 

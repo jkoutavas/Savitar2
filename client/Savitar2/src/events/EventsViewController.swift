@@ -16,6 +16,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet var nameColumn: NSTableColumn!
     @IBOutlet var typeColumn: NSTableColumn!
 
+    var documentUUIDS: [String] = []
     var groupNames: [String] = []
     var triggerMen: [TriggerMan] = []
 
@@ -23,15 +24,6 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         super.viewDidLoad()
 
         triggerTable.action = #selector(onItemClicked)
-
-        groupNames.append("Universal Triggers")
-        triggerMen.append(TriggerMan()) // we'll get this from the globalStore
-
-        // TODO: get these from the globalStore
-        for world in AppContext.worldMan.get() {
-            groupNames.append("\"\(world.name)\" Triggers")
-            triggerMen.append(world.triggerMan)
-        }
     }
 
     override func viewWillAppear() {
@@ -180,10 +172,40 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
 extension EventsViewController: StoreSubscriber {
     func newState(state: AppState) {
-        self.triggerMen[0] = TriggerMan(state.universalTriggers)
-        triggerTable.reloadData()
+        
+        var expand: [TriggerMan] = [] // used to determine if newly added triggerMan should be expanded
 
-        for tm in triggerMen {
+        // Determine if we've seen universal triggers yet
+        if groupNames.count == 0 {
+            groupNames.append("Universal Triggers")
+            let triggerMan = TriggerMan(state.universalTriggers)
+            triggerMen.append(triggerMan)
+            expand.append(triggerMan)
+        }
+
+        // Rebuild groupNames and triggerMen for all open documents
+        groupNames = groupNames.dropLast(groupNames.count-1)
+        triggerMen = triggerMen.dropLast(triggerMen.count-1)
+        for document in state.worldDocuments {
+            let world = document.world
+            // TODO: test for duplicate group names. If one exists, tack-on part of the UUID to make it unique
+            groupNames.append("\"\(world.name)\" Triggers")
+            triggerMen.append(world.triggerMan)
+            if !documentUUIDS.contains(document.GUID) {
+                // only expand if this is a newly opened world
+                expand.append(world.triggerMan)
+            }
+        }
+        
+        // rebuild documentUUIDS so we can detect expansion state the next time a document comes or goes
+        documentUUIDS = []
+        for document in state.worldDocuments {
+            documentUUIDS.append(document.GUID)
+        }
+
+        // Now refrech the actual UI
+        triggerTable.reloadData()
+        for tm in expand {
             triggerTable.expandItem(tm)
         }
     }

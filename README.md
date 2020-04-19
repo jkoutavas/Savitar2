@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: January 12th, 2020
+README last updated: April 17th, 2020
 
 ## Current state of the application
 
@@ -29,6 +29,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Output triggers are working
 √ Load Sav 1.x app settings (includes triggers)
 √ Load Sav 1.x world triggers
+_ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 _ Input pane command recall and local commands supported
 _ Implement input triggers
 _ Implement Triggers Window
