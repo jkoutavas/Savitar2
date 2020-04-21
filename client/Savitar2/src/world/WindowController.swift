@@ -100,7 +100,6 @@ class WindowController: NSWindowController {
             window?.setIsZoomed(w.zoomed)
         }
 
-        windowFrameAutosaveName = NSWindow.FrameAutosaveName(doc.GUID)
-        splitViewController?.splitView.autosaveName = NSSplitView.AutosaveName(doc.GUID)
+        splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
     }
 }
