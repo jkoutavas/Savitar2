@@ -16,7 +16,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet var nameColumn: NSTableColumn!
     @IBOutlet var typeColumn: NSTableColumn!
 
-    var documentUUIDS: [String] = []
+    var documentIDs: [String] = []
     var groupNames: [String] = []
     var triggerMen: [TriggerMan] = []
 
@@ -172,7 +172,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
 extension EventsViewController: StoreSubscriber {
     func newState(state: AppState) {
-        
+
         var expand: [TriggerMan] = [] // used to determine if newly added triggerMan should be expanded
 
         // Determine if we've seen universal triggers yet
@@ -187,20 +187,23 @@ extension EventsViewController: StoreSubscriber {
         groupNames = groupNames.dropLast(groupNames.count-1)
         triggerMen = triggerMen.dropLast(triggerMen.count-1)
         for document in state.worldDocuments {
+            guard let fileURL = document.fileURL else { continue }
+
             let world = document.world
-            // TODO: test for duplicate group names. If one exists, tack-on part of the UUID to make it unique
-            groupNames.append("\"\(world.name)\" Triggers")
+            // TODO: test for duplicate group names. If one exists, show the full path
+            groupNames.append("\"\(fileURL.lastPathComponent.fileName())\" Triggers")
             triggerMen.append(world.triggerMan)
-            if !documentUUIDS.contains(document.GUID) {
+            if !documentIDs.contains(fileURL.absoluteString) {
                 // only expand if this is a newly opened world
                 expand.append(world.triggerMan)
             }
         }
-        
-        // rebuild documentUUIDS so we can detect expansion state the next time a document comes or goes
-        documentUUIDS = []
+
+        // rebuild documentIDs so we can detect expansion state the next time a document comes or goes
+        documentIDs = []
         for document in state.worldDocuments {
-            documentUUIDS.append(document.GUID)
+            guard let fileURL = document.fileURL else { continue }
+            documentIDs.append(fileURL.absoluteString)
         }
 
         // Now refrech the actual UI
