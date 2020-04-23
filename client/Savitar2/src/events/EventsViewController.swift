@@ -18,7 +18,7 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 
     var documentIDs: [String] = []
     var groupNames: [String] = []
-    var triggerMen: [TriggerMan] = []
+    var triggerGroups: [[Trigger]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,13 +52,15 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
 
     private func toggleEnabled(item: Any?) {
+/*
         // if the trigger manager has its own undomanager (like in the case of a world document)
         // then inform that undo manager of the change too
-        if let triggerMan = triggerTable.parent(forItem: item) as? TriggerMan {
+        if let triggers = triggerTable.parent(forItem: item) as? [Trigger] {
             triggerMan.undoManager?.registerUndo(withTarget: self, handler: { (_) in
                 self.toggleEnabled(item: item)
             })
         }
+*/
 
         // now do the actual toggle
         guard let trigger = item as? Trigger else { return }
@@ -93,11 +95,11 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
             // Run til the window is signaled to close and close the window
             triggerWindow.close()
 
-            // If there are changes to apply, apply them now to the corresponding triggerMan
+            // If there are changes to apply, apply them now to the corresponding [Trigger]
             if vc.applyChange {
-                if let triggerMan = sender.parent(forItem: item) as? TriggerMan {
-                    triggerMan.set(index: sender.childIndex(forItem: item!), object: vc.trigger!)
-                    triggerTable.reloadData()
+                if var triggers = sender.parent(forItem: item) as? [Trigger] {
+                    triggers[sender.childIndex(forItem: item!)] = vc.trigger! // TODO: make this an action
+                    triggerTable.reloadData() // TODO: make this go away
                 }
             }
         }
@@ -106,25 +108,25 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     // MARK: - NSOutlineViewDataSource
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let man = item as? TriggerMan {
-            return man.get().count
+        if let triggers = item as? [Trigger] {
+            return triggers.count
         }
-        return triggerMen.count
+        return triggerGroups.count
     }
 
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let man = item as? TriggerMan {
-            return man.get()[index]
+        if let triggers = item as? [Trigger] {
+            return triggers[index]
         }
 
-        return triggerMen[index]
+        return triggerGroups[index]
     }
 
     // MARK: - NSOutlineViewDelegate
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        if let man = item as? TriggerMan {
-            return man.get().count > 0
+        if let triggers = item as? [Trigger] {
+            return triggers.count > 0
         }
 
         return false
@@ -139,9 +141,9 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
             as? NSTableCellView else { return nil }
         guard let textField = cell.textField else { return nil }
 
-        if let triggerMan = item as? TriggerMan {
+        if let triggers = item as? [Trigger] {
             if tableColumn! == nameColumn {
-                if let index = triggerMen.firstIndex(where: {$0 === triggerMan}) {
+                if let index = triggerGroups.firstIndex(where: {$0 == triggers}) {
                     textField.stringValue = groupNames[index]
                 }
             } else {
@@ -173,29 +175,28 @@ class EventsViewController: NSViewController, NSOutlineViewDataSource, NSOutline
 extension EventsViewController: StoreSubscriber {
     func newState(state: AppState) {
 
-        var expand: [TriggerMan] = [] // used to determine if newly added triggerMan should be expanded
+        var expand: [[Trigger]] = [] // used to determine if newly added triggers should be expanded
 
         // Determine if we've seen universal triggers yet
         if groupNames.count == 0 {
             groupNames.append("Universal Triggers")
-            let triggerMan = TriggerMan(state.universalTriggers)
-            triggerMen.append(triggerMan)
-            expand.append(triggerMan)
+            triggerGroups.append(state.universalTriggers)
+            expand.append(state.universalTriggers)
         }
 
-        // Rebuild groupNames and triggerMen for all open documents
+        // Rebuild groupNames and triggerGroups for all open documents
         groupNames = groupNames.dropLast(groupNames.count-1)
-        triggerMen = triggerMen.dropLast(triggerMen.count-1)
+        triggerGroups = triggerGroups.dropLast(triggerGroups.count-1)
         for document in state.worldDocuments {
             guard let fileURL = document.fileURL else { continue }
 
             let world = document.world
             // TODO: test for duplicate group names. If one exists, show the full path
             groupNames.append("\"\(fileURL.lastPathComponent.fileName())\" Triggers")
-            triggerMen.append(world.triggerMan)
+            triggerGroups.append(world.triggerMan.get())
             if !documentIDs.contains(fileURL.absoluteString) {
                 // only expand if this is a newly opened world
-                expand.append(world.triggerMan)
+                expand.append(world.triggerMan.get())
             }
         }
 
