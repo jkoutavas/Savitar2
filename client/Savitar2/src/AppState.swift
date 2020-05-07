@@ -14,12 +14,26 @@ struct ItemListState<T>: StateType {
     var selection: SelectionState = nil
 }
 
-struct SetTriggersAction: Action {
+protocol TriggersAction: Action {
+    func apply(oldTriggers: ReactionsState) -> ReactionsState
+}
+
+struct SetTriggersAction: TriggersAction {
     let triggers: [Trigger]
 
     init(triggers: [Trigger]) {
         self.triggers = triggers
     }
+
+    func apply(oldTriggers: ReactionsState) -> ReactionsState {
+        var result = oldTriggers
+        result.triggerList.items = triggers
+        return result
+    }
+}
+
+protocol VariablesAction: Action {
+    func apply(oldVariables: ReactionsState) -> ReactionsState
 }
 
 struct SetVariablesAction: Action {
@@ -27,6 +41,12 @@ struct SetVariablesAction: Action {
 
     init(variables: [Variable]) {
         self.variables = variables
+    }
+
+    func apply(oldVariables: ReactionsState) -> ReactionsState {
+        var result = oldVariables
+        result.variableList.items = variables
+        return result
     }
 }
 
@@ -36,17 +56,33 @@ struct ReactionsState: StateType {
 }
 
 func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState {
-    var state = state ?? ReactionsState()
-
-    switch action {
-    case let action as SetTriggersAction:
-        state.triggerList.items = action.triggers
-    case let action as SetVariablesAction:
-        state.variableList.items = action.variables
-    default: break
+    guard var state = state else {
+        return ReactionsState()
     }
 
+    state = passActionToTriggers(action, state: state)
+    state = passActionToVariables(action, state: state)
+
+    state.triggerList.selection = passActionToSelection(action, selectionState: state.triggerList.selection)
+    state.variableList.selection = passActionToSelection(action, selectionState: state.variableList.selection)
+
     return state
+}
+
+private func passActionToTriggers(_ action: Action, state: ReactionsState) -> ReactionsState {
+    guard let action = action as? TriggersAction else { return state }
+
+    return action.apply(oldTriggers: state)
+}
+
+private func passActionToVariables(_ action: Action, state: ReactionsState) -> ReactionsState {
+    guard let action = action as? VariablesAction else { return state }
+
+    return action.apply(oldVariables: state)
+}
+
+private func passActionToSelection(_ action: Action, selectionState: SelectionState) -> SelectionState {
+    return selectionReducer(action, state: selectionState)
 }
 
 typealias ReactionsStore = Store<ReactionsState>

@@ -30,6 +30,8 @@ class TriggersTabController: EventsTabController {
         }
     }
 
+    private var selectionIsChanging = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,14 +65,19 @@ extension TriggersTabController: NSTableViewDelegate {
             return .select(row: tableView.selectedRow)
         }()
 
-        store?.dispatch(action)
+        if !selectionIsChanging {
+            store?.dispatch(action)
+        }
     }
 }
 
 extension TriggersTabController {
     func displayTriggers(triggersViewModel viewModel: TriggersViewModel) {
         updateTableDataSource(viewModel: viewModel)
+
+        selectionIsChanging = true
         displaySelection(viewModel: viewModel)
+        selectionIsChanging = false
 
         focusTableView()
     }
