@@ -208,7 +208,7 @@ class Endpoint: NSObject, StreamDelegate {
 }
 
 extension Endpoint: StoreSubscriber {
-    func newState(state: AppState) {
-        self.universalTriggers = state.universalTriggers
+    func newState(state: ReactionsState) {
+        self.universalTriggers = state.triggerList.items
     }
 }

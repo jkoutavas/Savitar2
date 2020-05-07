@@ -57,8 +57,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         NSApp.activate(ignoringOtherApps: true)
-        myWindow.makeKeyAndOrderFront(self)
         let vc = NSWindowController(window: myWindow)
-        vc.showWindow(self)
+
+        if let eventsController = myWindow.contentViewController as? EventsViewController {
+            eventsController.store = globalStore
+
+            vc.showWindow(self)
+        }
+        myWindow.makeKeyAndOrderFront(self)
     }
 }

@@ -9,14 +9,23 @@
 import SwiftyXMLParser
 
 class SavitarObject: Equatable, SavitarXMLProtocol {
+    let objectID: SavitarObjectID
     @objc dynamic var name = ""
 
+    init(objectID: SavitarObjectID = SavitarObjectID()) {
+        self.objectID = objectID
+    }
+    
+    init() {
+        self.objectID = SavitarObjectID()
+    }
+    
     func parse(xml: XML.Accessor) throws {}
     func toXMLElement() throws -> XMLElement {
         return XMLElement()
     }
 
     static func == (lhs: SavitarObject, rhs: SavitarObject) -> Bool {
-        return lhs.name == rhs.name
+        return lhs.objectID == rhs.objectID && lhs.name == rhs.name
     }
 }

@@ -9,30 +9,12 @@
 import Foundation
 import ReSwift
 
-struct AppState: StateType {
-    var universalTriggers: [Trigger] = []
-    var worldDocuments: [Document] = []
+struct ItemListState<T>: StateType {
+    var items: [T] = []
+    var selection: SelectionState = nil
 }
 
-typealias AppStore = Store<AppState>
-
-struct AddWorldDocumentAction: Action {
-    let document: Document
-
-    init(document: Document) {
-        self.document = document
-    }
-}
-
-struct RemoveWorldDocumentAction: Action {
-    let document: Document
-
-    init(document: Document) {
-        self.document = document
-    }
-}
-
-struct SetUniversalTriggersAction: Action {
+struct SetTriggersAction: Action {
     let triggers: [Trigger]
 
     init(triggers: [Trigger]) {
@@ -40,30 +22,48 @@ struct SetUniversalTriggersAction: Action {
     }
 }
 
-func appReducer(action: Action, state: AppState?) -> AppState {
-    var state = state ?? AppState()
+struct SetVariablesAction: Action {
+    let variables: [Variable]
+
+    init(variables: [Variable]) {
+        self.variables = variables
+    }
+}
+
+struct ReactionsState: StateType {
+    var triggerList: ItemListState<Trigger> = ItemListState<Trigger>()
+    var variableList: ItemListState<Variable> = ItemListState<Variable>()
+}
+
+func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState {
+    var state = state ?? ReactionsState()
 
     switch action {
-    case let action as AddWorldDocumentAction:
-        state.worldDocuments.append(action.document)
-    case let action as RemoveWorldDocumentAction:
-        state.worldDocuments.remove(object: action.document)
-    case let action as SetUniversalTriggersAction:
-        state.universalTriggers = action.triggers
+    case let action as SetTriggersAction:
+        state.triggerList.items = action.triggers
+    case let action as SetVariablesAction:
+        state.variableList.items = action.variables
     default: break
     }
 
     return state
 }
 
+typealias ReactionsStore = Store<ReactionsState>
+
+func reactionsStore(undoManager: UndoManager) -> ReactionsStore {
+
+    return ReactionsStore(
+        reducer: reactionsReducer,
+        state: nil
 /*
-func appStore() -> AppStore {
-    return AppStore(
-        reducer: appReducer,
-        state: AppState(),
-        middleware: []
+        middleware: [
+            removeIdempotentActionsMiddleware,
+            loggingMiddleware,
+            undoMiddleware(undoManager: undoManager)
+        ]
+*/
     )
 }
-*/
 
-var globalStore = Store<AppState>(reducer: appReducer, state: nil)
+var globalStore = reactionsStore(undoManager: UndoManager())
