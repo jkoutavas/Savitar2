@@ -32,9 +32,3 @@ class EventsViewController: NSTabViewController {
         }
     }
 }
-
-class EventsTabController: NSViewController {
-    @IBOutlet var tableView: NSTableView!
-
-    var store: ReactionsStore?
-}

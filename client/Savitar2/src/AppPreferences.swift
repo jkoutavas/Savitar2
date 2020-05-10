@@ -69,6 +69,7 @@ class AppPreferences: SavitarXMLProtocol {
             loaded = true
 
             globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
         } catch {
             // It's okay if loading v2 prefs failed. It simply means Savitar v2 is not installed, or the v2 preferences
             // are corrupt.
@@ -94,6 +95,7 @@ class AppPreferences: SavitarXMLProtocol {
             loaded = true
 
             globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
         } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.

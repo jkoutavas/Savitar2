@@ -1,34 +1,34 @@
 //
-//  TriggerTableDataSource.swift
+//  VariableTableDataSource.swift
 //  Savitar2
 //
-//  Created by Jay Koutavas on 4/25/20.
+//  Created by Jay Koutavas on 5/8/20.
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
 import Cocoa
 
-class TriggerTableDataSource: NSObject {
-    var viewModel: TriggersViewModel?
+class VariableTableDataSource: NSObject {
+    var viewModel: VariablesViewModel?
     var store: ReactionsStore?
 }
 
-extension TriggerTableDataSource: NSTableViewDataSource {
+extension VariableTableDataSource: NSTableViewDataSource {
     func numberOfRows(in _: NSTableView) -> Int {
         return viewModel?.itemCount ?? 0
     }
 }
 
-extension TriggerTableDataSourceType where Self: NSTableViewDataSource {
+extension VariableTableDataSourceType where Self: NSTableViewDataSource {
     var tableDataSource: NSTableViewDataSource {
         return self
     }
 }
 
-extension TriggerTableDataSource: TriggerTableDataSourceType {
+extension VariableTableDataSource: VariableTableDataSourceType {
     var selectedRow: Int? { return viewModel?.selectedRow }
-    var selectedTrigger: TriggerViewModel? { return viewModel?.selectedTrigger }
-    var triggerCount: Int { return viewModel?.itemCount ?? 0 }
+    var selectedVariable: VariableViewModel? { return viewModel?.selectedVariable }
+    var variableCount: Int { return viewModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -38,22 +38,22 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
         store = reactionsStore
     }
 
-    func updateContents(triggersViewModel viewModel: TriggersViewModel) {
+    func updateContents(variablesViewModel viewModel: VariablesViewModel) {
         self.viewModel = viewModel
     }
 
-    func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func variableCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
             as? NSTableCellView else { return nil }
         guard let textField = cell.textField else { return nil }
 
-        if let tViewModel = viewModel?.triggers[row] {
+        if let vViewModel = viewModel?.variables[row] {
             if tableColumn == tableView.tableColumns[0] {
-                textField.stringValue = tViewModel.name
+                textField.stringValue = vViewModel.name
             } else if tableColumn == tableView.tableColumns[1] {
-                textField.stringValue = tViewModel.type
+                textField.stringValue = vViewModel.hotKey
             } else {
-                textField.stringValue = tViewModel.audioCue
+                textField.stringValue = vViewModel.value
             }
         }
 

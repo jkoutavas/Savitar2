@@ -1,30 +1,30 @@
 //
-//  EventsViewController.swift
+//  VariablesTabController.swift
 //  Savitar2
 //
-//  Created by Jay Koutavas on 1/2/20.
+//  Created by Jay Koutavas on 5/8/20.
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
 import Cocoa
 import ReSwift
 
-protocol TriggerTableDataSourceType {
+protocol VariableTableDataSourceType {
     var tableDataSource: NSTableViewDataSource { get }
 
     var selectedRow: SelectionState { get }
-    var selectedTrigger: TriggerViewModel? { get }
-    var triggerCount: Int { get }
+    var selectedVariable: VariableViewModel? { get }
+    var variableCount: Int { get }
 
-    func updateContents(triggersViewModel viewModel: TriggersViewModel)
+    func updateContents(variablesViewModel viewModel: VariablesViewModel)
     func getStore() -> ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?)
-    func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
+    func variableCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 
-class TriggersTabController: EventsTabController {
+class VariablesTabController: EventsTabController {
 
-    var dataSource: TriggerTableDataSourceType = TriggerTableDataSource() {
+    var dataSource: VariableTableDataSourceType = VariableTableDataSource() {
         didSet {
             tableView.dataSource = dataSource.tableDataSource
         }
@@ -52,9 +52,9 @@ class TriggersTabController: EventsTabController {
     }
 }
 
-extension TriggersTabController: NSTableViewDelegate {
+extension VariablesTabController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        return dataSource.triggerCellView(tableView, viewFor: tableColumn, row: row)
+        return dataSource.variableCellView(tableView, viewFor: tableColumn, row: row)
     }
 
     func tableViewSelectionDidChange(_: Notification) {
@@ -69,12 +69,12 @@ extension TriggersTabController: NSTableViewDelegate {
             return tableView.selectedRow
         }()
 
-        store?.dispatch(SelectTriggerAction(selection: sel))
+        store?.dispatch(SelectVariableAction(selection: sel))
     }
 }
 
-extension TriggersTabController {
-    func displayTriggers(triggersViewModel viewModel: TriggersViewModel) {
+extension VariablesTabController {
+    func displayVariables(variablesViewModel viewModel: VariablesViewModel) {
         updateTableDataSource(viewModel: viewModel)
 
         selectionIsChanging = true
@@ -84,12 +84,12 @@ extension TriggersTabController {
         focusTableView()
     }
 
-    fileprivate func updateTableDataSource(viewModel: TriggersViewModel) {
-        dataSource.updateContents(triggersViewModel: viewModel)
+    fileprivate func updateTableDataSource(viewModel: VariablesViewModel) {
+        dataSource.updateContents(variablesViewModel: viewModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(viewModel: TriggersViewModel) {
+    fileprivate func displaySelection(viewModel: VariablesViewModel) {
         guard let selectedRow = viewModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return
@@ -103,14 +103,14 @@ extension TriggersTabController {
     }
 }
 
-extension TriggersTabController: StoreSubscriber {
+extension VariablesTabController: StoreSubscriber {
     func newState(state: ReactionsState) {
-        let triggerViewModels = state.triggerList.items.map(TriggerViewModel.init)
-        let triggersViewModel = TriggersViewModel(
-            triggers: triggerViewModels,
-            selectedRow: state.triggerList.selection
+        let variableViewModels = state.variableList.items.map(VariableViewModel.init)
+        let variablesViewModel = VariablesViewModel(
+            variables: variableViewModels,
+            selectedRow: state.variableList.selection
         )
 
-        displayTriggers(triggersViewModel: triggersViewModel)
+        displayVariables(variablesViewModel: variablesViewModel)
     }
 }

@@ -9,13 +9,52 @@
 import Foundation
 import ReSwift
 
+typealias SelectionState = Int?
+
+protocol ApplicableAction: Action {
+    func apply(oldState: ReactionsState) -> ReactionsState
+}
+
+protocol TriggerSelectionAction: ApplicableAction {
+}
+
+struct SelectTriggerAction: TriggerSelectionAction {
+    let selection: SelectionState
+
+    init(selection: SelectionState) {
+        self.selection = selection
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.triggerList.selection = selection
+        return result
+    }
+}
+
+protocol VariableSelectionAction: ApplicableAction {
+}
+
+struct SelectVariableAction: VariableSelectionAction {
+    let selection: SelectionState
+
+    init(selection: SelectionState) {
+        self.selection = selection
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.variableList.selection = selection
+        return result
+    }
+}
+
 struct ItemListState<T>: StateType {
     var items: [T] = []
     var selection: SelectionState = nil
 }
 
-protocol TriggersAction: Action {
-    func apply(oldTriggers: ReactionsState) -> ReactionsState
+protocol TriggersAction: ApplicableAction {
 }
 
 struct SetTriggersAction: TriggersAction {
@@ -25,26 +64,25 @@ struct SetTriggersAction: TriggersAction {
         self.triggers = triggers
     }
 
-    func apply(oldTriggers: ReactionsState) -> ReactionsState {
-        var result = oldTriggers
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
         result.triggerList.items = triggers
         return result
     }
 }
 
-protocol VariablesAction: Action {
-    func apply(oldVariables: ReactionsState) -> ReactionsState
+protocol VariablesAction: ApplicableAction {
 }
 
-struct SetVariablesAction: Action {
+struct SetVariablesAction: VariablesAction {
     let variables: [Variable]
 
     init(variables: [Variable]) {
         self.variables = variables
     }
 
-    func apply(oldVariables: ReactionsState) -> ReactionsState {
-        var result = oldVariables
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
         result.variableList.items = variables
         return result
     }
@@ -62,9 +100,8 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
 
     state = passActionToTriggers(action, state: state)
     state = passActionToVariables(action, state: state)
-
-    state.triggerList.selection = passActionToSelection(action, selectionState: state.triggerList.selection)
-    state.variableList.selection = passActionToSelection(action, selectionState: state.variableList.selection)
+    state = passActionToTriggerSelection(action, state: state)
+    state = passActionToVariableSelection(action, state: state)
 
     return state
 }
@@ -72,17 +109,25 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
 private func passActionToTriggers(_ action: Action, state: ReactionsState) -> ReactionsState {
     guard let action = action as? TriggersAction else { return state }
 
-    return action.apply(oldTriggers: state)
+    return action.apply(oldState: state)
 }
 
 private func passActionToVariables(_ action: Action, state: ReactionsState) -> ReactionsState {
     guard let action = action as? VariablesAction else { return state }
 
-    return action.apply(oldVariables: state)
+    return action.apply(oldState: state)
 }
 
-private func passActionToSelection(_ action: Action, selectionState: SelectionState) -> SelectionState {
-    return selectionReducer(action, state: selectionState)
+private func passActionToTriggerSelection(_ action: Action, state: ReactionsState) -> ReactionsState {
+    guard let action = action as? TriggerSelectionAction else { return state }
+
+    return action.apply(oldState: state)
+}
+
+private func passActionToVariableSelection(_ action: Action, state: ReactionsState) -> ReactionsState {
+    guard let action = action as? VariableSelectionAction else { return state }
+
+    return action.apply(oldState: state)
 }
 
 typealias ReactionsStore = Store<ReactionsState>
