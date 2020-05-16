@@ -74,6 +74,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="313.5" minWidth="40" maxWidth="1000" id="kaE-2H-ne9">
@@ -89,13 +90,19 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="Aww-N3-D1s">
+                                                        <tableCellView id="Aww-N3-D1s" customClass="CheckableTableCellView" customModule="Savitar2" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="314" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eSn-PV-b8x">
-                                                                    <rect key="frame" x="0.0" y="3" width="314" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-o7-BMa" customClass="CheckBox" customModule="Savitar2" customModuleProvider="target">
+                                                                    <rect key="frame" x="6" y="1" width="22" height="18"/>
+                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ibg-Lu-siO">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                </button>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eSn-PV-b8x">
+                                                                    <rect key="frame" x="32" y="2" width="48" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Trigger" id="SMk-mF-kNq">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -103,7 +110,14 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="4Re-o7-BMa" firstAttribute="leading" secondItem="Aww-N3-D1s" secondAttribute="leading" constant="8" id="6q3-Ts-lKW"/>
+                                                                <constraint firstItem="4Re-o7-BMa" firstAttribute="centerY" secondItem="Aww-N3-D1s" secondAttribute="centerY" id="jzW-oY-38U"/>
+                                                                <constraint firstItem="eSn-PV-b8x" firstAttribute="centerY" secondItem="Aww-N3-D1s" secondAttribute="centerY" id="lNY-qu-Z1d"/>
+                                                                <constraint firstItem="eSn-PV-b8x" firstAttribute="leading" secondItem="4Re-o7-BMa" secondAttribute="trailing" constant="8" id="oHo-XC-8fg"/>
+                                                            </constraints>
                                                             <connections>
+                                                                <outlet property="checkbox" destination="4Re-o7-BMa" id="Nij-gY-76b"/>
                                                                 <outlet property="textField" destination="eSn-PV-b8x" id="D2E-Ke-Tsj"/>
                                                             </connections>
                                                         </tableCellView>
@@ -206,21 +220,22 @@
         <scene sceneID="s43-fg-pVy">
             <objects>
                 <viewController title="Macros" id="WqB-Ri-W1T" customClass="VariablesTabController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
-                    <scrollView key="view" autohidesScrollers="YES" horizontalLineScroll="69" horizontalPageScroll="10" verticalLineScroll="69" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="VSj-yE-Jph">
-                        <rect key="frame" x="0.0" y="0.0" width="482" height="254"/>
+                    <scrollView key="view" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="VSj-yE-Jph">
+                        <rect key="frame" x="0.0" y="0.0" width="482" height="229"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="JgD-OP-z53">
-                            <rect key="frame" x="1" y="0.0" width="480" height="253"/>
+                            <rect key="frame" x="1" y="0.0" width="480" height="228"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="67" rowSizeStyle="automatic" headerView="yRi-qm-cYL" viewBased="YES" id="5v2-HO-fkE">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="yRi-qm-cYL" viewBased="YES" id="5v2-HO-fkE">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="203"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="138.5" minWidth="40" maxWidth="1000" id="Gc9-vb-GAd">
+                                        <tableColumn width="216.5" minWidth="40" maxWidth="1000" id="Gc9-vb-GAd">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Macro">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -233,13 +248,19 @@
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
-                                                <tableCellView id="JRM-xY-ADt">
-                                                    <rect key="frame" x="1" y="1" width="139" height="20"/>
+                                                <tableCellView id="JRM-xY-ADt" customClass="CheckableTableCellView" customModule="Savitar2" customModuleProvider="target">
+                                                    <rect key="frame" x="1" y="1" width="217" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3sC-Nb-l6i">
-                                                            <rect key="frame" x="0.0" y="3" width="139" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6P-F7-Zry" customClass="CheckBox" customModule="Savitar2" customModuleProvider="target">
+                                                            <rect key="frame" x="6" y="1" width="22" height="18"/>
+                                                            <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bLj-bG-yfl">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3sC-Nb-l6i">
+                                                            <rect key="frame" x="32" y="2" width="42" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Macro" id="Yyf-iy-w9X">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -247,13 +268,20 @@
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="y6P-F7-Zry" firstAttribute="leading" secondItem="JRM-xY-ADt" secondAttribute="leading" constant="8" id="68n-Xr-6y5"/>
+                                                        <constraint firstItem="3sC-Nb-l6i" firstAttribute="leading" secondItem="y6P-F7-Zry" secondAttribute="trailing" constant="8" id="ApJ-0N-3bo"/>
+                                                        <constraint firstItem="y6P-F7-Zry" firstAttribute="centerY" secondItem="JRM-xY-ADt" secondAttribute="centerY" id="Aq7-MG-Q99"/>
+                                                        <constraint firstItem="3sC-Nb-l6i" firstAttribute="centerY" secondItem="JRM-xY-ADt" secondAttribute="centerY" id="xdz-JM-m55"/>
+                                                    </constraints>
                                                     <connections>
+                                                        <outlet property="checkbox" destination="y6P-F7-Zry" id="ZJw-bO-uDl"/>
                                                         <outlet property="textField" destination="3sC-Nb-l6i" id="j2c-MX-gOh"/>
                                                     </connections>
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn width="82" minWidth="40" maxWidth="1000" id="nZF-qc-FNd">
+                                        <tableColumn width="118" minWidth="40" maxWidth="1000" id="nZF-qc-FNd">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Hotkey">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -267,11 +295,11 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="143" y="1" width="82" height="20"/>
+                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
-                                                            <rect key="frame" x="0.0" y="3" width="82" height="17"/>
+                                                            <rect key="frame" x="0.0" y="3" width="118" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Hotkey" id="Z0u-fC-Y8S">
                                                                 <font key="font" metaFont="system"/>
@@ -286,7 +314,7 @@
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn width="249.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="MAv-vM-6WU">
+                                        <tableColumn width="135.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="MAv-vM-6WU">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -300,11 +328,11 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="228" y="1" width="249" height="20"/>
+                                                    <rect key="frame" x="342" y="1" width="136" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">
-                                                            <rect key="frame" x="0.0" y="3" width="249" height="17"/>
+                                                            <rect key="frame" x="0.0" y="3" width="136" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Value" id="XED-uK-oeH">
                                                                 <font key="font" metaFont="system"/>
@@ -324,7 +352,7 @@
                             </subviews>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LbE-q8-tsL">
-                            <rect key="frame" x="1" y="238" width="480" height="15"/>
+                            <rect key="frame" x="1" y="213" width="480" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="czf-1T-tww">

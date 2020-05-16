@@ -43,20 +43,30 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
     }
 
     func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
-            as? NSTableCellView else { return nil }
-        guard let textField = cell.textField else { return nil }
-
-        if let tViewModel = viewModel?.triggers[row] {
-            if tableColumn == tableView.tableColumns[0] {
-                textField.stringValue = tViewModel.name
-            } else if tableColumn == tableView.tableColumns[1] {
-                textField.stringValue = tViewModel.type
-            } else {
-                textField.stringValue = tViewModel.audioCue
-            }
+        func setTextField(_ cell: NSTableCellView, _ value: String) {
+            guard let textField = cell.textField else { return }
+            textField.stringValue = value
         }
-
-        return cell
-    }
+        guard let tViewModel = viewModel?.triggers[row] else { return nil }
+        switch tableColumn {
+        case tableView.tableColumns[0]:
+            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+                as? CheckableTableCellView else { return nil }
+            cell.checkbox.checked = tViewModel.enabled
+            setTextField(cell, tViewModel.name)
+            return cell
+        case tableView.tableColumns[1]:
+            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+                as? NSTableCellView else { return nil }
+            setTextField(cell, tViewModel.type)
+            return cell
+        case tableView.tableColumns[2]:
+            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+                as? NSTableCellView else { return nil }
+            setTextField(cell, tViewModel.audioCue)
+            return cell
+        default:
+            return nil
+        }
+     }
 }

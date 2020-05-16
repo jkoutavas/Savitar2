@@ -29,6 +29,8 @@
 		693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* VariableTableDataSource.swift */; };
 		693944EC24662FF300931FA8 /* VariableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944EB24662FF300931FA8 /* VariableViewModel.swift */; };
 		693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* VariablesViewModel.swift */; };
+		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
+		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -128,6 +130,8 @@
 		693944E924662F3F00931FA8 /* VariableTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTableDataSource.swift; sourceTree = "<group>"; };
 		693944EB24662FF300931FA8 /* VariableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableViewModel.swift; sourceTree = "<group>"; };
 		693944ED246630E300931FA8 /* VariablesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesViewModel.swift; sourceTree = "<group>"; };
+		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
+		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -251,6 +255,15 @@
 			path = triggers;
 			sourceTree = "<group>";
 		};
+		693944F1246F7C8900931FA8 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */,
+				693944F4246F7C9E00931FA8 /* CheckBox.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +340,7 @@
 				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
+				693944F1246F7C8900931FA8 /* components */,
 				69CEEDE023BEDA7900E9F087 /* events */,
 				69662B23204367BD00E7CC7B /* extensions */,
 				696F77402390CFF2005E45EB /* thirdparty */,
@@ -724,6 +738,7 @@
 				69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
+				693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
@@ -740,6 +755,7 @@
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
 				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
+				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
 				693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */,
 				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,

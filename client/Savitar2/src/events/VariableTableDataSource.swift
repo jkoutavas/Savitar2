@@ -43,20 +43,30 @@ extension VariableTableDataSource: VariableTableDataSourceType {
     }
 
     func variableCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
-            as? NSTableCellView else { return nil }
-        guard let textField = cell.textField else { return nil }
-
-        if let vViewModel = viewModel?.variables[row] {
-            if tableColumn == tableView.tableColumns[0] {
-                textField.stringValue = vViewModel.name
-            } else if tableColumn == tableView.tableColumns[1] {
-                textField.stringValue = vViewModel.hotKey
-            } else {
-                textField.stringValue = vViewModel.value
-            }
-        }
-
-        return cell
+       func setTextField(_ cell: NSTableCellView, _ value: String) {
+           guard let textField = cell.textField else { return }
+           textField.stringValue = value
+       }
+       guard let tViewModel = viewModel?.variables[row] else { return nil }
+       switch tableColumn {
+       case tableView.tableColumns[0]:
+           guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+               as? CheckableTableCellView else { return nil }
+           cell.checkbox.checked = tViewModel.enabled
+           setTextField(cell, tViewModel.name)
+           return cell
+       case tableView.tableColumns[1]:
+           guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+               as? NSTableCellView else { return nil }
+           setTextField(cell, tViewModel.hotKey)
+           return cell
+       case tableView.tableColumns[2]:
+           guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
+               as? NSTableCellView else { return nil }
+           setTextField(cell, tViewModel.value)
+           return cell
+       default:
+           return nil
+       }
     }
 }

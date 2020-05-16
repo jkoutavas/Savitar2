@@ -15,12 +15,15 @@ protocol DisplaysVariable {
 struct VariableViewModel: Codable {
     let identifier: String
 
+    let enabled: Bool
     let name: String
     let hotKey: String
     let value: String
 
     init(variable: Variable) {
         identifier = variable.objectID.identifier
+
+        enabled = variable.enabled
         name = variable.name
         hotKey = "hotKey" // TODO
         value = "value" // TODO

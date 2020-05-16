@@ -15,12 +15,14 @@ protocol DisplaysTrigger {
 struct TriggerViewModel: Codable {
     let identifier: String
 
+    let enabled: Bool
     let name: String
     let type: String
     let audioCue: String
-    
+
     init(trigger: Trigger) {
         identifier = trigger.objectID.identifier
+        enabled = !trigger.flags.contains(.disabled)
         name = trigger.name
         type = "type" // TODO
         audioCue = "audioCue" // TODO
