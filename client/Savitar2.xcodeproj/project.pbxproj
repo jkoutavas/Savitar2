@@ -31,6 +31,8 @@
 		693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* VariablesViewModel.swift */; };
 		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
 		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
+		693944F72471ABF900931FA8 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F62471ABF900931FA8 /* TriggerActions.swift */; };
+		693944F92471AC5B00931FA8 /* VariableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F82471AC5B00931FA8 /* VariableActions.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -132,6 +134,8 @@
 		693944ED246630E300931FA8 /* VariablesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesViewModel.swift; sourceTree = "<group>"; };
 		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		693944F62471ABF900931FA8 /* TriggerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerActions.swift; sourceTree = "<group>"; };
+		693944F82471AC5B00931FA8 /* VariableActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableActions.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				69000EDB23942523009976E0 /* Trigger.swift */,
+				693944F62471ABF900931FA8 /* TriggerActions.swift */,
 				69CEEDEF23C94EE400E9F087 /* TriggerController.swift */,
 				69000EDF2397CE30009976E0 /* TriggerMan.swift */,
 				69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */,
@@ -411,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				69CEEDC823B27BCD00E9F087 /* Variable.swift */,
+				693944F82471AC5B00931FA8 /* VariableActions.swift */,
 				69CEEDCC23B3967300E9F087 /* VariableMan.swift */,
 			);
 			path = variables;
@@ -744,6 +750,8 @@
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
+				693944F92471AC5B00931FA8 /* VariableActions.swift in Sources */,
+				693944F72471ABF900931FA8 /* TriggerActions.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,

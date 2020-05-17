@@ -15,77 +15,9 @@ protocol ApplicableAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
-protocol TriggerSelectionAction: ApplicableAction {
-}
-
-struct SelectTriggerAction: TriggerSelectionAction {
-    let selection: SelectionState
-
-    init(selection: SelectionState) {
-        self.selection = selection
-    }
-
-    func apply(oldState: ReactionsState) -> ReactionsState {
-        var result = oldState
-        result.triggerList.selection = selection
-        return result
-    }
-}
-
-protocol VariableSelectionAction: ApplicableAction {
-}
-
-struct SelectVariableAction: VariableSelectionAction {
-    let selection: SelectionState
-
-    init(selection: SelectionState) {
-        self.selection = selection
-    }
-
-    func apply(oldState: ReactionsState) -> ReactionsState {
-        var result = oldState
-        result.variableList.selection = selection
-        return result
-    }
-}
-
 struct ItemListState<T>: StateType {
     var items: [T] = []
     var selection: SelectionState = nil
-}
-
-protocol TriggersAction: ApplicableAction {
-}
-
-struct SetTriggersAction: TriggersAction {
-    let triggers: [Trigger]
-
-    init(triggers: [Trigger]) {
-        self.triggers = triggers
-    }
-
-    func apply(oldState: ReactionsState) -> ReactionsState {
-        var result = oldState
-        result.triggerList.items = triggers
-        return result
-    }
-}
-
-protocol VariablesAction: ApplicableAction {
-}
-
-struct SetVariablesAction: VariablesAction {
-    let variables: [Variable]
-
-    init(variables: [Variable]) {
-        self.variables = variables
-    }
-
-    func apply(oldState: ReactionsState) -> ReactionsState {
-        var result = oldState
-        result.variableList.items = variables
-        return result
-    }
 }
 
 struct ReactionsState: StateType {
