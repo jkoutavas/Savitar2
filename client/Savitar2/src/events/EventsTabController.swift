@@ -8,11 +8,7 @@
 
 import Cocoa
 
-protocol EventsTabControllerType {
-    func setStore(reactionsStore: ReactionsStore?)
-}
-
-class EventsTabController: NSViewController, EventsTabControllerType {
+class EventsTabController: NSViewController {
     @IBOutlet var tableView: NSTableView!
 
     internal var store: ReactionsStore? {
@@ -21,5 +17,7 @@ class EventsTabController: NSViewController, EventsTabControllerType {
         }
     }
 
-    func setStore(reactionsStore: ReactionsStore?) {} // ovveride this
+    func setStore(reactionsStore: ReactionsStore?) {
+        fatalError("Must Override")
+    }
 }

@@ -27,6 +27,10 @@ class VariablesTabController: EventsTabController {
     private var dataSource: VariableTableDataSourceType = VariableTableDataSource()
     private var selectionIsChanging = false
 
+    override func setStore(reactionsStore: ReactionsStore?) {
+        dataSource.setStore(reactionsStore: store)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,10 +38,6 @@ class VariablesTabController: EventsTabController {
         tableView.delegate = self
     }
 
-    override func setStore(reactionsStore: ReactionsStore?) {
-        dataSource.setStore(reactionsStore: store)
-    }
-    
     override func viewWillAppear() {
         super.viewWillAppear()
 
@@ -79,8 +79,6 @@ extension VariablesTabController {
         selectionIsChanging = true
         displaySelection(viewModel: viewModel)
         selectionIsChanging = false
-
-        focusTableView()
     }
 
     fileprivate func updateTableDataSource(viewModel: VariablesViewModel) {
@@ -95,10 +93,6 @@ extension VariablesTabController {
         }
 
         tableView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
-    }
-
-    fileprivate func focusTableView() {
-        view.window?.makeFirstResponder(tableView)
     }
 }
 

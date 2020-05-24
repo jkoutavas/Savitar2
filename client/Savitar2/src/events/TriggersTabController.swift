@@ -1,5 +1,5 @@
 //
-//  EventsViewController.swift
+//  TriggersTabController.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 1/2/20.
@@ -27,15 +27,15 @@ class TriggersTabController: EventsTabController {
     private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
     private var selectionIsChanging = false
 
+    override func setStore(reactionsStore: ReactionsStore?) {
+        dataSource.setStore(reactionsStore: store)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
-    }
-
-    override func setStore(reactionsStore: ReactionsStore?) {
-        dataSource.setStore(reactionsStore: store)
     }
 
     override func viewWillAppear() {
@@ -79,8 +79,6 @@ extension TriggersTabController {
         selectionIsChanging = true
         displaySelection(viewModel: viewModel)
         selectionIsChanging = false
-
-        focusTableView()
     }
 
     fileprivate func updateTableDataSource(viewModel: TriggersViewModel) {
@@ -95,10 +93,6 @@ extension TriggersTabController {
         }
 
         tableView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
-    }
-
-    fileprivate func focusTableView() {
-        view.window?.makeFirstResponder(tableView)
     }
 }
 
