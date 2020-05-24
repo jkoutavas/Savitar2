@@ -33,16 +33,16 @@ struct SetTriggerEnabledAction: ReactionAction {
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
-        var result = oldState
-        for trigger in result.triggerList.items {
-            if trigger.objectID.identifier == identifier {
-                if enabled {
-                    trigger.flags.remove(.disabled) // TODO: hide this inversed crud
-                } else {
-                    trigger.flags.insert(.disabled) // TODO: same goes for here
-                }
+        let triggers = oldState.triggerList.items
+        for trigger in triggers where trigger.objectID.identifier == identifier {
+            if enabled {
+                trigger.flags.remove(.disabled) // TODO: hide this inversed crud
+            } else {
+                trigger.flags.insert(.disabled) // TODO: same goes for here
             }
         }
+        var result = oldState
+        result.triggerList.items = triggers
         return result
     }
 }

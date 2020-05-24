@@ -24,12 +24,7 @@ protocol TriggerTableDataSourceType {
 
 class TriggersTabController: EventsTabController {
 
-    var dataSource: TriggerTableDataSourceType = TriggerTableDataSource() {
-        didSet {
-            tableView.dataSource = dataSource.tableDataSource
-        }
-    }
-
+    private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
     private var selectionIsChanging = false
 
     override func viewDidLoad() {
@@ -37,6 +32,10 @@ class TriggersTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+    }
+
+    override func setStore(reactionsStore: ReactionsStore?) {
+        dataSource.setStore(reactionsStore: store)
     }
 
     override func viewWillAppear() {

@@ -42,6 +42,6 @@ class CheckableTableCellView: NSTableCellView {
     }
 
     @IBAction func checkboxChanged(_ sender: AnyObject) {
-        // TODO
+        checkableItemChangeDelegate?.checkableItem(identifier: viewModel.identifier, didChangeChecked: checkbox.checked)
     }
 }

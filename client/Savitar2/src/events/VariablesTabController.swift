@@ -24,12 +24,7 @@ protocol VariableTableDataSourceType {
 
 class VariablesTabController: EventsTabController {
 
-    var dataSource: VariableTableDataSourceType = VariableTableDataSource() {
-        didSet {
-            tableView.dataSource = dataSource.tableDataSource
-        }
-    }
-
+    private var dataSource: VariableTableDataSourceType = VariableTableDataSource()
     private var selectionIsChanging = false
 
     override func viewDidLoad() {
@@ -39,6 +34,10 @@ class VariablesTabController: EventsTabController {
         tableView.delegate = self
     }
 
+    override func setStore(reactionsStore: ReactionsStore?) {
+        dataSource.setStore(reactionsStore: store)
+    }
+    
     override func viewWillAppear() {
         super.viewWillAppear()
 

@@ -8,8 +8,18 @@
 
 import Cocoa
 
-class EventsTabController: NSViewController {
+protocol EventsTabControllerType {
+    func setStore(reactionsStore: ReactionsStore?)
+}
+
+class EventsTabController: NSViewController, EventsTabControllerType {
     @IBOutlet var tableView: NSTableView!
 
-    internal var store: ReactionsStore?
+    internal var store: ReactionsStore? {
+        didSet {
+            setStore(reactionsStore: store)
+        }
+    }
+
+    func setStore(reactionsStore: ReactionsStore?) {} // ovveride this
 }
