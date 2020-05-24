@@ -11,7 +11,7 @@ import ReSwift
 
 typealias SelectionState = Int?
 
-protocol ApplicableAction: Action {
+protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
@@ -26,40 +26,12 @@ struct ReactionsState: StateType {
 }
 
 func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState {
-    guard var state = state else {
+    guard let state = state else {
         return ReactionsState()
     }
 
-    state = passActionToTriggers(action, state: state)
-    state = passActionToVariables(action, state: state)
-    state = passActionToTriggerSelection(action, state: state)
-    state = passActionToVariableSelection(action, state: state)
-
-    return state
-}
-
-private func passActionToTriggers(_ action: Action, state: ReactionsState) -> ReactionsState {
-    guard let action = action as? TriggersAction else { return state }
-
-    return action.apply(oldState: state)
-}
-
-private func passActionToVariables(_ action: Action, state: ReactionsState) -> ReactionsState {
-    guard let action = action as? VariablesAction else { return state }
-
-    return action.apply(oldState: state)
-}
-
-private func passActionToTriggerSelection(_ action: Action, state: ReactionsState) -> ReactionsState {
-    guard let action = action as? TriggerSelectionAction else { return state }
-
-    return action.apply(oldState: state)
-}
-
-private func passActionToVariableSelection(_ action: Action, state: ReactionsState) -> ReactionsState {
-    guard let action = action as? VariableSelectionAction else { return state }
-
-    return action.apply(oldState: state)
+    guard let reactionAction = action as? ReactionAction else { return state }
+    return reactionAction.apply(oldState: state)
 }
 
 typealias ReactionsStore = Store<ReactionsState>

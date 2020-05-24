@@ -15,11 +15,11 @@ class SavitarObject: Equatable, SavitarXMLProtocol {
     init(objectID: SavitarObjectID = SavitarObjectID()) {
         self.objectID = objectID
     }
-    
+
     init() {
         self.objectID = SavitarObjectID()
     }
-    
+
     func parse(xml: XML.Accessor) throws {}
     func toXMLElement() throws -> XMLElement {
         return XMLElement()

@@ -9,10 +9,7 @@
 import Foundation
 import ReSwift
 
-protocol VariableSelectionAction: ApplicableAction {
-}
-
-struct SelectVariableAction: VariableSelectionAction {
+struct SelectVariableAction: ReactionAction {
     let selection: SelectionState
 
     init(selection: SelectionState) {
@@ -26,10 +23,7 @@ struct SelectVariableAction: VariableSelectionAction {
     }
 }
 
-protocol VariablesAction: ApplicableAction {
-}
-
-struct SetVariablesAction: VariablesAction {
+struct SetVariablesAction: ReactionAction {
     let variables: [Variable]
 
     init(variables: [Variable]) {
@@ -42,5 +36,3 @@ struct SetVariablesAction: VariablesAction {
         return result
     }
 }
-
-

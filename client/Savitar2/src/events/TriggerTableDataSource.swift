@@ -52,8 +52,8 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
         case tableView.tableColumns[0]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? CheckableTableCellView else { return nil }
-            cell.checkbox.checked = tViewModel.enabled
-            setTextField(cell, tViewModel.name)
+            cell.checkableItemChangeDelegate = self
+            cell.viewModel = tViewModel
             return cell
         case tableView.tableColumns[1]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
@@ -69,4 +69,11 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
             return nil
         }
      }
+}
+
+extension TriggerTableDataSource: CheckableItemChangeDelegate {
+    func checkableItem(identifier: String, didChangeChecked checked: Bool) {
+        store?.dispatch(SetTriggerEnabledAction(identifier: identifier, enabled: checked))
+    }
+
 }

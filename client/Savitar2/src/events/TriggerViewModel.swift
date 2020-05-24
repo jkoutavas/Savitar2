@@ -12,19 +12,19 @@ protocol DisplaysTrigger {
     func showTrigger(triggerViewModel viewModel: TriggerViewModel)
 }
 
-struct TriggerViewModel: Codable {
-    let identifier: String
-
-    let enabled: Bool
-    let name: String
+class TriggerViewModel: CheckableItemViewModel {
     let type: String
     let audioCue: String
 
     init(trigger: Trigger) {
-        identifier = trigger.objectID.identifier
-        enabled = !trigger.flags.contains(.disabled)
-        name = trigger.name
         type = "type" // TODO
         audioCue = "audioCue" // TODO
+        super.init(identifier: trigger.objectID.identifier,
+                   title: trigger.name,
+                   enabled: !trigger.flags.contains(.disabled))
+    }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

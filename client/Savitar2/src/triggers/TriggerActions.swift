@@ -9,10 +9,7 @@
 import Foundation
 import ReSwift
 
-protocol TriggerSelectionAction: ApplicableAction {
-}
-
-struct SelectTriggerAction: TriggerSelectionAction {
+struct SelectTriggerAction: ReactionAction {
     let selection: SelectionState
 
     init(selection: SelectionState) {
@@ -26,10 +23,31 @@ struct SelectTriggerAction: TriggerSelectionAction {
     }
 }
 
-protocol TriggersAction: ApplicableAction {
+struct SetTriggerEnabledAction: ReactionAction {
+    let identifier: String
+    let enabled: Bool
+
+    init(identifier: String, enabled: Bool) {
+        self.identifier = identifier
+        self.enabled = enabled
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        for trigger in result.triggerList.items {
+            if trigger.objectID.identifier == identifier {
+                if enabled {
+                    trigger.flags.remove(.disabled) // TODO: hide this inversed crud
+                } else {
+                    trigger.flags.insert(.disabled) // TODO: same goes for here
+                }
+            }
+        }
+        return result
+    }
 }
 
-struct SetTriggersAction: TriggersAction {
+struct SetTriggersAction: ReactionAction {
     let triggers: [Trigger]
 
     init(triggers: [Trigger]) {
@@ -42,4 +60,3 @@ struct SetTriggersAction: TriggersAction {
         return result
     }
 }
-
