@@ -20,8 +20,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
 
     var endpoint: Endpoint?
     var splitViewController: SplitViewController?
-    
-    lazy var store = reactionsStore(undoManager: self.undoManager!)
+
+//    lazy var store = reactionsStore(undoManager: self.undoManager!)
 
     override func close() {
         super.close()
