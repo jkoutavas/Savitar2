@@ -9,13 +9,13 @@
 import Cocoa
 import ReSwift
 
-class EventsViewController: NSTabViewController {
+class EventsViewController: NSTabViewController, NSWindowDelegate {
     var store: ReactionsStore?
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        globalStoreUndoManagerProvider.undoManager = view.window!.undoManager
+        view.window!.delegate = self
 
         for tabViewItem in tabViewItems {
             if let tabVC = tabViewItem.viewController as? EventsTabController {
@@ -27,12 +27,18 @@ class EventsViewController: NSTabViewController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        globalStoreUndoManagerProvider.undoManager = nil
-
         for tabViewItem in tabViewItems {
             if let tabVC = tabViewItem.viewController as? EventsTabController {
                 tabVC.store = nil
             }
         }
+    }
+
+    //***************************
+    // MARK: - NSWindowDelegate
+    //***************************
+
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+        return globalStoreUndoManagerProvider.undoManager
     }
 }
