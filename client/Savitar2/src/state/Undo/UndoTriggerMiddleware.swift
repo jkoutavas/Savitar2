@@ -37,13 +37,12 @@ extension UndoCommand {
     }
 }
 
-func undoTriggerMiddleware() -> Middleware<ReactionsState> {
+func undoTriggerMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
     func undoAction(action: UndoableAction, state: ReactionsState, dispatch: @escaping DispatchFunction) -> UndoCommand? {
         let context = UndoableStateAdapter(reactionsState: state)
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
     }
-
     let undoMiddleware: Middleware<ReactionsState> = { dispatch, getState in {
         next in {
             action in
@@ -57,7 +56,7 @@ func undoTriggerMiddleware() -> Middleware<ReactionsState> {
                 if let undoableAction = action as? UndoableAction, undoableAction.isUndoable,
                     let state = getState(),
                     let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
-                    let undoManager = undoManagerForTriggerMiddleware {
+                    let undoManager = undoManagerProvider() {
                     undo.register(undoManager: undoManager)
                 }
 

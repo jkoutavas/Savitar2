@@ -21,3 +21,6 @@ struct AppContext {
         try prefs.save()
     }
 }
+
+var globalStoreUndoManagerProvider = UndoManagerProvider()
+var globalStore = reactionsStore(undoManagerProvider: { globalStoreUndoManagerProvider.undoManager })

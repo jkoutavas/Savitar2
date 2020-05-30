@@ -62,8 +62,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let eventsController = myWindow.contentViewController as? EventsViewController {
             eventsController.store = globalStore
 
-            undoManagerForTriggerMiddleware = myWindow.undoManager
-
             vc.showWindow(self)
         }
         myWindow.makeKeyAndOrderFront(self)

@@ -15,6 +15,8 @@ class EventsViewController: NSTabViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
 
+        globalStoreUndoManagerProvider.undoManager = view.window!.undoManager
+
         for tabViewItem in tabViewItems {
             if let tabVC = tabViewItem.viewController as? EventsTabController {
                 tabVC.store = store
@@ -24,6 +26,8 @@ class EventsViewController: NSTabViewController {
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
+
+        globalStoreUndoManagerProvider.undoManager = nil
 
         for tabViewItem in tabViewItems {
             if let tabVC = tabViewItem.viewController as? EventsTabController {

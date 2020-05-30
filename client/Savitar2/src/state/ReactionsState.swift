@@ -51,24 +51,23 @@ private func passActionToItems(_ action: Action, triggerList: ItemListState<Trig
     return triggerList
 }
 
-typealias ReactionsStore = Store<ReactionsState>
+struct UndoManagerProvider {
+    var undoManager: UndoManager?
+}
 
-var undoManagerForTriggerMiddleware: UndoManager?
+typealias ReactionsStore = Store<ReactionsState>
 
 // A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
 protocol UndoableAction: Action, Undoable { }
 
-func reactionsStore() -> ReactionsStore {
-
+func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> ReactionsStore {
     return ReactionsStore(
         reducer: reactionsReducer,
         state: nil,
         middleware: [
 //            removeIdempotentActionsMiddleware,
 //            loggingMiddleware,
-            undoTriggerMiddleware()
+            undoTriggerMiddleware(undoManagerProvider: undoManagerProvider)
         ]
     )
 }
-
-var globalStore = reactionsStore()
