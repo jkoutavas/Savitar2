@@ -73,7 +73,17 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
 
 extension TriggerTableDataSource: CheckableItemChangeDelegate {
     func checkableItem(identifier: String, didChangeChecked checked: Bool) {
-        store?.dispatch(SetTriggerEnabledAction(identifier: identifier, enabled: checked))
+        guard let triggerID = SavitarObjectID(identifier: identifier)
+            else { preconditionFailure("Invalid Trigger identifier \(identifier).") }
+
+        let action: TriggerAction = {
+            switch checked {
+            case true: return TriggerAction.enable(triggerID)
+            case false: return TriggerAction.disable(triggerID)
+            }
+        }()
+
+        store?.dispatch(action)
     }
 
 }
