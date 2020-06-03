@@ -1,5 +1,5 @@
 //
-//  Undo.swift
+//  Undoable.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/24/20.
@@ -16,7 +16,7 @@ protocol Undoable {
     var notUndoable: NotUndoable { get }
     var isUndoable: Bool { get }
 
-    func inverse(context: UndoTriggerActionContext) -> UndoableAction?
+    func inverse(context: UndoActionContext) -> UndoableAction?
 }
 
 extension Undoable where Self: UndoableAction {

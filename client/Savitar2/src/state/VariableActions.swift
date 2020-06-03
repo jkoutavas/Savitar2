@@ -36,3 +36,29 @@ struct SetVariablesAction: ReactionAction {
         return result
     }
 }
+
+enum VariableAction: UndoableAction {
+    case enable(SavitarObjectID)
+    case disable(SavitarObjectID)
+
+    // MARK: Undoable
+
+    var isUndoable: Bool { return true }
+
+    var name: String {
+        switch self {
+        case .enable: return "Enable Macro"
+        case .disable: return "Disable Macro"
+        }
+    }
+
+    func inverse(context: UndoActionContext) -> UndoableAction? {
+
+        switch self {
+        case .enable(let variableID):
+            return VariableAction.disable(variableID)
+        case .disable(let variableID):
+            return VariableAction.enable(variableID)
+        }
+    }
+}

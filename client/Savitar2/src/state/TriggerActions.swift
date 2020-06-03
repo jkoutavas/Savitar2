@@ -52,7 +52,7 @@ enum TriggerAction: UndoableAction {
         }
     }
 
-    func inverse(context: UndoTriggerActionContext) -> UndoableAction? {
+    func inverse(context: UndoActionContext) -> UndoableAction? {
 
         switch self {
         case .enable(let triggerID):

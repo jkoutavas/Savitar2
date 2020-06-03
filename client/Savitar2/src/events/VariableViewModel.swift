@@ -12,20 +12,20 @@ protocol DisplaysVariable {
     func showVariable(variableViewModel viewModel: VariableViewModel)
 }
 
-struct VariableViewModel: Codable {
-    let identifier: String
-
-    let enabled: Bool
-    let name: String
+class VariableViewModel: CheckableItemViewModel {
     let hotKey: String
     let value: String
 
     init(variable: Variable) {
-        identifier = variable.objectID.identifier
-
-        enabled = variable.enabled
-        name = variable.name
         hotKey = "hotKey" // TODO
         value = "value" // TODO
+        super.init(identifier: variable.objectID.identifier,
+                   title: variable.name,
+                   enabled: variable.enabled)
+
+    }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

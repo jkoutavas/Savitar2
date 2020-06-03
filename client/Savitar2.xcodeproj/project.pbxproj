@@ -60,9 +60,10 @@
 		69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7A247AC99A00571B21 /* NotUndoable.swift */; };
 		69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7E247ACB4E00571B21 /* ReactionsState.swift */; };
 		69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A80247CB80A00571B21 /* TriggerReducer.swift */; };
-		69928A83247CBCAF00571B21 /* UndoTriggerActionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A82247CBCAF00571B21 /* UndoTriggerActionContext.swift */; };
-		69928A852481E1B700571B21 /* UndoTriggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoTriggerMiddleware.swift */; };
+		69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A82247CBCAF00571B21 /* UndoActionContext.swift */; };
+		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
 		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
+		69928A89248742C000571B21 /* VariableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* VariableReducer.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Variable.swift */; };
 		69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* VariableMan.swift */; };
@@ -177,9 +178,10 @@
 		69928A7A247AC99A00571B21 /* NotUndoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotUndoable.swift; sourceTree = "<group>"; };
 		69928A7E247ACB4E00571B21 /* ReactionsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsState.swift; sourceTree = "<group>"; };
 		69928A80247CB80A00571B21 /* TriggerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerReducer.swift; sourceTree = "<group>"; };
-		69928A82247CBCAF00571B21 /* UndoTriggerActionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoTriggerActionContext.swift; sourceTree = "<group>"; };
-		69928A842481E1B700571B21 /* UndoTriggerMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoTriggerMiddleware.swift; sourceTree = "<group>"; };
+		69928A82247CBCAF00571B21 /* UndoActionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoActionContext.swift; sourceTree = "<group>"; };
+		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
 		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
+		69928A88248742C000571B21 /* VariableReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableReducer.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* VariableMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableMan.swift; sourceTree = "<group>"; };
@@ -428,9 +430,10 @@
 			children = (
 				69928A75247AC91B00571B21 /* Undo */,
 				69928A7E247ACB4E00571B21 /* ReactionsState.swift */,
-				69928A70247AC8FF00571B21 /* VariableActions.swift */,
 				69928A71247AC8FF00571B21 /* TriggerActions.swift */,
 				69928A80247CB80A00571B21 /* TriggerReducer.swift */,
+				69928A70247AC8FF00571B21 /* VariableActions.swift */,
+				69928A88248742C000571B21 /* VariableReducer.swift */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -440,9 +443,9 @@
 			children = (
 				69928A7A247AC99A00571B21 /* NotUndoable.swift */,
 				69928A78247AC96900571B21 /* Undoable.swift */,
+				69928A82247CBCAF00571B21 /* UndoActionContext.swift */,
 				69928A862481E2F600571B21 /* UndoCommand.swift */,
-				69928A82247CBCAF00571B21 /* UndoTriggerActionContext.swift */,
-				69928A842481E1B700571B21 /* UndoTriggerMiddleware.swift */,
+				69928A842481E1B700571B21 /* UndoMiddleware.swift */,
 			);
 			path = Undo;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
 				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
+				69928A89248742C000571B21 /* VariableReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
 				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
 				693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */,
@@ -816,8 +820,8 @@
 				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
 				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
-				69928A83247CBCAF00571B21 /* UndoTriggerActionContext.swift in Sources */,
-				69928A852481E1B700571B21 /* UndoTriggerMiddleware.swift in Sources */,
+				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
+				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
 				693944E62466245F00931FA8 /* VariablesTabController.swift in Sources */,
 				69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */,

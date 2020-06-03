@@ -30,25 +30,21 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
         return ReactionsState()
     }
 
-//    guard let reactionAction = action as? ReactionAction else { return state }
-//    return reactionAction.apply(oldState: state)
     if let reactionAction = action as? ReactionAction {
         return reactionAction.apply(oldState: state)
     } else {
-        var triggerList = state.triggerList
-        triggerList = passActionToItems(action, triggerList: triggerList)
-        state.triggerList = triggerList
+        if let triggerAction = action as? TriggerAction {
+            var triggerList = state.triggerList
+            triggerList.items = triggerList.items.compactMap { triggerReducer(action, state: $0) }
+            state.triggerList = triggerList
+        } else if let variableAction = action as? VariableAction {
+            var variableList = state.variableList
+            variableList.items = variableList.items.compactMap { variableReducer(action, state: $0) }
+            state.variableList = variableList
+        }
 
         return state
     }
-}
-
-private func passActionToItems(_ action: Action, triggerList: ItemListState<Trigger>) -> ItemListState<Trigger> {
-    var triggerList = triggerList
-
-    triggerList.items = triggerList.items.compactMap { triggerReducer(action, state: $0) }
-
-    return triggerList
 }
 
 struct UndoManagerProvider {
@@ -67,7 +63,7 @@ func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> Reacti
         middleware: [
 //            removeIdempotentActionsMiddleware,
 //            loggingMiddleware,
-            undoTriggerMiddleware(undoManagerProvider: undoManagerProvider)
+            undoMiddleware(undoManagerProvider: undoManagerProvider)
         ]
     )
 }

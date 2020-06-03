@@ -47,26 +47,42 @@ extension VariableTableDataSource: VariableTableDataSourceType {
            guard let textField = cell.textField else { return }
            textField.stringValue = value
        }
-       guard let tViewModel = viewModel?.variables[row] else { return nil }
+       guard let vViewModel = viewModel?.variables[row] else { return nil }
        switch tableColumn {
        case tableView.tableColumns[0]:
            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                as? CheckableTableCellView else { return nil }
-           cell.checkbox.checked = tViewModel.enabled
-           setTextField(cell, tViewModel.name)
+           cell.checkableItemChangeDelegate = self
+           cell.viewModel = vViewModel
            return cell
        case tableView.tableColumns[1]:
            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                as? NSTableCellView else { return nil }
-           setTextField(cell, tViewModel.hotKey)
+           setTextField(cell, vViewModel.hotKey)
            return cell
        case tableView.tableColumns[2]:
            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                as? NSTableCellView else { return nil }
-           setTextField(cell, tViewModel.value)
+           setTextField(cell, vViewModel.value)
            return cell
        default:
            return nil
        }
+    }
+}
+
+extension VariableTableDataSource: CheckableItemChangeDelegate {
+    func checkableItem(identifier: String, didChangeChecked checked: Bool) {
+        guard let variableID = SavitarObjectID(identifier: identifier)
+            else { preconditionFailure("Invalid Variable identifier \(identifier).") }
+
+        let action: VariableAction = {
+            switch checked {
+            case true: return VariableAction.enable(variableID)
+            case false: return VariableAction.disable(variableID)
+            }
+        }()
+
+        store?.dispatch(action)
     }
 }

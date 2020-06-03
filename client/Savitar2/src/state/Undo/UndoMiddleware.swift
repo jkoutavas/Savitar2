@@ -1,5 +1,5 @@
 //
-//  UndoTriggerMiddleware.swift
+//  UndoMiddleware.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/29/20.
@@ -9,25 +9,17 @@
 import Foundation
 import ReSwift
 
-class UndoableStateAdapter: UndoTriggerActionContext {
+class UndoableStateAdapter: UndoActionContext {
 
     let state: ReactionsState
 
     init(reactionsState: ReactionsState) {
         state = reactionsState
     }
-
-    func triggerIn(triggerID: SavitarObjectID) -> TriggerIn? {
-        guard let index = state.triggerList.items.firstIndex(where: { $0.objectID == triggerID })
-        else { return nil }
-
-        let trigger = state.triggerList.items[index]
-        return (trigger, index)
-    }
 }
 
 extension UndoCommand {
-    convenience init?(appAction: UndoableAction, context: UndoTriggerActionContext, dispatch: @escaping DispatchFunction) {
+    convenience init?(appAction: UndoableAction, context: UndoActionContext, dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context)
         else { return nil }
 
@@ -37,7 +29,7 @@ extension UndoCommand {
     }
 }
 
-func undoTriggerMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
+func undoMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
     func undoAction(action: UndoableAction, state: ReactionsState, dispatch: @escaping DispatchFunction) -> UndoCommand? {
         let context = UndoableStateAdapter(reactionsState: state)
 
