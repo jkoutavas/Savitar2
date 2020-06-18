@@ -32,6 +32,28 @@ class WindowController: NSWindowController {
         return components[0] + status
     }
 
+    @IBAction func showWorldEvents(_ sender: Any) {
+        let bundle = Bundle(for: Self.self)
+        let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
+        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
+            return
+        }
+        guard let myWindow = controller.window else {
+            return
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        let vc = NSWindowController(window: myWindow)
+
+        if let eventsController = myWindow.contentViewController as? EventsViewController {
+            guard let doc = document as? Document else { return }
+            controller.document = doc
+            eventsController.store = doc.store
+
+            vc.showWindow(self)
+        }
+        myWindow.makeKeyAndOrderFront(self)
+    }
+
     @IBAction func showWorldSetting(_ sender: Any) {
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
         guard let wc = storyboard?.instantiateController(withIdentifier:

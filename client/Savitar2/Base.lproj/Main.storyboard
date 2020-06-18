@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1294,11 +1294,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="titlebarViewController" id="h1D-5o-gDg" customClass="NSTitlebarAccessoryViewController" sceneMemberID="viewController">
                     <view key="view" id="n85-aq-ZEl">
-                        <rect key="frame" x="0.0" y="0.0" width="119" height="34"/>
+                        <rect key="frame" x="0.0" y="0.0" width="189" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="38.5" y="5" width="65" height="23"/>
+                                <rect key="frame" x="108.5" y="5" width="65" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1307,18 +1307,31 @@ Gw
                                     <action selector="showWorldSetting:" target="iLh-qn-Ycd" id="A52-mR-SxS"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
+                                <rect key="frame" x="41.5" y="5" width="55" height="23"/>
+                                <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="showWorldEvents:" target="iLh-qn-Ycd" id="Ml7-h6-n6H"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="6ks-CJ-Gf8" firstAttribute="leading" secondItem="n85-aq-ZEl" secondAttribute="leading" constant="42" id="Eaa-Tv-c18"/>
                             <constraint firstAttribute="bottom" secondItem="9TJ-w7-3SB" secondAttribute="bottom" constant="6" id="Hrt-nq-4C7"/>
                             <constraint firstAttribute="trailing" secondItem="9TJ-w7-3SB" secondAttribute="trailing" constant="16" id="fbb-3M-2tn"/>
-                            <constraint firstItem="9TJ-w7-3SB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="n85-aq-ZEl" secondAttribute="leading" id="fqL-co-UHx"/>
+                            <constraint firstAttribute="bottom" secondItem="6ks-CJ-Gf8" secondAttribute="bottom" constant="6" id="hsS-vg-Tlm"/>
+                            <constraint firstItem="9TJ-w7-3SB" firstAttribute="leading" secondItem="6ks-CJ-Gf8" secondAttribute="trailing" constant="13" id="sid-M5-cCA"/>
                             <constraint firstItem="9TJ-w7-3SB" firstAttribute="top" secondItem="n85-aq-ZEl" secondAttribute="top" constant="6" id="t6b-3l-FAY"/>
+                            <constraint firstItem="6ks-CJ-Gf8" firstAttribute="top" secondItem="n85-aq-ZEl" secondAttribute="top" constant="6" id="wth-36-odZ"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="iLh-qn-Ycd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2246" y="-11011"/>
+            <point key="canvasLocation" x="-2281.5" y="-11011"/>
         </scene>
     </scenes>
 </document>

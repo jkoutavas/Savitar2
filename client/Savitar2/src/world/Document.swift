@@ -21,13 +21,11 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     var endpoint: Endpoint?
     var splitViewController: SplitViewController?
 
-//    lazy var store = reactionsStore(undoManager: self.undoManager!)
+    lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
         super.close()
         endpoint?.close()
-
-//        globalStore.dispatch(RemoveWorldDocumentAction(document: self))
     }
 
     override func makeWindowControllers() {
@@ -52,8 +50,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         let xml = XML.parse(data)
         try self.parse(xml: xml[DocumentElemIdentifier])
 
-        world.triggerMan.undoManager = undoManager
-        world.variableMan.undoManager = undoManager
+        store.dispatch(SetTriggersAction(triggers: world.triggerMan.get()))
+        store.dispatch(SetVariablesAction(variables: world.variableMan.get()))
     }
 
     func output(result: OutputResult) {
