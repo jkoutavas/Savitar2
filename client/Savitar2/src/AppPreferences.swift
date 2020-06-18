@@ -44,10 +44,10 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
 
-    var worldMan = WorldMan()
+    private var worldMan = WorldMan()
     private var triggerMan = TriggerMan()
-    var variableMan = VariableMan()
-    var colorMan = ColorMan()
+    private var variableMan = VariableMan()
+    private var colorMan = ColorMan()
 
     init() {
         self.version = latestPrefsVersion
