@@ -44,10 +44,10 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
 
-    var worldMan = WorldMan()
-    var triggerMan = TriggerMan()
-    var variableMan = VariableMan()
-    var colorMan = ColorMan()
+    private var worldMan = WorldMan()
+    private var triggerMan = TriggerMan()
+    private var variableMan = VariableMan()
+    private var colorMan = ColorMan()
 
     init() {
         self.version = latestPrefsVersion
@@ -67,6 +67,9 @@ class AppPreferences: SavitarXMLProtocol {
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
+
+            globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
         } catch {
             // It's okay if loading v2 prefs failed. It simply means Savitar v2 is not installed, or the v2 preferences
             // are corrupt.
@@ -90,6 +93,9 @@ class AppPreferences: SavitarXMLProtocol {
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
+
+            globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
         } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.

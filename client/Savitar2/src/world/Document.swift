@@ -15,12 +15,13 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
 
     let type = "Savitar World"
     var version = 1 // start with the assumption that a v1 world XML is being parsed
-    var GUID = NSUUID().uuidString
 
     var world = World()
 
     var endpoint: Endpoint?
     var splitViewController: SplitViewController?
+
+    lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
         super.close()
@@ -49,8 +50,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         let xml = XML.parse(data)
         try self.parse(xml: xml[DocumentElemIdentifier])
 
-        world.triggerMan.undoManager = undoManager
-        world.variableMan.undoManager = undoManager
+        store.dispatch(SetTriggersAction(triggers: world.triggerMan.get()))
+        store.dispatch(SetVariablesAction(variables: world.variableMan.get()))
     }
 
     func output(result: OutputResult) {
@@ -94,7 +95,6 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     enum DocumentAttribIdentifier: String {
         case type = "TYPE"
         case version = "VERSION"
-        case GUID = "GUID"
     }
 
     func parse(xml: XML.Accessor) throws {
@@ -108,8 +108,6 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
                 if let v = Int(attribute.value) {
                     self.version = v
                 }
-            case DocumentAttribIdentifier.GUID.rawValue:
-                self.GUID = attribute.value
             default:
                 Swift.print("skipping document attribute \(attribute.key)")
             }
@@ -125,7 +123,6 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
 
         docElem.addAttribute(name: DocumentAttribIdentifier.type.rawValue, stringValue: type)
         docElem.addAttribute(name: DocumentAttribIdentifier.version.rawValue, stringValue: "\(version)")
-        docElem.addAttribute(name: DocumentAttribIdentifier.GUID.rawValue, stringValue: GUID)
 
         let worldElem = try world.toXMLElement()
         docElem.addChild(worldElem)

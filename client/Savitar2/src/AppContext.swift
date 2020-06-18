@@ -9,11 +9,16 @@
 import Cocoa
 import ReSwift
 
+var globalStoreUndoManagerProvider = UndoManagerProvider()
+var globalStore = reactionsStore(undoManagerProvider: { globalStoreUndoManagerProvider.undoManager })
+
 struct AppContext {
     static var prefs = AppPreferences()
     static var worldMan = WorldMan()
 
     static func load() throws {
+        globalStoreUndoManagerProvider.undoManager = UndoManager()
+
         try prefs.load()
     }
 

@@ -20,6 +20,17 @@
 		690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */; };
 		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
+		691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A12453D6F20057DD34 /* TriggerViewModel.swift */; };
+		691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A52453D98E0057DD34 /* TriggersViewModel.swift */; };
+		691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B52453EA700057DD34 /* TriggersTabController.swift */; };
+		691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */; };
+		693944E62466245F00931FA8 /* VariablesTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E52466245E00931FA8 /* VariablesTabController.swift */; };
+		693944E82466248C00931FA8 /* EventsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E72466248C00931FA8 /* EventsTabController.swift */; };
+		693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* VariableTableDataSource.swift */; };
+		693944EC24662FF300931FA8 /* VariableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944EB24662FF300931FA8 /* VariableViewModel.swift */; };
+		693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* VariablesViewModel.swift */; };
+		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
+		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
@@ -43,6 +54,16 @@
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
 		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
+		69928A73247AC8FF00571B21 /* VariableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A70247AC8FF00571B21 /* VariableActions.swift */; };
+		69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A71247AC8FF00571B21 /* TriggerActions.swift */; };
+		69928A79247AC96900571B21 /* Undoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A78247AC96900571B21 /* Undoable.swift */; };
+		69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7A247AC99A00571B21 /* NotUndoable.swift */; };
+		69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7E247ACB4E00571B21 /* ReactionsState.swift */; };
+		69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A80247CB80A00571B21 /* TriggerReducer.swift */; };
+		69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A82247CBCAF00571B21 /* UndoActionContext.swift */; };
+		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
+		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
+		69928A89248742C000571B21 /* VariableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* VariableReducer.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Variable.swift */; };
 		69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* VariableMan.swift */; };
@@ -109,6 +130,17 @@
 		690B462623B0063F000445E4 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesTests.swift; sourceTree = "<group>"; };
 		690B462C23B16B54000445E4 /* StartupPreferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StartupPreferences.xml; sourceTree = "<group>"; };
+		691963A12453D6F20057DD34 /* TriggerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewModel.swift; sourceTree = "<group>"; };
+		691963A52453D98E0057DD34 /* TriggersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggersViewModel.swift; sourceTree = "<group>"; };
+		691963B52453EA700057DD34 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
+		691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
+		693944E52466245E00931FA8 /* VariablesTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesTabController.swift; sourceTree = "<group>"; };
+		693944E72466248C00931FA8 /* EventsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabController.swift; sourceTree = "<group>"; };
+		693944E924662F3F00931FA8 /* VariableTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTableDataSource.swift; sourceTree = "<group>"; };
+		693944EB24662FF300931FA8 /* VariableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableViewModel.swift; sourceTree = "<group>"; };
+		693944ED246630E300931FA8 /* VariablesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesViewModel.swift; sourceTree = "<group>"; };
+		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
+		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +172,16 @@
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		69928A70247AC8FF00571B21 /* VariableActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableActions.swift; sourceTree = "<group>"; };
+		69928A71247AC8FF00571B21 /* TriggerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerActions.swift; sourceTree = "<group>"; };
+		69928A78247AC96900571B21 /* Undoable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Undoable.swift; sourceTree = "<group>"; };
+		69928A7A247AC99A00571B21 /* NotUndoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotUndoable.swift; sourceTree = "<group>"; };
+		69928A7E247ACB4E00571B21 /* ReactionsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsState.swift; sourceTree = "<group>"; };
+		69928A80247CB80A00571B21 /* TriggerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerReducer.swift; sourceTree = "<group>"; };
+		69928A82247CBCAF00571B21 /* UndoActionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoActionContext.swift; sourceTree = "<group>"; };
+		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
+		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
+		69928A88248742C000571B21 /* VariableReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableReducer.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* VariableMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableMan.swift; sourceTree = "<group>"; };
@@ -231,6 +273,15 @@
 			path = triggers;
 			sourceTree = "<group>";
 		};
+		693944F1246F7C8900931FA8 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */,
+				693944F4246F7C9E00931FA8 /* CheckBox.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
@@ -306,8 +357,10 @@
 				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
+				693944F1246F7C8900931FA8 /* components */,
 				69CEEDE023BEDA7900E9F087 /* events */,
 				69662B23204367BD00E7CC7B /* extensions */,
+				69928A6E247AC8FF00571B21 /* state */,
 				696F77402390CFF2005E45EB /* thirdparty */,
 				69000EDA23942513009976E0 /* triggers */,
 				69CEEDC723B27BB400E9F087 /* variables */,
@@ -372,6 +425,31 @@
 			path = aha;
 			sourceTree = "<group>";
 		};
+		69928A6E247AC8FF00571B21 /* state */ = {
+			isa = PBXGroup;
+			children = (
+				69928A75247AC91B00571B21 /* Undo */,
+				69928A7E247ACB4E00571B21 /* ReactionsState.swift */,
+				69928A71247AC8FF00571B21 /* TriggerActions.swift */,
+				69928A80247CB80A00571B21 /* TriggerReducer.swift */,
+				69928A70247AC8FF00571B21 /* VariableActions.swift */,
+				69928A88248742C000571B21 /* VariableReducer.swift */,
+			);
+			path = state;
+			sourceTree = "<group>";
+		};
+		69928A75247AC91B00571B21 /* Undo */ = {
+			isa = PBXGroup;
+			children = (
+				69928A7A247AC99A00571B21 /* NotUndoable.swift */,
+				69928A78247AC96900571B21 /* Undoable.swift */,
+				69928A82247CBCAF00571B21 /* UndoActionContext.swift */,
+				69928A862481E2F600571B21 /* UndoCommand.swift */,
+				69928A842481E1B700571B21 /* UndoMiddleware.swift */,
+			);
+			path = Undo;
+			sourceTree = "<group>";
+		};
 		69CEEDC723B27BB400E9F087 /* variables */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,8 +471,17 @@
 		69CEEDE023BEDA7900E9F087 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				693944E72466248C00931FA8 /* EventsTabController.swift */,
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
+				691963B52453EA700057DD34 /* TriggersTabController.swift */,
+				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
+				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
+				691963A12453D6F20057DD34 /* TriggerViewModel.swift */,
+				693944E52466245E00931FA8 /* VariablesTabController.swift */,
+				693944ED246630E300931FA8 /* VariablesViewModel.swift */,
+				693944E924662F3F00931FA8 /* VariableTableDataSource.swift */,
+				693944EB24662FF300931FA8 /* VariableViewModel.swift */,
 			);
 			path = events;
 			sourceTree = "<group>";
@@ -685,14 +772,17 @@
 				69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */,
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
+				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
 				69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */,
 				690B462723B0063F000445E4 /* ModelManager.swift in Sources */,
+				691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */,
 				69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
+				693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
@@ -709,20 +799,38 @@
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
 				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
+				69928A89248742C000571B21 /* VariableReducer.swift in Sources */,
+				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
+				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
+				693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */,
+				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
+				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
+				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
 				696F77442390CFF2005E45EB /* aha.c in Sources */,
+				691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */,
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
+				69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */,
+				693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
+				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
+				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
+				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
+				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
+				693944E62466245F00931FA8 /* VariablesTabController.swift in Sources */,
 				69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */,
+				693944EC24662FF300931FA8 /* VariableViewModel.swift in Sources */,
+				693944E82466248C00931FA8 /* EventsTabController.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
 				69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */,
 				69662B2B204367BD00E7CC7B /* Document.swift in Sources */,
+				69928A73247AC8FF00571B21 /* VariableActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

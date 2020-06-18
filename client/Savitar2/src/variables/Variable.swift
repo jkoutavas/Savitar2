@@ -36,10 +36,10 @@ class Variable: SavitarObject {
 
     override init() {
         super.init()
-        
+
         name = Self.defaultName
     }
-    
+
     override func parse(xml: XML.Accessor) throws {
         for attribute in xml.attributes {
             switch attribute.key {
