@@ -65,6 +65,7 @@
 		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
 		69928A89248742C000571B21 /* VariableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* VariableReducer.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
+		69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D6249EA7120058B067 /* EventsSplitViewController.swift */; };
 		69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Variable.swift */; };
 		69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* VariableMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* VariableManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* VariableManTests.swift */; };
@@ -183,6 +184,7 @@
 		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
 		69928A88248742C000571B21 /* VariableReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableReducer.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
+		69B278D6249EA7120058B067 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* VariableMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* VariableManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableManTests.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		69CEEDE023BEDA7900E9F087 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				69B278D6249EA7120058B067 /* EventsSplitViewController.swift */,
 				693944E72466248C00931FA8 /* EventsTabController.swift */,
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
@@ -790,6 +793,7 @@
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
+				69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
 				69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
