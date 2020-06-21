@@ -53,7 +53,7 @@ extension String {
             throw NSError()
         }
     }
-    
+
     func fileName() -> String {
         return URL(fileURLWithPath: self).deletingPathExtension().lastPathComponent
     }

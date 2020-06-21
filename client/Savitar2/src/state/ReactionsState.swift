@@ -33,11 +33,11 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
     if let reactionAction = action as? ReactionAction {
         return reactionAction.apply(oldState: state)
     } else {
-        if let triggerAction = action as? TriggerAction {
+        if action is TriggerAction {
             var triggerList = state.triggerList
             triggerList.items = triggerList.items.compactMap { triggerReducer(action, state: $0) }
             state.triggerList = triggerList
-        } else if let variableAction = action as? VariableAction {
+        } else if action is VariableAction {
             var variableList = state.variableList
             variableList.items = variableList.items.compactMap { variableReducer(action, state: $0) }
             state.variableList = variableList

@@ -13,7 +13,7 @@ class TriggerSettingsController: NSViewController {
     @IBOutlet var tabView: NSTabView!
 
     var applyChange = false
-     
+
     var trigger: Trigger? {
          get {
             return _editedTrigger
