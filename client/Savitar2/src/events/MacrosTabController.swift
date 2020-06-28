@@ -1,5 +1,5 @@
 //
-//  VariablesTabController.swift
+//  MacrosTabController.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/8/20.
@@ -9,22 +9,22 @@
 import Cocoa
 import ReSwift
 
-protocol VariableTableDataSourceType {
+protocol MacroTableDataSourceType {
     var tableDataSource: NSTableViewDataSource { get }
 
     var selectedRow: SelectionState { get }
-    var selectedVariable: VariableViewModel? { get }
-    var variableCount: Int { get }
+    var selectedMacro: MacroViewModel? { get }
+    var macroCount: Int { get }
 
-    func updateContents(variablesViewModel viewModel: VariablesViewModel)
+    func updateContents(macrosViewModel viewModel: MacrosViewModel)
     func getStore() -> ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?)
-    func variableCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
+    func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 
-class VariablesTabController: EventsTabController {
+class MacrosTabController: EventsTabController {
 
-    private var dataSource: VariableTableDataSourceType = VariableTableDataSource()
+    private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
     private var selectionIsChanging = false
 
     override func setStore(reactionsStore: ReactionsStore?) {
@@ -51,9 +51,9 @@ class VariablesTabController: EventsTabController {
     }
 }
 
-extension VariablesTabController: NSTableViewDelegate {
+extension MacrosTabController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        return dataSource.variableCellView(tableView, viewFor: tableColumn, row: row)
+        return dataSource.macroCellView(tableView, viewFor: tableColumn, row: row)
     }
 
     func tableViewSelectionDidChange(_: Notification) {
@@ -68,12 +68,12 @@ extension VariablesTabController: NSTableViewDelegate {
             return tableView.selectedRow
         }()
 
-        store?.dispatch(SelectVariableAction(selection: sel))
+        store?.dispatch(SelectMacroAction(selection: sel))
     }
 }
 
-extension VariablesTabController {
-    func displayVariables(variablesViewModel viewModel: VariablesViewModel) {
+extension MacrosTabController {
+    func displayMacros(macrosViewModel viewModel: MacrosViewModel) {
         updateTableDataSource(viewModel: viewModel)
 
         selectionIsChanging = true
@@ -81,12 +81,12 @@ extension VariablesTabController {
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(viewModel: VariablesViewModel) {
-        dataSource.updateContents(variablesViewModel: viewModel)
+    fileprivate func updateTableDataSource(viewModel: MacrosViewModel) {
+        dataSource.updateContents(macrosViewModel: viewModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(viewModel: VariablesViewModel) {
+    fileprivate func displaySelection(viewModel: MacrosViewModel) {
         guard let selectedRow = viewModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return
@@ -96,14 +96,14 @@ extension VariablesTabController {
     }
 }
 
-extension VariablesTabController: StoreSubscriber {
+extension MacrosTabController: StoreSubscriber {
     func newState(state: ReactionsState) {
-        let variableViewModels = state.variableList.items.map(VariableViewModel.init)
-        let variablesViewModel = VariablesViewModel(
-            variables: variableViewModels,
-            selectedRow: state.variableList.selection
+        let macroViewModels = state.macroList.items.map(MacroViewModel.init)
+        let macrosViewModel = MacrosViewModel(
+            macros: macroViewModels,
+            selectedRow: state.macroList.selection
         )
 
-        displayVariables(variablesViewModel: variablesViewModel)
+        displayMacros(macrosViewModel: macrosViewModel)
     }
 }

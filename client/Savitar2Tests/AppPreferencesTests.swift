@@ -49,8 +49,8 @@ class AppPreferencesTests: XCTestCase {
         XCTAssertEqual(startingPrefs.triggerMan.get().count, 2)
     }
 
-    func testVariableMan() {
-        XCTAssertEqual(startingPrefs.variableMan.get().count, 15)
+    func testMacroMan() {
+        XCTAssertEqual(startingPrefs.macroMan.get().count, 15)
     }
 
     func testColorMan() {

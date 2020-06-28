@@ -1,5 +1,5 @@
 //
-//  VariableTableDataSource.swift
+//  MacroTableDataSource.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/8/20.
@@ -8,27 +8,27 @@
 
 import Cocoa
 
-class VariableTableDataSource: NSObject, ReactionStoreSetter {
-    var viewModel: VariablesViewModel?
+class MacroTableDataSource: NSObject, ReactionStoreSetter {
+    var viewModel: MacrosViewModel?
     var store: ReactionsStore?
 }
 
-extension VariableTableDataSource: NSTableViewDataSource {
+extension MacroTableDataSource: NSTableViewDataSource {
     func numberOfRows(in _: NSTableView) -> Int {
         return viewModel?.itemCount ?? 0
     }
 }
 
-extension VariableTableDataSourceType where Self: NSTableViewDataSource {
+extension MacroTableDataSourceType where Self: NSTableViewDataSource {
     var tableDataSource: NSTableViewDataSource {
         return self
     }
 }
 
-extension VariableTableDataSource: VariableTableDataSourceType {
+extension MacroTableDataSource: MacroTableDataSourceType {
     var selectedRow: Int? { return viewModel?.selectedRow }
-    var selectedVariable: VariableViewModel? { return viewModel?.selectedVariable }
-    var variableCount: Int { return viewModel?.itemCount ?? 0 }
+    var selectedMacro: MacroViewModel? { return viewModel?.selectedMacro }
+    var macroCount: Int { return viewModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -38,16 +38,16 @@ extension VariableTableDataSource: VariableTableDataSourceType {
         store = reactionsStore
     }
 
-    func updateContents(variablesViewModel viewModel: VariablesViewModel) {
+    func updateContents(macrosViewModel viewModel: MacrosViewModel) {
         self.viewModel = viewModel
     }
 
-    func variableCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
        func setTextField(_ cell: NSTableCellView, _ value: String) {
            guard let textField = cell.textField else { return }
            textField.stringValue = value
        }
-       guard let vViewModel = viewModel?.variables[row] else { return nil }
+       guard let vViewModel = viewModel?.macros[row] else { return nil }
        switch tableColumn {
        case tableView.tableColumns[0]:
            guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
@@ -71,15 +71,15 @@ extension VariableTableDataSource: VariableTableDataSourceType {
     }
 }
 
-extension VariableTableDataSource: CheckableItemChangeDelegate {
+extension MacroTableDataSource: CheckableItemChangeDelegate {
     func checkableItem(identifier: String, didChangeChecked checked: Bool) {
-        guard let variableID = SavitarObjectID(identifier: identifier)
-            else { preconditionFailure("Invalid Variable identifier \(identifier).") }
+        guard let macroID = SavitarObjectID(identifier: identifier)
+            else { preconditionFailure("Invalid macro identifier \(identifier).") }
 
-        let action: VariableAction = {
+        let action: MacroAction = {
             switch checked {
-            case true: return VariableAction.enable(variableID)
-            case false: return VariableAction.disable(variableID)
+            case true: return MacroAction.enable(macroID)
+            case false: return MacroAction.disable(macroID)
             }
         }()
 

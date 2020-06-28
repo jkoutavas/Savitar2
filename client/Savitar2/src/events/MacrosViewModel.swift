@@ -1,5 +1,5 @@
 //
-//  VariablesViewModel.swift
+//  MacrosViewModel.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/8/20.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct VariablesViewModel {
-    let variables: [VariableViewModel]
-    var itemCount: Int { return variables.count }
+struct MacrosViewModel {
+    let macros: [MacroViewModel]
+    var itemCount: Int { return macros.count }
 
     let selectedRow: Int?
-    var selectedVariable: VariableViewModel? {
+    var selectedMacro: MacroViewModel? {
         guard let selectedRow = selectedRow else { return nil }
-        return variables[selectedRow]
+        return macros[selectedRow]
     }
 }

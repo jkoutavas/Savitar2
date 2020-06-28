@@ -1,5 +1,5 @@
 //
-//  VariableActions.swift
+//  MacroActions.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/17/20.
@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 
-struct SelectVariableAction: ReactionAction {
+struct SelectMacroAction: ReactionAction {
     let selection: SelectionState
 
     init(selection: SelectionState) {
@@ -18,26 +18,26 @@ struct SelectVariableAction: ReactionAction {
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
-        result.variableList.selection = selection
+        result.macroList.selection = selection
         return result
     }
 }
 
-struct SetVariablesAction: ReactionAction {
-    let variables: [Variable]
+struct SetMacrosAction: ReactionAction {
+    let macros: [Macro]
 
-    init(variables: [Variable]) {
-        self.variables = variables
+    init(macros: [Macro]) {
+        self.macros = macros
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
-        result.variableList.items = variables
+        result.macroList.items = macros
         return result
     }
 }
 
-enum VariableAction: UndoableAction {
+enum MacroAction: UndoableAction {
     case enable(SavitarObjectID)
     case disable(SavitarObjectID)
 
@@ -55,10 +55,10 @@ enum VariableAction: UndoableAction {
     func inverse(context: UndoActionContext) -> UndoableAction? {
 
         switch self {
-        case .enable(let variableID):
-            return VariableAction.disable(variableID)
-        case .disable(let variableID):
-            return VariableAction.enable(variableID)
+        case .enable(let macroID):
+            return MacroAction.disable(macroID)
+        case .disable(let macroID):
+            return MacroAction.enable(macroID)
         }
     }
 }

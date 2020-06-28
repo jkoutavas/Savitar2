@@ -1,5 +1,5 @@
 //
-//  VariableManTests.swift
+//  MacroManTests.swift
 //  Savitar2Tests
 //
 //  Created by Jay Koutavas on 12/25/19.
@@ -13,8 +13,8 @@ import SwiftyXMLParser
 
 class VariableManTests: XCTestCase {
 
-    func testVariables() throws {
-        // These are the variables lifted directly from StarupPreferences.xml
+    func testMacros() throws {
+        // These are the macros lifted directly from StarupPreferences.xml
         let xmlString = """
         <!DOCTYPE doc [
             <!ENTITY ret "&#38;#13;">

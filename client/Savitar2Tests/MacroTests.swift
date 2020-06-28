@@ -1,5 +1,5 @@
 //
-//  VariableTests.swift
+//  MacroTests.swift
 //  Savitar2Tests
 //
 //  Created by Jay Koutavas on 12/25/19.
@@ -11,10 +11,10 @@ import SwiftyXMLParser
 
 @testable import Savitar2
 
-class VariableTests: XCTestCase {
+class MacroTests: XCTestCase {
 
     func testV1RetEntity() throws {
-        // v1 Savitar variables use the "&ret;" custom entity to separate lines of text.
+        // v1 Savitar macros use the "&ret;" custom entity to separate lines of text.
         // XMLParser has a known bug with handling custom entities (of which SwiftyXMLParser is based)
         // See: https://stackoverflow.com/questions/44680734/parsing-xml-with-entities-in-swift-with-xmlparser
         // This test is here to signal if/when this gets sorted out. Like, if/when there's a move to
@@ -33,8 +33,8 @@ class VariableTests: XCTestCase {
         """
 
         let xml = try XML.parse(xmlString)
-        let v1 = Variable()
-        try v1.parse(xml: xml[VariableElemIdentifier])
+        let v1 = Macro()
+        try v1.parse(xml: xml[MacroElemIdentifier])
 
         XCTAssertEqual(v1.name, "MACRO_5")
 
@@ -58,8 +58,8 @@ class VariableTests: XCTestCase {
         """
 
         let xml = try XML.parse(xmlString)
-        let v1 = Variable()
-        try v1.parse(xml: xml[VariableElemIdentifier])
+        let v1 = Macro()
+        try v1.parse(xml: xml[MacroElemIdentifier])
 
         XCTAssertEqual(v1.name, "MACRO_5")
 
@@ -82,8 +82,8 @@ say ...and here is command two!
 """
 
         let xml = try XML.parse(xmlString)
-        let v1 = Variable()
-        try v1.parse(xml: xml[VariableElemIdentifier])
+        let v1 = Macro()
+        try v1.parse(xml: xml[MacroElemIdentifier])
 
         XCTAssertEqual(v1.name, "MACRO_5")
 

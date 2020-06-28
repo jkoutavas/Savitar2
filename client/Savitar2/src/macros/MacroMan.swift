@@ -1,5 +1,5 @@
 //
-//  VariableMan.swift
+//  MacroMan.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 12/25/19.
@@ -8,23 +8,23 @@
 
 import SwiftyXMLParser
 
-let VariablesElemIdentifier = "VARIABLES"
+let MacrosElemIdentifier = "VARIABLES" // yes, the original v1.x Savitar's macro list was labeled VARIABLES
 
-class VariableMan: ModelManager<Variable>, SavitarXMLProtocol {
+class MacroMan: ModelManager<Macro>, SavitarXMLProtocol {
 
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[VariablesElemIdentifier][VariableElemIdentifier] {
-            let object = Variable()
+         for elem in xml[MacrosElemIdentifier][MacroElemIdentifier] {
+            let object = Macro()
             try object.parse(xml: elem)
             add(object)
         }
     }
 
     func toXMLElement() throws -> XMLElement {
-        return try toXMLElement(groupId: VariablesElemIdentifier)
+        return try toXMLElement(groupId: MacrosElemIdentifier)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Variable.swift
+//  Macro.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 12/23/19.
@@ -9,9 +9,9 @@
 import Cocoa
 import SwiftyXMLParser
 
-let VariableElemIdentifier = "MACRO"
+let MacroElemIdentifier = "MACRO"
 
-class Variable: SavitarObject {
+class Macro: SavitarObject {
     public static let defaultName = "<new macro>"
     public static let defaultValue = "<new value>"
 
@@ -27,8 +27,8 @@ class Variable: SavitarObject {
 
     let ValueElemIdentifier = "VALUE"
 
-    // These are the VariableElemIdentifier attributes
-    enum VariableAttribIdentifier: String {
+    // These are the MacroElemIdentifier attributes
+    enum MacroAttribIdentifier: String {
         case name = "NAME"
         case flags = "FLAGS"
         case key = "KEY"
@@ -43,15 +43,15 @@ class Variable: SavitarObject {
     override func parse(xml: XML.Accessor) throws {
         for attribute in xml.attributes {
             switch attribute.key {
-            case VariableAttribIdentifier.name.rawValue:
+            case MacroAttribIdentifier.name.rawValue:
                 self.name = attribute.value
-            case VariableAttribIdentifier.flags.rawValue:
+            case MacroAttribIdentifier.flags.rawValue:
                 self.enabled = !attribute.value.contains("disabled")
                 self.readOnly = attribute.value.contains("readOnly")
-            case VariableAttribIdentifier.key.rawValue:
+            case MacroAttribIdentifier.key.rawValue:
                 self.keySequence = attribute.value
             default:
-                print("skipping variable attribute \(attribute.key)")
+                print("skipping macro attribute \(attribute.key)")
             }
         }
 
@@ -61,11 +61,11 @@ class Variable: SavitarObject {
     }
 
     override func toXMLElement() throws -> XMLElement {
-        let varElem = XMLElement(name: VariableElemIdentifier)
+        let varElem = XMLElement(name: MacroElemIdentifier)
 
-        varElem.addAttribute(name: VariableAttribIdentifier.name.rawValue, stringValue: self.name)
+        varElem.addAttribute(name: MacroAttribIdentifier.name.rawValue, stringValue: self.name)
 
-        varElem.addAttribute(name: VariableAttribIdentifier.key.rawValue, stringValue: self.keySequence)
+        varElem.addAttribute(name: MacroAttribIdentifier.key.rawValue, stringValue: self.keySequence)
 
         var flags = !self.enabled ? "disabled" : ""
         if self.readOnly {
@@ -75,7 +75,7 @@ class Variable: SavitarObject {
             flags = "\(flags)readOnly"
         }
         if flags.count > 0 {
-            varElem.addAttribute(name: VariableAttribIdentifier.flags.rawValue, stringValue: flags)
+            varElem.addAttribute(name: MacroAttribIdentifier.flags.rawValue, stringValue: flags)
         }
 
         varElem.addChild(XMLElement.init(name: ValueElemIdentifier, stringValue: value))

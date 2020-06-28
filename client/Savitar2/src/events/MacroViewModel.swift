@@ -1,5 +1,5 @@
 //
-//  VariableViewModel.swift
+//  MacroViewModel.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/8/20.
@@ -8,20 +8,20 @@
 
 import Foundation
 
-protocol DisplaysVariable {
-    func showVariable(variableViewModel viewModel: VariableViewModel)
+protocol DisplaysMacro {
+    func showMacro(macroViewModel viewModel: MacroViewModel)
 }
 
-class VariableViewModel: CheckableItemViewModel {
+class MacroViewModel: CheckableItemViewModel {
     let hotKey: String
     let value: String
 
-    init(variable: Variable) {
+    init(macro: Macro) {
         hotKey = "hotKey" // TODO
         value = "value" // TODO
-        super.init(identifier: variable.objectID.identifier,
-                   title: variable.name,
-                   enabled: variable.enabled)
+        super.init(identifier: macro.objectID.identifier,
+                   title: macro.name,
+                   enabled: macro.enabled)
 
     }
 

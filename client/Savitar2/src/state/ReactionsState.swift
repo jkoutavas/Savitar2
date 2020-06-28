@@ -21,8 +21,8 @@ struct ItemListState<T>: StateType {
 }
 
 struct ReactionsState: StateType {
+    var macroList: ItemListState<Macro> = ItemListState<Macro>()
     var triggerList: ItemListState<Trigger> = ItemListState<Trigger>()
-    var variableList: ItemListState<Variable> = ItemListState<Variable>()
 }
 
 func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState {
@@ -33,16 +33,16 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
     if let reactionAction = action as? ReactionAction {
         return reactionAction.apply(oldState: state)
     } else {
-        if action is TriggerAction {
+        if action is MacroAction {
+            var macroList = state.macroList
+            macroList.items = macroList.items.compactMap { macroReducer(action, state: $0) }
+            state.macroList = macroList
+        } else if action is TriggerAction {
             var triggerList = state.triggerList
             triggerList.items = triggerList.items.compactMap { triggerReducer(action, state: $0) }
             state.triggerList = triggerList
-        } else if action is VariableAction {
-            var variableList = state.variableList
-            variableList.items = variableList.items.compactMap { variableReducer(action, state: $0) }
-            state.variableList = variableList
         }
-
+        
         return state
     }
 }
