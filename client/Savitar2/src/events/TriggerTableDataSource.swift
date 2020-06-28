@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TriggerTableDataSource: NSObject {
+class TriggerTableDataSource: NSObject, ReactionStoreSetter {
     var viewModel: TriggersViewModel?
     var store: ReactionsStore?
 }

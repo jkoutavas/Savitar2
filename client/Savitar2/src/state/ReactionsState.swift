@@ -56,6 +56,10 @@ typealias ReactionsStore = Store<ReactionsState>
 // A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
 protocol UndoableAction: Action, Undoable { }
 
+protocol ReactionStoreSetter {
+    func setStore(reactionsStore: ReactionsStore?)
+}
+
 func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> ReactionsStore {
     return ReactionsStore(
         reducer: reactionsReducer,

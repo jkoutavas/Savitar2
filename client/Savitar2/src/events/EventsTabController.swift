@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class EventsTabController: NSViewController {
+class EventsTabController: NSViewController, ReactionStoreSetter {
     @IBOutlet var tableView: NSTableView!
 
     internal var store: ReactionsStore? {

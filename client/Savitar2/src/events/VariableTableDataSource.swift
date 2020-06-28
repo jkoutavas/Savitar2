@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class VariableTableDataSource: NSObject {
+class VariableTableDataSource: NSObject, ReactionStoreSetter {
     var viewModel: VariablesViewModel?
     var store: ReactionsStore?
 }

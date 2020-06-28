@@ -60,11 +60,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let vc = NSWindowController(window: myWindow)
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            if let eventsViewController = splitViewController.eventsViewController {
-                eventsViewController.store = globalStore
-
-                vc.showWindow(self)
-            }
+            splitViewController.store = globalStore
+            vc.showWindow(self)
         }
         myWindow.makeKeyAndOrderFront(self)
     }

@@ -10,15 +10,26 @@ import Cocoa
 
 class EventsSplitViewController: NSSplitViewController {
     var eventsViewController: EventsViewController?
-    var detailViewController: NSTabViewController?
+    var detailViewController: DetailsTabViewController?
+
+    internal var store: ReactionsStore? {
+        didSet {
+            if let evc = eventsViewController {
+                evc.store = store
+            }
+            if let dvc = detailViewController {
+                dvc.setStore(reactionsStore: store)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let eventsViewController = children.first as? EventsViewController,
-           let detailViewController = children.last as? NSTabViewController {
+           let detailViewController = children.last as? DetailsTabViewController {
             self.eventsViewController = eventsViewController
-            eventsViewController.detailViewController = detailViewController
+            self.detailViewController = detailViewController
         }
     }
 }
