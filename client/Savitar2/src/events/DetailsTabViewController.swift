@@ -21,6 +21,10 @@ class DetailsTabViewController: NSTabViewController, ReactionStoreSetter {
         if let triggerView = tabView.tabViewItems[0].view as? TriggerView {
             triggerView.setStore(reactionsStore: store)
         }
+
+        if let macroView = tabView.tabViewItems[1].view as? MacroView {
+            macroView.setStore(reactionsStore: store)
+        }
     }
 
     override func viewWillDisappear() {
@@ -28,6 +32,10 @@ class DetailsTabViewController: NSTabViewController, ReactionStoreSetter {
 
         if let triggerView = tabView.tabViewItems[0].view as? TriggerView {
             triggerView.setStore(reactionsStore: nil)
+        }
+
+        if let macroView = tabView.tabViewItems[1].view as? MacroView {
+            macroView.setStore(reactionsStore: nil)
         }
     }
 }

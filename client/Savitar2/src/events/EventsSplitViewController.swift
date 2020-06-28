@@ -15,6 +15,7 @@ class EventsSplitViewController: NSSplitViewController {
     internal var store: ReactionsStore? {
         didSet {
             if let evc = eventsViewController {
+                evc.detailViewController = detailViewController
                 evc.store = store
             }
             if let dvc = detailViewController {

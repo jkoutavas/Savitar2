@@ -93,6 +93,7 @@
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
 		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
+		69F629C324A8D9480067CAE8 /* MacroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F629C224A8D9480067CAE8 /* MacroView.swift */; };
 		69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
 		8EC587E8419D8E733647527D /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C2D0666F79855C3B3233E7 /* Pods_Savitar2Tests.framework */; };
@@ -213,6 +214,7 @@
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		69F629C224A8D9480067CAE8 /* MacroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroView.swift; sourceTree = "<group>"; };
 		69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarXMLProtocol.swift; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
 		AF6F28F7F8F374A69DDD0671 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -483,6 +485,7 @@
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
 				693944E52466245E00931FA8 /* MacrosTabController.swift */,
+				69F629C224A8D9480067CAE8 /* MacroView.swift */,
 				693944ED246630E300931FA8 /* MacrosViewModel.swift */,
 				693944E924662F3F00931FA8 /* MacroTableDataSource.swift */,
 				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
@@ -811,6 +814,7 @@
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
+				69F629C324A8D9480067CAE8 /* MacroView.swift in Sources */,
 				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
 				693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */,
 				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
