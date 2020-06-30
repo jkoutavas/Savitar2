@@ -29,6 +29,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     case let .disable(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.flags.insert(.disabled) // TODO: same goes for here
+
+    case let .rename(triggerID, name: name):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.name = name
     }
 
     return trigger

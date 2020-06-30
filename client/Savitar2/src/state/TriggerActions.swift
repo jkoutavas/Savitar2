@@ -40,6 +40,7 @@ struct SetTriggersAction: ReactionAction {
 enum TriggerAction: UndoableAction {
     case enable(SavitarObjectID)
     case disable(SavitarObjectID)
+    case rename(SavitarObjectID, name: String)
 
     // MARK: Undoable
 
@@ -49,6 +50,7 @@ enum TriggerAction: UndoableAction {
         switch self {
         case .enable: return "Enable Trigger"
         case .disable: return "Disable Trigger"
+        case .rename: return "Rename Trigger"
         }
     }
 
@@ -59,6 +61,9 @@ enum TriggerAction: UndoableAction {
             return TriggerAction.disable(triggerID)
         case .disable(let triggerID):
             return TriggerAction.enable(triggerID)
+        case .rename(let triggerID, name: _):
+            guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
+            return TriggerAction.rename(triggerID, name: oldName)
         }
     }
 }

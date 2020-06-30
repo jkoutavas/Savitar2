@@ -95,12 +95,53 @@
                                     <constraint firstAttribute="width" constant="410" id="jg1-Qb-t6S"/>
                                     <constraint firstAttribute="height" constant="24" id="sDK-Xe-hjB"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="Trigger" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="Trigger" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="xRC-cD-OnX">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
+                            <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDQ-y6-XSx">
+                                <rect key="frame" x="-8" y="-10" width="466" height="211"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Matching" identifier="" id="lTx-dy-oKV">
+                                        <view key="view" ambiguous="YES" id="imw-eq-pJX">
+                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Appearance" identifier="" id="g7J-M1-rXB">
+                                        <view key="view" id="xnU-hO-dtB">
+                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Audio Cue" identifier="" id="55J-we-nVJ">
+                                        <view key="view" id="4mp-Ol-Ji3">
+                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Reply" identifier="" id="t5g-2S-tad">
+                                        <view key="view" id="paZ-1n-7wr">
+                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="centerX" secondItem="tNW-b0-6Bf" secondAttribute="centerX" id="DHn-aF-rK7"/>
@@ -112,6 +153,7 @@
                     </connections>
                 </viewController>
                 <customObject id="x0t-Rb-Adm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="7Ll-e6-3Gc"/>
             </objects>
             <point key="canvasLocation" x="885" y="-343"/>
         </scene>
@@ -255,7 +297,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -288,7 +330,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -414,7 +456,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -447,7 +489,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">

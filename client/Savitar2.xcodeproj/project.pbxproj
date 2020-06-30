@@ -81,9 +81,6 @@
 		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
 		69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */; };
 		69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE923C2C8B900E9F087 /* WorldController.swift */; };
-		69CEEDEC23C57EE500E9F087 /* TriggerWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */; };
-		69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */; };
-		69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDEF23C94EE400E9F087 /* TriggerController.swift */; };
 		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
 		69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
@@ -203,9 +200,6 @@
 		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObject.swift; sourceTree = "<group>"; };
 		69CEEDE923C2C8B900E9F087 /* WorldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldController.swift; sourceTree = "<group>"; };
-		69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TriggerWindow.storyboard; sourceTree = "<group>"; };
-		69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSettingsController.swift; sourceTree = "<group>"; };
-		69CEEDEF23C94EE400E9F087 /* TriggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerController.swift; sourceTree = "<group>"; };
 		69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObjectId.swift; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
@@ -272,10 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				69000EDB23942523009976E0 /* Trigger.swift */,
-				69CEEDEF23C94EE400E9F087 /* TriggerController.swift */,
 				69000EDF2397CE30009976E0 /* TriggerMan.swift */,
-				69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */,
-				69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */,
 				69683027239C22550066CC48 /* TrigTextStyle.swift */,
 			);
 			path = triggers;
@@ -643,7 +634,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CEEDEC23C57EE500E9F087 /* TriggerWindow.storyboard in Resources */,
 				6994602E2041124800409308 /* World.icns in Resources */,
 				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
@@ -781,7 +771,6 @@
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
-				69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */,
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
@@ -840,7 +829,6 @@
 				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
 				693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */,
-				69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */,
 				693944EC24662FF300931FA8 /* MacroViewModel.swift in Sources */,
 				693944E82466248C00931FA8 /* EventsTabController.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,

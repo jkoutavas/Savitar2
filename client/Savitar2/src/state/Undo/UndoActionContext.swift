@@ -9,4 +9,5 @@
 import Foundation
 
 protocol UndoActionContext {
+    func triggerName(triggerID: SavitarObjectID) -> String?
 }

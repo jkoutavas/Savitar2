@@ -26,16 +26,4 @@ class DetailsTabViewController: NSTabViewController, ReactionStoreSetter {
             macroViewController.setStore(reactionsStore: store)
         }
     }
-
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-
-        if let triggerViewController = tabView.tabViewItems[0].viewController as? TriggerViewController {
-            triggerViewController.setStore(reactionsStore: nil)
-        }
-
-        if let macroViewController = tabView.tabViewItems[1].viewController as? MacroViewController {
-            macroViewController.setStore(reactionsStore: nil)
-        }
-    }
 }

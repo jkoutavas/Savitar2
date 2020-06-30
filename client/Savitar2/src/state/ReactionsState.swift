@@ -18,6 +18,19 @@ protocol ReactionAction: Action {
 struct ItemListState<T>: StateType {
     var items: [T] = []
     var selection: SelectionState = nil
+
+    func indexOf(objectID: SavitarObjectID) -> Int? {
+        // swiftlint:disable force_cast
+        return items.firstIndex(where: { ($0 as! SavitarObject).objectID == objectID })
+        // swiftlint:enable force_cast
+    }
+
+    func item(objectID: SavitarObjectID) -> T? {
+        guard let index = indexOf(objectID: objectID)
+        else { return nil }
+
+        return items[index]
+    }
 }
 
 struct ReactionsState: StateType {

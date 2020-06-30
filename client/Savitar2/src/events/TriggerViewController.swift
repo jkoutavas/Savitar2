@@ -12,8 +12,6 @@ import ReSwift
 class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     var store: ReactionsStore?
 
-    @IBOutlet var name: NSTextField!
-
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
     }
@@ -33,9 +31,32 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
-            name.stringValue = trigger.name
+            self.representedObject = TriggerController(trigger: trigger, store: store)
         } else {
-            name.stringValue = ""
+            self.representedObject = nil
         }
+    }
+}
+
+class TriggerController: NSController {
+    var trigger: Trigger
+    var store: ReactionsStore?
+
+    @objc dynamic var name: String {
+        get { trigger.name }
+        set(name) {
+            store?.dispatch(TriggerAction.rename(trigger.objectID, name: name))
+        }
+    }
+
+    init(trigger: Trigger, store: ReactionsStore?) {
+        self.trigger = trigger
+        self.store = store
+
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
