@@ -18,24 +18,24 @@ class DetailsTabViewController: NSTabViewController, ReactionStoreSetter {
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        if let triggerView = tabView.tabViewItems[0].view as? TriggerView {
-            triggerView.setStore(reactionsStore: store)
+        if let triggerViewController = tabView.tabViewItems[0].viewController as? TriggerViewController {
+            triggerViewController.setStore(reactionsStore: store)
         }
 
-        if let macroView = tabView.tabViewItems[1].view as? MacroView {
-            macroView.setStore(reactionsStore: store)
+        if let macroViewController = tabView.tabViewItems[1].viewController as? MacroViewController {
+            macroViewController.setStore(reactionsStore: store)
         }
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        if let triggerView = tabView.tabViewItems[0].view as? TriggerView {
-            triggerView.setStore(reactionsStore: nil)
+        if let triggerViewController = tabView.tabViewItems[0].viewController as? TriggerViewController {
+            triggerViewController.setStore(reactionsStore: nil)
         }
 
-        if let macroView = tabView.tabViewItems[1].view as? MacroView {
-            macroView.setStore(reactionsStore: nil)
+        if let macroViewController = tabView.tabViewItems[1].viewController as? MacroViewController {
+            macroViewController.setStore(reactionsStore: nil)
         }
     }
 }

@@ -66,7 +66,7 @@
 		69928A89248742C000571B21 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* MacroReducer.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D6249EA7120058B067 /* EventsSplitViewController.swift */; };
-		69B278D9249F824B0058B067 /* TriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerView.swift */; };
+		69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerViewController.swift */; };
 		69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278DA249FA1990058B067 /* DetailsTabViewController.swift */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
@@ -93,7 +93,7 @@
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
 		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
-		69F629C324A8D9480067CAE8 /* MacroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F629C224A8D9480067CAE8 /* MacroView.swift */; };
+		69F629C324A8D9480067CAE8 /* MacroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F629C224A8D9480067CAE8 /* MacroViewController.swift */; };
 		69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
 		8EC587E8419D8E733647527D /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C2D0666F79855C3B3233E7 /* Pods_Savitar2Tests.framework */; };
@@ -188,7 +188,7 @@
 		69928A88248742C000571B21 /* MacroReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		69B278D6249EA7120058B067 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
-		69B278D8249F824B0058B067 /* TriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerView.swift; sourceTree = "<group>"; };
+		69B278D8249F824B0058B067 /* TriggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
 		69B278DA249FA1990058B067 /* DetailsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTabViewController.swift; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		69F629C224A8D9480067CAE8 /* MacroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroView.swift; sourceTree = "<group>"; };
+		69F629C224A8D9480067CAE8 /* MacroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroViewController.swift; sourceTree = "<group>"; };
 		69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarXMLProtocol.swift; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
 		AF6F28F7F8F374A69DDD0671 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -485,14 +485,14 @@
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
 				693944E52466245E00931FA8 /* MacrosTabController.swift */,
-				69F629C224A8D9480067CAE8 /* MacroView.swift */,
 				693944ED246630E300931FA8 /* MacrosViewModel.swift */,
 				693944E924662F3F00931FA8 /* MacroTableDataSource.swift */,
+				69F629C224A8D9480067CAE8 /* MacroViewController.swift */,
 				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
 				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
 				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
-				69B278D8249F824B0058B067 /* TriggerView.swift */,
+				69B278D8249F824B0058B067 /* TriggerViewController.swift */,
 				691963A12453D6F20057DD34 /* TriggerViewModel.swift */,
 			);
 			path = events;
@@ -814,7 +814,7 @@
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
-				69F629C324A8D9480067CAE8 /* MacroView.swift in Sources */,
+				69F629C324A8D9480067CAE8 /* MacroViewController.swift in Sources */,
 				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
 				693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */,
 				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
@@ -831,7 +831,7 @@
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */,
-				69B278D9249F824B0058B067 /* TriggerView.swift in Sources */,
+				69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
 				69928A79247AC96900571B21 /* Undoable.swift in Sources */,

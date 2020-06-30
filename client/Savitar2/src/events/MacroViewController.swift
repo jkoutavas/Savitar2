@@ -1,5 +1,5 @@
 //
-//  MacroView.swift
+//  MacroViewController.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 6/28/20.
@@ -9,18 +9,25 @@
 import Cocoa
 import ReSwift
 
-class MacroView: NSView, StoreSubscriber, ReactionStoreSetter {
+class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     var store: ReactionsStore?
 
     @IBOutlet var name: NSTextField!
 
     func setStore(reactionsStore: ReactionsStore?) {
-        if reactionsStore != nil {
-            reactionsStore?.subscribe(self)
-        } else {
-            store?.unsubscribe(self)
-        }
         store = reactionsStore
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        store?.subscribe(self)
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+
+        store?.unsubscribe(self)
     }
 
     func newState(state: ReactionsState) {
