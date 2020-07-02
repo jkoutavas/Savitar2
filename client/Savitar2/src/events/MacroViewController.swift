@@ -12,8 +12,6 @@ import ReSwift
 class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     var store: ReactionsStore?
 
-    @IBOutlet var name: NSTextField!
-
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
     }
@@ -33,9 +31,32 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
     func newState(state: ReactionsState) {
         if let index = state.macroList.selection {
             let macro = state.macroList.items[index]
-            name.stringValue = macro.name
+            self.representedObject = MacroController(macro: macro, store: store)
         } else {
-            name.stringValue = ""
+            self.representedObject = nil
         }
+    }
+}
+
+class MacroController: NSController {
+    var macro: Macro
+    var store: ReactionsStore?
+
+    @objc dynamic var name: String {
+        get { macro.name }
+        set(name) {
+            store?.dispatch(MacroAction.rename(macro.objectID, name: name))
+        }
+    }
+
+    init(macro: Macro, store: ReactionsStore?) {
+        self.macro = macro
+        self.store = store
+
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

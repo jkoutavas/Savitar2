@@ -29,6 +29,10 @@ private func handleMacroAction(_ action: MacroAction, macro: Macro) -> Macro {
     case let .disable(macroID):
         guard macro.objectID == macroID else { return macro }
         macro.enabled = false
+
+    case let .rename(macroID, name: name):
+        guard macro.objectID == macroID else { return macro }
+        macro.name = name
     }
 
     return macro
