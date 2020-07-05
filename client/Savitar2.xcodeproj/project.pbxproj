@@ -32,10 +32,10 @@
 		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
 		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
+		695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
-		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
 		69662B27204367BD00E7CC7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1D204367BD00E7CC7B /* ViewController.swift */; };
 		69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SplitViewController.swift */; };
 		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
@@ -144,6 +144,8 @@
 		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
+		695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
+		695204C824B1F29E004BDBE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695484A81FC4E6E400A6983F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -152,8 +154,6 @@
 		695484B41FC4E6E400A6983F /* Savitar2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2Tests.swift; sourceTree = "<group>"; };
 		695484B61FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
-		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69662B1D204367BD00E7CC7B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		69662B1E204367BD00E7CC7B /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
@@ -283,12 +283,22 @@
 			path = components;
 			sourceTree = "<group>";
 		};
+		695204C624B1F29E004BDBE2 /* Savitar2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */,
+				695204C824B1F29E004BDBE2 /* Info.plist */,
+			);
+			path = Savitar2UITests;
+			sourceTree = "<group>";
+		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
 				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
+				695204C624B1F29E004BDBE2 /* Savitar2UITests */,
 				6954849D1FC4E6E400A6983F /* Products */,
 				2EF3ACDB1F9E5AA4D43744E6 /* Pods */,
 				87B55DDC3EAE7840CA6BA5B4 /* Frameworks */,
@@ -336,15 +346,6 @@
 				69071B3E23A6EA51001C58B1 /* WorldTests.swift */,
 			);
 			path = Savitar2Tests;
-			sourceTree = "<group>";
-		};
-		695484BE1FC4E6E400A6983F /* Savitar2UITests */ = {
-			isa = PBXGroup;
-			children = (
-				695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */,
-				695484C11FC4E6E400A6983F /* Info.plist */,
-			);
-			path = Savitar2UITests;
 			sourceTree = "<group>";
 		};
 		69662B1B204367BD00E7CC7B /* src */ = {
@@ -845,7 +846,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */,
+				695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
