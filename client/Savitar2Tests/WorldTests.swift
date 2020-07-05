@@ -131,7 +131,7 @@ class WorldTests: XCTestCase {
         <?xml version="1.0" encoding="UTF-8"?>
         <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0">
             <TRIGGERS>
-                <TRIGGER AUDIO="speakEvent" FGCOLOR="#EE42BB" FLAGS="matchWholeLine+useRegex" NAME="^joan" SOUND="Click" TYPE="output" VOICE="Princess">
+                <TRIGGER NAME="^joan" TYPE="output" FLAGS="matchWholeLine+useRegex" FGCOLOR="#EE42BB" SOUND="Click" AUDIO="speakEvent" VOICE="Princess">
                     <WORDEND>&amp;-"</WORDEND>
                     <SAY>Select a voice from the menu to hear this.</SAY>
                 </TRIGGER>

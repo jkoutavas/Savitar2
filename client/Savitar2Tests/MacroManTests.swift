@@ -129,15 +129,15 @@ class VariableManTests: XCTestCase {
         """
 
         let xml = try XML.parse(xmlString)
-        let vm = VariableMan()
-        try vm.parse(xml: xml)
+        let mm = MacroMan()
+        try mm.parse(xml: xml)
 
-        XCTAssertEqual(vm.get().count, 15)
+        XCTAssertEqual(mm.get().count, 15)
 
-        XCTAssertEqual(vm.get()[12].name, "MACRO_3")
+        XCTAssertEqual(mm.get()[12].name, "MACRO_3")
 
-        XCTAssertEqual(vm.get()[12].value, "who")
+        XCTAssertEqual(mm.get()[12].value, "who")
 
-        XCTAssertEqual(vm.get()[12].keySequence, "F3")
+        XCTAssertEqual(mm.get()[12].keyLabel, "F3")
     }
 }

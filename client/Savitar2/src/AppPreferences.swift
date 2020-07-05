@@ -44,10 +44,11 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
 
-    private var worldMan = WorldMan()
-    private var triggerMan = TriggerMan()
-    private var macroMan = MacroMan()
-    private var colorMan = ColorMan()
+    // TODO: these are deprecating
+    var worldMan = WorldMan()
+    var triggerMan = TriggerMan()
+    var macroMan = MacroMan()
+    var colorMan = ColorMan()
 
     init() {
         self.version = latestPrefsVersion

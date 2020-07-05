@@ -14,8 +14,8 @@
         <WORLD URL="telnet://builderacademy.net:9091" NAME="The Builders Academy" FLAGS="ansi" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0"></WORLD>
     </WORLDS>
     <TRIGGERS>
-        <TRIGGER AUDIO="sound" FGCOLOR="#00FF00" FACE="bold" FLAGS="matchExactly" NAME="beep" SOUND="Click" TYPE="output"></TRIGGER>
-        <TRIGGER AUDIO="silent" FLAGS="matchExactly" NAME="greet $$name" SOUND="Click" TYPE="input"></TRIGGER>
+        <TRIGGER NAME="beep" TYPE="output" FLAGS="matchExactly" FACE="bold" FGCOLOR="#00FF00" SOUND="Click" AUDIO="sound"></TRIGGER>
+        <TRIGGER NAME="greet $$name" TYPE="input" FLAGS="matchExactly" SOUND="Click" AUDIO="silent"></TRIGGER>
     </TRIGGERS>
     <VARIABLES>
         <MACRO NAME="MACRO_NORTH" KEY="KP8">

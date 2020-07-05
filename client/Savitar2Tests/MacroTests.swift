@@ -41,7 +41,7 @@ class MacroTests: XCTestCase {
         XCTAssertEqual(v1.value, "say Here is command one...say ...and here is command two!"
         )
 
-        XCTAssertEqual(v1.keySequence, "F5")
+        XCTAssertEqual(v1.keyLabel, "F5")
     }
 
     func testV2CarriageReturn() throws {
@@ -65,7 +65,7 @@ class MacroTests: XCTestCase {
 
         XCTAssertEqual(v1.value, "say Here is command one...\nsay ...and here is command two!")
 
-        XCTAssertEqual(v1.keySequence, "F5")
+        XCTAssertEqual(v1.keyLabel, "F5")
     }
 
     func testNewLine() throws {
@@ -89,6 +89,6 @@ say ...and here is command two!
 
         XCTAssertEqual(v1.value, "say Here is command one...\nsay ...and here is command two!")
 
-        XCTAssertEqual(v1.keySequence, "F5")
+        XCTAssertEqual(v1.keyLabel, "F5")
     }
 }
