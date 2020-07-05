@@ -6,6 +6,7 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
+import Foundation
 import SwiftyXMLParser
 
 let MacrosElemIdentifier = "VARIABLES" // yes, the original v1.x Savitar's macro list was labeled VARIABLES

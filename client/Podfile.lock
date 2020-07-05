@@ -7,29 +7,17 @@ PODS:
   - AppCenter/Core (3.3.1)
   - AppCenter/Crashes (3.3.1):
     - AppCenter/Core
-  - SwiftyXMLParser (5.1.0)
 
 DEPENDENCIES:
   - AppCenter
-  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
   trunk:
     - AppCenter
 
-EXTERNAL SOURCES:
-  SwiftyXMLParser:
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
-
-CHECKOUT OPTIONS:
-  SwiftyXMLParser:
-    :commit: 9d82653e535a13a518b411934c0a5c0c84406c22
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
-
 SPEC CHECKSUMS:
   AppCenter: 76ecf7e959a68e36b0fd314e8dc5897660214423
-  SwiftyXMLParser: 8271497e0a37b5c04b0b167c77b4896e36175a21
 
-PODFILE CHECKSUM: 79e8d17d90348c5899b1970600136f615098289a
+PODFILE CHECKSUM: 2ed6bacb0d71ce9fc975061733460aae4869109a
 
 COCOAPODS: 1.9.1

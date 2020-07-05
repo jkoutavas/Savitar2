@@ -224,9 +224,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */,
-				6991F46B2393F71700E2BFDB /* Logging in Frameworks */,
+				69CEEDF323D6213900E9F087 /* BuildFile in Frameworks */,
+				6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
+				69D6E5EF24B203CB00058D70 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +521,6 @@
 				695484991FC4E6E400A6983F /* Frameworks */,
 				6954849A1FC4E6E400A6983F /* Resources */,
 				6991F4682393F20B00E2BFDB /* SwiftLint */,
-				53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -528,8 +528,9 @@
 			);
 			name = Savitar2;
 			packageProductDependencies = (
-				6991F46A2393F71700E2BFDB /* Logging */,
-				69CEEDF223D6213900E9F087 /* ReSwift */,
+				6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */,
+				69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */,
+				69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -615,8 +616,9 @@
 			);
 			mainGroup = 695484931FC4E6E400A6983F;
 			packageReferences = (
-				6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */,
-				69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */,
+				6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */,
+				69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */,
+				69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -703,23 +705,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6991F4682393F20B00E2BFDB /* SwiftLint */ = {
@@ -1188,7 +1173,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */ = {
+		6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -1196,7 +1181,7 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
+		69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
 			requirement = {
@@ -1204,18 +1189,31 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6991F46A2393F71700E2BFDB /* Logging */ = {
+		6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */;
+			package = 6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */;
 			productName = Logging;
 		};
-		69CEEDF223D6213900E9F087 /* ReSwift */ = {
+		69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */;
+			package = 69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */;
 			productName = ReSwift;
+		};
+		69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */;
+			productName = SwiftyXMLParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

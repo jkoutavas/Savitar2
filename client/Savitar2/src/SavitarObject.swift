@@ -6,6 +6,7 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
+import Foundation
 import SwiftyXMLParser
 
 class SavitarObject: Equatable, SavitarXMLProtocol {
