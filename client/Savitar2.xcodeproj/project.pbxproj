@@ -53,7 +53,7 @@
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
-		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
+		6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */; };
 		69928A73247AC8FF00571B21 /* MacroActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A70247AC8FF00571B21 /* MacroActions.swift */; };
 		69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A71247AC8FF00571B21 /* TriggerActions.swift */; };
 		69928A79247AC96900571B21 /* Undoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A78247AC96900571B21 /* Undoable.swift */; };
@@ -81,8 +81,9 @@
 		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
 		69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */; };
 		69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE923C2C8B900E9F087 /* WorldController.swift */; };
-		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
+		69CEEDF323D6213900E9F087 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */; };
 		69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */; };
+		69D6E5EF24B203CB00058D70 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
