@@ -24,18 +24,18 @@
 		691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A52453D98E0057DD34 /* TriggersViewModel.swift */; };
 		691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B52453EA700057DD34 /* TriggersTabController.swift */; };
 		691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */; };
-		693944E62466245F00931FA8 /* VariablesTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E52466245E00931FA8 /* VariablesTabController.swift */; };
+		693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E52466245E00931FA8 /* MacrosTabController.swift */; };
 		693944E82466248C00931FA8 /* EventsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E72466248C00931FA8 /* EventsTabController.swift */; };
-		693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* VariableTableDataSource.swift */; };
-		693944EC24662FF300931FA8 /* VariableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944EB24662FF300931FA8 /* VariableViewModel.swift */; };
-		693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* VariablesViewModel.swift */; };
+		693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* MacroTableDataSource.swift */; };
+		693944EC24662FF300931FA8 /* MacroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944EB24662FF300931FA8 /* MacroViewModel.swift */; };
+		693944EE246630E300931FA8 /* MacrosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* MacrosViewModel.swift */; };
 		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
 		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
+		695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */; };
 		695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695484A51FC4E6E400A6983F /* Assets.xcassets */; };
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
-		695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */; };
 		69662B27204367BD00E7CC7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1D204367BD00E7CC7B /* ViewController.swift */; };
 		69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SplitViewController.swift */; };
 		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
@@ -53,8 +53,8 @@
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
-		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
-		69928A73247AC8FF00571B21 /* VariableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A70247AC8FF00571B21 /* VariableActions.swift */; };
+		6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */; };
+		69928A73247AC8FF00571B21 /* MacroActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A70247AC8FF00571B21 /* MacroActions.swift */; };
 		69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A71247AC8FF00571B21 /* TriggerActions.swift */; };
 		69928A79247AC96900571B21 /* Undoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A78247AC96900571B21 /* Undoable.swift */; };
 		69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7A247AC99A00571B21 /* NotUndoable.swift */; };
@@ -63,12 +63,15 @@
 		69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A82247CBCAF00571B21 /* UndoActionContext.swift */; };
 		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
 		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
-		69928A89248742C000571B21 /* VariableReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* VariableReducer.swift */; };
+		69928A89248742C000571B21 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* MacroReducer.swift */; };
 		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
-		69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Variable.swift */; };
-		69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* VariableMan.swift */; };
-		69CEEDCF23B3D75F00E9F087 /* VariableManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* VariableManTests.swift */; };
-		69CEEDD123B3EEA700E9F087 /* VariableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD023B3EEA700E9F087 /* VariableTests.swift */; };
+		69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D6249EA7120058B067 /* EventsSplitViewController.swift */; };
+		69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerViewController.swift */; };
+		69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278DA249FA1990058B067 /* DetailsTabViewController.swift */; };
+		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
+		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
+		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
+		69CEEDD123B3EEA700E9F087 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD023B3EEA700E9F087 /* MacroTests.swift */; };
 		69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD323B4003400E9F087 /* ColorMan.swift */; };
 		69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD523B4011500E9F087 /* SavColor.swift */; };
 		69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD723B4064D00E9F087 /* ColorManTests.swift */; };
@@ -78,11 +81,9 @@
 		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
 		69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */; };
 		69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE923C2C8B900E9F087 /* WorldController.swift */; };
-		69CEEDEC23C57EE500E9F087 /* TriggerWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */; };
-		69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */; };
-		69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDEF23C94EE400E9F087 /* TriggerController.swift */; };
-		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
+		69CEEDF323D6213900E9F087 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */; };
 		69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */; };
+		69D6E5EF24B203CB00058D70 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */; };
 		69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */; };
 		69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DC204B86A000301A8D /* DocumentV1.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
@@ -90,6 +91,7 @@
 		69F620E3204B881600301A8D /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E2204B881600301A8D /* DocumentV2.swift */; };
 		69F620E5204B889200301A8D /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E4204B889200301A8D /* World.swift */; };
 		69F620E7204BC19100301A8D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E6204BC19100301A8D /* WindowController.swift */; };
+		69F629C324A8D9480067CAE8 /* MacroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F629C224A8D9480067CAE8 /* MacroViewController.swift */; };
 		69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
 		8EC587E8419D8E733647527D /* Pods_Savitar2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C2D0666F79855C3B3233E7 /* Pods_Savitar2Tests.framework */; };
@@ -134,14 +136,16 @@
 		691963A52453D98E0057DD34 /* TriggersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggersViewModel.swift; sourceTree = "<group>"; };
 		691963B52453EA700057DD34 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
 		691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
-		693944E52466245E00931FA8 /* VariablesTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesTabController.swift; sourceTree = "<group>"; };
+		693944E52466245E00931FA8 /* MacrosTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosTabController.swift; sourceTree = "<group>"; };
 		693944E72466248C00931FA8 /* EventsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabController.swift; sourceTree = "<group>"; };
-		693944E924662F3F00931FA8 /* VariableTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTableDataSource.swift; sourceTree = "<group>"; };
-		693944EB24662FF300931FA8 /* VariableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableViewModel.swift; sourceTree = "<group>"; };
-		693944ED246630E300931FA8 /* VariablesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesViewModel.swift; sourceTree = "<group>"; };
+		693944E924662F3F00931FA8 /* MacroTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTableDataSource.swift; sourceTree = "<group>"; };
+		693944EB24662FF300931FA8 /* MacroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroViewModel.swift; sourceTree = "<group>"; };
+		693944ED246630E300931FA8 /* MacrosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosViewModel.swift; sourceTree = "<group>"; };
 		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
+		695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
+		695204C824B1F29E004BDBE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695484A81FC4E6E400A6983F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -150,8 +154,6 @@
 		695484B41FC4E6E400A6983F /* Savitar2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2Tests.swift; sourceTree = "<group>"; };
 		695484B61FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
-		695484C11FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69662B1D204367BD00E7CC7B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		69662B1E204367BD00E7CC7B /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +174,7 @@
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		69928A70247AC8FF00571B21 /* VariableActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableActions.swift; sourceTree = "<group>"; };
+		69928A70247AC8FF00571B21 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
 		69928A71247AC8FF00571B21 /* TriggerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerActions.swift; sourceTree = "<group>"; };
 		69928A78247AC96900571B21 /* Undoable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Undoable.swift; sourceTree = "<group>"; };
 		69928A7A247AC99A00571B21 /* NotUndoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotUndoable.swift; sourceTree = "<group>"; };
@@ -181,12 +183,15 @@
 		69928A82247CBCAF00571B21 /* UndoActionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoActionContext.swift; sourceTree = "<group>"; };
 		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
 		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
-		69928A88248742C000571B21 /* VariableReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableReducer.swift; sourceTree = "<group>"; };
+		69928A88248742C000571B21 /* MacroReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
 		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
-		69CEEDC823B27BCD00E9F087 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
-		69CEEDCC23B3967300E9F087 /* VariableMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableMan.swift; sourceTree = "<group>"; };
-		69CEEDCE23B3D75F00E9F087 /* VariableManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableManTests.swift; sourceTree = "<group>"; };
-		69CEEDD023B3EEA700E9F087 /* VariableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTests.swift; sourceTree = "<group>"; };
+		69B278D6249EA7120058B067 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
+		69B278D8249F824B0058B067 /* TriggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
+		69B278DA249FA1990058B067 /* DetailsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTabViewController.swift; sourceTree = "<group>"; };
+		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
+		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
+		69CEEDD023B3EEA700E9F087 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		69CEEDD323B4003400E9F087 /* ColorMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMan.swift; sourceTree = "<group>"; };
 		69CEEDD523B4011500E9F087 /* SavColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColor.swift; sourceTree = "<group>"; };
 		69CEEDD723B4064D00E9F087 /* ColorManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManTests.swift; sourceTree = "<group>"; };
@@ -196,9 +201,6 @@
 		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObject.swift; sourceTree = "<group>"; };
 		69CEEDE923C2C8B900E9F087 /* WorldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldController.swift; sourceTree = "<group>"; };
-		69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TriggerWindow.storyboard; sourceTree = "<group>"; };
-		69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSettingsController.swift; sourceTree = "<group>"; };
-		69CEEDEF23C94EE400E9F087 /* TriggerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerController.swift; sourceTree = "<group>"; };
 		69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarObjectId.swift; sourceTree = "<group>"; };
 		69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsController.swift; sourceTree = "<group>"; };
 		69F620DC204B86A000301A8D /* DocumentV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV1.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		69F620E2204B881600301A8D /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
 		69F620E4204B889200301A8D /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		69F620E6204BC19100301A8D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		69F629C224A8D9480067CAE8 /* MacroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroViewController.swift; sourceTree = "<group>"; };
 		69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarXMLProtocol.swift; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
 		AF6F28F7F8F374A69DDD0671 /* Pods_Savitar2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savitar2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,9 +225,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */,
-				6991F46B2393F71700E2BFDB /* Logging in Frameworks */,
+				69CEEDF323D6213900E9F087 /* BuildFile in Frameworks */,
+				6991F46B2393F71700E2BFDB /* BuildFile in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
+				69D6E5EF24B203CB00058D70 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,10 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				69000EDB23942523009976E0 /* Trigger.swift */,
-				69CEEDEF23C94EE400E9F087 /* TriggerController.swift */,
 				69000EDF2397CE30009976E0 /* TriggerMan.swift */,
-				69CEEDED23C94C6A00E9F087 /* TriggerSettingsController.swift */,
-				69CEEDEB23C57EE500E9F087 /* TriggerWindow.storyboard */,
 				69683027239C22550066CC48 /* TrigTextStyle.swift */,
 			);
 			path = triggers;
@@ -282,12 +283,22 @@
 			path = components;
 			sourceTree = "<group>";
 		};
+		695204C624B1F29E004BDBE2 /* Savitar2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */,
+				695204C824B1F29E004BDBE2 /* Info.plist */,
+			);
+			path = Savitar2UITests;
+			sourceTree = "<group>";
+		};
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
 				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
+				695204C624B1F29E004BDBE2 /* Savitar2UITests */,
 				6954849D1FC4E6E400A6983F /* Products */,
 				2EF3ACDB1F9E5AA4D43744E6 /* Pods */,
 				87B55DDC3EAE7840CA6BA5B4 /* Frameworks */,
@@ -325,25 +336,16 @@
 				695484B61FC4E6E400A6983F /* Info.plist */,
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
+				69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */,
+				69CEEDD023B3EEA700E9F087 /* MacroTests.swift */,
 				69CEEDD923B4078400E9F087 /* SavColorTests.swift */,
 				695484B41FC4E6E400A6983F /* Savitar2Tests.swift */,
 				69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */,
 				69071B3823A52A7B001C58B1 /* TriggerManTests.swift */,
 				697D14A5239D828900BBF33C /* TriggerTests.swift */,
-				69CEEDCE23B3D75F00E9F087 /* VariableManTests.swift */,
-				69CEEDD023B3EEA700E9F087 /* VariableTests.swift */,
 				69071B3E23A6EA51001C58B1 /* WorldTests.swift */,
 			);
 			path = Savitar2Tests;
-			sourceTree = "<group>";
-		};
-		695484BE1FC4E6E400A6983F /* Savitar2UITests */ = {
-			isa = PBXGroup;
-			children = (
-				695484BF1FC4E6E400A6983F /* Savitar2UITests.swift */,
-				695484C11FC4E6E400A6983F /* Info.plist */,
-			);
-			path = Savitar2UITests;
 			sourceTree = "<group>";
 		};
 		69662B1B204367BD00E7CC7B /* src */ = {
@@ -360,10 +362,10 @@
 				693944F1246F7C8900931FA8 /* components */,
 				69CEEDE023BEDA7900E9F087 /* events */,
 				69662B23204367BD00E7CC7B /* extensions */,
+				69CEEDC723B27BB400E9F087 /* macros */,
 				69928A6E247AC8FF00571B21 /* state */,
 				696F77402390CFF2005E45EB /* thirdparty */,
 				69000EDA23942513009976E0 /* triggers */,
-				69CEEDC723B27BB400E9F087 /* variables */,
 				69662B1C204367BD00E7CC7B /* world */,
 			);
 			path = src;
@@ -429,11 +431,11 @@
 			isa = PBXGroup;
 			children = (
 				69928A75247AC91B00571B21 /* Undo */,
+				69928A70247AC8FF00571B21 /* MacroActions.swift */,
+				69928A88248742C000571B21 /* MacroReducer.swift */,
 				69928A7E247ACB4E00571B21 /* ReactionsState.swift */,
 				69928A71247AC8FF00571B21 /* TriggerActions.swift */,
 				69928A80247CB80A00571B21 /* TriggerReducer.swift */,
-				69928A70247AC8FF00571B21 /* VariableActions.swift */,
-				69928A88248742C000571B21 /* VariableReducer.swift */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -450,13 +452,13 @@
 			path = Undo;
 			sourceTree = "<group>";
 		};
-		69CEEDC723B27BB400E9F087 /* variables */ = {
+		69CEEDC723B27BB400E9F087 /* macros */ = {
 			isa = PBXGroup;
 			children = (
-				69CEEDC823B27BCD00E9F087 /* Variable.swift */,
-				69CEEDCC23B3967300E9F087 /* VariableMan.swift */,
+				69CEEDC823B27BCD00E9F087 /* Macro.swift */,
+				69CEEDCC23B3967300E9F087 /* MacroMan.swift */,
 			);
-			path = variables;
+			path = macros;
 			sourceTree = "<group>";
 		};
 		69CEEDD223B4001E00E9F087 /* colors */ = {
@@ -471,17 +473,21 @@
 		69CEEDE023BEDA7900E9F087 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				69B278DA249FA1990058B067 /* DetailsTabViewController.swift */,
+				69B278D6249EA7120058B067 /* EventsSplitViewController.swift */,
 				693944E72466248C00931FA8 /* EventsTabController.swift */,
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
+				693944E52466245E00931FA8 /* MacrosTabController.swift */,
+				693944ED246630E300931FA8 /* MacrosViewModel.swift */,
+				693944E924662F3F00931FA8 /* MacroTableDataSource.swift */,
+				69F629C224A8D9480067CAE8 /* MacroViewController.swift */,
+				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
 				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
 				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
+				69B278D8249F824B0058B067 /* TriggerViewController.swift */,
 				691963A12453D6F20057DD34 /* TriggerViewModel.swift */,
-				693944E52466245E00931FA8 /* VariablesTabController.swift */,
-				693944ED246630E300931FA8 /* VariablesViewModel.swift */,
-				693944E924662F3F00931FA8 /* VariableTableDataSource.swift */,
-				693944EB24662FF300931FA8 /* VariableViewModel.swift */,
 			);
 			path = events;
 			sourceTree = "<group>";
@@ -517,7 +523,6 @@
 				695484991FC4E6E400A6983F /* Frameworks */,
 				6954849A1FC4E6E400A6983F /* Resources */,
 				6991F4682393F20B00E2BFDB /* SwiftLint */,
-				53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -525,8 +530,9 @@
 			);
 			name = Savitar2;
 			packageProductDependencies = (
-				6991F46A2393F71700E2BFDB /* Logging */,
-				69CEEDF223D6213900E9F087 /* ReSwift */,
+				6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */,
+				69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */,
+				69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -612,8 +618,9 @@
 			);
 			mainGroup = 695484931FC4E6E400A6983F;
 			packageReferences = (
-				6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */,
-				69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */,
+				6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */,
+				69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */,
+				69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -631,7 +638,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CEEDEC23C57EE500E9F087 /* TriggerWindow.storyboard in Resources */,
 				6994602E2041124800409308 /* World.icns in Resources */,
 				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
@@ -703,23 +709,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		53A531594F4B2DDF3163EC05 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Savitar2/Pods-Savitar2-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6991F4682393F20B00E2BFDB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,17 +758,16 @@
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
-				69CEEDEE23C94C6A00E9F087 /* TriggerSettingsController.swift in Sources */,
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
-				69CEEDC923B27BCD00E9F087 /* Variable.swift in Sources */,
+				69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */,
 				690B462723B0063F000445E4 /* ModelManager.swift in Sources */,
 				691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */,
 				69000EE02397CE30009976E0 /* TriggerMan.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
-				69CEEDCD23B3967300E9F087 /* VariableMan.swift in Sources */,
+				69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */,
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
 				693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */,
@@ -790,6 +778,7 @@
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
+				69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
 				69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
@@ -799,11 +788,13 @@
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
 				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
-				69928A89248742C000571B21 /* VariableReducer.swift in Sources */,
+				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
+				69F629C324A8D9480067CAE8 /* MacroViewController.swift in Sources */,
 				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
-				693944EA24662F3F00931FA8 /* VariableTableDataSource.swift in Sources */,
+				693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */,
 				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
+				69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */,
 				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
 				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
@@ -812,10 +803,11 @@
 				691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */,
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
 				69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */,
-				693944EE246630E300931FA8 /* VariablesViewModel.swift in Sources */,
+				693944EE246630E300931FA8 /* MacrosViewModel.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */,
+				69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
 				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
@@ -823,14 +815,13 @@
 				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
 				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
-				693944E62466245F00931FA8 /* VariablesTabController.swift in Sources */,
-				69CEEDF023C94EE400E9F087 /* TriggerController.swift in Sources */,
-				693944EC24662FF300931FA8 /* VariableViewModel.swift in Sources */,
+				693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */,
+				693944EC24662FF300931FA8 /* MacroViewModel.swift in Sources */,
 				693944E82466248C00931FA8 /* EventsTabController.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
 				69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */,
 				69662B2B204367BD00E7CC7B /* Document.swift in Sources */,
-				69928A73247AC8FF00571B21 /* VariableActions.swift in Sources */,
+				69928A73247AC8FF00571B21 /* MacroActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,7 +829,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69CEEDCF23B3D75F00E9F087 /* VariableManTests.swift in Sources */,
+				69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */,
 				69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */,
 				69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */,
 				697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */,
@@ -847,7 +838,7 @@
 				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,
-				69CEEDD123B3EEA700E9F087 /* VariableTests.swift in Sources */,
+				69CEEDD123B3EEA700E9F087 /* MacroTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +846,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				695484C01FC4E6E400A6983F /* Savitar2UITests.swift in Sources */,
+				695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,7 +1175,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */ = {
+		6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
@@ -1192,7 +1183,7 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
+		69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
 			requirement = {
@@ -1200,18 +1191,31 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6991F46A2393F71700E2BFDB /* Logging */ = {
+		6991F46A2393F71700E2BFDB /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6991F4692393F71700E2BFDB /* XCRemoteSwiftPackageReference "swift-log" */;
+			package = 6991F4692393F71700E2BFDB /* RemoteSwiftPackageReference */;
 			productName = Logging;
 		};
-		69CEEDF223D6213900E9F087 /* ReSwift */ = {
+		69CEEDF223D6213900E9F087 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */;
+			package = 69CEEDF123D6213900E9F087 /* RemoteSwiftPackageReference */;
 			productName = ReSwift;
+		};
+		69D6E5EE24B203CB00058D70 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69D6E5ED24B203CB00058D70 /* RemoteSwiftPackageReference */;
+			productName = SwiftyXMLParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

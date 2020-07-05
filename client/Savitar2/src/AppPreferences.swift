@@ -44,10 +44,11 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
 
-    private var worldMan = WorldMan()
-    private var triggerMan = TriggerMan()
-    private var variableMan = VariableMan()
-    private var colorMan = ColorMan()
+    // TODO: these are deprecating
+    var worldMan = WorldMan()
+    var triggerMan = TriggerMan()
+    var macroMan = MacroMan()
+    var colorMan = ColorMan()
 
     init() {
         self.version = latestPrefsVersion
@@ -68,8 +69,8 @@ class AppPreferences: SavitarXMLProtocol {
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
 
+            globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
             globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
-            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
         } catch {
             // It's okay if loading v2 prefs failed. It simply means Savitar v2 is not installed, or the v2 preferences
             // are corrupt.
@@ -84,7 +85,7 @@ class AppPreferences: SavitarXMLProtocol {
             // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
             var xmlStr = try String(contentsOfFile: NSString(string: v1PrefsPath).expandingTildeInPath)
 
-            // v1 Savitar variables use the "&ret;" custom entity to separate lines of text.
+            // v1 Savitar macros use the "&ret;" custom entity to separate lines of text.
             // XMLParser has a known bug with handling custom entities (of which SwiftyXMLParser is based)
             // See: https://stackoverflow.com/questions/44680734/parsing-xml-with-entities-in-swift-with-xmlparser
             // Here we're simply replace it with a \n to indicate a line feed
@@ -94,9 +95,9 @@ class AppPreferences: SavitarXMLProtocol {
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
 
+            globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
             globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
-            globalStore.dispatch(SetVariablesAction(variables: variableMan.get()))
-        } catch {
+         } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.
         }
@@ -164,7 +165,7 @@ class AppPreferences: SavitarXMLProtocol {
 
         try prefs.worldMan.parse(xml: xml)
         try prefs.triggerMan.parse(xml: xml)
-        try prefs.variableMan.parse(xml: xml)
+        try prefs.macroMan.parse(xml: xml)
         try prefs.colorMan.parse(xml: xml)
     }
 
@@ -201,9 +202,9 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(triggersElem)
         }
 
-        let variablesElem = try variableMan.toXMLElement()
-        if variablesElem.childCount > 0 {
-            prefsElem.addChild(variablesElem)
+        let macrosElem = try macroMan.toXMLElement()
+        if macrosElem.childCount > 0 {
+            prefsElem.addChild(macrosElem)
         }
 
         let colorsElem = try colorMan.toXMLElement()

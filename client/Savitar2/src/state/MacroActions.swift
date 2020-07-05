@@ -1,5 +1,5 @@
 //
-//  TriggerActions.swift
+//  MacroActions.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/17/20.
@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 
-struct SelectTriggerAction: ReactionAction {
+struct SelectMacroAction: ReactionAction {
     let selection: SelectionState
 
     init(selection: SelectionState) {
@@ -18,26 +18,26 @@ struct SelectTriggerAction: ReactionAction {
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
-        result.triggerList.selection = selection
+        result.macroList.selection = selection
         return result
     }
 }
 
-struct SetTriggersAction: ReactionAction {
-    let triggers: [Trigger]
+struct SetMacrosAction: ReactionAction {
+    let macros: [Macro]
 
-    init(triggers: [Trigger]) {
-        self.triggers = triggers
+    init(macros: [Macro]) {
+        self.macros = macros
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
-        result.triggerList.items = triggers
+        result.macroList.items = macros
         return result
     }
 }
 
-enum TriggerAction: UndoableAction {
+enum MacroAction: UndoableAction {
     case enable(SavitarObjectID)
     case disable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
@@ -48,22 +48,22 @@ enum TriggerAction: UndoableAction {
 
     var name: String {
         switch self {
-        case .enable: return "Enable Trigger"
-        case .disable: return "Disable Trigger"
-        case .rename: return "Rename Trigger"
+        case .enable: return "Enable Macro"
+        case .disable: return "Disable Macro"
+        case .rename: return "Rename Macro"
         }
     }
 
     func inverse(context: UndoActionContext) -> UndoableAction? {
 
         switch self {
-        case .enable(let triggerID):
-            return TriggerAction.disable(triggerID)
-        case .disable(let triggerID):
-            return TriggerAction.enable(triggerID)
-        case .rename(let triggerID, name: _):
-            guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
-            return TriggerAction.rename(triggerID, name: oldName)
+        case .enable(let macroID):
+            return MacroAction.disable(macroID)
+        case .disable(let macroID):
+            return MacroAction.enable(macroID)
+        case .rename(let macroID, name: _):
+            guard let oldName = context.macroName(macroID: macroID) else { return nil }
+            return MacroAction.rename(macroID, name: oldName)
         }
     }
 }

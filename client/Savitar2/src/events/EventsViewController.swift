@@ -11,6 +11,7 @@ import ReSwift
 
 class EventsViewController: NSTabViewController, NSWindowDelegate {
     var store: ReactionsStore?
+    var detailViewController: NSTabViewController?
 
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -31,6 +32,17 @@ class EventsViewController: NSTabViewController, NSWindowDelegate {
             if let tabVC = tabViewItem.viewController as? EventsTabController {
                 tabVC.store = nil
             }
+        }
+    }
+
+    //**************************************
+    // MARK: - NSTabViewControllerDelegate
+    //**************************************
+
+    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        // Keep the detail tab selection in lock-step with the events tab selection
+        if let vc = self.detailViewController {
+            vc.selectedTabViewItemIndex = selectedTabViewItemIndex
         }
     }
 

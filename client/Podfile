@@ -6,7 +6,6 @@ target 'Savitar2' do
 
   # Pods for Savitar2
   pod 'AppCenter'
-  pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
 
   target 'Savitar2Tests' do
     inherit! :search_paths

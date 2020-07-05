@@ -50,8 +50,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         let xml = XML.parse(data)
         try self.parse(xml: xml[DocumentElemIdentifier])
 
+        store.dispatch(SetMacrosAction(macros: world.macroMan.get()))
         store.dispatch(SetTriggersAction(triggers: world.triggerMan.get()))
-        store.dispatch(SetVariablesAction(variables: world.variableMan.get()))
     }
 
     func output(result: OutputResult) {
@@ -91,7 +91,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     // MARK: - SavitarXMLProtocol
     //***************************
 
-    // These are the VariableElemIdentifier attributes
+    // These are the MacroElemIdentifier attributes
     enum DocumentAttribIdentifier: String {
         case type = "TYPE"
         case version = "VERSION"

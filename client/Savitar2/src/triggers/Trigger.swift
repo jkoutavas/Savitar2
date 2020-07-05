@@ -105,12 +105,16 @@ class Trigger: SavitarObject, NSCopying {
             self.flags = f
         }
         self.reply = reply
-        self.style = style
         self.say = say
         self.sound = sound
         self.substitution = substitution
         self.voice = voice
         self.wordEnding = wordEnding
+
+        self.style = style
+        if style != nil {
+            self.style!.formOnOff()
+        }
     }
 
     public func reactionTo(line: String) -> String {

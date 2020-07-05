@@ -18,6 +18,15 @@
           "revision": "74d7b91ceebc85daf387ebb206003f78813f71aa",
           "version": "1.2.0"
         }
+      },
+      {
+        "package": "SwiftyXMLParser",
+        "repositoryURL": "https://github.com/yahoojapan/SwiftyXMLParser",
+        "state": {
+          "branch": null,
+          "revision": "9d82653e535a13a518b411934c0a5c0c84406c22",
+          "version": "5.2.0"
+        }
       }
     ]
   },

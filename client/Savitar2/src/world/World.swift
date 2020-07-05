@@ -72,8 +72,8 @@ class World: SavitarObject, NSCopying {
     var retrySecs = 0
     var keepAliveMins = 0
 
+    var macroMan = MacroMan()
     var triggerMan = TriggerMan()
-    var variableMan = VariableMan()
 
     init(world: World) {
         super.init()
@@ -312,8 +312,8 @@ class World: SavitarObject, NSCopying {
             try triggerMan.parse(xml: xml)
         }
 
-        if case .singleElement = xml[VariablesElemIdentifier] {
-            try variableMan.parse(xml: xml)
+        if case .singleElement = xml[MacrosElemIdentifier] {
+            try macroMan.parse(xml: xml)
         }
     }
 
@@ -392,9 +392,9 @@ class World: SavitarObject, NSCopying {
             worldElem.addChild(triggersElem)
         }
 
-        let variablesElem = try variableMan.toXMLElement()
-        if variablesElem.childCount > 0 {
-            worldElem.addChild(variablesElem)
+        let macrosElem = try macroMan.toXMLElement()
+        if macrosElem.childCount > 0 {
+            worldElem.addChild(macrosElem)
         }
 
         return worldElem
