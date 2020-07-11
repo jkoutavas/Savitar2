@@ -49,6 +49,20 @@ class MacroController: NSController {
         }
     }
 
+    @objc dynamic var keyLabel: String {
+        get { macro.keyLabel }
+        set(keyLabel) {
+//            store?.dispatch(MacroAction.rename(macro.objectID, name: name))
+        }
+    }
+
+    @objc dynamic var value: String {
+        get { macro.value }
+        set(value) {
+//            store?.dispatch(MacroAction.rename(macro.objectID, name: name))
+        }
+    }
+
     init(macro: Macro, store: ReactionsStore?) {
         self.macro = macro
         self.store = store

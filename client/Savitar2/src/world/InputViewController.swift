@@ -21,22 +21,34 @@ class InputViewController: ViewController {
         self.textView?.isAutomaticDashSubstitutionEnabled = false
 
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            self.keyDown(with: $0)
-            return $0
+            if self.myKeyDown(with: $0) {
+                return nil
+            } else {
+                return $0
+            }
         }
     }
 
-    override func keyDown(with event: NSEvent) {
-        if event.keyCode == 36 {
-             // we're wrapping this in an async call so we call unwind the
+    func myKeyDown(with event: NSEvent) -> Bool {
+        // handle keyDown only if current window has focus, i.e. is keyWindow
+        guard let locWindow = self.view.window,
+           NSApplication.shared.keyWindow === locWindow else { return false }
+
+        guard let ep = self.endpoint else { return false }
+        if ep.expandKeypress(with: event) { return true }
+
+        if event.keyCode == Keycode.returnKey {
+            // we're wrapping this in an async call so we call unwind the
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
                 if let textView = self.textView, textView.string.count > 1 {
-                    self.endpoint?.sendString(string: textView.string)
+                    ep.sendString(string: textView.string)
                 }
 
+                // TODO: add command history support
                 self.textView?.string = ""
             }
         }
+        return false
     }
 }

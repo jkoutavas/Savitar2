@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: April 17th, 2020
+README last updated: July 3rd, 2020
 
 ## Current state of the application
 
@@ -27,12 +27,14 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Integrated WKWebView as the output pane
 √ World settings Appearance tab is operational
 √ Output triggers are working
+_ Input macro hotkeys are supported
 √ Load Sav 1.x app settings (includes triggers)
 √ Load Sav 1.x world triggers
 _ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 _ Input pane command recall and local commands supported
 _ Implement input triggers
-_ Implement Triggers Window
+_ Implement Triggers Detail view
+_ Implement Macros Detail view
 _ Implement World settings Starting tab
 _ Connect/disconnect session handling
 _ Implement remaining World settings tabs

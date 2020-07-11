@@ -17,8 +17,8 @@ class MacroViewModel: CheckableItemViewModel {
     let value: String
 
     init(macro: Macro) {
-        hotKey = "hotKey" // TODO
-        value = "value" // TODO
+        hotKey = macro.keyLabel
+        value = macro.value
         super.init(identifier: macro.objectID.identifier,
                    title: macro.name,
                    enabled: macro.enabled)

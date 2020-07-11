@@ -195,7 +195,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="958-LY-Jcb">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="T6s-dm-fgz">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -253,7 +253,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="lk5-Ec-guy">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.keyLabel" id="SQs-O8-TfD">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -268,15 +268,12 @@
                             <constraint firstAttribute="trailing" secondItem="CfY-wq-wEY" secondAttribute="trailing" constant="20" id="2Fj-2E-aNv"/>
                             <constraint firstItem="CfY-wq-wEY" firstAttribute="leading" secondItem="bfU-Ke-E9A" secondAttribute="trailing" constant="16" id="38d-hg-jaI"/>
                             <constraint firstItem="bfU-Ke-E9A" firstAttribute="leading" secondItem="xvf-Ug-4fb" secondAttribute="leading" constant="22" id="5TW-GE-ehN"/>
-                            <constraint firstItem="CfY-wq-wEY" firstAttribute="leading" secondItem="bfU-Ke-E9A" secondAttribute="trailing" constant="16" id="8gZ-fL-d79"/>
                             <constraint firstItem="tr0-wv-M0N" firstAttribute="top" secondItem="bfU-Ke-E9A" secondAttribute="bottom" constant="16" id="9Ny-dl-lAJ"/>
                             <constraint firstItem="Fxb-fE-YXf" firstAttribute="leading" secondItem="tr0-wv-M0N" secondAttribute="trailing" constant="16" id="A18-jg-IC4"/>
                             <constraint firstItem="Jg6-mM-vJL" firstAttribute="leading" secondItem="xvf-Ug-4fb" secondAttribute="leading" constant="22" id="DOf-mx-dp6"/>
                             <constraint firstItem="l05-sm-qIb" firstAttribute="leading" secondItem="Jg6-mM-vJL" secondAttribute="trailing" constant="16" id="EPu-Pf-21I"/>
                             <constraint firstItem="tr0-wv-M0N" firstAttribute="leading" secondItem="xvf-Ug-4fb" secondAttribute="leading" constant="22" id="K60-Um-tai"/>
-                            <constraint firstItem="tr0-wv-M0N" firstAttribute="top" secondItem="bfU-Ke-E9A" secondAttribute="bottom" constant="16" id="NGv-py-Sgt"/>
                             <constraint firstAttribute="trailing" secondItem="l05-sm-qIb" secondAttribute="trailing" constant="20" id="P0D-ww-gih"/>
-                            <constraint firstItem="l05-sm-qIb" firstAttribute="top" secondItem="Fxb-fE-YXf" secondAttribute="bottom" constant="22" id="VQO-Yy-5cp"/>
                             <constraint firstItem="Jg6-mM-vJL" firstAttribute="top" secondItem="tr0-wv-M0N" secondAttribute="bottom" constant="30" id="ZlG-PR-nn0"/>
                             <constraint firstItem="bfU-Ke-E9A" firstAttribute="top" secondItem="xvf-Ug-4fb" secondAttribute="top" constant="20" id="aZA-6j-LA3"/>
                             <constraint firstItem="CfY-wq-wEY" firstAttribute="top" secondItem="xvf-Ug-4fb" secondAttribute="top" constant="18" id="cPI-lB-41R"/>

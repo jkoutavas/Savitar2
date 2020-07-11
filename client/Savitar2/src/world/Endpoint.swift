@@ -6,7 +6,7 @@
 //  Copyright © 2018 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import Logging
 import ReSwift
 
@@ -20,6 +20,7 @@ class Endpoint: NSObject, StreamDelegate {
     var logger: Logger
     var telnetParser: TelnetParser?
 
+    var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
     init(world: World, outputter: OutputProtocol) {
@@ -75,6 +76,11 @@ class Endpoint: NSObject, StreamDelegate {
         }
     }
 
+    func expandKeypress(with event: NSEvent) -> Bool {
+        return processMacros(with: event, macros: universalMacros) ||
+            processMacros(with: event, macros: world.macroMan.get())
+    }
+
     func sendData(data: Data) {
          _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
              let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
@@ -122,6 +128,16 @@ class Endpoint: NSObject, StreamDelegate {
                 self?.outputter.output(result: .success(line))
             })
         }
+    }
+
+    private func processMacros(with event: NSEvent, macros: [Macro]) -> Bool {
+        for macro in macros {
+            if macro.isHotKey(forEvent: event) {
+                sendString(string: macro.value)
+                return true
+            }
+        }
+        return false
     }
 
     private func processTriggers(inputLine: String, triggers: [Trigger]) -> String {
@@ -209,6 +225,7 @@ class Endpoint: NSObject, StreamDelegate {
 
 extension Endpoint: StoreSubscriber {
     func newState(state: ReactionsState) {
+        self.universalMacros = state.macroList.items
         self.universalTriggers = state.triggerList.items
     }
 }
