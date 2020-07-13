@@ -12,6 +12,8 @@ class InputViewController: ViewController {
 
     public weak var endpoint: Endpoint?
 
+    internal var eventMonitor: Any?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,13 +21,25 @@ class InputViewController: ViewController {
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
         self.textView?.isAutomaticQuoteSubstitutionEnabled = false
         self.textView?.isAutomaticDashSubstitutionEnabled = false
+    }
 
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             if self.myKeyDown(with: $0) {
                 return nil
             } else {
                 return $0
             }
+        }
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+
+        if let monitor = self.eventMonitor {
+            NSEvent.removeMonitor(monitor)
         }
     }
 
