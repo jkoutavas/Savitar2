@@ -27,11 +27,7 @@ class InputViewController: ViewController {
         super.viewWillAppear()
 
         eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            if self.myKeyDown(with: $0) {
-                return nil
-            } else {
-                return $0
-            }
+            return self.myKeyDown(with: $0) ? nil : $0
         }
     }
 
@@ -51,16 +47,20 @@ class InputViewController: ViewController {
         guard let ep = self.endpoint else { return false }
         if ep.expandKeypress(with: event) { return true }
 
+        // swiftlint:disable force_cast
+        guard let doc = locWindow.windowController?.document as! Document? else { return false }
+        doc.suppressChangeCount = true
+
         if event.keyCode == Keycode.returnKey {
             // we're wrapping this in an async call so we call unwind the
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
-                if let textView = self.textView, textView.string.count > 1 {
+                if let textView = self.textView, textView.string.count > 0 {
                     ep.sendString(string: textView.string)
+                    self.undoManager?.removeAllActions(withTarget: self.view)
+                    // TODO: add command history support
+                    textView.string = ""
                 }
-
-                // TODO: add command history support
-                self.textView?.string = ""
             }
         }
         return false
