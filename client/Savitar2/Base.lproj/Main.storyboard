@@ -784,6 +784,9 @@
                                             <size key="minSize" width="583" height="98"/>
                                             <size key="maxSize" width="600" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="5bW-Js-79f" id="dxP-xn-P6K"/>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                 </clipView>
@@ -1294,11 +1297,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="titlebarViewController" id="h1D-5o-gDg" customClass="NSTitlebarAccessoryViewController" sceneMemberID="viewController">
                     <view key="view" id="n85-aq-ZEl">
-                        <rect key="frame" x="0.0" y="0.0" width="189" height="34"/>
+                        <rect key="frame" x="0.0" y="0.0" width="191" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="108.5" y="5" width="65" height="23"/>
+                                <rect key="frame" x="109.5" y="5" width="66" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1308,7 +1311,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="41.5" y="5" width="55" height="23"/>
+                                <rect key="frame" x="41.5" y="5" width="56" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

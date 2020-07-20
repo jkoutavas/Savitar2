@@ -10,5 +10,6 @@ import Foundation
 
 protocol UndoActionContext {
     func macroName(macroID: SavitarObjectID) -> String?
+    func macroValue(macroID: SavitarObjectID) -> String?
     func triggerName(triggerID: SavitarObjectID) -> String?
 }

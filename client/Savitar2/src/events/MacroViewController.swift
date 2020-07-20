@@ -59,7 +59,7 @@ class MacroController: NSController {
     @objc dynamic var value: String {
         get { macro.value }
         set(value) {
-//            store?.dispatch(MacroAction.rename(macro.objectID, name: name))
+            store?.dispatch(MacroAction.changeValue(macro.objectID, value: value))
         }
     }
 
