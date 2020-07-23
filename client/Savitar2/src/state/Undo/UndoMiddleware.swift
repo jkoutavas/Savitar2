@@ -21,6 +21,10 @@ class UndoableStateAdapter: UndoActionContext {
         return state.macroList.item(objectID: macroID)?.name
     }
 
+    func macroKey(macroID: SavitarObjectID) -> HotKey? {
+        return state.macroList.item(objectID: macroID)?.hotKey
+    }
+
     func macroValue(macroID: SavitarObjectID) -> String? {
         return state.macroList.item(objectID: macroID)?.value
     }

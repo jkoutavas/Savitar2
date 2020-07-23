@@ -10,6 +10,8 @@ import Cocoa
 import ReSwift
 
 class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
+    @IBOutlet var hotKeyEditor: HotKeyEditor!
+    var macro: Macro?
     var store: ReactionsStore?
 
     func setStore(reactionsStore: ReactionsStore?) {
@@ -20,6 +22,13 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
         super.viewWillAppear()
 
         store?.subscribe(self)
+        hotKeyEditor.completionHandler = { (_ key: HotKey) in
+            if key.isKnown() {
+                if let _store = self.store, let _macro = self.macro {
+                    _store.dispatch(MacroAction.changeKey(_macro.objectID, key: key))
+                }
+            }
+        }
     }
 
     override func viewWillDisappear() {
@@ -30,8 +39,9 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
 
     func newState(state: ReactionsState) {
         if let index = state.macroList.selection {
-            let macro = state.macroList.items[index]
-            self.representedObject = MacroController(macro: macro, store: store)
+            let _macro = state.macroList.items[index]
+            self.macro = _macro
+            self.representedObject = MacroController(macro: _macro, store: store)
         } else {
             self.representedObject = nil
         }
@@ -49,12 +59,7 @@ class MacroController: NSController {
         }
     }
 
-    @objc dynamic var keyLabel: String {
-        get { macro.keyLabel }
-        set(keyLabel) {
-//            store?.dispatch(MacroAction.rename(macro.objectID, name: name))
-        }
-    }
+    @objc dynamic var keyLabel: String { return macro.keyLabel }
 
     @objc dynamic var value: String {
         get { macro.value }

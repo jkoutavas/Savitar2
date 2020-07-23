@@ -53,6 +53,7 @@
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
+		698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698576D724C5BC9000B5B370 /* HotKeyEditor.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
 		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
@@ -177,6 +178,7 @@
 		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
 		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
+		698576D724C5BC9000B5B370 /* HotKeyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyEditor.swift; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		69928A70247AC8FF00571B21 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				69B278DA249FA1990058B067 /* DetailsTabViewController.swift */,
+				698576D724C5BC9000B5B370 /* HotKeyEditor.swift */,
 				69B278D6249EA7120058B067 /* EventsSplitViewController.swift */,
 				693944E72466248C00931FA8 /* EventsTabController.swift */,
 				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
@@ -781,6 +784,7 @@
 				69662B27204367BD00E7CC7B /* ViewController.swift in Sources */,
 				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
 				693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */,
+				698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,

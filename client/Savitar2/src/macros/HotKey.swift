@@ -64,6 +64,11 @@ struct HotKey {
     var keyCode: KeyCodeType
     var modifierFlags: NSEvent.ModifierFlags
 
+    init(event: NSEvent) {
+        keyCode = event.keyCode
+        modifierFlags = event.modifierFlags
+    }
+
     init(keyLabel: String) {
         // we do a "bijective" dictionary lookup
         // https://stackoverflow.com/questions/27218669/swift-dictionary-get-key-for-value
@@ -80,5 +85,9 @@ struct HotKey {
         }
 
         return ""
+    }
+
+    func isKnown() -> Bool {
+        return KeyCodeLabelDict[keyCode] != nil
     }
 }

@@ -30,6 +30,10 @@ private func handleMacroAction(_ action: MacroAction, macro: Macro) -> Macro {
         guard macro.objectID == macroID else { return macro }
         macro.enabled = false
 
+    case let .changeKey(macroID, key: value):
+        guard macro.objectID == macroID else { return macro }
+        macro.hotKey = value
+
     case let .changeValue(macroID, value: value):
         guard macro.objectID == macroID else { return macro }
         macro.value = value
