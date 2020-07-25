@@ -60,7 +60,7 @@ let KeyCodeLabelDict: [KeyCodeType: String] = [
     Keycode.keypadClear: "clear"
 ]
 
-struct HotKey {
+struct HotKey: Equatable {
     var keyCode: KeyCodeType
     var modifierFlags: NSEvent.ModifierFlags
 
@@ -69,25 +69,102 @@ struct HotKey {
         modifierFlags = event.modifierFlags
     }
 
+    static func handleFlag(_ keyLabel: inout String, _ modString: String, _ flag: NSEvent.ModifierFlags, _ flags: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
+        var result = flags
+        if keyLabel.contains(modString) {
+            keyLabel = keyLabel.replacingOccurrences(of: modString, with: "")
+            result.insert(flag)
+            return result
+        }
+
+        return result
+    }
+
+    mutating func raiseFlag(keyLabel: String, modString: String, flag: NSEvent.ModifierFlags) -> String {
+        if keyLabel.contains(modString) {
+            modifierFlags.insert(flag)
+            return keyLabel.replacingOccurrences(of: modString, with: "")
+        }
+
+        return keyLabel
+    }
+
     init(keyLabel: String) {
+        var label = keyLabel
+
+        modifierFlags = NSEvent.ModifierFlags.init(rawValue: 0)
+        modifierFlags = HotKey.handleFlag(&label, "shift-", .shift, modifierFlags)
+        modifierFlags = HotKey.handleFlag(&label, "control-", .control, modifierFlags)
+        modifierFlags = HotKey.handleFlag(&label, "option-", .option, modifierFlags)
+        modifierFlags = HotKey.handleFlag(&label, "command-", .command, modifierFlags)
+
         // we do a "bijective" dictionary lookup
         // https://stackoverflow.com/questions/27218669/swift-dictionary-get-key-for-value
         keyCode = 0
-        if let key = KeyCodeLabelDict.first(where: { $0.value == keyLabel })?.key {
+        if let key = KeyCodeLabelDict.first(where: { $0.value == label })?.key {
             keyCode = key
         }
-        modifierFlags = NSEvent.ModifierFlags.init(rawValue: 0)
+    }
+
+    static func normalize(modifierFlags: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
+        var flags = modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if flags.contains(.function) {
+            flags.remove(.function)
+        }
+        if flags.contains(.numericPad) {
+            flags.remove(.numericPad)
+        }
+        return flags
     }
 
     func toString() -> String {
-        if let funcLabel = KeyCodeLabelDict[keyCode] {
-            return funcLabel
+        guard let funcLabel = KeyCodeLabelDict[keyCode] else { return "" }
+        var modifierLabel = ""
+
+        switch HotKey.normalize(modifierFlags: modifierFlags) {
+        case [.shift]:
+            modifierLabel = "shift-"
+        case [.control]:
+            modifierLabel = "control-"
+        case [.option]:
+            modifierLabel = "option-"
+        case [.command]:
+            modifierLabel = "command-"
+        case [.control, .shift]:
+           modifierLabel = "control-shift-"
+        case [.option, .shift]:
+           modifierLabel = "option-shift-"
+        case [.command, .shift]:
+           modifierLabel = "command-shift-"
+        case [.control, .option]:
+           modifierLabel = "control-option-"
+        case [.control, .command]:
+           modifierLabel = "control-command-"
+        case [.option, .command]:
+           modifierLabel = "option-command-"
+        case [.shift, .control, .option]:
+           modifierLabel = "shift-control-option-"
+        case [.shift, .control, .command]:
+           modifierLabel = "shift-control-command-"
+        case [.control, .option, .command]:
+           modifierLabel = "control-option-command-"
+        case [.shift, .command, .option]:
+           modifierLabel = "shift-command-option-"
+        case [.shift, .control, .option, .command]:
+           modifierLabel = "shift-control-option-command"
+        default:
+           modifierLabel = ""
         }
 
-        return ""
+        return "\(modifierLabel)\(funcLabel)"
     }
 
     func isKnown() -> Bool {
         return KeyCodeLabelDict[keyCode] != nil
+    }
+
+    static func == (lhs: HotKey, rhs: HotKey) -> Bool {
+        return lhs.keyCode == rhs.keyCode &&
+            normalize(modifierFlags: lhs.modifierFlags) == normalize(modifierFlags: rhs.modifierFlags)
     }
 }

@@ -245,17 +245,17 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uF-FQ-Cvk">
-                                <rect key="frame" x="84" y="172" width="135" height="26"/>
+                                <rect key="frame" x="84" y="172" width="205" height="26"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="FwW-hY-BOK">
-                                    <rect key="frame" x="0.0" y="0.0" width="135" height="26"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="205" height="26"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" textCompletion="NO" id="baB-yG-d02" customClass="HotKeyEditor" customModule="Savitar2" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="135" height="26"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="205" height="26"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="135" height="26"/>
+                                            <size key="minSize" width="205" height="26"/>
                                             <size key="maxSize" width="240" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="key">
@@ -275,7 +275,7 @@
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="AAa-pz-ikE"/>
-                                    <constraint firstAttribute="width" constant="135" id="aBT-DO-Esj"/>
+                                    <constraint firstAttribute="width" constant="205" id="aBT-DO-Esj"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="iSB-lt-C3I">
                                     <rect key="frame" x="-100" y="-100" width="225" height="15"/>

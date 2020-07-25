@@ -11,7 +11,8 @@ import ReSwift
 
 class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     @IBOutlet var hotKeyEditor: HotKeyEditor!
-    var macro: Macro?
+    var macroID: SavitarObjectID?
+    var macros: [Macro]?
     var store: ReactionsStore?
 
     func setStore(reactionsStore: ReactionsStore?) {
@@ -24,8 +25,12 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
         store?.subscribe(self)
         hotKeyEditor.completionHandler = { (_ key: HotKey) in
             if key.isKnown() {
-                if let _store = self.store, let _macro = self.macro {
-                    _store.dispatch(MacroAction.changeKey(_macro.objectID, key: key))
+                if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
+                    print("duplicate\n")
+                } else {
+                    if let _store = self.store, let _macroID = self.macroID {
+                        _store.dispatch(MacroAction.changeKey(_macroID, key: key))
+                    }
                 }
             }
         }
@@ -38,12 +43,14 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
     }
 
     func newState(state: ReactionsState) {
+        self.macros = state.macroList.items
         if let index = state.macroList.selection {
-            let _macro = state.macroList.items[index]
-            self.macro = _macro
-            self.representedObject = MacroController(macro: _macro, store: store)
+            let macro = state.macroList.items[index]
+            self.macroID = macro.objectID
+            self.representedObject = MacroController(macro: macro, store: store)
         } else {
             self.representedObject = nil
+            self.macroID = nil
         }
     }
 }
