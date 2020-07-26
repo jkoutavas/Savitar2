@@ -26,7 +26,12 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
         hotKeyEditor.completionHandler = { (_ key: HotKey) in
             if key != self.macro?.hotKey && key.isKnown() {
                 if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
-                    print("duplicate\n")
+                    let alert = NSAlert()
+                    alert.messageText = "Hotkey '\(key.toString() )' is already in use"
+                    alert.informativeText = "Please try another hotkey"
+                    alert.addButton(withTitle: "OK")
+                    alert.alertStyle = NSAlert.Style.warning
+                    alert.runModal()
                 } else {
                     if let _store = self.store, let _macroID = self.macro?.objectID {
                         _store.dispatch(MacroAction.changeKey(_macroID, key: key))
