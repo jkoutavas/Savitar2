@@ -15,6 +15,7 @@ let KeyCodeLabelDict: [KeyCodeType: String] = [
     Keycode.downArrow: "down arrow",
     Keycode.leftArrow: "left arrow",
     Keycode.rightArrow: "right arrow",
+    Keycode.escape: "escape",
     Keycode.f1: "F1",
     Keycode.f2: "F2",
     Keycode.f3: "F3",
@@ -63,13 +64,16 @@ let KeyCodeLabelDict: [KeyCodeType: String] = [
 struct HotKey: Equatable {
     var keyCode: KeyCodeType
     var modifierFlags: NSEvent.ModifierFlags
+    internal var chars: String
 
     init(event: NSEvent) {
         keyCode = event.keyCode
         modifierFlags = event.modifierFlags
+        chars = event.charactersIgnoringModifiers!
     }
 
-    static func handleFlag(_ keyLabel: inout String, _ modString: String, _ flag: NSEvent.ModifierFlags, _ flags: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
+    static func handleFlag(_ keyLabel: inout String, _ modString: String, _ flag: NSEvent.ModifierFlags,
+                           _ flags: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
         var result = flags
         if keyLabel.contains(modString) {
             keyLabel = keyLabel.replacingOccurrences(of: modString, with: "")
@@ -104,6 +108,9 @@ struct HotKey: Equatable {
         if let key = KeyCodeLabelDict.first(where: { $0.value == label })?.key {
             keyCode = key
         }
+
+        // whatever remains of label are the visible characters for this HotKey
+        chars = label
     }
 
     static func normalize(modifierFlags: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
@@ -117,8 +124,20 @@ struct HotKey: Equatable {
         return flags
     }
 
+    static func isPrintable(_ chars: String) -> Bool {
+      let utf8View = chars.utf8
+      return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+    }
+
     func toString() -> String {
-        guard let funcLabel = KeyCodeLabelDict[keyCode] else { return "" }
+        var keyLabel = ""
+        if let keyString = KeyCodeLabelDict[keyCode] {
+            keyLabel = keyString
+        } else if HotKey.isPrintable(chars) {
+            keyLabel = chars
+        } else {
+            return ""
+        }
         var modifierLabel = ""
 
         switch HotKey.normalize(modifierFlags: modifierFlags) {
@@ -156,11 +175,12 @@ struct HotKey: Equatable {
            modifierLabel = ""
         }
 
-        return "\(modifierLabel)\(funcLabel)"
+        return "\(modifierLabel)\(keyLabel)"
     }
 
     func isKnown() -> Bool {
-        return KeyCodeLabelDict[keyCode] != nil
+        return KeyCodeLabelDict[keyCode] != nil || (HotKey.isPrintable(chars) &&
+            (modifierFlags.contains(.control) || modifierFlags.contains(.option) || modifierFlags.contains(.command)))
     }
 
     static func == (lhs: HotKey, rhs: HotKey) -> Bool {
