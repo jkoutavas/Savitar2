@@ -89,8 +89,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="gDQ-y6-XSx">
+                                <rect key="frame" x="-8" y="-10" width="466" height="165"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Matching" identifier="" id="lTx-dy-oKV">
+                                        <view key="view" id="imw-eq-pJX">
+                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Appearance" identifier="" id="g7J-M1-rXB">
+                                        <view key="view" id="xnU-hO-dtB">
+                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Audio Cue" identifier="" id="55J-we-nVJ">
+                                        <view key="view" id="4mp-Ol-Ji3">
+                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Reply" identifier="" id="t5g-2S-tad">
+                                        <view key="view" id="paZ-1n-7wr">
+                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oK7-Pr-SDv">
+                                <rect key="frame" x="60" y="208" width="90" height="25"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hZl-fq-JHS" id="JLJ-BJ-xPe">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="eU3-Jg-aRI">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="hZl-fq-JHS"/>
+                                            <menuItem title="Item 2" id="77y-ac-lOd"/>
+                                            <menuItem title="Item 3" id="hBB-2Q-Lut"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HEU-va-7m7">
+                                <rect key="frame" x="18" y="216" width="38" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Type:" id="xbJ-Ts-g8B">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-BM-GPE">
+                                <rect key="frame" x="222" y="208" width="211" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="206" id="BGq-qb-z8b"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="O5X-Vu-Idn" id="jLj-1G-Mys">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <menu key="menu" id="6em-9h-yqI">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="O5X-Vu-Idn"/>
+                                            <menuItem title="Item 2" id="eND-lc-uUy"/>
+                                            <menuItem title="Item 3" id="qzf-To-wBZ"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WCO-I4-ifq">
+                                <rect key="frame" x="172" y="214" width="46" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Match:" id="KGp-0K-qM6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E0Z-rx-Lr1">
+                                <rect key="frame" x="18" y="155" width="80" height="18"/>
+                                <buttonCell key="cell" type="check" title="Activated" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QiS-xd-W8k">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohH-Vt-Rnc">
+                                <rect key="frame" x="316" y="155" width="116" height="18"/>
+                                <buttonCell key="cell" type="check" title="Case sensitive" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7z1-yx-QzJ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VyJ-ur-8M4">
-                                <rect key="frame" x="20" y="210" width="410" height="24"/>
+                                <rect key="frame" x="20" y="179" width="410" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="410" id="jg1-Qb-t6S"/>
                                     <constraint firstAttribute="height" constant="24" id="sDK-Xe-hjB"/>
@@ -111,41 +202,27 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDQ-y6-XSx">
-                                <rect key="frame" x="-8" y="-10" width="466" height="211"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Matching" identifier="" id="lTx-dy-oKV">
-                                        <view key="view" ambiguous="YES" id="imw-eq-pJX">
-                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Appearance" identifier="" id="g7J-M1-rXB">
-                                        <view key="view" id="xnU-hO-dtB">
-                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Audio Cue" identifier="" id="55J-we-nVJ">
-                                        <view key="view" id="4mp-Ol-Ji3">
-                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Reply" identifier="" id="t5g-2S-tad">
-                                        <view key="view" id="paZ-1n-7wr">
-                                            <rect key="frame" x="10" y="33" width="446" height="165"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="centerX" secondItem="tNW-b0-6Bf" secondAttribute="centerX" id="DHn-aF-rK7"/>
-                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="top" secondItem="tNW-b0-6Bf" secondAttribute="top" constant="16" id="LlL-oK-UG1"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="leading" secondItem="E0Z-rx-Lr1" secondAttribute="leading" id="DcI-a1-9Xq"/>
+                            <constraint firstItem="oK7-Pr-SDv" firstAttribute="leading" secondItem="HEU-va-7m7" secondAttribute="trailing" constant="8" symbolic="YES" id="FQt-j6-mYr"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="top" secondItem="oK7-Pr-SDv" secondAttribute="bottom" constant="8" id="FZC-79-jmm"/>
+                            <constraint firstItem="g8f-BM-GPE" firstAttribute="leading" secondItem="WCO-I4-ifq" secondAttribute="trailing" constant="8" symbolic="YES" id="MQl-2x-5L3"/>
+                            <constraint firstItem="E0Z-rx-Lr1" firstAttribute="top" secondItem="VyJ-ur-8M4" secondAttribute="bottom" constant="8" symbolic="YES" id="PTV-ju-PWH"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="top" secondItem="tNW-b0-6Bf" secondAttribute="top" constant="47" id="QTq-rd-vCN"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="trailing" secondItem="ohH-Vt-Rnc" secondAttribute="trailing" id="QvE-Ug-meu"/>
+                            <constraint firstItem="g8f-BM-GPE" firstAttribute="top" secondItem="HEU-va-7m7" secondAttribute="top" id="RzM-b0-H0p"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="centerX" secondItem="gDQ-y6-XSx" secondAttribute="centerX" id="SMz-9G-Hoh"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="trailing" secondItem="g8f-BM-GPE" secondAttribute="trailing" id="Uys-IM-pKV"/>
+                            <constraint firstItem="g8f-BM-GPE" firstAttribute="baseline" secondItem="oK7-Pr-SDv" secondAttribute="baseline" id="W7z-L4-YKJ"/>
+                            <constraint firstItem="gDQ-y6-XSx" firstAttribute="leading" secondItem="tNW-b0-6Bf" secondAttribute="leading" constant="-1" id="bEM-zi-mHL"/>
+                            <constraint firstItem="gDQ-y6-XSx" firstAttribute="top" secondItem="E0Z-rx-Lr1" secondAttribute="bottom" constant="8" symbolic="YES" id="exJ-Ye-jbl"/>
+                            <constraint firstAttribute="bottom" secondItem="gDQ-y6-XSx" secondAttribute="bottom" id="iFM-gM-VcT"/>
+                            <constraint firstItem="WCO-I4-ifq" firstAttribute="leading" secondItem="oK7-Pr-SDv" secondAttribute="trailing" constant="27" id="nus-WI-NgQ"/>
+                            <constraint firstItem="g8f-BM-GPE" firstAttribute="baseline" secondItem="WCO-I4-ifq" secondAttribute="baseline" id="rNu-fG-fgS"/>
+                            <constraint firstItem="ohH-Vt-Rnc" firstAttribute="top" secondItem="VyJ-ur-8M4" secondAttribute="bottom" constant="8" symbolic="YES" id="sGF-dm-nuI"/>
+                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="leading" secondItem="HEU-va-7m7" secondAttribute="leading" id="vEq-kN-tfX"/>
                         </constraints>
                     </view>
                     <connections>
