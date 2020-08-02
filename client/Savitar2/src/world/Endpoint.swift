@@ -150,7 +150,7 @@ class Endpoint: NSObject, StreamDelegate {
          //    3. all the rest
         var processedTriggers: [Trigger] = []
         for trigger in triggers {
-            if trigger.flags.contains(.disabled) {
+            if !trigger.enabled {
                 continue
             }
             if trigger.flags.contains(.gag) {
@@ -160,7 +160,7 @@ class Endpoint: NSObject, StreamDelegate {
         }
         if line.count > 0 {
             for trigger in triggers {
-                if trigger.flags.contains(.disabled) {
+                if !trigger.enabled {
                     continue
                 }
                 if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
@@ -171,7 +171,7 @@ class Endpoint: NSObject, StreamDelegate {
         }
         if line.count > 0 {
             for trigger in triggers {
-                if trigger.flags.contains(.disabled) {
+                if !trigger.enabled {
                     continue
                 }
                 if !processedTriggers.contains(trigger) {

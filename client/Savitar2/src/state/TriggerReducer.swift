@@ -24,11 +24,11 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     switch action {
     case let .enable(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
-        trigger.flags.remove(.disabled) // TODO: hide this inversed crud
+        trigger.enabled = true
 
     case let .disable(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
-        trigger.flags.insert(.disabled) // TODO: same goes for here
+        trigger.enabled = false
 
     case let .rename(triggerID, name: name):
         guard trigger.objectID == triggerID else { return trigger }

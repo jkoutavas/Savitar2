@@ -59,6 +59,19 @@ class Trigger: SavitarObject, NSCopying {
     var voice: String?
     var wordEnding: String?
 
+    var enabled: Bool {
+        get {
+            !flags.contains(.disabled)
+        }
+        set(enabled) {
+            if enabled {
+                flags.remove(.disabled)
+            } else {
+                flags.insert(.disabled)
+            }
+        }
+    }
+
     func copy(with zone: NSZone? = nil) -> Any {
         return Trigger(trigger: self)
     }

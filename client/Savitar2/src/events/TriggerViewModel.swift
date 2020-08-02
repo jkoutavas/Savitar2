@@ -21,7 +21,7 @@ class TriggerViewModel: CheckableItemViewModel {
         audioCue = "audioCue" // TODO
         super.init(identifier: trigger.objectID.identifier,
                    title: trigger.name,
-                   enabled: !trigger.flags.contains(.disabled))
+                   enabled: trigger.enabled)
     }
 
     required init(from decoder: Decoder) throws {
