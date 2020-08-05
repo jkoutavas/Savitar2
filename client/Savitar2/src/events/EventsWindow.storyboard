@@ -89,41 +89,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="gDQ-y6-XSx">
-                                <rect key="frame" x="-8" y="-10" width="466" height="165"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Matching" identifier="" id="lTx-dy-oKV">
-                                        <view key="view" id="imw-eq-pJX">
-                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Appearance" identifier="" id="g7J-M1-rXB">
-                                        <view key="view" id="xnU-hO-dtB">
-                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Audio Cue" identifier="" id="55J-we-nVJ">
-                                        <view key="view" id="4mp-Ol-Ji3">
-                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Reply" identifier="" id="t5g-2S-tad">
-                                        <view key="view" id="paZ-1n-7wr">
-                                            <rect key="frame" x="10" y="33" width="446" height="119"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oK7-Pr-SDv">
                                 <rect key="frame" x="60" y="208" width="90" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hZl-fq-JHS" id="JLJ-BJ-xPe">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="eU3-Jg-aRI">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="hZl-fq-JHS"/>
@@ -148,7 +118,7 @@
                                 </constraints>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="O5X-Vu-Idn" id="jLj-1G-Mys">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="6em-9h-yqI">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="O5X-Vu-Idn"/>
@@ -172,6 +142,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.activated" id="nTU-rN-TNa"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohH-Vt-Rnc">
                                 <rect key="frame" x="316" y="155" width="116" height="18"/>
@@ -179,6 +152,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.caseSensitive" id="pAQ-en-89h"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VyJ-ur-8M4">
                                 <rect key="frame" x="20" y="179" width="410" height="24"/>
@@ -202,8 +178,15 @@
                                     </binding>
                                 </connections>
                             </textField>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AbX-pi-qyO">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="143"/>
+                                <connections>
+                                    <segue destination="91e-Ka-Eif" kind="embed" id="Lom-7I-BPx"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="AbX-pi-qyO" firstAttribute="top" secondItem="E0Z-rx-Lr1" secondAttribute="bottom" constant="14" id="1F1-GF-EI5"/>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="centerX" secondItem="tNW-b0-6Bf" secondAttribute="centerX" id="DHn-aF-rK7"/>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="leading" secondItem="E0Z-rx-Lr1" secondAttribute="leading" id="DcI-a1-9Xq"/>
                             <constraint firstItem="oK7-Pr-SDv" firstAttribute="leading" secondItem="HEU-va-7m7" secondAttribute="trailing" constant="8" symbolic="YES" id="FQt-j6-mYr"/>
@@ -213,12 +196,11 @@
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="top" secondItem="tNW-b0-6Bf" secondAttribute="top" constant="47" id="QTq-rd-vCN"/>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="trailing" secondItem="ohH-Vt-Rnc" secondAttribute="trailing" id="QvE-Ug-meu"/>
                             <constraint firstItem="g8f-BM-GPE" firstAttribute="top" secondItem="HEU-va-7m7" secondAttribute="top" id="RzM-b0-H0p"/>
-                            <constraint firstItem="VyJ-ur-8M4" firstAttribute="centerX" secondItem="gDQ-y6-XSx" secondAttribute="centerX" id="SMz-9G-Hoh"/>
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="trailing" secondItem="g8f-BM-GPE" secondAttribute="trailing" id="Uys-IM-pKV"/>
                             <constraint firstItem="g8f-BM-GPE" firstAttribute="baseline" secondItem="oK7-Pr-SDv" secondAttribute="baseline" id="W7z-L4-YKJ"/>
-                            <constraint firstItem="gDQ-y6-XSx" firstAttribute="leading" secondItem="tNW-b0-6Bf" secondAttribute="leading" constant="-1" id="bEM-zi-mHL"/>
-                            <constraint firstItem="gDQ-y6-XSx" firstAttribute="top" secondItem="E0Z-rx-Lr1" secondAttribute="bottom" constant="8" symbolic="YES" id="exJ-Ye-jbl"/>
-                            <constraint firstAttribute="bottom" secondItem="gDQ-y6-XSx" secondAttribute="bottom" id="iFM-gM-VcT"/>
+                            <constraint firstAttribute="trailing" secondItem="AbX-pi-qyO" secondAttribute="trailing" id="Wvm-Mb-92L"/>
+                            <constraint firstAttribute="bottom" secondItem="AbX-pi-qyO" secondAttribute="bottom" id="akx-Sc-JFJ"/>
+                            <constraint firstItem="AbX-pi-qyO" firstAttribute="leading" secondItem="tNW-b0-6Bf" secondAttribute="leading" id="bbl-fu-CqG"/>
                             <constraint firstItem="WCO-I4-ifq" firstAttribute="leading" secondItem="oK7-Pr-SDv" secondAttribute="trailing" constant="27" id="nus-WI-NgQ"/>
                             <constraint firstItem="g8f-BM-GPE" firstAttribute="baseline" secondItem="WCO-I4-ifq" secondAttribute="baseline" id="rNu-fG-fgS"/>
                             <constraint firstItem="ohH-Vt-Rnc" firstAttribute="top" secondItem="VyJ-ur-8M4" secondAttribute="bottom" constant="8" symbolic="YES" id="sGF-dm-nuI"/>
@@ -391,6 +373,117 @@
                 <customObject id="kbW-Sk-0AF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885" y="-3"/>
+        </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="PZJ-v8-CVB">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="0" id="91e-Ka-Eif" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem identifier="" id="nvJ-T6-DgS"/>
+                        <tabViewItem identifier="" id="cxC-z4-fx4"/>
+                    </tabViewItems>
+                    <tabView key="tabView" wantsLayer="YES" canDrawConcurrently="YES" type="noTabsLineBorder" id="dX3-Cl-o1j">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.62311627538071068" green="0.057954700963632644" blue="0.11193756521667698" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="delegate" destination="91e-Ka-Eif" id="3ZY-d8-wvd"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="dX3-Cl-o1j" id="pmF-X5-6us"/>
+                        <segue destination="XPq-gT-6kf" kind="relationship" relationship="tabItems" id="cRK-nQ-Xje"/>
+                        <segue destination="fa1-Uj-duv" kind="relationship" relationship="tabItems" id="hqw-Jo-RCV"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="6Ql-7R-mRN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1427" y="-312"/>
+        </scene>
+        <!--Matching-->
+        <scene sceneID="PgX-hc-QoT">
+            <objects>
+                <viewController title="Matching" id="XPq-gT-6kf" customClass="TriggerMatchingViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="mv7-99-pcn">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="LPd-rF-ucy">
+                                <rect key="frame" x="66" y="206" width="239" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="radio" title="Match the whole line it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3NQ-Jd-vXn">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="dyR-hp-dw6"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="wzP-pY-zHH">
+                                <rect key="frame" x="66" y="184" width="248" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="radio" title="Match the whole word it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3XD-sY-ajW">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="x3m-D1-mih"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hld-43-s3m">
+                                <rect key="frame" x="66" y="228" width="213" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="radio" title="Match it exactly as it was found" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="uLm-es-uBp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="hpL-1i-IhC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="matchExactlyRadio" destination="Hld-43-s3m" id="TnF-n2-Prk"/>
+                        <outlet property="matchWholeLineRadio" destination="LPd-rF-ucy" id="uMc-0D-8L1"/>
+                        <outlet property="matchWholeWordRadio" destination="wzP-pY-zHH" id="w9m-e8-HGy"/>
+                    </connections>
+                </viewController>
+                <customObject id="TGy-JK-o83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1375" y="243"/>
+        </scene>
+        <!--Appearance-->
+        <scene sceneID="Wzy-ba-Qyo">
+            <objects>
+                <viewController title="Appearance" id="fa1-Uj-duv" customClass="TriggerAppearanceViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="WVj-5c-Uem">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7x-yf-cJG">
+                                <rect key="frame" x="356" y="20" width="76" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="appearance" id="Q9Y-T8-Ia0">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="5fG-B3-BlX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1872" y="243"/>
         </scene>
         <!--Events Split View Controller-->
         <scene sceneID="EQt-tl-cXn">

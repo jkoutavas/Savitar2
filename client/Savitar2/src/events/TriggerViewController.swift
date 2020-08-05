@@ -9,11 +9,35 @@
 import Cocoa
 import ReSwift
 
+protocol TriggerEditor : ReactionStoreSetter {
+    func setTrigger(_ trigger: Trigger)
+}
+
 class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
+    var appearanceViewController: TriggerAppearanceViewController?
+    var matchingViewController: TriggerMatchingViewController?
+
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        // Go off and find the view controllers for each tab
+        if segue.destinationController is NSTabViewController {
+            if let tabViewController = segue.destinationController as? NSTabViewController {
+                for tabViewItem in tabViewController.tabViewItems {
+                    if let tabVC = tabViewItem.viewController as? TriggerAppearanceViewController {
+                        appearanceViewController = tabVC
+                     } else if let tabVC = tabViewItem.viewController as? TriggerMatchingViewController {
+                        matchingViewController = tabVC
+                    }
+                }
+            }
+        }
+    }
+
     var store: ReactionsStore?
 
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
+        appearanceViewController?.setStore(reactionsStore: store)
+        matchingViewController?.setStore(reactionsStore: store)
     }
 
     override func viewWillAppear() {
@@ -31,6 +55,8 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
+            appearanceViewController?.setTrigger(trigger)
+            matchingViewController?.setTrigger(trigger)
             self.representedObject = TriggerController(trigger: trigger, store: store)
         } else {
             self.representedObject = nil
@@ -46,6 +72,25 @@ class TriggerController: NSController {
         get { trigger.name }
         set(name) {
             store?.dispatch(TriggerAction.rename(trigger.objectID, name: name))
+        }
+    }
+
+    @objc dynamic var activated: Bool {
+        // TODO: add a toggle action
+        get { trigger.enabled }
+        set(activated) {
+            if activated {
+                store?.dispatch(TriggerAction.enable(trigger.objectID))
+            } else {
+                store?.dispatch(TriggerAction.disable(trigger.objectID))
+            }
+        }
+    }
+
+    @objc dynamic var caseSensitive: Bool {
+        get { trigger.flags.contains(.caseSensitive) }
+        set(caseSensitive) {
+            print("toggle caseSensitive")
         }
     }
 

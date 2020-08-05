@@ -72,6 +72,8 @@
 		69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerViewController.swift */; };
 		69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278DA249FA1990058B067 /* DetailsTabViewController.swift */; };
 		69B5D58324B559B0002BBF5C /* Keycode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5D58224B559AF002BBF5C /* Keycode.swift */; };
+		69BAE50D24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */; };
+		69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -196,6 +198,8 @@
 		69B278D8249F824B0058B067 /* TriggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
 		69B278DA249FA1990058B067 /* DetailsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTabViewController.swift; sourceTree = "<group>"; };
 		69B5D58224B559AF002BBF5C /* Keycode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycode.swift; sourceTree = "<group>"; };
+		69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMatchingViewController.swift; sourceTree = "<group>"; };
+		69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -494,6 +498,8 @@
 				693944E924662F3F00931FA8 /* MacroTableDataSource.swift */,
 				69F629C224A8D9480067CAE8 /* MacroViewController.swift */,
 				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
+				69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */,
+				69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
 				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
 				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
@@ -811,6 +817,7 @@
 				69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */,
 				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
 				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
+				69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
 				696F77442390CFF2005E45EB /* aha.c in Sources */,
@@ -831,6 +838,7 @@
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,
 				693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */,
 				693944EC24662FF300931FA8 /* MacroViewModel.swift in Sources */,
+				69BAE50D24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift in Sources */,
 				693944E82466248C00931FA8 /* EventsTabController.swift in Sources */,
 				69CEEDE423BEDA9600E9F087 /* EventsViewController.swift in Sources */,
 				69CEEDE823C2C48C00E9F087 /* SavitarObject.swift in Sources */,
