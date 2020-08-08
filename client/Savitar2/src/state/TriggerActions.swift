@@ -41,6 +41,7 @@ enum TriggerAction: UndoableAction {
     case enable(SavitarObjectID)
     case disable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
+    case toggleCaseSensitive(SavitarObjectID, sensitive: Bool)
 
     // MARK: Undoable
 
@@ -51,11 +52,11 @@ enum TriggerAction: UndoableAction {
         case .enable: return "Enable Trigger"
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
+        case .toggleCaseSensitive: return "Change Case Sensitive"
         }
     }
 
     func inverse(context: UndoActionContext) -> UndoableAction? {
-
         switch self {
         case .enable(let triggerID):
             return TriggerAction.disable(triggerID)
@@ -64,6 +65,8 @@ enum TriggerAction: UndoableAction {
         case .rename(let triggerID, name: _):
             guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
             return TriggerAction.rename(triggerID, name: oldName)
+        case .toggleCaseSensitive(let triggerID, let sensitive):
+            return TriggerAction.toggleCaseSensitive(triggerID, sensitive: !sensitive)
         }
     }
 }

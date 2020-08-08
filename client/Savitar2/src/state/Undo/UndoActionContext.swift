@@ -12,5 +12,6 @@ protocol UndoActionContext {
     func macroName(macroID: SavitarObjectID) -> String?
     func macroKey(macroID: SavitarObjectID) -> HotKey?
     func macroValue(macroID: SavitarObjectID) -> String?
+    func triggerFlags(triggerID: SavitarObjectID) -> TrigFlags?
     func triggerName(triggerID: SavitarObjectID) -> String?
 }

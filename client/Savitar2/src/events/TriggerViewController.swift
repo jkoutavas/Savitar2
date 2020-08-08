@@ -76,7 +76,6 @@ class TriggerController: NSController {
     }
 
     @objc dynamic var activated: Bool {
-        // TODO: add a toggle action
         get { trigger.enabled }
         set(activated) {
             if activated {
@@ -88,9 +87,9 @@ class TriggerController: NSController {
     }
 
     @objc dynamic var caseSensitive: Bool {
-        get { trigger.flags.contains(.caseSensitive) }
+        get { trigger.caseSensitive }
         set(caseSensitive) {
-            print("toggle caseSensitive")
+            store?.dispatch(TriggerAction.toggleCaseSensitive(trigger.objectID, sensitive: caseSensitive))
         }
     }
 

@@ -59,6 +59,19 @@ class Trigger: SavitarObject, NSCopying {
     var voice: String?
     var wordEnding: String?
 
+    var caseSensitive: Bool {
+        get {
+            flags.contains(.caseSensitive)
+        }
+        set(sensitive) {
+            if sensitive {
+                flags.insert(.caseSensitive)
+            } else {
+                flags.remove(.caseSensitive)
+            }
+        }
+    }
+
     var enabled: Bool {
         get {
             !flags.contains(.disabled)

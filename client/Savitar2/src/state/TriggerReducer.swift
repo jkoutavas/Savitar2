@@ -33,6 +33,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     case let .rename(triggerID, name: name):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.name = name
+
+    case let .toggleCaseSensitive(triggerID, sensitive: sensitive):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.caseSensitive = sensitive
     }
 
     return trigger
