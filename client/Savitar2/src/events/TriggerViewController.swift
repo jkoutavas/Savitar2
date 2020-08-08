@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-protocol TriggerEditor : ReactionStoreSetter {
+protocol TriggerEditor: ReactionStoreSetter {
     func setTrigger(_ trigger: Trigger)
 }
 

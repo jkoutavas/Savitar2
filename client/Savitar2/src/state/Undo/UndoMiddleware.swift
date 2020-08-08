@@ -10,7 +10,6 @@ import Foundation
 import ReSwift
 
 class UndoableStateAdapter: UndoActionContext {
-
     let state: ReactionsState
 
     init(reactionsState: ReactionsState) {
