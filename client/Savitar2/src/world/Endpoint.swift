@@ -56,10 +56,10 @@ class Endpoint: NSObject, StreamDelegate {
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
-                                 world.host as CFString,
-                                 world.port,
-                                 &readStream,
-                                 &writeStream)
+                                           world.host as CFString,
+                                           world.port,
+                                           &readStream,
+                                           &writeStream)
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
 
@@ -82,15 +82,15 @@ class Endpoint: NSObject, StreamDelegate {
     }
 
     func sendData(data: Data) {
-         _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
-             let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
-             outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
+        _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+            let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+            outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
         }
     }
 
     func sendString(string: String) {
         sendData(data: string.data(using: .utf8)!)
-     }
+    }
 
     private func process(buffer: [UInt8]) -> Data {
         var data = Data()
@@ -143,11 +143,11 @@ class Endpoint: NSObject, StreamDelegate {
     private func processTriggers(inputLine: String, triggers: [Trigger]) -> String {
         var line = inputLine
 
-         // Handle trigger reactions. Often it'll result in a modification of the line, so let's
-         // process triggers in this order:
-         //    1. gagging triggers
-         //    2. subsitution triggers
-         //    3. all the rest
+        // Handle trigger reactions. Often it'll result in a modification of the line, so let's
+        // process triggers in this order:
+        //    1. gagging triggers
+        //    2. subsitution triggers
+        //    3. all the rest
         var processedTriggers: [Trigger] = []
         for trigger in triggers {
             if !trigger.enabled {

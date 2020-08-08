@@ -24,7 +24,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
                 for tabViewItem in tabViewController.tabViewItems {
                     if let tabVC = tabViewItem.viewController as? TriggerAppearanceViewController {
                         appearanceViewController = tabVC
-                     } else if let tabVC = tabViewItem.viewController as? TriggerMatchingViewController {
+                    } else if let tabVC = tabViewItem.viewController as? TriggerMatchingViewController {
                         matchingViewController = tabVC
                     }
                 }

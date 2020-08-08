@@ -45,7 +45,7 @@ extension NSColor {
     func formOnBGColorANSICode() -> String {
         let rgb = self.toIntArray()
         return rgb.count >= 3 ? ";48:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
-     }
+    }
 
     func formOffBGColorANSICode() -> String {
         return ";49" // default background color
@@ -104,7 +104,7 @@ extension TrigFace: StrOptionSet {
         (.underline, "underline"),
         (.blink, "blink"),
         (.inverse, "inverse")
-    ]}
+        ]}
     static var labelDict: [String: Self] { return [
         "normal": .normal,
         "bold": .bold,
@@ -112,7 +112,7 @@ extension TrigFace: StrOptionSet {
         "underline": .underline,
         "blink": .blink,
         "inverse": inverse
-    ]}
+        ]}
 }
 
 struct TrigTextStyle: Equatable {

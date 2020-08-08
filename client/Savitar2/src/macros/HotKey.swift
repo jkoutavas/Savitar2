@@ -125,8 +125,8 @@ struct HotKey: Equatable {
     }
 
     static func isPrintable(_ chars: String) -> Bool {
-      let utf8View = chars.utf8
-      return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+        let utf8View = chars.utf8
+        return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
     }
 
     func toString() -> String {
@@ -150,29 +150,29 @@ struct HotKey: Equatable {
         case [.command]:
             modifierLabel = "command-"
         case [.control, .shift]:
-           modifierLabel = "control-shift-"
+            modifierLabel = "control-shift-"
         case [.option, .shift]:
-           modifierLabel = "option-shift-"
+            modifierLabel = "option-shift-"
         case [.command, .shift]:
-           modifierLabel = "command-shift-"
+            modifierLabel = "command-shift-"
         case [.control, .option]:
-           modifierLabel = "control-option-"
+            modifierLabel = "control-option-"
         case [.control, .command]:
-           modifierLabel = "control-command-"
+            modifierLabel = "control-command-"
         case [.option, .command]:
-           modifierLabel = "option-command-"
+            modifierLabel = "option-command-"
         case [.shift, .control, .option]:
-           modifierLabel = "shift-control-option-"
+            modifierLabel = "shift-control-option-"
         case [.shift, .control, .command]:
-           modifierLabel = "shift-control-command-"
+            modifierLabel = "shift-control-command-"
         case [.control, .option, .command]:
-           modifierLabel = "control-option-command-"
+            modifierLabel = "control-option-command-"
         case [.shift, .command, .option]:
-           modifierLabel = "shift-command-option-"
+            modifierLabel = "shift-command-option-"
         case [.shift, .control, .option, .command]:
-           modifierLabel = "shift-control-option-command"
+            modifierLabel = "shift-control-option-command"
         default:
-           modifierLabel = ""
+            modifierLabel = ""
         }
 
         return "\(modifierLabel)\(keyLabel)"

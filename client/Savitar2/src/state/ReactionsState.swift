@@ -27,7 +27,7 @@ struct ItemListState<T>: StateType {
 
     func item(objectID: SavitarObjectID) -> T? {
         guard let index = indexOf(objectID: objectID)
-        else { return nil }
+            else { return nil }
 
         return items[index]
     }
@@ -55,7 +55,7 @@ func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState 
             triggerList.items = triggerList.items.compactMap { triggerReducer(action, state: $0) }
             state.triggerList = triggerList
         }
-        
+
         return state
     }
 }
@@ -78,8 +78,8 @@ func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> Reacti
         reducer: reactionsReducer,
         state: nil,
         middleware: [
-//            removeIdempotentActionsMiddleware,
-//            loggingMiddleware,
+            //            removeIdempotentActionsMiddleware,
+            //            loggingMiddleware,
             undoMiddleware(undoManagerProvider: undoManagerProvider)
         ]
     )

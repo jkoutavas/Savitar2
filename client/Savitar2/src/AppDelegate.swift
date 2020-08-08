@@ -6,10 +6,10 @@
 //  Copyright © 2017 Heynow Software. All rights reserved.
 //
 
-import Cocoa
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import Cocoa
 
 var isRunningTests: Bool {
     return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
@@ -17,23 +17,22 @@ var isRunningTests: Bool {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         if isRunningTests {
             return
         }
 
         MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
-          MSAnalytics.self,
-          MSCrashes.self
+            MSAnalytics.self,
+            MSCrashes.self
         ])
 
         do {
             try AppContext.load()
         } catch {}
-     }
+    }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
+    func applicationWillTerminate(_: Notification) {
         if isRunningTests {
             return
         }
@@ -43,11 +42,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } catch {}
     }
 
-    func applicationOpenUntitledFile(_ sender: NSApplication) -> Bool {
+    func applicationOpenUntitledFile(_: NSApplication) -> Bool {
         return true
     }
 
-    @IBAction func showEventsWindowAction(_ sender: Any) {
+    @IBAction func showEventsWindowAction(_: Any) {
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
         guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {

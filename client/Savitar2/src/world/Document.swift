@@ -69,7 +69,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
             guard let svc = splitViewController else { return }
             guard let outputVC = svc.outputViewController else { return }
             outputVC.output(string: string)
-         }
+        }
 
         var attributes = [NSAttributedString.Key: AnyObject]()
         attributes[NSAttributedString.Key.font] = NSFont(name: world.fontName, size: world.fontSize)

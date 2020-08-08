@@ -96,7 +96,7 @@ class TriggerManTests: XCTestCase {
 
         XCTAssertEqual(tm.get()[0].name, "$$d $$h:$$m:$$s 2000 CDT ")
         // TODO: the following tests fails due to an XMLParser bug. See comments in SwiftyXMLParserTests
-//        XCTAssertEqual(tm.get()[0].reply, "##set status output %%h:%%m:%%s ")
+        //        XCTAssertEqual(tm.get()[0].reply, "##set status output %%h:%%m:%%s ")
 
         XCTAssertEqual(tm.get()[1].name, "^kira")
 

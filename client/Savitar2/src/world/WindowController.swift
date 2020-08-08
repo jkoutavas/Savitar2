@@ -78,7 +78,7 @@ class WindowController: NSWindowController {
         })
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
-            comment: "Change World Settings"))
+                                                         comment: "Change World Settings"))
 
         doc.world = fromWorld
         self.updateViews(fromWorld)

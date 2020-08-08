@@ -12,22 +12,22 @@ import SwiftyXMLParser
 let PreferencesElemIdentifier = "PREFERENCES"
 
 struct PrefsFlags: OptionSet {
-   let rawValue: Int
+    let rawValue: Int
 
-   static let commandEcho = PrefsFlags(rawValue: 1 << 0)
-   static let startupPicker = PrefsFlags(rawValue: 1 << 1)
-   static let muteSound = PrefsFlags(rawValue: 1 << 2)
-   static let muteSpeaking = PrefsFlags(rawValue: 1 << 3)
-   static let muteClicker = PrefsFlags(rawValue: 1 << 4)
-   static let muteBell = PrefsFlags(rawValue: 1 << 5)
-   static let startupClicker = PrefsFlags(rawValue: 1 << 6)
-   static let useKeypad = PrefsFlags(rawValue: 1 << 7)
-   static let trigsClosed = PrefsFlags(rawValue: 1 << 8)
-   static let varsClosed = PrefsFlags(rawValue: 1 << 9)
-   static let debug = PrefsFlags(rawValue: 1 << 10)
-   static let monoFontsOnly = PrefsFlags(rawValue: 1 << 11)
-   static let defaultWordWrap = PrefsFlags(rawValue: 1 << 12)
-   static let dontWarnPicker = PrefsFlags(rawValue: 1 << 13)
+    static let commandEcho = PrefsFlags(rawValue: 1 << 0)
+    static let startupPicker = PrefsFlags(rawValue: 1 << 1)
+    static let muteSound = PrefsFlags(rawValue: 1 << 2)
+    static let muteSpeaking = PrefsFlags(rawValue: 1 << 3)
+    static let muteClicker = PrefsFlags(rawValue: 1 << 4)
+    static let muteBell = PrefsFlags(rawValue: 1 << 5)
+    static let startupClicker = PrefsFlags(rawValue: 1 << 6)
+    static let useKeypad = PrefsFlags(rawValue: 1 << 7)
+    static let trigsClosed = PrefsFlags(rawValue: 1 << 8)
+    static let varsClosed = PrefsFlags(rawValue: 1 << 9)
+    static let debug = PrefsFlags(rawValue: 1 << 10)
+    static let monoFontsOnly = PrefsFlags(rawValue: 1 << 11)
+    static let defaultWordWrap = PrefsFlags(rawValue: 1 << 12)
+    static let dontWarnPicker = PrefsFlags(rawValue: 1 << 13)
 }
 
 class AppPreferences: SavitarXMLProtocol {
@@ -51,7 +51,7 @@ class AppPreferences: SavitarXMLProtocol {
     var colorMan = ColorMan()
 
     init() {
-        self.version = latestPrefsVersion
+        version = latestPrefsVersion
     }
 
     func load() throws {
@@ -63,7 +63,7 @@ class AppPreferences: SavitarXMLProtocol {
 
         // Try to load v2 preferences, if any.
         do {
-             // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
+            // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
             let xmlStr = try String(contentsOfFile: NSString(string: v2PrefsPath).expandingTildeInPath)
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
@@ -97,14 +97,14 @@ class AppPreferences: SavitarXMLProtocol {
 
             globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
             globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
-         } catch {
+        } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.
         }
     }
 
     func save() throws {
-        let xmlOutputStr = try self.toXMLElement().xmlString.prettyXMLFormat()
+        let xmlOutputStr = try toXMLElement().xmlString.prettyXMLFormat()
 
         // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
         let filename = NSString(string: v2PrefsPath).expandingTildeInPath
@@ -117,9 +117,11 @@ class AppPreferences: SavitarXMLProtocol {
         }
     }
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     enum PrefsAttribIdentifier: String {
         case version = "VERSION"
@@ -175,22 +177,22 @@ class AppPreferences: SavitarXMLProtocol {
         version = latestPrefsVersion
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.version.rawValue,
-            stringValue: "\(version)")
+                               stringValue: "\(version)")
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechEnabled.rawValue,
-            stringValue: continuousSpeechEnabled ? "TRUE" : "FALSE")
+                               stringValue: continuousSpeechEnabled ? "TRUE" : "FALSE")
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechRate.rawValue,
-            stringValue: "\(continuousSpeechRate)")
+                               stringValue: "\(continuousSpeechRate)")
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.flags.rawValue,
-            stringValue: flags.description)
+                               stringValue: flags.description)
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.lastUpdateCheck.rawValue,
-            stringValue: "\(lastUpdateSecs)")
+                               stringValue: "\(lastUpdateSecs)")
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.updatingEnabled.rawValue,
-            stringValue: updatingEnabled ? "TRUE" : "FALSE")
+                               stringValue: updatingEnabled ? "TRUE" : "FALSE")
 
         let worldsElem = try worldMan.toXMLElement()
         if worldsElem.childCount > 0 {
@@ -212,7 +214,7 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(colorsElem)
         }
 
-         return prefsElem
+        return prefsElem
     }
 }
 
@@ -233,7 +235,7 @@ extension PrefsFlags: StrOptionSet {
         (.monoFontsOnly, "monoFontsOnly"),
         (.defaultWordWrap, "defaultWordWrap"),
         (.dontWarnPicker, "dontWarnPicker")
-    ]}
+        ] }
     static var labelDict: [String: Self] { return [
         "commandEcho": .commandEcho,
         "startupPicker": .startupPicker,
@@ -249,5 +251,5 @@ extension PrefsFlags: StrOptionSet {
         "monoFontsOnly": .monoFontsOnly,
         "defaultWordWrap": .defaultWordWrap,
         "dontWarnPicker": .dontWarnPicker
-    ]}
+        ] }
 }

@@ -9,21 +9,17 @@
 import Foundation
 
 struct SavitarObjectID {
-
     let identifier: String
 
     init() {
-
-        self.identifier = UUID().uuidString
+        identifier = UUID().uuidString
     }
 
     init(UUID: Foundation.UUID) {
-
-        self.identifier = UUID.uuidString
+        identifier = UUID.uuidString
     }
 
     init?(identifier: String) {
-
         guard let UUID = UUID(uuidString: identifier) else {
             return nil
         }
@@ -32,16 +28,14 @@ struct SavitarObjectID {
     }
 }
 
-extension SavitarObjectID: Equatable { }
+extension SavitarObjectID: Equatable {}
 
 func == (lhs: SavitarObjectID, rhs: SavitarObjectID) -> Bool {
-
     return lhs.identifier == rhs.identifier
 }
 
-extension SavitarObjectID: Hashable { }
+extension SavitarObjectID: Hashable {}
 
 extension SavitarObjectID: CustomStringConvertible {
-
     var description: String { return identifier }
 }

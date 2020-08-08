@@ -28,7 +28,7 @@ class EventsSplitViewController: NSSplitViewController {
         super.viewDidLoad()
 
         if let eventsViewController = children.first as? EventsViewController,
-           let detailViewController = children.last as? DetailsTabViewController {
+            let detailViewController = children.last as? DetailsTabViewController {
             self.eventsViewController = eventsViewController
             self.detailViewController = detailViewController
         }

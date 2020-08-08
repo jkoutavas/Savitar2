@@ -42,7 +42,7 @@ class InputViewController: ViewController {
     func myKeyDown(with event: NSEvent) -> Bool {
         // handle keyDown only if current window has focus, i.e. is keyWindow
         guard let locWindow = self.view.window,
-           NSApplication.shared.keyWindow === locWindow else { return false }
+            NSApplication.shared.keyWindow === locWindow else { return false }
 
         guard let ep = self.endpoint else { return false }
         if ep.expandKeypress(with: event) { return true }

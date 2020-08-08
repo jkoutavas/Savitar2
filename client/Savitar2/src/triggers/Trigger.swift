@@ -40,7 +40,7 @@ struct TrigFlags: OptionSet {
     static let dontUseStyle = TrigFlags(rawValue: 1 << 9)
     static let useSubstitution = TrigFlags(rawValue: 1 << 10)
     static let useRegex = TrigFlags(rawValue: 1 << 11)
- }
+}
 
 class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
@@ -103,7 +103,7 @@ class Trigger: SavitarObject, NSCopying {
         self.type = trigger.type
         self.voice = trigger.voice
         self.wordEnding = trigger.wordEnding
-     }
+    }
 
     init(name: String? = nil,
          audio: AudioType? = nil,
@@ -189,7 +189,7 @@ class Trigger: SavitarObject, NSCopying {
             pos = range.upperBound
         }
         if pos < line.endIndex {
-             resultLine += line[pos..<line.endIndex]
+            resultLine += line[pos..<line.endIndex]
         }
         return resultLine
     }
@@ -284,7 +284,7 @@ class Trigger: SavitarObject, NSCopying {
             case TriggerAttribIdentifier.name.rawValue:
                 self.name = attribute.value
             case TriggerAttribIdentifier.sound.rawValue:
-                 self.sound = attribute.value
+                self.sound = attribute.value
             case TriggerAttribIdentifier.type.rawValue:
                 if let type = typeLabels[attribute.value] {
                     self.type = type
@@ -299,21 +299,21 @@ class Trigger: SavitarObject, NSCopying {
         }
 
         if let text = xml[ReplyElemIdentifier].text {
-             self.reply = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.reply = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[SayElemIdentifier].text {
-             self.say = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.say = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[SubsitutionElemIdentifier].text {
-             self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         } else if let text = xml[SubstitutionElemIdentifier].text {
             self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[WordEndElemIdentifier].text {
-             self.wordEnding = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.wordEnding = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
@@ -328,7 +328,7 @@ class Trigger: SavitarObject, NSCopying {
 
         trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue, stringValue: self.flags.description)
 
-         if let value = self.wordEnding {
+        if let value = self.wordEnding {
             trigElem.addChild(
                 XMLElement.init(name: WordEndElemIdentifier, stringValue: value))
         }
@@ -386,7 +386,7 @@ extension TrigFlags: StrOptionSet {
         (.dontUseStyle, "dontUseStyle"),
         (.useSubstitution, "useSubstitution"), // Note: new label correct spelling for v2
         (.useRegex, "useRegex")
-    ]}
+        ]}
     static var labelDict: [String: Self] { return [
         "matchExactly": .exact,
         "matchToEndOfWord": .toEndOfWord,
@@ -401,5 +401,5 @@ extension TrigFlags: StrOptionSet {
         "useSubstitution": .useSubstitution, // Note: new v2.0 correctly spelled label
         "useSubsitution": .useSubstitution, // Note: old (misspelled) v1.0 label
         "useRegex": .useRegex
-    ]}
+        ]}
 }

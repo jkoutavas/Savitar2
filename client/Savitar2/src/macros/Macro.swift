@@ -69,7 +69,7 @@ class Macro: SavitarObject {
         }
 
         if let text = xml[ValueElemIdentifier].text {
-             self.value = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.value = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
@@ -100,6 +100,6 @@ class Macro: SavitarObject {
     func isHotKey(forEvent event: NSEvent) -> Bool {
         return enabled && hotKey.keyCode == event.keyCode &&
             hotKey.modifierFlags.intersection(.deviceIndependentFlagsMask) ==
-             event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+            event.modifierFlags.intersection(.deviceIndependentFlagsMask)
     }
 }
