@@ -168,17 +168,16 @@
                                     <constraint firstAttribute="width" constant="410" id="jg1-Qb-t6S"/>
                                     <constraint firstAttribute="height" constant="24" id="sDK-Xe-hjB"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="lyn-zF-P5i">
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="PCe-Bo-jnY">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
@@ -227,17 +226,16 @@
                                     <constraint firstAttribute="height" constant="24" id="9yC-zf-Qbq"/>
                                     <constraint firstAttribute="width" constant="410" id="xtu-dn-BIz"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="VSx-Wa-gD9">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="VSx-Wa-gD9">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="AOM-Z6-cCo">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="dU7-vc-I0b">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
@@ -248,17 +246,16 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="132" id="Jxe-Rg-Ete"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="value" drawsBackground="YES" usesSingleLineMode="YES" id="hPw-QC-ylQ">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="value" drawsBackground="YES" usesSingleLineMode="YES" id="hPw-QC-ylQ">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="Xx2-MT-A7F">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="LRV-sn-bia">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
@@ -376,7 +373,7 @@
             <objects>
                 <tabViewController selectedTabViewItemIndex="0" id="91e-Ka-Eif" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem identifier="" id="nvJ-T6-DgS"/>
+                        <tabViewItem label="Matching" identifier="" id="nvJ-T6-DgS"/>
                         <tabViewItem identifier="" id="cxC-z4-fx4"/>
                     </tabViewItems>
                     <tabView key="tabView" wantsLayer="YES" canDrawConcurrently="YES" type="noTabsLineBorder" id="dX3-Cl-o1j">
@@ -457,18 +454,17 @@
                                     <constraint firstAttribute="height" constant="24" id="5Ti-U4-onr"/>
                                     <constraint firstAttribute="width" constant="126" id="luN-Vt-n8o"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="ioy-02-a8x">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="ioy-02-a8x">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useWordEnding" id="OsN-mm-0bg"/>
-                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="41R-Cw-oRS">
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="l7a-5d-bZU">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
@@ -490,18 +486,17 @@
                                     <constraint firstAttribute="height" constant="44" id="KNw-el-FQ0"/>
                                     <constraint firstAttribute="width" constant="342" id="aPF-qN-mSf"/>
                                 </constraints>
-                                <textFieldCell key="cell" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="SRM-7S-wLf">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="SRM-7S-wLf">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
-                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="8mW-xu-hfv">
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="epg-Xd-jSa">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
