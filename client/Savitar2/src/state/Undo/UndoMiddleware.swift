@@ -32,12 +32,16 @@ class UndoableStateAdapter: UndoActionContext {
         return state.triggerList.item(objectID: triggerID)?.matching
     }
 
-    func triggerWordEnding(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.wordEnding
-    }
-
     func triggerName(triggerID: SavitarObjectID) -> String? {
         return state.triggerList.item(objectID: triggerID)?.name
+    }
+
+    func triggerSubstitution(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.substitution
+    }
+
+    func triggerWordEnding(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.wordEnding
     }
 }
 

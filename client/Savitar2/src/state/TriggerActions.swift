@@ -42,8 +42,10 @@ enum TriggerAction: UndoableAction {
     case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
     case setMatching(SavitarObjectID, matching: TriggerMatching)
+    case setSubstitution(SavitarObjectID, substitution: String)
     case setWordEnding(SavitarObjectID, wordEnding: String)
-    case toggleCaseSensitive(SavitarObjectID, sensitive: Bool)
+    case toggleCaseSensitive(SavitarObjectID)
+    case toggleUseSubstitution(SavitarObjectID)
 
     // MARK: Undoable
 
@@ -55,33 +57,43 @@ enum TriggerAction: UndoableAction {
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
         case .setMatching: return "Change Trigger Matching"
+        case .setSubstitution: return "Change Trigger Substitution"
         case .setWordEnding: return "Change Trigger Word Ending"
         case .toggleCaseSensitive: return "Change Trigger Case Sensitive"
+        case .toggleUseSubstitution: return "Change Trigger Use Substitution"
         }
     }
 
     func inverse(context: UndoActionContext) -> UndoableAction? {
         switch self {
-        case .disable(let triggerID):
+        case let .disable(triggerID):
             return TriggerAction.enable(triggerID)
 
-        case .enable(let triggerID):
+        case let .enable(triggerID):
             return TriggerAction.disable(triggerID)
 
-        case .rename(let triggerID, name: _):
-            guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
-            return TriggerAction.rename(triggerID, name: oldName)
+        case let .rename(triggerID, name: _):
+            guard let prev = context.triggerName(triggerID: triggerID) else { return nil }
+            return TriggerAction.rename(triggerID, name: prev)
 
-        case .setMatching(let triggerID, matching: _):
-            guard let oldMatching = context.triggerMatching(triggerID: triggerID) else { return nil }
-            return TriggerAction.setMatching(triggerID, matching: oldMatching)
+        case let .setMatching(triggerID, matching: _):
+            guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }
+            return TriggerAction.setMatching(triggerID, matching: prev)
 
-        case .setWordEnding(let triggerID, wordEnding: _):
-            guard let oldWordEnding = context.triggerWordEnding(triggerID: triggerID) else { return nil }
-            return TriggerAction.setWordEnding(triggerID, wordEnding: oldWordEnding)
+        case let .setSubstitution(triggerID, substitution: _):
+            guard let prev = context.triggerSubstitution(triggerID: triggerID) else { return nil }
+            return TriggerAction.setSubstitution(triggerID, substitution: prev)
 
-        case .toggleCaseSensitive(let triggerID, let sensitive):
-            return TriggerAction.toggleCaseSensitive(triggerID, sensitive: !sensitive)
+        case let .setWordEnding(triggerID, wordEnding: _):
+            guard let prev = context.triggerWordEnding(triggerID: triggerID) else { return nil }
+            return TriggerAction.setWordEnding(triggerID, wordEnding: prev)
+
+        case let .toggleCaseSensitive(triggerID):
+            return TriggerAction.toggleCaseSensitive(triggerID)
+
+        case let .toggleUseSubstitution(triggerID):
+            return TriggerAction.toggleUseSubstitution(triggerID)
+
         }
     }
 }

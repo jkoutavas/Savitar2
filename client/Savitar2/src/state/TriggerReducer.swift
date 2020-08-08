@@ -38,13 +38,21 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
 
+    case let .setSubstitution(triggerID, substitution: substitution):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.substitution = substitution
+
     case let .setWordEnding(triggerID, wordEnding: wordEnding):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.wordEnding = wordEnding
 
-    case let .toggleCaseSensitive(triggerID, sensitive: sensitive):
+    case let .toggleCaseSensitive(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
-        trigger.caseSensitive = sensitive
+        trigger.caseSensitive = !trigger.caseSensitive
+
+    case let .toggleUseSubstitution(triggerID):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.useSubstitution = !trigger.useSubstitution
     }
 
     return trigger

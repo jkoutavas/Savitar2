@@ -88,7 +88,9 @@ class TriggerController: NSController {
     @objc dynamic var caseSensitive: Bool {
         get { trigger.caseSensitive }
         set(caseSensitive) {
-            store?.dispatch(TriggerAction.toggleCaseSensitive(trigger.objectID, sensitive: caseSensitive))
+            if trigger.caseSensitive != caseSensitive {
+                store?.dispatch(TriggerAction.toggleCaseSensitive(trigger.objectID))
+            }
         }
     }
 

@@ -13,8 +13,6 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
     @IBOutlet var matchExactlyRadio: NSButton!
     @IBOutlet var matchWholeLineRadio: NSButton!
     @IBOutlet var matchWholeWordRadio: NSButton!
-    @IBOutlet var endOfWordPrompt: NSTextField!
-    @IBOutlet var endOfWordEdit: NSTextField!
 
     var trigger: Trigger?
     var store: ReactionsStore?
@@ -46,17 +44,6 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
         }
     }
 
-    @objc dynamic var wordEnding: String {
-        get {
-            guard let trig = self.trigger, let wordEnding = trig.wordEnding else { return "" }
-            return wordEnding
-        }
-        set(wordEnding) {
-            guard let trig = self.trigger else { return }
-            store?.dispatch(TriggerAction.setWordEnding(trig.objectID, wordEnding: wordEnding))
-        }
-    }
-
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
@@ -68,13 +55,60 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
             } else if trigger.matchesWholeWord {
                 matchWholeWordRadio.state = .on
             }
-            endOfWordPrompt.textColor = trigger.matchesWholeWord ? NSColor.black : NSColor.gray
-            endOfWordEdit.isEnabled = trigger.matchesWholeWord
-            if let wordEnding = trigger.wordEnding {
-                endOfWordEdit.stringValue = wordEnding
-            } else {
-                endOfWordEdit.stringValue = ""
+            self.representedObject = TriggerMatchingController(trigger: trigger, store: store)
+        } else {
+            self.representedObject = nil
+        }
+    }
+}
+
+class TriggerMatchingController: NSController {
+    var trigger: Trigger
+    var store: ReactionsStore?
+
+    @objc dynamic var substitution: String {
+        get {
+            return trigger.substitution ?? ""
+        }
+        set(substitution) {
+            store?.dispatch(TriggerAction.setSubstitution(trigger.objectID, substitution: substitution))
+        }
+    }
+
+    @objc dynamic var useSubstitution: Bool {
+        get {
+            return trigger.useSubstitution
+        }
+        set(useSubstitution) {
+            if trigger.useSubstitution != useSubstitution {
+                store?.dispatch(TriggerAction.toggleUseSubstitution(trigger.objectID))
             }
         }
+    }
+
+    @objc dynamic var useWordEnding: Bool {
+        get {
+            return trigger.matchesWholeWord
+        }
+    }
+
+    @objc dynamic var wordEnding: String {
+        get {
+            return trigger.wordEnding ?? ""
+        }
+        set(wordEnding) {
+             store?.dispatch(TriggerAction.setWordEnding(trigger.objectID, wordEnding: wordEnding))
+        }
+    }
+
+    init(trigger: Trigger, store: ReactionsStore?) {
+        self.trigger = trigger
+        self.store = store
+
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

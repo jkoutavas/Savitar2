@@ -156,6 +156,12 @@
                                     <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.caseSensitive" id="pAQ-en-89h"/>
                                 </connections>
                             </button>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AbX-pi-qyO">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="143"/>
+                                <connections>
+                                    <segue destination="91e-Ka-Eif" kind="embed" id="Lom-7I-BPx"/>
+                                </connections>
+                            </containerView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VyJ-ur-8M4">
                                 <rect key="frame" x="20" y="179" width="410" height="24"/>
                                 <constraints>
@@ -168,7 +174,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="xRC-cD-OnX">
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="lyn-zF-P5i">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -178,12 +184,6 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AbX-pi-qyO">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="143"/>
-                                <connections>
-                                    <segue destination="91e-Ka-Eif" kind="embed" id="Lom-7I-BPx"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="AbX-pi-qyO" firstAttribute="top" secondItem="E0Z-rx-Lr1" secondAttribute="bottom" constant="14" id="1F1-GF-EI5"/>
@@ -233,7 +233,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="39Q-YZ-XTo">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="AOM-Z6-cCo">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -254,7 +254,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="T6s-dm-fgz">
+                                    <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="Xx2-MT-A7F">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -397,10 +397,10 @@
             </objects>
             <point key="canvasLocation" x="1427" y="-312"/>
         </scene>
-        <!--Matching-->
+        <!--Trigger Matching View Controller-->
         <scene sceneID="PgX-hc-QoT">
             <objects>
-                <viewController title="Matching" id="XPq-gT-6kf" customClass="TriggerMatchingViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XPq-gT-6kf" customClass="TriggerMatchingViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="mv7-99-pcn">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -463,7 +463,41 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="XPq-gT-6kf" name="value" keyPath="wordEnding" id="lui-fE-jqH">
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useWordEnding" id="OsN-mm-0bg"/>
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="41R-Cw-oRS">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1tg-UD-t8b">
+                                <rect key="frame" x="64" y="105" width="180" height="18"/>
+                                <buttonCell key="cell" type="check" title="Substitute it with this text:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7le-a8-lP3">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.useSubstitution" id="XaN-ad-B57"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BbI-N8-uCd">
+                                <rect key="frame" x="88" y="55" width="342" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="KNw-el-FQ0"/>
+                                    <constraint firstAttribute="width" constant="342" id="aPF-qN-mSf"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="SRM-7S-wLf">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="8mW-xu-hfv">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -481,24 +515,28 @@
                             <constraint firstItem="wzP-pY-zHH" firstAttribute="leading" secondItem="mv7-99-pcn" secondAttribute="leading" constant="67" id="DiM-Pl-IpI"/>
                             <constraint firstItem="LPd-rF-ucy" firstAttribute="top" secondItem="Hld-43-s3m" secondAttribute="bottom" constant="6" symbolic="YES" id="FPC-EH-mZQ"/>
                             <constraint firstItem="RRv-gm-cxw" firstAttribute="leading" secondItem="mv7-99-pcn" secondAttribute="leading" constant="88" id="HXb-Ps-9QP"/>
+                            <constraint firstItem="1tg-UD-t8b" firstAttribute="centerX" secondItem="yN4-gP-VdU" secondAttribute="centerX" id="IGC-5l-aIc"/>
                             <constraint firstItem="wzP-pY-zHH" firstAttribute="leading" secondItem="LPd-rF-ucy" secondAttribute="leading" id="Jox-by-pAE"/>
                             <constraint firstItem="RRv-gm-cxw" firstAttribute="centerX" secondItem="mv7-99-pcn" secondAttribute="centerX" id="L9Q-Kg-5Xu"/>
                             <constraint firstItem="Hld-43-s3m" firstAttribute="top" secondItem="Bc7-VL-NYE" secondAttribute="bottom" constant="8" symbolic="YES" id="QkA-Vx-vcp"/>
                             <constraint firstItem="yN4-gP-VdU" firstAttribute="top" secondItem="mv7-99-pcn" secondAttribute="top" constant="147" id="WHg-zn-wwh"/>
+                            <constraint firstItem="BbI-N8-uCd" firstAttribute="top" secondItem="1tg-UD-t8b" secondAttribute="bottom" constant="8" id="Xdu-LC-ycQ"/>
                             <constraint firstItem="wzP-pY-zHH" firstAttribute="top" secondItem="LPd-rF-ucy" secondAttribute="bottom" constant="6" symbolic="YES" id="cwW-2X-5CW"/>
                             <constraint firstItem="RRv-gm-cxw" firstAttribute="top" secondItem="wzP-pY-zHH" secondAttribute="bottom" constant="8" symbolic="YES" id="iXG-4h-DJz"/>
+                            <constraint firstItem="1tg-UD-t8b" firstAttribute="top" secondItem="yN4-gP-VdU" secondAttribute="bottom" constant="8" symbolic="YES" id="jYc-8L-vbf"/>
+                            <constraint firstItem="1tg-UD-t8b" firstAttribute="leading" secondItem="mv7-99-pcn" secondAttribute="leading" constant="66" id="t8o-md-nY6"/>
                             <constraint firstItem="yN4-gP-VdU" firstAttribute="leading" secondItem="mv7-99-pcn" secondAttribute="leading" constant="91" id="uJN-qV-KG3"/>
+                            <constraint firstItem="BbI-N8-uCd" firstAttribute="leading" secondItem="mv7-99-pcn" secondAttribute="leading" constant="88" id="z31-5H-pYi"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="endOfWordEdit" destination="yN4-gP-VdU" id="vuu-IQ-ZP1"/>
-                        <outlet property="endOfWordPrompt" destination="RRv-gm-cxw" id="BH2-be-gkb"/>
                         <outlet property="matchExactlyRadio" destination="Hld-43-s3m" id="TnF-n2-Prk"/>
                         <outlet property="matchWholeLineRadio" destination="LPd-rF-ucy" id="uMc-0D-8L1"/>
                         <outlet property="matchWholeWordRadio" destination="wzP-pY-zHH" id="w9m-e8-HGy"/>
                     </connections>
                 </viewController>
                 <customObject id="TGy-JK-o83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="Ium-kb-vb0"/>
             </objects>
             <point key="canvasLocation" x="1375" y="243"/>
         </scene>
@@ -633,7 +671,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -666,7 +704,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -792,7 +830,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -825,7 +863,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">

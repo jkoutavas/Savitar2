@@ -150,6 +150,15 @@ class Trigger: SavitarObject, NSCopying {
         }
     }
 
+    var useSubstitution: Bool {
+        get {
+            flags.contains(.useSubstitution)
+        }
+        set (useSubstitution) {
+            setFlag(flag: .useSubstitution, on: useSubstitution)
+        }
+    }
+
     func copy(with zone: NSZone? = nil) -> Any {
         return Trigger(trigger: self)
     }
