@@ -131,7 +131,6 @@ class TriggerTests: XCTestCase {
                     style: TrigTextStyle(face: [.underline, .bold, .blink, .italic],
                                          foreColor: NSColor.white,
                                          backColor: NSColor.black))
-        // swiftlint:disable line_length
         XCTAssertEqual(t.reactionTo(line: "a super combo match"),
                        "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;23;25;39;49m match")
         // swiftlint:enable line_length

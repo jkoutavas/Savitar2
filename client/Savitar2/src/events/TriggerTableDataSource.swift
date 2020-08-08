@@ -55,16 +55,19 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
             cell.checkableItemChangeDelegate = self
             cell.viewModel = tViewModel
             return cell
+
         case tableView.tableColumns[1]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
             setTextField(cell, tViewModel.type)
             return cell
+
         case tableView.tableColumns[2]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
             setTextField(cell, tViewModel.audioCue)
             return cell
+
         default:
             return nil
         }
@@ -78,8 +81,8 @@ extension TriggerTableDataSource: CheckableItemChangeDelegate {
 
         let action: TriggerAction = {
             switch checked {
-            case true: return TriggerAction.enable(triggerID)
             case false: return TriggerAction.disable(triggerID)
+            case true: return TriggerAction.enable(triggerID)
             }
         }()
 

@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: July 3rd, 2020
+README last updated: August 7th, 2020
 
 ## Current state of the application
 
@@ -103,7 +103,7 @@ $ swift package generate-xcodeproj
 
 `cloc . --exclude-dir=Pods`
 
-### January 10th
+### January 10th, 2020
 
 ```
      162 text files.
@@ -127,5 +127,33 @@ D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
 SUM:                           109           2455           2422          10642
+-------------------------------------------------------------------------------
+```
+
+
+### August 7th, 2020
+
+```
+     194 text files.
+     189 unique files.                                          
+      61 files ignored.
+
+github.com/AlDanial/cloc v 1.84  T=1.01 s (136.7 files/s, 17984.9 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Swift                           92           2449           2352           7934
+XML                             12              0             24           2574
+C                                1             76             52           1008
+Markdown                         5            173              0            504
+Bourne Shell                    10             66            173            287
+YAML                             4             11              5            158
+JSON                             5              0              0            104
+Perl                             1             19             30             65
+Ruby                             1              1              0             18
+D                                4              0              0             12
+C/C++ Header                     3             10             35             11
+-------------------------------------------------------------------------------
+SUM:                           138           2805           2671          12675
 -------------------------------------------------------------------------------
 ```

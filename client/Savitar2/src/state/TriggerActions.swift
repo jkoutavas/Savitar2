@@ -38,8 +38,8 @@ struct SetTriggersAction: ReactionAction {
 }
 
 enum TriggerAction: UndoableAction {
-    case enable(SavitarObjectID)
     case disable(SavitarObjectID)
+    case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
     case setMatching(SavitarObjectID, matching: TriggerMatching)
     case toggleCaseSensitive(SavitarObjectID, sensitive: Bool)
@@ -60,16 +60,20 @@ enum TriggerAction: UndoableAction {
 
     func inverse(context: UndoActionContext) -> UndoableAction? {
         switch self {
-        case .enable(let triggerID):
-            return TriggerAction.disable(triggerID)
         case .disable(let triggerID):
             return TriggerAction.enable(triggerID)
+
+        case .enable(let triggerID):
+            return TriggerAction.disable(triggerID)
+
         case .rename(let triggerID, name: _):
             guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
             return TriggerAction.rename(triggerID, name: oldName)
-        case .setMatching(let triggerID, let matching):
+
+        case .setMatching(let triggerID, matching: _):
             guard let oldMatching = context.triggerMatching(triggerID: triggerID) else { return nil }
             return TriggerAction.setMatching(triggerID, matching: oldMatching)
+
         case .toggleCaseSensitive(let triggerID, let sensitive):
             return TriggerAction.toggleCaseSensitive(triggerID, sensitive: !sensitive)
         }
