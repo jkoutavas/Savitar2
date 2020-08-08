@@ -38,6 +38,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
 
+    case let .setWordEnding(triggerID, wordEnding: wordEnding):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.wordEnding = wordEnding
+
     case let .toggleCaseSensitive(triggerID, sensitive: sensitive):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.caseSensitive = sensitive

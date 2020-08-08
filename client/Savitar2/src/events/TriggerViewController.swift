@@ -56,7 +56,6 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
             appearanceViewController?.setTrigger(trigger)
-            matchingViewController?.setTrigger(trigger)
             self.representedObject = TriggerController(trigger: trigger, store: store)
         } else {
             self.representedObject = nil
