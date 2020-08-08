@@ -28,6 +28,10 @@ class UndoableStateAdapter: UndoActionContext {
         return state.macroList.item(objectID: macroID)?.value
     }
 
+    func triggerMatching(triggerID: SavitarObjectID) -> TriggerMatching? {
+        return state.triggerList.item(objectID: triggerID)?.matching
+    }
+
     func triggerName(triggerID: SavitarObjectID) -> String? {
         return state.triggerList.item(objectID: triggerID)?.name
     }

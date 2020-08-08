@@ -41,6 +41,7 @@ enum TriggerAction: UndoableAction {
     case enable(SavitarObjectID)
     case disable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
+    case setMatching(SavitarObjectID, matching: TriggerMatching)
     case toggleCaseSensitive(SavitarObjectID, sensitive: Bool)
 
     // MARK: Undoable
@@ -52,7 +53,8 @@ enum TriggerAction: UndoableAction {
         case .enable: return "Enable Trigger"
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
-        case .toggleCaseSensitive: return "Change Case Sensitive"
+        case .setMatching: return "Change Trigger Matching"
+        case .toggleCaseSensitive: return "Change Trigger Case Sensitive"
         }
     }
 
@@ -65,6 +67,9 @@ enum TriggerAction: UndoableAction {
         case .rename(let triggerID, name: _):
             guard let oldName = context.triggerName(triggerID: triggerID) else { return nil }
             return TriggerAction.rename(triggerID, name: oldName)
+        case .setMatching(let triggerID, let matching):
+            guard let oldMatching = context.triggerMatching(triggerID: triggerID) else { return nil }
+            return TriggerAction.setMatching(triggerID, matching: oldMatching)
         case .toggleCaseSensitive(let triggerID, let sensitive):
             return TriggerAction.toggleCaseSensitive(triggerID, sensitive: !sensitive)
         }

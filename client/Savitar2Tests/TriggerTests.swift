@@ -280,4 +280,25 @@ class TriggerTests: XCTestCase {
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
+
+    func testMatchingFlags() throws {
+        // these flags are a radio group. Only one of them can be raised at a given time
+
+        let trigger = Trigger()
+
+        trigger.matchesExact = true
+        XCTAssertTrue(trigger.flags.contains(.exact))
+        XCTAssertTrue(!trigger.flags.contains(.wholeLine))
+        XCTAssertTrue(!trigger.flags.contains(.toEndOfWord))
+
+        trigger.matchesWholeWord = true
+        XCTAssertTrue(!trigger.flags.contains(.exact))
+        XCTAssertTrue(!trigger.flags.contains(.wholeLine))
+        XCTAssertTrue(trigger.flags.contains(.toEndOfWord))
+
+        trigger.matchesWholeLine = true
+        XCTAssertTrue(!trigger.flags.contains(.exact))
+        XCTAssertTrue(trigger.flags.contains(.wholeLine))
+        XCTAssertTrue(!trigger.flags.contains(.toEndOfWord))
+    }
 }

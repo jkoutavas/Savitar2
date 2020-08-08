@@ -14,17 +14,14 @@ class TriggerMatchingViewController: NSViewController, TriggerEditor {
     @IBOutlet var matchWholeLineRadio: NSButton!
     @IBOutlet var matchWholeWordRadio: NSButton!
 
-    @IBAction func matchingRadioButtonChanged(_ sender: AnyObject) {
-    }
-
     var trigger: Trigger?
     func setTrigger(_ trigger: Trigger) {
         self.trigger = trigger
-        if trigger.flags.contains(.exact) {
+        if trigger.matchesExact {
             matchExactlyRadio.state = .on
-        } else if trigger.flags.contains(.wholeLine) {
+        } else if trigger.matchesWholeLine {
             matchWholeLineRadio.state = .on
-        } else if trigger.flags.contains(.toEndOfWord) {
+        } else if trigger.matchesWholeWord {
             matchWholeWordRadio.state = .on
         }
     }
@@ -32,5 +29,17 @@ class TriggerMatchingViewController: NSViewController, TriggerEditor {
     var store: ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
+    }
+
+    @IBAction func matchingRadioButtonChanged(_ sender: AnyObject) {
+        guard let trig = trigger else { return }
+
+        if matchExactlyRadio.state == .on {
+            store?.dispatch(TriggerAction.setMatching(trig.objectID, matching: .exact))
+        } else if matchWholeLineRadio.state == .on {
+            store?.dispatch(TriggerAction.setMatching(trig.objectID, matching: .wholeLine))
+        } else {
+            store?.dispatch(TriggerAction.setMatching(trig.objectID, matching: .wholeWord))
+        }
     }
 }

@@ -34,6 +34,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.name = name
 
+    case let .setMatching(triggerID, matching: matching):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.matching = matching
+        
     case let .toggleCaseSensitive(triggerID, sensitive: sensitive):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.caseSensitive = sensitive

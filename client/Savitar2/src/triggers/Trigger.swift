@@ -42,6 +42,12 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
 }
 
+enum TriggerMatching {
+    case exact
+    case wholeLine
+    case wholeWord
+}
+
 class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
@@ -59,16 +65,21 @@ class Trigger: SavitarObject, NSCopying {
     var voice: String?
     var wordEnding: String?
 
+    // utility function
+    func setFlag(flag: TrigFlags, on: Bool) {
+        if on {
+            flags.insert(flag)
+        } else {
+            flags.remove(flag)
+        }
+    }
+
     var caseSensitive: Bool {
         get {
             flags.contains(.caseSensitive)
         }
         set(sensitive) {
-            if sensitive {
-                flags.insert(.caseSensitive)
-            } else {
-                flags.remove(.caseSensitive)
-            }
+            setFlag(flag: .caseSensitive, on: sensitive)
         }
     }
 
@@ -77,10 +88,64 @@ class Trigger: SavitarObject, NSCopying {
             !flags.contains(.disabled)
         }
         set(enabled) {
-            if enabled {
-                flags.remove(.disabled)
+            setFlag(flag: .disabled, on: !enabled)
+        }
+    }
+
+    var matchesExact: Bool {
+        get {
+            flags.contains(.exact)
+        }
+        set {
+            _ = newValue // silence  "unused_setter_value" linter warning
+            setFlag(flag: .exact, on: true)
+            setFlag(flag: .wholeLine, on: false)
+            setFlag(flag: .toEndOfWord, on: false)
+        }
+    }
+
+    var matchesWholeLine: Bool {
+        get {
+            flags.contains(.wholeLine)
+        }
+        set {
+            _ = newValue // silence  "unused_setter_value" linter warning
+            setFlag(flag: .exact, on: false)
+            setFlag(flag: .wholeLine, on: true)
+            setFlag(flag: .toEndOfWord, on: false)
+        }
+    }
+
+    var matchesWholeWord: Bool {
+        get {
+            flags.contains(.toEndOfWord)
+        }
+        set {
+            _ = newValue // silence  "unused_setter_value" linter warning
+            setFlag(flag: .exact, on: false)
+            setFlag(flag: .wholeLine, on: false)
+            setFlag(flag: .toEndOfWord, on: true)
+        }
+    }
+
+    var matching: TriggerMatching {
+        get {
+            if matchesExact {
+                return .exact
+            } else if matchesWholeLine {
+                return .wholeLine
             } else {
-                flags.insert(.disabled)
+                return .wholeWord
+            }
+        }
+        set(matching) {
+            switch matching {
+            case .exact:
+                matchesExact = true
+            case .wholeLine:
+                matchesWholeLine = true
+            case .wholeWord:
+                matchesWholeWord = true
             }
         }
     }
