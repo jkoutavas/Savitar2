@@ -207,9 +207,6 @@
                             <constraint firstItem="VyJ-ur-8M4" firstAttribute="leading" secondItem="HEU-va-7m7" secondAttribute="leading" id="vEq-kN-tfX"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="name" destination="VyJ-ur-8M4" id="LiK-2I-7Im"/>
-                    </connections>
                 </viewController>
                 <customObject id="x0t-Rb-Adm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="7Ll-e6-3Gc"/>
@@ -386,14 +383,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.62311627538071068" green="0.057954700963632644" blue="0.11193756521667698" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="delegate" destination="91e-Ka-Eif" id="3ZY-d8-wvd"/>
                         </connections>

@@ -61,23 +61,23 @@ enum MacroAction: UndoableAction {
     func inverse(context: UndoActionContext) -> UndoableAction? {
 
         switch self {
-        case .changeKey(let macroID, key: _):
-            guard let oldKey = context.macroKey(macroID: macroID) else { return nil }
-            return MacroAction.changeKey(macroID, key: oldKey)
+        case let .changeKey(macroID, key: _):
+            guard let prev = context.macroKey(macroID: macroID) else { return nil }
+            return MacroAction.changeKey(macroID, key: prev)
 
-        case .changeValue(let macroID, value: _):
-            guard let oldValue = context.macroValue(macroID: macroID) else { return nil }
-            return MacroAction.changeValue(macroID, value: oldValue)
+        case let .changeValue(macroID, value: _):
+            guard let prev = context.macroValue(macroID: macroID) else { return nil }
+            return MacroAction.changeValue(macroID, value: prev)
 
-        case .disable(let macroID):
+        case let .disable(macroID):
             return MacroAction.enable(macroID)
 
-        case .enable(let macroID):
+        case let .enable(macroID):
             return MacroAction.disable(macroID)
 
-        case .rename(let macroID, name: _):
-            guard let oldName = context.macroName(macroID: macroID) else { return nil }
-            return MacroAction.rename(macroID, name: oldName)
+        case let .rename(macroID, name: _):
+            guard let prev = context.macroName(macroID: macroID) else { return nil }
+            return MacroAction.rename(macroID, name: prev)
         }
     }
 }
