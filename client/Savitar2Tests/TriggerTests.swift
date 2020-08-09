@@ -231,7 +231,7 @@ class TriggerTests: XCTestCase {
 
         XCTAssertEqual(t1.name, Trigger.defaultName)
         XCTAssertEqual(t1.type, .output)
-        XCTAssertEqual(t1.flags, .exact)
+        XCTAssertEqual(t1.flags, [.exact, .useFore])
         XCTAssertEqual(t1.audioCue, .silent)
     }
 
@@ -280,24 +280,60 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
 
+    func testAppearanceFlags() throws {
+        // these flags are a radio group. Only one of them can be raised at a given time
+
+        let trigger = Trigger()
+
+        trigger.appearance = .gag
+        XCTAssertTrue(trigger.flags.contains(.gag))
+        XCTAssertTrue(!trigger.flags.contains(.dontUseStyle))
+
+        trigger.appearance = .dontUseStyle
+        XCTAssertTrue(!trigger.flags.contains(.gag))
+        XCTAssertTrue(trigger.flags.contains(.dontUseStyle))
+
+        trigger.appearance = .changeAppearance
+        XCTAssertTrue(!trigger.flags.contains(.gag))
+        XCTAssertTrue(!trigger.flags.contains(.dontUseStyle))
+    }
+
     func testMatchingFlags() throws {
         // these flags are a radio group. Only one of them can be raised at a given time
 
         let trigger = Trigger()
 
-        trigger.matchesExact = true
+        trigger.matching = .exact
         XCTAssertTrue(trigger.flags.contains(.exact))
         XCTAssertTrue(!trigger.flags.contains(.wholeLine))
         XCTAssertTrue(!trigger.flags.contains(.toEndOfWord))
 
-        trigger.matchesWholeWord = true
+        trigger.matching = .wholeWord
         XCTAssertTrue(!trigger.flags.contains(.exact))
         XCTAssertTrue(!trigger.flags.contains(.wholeLine))
         XCTAssertTrue(trigger.flags.contains(.toEndOfWord))
 
-        trigger.matchesWholeLine = true
+        trigger.matching = .wholeLine
         XCTAssertTrue(!trigger.flags.contains(.exact))
         XCTAssertTrue(trigger.flags.contains(.wholeLine))
         XCTAssertTrue(!trigger.flags.contains(.toEndOfWord))
+    }
+
+    func testSpecifierFlags() throws {
+        // these flags are a radio group. Only one of them can be raised at a given time
+
+        let trigger = Trigger()
+
+        trigger.specifier = .startsWith
+        XCTAssertTrue(trigger.flags.contains(.startsWith))
+        XCTAssertTrue(!trigger.flags.contains(.useRegex))
+
+        trigger.specifier = .lineContains
+        XCTAssertTrue(!trigger.flags.contains(.startsWith))
+        XCTAssertTrue(!trigger.flags.contains(.useRegex))
+
+        trigger.specifier = .useRegex
+        XCTAssertTrue(!trigger.flags.contains(.startsWith))
+        XCTAssertTrue(trigger.flags.contains(.useRegex))
     }
 }

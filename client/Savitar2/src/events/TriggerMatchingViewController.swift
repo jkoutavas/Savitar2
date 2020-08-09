@@ -15,6 +15,7 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
     @IBOutlet var matchWholeWordRadio: NSButton!
 
     var trigger: Trigger?
+
     var store: ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
@@ -48,11 +49,12 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
             self.trigger = trigger
-            if trigger.matchesExact {
+            switch trigger.matching {
+            case .exact:
                 matchExactlyRadio.state = .on
-            } else if trigger.matchesWholeLine {
+            case .wholeLine:
                 matchWholeLineRadio.state = .on
-            } else if trigger.matchesWholeWord {
+            case .wholeWord:
                 matchWholeWordRadio.state = .on
             }
             self.representedObject = TriggerMatchingController(trigger: trigger, store: store)
@@ -88,7 +90,7 @@ class TriggerMatchingController: NSController {
 
     @objc dynamic var useWordEnding: Bool {
         get {
-            return trigger.matchesWholeWord
+            return trigger.matching == .wholeWord
         }
     }
 
@@ -97,7 +99,7 @@ class TriggerMatchingController: NSController {
             return trigger.wordEnding ?? ""
         }
         set(wordEnding) {
-             store?.dispatch(TriggerAction.setWordEnding(trigger.objectID, wordEnding: wordEnding))
+            store?.dispatch(TriggerAction.setWordEnding(trigger.objectID, wordEnding: wordEnding))
         }
     }
 

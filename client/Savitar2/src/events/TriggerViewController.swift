@@ -9,10 +9,6 @@
 import Cocoa
 import ReSwift
 
-protocol TriggerEditor: ReactionStoreSetter {
-    func setTrigger(_ trigger: Trigger)
-}
-
 class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     var appearanceViewController: TriggerAppearanceViewController?
     var matchingViewController: TriggerMatchingViewController?
@@ -55,7 +51,6 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
-            appearanceViewController?.setTrigger(trigger)
             self.representedObject = TriggerController(trigger: trigger, store: store)
         } else {
             self.representedObject = nil
@@ -130,8 +125,6 @@ class TriggerController: NSController {
                 return 1
             case .both:
                 return 2
-            case .unknown:
-                return 0
             }
         }
         set {
@@ -144,7 +137,7 @@ class TriggerController: NSController {
             case 2:
                 type = .both
             default:
-                type = .unknown
+                type = .output
             }
             store?.dispatch(TriggerAction.setType(trigger.objectID, type: type))
         }

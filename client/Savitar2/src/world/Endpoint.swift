@@ -153,7 +153,7 @@ class Endpoint: NSObject, StreamDelegate {
             if !trigger.enabled {
                 continue
             }
-            if trigger.flags.contains(.gag) {
+            if trigger.appearance == .gag {
                 line = trigger.reactionTo(line: line)
                 processedTriggers.append(trigger)
             }
@@ -163,7 +163,7 @@ class Endpoint: NSObject, StreamDelegate {
                 if !trigger.enabled {
                     continue
                 }
-                if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                if trigger.useSubstitution && !processedTriggers.contains(trigger) {
                     line = trigger.reactionTo(line: line)
                     processedTriggers.append(trigger)
                 }
