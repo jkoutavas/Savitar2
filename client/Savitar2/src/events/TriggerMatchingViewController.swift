@@ -69,37 +69,29 @@ class TriggerMatchingController: NSController {
     var store: ReactionsStore?
 
     @objc dynamic var substitution: String {
-        get {
-            return trigger.substitution ?? ""
-        }
-        set(substitution) {
-            store?.dispatch(TriggerAction.setSubstitution(trigger.objectID, substitution: substitution))
+        get { return trigger.substitution ?? "" }
+        set {
+            store?.dispatch(TriggerAction.setSubstitution(trigger.objectID, substitution: newValue))
         }
     }
 
     @objc dynamic var useSubstitution: Bool {
-        get {
-            return trigger.useSubstitution
-        }
-        set(useSubstitution) {
-            if trigger.useSubstitution != useSubstitution {
+        get { return trigger.useSubstitution }
+        set {
+            if trigger.useSubstitution != newValue {
                 store?.dispatch(TriggerAction.toggleUseSubstitution(trigger.objectID))
             }
         }
     }
 
     @objc dynamic var useWordEnding: Bool {
-        get {
-            return trigger.matching == .wholeWord
-        }
+        get { return trigger.matching == .wholeWord }
     }
 
     @objc dynamic var wordEnding: String {
-        get {
-            return trigger.wordEnding ?? ""
-        }
-        set(wordEnding) {
-            store?.dispatch(TriggerAction.setWordEnding(trigger.objectID, wordEnding: wordEnding))
+        get { return trigger.wordEnding ?? "" }
+        set {
+            store?.dispatch(TriggerAction.setWordEnding(trigger.objectID, wordEnding: newValue))
         }
     }
 
