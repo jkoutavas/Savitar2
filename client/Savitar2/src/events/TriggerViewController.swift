@@ -69,8 +69,8 @@ class TriggerController: NSController {
 
     @objc dynamic var activated: Bool {
         get { trigger.enabled }
-        set(activated) {
-            if activated {
+        set {
+            if newValue {
                 store?.dispatch(TriggerAction.enable(trigger.objectID))
             } else {
                 store?.dispatch(TriggerAction.disable(trigger.objectID))
@@ -80,8 +80,8 @@ class TriggerController: NSController {
 
     @objc dynamic var caseSensitive: Bool {
         get { trigger.caseSensitive }
-        set(caseSensitive) {
-            if trigger.caseSensitive != caseSensitive {
+        set {
+            if trigger.caseSensitive != newValue {
                 store?.dispatch(TriggerAction.toggleCaseSensitive(trigger.objectID))
             }
         }
@@ -89,8 +89,35 @@ class TriggerController: NSController {
 
     @objc dynamic var name: String {
         get { trigger.name }
-        set(name) {
-            store?.dispatch(TriggerAction.rename(trigger.objectID, name: name))
+        set {
+            store?.dispatch(TriggerAction.rename(trigger.objectID, name: newValue))
+        }
+    }
+
+    @objc dynamic var specifierIndex: Int {
+        get {
+            switch trigger.specifier {
+            case .startsWith:
+                return 0
+            case .lineContains:
+                return 1
+            case .useRegex:
+                return 2
+            }
+        }
+        set {
+            var specifier: TrigSpecifier
+            switch newValue {
+            case 0:
+                specifier = .startsWith
+            case 1:
+                specifier = .lineContains
+            case 2:
+                specifier = .useRegex
+            default:
+                specifier = .startsWith
+            }
+            store?.dispatch(TriggerAction.setSpecifier(trigger.objectID, specifier: specifier))
         }
     }
 
@@ -107,9 +134,9 @@ class TriggerController: NSController {
                 return 0
             }
         }
-        set(typeIndex) {
+        set {
             var type: TrigType
-            switch typeIndex {
+            switch newValue {
             case 0:
                 type = .output
             case 1:

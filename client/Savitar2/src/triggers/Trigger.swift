@@ -11,13 +11,6 @@ import SwiftyXMLParser
 
 let TriggerElemIdentifier = "TRIGGER"
 
-enum TrigType {
-    case unknown
-    case input
-    case output
-    case both
-}
-
 enum AudioType {
     case silent
     case sound
@@ -42,10 +35,23 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
 }
 
-enum TriggerMatching {
+enum TrigMatching {
     case exact
     case wholeLine
     case wholeWord
+}
+
+enum TrigSpecifier {
+    case startsWith
+    case lineContains
+    case useRegex
+}
+
+enum TrigType {
+    case unknown
+    case input
+    case output
+    case both
 }
 
 class Trigger: SavitarObject, NSCopying {
@@ -75,27 +81,17 @@ class Trigger: SavitarObject, NSCopying {
     }
 
     var caseSensitive: Bool {
-        get {
-            flags.contains(.caseSensitive)
-        }
-        set(sensitive) {
-            setFlag(flag: .caseSensitive, on: sensitive)
-        }
+        get { flags.contains(.caseSensitive) }
+        set { setFlag(flag: .caseSensitive, on: newValue) }
     }
 
     var enabled: Bool {
-        get {
-            !flags.contains(.disabled)
-        }
-        set(enabled) {
-            setFlag(flag: .disabled, on: !enabled)
-        }
+        get { !flags.contains(.disabled) }
+        set { setFlag(flag: .disabled, on: !newValue) }
     }
 
     var matchesExact: Bool {
-        get {
-            flags.contains(.exact)
-        }
+        get { flags.contains(.exact) }
         set {
             _ = newValue // silence  "unused_setter_value" linter warning
             setFlag(flag: .exact, on: true)
@@ -105,9 +101,7 @@ class Trigger: SavitarObject, NSCopying {
     }
 
     var matchesWholeLine: Bool {
-        get {
-            flags.contains(.wholeLine)
-        }
+        get { flags.contains(.wholeLine) }
         set {
             _ = newValue // silence  "unused_setter_value" linter warning
             setFlag(flag: .exact, on: false)
@@ -117,9 +111,7 @@ class Trigger: SavitarObject, NSCopying {
     }
 
     var matchesWholeWord: Bool {
-        get {
-            flags.contains(.toEndOfWord)
-        }
+        get { flags.contains(.toEndOfWord) }
         set {
             _ = newValue // silence  "unused_setter_value" linter warning
             setFlag(flag: .exact, on: false)
@@ -128,7 +120,7 @@ class Trigger: SavitarObject, NSCopying {
         }
     }
 
-    var matching: TriggerMatching {
+    var matching: TrigMatching {
         get {
             if matchesExact {
                 return .exact
@@ -138,8 +130,8 @@ class Trigger: SavitarObject, NSCopying {
                 return .wholeWord
             }
         }
-        set(matching) {
-            switch matching {
+        set {
+            switch newValue {
             case .exact:
                 matchesExact = true
             case .wholeLine:
@@ -150,13 +142,34 @@ class Trigger: SavitarObject, NSCopying {
         }
     }
 
-    var useSubstitution: Bool {
+    var specifier: TrigSpecifier {
         get {
-            flags.contains(.useSubstitution)
+            if flags.contains(.startsWith) {
+                return .startsWith
+            } else if flags.contains(.useRegex) {
+                return .useRegex
+            } else {
+                return .lineContains
+            }
         }
-        set (useSubstitution) {
-            setFlag(flag: .useSubstitution, on: useSubstitution)
+        set {
+            switch newValue {
+            case .startsWith:
+                setFlag(flag: .startsWith, on: true)
+                setFlag(flag: .useRegex, on: false)
+            case .useRegex:
+                setFlag(flag: .startsWith, on: false)
+                setFlag(flag: .useRegex, on: true)
+            case .lineContains:
+                setFlag(flag: .startsWith, on: false)
+                setFlag(flag: .useRegex, on: false)
+            }
         }
+    }
+
+    var useSubstitution: Bool {
+        get { flags.contains(.useSubstitution) }
+        set { setFlag(flag: .useSubstitution, on: newValue) }
     }
 
     func copy(with zone: NSZone? = nil) -> Any {

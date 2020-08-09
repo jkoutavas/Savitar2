@@ -38,6 +38,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
 
+    case let .setSpecifier(triggerID, specifier: specifier):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.specifier = specifier
+
     case let .setSubstitution(triggerID, substitution: substitution):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.substitution = substitution
