@@ -42,6 +42,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.substitution = substitution
 
+    case let .setType(triggerID, type: type):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.type = type
+
     case let .setWordEnding(triggerID, wordEnding: wordEnding):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.wordEnding = wordEnding

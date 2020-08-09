@@ -67,13 +67,6 @@ class TriggerController: NSController {
     var trigger: Trigger
     var store: ReactionsStore?
 
-    @objc dynamic var name: String {
-        get { trigger.name }
-        set(name) {
-            store?.dispatch(TriggerAction.rename(trigger.objectID, name: name))
-        }
-    }
-
     @objc dynamic var activated: Bool {
         get { trigger.enabled }
         set(activated) {
@@ -91,6 +84,42 @@ class TriggerController: NSController {
             if trigger.caseSensitive != caseSensitive {
                 store?.dispatch(TriggerAction.toggleCaseSensitive(trigger.objectID))
             }
+        }
+    }
+
+    @objc dynamic var name: String {
+        get { trigger.name }
+        set(name) {
+            store?.dispatch(TriggerAction.rename(trigger.objectID, name: name))
+        }
+    }
+
+    @objc dynamic var typeIndex: Int {
+        get {
+            switch trigger.type {
+            case .output:
+                return 0
+            case .input:
+                return 1
+            case .both:
+                return 2
+            case .unknown:
+                return 0
+            }
+        }
+        set(typeIndex) {
+            var type: TrigType
+            switch typeIndex {
+            case 0:
+                type = .output
+            case 1:
+                type = .input
+            case 2:
+                type = .both
+            default:
+                type = .unknown
+            }
+            store?.dispatch(TriggerAction.setType(trigger.objectID, type: type))
         }
     }
 

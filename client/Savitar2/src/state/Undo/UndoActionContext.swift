@@ -15,6 +15,7 @@ protocol UndoActionContext {
 
     func triggerMatching(triggerID: SavitarObjectID) -> TriggerMatching?
     func triggerSubstitution(triggerID: SavitarObjectID) -> String?
+    func triggerType(triggerID: SavitarObjectID) -> TrigType?
     func triggerWordEnding(triggerID: SavitarObjectID) -> String?
     func triggerName(triggerID: SavitarObjectID) -> String?
 }

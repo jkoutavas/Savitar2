@@ -43,6 +43,7 @@ enum TriggerAction: UndoableAction {
     case rename(SavitarObjectID, name: String)
     case setMatching(SavitarObjectID, matching: TriggerMatching)
     case setSubstitution(SavitarObjectID, substitution: String)
+    case setType(SavitarObjectID, type: TrigType)
     case setWordEnding(SavitarObjectID, wordEnding: String)
     case toggleCaseSensitive(SavitarObjectID)
     case toggleUseSubstitution(SavitarObjectID)
@@ -58,6 +59,7 @@ enum TriggerAction: UndoableAction {
         case .rename: return "Rename Trigger"
         case .setMatching: return "Change Trigger Matching"
         case .setSubstitution: return "Change Trigger Substitution"
+        case .setType: return "Change Trigger Type"
         case .setWordEnding: return "Change Trigger Word Ending"
         case .toggleCaseSensitive: return "Change Trigger Case Sensitive"
         case .toggleUseSubstitution: return "Change Trigger Use Substitution"
@@ -83,6 +85,10 @@ enum TriggerAction: UndoableAction {
         case let .setSubstitution(triggerID, substitution: _):
             guard let prev = context.triggerSubstitution(triggerID: triggerID) else { return nil }
             return TriggerAction.setSubstitution(triggerID, substitution: prev)
+
+        case let .setType(triggerID, type: _):
+            guard let prev = context.triggerType(triggerID: triggerID) else { return nil }
+            return TriggerAction.setType(triggerID, type: prev)
 
         case let .setWordEnding(triggerID, wordEnding: _):
             guard let prev = context.triggerWordEnding(triggerID: triggerID) else { return nil }
