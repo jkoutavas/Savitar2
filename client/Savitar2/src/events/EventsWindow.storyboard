@@ -500,7 +500,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
                                     <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="epg-Xd-jSa">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -508,6 +507,7 @@
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -567,6 +567,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="9Zt-8p-rIB"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZF-RJ-CNR">
                                 <rect key="frame" x="31" y="217" width="160" height="18"/>
@@ -575,6 +578,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="r0q-2m-cDR"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YlY-19-3ZS">
                                 <rect key="frame" x="31" y="195" width="187" height="18"/>
@@ -583,19 +589,88 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="PmH-Fv-1IW"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSV-WT-xrS">
+                                <rect key="frame" x="51" y="172" width="50" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cQH-UQ-v3M">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="L4E-d4-qEU"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.bold" id="fqa-Rp-nMh"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUf-ej-TTt">
+                                <rect key="frame" x="124" y="172" width="81" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Underline" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="770-jj-uar">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="xX7-Oa-dkD"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.underline" id="GiT-PI-jIH"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v3P-mC-kng">
+                                <rect key="frame" x="220" y="172" width="51" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5hO-on-piD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="653-tu-05p"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.italic" id="kl3-fy-p9d"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1k-5p-bh3">
+                                <rect key="frame" x="51" y="152" width="52" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Blink" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="orH-xE-SFV">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="9Dr-FT-mxm"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.blink" id="SpX-5z-ubF"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1H-S8-c7F">
-                                <rect key="frame" x="31" y="95" width="55" height="18"/>
+                                <rect key="frame" x="31" y="109" width="55" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="Color" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="w1h-ai-Fe8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QS-g3-sZt">
+                                <rect key="frame" x="123" y="152" width="66" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Inverse" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m9c-VV-Zip">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="SXT-Az-l1h"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.inverse" id="hCq-BR-yPk"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="changeRadio" destination="YlY-19-3ZS" id="aRk-TF-WVc"/>
+                        <outlet property="dontAlterRadio" destination="DZF-RJ-CNR" id="j5a-wE-GqB"/>
+                        <outlet property="gagRadio" destination="e6N-DD-hJn" id="GVs-lO-ECT"/>
+                    </connections>
                 </viewController>
                 <customObject id="5fG-B3-BlX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="V2z-UN-cD2"/>
             </objects>
             <point key="canvasLocation" x="1872" y="243"/>
         </scene>

@@ -13,6 +13,8 @@ protocol UndoActionContext {
     func macroKey(macroID: SavitarObjectID) -> HotKey?
     func macroValue(macroID: SavitarObjectID) -> String?
 
+    func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance?
+    func triggerFace(triggerID: SavitarObjectID) -> TrigFace?
     func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching?
     func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier?
     func triggerSubstitution(triggerID: SavitarObjectID) -> String?

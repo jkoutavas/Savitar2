@@ -41,6 +41,8 @@ enum TriggerAction: UndoableAction {
     case disable(SavitarObjectID)
     case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
+    case setAppearance(SavitarObjectID, appearance: TrigAppearance)
+    case setFace(SavitarObjectID, face: TrigFace)
     case setMatching(SavitarObjectID, matching: TrigMatching)
     case setSpecifier(SavitarObjectID, specifier: TrigSpecifier)
     case setSubstitution(SavitarObjectID, substitution: String)
@@ -58,6 +60,8 @@ enum TriggerAction: UndoableAction {
         case .enable: return "Enable Trigger"
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
+        case .setAppearance: return "Change Trigger Appearance Type"
+        case .setFace: return "Change Trigger Face"
         case .setMatching: return "Change Trigger Matching"
         case .setSpecifier: return "Change Trigger Specifier"
         case .setSubstitution: return "Change Trigger Substitution"
@@ -79,6 +83,14 @@ enum TriggerAction: UndoableAction {
         case let .rename(triggerID, name: _):
             guard let prev = context.triggerName(triggerID: triggerID) else { return nil }
             return TriggerAction.rename(triggerID, name: prev)
+
+        case let .setAppearance(triggerID, appearance: _):
+            guard let prev = context.triggerAppearance(triggerID: triggerID) else { return nil }
+            return TriggerAction.setAppearance(triggerID, appearance: prev)
+
+        case let .setFace(triggerID, face: _):
+            guard let prev = context.triggerFace(triggerID: triggerID) else { return nil }
+            return TriggerAction.setFace(triggerID, face: prev)
 
         case let .setMatching(triggerID, matching: _):
             guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }

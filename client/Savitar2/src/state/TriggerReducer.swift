@@ -34,6 +34,14 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.name = name
 
+    case let .setFace(triggerID, face: face):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.style?.face = face
+
+    case let .setAppearance(triggerID, appearance: appearance):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.appearance = appearance
+
     case let .setMatching(triggerID, matching: matching):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
