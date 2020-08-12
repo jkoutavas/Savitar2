@@ -231,7 +231,6 @@ class TriggerTests: XCTestCase {
 
         XCTAssertEqual(t1.name, Trigger.defaultName)
         XCTAssertEqual(t1.type, .output)
-        XCTAssertEqual(t1.flags, [.exact, .useFore])
         XCTAssertEqual(t1.audioCue, .silent)
     }
 
@@ -266,6 +265,52 @@ class TriggerTests: XCTestCase {
         let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
 
         // v2 XML
+        // swiftlint:disable line_length
+        let expectedOutput = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <TRIGGER NAME="russ" TYPE="output" FLAGS="matchWholeLine+matchAtStart" FACE="foreColor" FGCOLOR="#26C9EE" SOUND="Click" AUDIO="speakEvent" VOICE="Ralph">
+            <WORDEND>&amp;-"</WORDEND>
+            <SAY>Select a voice from the menu to hear this.</SAY>
+            <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
+        </TRIGGER>
+        """
+        // swiftlint:enable line_length
+
+        XCTAssertEqual(xmlOutString, expectedOutput)
+    }
+
+    func testv1TriggerUseForFlagXMLtoV2() throws {
+        // v1 XML
+        // note the misspelled <SUBSITUTION> element
+        let xmlInString = """
+        <TRIGGER
+            NAME="russ"
+            TYPE="output"
+            FLAGS="matchWholeLine+matchAtStart+useFore"
+            COLOR="#26C9EE"
+            AUDIO="speakEvent"
+            SOUND="Click"
+            VOICE="Ralph">
+            <WORDEND>
+                &amp;-&quot;
+            </WORDEND>
+            <SAY>
+                Select a voice from the menu to hear this.
+            </SAY>
+            <SUBSITUTION>
+                oh boy, oh boy
+            </SUBSITUTION>
+        </TRIGGER>
+        """
+
+        let xml = try XML.parse(xmlInString)
+        let t1 = Trigger()
+        try t1.parse(xml: xml[TriggerElemIdentifier])
+
+        let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
+
+        // v2 XML
+        // Here we're expecting that "FLAG"="foreColor" does not get generated. That's because there's a "useFore" in the v1 text XML
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>

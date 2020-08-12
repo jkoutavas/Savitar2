@@ -61,6 +61,8 @@ struct TrigFace: OptionSet, Hashable {
     static let underline = TrigFace(rawValue: 1 << 3)
     static let blink = TrigFace(rawValue: 1 << 4) // new with version 2.0
     static let inverse = TrigFace(rawValue: 1 << 5) // new with version 2.0
+    static let foreColor = TrigFace(rawValue: 1 << 6) // new with version 2.0
+    static let backColor = TrigFace(rawValue: 1 << 7) // new with version 2.0
 
     private func formANSICodes(dict: [TrigFace: Int]) -> String {
         var result = ""
@@ -103,7 +105,9 @@ extension TrigFace: StrOptionSet {
         (.italic, "italic"),
         (.underline, "underline"),
         (.blink, "blink"),
-        (.inverse, "inverse")
+        (.inverse, "inverse"),
+        (.foreColor, "foreColor"),
+        (.backColor, "backColor")
         ]}
     static var labelDict: [String: Self] { return [
         "normal": .normal,
@@ -111,7 +115,9 @@ extension TrigFace: StrOptionSet {
         "italic": .italic,
         "underline": .underline,
         "blink": .blink,
-        "inverse": inverse
+        "inverse": .inverse,
+        "foreColor": .foreColor,
+        "backColor": .backColor
         ]}
 }
 

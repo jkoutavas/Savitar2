@@ -49,7 +49,7 @@ struct TrigFlags: OptionSet {
     static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
-    static let useFore = TrigFlags(rawValue: 1 << 4)
+//    static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
     static let gag = TrigFlags(rawValue: 1 << 5)
     static let startsWith = TrigFlags(rawValue: 1 << 6)
     static let echoReply = TrigFlags(rawValue: 1 << 7)
@@ -72,7 +72,6 @@ class Trigger: SavitarObject, NSCopying {
     var enabled: Bool = true
     var useSubstitution: Bool = false
     var echoReply: Bool = false
-    var useForeColor: Bool = true
 
     // optional settings
     var reply: String?
@@ -133,10 +132,6 @@ class Trigger: SavitarObject, NSCopying {
             flags.insert(.echoReply)
         }
 
-        if self.useForeColor {
-            flags.insert(.useFore)
-        }
-
         return flags
     }
 
@@ -169,7 +164,6 @@ class Trigger: SavitarObject, NSCopying {
         self.enabled = !flags.contains(.disabled)
         self.useSubstitution = flags.contains(.useSubstitution)
         self.echoReply = flags.contains(.echoReply)
-        self.useForeColor = flags.contains(.useFore)
     }
 
     var flags: TrigFlags {
@@ -190,7 +184,6 @@ class Trigger: SavitarObject, NSCopying {
         self.enabled = trigger.enabled
         self.useSubstitution = trigger.useSubstitution
         self.echoReply = trigger.echoReply
-        self.useForeColor = trigger.useForeColor
         self.reply = trigger.reply
         self.say = trigger.say
         self.sound = trigger.sound
@@ -214,7 +207,6 @@ class Trigger: SavitarObject, NSCopying {
         enabled: Bool = true,
         useSubstitution: Bool = false,
         echoReply: Bool = false,
-        useForeColor: Bool = true,
         // optional settings
         reply: String? = nil,
         say: String? = nil,
@@ -365,6 +357,7 @@ class Trigger: SavitarObject, NSCopying {
             "both": .both
         ]
 
+        var hasUseFore = false
         for attribute in xml.attributes {
             switch attribute.key {
             case TriggerAttribIdentifier.audio.rawValue:
@@ -376,11 +369,21 @@ class Trigger: SavitarObject, NSCopying {
                     self.style = TrigTextStyle()
                 }
                 self.style!.backColor = NSColor(hex: attribute.value)
+                if self.style!.face == nil {
+                    self.style!.face = .backColor
+                } else {
+                    self.style!.face!.insert(.backColor)
+                }
             case TriggerAttribIdentifier.color.rawValue, TriggerAttribIdentifier.fgColor.rawValue:
                 if self.style == nil {
                     self.style = TrigTextStyle()
                 }
                 self.style!.foreColor = NSColor(hex: attribute.value)
+                if self.style!.face == nil {
+                    self.style!.face = .foreColor
+                } else {
+                    self.style!.face!.insert(.foreColor)
+                }
             case TriggerAttribIdentifier.face.rawValue:
                 if self.style == nil {
                     self.style = TrigTextStyle()
@@ -389,6 +392,7 @@ class Trigger: SavitarObject, NSCopying {
             case TriggerAttribIdentifier.flags.rawValue:
                 let flags = TrigFlags.from(string: attribute.value)
                 setValuesFrom(flags: flags)
+                hasUseFore = attribute.value.contains("useFore") // only present in v1.x documents
             case TriggerAttribIdentifier.name.rawValue:
                 self.name = attribute.value
             case TriggerAttribIdentifier.sound.rawValue:
@@ -402,6 +406,17 @@ class Trigger: SavitarObject, NSCopying {
             default:
                 print("skipping trigger attribute \(attribute.key)")
             }
+        }
+        if hasUseFore {
+           // In v1.x, "useFore" signifies "use the current world's foreground color, don't set a foreground
+           // color for the trigger. In v2.0, we translate the v1.x "useFore" flag to mean, "set the face's
+           // "foreColor" if there's not a v1.x "useFor" flag." Basically, we're saying:
+           //      face.foreColor == !flags.useFore
+           if self.style != nil {
+               if self.style!.face != nil {
+                   self.style!.face!.remove(.foreColor)
+               }
+           }
         }
 
         if let text = xml[ReplyElemIdentifier].text {
@@ -440,7 +455,9 @@ class Trigger: SavitarObject, NSCopying {
         }
 
         if let value = self.style?.face?.description {
-            trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
+            if value.count > 0 {
+                trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
+            }
         }
 
         if let value = self.style?.backColor?.toHex() {
@@ -484,7 +501,6 @@ extension TrigFlags: StrOptionSet {
         (.toEndOfWord, "matchToEndOfWord"),
         (.wholeLine, "matchWholeLine"),
         (.disabled, "disabled"),
-        (.useFore, "useFore"), // TODO: obsolete this
         (.gag, "gag"),
         (.startsWith, "matchAtStart"),
         (.echoReply, "echoReply"),
@@ -498,7 +514,6 @@ extension TrigFlags: StrOptionSet {
         "matchToEndOfWord": .toEndOfWord,
         "matchWholeLine": .wholeLine,
         "disabled": .disabled,
-        // intentially skipping "useFore"
         "gag": .gag,
         "matchAtStart": .startsWith,
         "echoReply": .echoReply,
