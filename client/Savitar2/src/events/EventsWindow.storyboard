@@ -641,14 +641,6 @@
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.blink" id="SpX-5z-ubF"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1H-S8-c7F">
-                                <rect key="frame" x="31" y="109" width="55" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="Color" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="w1h-ai-Fe8">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QS-g3-sZt">
                                 <rect key="frame" x="123" y="152" width="66" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -661,6 +653,40 @@
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.inverse" id="hCq-BR-yPk"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCM-dR-f2c">
+                                <rect key="frame" x="51" y="126" width="86" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Fore Color" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Gj-TA-bnQ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="opm-jb-V9R"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.foreColor" id="qaS-DC-WK4"/>
+                                </connections>
+                            </button>
+                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-6x-Qcp">
+                                <rect key="frame" x="146" y="123" width="44" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </colorWell>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s2J-df-h9S">
+                                <rect key="frame" x="51" y="100" width="88" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Back Color" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aR1-WY-JrD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="waf-yf-6Xp"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.backColor" id="TLQ-vx-SH5"/>
+                                </connections>
+                            </button>
+                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAS-9h-1e2">
+                                <rect key="frame" x="146" y="97" width="44" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </colorWell>
                         </subviews>
                     </view>
                     <connections>

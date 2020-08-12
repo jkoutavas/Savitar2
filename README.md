@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 8th, 2020
+README last updated: August 11th, 2020
 
 ## Current state of the application
 
@@ -107,16 +107,16 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods`
 
 ```
-     194 text files.
-     189 unique files.                                          
-      61 files ignored.
+     211 text files.
+     200 unique files.                                          
+      78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=1.09 s (126.7 files/s, 17192.3 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.93 s (148.9 files/s, 20312.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           92           2534           2354           8235
-XML                             12              0             24           2763
+Swift                           92           2538           2364           8287
+XML                             12              0             24           2789
 C                                1             76             52           1008
 Markdown                         5            172              0            506
 Bourne Shell                    10             66            173            287
@@ -127,6 +127,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           138           2889           2673          13167
+SUM:                           138           2893           2683          13245
 -------------------------------------------------------------------------------
 ```
