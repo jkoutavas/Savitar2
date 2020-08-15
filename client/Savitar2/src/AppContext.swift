@@ -13,6 +13,7 @@ var globalStoreUndoManagerProvider = UndoManagerProvider()
 var globalStore = reactionsStore(undoManagerProvider: { globalStoreUndoManagerProvider.undoManager })
 
 struct AppContext {
+    static var isTerminating = false
     static var prefs = AppPreferences()
     static var worldMan = WorldMan()
 
@@ -22,7 +23,9 @@ struct AppContext {
         try prefs.load()
     }
 
-    static func save() throws {
-        try prefs.save()
+    static func save() {
+        do {
+            try prefs.save()
+        } catch {}
     }
 }

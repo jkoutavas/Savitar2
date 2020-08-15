@@ -9,14 +9,12 @@
         <!--Window Controller-->
         <scene sceneID="v7Q-MB-zTA">
             <objects>
-                <windowController id="XVw-G3-IPJ" sceneMemberID="viewController">
-                    <window key="window" title="Events Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PNs-S1-sj8">
+                <windowController id="XVw-G3-IPJ" customClass="EventsWindowController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Events Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PNs-S1-sj8">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="362" width="980" height="400"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-                        <value key="minSize" type="size" width="980" height="400"/>
-                        <value key="maxSize" type="size" width="980" height="400"/>
                         <connections>
                             <outlet property="delegate" destination="XVw-G3-IPJ" id="P5W-jF-wla"/>
                         </connections>
@@ -697,6 +695,7 @@
                 </viewController>
                 <customObject id="5fG-B3-BlX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="V2z-UN-cD2"/>
+                <userDefaultsController id="0de-Pz-ULv"/>
             </objects>
             <point key="canvasLocation" x="1872" y="243"/>
         </scene>

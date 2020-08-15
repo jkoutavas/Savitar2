@@ -30,16 +30,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             try AppContext.load()
         } catch {}
+
+        if AppContext.prefs.flags.contains(.startupEventsWindow) {
+            showEventsWindowAction(self)
+        }
     }
 
     func applicationWillTerminate(_: Notification) {
         if isRunningTests {
             return
         }
-
-        do {
-            try AppContext.save()
-        } catch {}
+        AppContext.isTerminating = true
+        AppContext.save()
     }
 
     func applicationOpenUntitledFile(_: NSApplication) -> Bool {
@@ -49,19 +51,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func showEventsWindowAction(_: Any) {
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
+        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else {
             return
         }
         guard let myWindow = controller.window else {
             return
         }
-        NSApp.activate(ignoringOtherApps: true)
-        let vc = NSWindowController(window: myWindow)
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             splitViewController.store = globalStore
-            vc.showWindow(self)
+            controller.showWindow(self)
+            AppContext.prefs.flags.insert(.startupEventsWindow)
+            AppContext.save()
         }
-        myWindow.makeKeyAndOrderFront(self)
     }
 }

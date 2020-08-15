@@ -28,6 +28,7 @@ struct PrefsFlags: OptionSet {
     static let monoFontsOnly = PrefsFlags(rawValue: 1 << 11)
     static let defaultWordWrap = PrefsFlags(rawValue: 1 << 12)
     static let dontWarnPicker = PrefsFlags(rawValue: 1 << 13)
+    static let startupEventsWindow = PrefsFlags(rawValue: 1 << 14)
 }
 
 class AppPreferences: SavitarXMLProtocol {
@@ -234,7 +235,8 @@ extension PrefsFlags: StrOptionSet {
         (.debug, "debug"),
         (.monoFontsOnly, "monoFontsOnly"),
         (.defaultWordWrap, "defaultWordWrap"),
-        (.dontWarnPicker, "dontWarnPicker")
+        (.dontWarnPicker, "dontWarnPicker"),
+        (.startupEventsWindow, "startupEventsWindow")
         ] }
     static var labelDict: [String: Self] { return [
         "commandEcho": .commandEcho,
@@ -250,6 +252,7 @@ extension PrefsFlags: StrOptionSet {
         "debug": .debug,
         "monoFontsOnly": .monoFontsOnly,
         "defaultWordWrap": .defaultWordWrap,
-        "dontWarnPicker": .dontWarnPicker
+        "dontWarnPicker": .dontWarnPicker,
+        "startupEventsWindow": .startupEventsWindow
         ] }
 }
