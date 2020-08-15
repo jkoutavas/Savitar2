@@ -49,7 +49,7 @@ struct TrigFlags: OptionSet {
     static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
-//    static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
+    //    static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
     static let gag = TrigFlags(rawValue: 1 << 5)
     static let startsWith = TrigFlags(rawValue: 1 << 6)
     static let echoReply = TrigFlags(rawValue: 1 << 7)
@@ -408,15 +408,15 @@ class Trigger: SavitarObject, NSCopying {
             }
         }
         if hasUseFore {
-           // In v1.x, "useFore" signifies "use the current world's foreground color, don't set a foreground
-           // color for the trigger. In v2.0, we translate the v1.x "useFore" flag to mean, "set the face's
-           // "foreColor" if there's not a v1.x "useFor" flag." Basically, we're saying:
-           //      face.foreColor == !flags.useFore
-           if self.style != nil {
-               if self.style!.face != nil {
-                   self.style!.face!.remove(.foreColor)
-               }
-           }
+            // In v1.x, "useFore" signifies "use the current world's foreground color, don't set a foreground
+            // color for the trigger. In v2.0, we translate the v1.x "useFore" flag to mean, "set the face's
+            // "foreColor" if there's not a v1.x "useFor" flag." Basically, we're saying:
+            //      face.foreColor == !flags.useFore
+            if self.style != nil {
+                if self.style!.face != nil {
+                    self.style!.face!.remove(.foreColor)
+                }
+            }
         }
 
         if let text = xml[ReplyElemIdentifier].text {

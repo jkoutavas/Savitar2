@@ -87,7 +87,7 @@ class TriggerAppearanceController: NSController {
     @objc dynamic var backColorColor: NSColor {
         get { return trigger.style?.backColor ?? NSColor.black }
         // For unknown reasons, this setter doesn't get called. Have to use the backColorChanged outlet as a workaround
-//        set { store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: newValue)) }
+        //        set { store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: newValue)) }
     }
 
     @objc dynamic var backColorWellEnabled: Bool {
@@ -100,7 +100,7 @@ class TriggerAppearanceController: NSController {
     @objc dynamic var foreColorColor: NSColor {
         get { return trigger.style?.foreColor ?? NSColor.white }
         // For unknown reasons, this setter doesn't get called. Have to use the foreColorChanged outlet as a workaround
- //       set { store?.dispatch(TriggerAction.setForeColor(trigger.objectID, color: newValue)) }
+        //       set { store?.dispatch(TriggerAction.setForeColor(trigger.objectID, color: newValue)) }
     }
 
     @objc dynamic var foreColorWellEnabled: Bool {
@@ -108,7 +108,7 @@ class TriggerAppearanceController: NSController {
             guard let face = trigger.style?.face else { return false }
             return trigger.appearance == .changeAppearance && face.contains(.foreColor)
         }
-     }
+    }
 
     @objc dynamic var storeIsPresent: Bool {
         get { return store != nil }
