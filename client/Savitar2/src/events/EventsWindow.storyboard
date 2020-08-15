@@ -560,34 +560,37 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6N-DD-hJn">
                                 <rect key="frame" x="31" y="239" width="237" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="Don't display the text (gag the text)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="7c2-W5-aYx">
+                                <buttonCell key="cell" type="radio" title="Don't display the text (gag the text)" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="7c2-W5-aYx">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="9Zt-8p-rIB"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.storeIsPresent" id="GoU-zD-7s6"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZF-RJ-CNR">
                                 <rect key="frame" x="31" y="217" width="160" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="Don't alter appearance" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Q4l-10-Kxa">
+                                <buttonCell key="cell" type="radio" title="Don't alter appearance" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="Q4l-10-Kxa">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="r0q-2m-cDR"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.storeIsPresent" id="yuq-M6-fCR"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YlY-19-3ZS">
                                 <rect key="frame" x="31" y="195" width="187" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="Change the appearance to:" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="WpK-41-ymd">
+                                <buttonCell key="cell" type="radio" title="Change the appearance to:" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="WpK-41-ymd">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="appearanceRadioButtonChanged:" target="fa1-Uj-duv" id="PmH-Fv-1IW"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.storeIsPresent" id="VIw-Ql-qjf"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSV-WT-xrS">
@@ -823,7 +826,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -856,7 +859,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -982,7 +985,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1015,7 +1018,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">

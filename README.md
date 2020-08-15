@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 11th, 2020
+README last updated: August 14th, 2020
 
 ## Current state of the application
 
@@ -34,7 +34,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 _ Input pane command recall and local commands supported
 _ Implement input triggers
 √ Implement Trigger Matching tab view
-_ Implement Trigger Appearance tab view
+√ Implement Trigger Appearance tab view
 _ Implement Trigger Audio Cue tab view
 _ Implement Trigger Reply tab view
 √ Implement Macro editor
@@ -107,16 +107,16 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods`
 
 ```
-     211 text files.
-     200 unique files.                                          
+     212 text files.
+     201 unique files.                                          
       78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.93 s (148.9 files/s, 20312.2 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.75 s (184.8 files/s, 25195.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           92           2538           2364           8287
-XML                             12              0             24           2789
+Swift                           93           2554           2378           8367
+XML                             12              0             24           2808
 C                                1             76             52           1008
 Markdown                         5            172              0            506
 Bourne Shell                    10             66            173            287
@@ -127,6 +127,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           138           2893           2683          13245
+SUM:                           139           2909           2697          13344
 -------------------------------------------------------------------------------
 ```

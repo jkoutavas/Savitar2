@@ -110,6 +110,10 @@ class TriggerAppearanceController: NSController {
         }
      }
 
+    @objc dynamic var storeIsPresent: Bool {
+        get { return store != nil }
+    }
+
     @objc dynamic var styleEnabled: Bool {
         get { return trigger.appearance == .changeAppearance }
     }
