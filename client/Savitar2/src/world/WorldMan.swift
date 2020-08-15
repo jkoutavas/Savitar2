@@ -18,7 +18,7 @@ class WorldMan: ModelManager<World>, SavitarXMLProtocol {
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[WorldsElemIdentifier][WorldElemIdentifier] {
+        for elem in xml[WorldsElemIdentifier][WorldElemIdentifier] {
             let object = World()
             try object.parse(xml: elem)
             add(object)

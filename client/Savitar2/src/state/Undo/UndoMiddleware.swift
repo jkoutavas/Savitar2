@@ -29,7 +29,7 @@ class UndoableStateAdapter: UndoActionContext {
 extension UndoCommand {
     convenience init?(appAction: UndoableAction, context: UndoActionContext, dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context)
-        else { return nil }
+            else { return nil }
 
         self.init(undoBlock: { _ = dispatch(inverseAction.notUndoable) },
                   undoName: appAction.name,
@@ -47,21 +47,21 @@ func undoMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middle
         next in {
             action in
 
-                // Pass already undone actions through
-                if let undoneAction = action as? NotUndoable {
-                    next(undoneAction.action)
-                    return
-                }
-
-                if let undoableAction = action as? UndoableAction, undoableAction.isUndoable,
-                    let state = getState(),
-                    let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
-                    let undoManager = undoManagerProvider() {
-                    undo.register(undoManager: undoManager)
-                }
-
-                next(action)
+            // Pass already undone actions through
+            if let undoneAction = action as? NotUndoable {
+                next(undoneAction.action)
+                return
             }
+
+            if let undoableAction = action as? UndoableAction, undoableAction.isUndoable,
+                let state = getState(),
+                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
+                let undoManager = undoManagerProvider() {
+                undo.register(undoManager: undoManager)
+            }
+
+            next(action)
+        }
         }
     }
 

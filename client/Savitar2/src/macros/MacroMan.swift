@@ -18,7 +18,7 @@ class MacroMan: ModelManager<Macro>, SavitarXMLProtocol {
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[MacrosElemIdentifier][MacroElemIdentifier] {
+        for elem in xml[MacrosElemIdentifier][MacroElemIdentifier] {
             let object = Macro()
             try object.parse(xml: elem)
             add(object)

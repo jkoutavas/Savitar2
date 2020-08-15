@@ -42,4 +42,4 @@ class ViewController: NSViewController {
     func rowHeight() -> CGFloat {
         return textView?.layoutManager?.defaultLineHeight(for: font) ?? 0
     }
- }
+}

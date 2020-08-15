@@ -28,7 +28,7 @@ class InputViewController: ViewController {
 
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 36 {
-             // we're wrapping this in an async call so we call unwind the
+            // we're wrapping this in an async call so we call unwind the
             // keyDown event off the stack before clearing the string
             DispatchQueue.main.async { [unowned self] in
                 if let textView = self.textView, textView.string.count > 1 {

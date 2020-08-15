@@ -13,7 +13,7 @@ import SwiftyXMLParser
 
 class SavColorTests: XCTestCase {
 
-     func testV2CarriageReturn() throws {
+    func testV2CarriageReturn() throws {
         let xmlString = """
         <COLOR
             NAME="red"

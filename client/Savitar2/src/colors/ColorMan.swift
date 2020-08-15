@@ -18,7 +18,7 @@ class ColorMan: ModelManager<SavColor>, SavitarXMLProtocol {
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[ColorsElemIdentifier][ColorElemIdentifier] {
+        for elem in xml[ColorsElemIdentifier][ColorElemIdentifier] {
             let object = SavColor()
             try object.parse(xml: elem)
             add(object)

@@ -19,4 +19,4 @@ class DocumentV2: Document {
     override func read(from data: Data, ofType typeName: String) throws {
         try super.read(from: data, ofType: typeName)
     }
- }
+}

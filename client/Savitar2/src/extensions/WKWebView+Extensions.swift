@@ -32,17 +32,17 @@ extension WKWebView {
         // append this output as a new <div>
 
         let js = """
-            var i=document.createElement('div');
-            i.setAttribute('class', 'reset bg-reset');
-            i.innerHTML=\"<pre>\(html)</pre>\";
-            document.body.appendChild(i);
+        var i=document.createElement('div');
+        i.setAttribute('class', 'reset bg-reset');
+        i.innerHTML=\"<pre>\(html)</pre>\";
+        document.body.appendChild(i);
         """
         run(javaScript: js)
         scrollToEndOfDocument(nil)
 
         #if DEBUG_WKWEBKIT
-//        print(html)
-//        printDOM(element: "document.body.innerHTML")
+        //        print(html)
+        //        printDOM(element: "document.body.innerHTML")
         #endif
     }
 
@@ -51,64 +51,64 @@ extension WKWebView {
         let foreColor = world.foreColor.toHex ?? "white"
         let linkColor = world.linkColor.toHex ?? "blue"
 
-         let ss = """
-         <style id='head-style' type="text/css">
-             body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
-             body * {font: \(world.fontSize)px \(world.fontName);}
-             a { color: #\(linkColor); }
-             code {font: \(world.monoFontSize)px \(world.monoFontName);}
-             pre {
-                overflow-x: auto;
-                white-space: pre-wrap;
-                white-space: -moz-pre-wrap;
-                white-space: -pre-wrap;
-                white-space: -o-pre-wrap;
-                word-wrap: break-word;
-                display: inline;
-                margin: 0;
-             }
-             .reset       {color: #\(foreColor);}
-             .bg-reset    {background-color: #\(backColor);}
-             .inverted    {color: #\(backColor);}
-             .bg-inverted {background-color: #\(foreColor);}
-             .dimgray     {color: dimgray;}
-             .red         {color: red;}
-             .green       {color: green;}
-             .yellow      {color: olive;}
-             .blue        {color: blue;}
-             .purple      {color: purple;}
-             .cyan        {color: teal;}
-             .white       {color: gray;}
-             .bg-black    {background-color: black;}
-             .bg-red      {background-color: red;}
-             .bg-green    {background-color: green;}
-             .bg-yellow   {background-color: olive;}
-             .bg-blue     {background-color: blue;}
-             .bg-purple   {background-color: purple;}
-             .bg-cyan     {background-color: teal;}
-             .bg-white    {background-color: gray;}
-             .underline   {text-decoration: underline;}
-             .bold        {font-weight: bold;}
-             .italic      {font-style: italic;}
-             .blink       {animation: blink 2s ease infinite;}
-             @keyframes blink{
-                 0%{opacity:0;}
-                 50%{opacity:1;}
-                 100%{opacity:0;}
-             }
-             .crossed-out {text-decoration: line-through;}
-             .highlighted {filter: contrast(70%) brightness(190%);}
-         </style>
-         """
+        let ss = """
+        <style id='head-style' type="text/css">
+        body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
+        body * {font: \(world.fontSize)px \(world.fontName);}
+        a { color: #\(linkColor); }
+        code {font: \(world.monoFontSize)px \(world.monoFontName);}
+        pre {
+        overflow-x: auto;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+        display: inline;
+        margin: 0;
+        }
+        .reset       {color: #\(foreColor);}
+        .bg-reset    {background-color: #\(backColor);}
+        .inverted    {color: #\(backColor);}
+        .bg-inverted {background-color: #\(foreColor);}
+        .dimgray     {color: dimgray;}
+        .red         {color: red;}
+        .green       {color: green;}
+        .yellow      {color: olive;}
+        .blue        {color: blue;}
+        .purple      {color: purple;}
+        .cyan        {color: teal;}
+        .white       {color: gray;}
+        .bg-black    {background-color: black;}
+        .bg-red      {background-color: red;}
+        .bg-green    {background-color: green;}
+        .bg-yellow   {background-color: olive;}
+        .bg-blue     {background-color: blue;}
+        .bg-purple   {background-color: purple;}
+        .bg-cyan     {background-color: teal;}
+        .bg-white    {background-color: gray;}
+        .underline   {text-decoration: underline;}
+        .bold        {font-weight: bold;}
+        .italic      {font-style: italic;}
+        .blink       {animation: blink 2s ease infinite;}
+        @keyframes blink{
+        0%{opacity:0;}
+        50%{opacity:1;}
+        100%{opacity:0;}
+        }
+        .crossed-out {text-decoration: line-through;}
+        .highlighted {filter: contrast(70%) brightness(190%);}
+        </style>
+        """
 
         // update the head <style> element
         run(javaScript: """
-        var ss = document.getElementById('head-style');
-        if (ss !== null) {
+            var ss = document.getElementById('head-style');
+            if (ss !== null) {
             ss.remove();
-        }
-        document.head.insertAdjacentHTML('beforeend', `\(ss)`)
-        """)
+            }
+            document.head.insertAdjacentHTML('beforeend', `\(ss)`)
+            """)
 
         #if DEBUG_WKWEBKIT
         printDOM(element: "document.head.innerHTML")
@@ -124,7 +124,7 @@ extension WKWebView {
                 print(result!)
                 #endif
             }
-         }
+        }
     }
 
     // Debug function, dump current html to the console

@@ -68,7 +68,7 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
         default:
             return nil
         }
-     }
+    }
 }
 
 extension TriggerTableDataSource: CheckableItemChangeDelegate {
