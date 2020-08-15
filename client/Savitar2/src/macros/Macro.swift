@@ -56,7 +56,7 @@ class Macro: SavitarObject {
         }
 
         if let text = xml[ValueElemIdentifier].text {
-             self.value = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.value = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 

@@ -12,7 +12,7 @@ extension XMLElement {
     func addAttribute(name: String, stringValue: String) {
         // TODO: need to do XML escaping for the stringValue?
         if let attrib = XMLNode.attribute(withName: name, stringValue: stringValue) as? XMLNode {
-             addAttribute(attrib)
-         }
+            addAttribute(attrib)
+        }
     }
 }

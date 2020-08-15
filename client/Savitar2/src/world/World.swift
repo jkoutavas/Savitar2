@@ -22,11 +22,11 @@ extension WorldFlags: StrOptionSet {
     static var labels: [Label] { return [
         (.ansi, "ansi"),
         (.html, "html")
-    ]}
+        ]}
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
         "html": .html
-    ]}
+        ]}
 }
 
 enum IntensityType: Int {
@@ -321,7 +321,7 @@ class World: SavitarObject, NSCopying {
         let worldElem = XMLElement(name: WorldElemIdentifier)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,
-                        stringValue: "\(TelnetIdentifier)\(host):\(port)")
+                               stringValue: "\(TelnetIdentifier)\(host):\(port)")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.name.rawValue, stringValue: name)
 
@@ -366,16 +366,16 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.MCPFontSize.rawValue, stringValue: "\(Int(monoFontSize))")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.resolution.rawValue,
-            stringValue: "\(outputRows)x\(columns)x\(inputRows)")
+                               stringValue: "\(outputRows)x\(columns)x\(inputRows)")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.position.rawValue,
-            stringValue: "\(Int(position.x)),\(Int(position.y))")
+                               stringValue: "\(Int(position.x)),\(Int(position.y))")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.windowSize.rawValue,
-            stringValue: "\(Int(windowSize.width)),\(Int(windowSize.height))")
+                               stringValue: "\(Int(windowSize.width)),\(Int(windowSize.height))")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.zoomed.rawValue,
-            stringValue: zoomed ? "TRUE" : "FALSE")
+                               stringValue: zoomed ? "TRUE" : "FALSE")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.outputMax.rawValue, stringValue: String(outputMax))
 

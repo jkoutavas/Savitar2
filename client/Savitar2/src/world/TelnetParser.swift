@@ -297,7 +297,7 @@ struct TelnetParser {
     }
 
     private func telnetLog(message: String, option: UInt8) {
-    #if DEBUG_TELNET
+        #if DEBUG_TELNET
         var label: String
         switch option {
         case 0:
@@ -326,6 +326,6 @@ struct TelnetParser {
             label = String(option)
         }
         logger?.info("\(message) \(label)")
-    #endif
+        #endif
     }
 }

@@ -18,7 +18,7 @@ class TriggerMan: ModelManager<Trigger>, SavitarXMLProtocol {
     //***************************
 
     func parse(xml: XML.Accessor) throws {
-         for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
+        for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {
             let trigger = Trigger()
             try trigger.parse(xml: elem)
 

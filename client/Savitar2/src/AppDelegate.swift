@@ -24,14 +24,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
-          MSAnalytics.self,
-          MSCrashes.self
+            MSAnalytics.self,
+            MSCrashes.self
         ])
 
         do {
             try AppContext.load()
         } catch {}
-     }
+    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         if isRunningTests {

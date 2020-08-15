@@ -10,8 +10,8 @@ import Foundation
 
 // TODO: eventually may want to move this into its own module
 enum Result<T, E> {
-  case success(T)
-  case error(E)
+    case success(T)
+    case error(E)
 }
 
 typealias OutputResult = Result<String, String>

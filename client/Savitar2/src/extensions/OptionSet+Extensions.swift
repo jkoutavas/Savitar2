@@ -17,8 +17,8 @@ protocol StrOptionSet: OptionSet, CustomStringConvertible {
 }
 extension StrOptionSet {
     var strs: [String] { return Self.labels
-                                .filter { (label: Label) in self.isDisjoint(with: label.0) == false }
-                                .map { (label: Label) in label.1 }
+        .filter { (label: Label) in self.isDisjoint(with: label.0) == false }
+        .map { (label: Label) in label.1 }
     }
 
     static public func from(string: String) -> Self {

@@ -47,16 +47,16 @@ class SwiftyXMLParserTests: XCTestCase {
 
         XCTAssertEqual(xml["DOCUMENT"]["test2"].attributes["text"], "%%content")
 
-/*
-        // swiftlint:disable line_length
-        // TODO: this test fails when dealing with defined entities. It's a known issue with Apple's XMLParser
-        // https://stackoverflow.com/questions/44680734/parsing-xml-with-entities-in-swift-with-xmlparser?noredirect=1&lq=1
-        // and I should move over to using another parser, one that's libxml2 based, like FoundationXMKL
-        // https://forums.swift.org/t/new-swift-corelibs-foundation-module-foundationxml/27544
-        if let text = xml["DOCUMENT"]["test2"].text {
-            XCTAssertEqual(text.trimmingCharacters(in: .whitespacesAndNewlines), "##foo")
-        }
-        // swiftlint:enable line_length
-*/
+        /*
+         // swiftlint:disable line_length
+         // TODO: this test fails when dealing with defined entities. It's a known issue with Apple's XMLParser
+         // https://stackoverflow.com/questions/44680734/parsing-xml-with-entities-in-swift-with-xmlparser?noredirect=1&lq=1
+         // and I should move over to using another parser, one that's libxml2 based, like FoundationXMKL
+         // https://forums.swift.org/t/new-swift-corelibs-foundation-module-foundationxml/27544
+         if let text = xml["DOCUMENT"]["test2"].text {
+         XCTAssertEqual(text.trimmingCharacters(in: .whitespacesAndNewlines), "##foo")
+         }
+         // swiftlint:enable line_length
+         */
     }
 }
