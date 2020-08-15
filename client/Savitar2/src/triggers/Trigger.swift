@@ -278,12 +278,12 @@ class Trigger: SavitarObject, NSCopying {
             }
             if appearance != .gag {
                 if let subst = self.substitution, useSubstitution {
-                    if let style = self.style {
+                    if let style = self.style, appearance == .changeAppearance {
                         resultLine += style.on + subst + style.off
                     } else {
                         resultLine += subst
                     }
-                } else if let style = self.style {
+                } else if let style = self.style, appearance == .changeAppearance {
                     resultLine += style.on + line[range] + style.off
                 } else {
                     resultLine = String(line[range])

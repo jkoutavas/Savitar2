@@ -6,7 +6,7 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ReSwift
 
 struct SelectTriggerAction: ReactionAction {
@@ -42,7 +42,9 @@ enum TriggerAction: UndoableAction {
     case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
     case setAppearance(SavitarObjectID, appearance: TrigAppearance)
+    case setBackColor(SavitarObjectID, color: NSColor)
     case setFace(SavitarObjectID, face: TrigFace)
+    case setForeColor(SavitarObjectID, color: NSColor)
     case setMatching(SavitarObjectID, matching: TrigMatching)
     case setSpecifier(SavitarObjectID, specifier: TrigSpecifier)
     case setSubstitution(SavitarObjectID, substitution: String)
@@ -61,7 +63,9 @@ enum TriggerAction: UndoableAction {
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
         case .setAppearance: return "Change Trigger Appearance Type"
+        case .setBackColor: return "Change Trigger Back Color"
         case .setFace: return "Change Trigger Face"
+        case .setForeColor: return "Change Trigger Fore Color"
         case .setMatching: return "Change Trigger Matching"
         case .setSpecifier: return "Change Trigger Specifier"
         case .setSubstitution: return "Change Trigger Substitution"
@@ -88,9 +92,17 @@ enum TriggerAction: UndoableAction {
             guard let prev = context.triggerAppearance(triggerID: triggerID) else { return nil }
             return TriggerAction.setAppearance(triggerID, appearance: prev)
 
+        case let .setBackColor(triggerID, color: _):
+            guard let prev = context.triggerBackColor(triggerID: triggerID) else { return nil }
+            return TriggerAction.setBackColor(triggerID, color: prev)
+
         case let .setFace(triggerID, face: _):
             guard let prev = context.triggerFace(triggerID: triggerID) else { return nil }
             return TriggerAction.setFace(triggerID, face: prev)
+
+        case let .setForeColor(triggerID, color: _):
+            guard let prev = context.triggerForeColor(triggerID: triggerID) else { return nil }
+            return TriggerAction.setForeColor(triggerID, color: prev)
 
         case let .setMatching(triggerID, matching: _):
             guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }

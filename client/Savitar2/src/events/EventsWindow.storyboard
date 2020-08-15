@@ -549,9 +549,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7x-yf-cJG">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y7x-yf-cJG">
                                 <rect key="frame" x="18" y="264" width="186" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="This trigger's text appearance" id="Q9Y-T8-Ia0">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -594,19 +593,19 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSV-WT-xrS">
                                 <rect key="frame" x="51" y="172" width="50" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cQH-UQ-v3M">
+                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="cQH-UQ-v3M">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="L4E-d4-qEU"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.bold" id="fqa-Rp-nMh"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="L4E-d4-qEU"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUf-ej-TTt">
                                 <rect key="frame" x="124" y="172" width="81" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Underline" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="770-jj-uar">
+                                <buttonCell key="cell" type="check" title="Underline" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="770-jj-uar">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -618,74 +617,92 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v3P-mC-kng">
                                 <rect key="frame" x="220" y="172" width="51" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5hO-on-piD">
+                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="5hO-on-piD">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="653-tu-05p"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.italic" id="kl3-fy-p9d"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="653-tu-05p"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1k-5p-bh3">
                                 <rect key="frame" x="51" y="152" width="52" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Blink" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="orH-xE-SFV">
+                                <buttonCell key="cell" type="check" title="Blink" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="orH-xE-SFV">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="9Dr-FT-mxm"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.blink" id="SpX-5z-ubF"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="9Dr-FT-mxm"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QS-g3-sZt">
                                 <rect key="frame" x="123" y="152" width="66" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Inverse" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m9c-VV-Zip">
+                                <buttonCell key="cell" type="check" title="Inverse" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="m9c-VV-Zip">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="SXT-Az-l1h"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.inverse" id="hCq-BR-yPk"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="SXT-Az-l1h"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCM-dR-f2c">
                                 <rect key="frame" x="51" y="126" width="86" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Fore Color" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Gj-TA-bnQ">
+                                <buttonCell key="cell" type="check" title="Fore Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="5Gj-TA-bnQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="opm-jb-V9R"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.foreColor" id="qaS-DC-WK4"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="opm-jb-V9R"/>
                                 </connections>
                             </button>
-                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-6x-Qcp">
-                                <rect key="frame" x="146" y="123" width="44" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </colorWell>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s2J-df-h9S">
                                 <rect key="frame" x="51" y="100" width="88" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Back Color" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aR1-WY-JrD">
+                                <buttonCell key="cell" type="check" title="Back Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="aR1-WY-JrD">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="waf-yf-6Xp"/>
                                     <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.backColor" id="TLQ-vx-SH5"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.styleEnabled" id="waf-yf-6Xp"/>
                                 </connections>
                             </button>
-                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAS-9h-1e2">
+                            <colorWell focusRingType="exterior" fixedFrame="YES" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAS-9h-1e2">
                                 <rect key="frame" x="146" y="97" width="44" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="backColorChanged:" target="fa1-Uj-duv" id="Uhx-AT-9uo"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.backColorWellEnabled" id="Yg0-OI-tIi"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.backColorColor" id="NhO-S4-tTX"/>
+                                </connections>
+                            </colorWell>
+                            <colorWell focusRingType="exterior" fixedFrame="YES" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0f-6x-Qcp">
+                                <rect key="frame" x="146" y="123" width="44" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="foreColorChanged:" target="fa1-Uj-duv" id="SGG-XY-bcI"/>
+                                    <binding destination="fa1-Uj-duv" name="enabled" keyPath="representedObject.foreColorWellEnabled" id="Kxl-hQ-DEf"/>
+                                    <binding destination="fa1-Uj-duv" name="value" keyPath="representedObject.foreColorColor" id="JWY-8d-DAF">
+                                        <dictionary key="options">
+                                            <bool key="NSValidatesImmediately" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </colorWell>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="y7x-yf-cJG" firstAttribute="leading" secondItem="WVj-5c-Uem" secondAttribute="leading" constant="20" id="3A2-81-B4y"/>
+                            <constraint firstItem="y7x-yf-cJG" firstAttribute="top" secondItem="WVj-5c-Uem" secondAttribute="top" constant="20" id="xzh-rs-ah7"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="changeRadio" destination="YlY-19-3ZS" id="aRk-TF-WVc"/>
@@ -806,7 +823,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -839,7 +856,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -965,7 +982,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -998,7 +1015,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">

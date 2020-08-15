@@ -6,7 +6,7 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 protocol UndoActionContext {
     func macroName(macroID: SavitarObjectID) -> String?
@@ -14,7 +14,9 @@ protocol UndoActionContext {
     func macroValue(macroID: SavitarObjectID) -> String?
 
     func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance?
+    func triggerBackColor(triggerID: SavitarObjectID) -> NSColor?
     func triggerFace(triggerID: SavitarObjectID) -> TrigFace?
+    func triggerForeColor(triggerID: SavitarObjectID) -> NSColor?
     func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching?
     func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier?
     func triggerSubstitution(triggerID: SavitarObjectID) -> String?

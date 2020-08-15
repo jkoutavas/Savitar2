@@ -22,25 +22,36 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     let trigger = trigger
 
     switch action {
-    case let .enable(triggerID):
-        guard trigger.objectID == triggerID else { return trigger }
-        trigger.enabled = true
-
     case let .disable(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.enabled = false
+
+    case let .enable(triggerID):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.enabled = true
 
     case let .rename(triggerID, name: name):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.name = name
 
-    case let .setFace(triggerID, face: face):
-        guard trigger.objectID == triggerID else { return trigger }
-        trigger.style?.face = face
-
     case let .setAppearance(triggerID, appearance: appearance):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.appearance = appearance
+
+    case let .setBackColor(triggerID, color: color):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.style?.backColor = color
+        trigger.style?.formOnOff()
+
+    case let .setFace(triggerID, face: face):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.style?.face = face
+        trigger.style?.formOnOff()
+
+    case let .setForeColor(triggerID, color: color):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.style?.foreColor = color
+        trigger.style?.formOnOff()
 
     case let .setMatching(triggerID, matching: matching):
         guard trigger.objectID == triggerID else { return trigger }

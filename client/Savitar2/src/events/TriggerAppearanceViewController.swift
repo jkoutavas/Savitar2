@@ -46,6 +46,20 @@ class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
         }
     }
 
+    @IBAction func backColorChanged(_ sender: AnyObject) {
+        guard let trigger = self.trigger else { return }
+        if let colorWell = sender as? NSColorWell {
+            store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: colorWell.color))
+        }
+    }
+
+    @IBAction func foreColorChanged(_ sender: AnyObject) {
+        guard let trigger = self.trigger else { return }
+        if let colorWell = sender as? NSColorWell {
+            store?.dispatch(TriggerAction.setForeColor(trigger.objectID, color: colorWell.color))
+        }
+    }
+
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
@@ -69,6 +83,32 @@ class TriggerAppearanceController: NSController {
     var trigger: Trigger
     var store: ReactionsStore?
     var faceDescription: String
+
+    @objc dynamic var backColorColor: NSColor {
+        get { return trigger.style?.backColor ?? NSColor.black }
+        // For unknown reasons, this setter doesn't get called. Have to use the backColorChanged outlet as a workaround
+//        set { store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: newValue)) }
+    }
+
+    @objc dynamic var backColorWellEnabled: Bool {
+        get {
+            guard let face = trigger.style?.face else { return false }
+            return trigger.appearance == .changeAppearance && face.contains(.backColor)
+        }
+    }
+
+    @objc dynamic var foreColorColor: NSColor {
+        get { return trigger.style?.foreColor ?? NSColor.white }
+        // For unknown reasons, this setter doesn't get called. Have to use the foreColorChanged outlet as a workaround
+ //       set { store?.dispatch(TriggerAction.setForeColor(trigger.objectID, color: newValue)) }
+    }
+
+    @objc dynamic var foreColorWellEnabled: Bool {
+        get {
+            guard let face = trigger.style?.face else { return false }
+            return trigger.appearance == .changeAppearance && face.contains(.foreColor)
+        }
+     }
 
     @objc dynamic var styleEnabled: Bool {
         get { return trigger.appearance == .changeAppearance }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ReSwift
 
 class UndoableStateAdapter: UndoActionContext {
@@ -32,8 +32,16 @@ class UndoableStateAdapter: UndoActionContext {
         return state.triggerList.item(objectID: triggerID)?.appearance
     }
 
+    func triggerBackColor(triggerID: SavitarObjectID) -> NSColor? {
+        return state.triggerList.item(objectID: triggerID)?.style?.backColor
+    }
+
     func triggerFace(triggerID: SavitarObjectID) -> TrigFace? {
         return state.triggerList.item(objectID: triggerID)?.style?.face
+    }
+
+    func triggerForeColor(triggerID: SavitarObjectID) -> NSColor? {
+        return state.triggerList.item(objectID: triggerID)?.style?.foreColor
     }
 
     func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching? {
