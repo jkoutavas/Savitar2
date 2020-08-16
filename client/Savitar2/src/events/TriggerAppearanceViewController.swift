@@ -38,11 +38,11 @@ class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
         guard let trigger = self.trigger else { return }
 
         if gagRadio.state == .on {
-            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .gag))
+            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, type: .gag))
         } else if dontAlterRadio.state == .on {
-            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .dontUseStyle))
+            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, type: .dontUseStyle))
         } else {
-            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .changeAppearance))
+            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, type: .changeAppearance))
         }
     }
 

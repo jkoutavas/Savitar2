@@ -34,9 +34,13 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.name = name
 
-    case let .setAppearance(triggerID, appearance: appearance):
+    case let .setAppearance(triggerID, type: appearance):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.appearance = appearance
+
+    case let .setAudioType(triggerID, type: audioType):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.audioType = audioType
 
     case let .setBackColor(triggerID, color: color):
         guard trigger.objectID == triggerID else { return trigger }

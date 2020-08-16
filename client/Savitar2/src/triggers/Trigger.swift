@@ -11,17 +11,17 @@ import SwiftyXMLParser
 
 let TriggerElemIdentifier = "TRIGGER"
 
-enum AudioType {
-    case silent
-    case sound
-    case speakEvent
-    case sayText
-}
-
 enum TrigAppearance {
     case gag
     case dontUseStyle
     case changeAppearance
+}
+
+enum TrigAudioType {
+    case silent
+    case sound
+    case speakEvent
+    case sayText
 }
 
 enum TrigMatching {
@@ -63,7 +63,7 @@ class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
     // default settings
-    var audioCue: AudioType = .silent
+    var audioType: TrigAudioType = .silent
     var appearance: TrigAppearance = .dontUseStyle
     var matching: TrigMatching = .exact
     var specifier: TrigSpecifier = .lineContains
@@ -175,7 +175,7 @@ class Trigger: SavitarObject, NSCopying {
         super.init()
 
         self.name = trigger.name
-        self.audioCue = trigger.audioCue
+        self.audioType = trigger.audioType
         self.appearance = trigger.appearance
         self.matching = trigger.matching
         self.specifier = trigger.specifier
@@ -198,7 +198,7 @@ class Trigger: SavitarObject, NSCopying {
         // default settings
         name: String = defaultName,
         flags: TrigFlags? = nil,
-        audioCue: AudioType = .silent,
+        audioCue: TrigAudioType = .silent,
         appearance: TrigAppearance = .changeAppearance,
         matching: TrigMatching = .exact,
         specifier: TrigSpecifier = .lineContains,
@@ -219,7 +219,7 @@ class Trigger: SavitarObject, NSCopying {
         super.init()
 
         self.name = name
-        self.audioCue = audioCue
+        self.audioType = audioCue
         self.appearance = appearance
         self.matching = matching
         self.specifier = specifier
@@ -297,7 +297,7 @@ class Trigger: SavitarObject, NSCopying {
         return resultLine
     }
 
-    let audioCueDict: [AudioType: String] = [
+    let audioCueDict: [TrigAudioType: String] = [
         .silent: "silent",
         .sound: "sound",
         .speakEvent: "speakEvent",
@@ -344,7 +344,7 @@ class Trigger: SavitarObject, NSCopying {
     }
 
     override func parse(xml: XML.Accessor) throws {
-        let audioLabels: [String: AudioType] = [
+        let audioLabels: [String: TrigAudioType] = [
             "silent": .silent,
             "sound": .sound,
             "speakEvent": .speakEvent,
@@ -362,7 +362,7 @@ class Trigger: SavitarObject, NSCopying {
             switch attribute.key {
             case TriggerAttribIdentifier.audio.rawValue:
                 if let type = audioLabels[attribute.value] {
-                    self.audioCue = type
+                    self.audioType = type
                 }
             case TriggerAttribIdentifier.bgColor.rawValue:
                 if self.style == nil {
@@ -472,7 +472,7 @@ class Trigger: SavitarObject, NSCopying {
             trigElem.addAttribute(name: TriggerAttribIdentifier.sound.rawValue, stringValue: value)
         }
 
-        if let value = audioCueDict[self.audioCue] {
+        if let value = audioCueDict[self.audioType] {
             trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
         }
 

@@ -14,6 +14,7 @@ protocol UndoActionContext {
     func macroValue(macroID: SavitarObjectID) -> String?
 
     func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance?
+    func triggerAudioType(triggerID: SavitarObjectID) -> TrigAudioType?
     func triggerBackColor(triggerID: SavitarObjectID) -> NSColor?
     func triggerFace(triggerID: SavitarObjectID) -> TrigFace?
     func triggerForeColor(triggerID: SavitarObjectID) -> NSColor?

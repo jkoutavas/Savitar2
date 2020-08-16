@@ -41,7 +41,8 @@ enum TriggerAction: UndoableAction {
     case disable(SavitarObjectID)
     case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
-    case setAppearance(SavitarObjectID, appearance: TrigAppearance)
+    case setAppearance(SavitarObjectID, type: TrigAppearance)
+    case setAudioType(SavitarObjectID, type: TrigAudioType)
     case setBackColor(SavitarObjectID, color: NSColor)
     case setFace(SavitarObjectID, face: TrigFace)
     case setForeColor(SavitarObjectID, color: NSColor)
@@ -63,6 +64,7 @@ enum TriggerAction: UndoableAction {
         case .disable: return "Disable Trigger"
         case .rename: return "Rename Trigger"
         case .setAppearance: return "Change Trigger Appearance Type"
+        case .setAudioType: return "Change Trigger Audio Type"
         case .setBackColor: return "Change Trigger Back Color"
         case .setFace: return "Change Trigger Face"
         case .setForeColor: return "Change Trigger Fore Color"
@@ -88,9 +90,13 @@ enum TriggerAction: UndoableAction {
             guard let prev = context.triggerName(triggerID: triggerID) else { return nil }
             return TriggerAction.rename(triggerID, name: prev)
 
-        case let .setAppearance(triggerID, appearance: _):
+        case let .setAppearance(triggerID, type: _):
             guard let prev = context.triggerAppearance(triggerID: triggerID) else { return nil }
-            return TriggerAction.setAppearance(triggerID, appearance: prev)
+            return TriggerAction.setAppearance(triggerID, type: prev)
+
+        case let .setAudioType(triggerID, type: _):
+            guard let prev = context.triggerAudioType(triggerID: triggerID) else { return nil }
+            return TriggerAction.setAudioType(triggerID, type: prev)
 
         case let .setBackColor(triggerID, color: _):
             guard let prev = context.triggerBackColor(triggerID: triggerID) else { return nil }

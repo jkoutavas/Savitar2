@@ -39,12 +39,13 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
         guard let trigger = self.trigger else { return }
 
         if silentRadio.state == .on {
-//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .gag))
+            store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .silent))
         } else if soundRadio.state == .on {
-//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .dontUseStyle))
+            store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .sound))
         } else if speakEventRadio.state == .on {
+            store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .speakEvent))
         } else {
-//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .changeAppearance))
+            store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .sayText))
         }
     }
 
@@ -52,7 +53,7 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
             self.trigger = trigger
-            switch trigger.audioCue {
+            switch trigger.audioType {
             case .silent:
                 silentRadio.state = .on
             case .sound:
@@ -79,19 +80,19 @@ class TriggerAudioCueController: NSController {
     }
 
     @objc dynamic var soundPopUpIsEnabled: Bool {
-        get { return store != nil && trigger.audioCue == .sound }
+        get { return store != nil && trigger.audioType == .sound }
     }
 
     @objc dynamic var speakerIsEnabled: Bool {
-        get { return store != nil && trigger.audioCue != .silent }
+        get { return store != nil && trigger.audioType != .silent }
     }
 
     @objc dynamic var textIsEnabled: Bool {
-        get { return store != nil && trigger.audioCue == .sayText }
+        get { return store != nil && trigger.audioType == .sayText }
     }
 
     @objc dynamic var voicePopUpIsEnabled: Bool {
-        get { return store != nil && trigger.audioCue == .sayText }
+        get { return store != nil && trigger.audioType == .sayText }
     }
 
     init(trigger: Trigger, store: ReactionsStore?) {

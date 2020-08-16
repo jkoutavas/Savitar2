@@ -32,6 +32,10 @@ class UndoableStateAdapter: UndoActionContext {
         return state.triggerList.item(objectID: triggerID)?.appearance
     }
 
+    func triggerAudioType(triggerID: SavitarObjectID) -> TrigAudioType? {
+        return state.triggerList.item(objectID: triggerID)?.audioType
+    }
+
     func triggerBackColor(triggerID: SavitarObjectID) -> NSColor? {
         return state.triggerList.item(objectID: triggerID)?.style?.backColor
     }
