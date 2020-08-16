@@ -76,23 +76,28 @@ class TriggerAudioCueController: NSController {
     var faceDescription: String
 
     @objc dynamic var radioIsEnabled: Bool {
-        get { return store != nil }
+       return store != nil
     }
 
     @objc dynamic var soundPopUpIsEnabled: Bool {
-        get { return store != nil && trigger.audioType == .sound }
+        return store != nil && trigger.audioType == .sound
+    }
+
+    @objc dynamic var sayText: String {
+        get { return trigger.say ?? "" }
+        set { store?.dispatch(TriggerAction.setSayText(trigger.objectID, text: newValue)) }
     }
 
     @objc dynamic var speakerIsEnabled: Bool {
-        get { return store != nil && trigger.audioType != .silent }
+        return store != nil && trigger.audioType != .silent
     }
 
     @objc dynamic var textIsEnabled: Bool {
-        get { return store != nil && trigger.audioType == .sayText }
+        return store != nil && trigger.audioType == .sayText
     }
 
     @objc dynamic var voicePopUpIsEnabled: Bool {
-        get { return store != nil && trigger.audioType == .sayText }
+        return store != nil && trigger.audioType == .sayText
     }
 
     init(trigger: Trigger, store: ReactionsStore?) {

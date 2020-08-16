@@ -85,7 +85,7 @@ class TriggerMatchingController: NSController {
     }
 
     @objc dynamic var useWordEnding: Bool {
-        get { return trigger.matching == .wholeWord }
+        return trigger.matching == .wholeWord
     }
 
     @objc dynamic var wordEnding: String {
