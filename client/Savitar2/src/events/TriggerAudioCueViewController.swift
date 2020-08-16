@@ -1,0 +1,108 @@
+//
+//  TriggerAudioCueViewController.swift
+//  Savitar2
+//
+//  Created by Jay Koutavas on 8/15/20.
+//  Copyright © 2020 Heynow Software. All rights reserved.
+//
+
+import Cocoa
+import ReSwift
+
+class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
+
+    @IBOutlet var silentRadio: NSButton!
+    @IBOutlet var soundRadio: NSButton!
+    @IBOutlet var speakEventRadio: NSButton!
+    @IBOutlet var sayTextRadio: NSButton!
+
+    var trigger: Trigger?
+
+    var store: ReactionsStore?
+    func setStore(reactionsStore: ReactionsStore?) {
+        store = reactionsStore
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        store?.subscribe(self)
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+
+        store?.unsubscribe(self)
+    }
+
+    @IBAction func audioCueRadioButtonChanged(_ sender: AnyObject) {
+        guard let trigger = self.trigger else { return }
+
+        if silentRadio.state == .on {
+//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .gag))
+        } else if soundRadio.state == .on {
+//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .dontUseStyle))
+        } else if speakEventRadio.state == .on {
+        } else {
+//            store?.dispatch(TriggerAction.setAppearance(trigger.objectID, appearance: .changeAppearance))
+        }
+    }
+
+    func newState(state: ReactionsState) {
+        if let index = state.triggerList.selection {
+            let trigger = state.triggerList.items[index]
+            self.trigger = trigger
+            switch trigger.audioCue {
+            case .silent:
+                silentRadio.state = .on
+            case .sound:
+                soundRadio.state = .on
+            case .speakEvent:
+                speakEventRadio.state = .on
+            case .sayText:
+                sayTextRadio.state = .on
+            }
+            self.representedObject = TriggerAudioCueController(trigger: trigger, store: store)
+        } else {
+            self.representedObject = nil
+        }
+    }
+}
+
+class TriggerAudioCueController: NSController {
+    var trigger: Trigger
+    var store: ReactionsStore?
+    var faceDescription: String
+
+    @objc dynamic var radioIsEnabled: Bool {
+        get { return store != nil }
+    }
+
+    @objc dynamic var soundPopUpIsEnabled: Bool {
+        get { return store != nil && trigger.audioCue == .sound }
+    }
+
+    @objc dynamic var speakerIsEnabled: Bool {
+        get { return store != nil && trigger.audioCue != .silent }
+    }
+
+    @objc dynamic var textIsEnabled: Bool {
+        get { return store != nil && trigger.audioCue == .sayText }
+    }
+
+    @objc dynamic var voicePopUpIsEnabled: Bool {
+        get { return store != nil && trigger.audioCue == .sayText }
+    }
+
+    init(trigger: Trigger, store: ReactionsStore?) {
+        self.trigger = trigger
+        self.store = store
+        self.faceDescription = trigger.style?.face?.description ?? ""
+
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

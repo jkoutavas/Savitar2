@@ -11,6 +11,7 @@ import ReSwift
 
 class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
     var appearanceViewController: TriggerAppearanceViewController?
+    var audioCueViewController: TriggerAudioCueViewController?
     var matchingViewController: TriggerMatchingViewController?
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -20,6 +21,8 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
                 for tabViewItem in tabViewController.tabViewItems {
                     if let tabVC = tabViewItem.viewController as? TriggerAppearanceViewController {
                         appearanceViewController = tabVC
+                    } else if let tabVC = tabViewItem.viewController as? TriggerAudioCueViewController {
+                        audioCueViewController = tabVC
                     } else if let tabVC = tabViewItem.viewController as? TriggerMatchingViewController {
                         matchingViewController = tabVC
                     }
@@ -33,6 +36,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     func setStore(reactionsStore: ReactionsStore?) {
         store = reactionsStore
         appearanceViewController?.setStore(reactionsStore: store)
+        audioCueViewController?.setStore(reactionsStore: store)
         matchingViewController?.setStore(reactionsStore: store)
     }
 

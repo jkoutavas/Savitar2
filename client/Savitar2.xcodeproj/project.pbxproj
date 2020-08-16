@@ -32,6 +32,7 @@
 		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
 		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
+		694D375A24E84E8800D375D4 /* TriggerAudioCueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694D375924E84E8800D375D4 /* TriggerAudioCueViewController.swift */; };
 		6952048B24B1EF7E004BDBE2 /* HotKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952048A24B1EF7E004BDBE2 /* HotKey.swift */; };
 		6952048D24B1EFB2004BDBE2 /* HotKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */; };
 		695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */; };
@@ -151,6 +152,7 @@
 		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
+		694D375924E84E8800D375D4 /* TriggerAudioCueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerAudioCueViewController.swift; sourceTree = "<group>"; };
 		6952048A24B1EF7E004BDBE2 /* HotKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKey.swift; sourceTree = "<group>"; };
 		6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyTests.swift; sourceTree = "<group>"; };
 		695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				69F629C224A8D9480067CAE8 /* MacroViewController.swift */,
 				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
 				69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */,
+				694D375924E84E8800D375D4 /* TriggerAudioCueViewController.swift */,
 				69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
 				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
@@ -814,6 +817,7 @@
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
+				694D375A24E84E8800D375D4 /* TriggerAudioCueViewController.swift in Sources */,
 				69F629C324A8D9480067CAE8 /* MacroViewController.swift in Sources */,
 				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
 				693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */,
