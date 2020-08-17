@@ -85,7 +85,7 @@ class TriggerAppearanceController: NSController {
     var faceDescription: String
 
     @objc dynamic var backColorColor: NSColor {
-        get { return trigger.style?.backColor ?? NSColor.black }
+        return trigger.style?.backColor ?? NSColor.black
         // For unknown reasons, this setter doesn't get called. Have to use the backColorChanged outlet as a workaround
         //        set { store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: newValue)) }
     }
