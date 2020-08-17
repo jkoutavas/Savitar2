@@ -31,7 +31,7 @@ class Endpoint: NSObject, StreamDelegate {
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
 
-        AppContext.worldMan.add(world)
+        AppContext.shared.worldMan.add(world)
     }
 
     func close() {
@@ -40,7 +40,7 @@ class Endpoint: NSObject, StreamDelegate {
         outputStream.close()
         logger.info("closed connection")
 
-        AppContext.worldMan.remove(world)
+        AppContext.shared.worldMan.remove(world)
     }
 
     func connectAndRun() {

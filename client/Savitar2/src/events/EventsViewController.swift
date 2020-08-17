@@ -57,9 +57,9 @@ class EventsViewController: NSTabViewController, NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
         // on application termination too.)
-        if !AppContext.isTerminating {
-            AppContext.prefs.flags.remove(.startupEventsWindow)
-            AppContext.save()
+        if !AppContext.shared.isTerminating {
+            AppContext.shared.prefs.flags.remove(.startupEventsWindow)
+            AppContext.shared.save()
         }
     }
 }

@@ -28,10 +28,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ])
 
         do {
-            try AppContext.load()
+            try AppContext.shared.load()
         } catch {}
 
-        if AppContext.prefs.flags.contains(.startupEventsWindow) {
+        if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
             showEventsWindowAction(self)
         }
     }
@@ -40,8 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if isRunningTests {
             return
         }
-        AppContext.isTerminating = true
-        AppContext.save()
+        AppContext.shared.isTerminating = true
+        AppContext.shared.save()
     }
 
     func applicationOpenUntitledFile(_: NSApplication) -> Bool {
@@ -61,8 +61,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             splitViewController.store = globalStore
             controller.showWindow(self)
-            AppContext.prefs.flags.insert(.startupEventsWindow)
-            AppContext.save()
+            AppContext.shared.prefs.flags.insert(.startupEventsWindow)
+            AppContext.shared.save()
         }
     }
 }
