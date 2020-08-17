@@ -55,6 +55,8 @@
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
 		698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698576D724C5BC9000B5B370 /* HotKeyEditor.swift */; };
+		698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667CF24E97E710061AA86 /* SpeakerMan.swift */; };
+		698667D424EA18500061AA86 /* Click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 698667D324EA17B40061AA86 /* Click.m4a */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
 		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
@@ -184,6 +186,8 @@
 		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
 		698576D724C5BC9000B5B370 /* HotKeyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyEditor.swift; sourceTree = "<group>"; };
+		698667CF24E97E710061AA86 /* SpeakerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerMan.swift; sourceTree = "<group>"; };
+		698667D324EA17B40061AA86 /* Click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.m4a; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		69928A70247AC8FF00571B21 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
 				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
+				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
 				693944F1246F7C8900931FA8 /* components */,
 				69CEEDE023BEDA7900E9F087 /* events */,
@@ -519,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				696F77472390D256005E45EB /* Appearance.txt */,
+				698667D324EA17B40061AA86 /* Click.m4a */,
 				690B462C23B16B54000445E4 /* StartupPreferences.xml */,
 			);
 			path = resources;
@@ -664,6 +670,7 @@
 				6994602E2041124800409308 /* World.icns in Resources */,
 				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
+				698667D424EA18500061AA86 /* Click.m4a in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
@@ -797,6 +804,7 @@
 				690B462523AD82CE000445E4 /* WorldMan.swift in Sources */,
 				693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */,
 				698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */,
+				698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
