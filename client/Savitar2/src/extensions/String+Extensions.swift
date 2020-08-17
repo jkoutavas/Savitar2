@@ -61,4 +61,9 @@ extension String {
     func fileExtension() -> String {
         return URL(fileURLWithPath: self).pathExtension
     }
+
+    // https://stackoverflow.com/a/53597089/246887
+    public var expandingTildeInPath: String {
+        return NSString(string: self).expandingTildeInPath
+    }
 }
