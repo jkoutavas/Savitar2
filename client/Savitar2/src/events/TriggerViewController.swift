@@ -124,6 +124,10 @@ class TriggerController: NSController {
         }
     }
 
+    @objc dynamic var storeIsPresent: Bool {
+        return store != nil
+    }
+    
     @objc dynamic var typeIndex: Int {
         get {
             switch trigger.type {

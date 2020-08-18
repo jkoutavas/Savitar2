@@ -89,7 +89,7 @@
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oK7-Pr-SDv">
                                 <rect key="frame" x="60" y="208" width="90" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Output" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hZl-fq-JHS" id="JLJ-BJ-xPe">
+                                <popUpButtonCell key="cell" type="push" title="Output" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hZl-fq-JHS" id="JLJ-BJ-xPe">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="eU3-Jg-aRI">
@@ -101,6 +101,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="i7S-h0-aWh"/>
                                     <binding destination="vHs-hi-qJN" name="selectedIndex" keyPath="representedObject.typeIndex" id="BS5-VR-srx"/>
                                 </connections>
                             </popUpButton>
@@ -117,7 +118,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="BGq-qb-z8b"/>
                                 </constraints>
-                                <popUpButtonCell key="cell" type="push" title="Line starts with" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="O5X-Vu-Idn" id="jLj-1G-Mys">
+                                <popUpButtonCell key="cell" type="push" title="Line starts with" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="O5X-Vu-Idn" id="jLj-1G-Mys">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="6em-9h-yqI">
@@ -131,26 +132,29 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="F2p-gP-mgG"/>
                                     <binding destination="vHs-hi-qJN" name="selectedIndex" keyPath="representedObject.specifierIndex" id="Ea7-OB-mG5"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E0Z-rx-Lr1">
                                 <rect key="frame" x="18" y="155" width="80" height="18"/>
-                                <buttonCell key="cell" type="check" title="Activated" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="QiS-xd-W8k">
+                                <buttonCell key="cell" type="check" title="Activated" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="QiS-xd-W8k">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="SY6-xj-MBl"/>
                                     <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.activated" id="nTU-rN-TNa"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ohH-Vt-Rnc">
                                 <rect key="frame" x="322" y="155" width="110" height="18"/>
-                                <buttonCell key="cell" type="check" title="Case sensitive" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7z1-yx-QzJ">
+                                <buttonCell key="cell" type="check" title="Case sensitive" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="7z1-yx-QzJ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="3pq-mv-j4c"/>
                                     <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.caseSensitive" id="pAQ-en-89h"/>
                                 </connections>
                             </button>
@@ -160,12 +164,13 @@
                                     <constraint firstAttribute="width" constant="410" id="jg1-Qb-t6S"/>
                                     <constraint firstAttribute="height" constant="24" id="sDK-Xe-hjB"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="zxZ-vx-nke"/>
                                     <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="PCe-Bo-jnY">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -267,12 +272,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Mcv-lC-koP"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="VSx-Wa-gD9">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="VSx-Wa-gD9">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="rcr-0w-OOh"/>
+                                    <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="rcr-0w-OOh" id="diy-zq-gHp"/>
                                     <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="dU7-vc-I0b">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -284,12 +291,14 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l05-sm-qIb">
                                 <rect key="frame" x="84" y="20" width="346" height="190"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" title="value" drawsBackground="YES" usesSingleLineMode="YES" id="hPw-QC-ylQ">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" title="value" drawsBackground="YES" usesSingleLineMode="YES" id="hPw-QC-ylQ">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="7Dj-jF-lXI"/>
+                                    <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="7Dj-jF-lXI" id="LAJ-NP-NE0"/>
                                     <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="LRV-sn-bia">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -305,7 +314,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="205" height="26"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" textCompletion="NO" id="baB-yG-d02" customClass="HotKeyEditor" customModule="Savitar2" customModuleProvider="target">
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" textCompletion="NO" id="baB-yG-d02" customClass="HotKeyEditor" customModule="Savitar2" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="205" height="26"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -323,6 +332,7 @@
                                             </attributedString>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
+                                                <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="Krk-Nw-bGR"/>
                                                 <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.keyLabel" id="c34-Kv-sqP"/>
                                             </connections>
                                         </textView>
@@ -852,7 +862,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -885,7 +895,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -1011,7 +1021,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1044,7 +1054,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">

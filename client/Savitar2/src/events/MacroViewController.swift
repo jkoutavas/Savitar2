@@ -80,6 +80,10 @@ class MacroController: NSController {
         }
     }
 
+    @objc dynamic var storeIsPresent: Bool {
+        return store != nil
+    }
+
     init(macro: Macro, store: ReactionsStore?) {
         self.macro = macro
         self.store = store
