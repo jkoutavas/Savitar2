@@ -68,6 +68,10 @@ class TriggerMatchingController: NSController {
     var trigger: Trigger
     var store: ReactionsStore?
 
+    @objc dynamic var storeIsPresent: Bool {
+        return store != nil
+    }
+
     @objc dynamic var substitution: String {
         get { return trigger.substitution ?? "" }
         set {

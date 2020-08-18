@@ -414,32 +414,35 @@
                         <subviews>
                             <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hld-43-s3m">
                                 <rect key="frame" x="66" y="248" width="213" height="18"/>
-                                <buttonCell key="cell" type="radio" title="Match it exactly as it was found" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="uLm-es-uBp">
+                                <buttonCell key="cell" type="radio" title="Match it exactly as it was found" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="uLm-es-uBp">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="hpL-1i-IhC"/>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.storeIsPresent" id="KBp-W7-U2A"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="LPd-rF-ucy">
                                 <rect key="frame" x="66" y="226" width="239" height="18"/>
-                                <buttonCell key="cell" type="radio" title="Match the whole line it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3NQ-Jd-vXn">
+                                <buttonCell key="cell" type="radio" title="Match the whole line it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="3NQ-Jd-vXn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="dyR-hp-dw6"/>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.storeIsPresent" id="qI0-Zg-vQS"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="wzP-pY-zHH">
                                 <rect key="frame" x="66" y="204" width="248" height="18"/>
-                                <buttonCell key="cell" type="radio" title="Match the whole word it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3XD-sY-ajW">
+                                <buttonCell key="cell" type="radio" title="Match the whole word it was found in" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="3XD-sY-ajW">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="matchingRadioButtonChanged:" target="XPq-gT-6kf" id="x3m-D1-mih"/>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.storeIsPresent" id="rZj-xt-3b9"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bc7-VL-NYE">
@@ -464,12 +467,20 @@
                                     <constraint firstAttribute="height" constant="24" id="5Ti-U4-onr"/>
                                     <constraint firstAttribute="width" constant="126" id="luN-Vt-n8o"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="ioy-02-a8x">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="ioy-02-a8x">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="XPq-gT-6kf" name="enabled2" keyPath="representedObject.storeIsPresent" previousBinding="OsN-mm-0bg" id="TFX-SO-vUo">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useWordEnding" id="OsN-mm-0bg"/>
                                     <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="l7a-5d-bZU">
                                         <dictionary key="options">
@@ -482,11 +493,12 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1tg-UD-t8b">
                                 <rect key="frame" x="64" y="125" width="180" height="18"/>
-                                <buttonCell key="cell" type="check" title="Substitute it with this text:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7le-a8-lP3">
+                                <buttonCell key="cell" type="check" title="Substitute it with this text:" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="7le-a8-lP3">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.storeIsPresent" id="P2F-6I-naX"/>
                                     <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.useSubstitution" id="XaN-ad-B57"/>
                                 </connections>
                             </button>
@@ -495,12 +507,20 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="99" id="SEZ-i7-Tcs"/>
                                 </constraints>
-                                <textFieldCell key="cell" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="SRM-7S-wLf">
+                                <textFieldCell key="cell" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="SRM-7S-wLf">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="XPq-gT-6kf" name="enabled2" keyPath="representedObject.storeIsPresent" previousBinding="U1Z-TQ-hCT" id="RhR-HJ-Bxs">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="epg-Xd-jSa">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -830,7 +850,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="e2x-CR-XXq">
-                                                    <rect key="frame" x="318" y="1" width="80" height="20"/>
+                                                    <rect key="frame" x="317.5" y="1" width="80" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h64-8i-i2O">
@@ -863,7 +883,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="lNm-Pj-fcn">
-                                                    <rect key="frame" x="401" y="1" width="77" height="20"/>
+                                                    <rect key="frame" x="400.5" y="1" width="77" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXO-3S-Hk9">
@@ -989,7 +1009,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1022,7 +1042,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">
