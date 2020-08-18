@@ -92,7 +92,6 @@ class TriggerAudioCueController: NSController {
     var store: ReactionsStore?
     var soundNames: [String]
     var voiceNames: [String]
-    var faceDescription: String
 
     @objc dynamic var radioIsEnabled: Bool {
        return store != nil
@@ -142,7 +141,6 @@ class TriggerAudioCueController: NSController {
         self.store = store
         self.soundNames = soundNames
         self.voiceNames = voiceNames
-        self.faceDescription = trigger.style?.face?.description ?? ""
 
         super.init()
     }
