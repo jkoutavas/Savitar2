@@ -56,6 +56,14 @@ class UndoableStateAdapter: UndoActionContext {
         return state.triggerList.item(objectID: triggerID)?.name
     }
 
+    func triggerSayText(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.say
+    }
+
+    func triggerSound(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.sound
+    }
+
     func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier? {
         return state.triggerList.item(objectID: triggerID)?.specifier
     }
@@ -66,6 +74,10 @@ class UndoableStateAdapter: UndoActionContext {
 
     func triggerType(triggerID: SavitarObjectID) -> TrigType? {
         return state.triggerList.item(objectID: triggerID)?.type
+    }
+
+    func triggerVoice(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.voice
     }
 
     func triggerWordEnding(triggerID: SavitarObjectID) -> String? {

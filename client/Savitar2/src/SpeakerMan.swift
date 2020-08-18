@@ -6,10 +6,11 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import AudioToolbox
 import Cocoa
 
 struct SpeakerMan {
+    let speechSynth = NSSpeechSynthesizer()
+
     // https://stackoverflow.com/a/38445571/246887
     var soundNames: [String] {
         let soundPaths: [String] = ["~/Library/Sounds", "/Library/Sounds", "/Network/Library/Sounds",
@@ -28,7 +29,38 @@ struct SpeakerMan {
         return names
     }
 
-    func playSound(name: String) {
-        NSSound(named: NSSound.Name(name))?.play()
+    var voiceNames: [String] {
+        let voices = NSSpeechSynthesizer.availableVoices
+
+        var names: [String] = []
+        for voice in voices {
+            let attributes = NSSpeechSynthesizer.attributes(forVoice:
+                NSSpeechSynthesizer.VoiceName(rawValue: voice.rawValue))
+            names.append((attributes[NSSpeechSynthesizer.VoiceAttributeKey.name] as? String)!)
+        }
+        return names
+    }
+
+    private func identifierForVoiceName(_ voiceName: String) -> NSSpeechSynthesizer.VoiceName? {
+        for voice in NSSpeechSynthesizer.availableVoices {
+            let attributes = NSSpeechSynthesizer.attributes(forVoice:
+                NSSpeechSynthesizer.VoiceName(rawValue: voice.rawValue))
+            let thisName = (attributes[NSSpeechSynthesizer.VoiceAttributeKey.name] as? String)
+            if thisName == voiceName {
+                return voice
+            }
+        }
+
+        return nil
+    }
+
+    func playAudio(trigger: Trigger) {
+        if trigger.audioType == .sound, let soundName = trigger.sound {
+            NSSound(named: NSSound.Name(soundName))?.play()
+        } else if trigger.audioType == .sayText, let say = trigger.say, let voiceName = trigger.voice {
+            speechSynth.stopSpeaking()
+            speechSynth.setVoice(identifierForVoiceName(voiceName))
+            speechSynth.startSpeaking(say)
+        }
     }
 }

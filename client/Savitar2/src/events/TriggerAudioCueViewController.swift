@@ -10,11 +10,21 @@ import Cocoa
 import ReSwift
 
 class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
-
     @IBOutlet var silentRadio: NSButton!
     @IBOutlet var soundRadio: NSButton!
     @IBOutlet var speakEventRadio: NSButton!
     @IBOutlet var sayTextRadio: NSButton!
+
+    let currentSoundNames = AppContext.shared.speakerMan.soundNames
+    let currentVoiceNames = AppContext.shared.speakerMan.voiceNames
+
+    @objc dynamic var soundNames: [String] {
+        return currentSoundNames
+    }
+
+    @objc dynamic var voiceNames: [String] {
+        return AppContext.shared.speakerMan.voiceNames
+    }
 
     var trigger: Trigger?
 
@@ -49,6 +59,12 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
         }
     }
 
+    @IBAction func speakerButtonAction(_ sender: AnyObject) {
+        if let trigger = self.trigger {
+            AppContext.shared.speakerMan.playAudio(trigger: trigger)
+        }
+    }
+
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection {
             let trigger = state.triggerList.items[index]
@@ -63,7 +79,8 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
             case .sayText:
                 sayTextRadio.state = .on
             }
-            self.representedObject = TriggerAudioCueController(trigger: trigger, store: store)
+            self.representedObject = TriggerAudioCueController(trigger: trigger, store: store,
+                soundNames: currentSoundNames, voiceNames: currentVoiceNames)
         } else {
             self.representedObject = nil
         }
@@ -73,10 +90,21 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
 class TriggerAudioCueController: NSController {
     var trigger: Trigger
     var store: ReactionsStore?
+    var soundNames: [String]
+    var voiceNames: [String]
     var faceDescription: String
 
     @objc dynamic var radioIsEnabled: Bool {
        return store != nil
+    }
+
+    @objc dynamic var soundIndex: Int {
+        get {
+            guard let soundName = trigger.sound else { return 0 }
+            let index = soundNames.firstIndex(of: soundName)
+            return index ?? 0
+        }
+        set { store?.dispatch(TriggerAction.setSound(trigger.objectID, name: soundNames[newValue])) }
     }
 
     @objc dynamic var soundPopUpIsEnabled: Bool {
@@ -96,13 +124,24 @@ class TriggerAudioCueController: NSController {
         return store != nil && trigger.audioType == .sayText
     }
 
+    @objc dynamic var voiceIndex: Int {
+        get {
+            guard let voiceName = trigger.voice else { return 0 }
+            let index = voiceNames.firstIndex(of: voiceName)
+            return index ?? 0
+        }
+        set { store?.dispatch(TriggerAction.setVoice(trigger.objectID, name: voiceNames[newValue])) }
+    }
+
     @objc dynamic var voicePopUpIsEnabled: Bool {
         return store != nil && trigger.audioType == .sayText
     }
 
-    init(trigger: Trigger, store: ReactionsStore?) {
+    init(trigger: Trigger, store: ReactionsStore?, soundNames: [String], voiceNames: [String]) {
         self.trigger = trigger
         self.store = store
+        self.soundNames = soundNames
+        self.voiceNames = voiceNames
         self.faceDescription = trigger.style?.face?.description ?? ""
 
         super.init()

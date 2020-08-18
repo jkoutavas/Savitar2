@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 14th, 2020
+README last updated: August 17th, 2020
 
 ## Current state of the application
 
@@ -35,7 +35,7 @@ _ Input pane command recall and local commands supported
 _ Implement input triggers
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view
-_ Implement Trigger Audio Cue tab view
+√ Implement Trigger Audio Cue tab view
 _ Implement Trigger Reply tab view
 √ Implement Macro editor
 _ Implement World settings Starting tab
@@ -107,16 +107,16 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods`
 
 ```
-     212 text files.
-     201 unique files.                                          
+     214 text files.
+     203 unique files.                                          
       78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.75 s (184.8 files/s, 25195.3 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.82 s (171.4 files/s, 23658.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           93           2554           2378           8367
-XML                             12              0             24           2808
+Swift                           95           2612           2411           8590
+XML                             12              0             25           3007
 C                                1             76             52           1008
 Markdown                         5            172              0            506
 Bourne Shell                    10             66            173            287
@@ -127,6 +127,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           139           2909           2697          13344
+SUM:                           141           2967           2731          13766
 -------------------------------------------------------------------------------
 ```

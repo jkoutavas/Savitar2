@@ -61,6 +61,14 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
 
+    case let .setSayText(triggerID, text: text):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.say = text
+
+    case let .setSound(triggerID, name: name):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.sound = name
+
     case let .setSpecifier(triggerID, specifier: specifier):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.specifier = specifier
@@ -72,6 +80,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     case let .setType(triggerID, type: type):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.type = type
+
+    case let .setVoice(triggerID, name: name):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.voice = name
 
     case let .setWordEnding(triggerID, wordEnding: wordEnding):
         guard trigger.objectID == triggerID else { return trigger }

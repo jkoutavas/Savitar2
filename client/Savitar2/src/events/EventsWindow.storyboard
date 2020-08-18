@@ -1082,14 +1082,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRL-Dy-UkI">
-                                <rect key="frame" x="186" y="20" width="42" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Voice:" id="oqz-hb-0jQ">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rvQ-ij-FJb">
                                 <rect key="frame" x="31" y="239" width="55" height="18"/>
                                 <buttonCell key="cell" type="radio" title="None" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="cLZ-q6-zOl">
@@ -1151,12 +1143,20 @@
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.textIsEnabled" id="9yq-pC-Wq9"/>
+                                    <binding destination="VPe-q3-3HZ" name="value" keyPath="representedObject.sayText" id="1Mp-RZ-Nbn">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nlh-BG-chO">
-                                <rect key="frame" x="232" y="14" width="201" height="25"/>
+                                <rect key="frame" x="300" y="14" width="133" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="196" id="lUh-JA-b3i"/>
+                                    <constraint firstAttribute="width" constant="128" id="lUh-JA-b3i"/>
                                 </constraints>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="twC-BE-0mC" id="vYI-ml-4eD">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -1170,24 +1170,13 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="voiceNames" id="PMF-cu-S8t"/>
                                     <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.voicePopUpIsEnabled" id="eJj-4C-Rca"/>
+                                    <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.voiceIndex" previousBinding="PMF-cu-S8t" id="t5l-qJ-lyQ"/>
                                 </connections>
                             </popUpButton>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="60l-0o-xbZ">
-                                <rect key="frame" x="398" y="248" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="34H-tq-2qR"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarAudioOutputVolumeHighTemplate" imagePosition="only" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="2m8-WQ-XUo">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.speakerIsEnabled" id="Cme-Zz-ZAy"/>
-                                </connections>
-                            </button>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iFz-hg-MeN">
-                                <rect key="frame" x="153" y="212" width="201" height="25"/>
+                                <rect key="frame" x="153" y="212" width="128" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JO1-cB-x34" id="R3H-i6-9SJ">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -1203,9 +1192,33 @@
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="soundNames" id="aCP-VO-cBI"/>
                                     <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.soundPopUpIsEnabled" id="ALZ-8S-QKZ"/>
+                                    <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.soundIndex" previousBinding="aCP-VO-cBI" id="Xh5-Qs-LDl"/>
                                 </connections>
                             </popUpButton>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="60l-0o-xbZ">
+                                <rect key="frame" x="398" y="248" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="34H-tq-2qR"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarAudioOutputVolumeHighTemplate" imagePosition="only" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="2m8-WQ-XUo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="speakerButtonAction:" target="VPe-q3-3HZ" id="SyV-uQ-QLO"/>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.speakerIsEnabled" id="Cme-Zz-ZAy"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRL-Dy-UkI">
+                                <rect key="frame" x="254" y="20" width="42" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Voice:" id="oqz-hb-0jQ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="rvQ-ij-FJb" firstAttribute="top" secondItem="55V-IV-Z9G" secondAttribute="bottom" constant="8" symbolic="YES" id="0BV-qk-ggd"/>
@@ -1215,7 +1228,7 @@
                             <constraint firstItem="Q04-1y-VMZ" firstAttribute="top" secondItem="8PP-bt-QJu" secondAttribute="bottom" constant="6" symbolic="YES" id="6gO-42-8lK"/>
                             <constraint firstItem="8PP-bt-QJu" firstAttribute="top" secondItem="Pz4-EK-m01" secondAttribute="bottom" constant="6" symbolic="YES" id="AdO-Bp-HLJ"/>
                             <constraint firstItem="Nlh-BG-chO" firstAttribute="top" secondItem="j8s-LP-krG" secondAttribute="bottom" constant="11" id="CNT-PY-lxF"/>
-                            <constraint firstAttribute="trailing" secondItem="iFz-hg-MeN" secondAttribute="trailing" constant="99" id="Eyd-hF-PIg"/>
+                            <constraint firstAttribute="trailing" secondItem="iFz-hg-MeN" secondAttribute="trailing" constant="172" id="Eyd-hF-PIg"/>
                             <constraint firstItem="j8s-LP-krG" firstAttribute="trailing" secondItem="Nlh-BG-chO" secondAttribute="trailing" id="GiN-YB-ueh"/>
                             <constraint firstItem="55V-IV-Z9G" firstAttribute="top" secondItem="60l-0o-xbZ" secondAttribute="top" id="Lmf-by-dDQ"/>
                             <constraint firstItem="iFz-hg-MeN" firstAttribute="leading" secondItem="Pz4-EK-m01" secondAttribute="trailing" constant="8" symbolic="YES" id="TI7-z2-qly"/>

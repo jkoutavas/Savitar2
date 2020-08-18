@@ -47,9 +47,12 @@ enum TriggerAction: UndoableAction {
     case setFace(SavitarObjectID, face: TrigFace)
     case setForeColor(SavitarObjectID, color: NSColor)
     case setMatching(SavitarObjectID, matching: TrigMatching)
+    case setSayText(SavitarObjectID, text: String)
+    case setSound(SavitarObjectID, name: String)
     case setSpecifier(SavitarObjectID, specifier: TrigSpecifier)
     case setSubstitution(SavitarObjectID, substitution: String)
     case setType(SavitarObjectID, type: TrigType)
+    case setVoice(SavitarObjectID, name: String)
     case setWordEnding(SavitarObjectID, wordEnding: String)
     case toggleCaseSensitive(SavitarObjectID)
     case toggleUseSubstitution(SavitarObjectID)
@@ -69,9 +72,12 @@ enum TriggerAction: UndoableAction {
         case .setFace: return "Change Trigger Face"
         case .setForeColor: return "Change Trigger Fore Color"
         case .setMatching: return "Change Trigger Matching"
+        case .setSayText: return "Change Trigger Spoken Text"
+        case .setSound: return "Change Trigger Sound"
         case .setSpecifier: return "Change Trigger Specifier"
         case .setSubstitution: return "Change Trigger Substitution"
         case .setType: return "Change Trigger Type"
+        case .setVoice: return "Change Trigger Voice"
         case .setWordEnding: return "Change Trigger Word Ending"
         case .toggleCaseSensitive: return "Change Trigger Case Sensitive"
         case .toggleUseSubstitution: return "Change Trigger Use Substitution"
@@ -114,6 +120,14 @@ enum TriggerAction: UndoableAction {
             guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }
             return TriggerAction.setMatching(triggerID, matching: prev)
 
+        case let .setSayText(triggerID, text: _):
+            guard let prev = context.triggerSayText(triggerID: triggerID) else { return nil }
+            return TriggerAction.setSayText(triggerID, text: prev)
+
+        case let .setSound(triggerID, name: _):
+            guard let prev = context.triggerSound(triggerID: triggerID) else { return nil }
+            return TriggerAction.setSound(triggerID, name: prev)
+
         case let .setSpecifier(triggerID, specifier: _):
             guard let prev = context.triggerSpecifier(triggerID: triggerID) else { return nil }
             return TriggerAction.setSpecifier(triggerID, specifier: prev)
@@ -125,6 +139,10 @@ enum TriggerAction: UndoableAction {
         case let .setType(triggerID, type: _):
             guard let prev = context.triggerType(triggerID: triggerID) else { return nil }
             return TriggerAction.setType(triggerID, type: prev)
+
+        case let .setVoice(triggerID, name: _):
+            guard let prev = context.triggerVoice(triggerID: triggerID) else { return nil }
+            return TriggerAction.setVoice(triggerID, name: prev)
 
         case let .setWordEnding(triggerID, wordEnding: _):
             guard let prev = context.triggerWordEnding(triggerID: triggerID) else { return nil }
