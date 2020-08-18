@@ -61,6 +61,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
         guard trigger.objectID == triggerID else { return trigger }
         trigger.matching = matching
 
+    case let .setReplyText(triggerID, text: text):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.reply = text
+
     case let .setSayText(triggerID, text: text):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.say = text
@@ -92,6 +96,10 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     case let .toggleCaseSensitive(triggerID):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.caseSensitive = !trigger.caseSensitive
+
+    case let .toggleEchoOutput(triggerID):
+        guard trigger.objectID == triggerID else { return trigger }
+        trigger.echoReply = !trigger.echoReply
 
     case let .toggleUseSubstitution(triggerID):
         guard trigger.objectID == triggerID else { return trigger }

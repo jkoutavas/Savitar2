@@ -384,6 +384,7 @@
                         <tabViewItem label="Matching" identifier="" id="nvJ-T6-DgS"/>
                         <tabViewItem identifier="" id="cxC-z4-fx4"/>
                         <tabViewItem id="6dO-zk-v5b"/>
+                        <tabViewItem id="EYi-Hu-ATz"/>
                     </tabViewItems>
                     <tabView key="tabView" wantsLayer="YES" canDrawConcurrently="YES" type="noTabsLineBorder" id="dX3-Cl-o1j">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -398,6 +399,7 @@
                         <segue destination="XPq-gT-6kf" kind="relationship" relationship="tabItems" id="cRK-nQ-Xje"/>
                         <segue destination="fa1-Uj-duv" kind="relationship" relationship="tabItems" id="hqw-Jo-RCV"/>
                         <segue destination="VPe-q3-3HZ" kind="relationship" relationship="tabItems" id="hIA-1j-Isd"/>
+                        <segue destination="u43-3v-IaC" kind="relationship" relationship="tabItems" id="3Hr-wM-wgz"/>
                     </connections>
                 </tabViewController>
                 <customObject id="6Ql-7R-mRN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -620,7 +622,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSV-WT-xrS">
                                 <rect key="frame" x="51" y="172" width="50" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="cQH-UQ-v3M">
+                                <buttonCell key="cell" type="check" title="Bold" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="cQH-UQ-v3M">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -632,7 +634,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUf-ej-TTt">
                                 <rect key="frame" x="124" y="172" width="81" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Underline" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="770-jj-uar">
+                                <buttonCell key="cell" type="check" title="Underline" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="770-jj-uar">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -644,7 +646,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v3P-mC-kng">
                                 <rect key="frame" x="220" y="172" width="51" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="5hO-on-piD">
+                                <buttonCell key="cell" type="check" title="Italic" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="5hO-on-piD">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -656,7 +658,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1k-5p-bh3">
                                 <rect key="frame" x="51" y="152" width="52" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Blink" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="orH-xE-SFV">
+                                <buttonCell key="cell" type="check" title="Blink" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="orH-xE-SFV">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -668,7 +670,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QS-g3-sZt">
                                 <rect key="frame" x="123" y="152" width="66" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Inverse" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="m9c-VV-Zip">
+                                <buttonCell key="cell" type="check" title="Inverse" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="m9c-VV-Zip">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -680,7 +682,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hCM-dR-f2c">
                                 <rect key="frame" x="51" y="126" width="86" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Fore Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="5Gj-TA-bnQ">
+                                <buttonCell key="cell" type="check" title="Fore Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="5Gj-TA-bnQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -692,7 +694,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s2J-df-h9S">
                                 <rect key="frame" x="51" y="100" width="88" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Back Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="aR1-WY-JrD">
+                                <buttonCell key="cell" type="check" title="Back Color" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="aR1-WY-JrD">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1162,7 +1164,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.textIsEnabled" id="9yq-pC-Wq9"/>
                                     <binding destination="VPe-q3-3HZ" name="value" keyPath="representedObject.sayText" id="1Mp-RZ-Nbn">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1171,6 +1172,7 @@
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.textIsEnabled" id="9yq-pC-Wq9"/>
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nlh-BG-chO">
@@ -1190,9 +1192,9 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="voiceNames" id="PMF-cu-S8t"/>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.voicePopUpIsEnabled" id="eJj-4C-Rca"/>
                                     <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.voiceIndex" previousBinding="PMF-cu-S8t" id="t5l-qJ-lyQ"/>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.voicePopUpIsEnabled" id="eJj-4C-Rca"/>
+                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="voiceNames" id="PMF-cu-S8t"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iFz-hg-MeN">
@@ -1212,9 +1214,9 @@
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="soundNames" id="aCP-VO-cBI"/>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.soundPopUpIsEnabled" id="ALZ-8S-QKZ"/>
                                     <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.soundIndex" previousBinding="aCP-VO-cBI" id="Xh5-Qs-LDl"/>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.soundPopUpIsEnabled" id="ALZ-8S-QKZ"/>
+                                    <binding destination="VPe-q3-3HZ" name="content" keyPath="soundNames" id="aCP-VO-cBI"/>
                                 </connections>
                             </popUpButton>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="60l-0o-xbZ">
@@ -1278,6 +1280,68 @@
                 <userDefaultsController id="Xa7-dn-ht1"/>
             </objects>
             <point key="canvasLocation" x="1821" y="51"/>
+        </scene>
+        <!--Reply-->
+        <scene sceneID="l1b-GK-Fbm">
+            <objects>
+                <viewController title="Reply" id="u43-3v-IaC" customClass="TriggerReplyViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="6sf-3S-Eqj">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="jDN-60-utT">
+                                <rect key="frame" x="18" y="264" width="153" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Send this text as a reply:" id="iXY-04-u3L">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="77C-UJ-gOo">
+                                <rect key="frame" x="20" y="47" width="410" height="209"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="209" id="fQH-5o-uDl"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="vhm-cj-AJj">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="u43-3v-IaC" name="enabled" keyPath="representedObject.storeIsPresent" id="O7d-eS-4rC"/>
+                                    <binding destination="u43-3v-IaC" name="value" keyPath="representedObject.replyText" id="sz3-l9-AJh"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B7l-Qp-pcr">
+                                <rect key="frame" x="18" y="18" width="228" height="18"/>
+                                <buttonCell key="cell" type="check" title="Echo this reply to the output pane" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="iOH-Tf-Y4t">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="u43-3v-IaC" name="enabled" keyPath="representedObject.storeIsPresent" id="MLY-f4-jtF"/>
+                                    <binding destination="u43-3v-IaC" name="value" keyPath="representedObject.echoOutput" id="5N3-0V-Yjr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="jDN-60-utT" firstAttribute="top" secondItem="6sf-3S-Eqj" secondAttribute="top" constant="20" symbolic="YES" id="8Mq-3D-YRs"/>
+                            <constraint firstItem="jDN-60-utT" firstAttribute="leading" secondItem="6sf-3S-Eqj" secondAttribute="leading" constant="20" symbolic="YES" id="IbF-8V-Q28"/>
+                            <constraint firstItem="77C-UJ-gOo" firstAttribute="top" secondItem="jDN-60-utT" secondAttribute="bottom" constant="8" symbolic="YES" id="TcE-uO-1Vc"/>
+                            <constraint firstItem="jDN-60-utT" firstAttribute="leading" secondItem="77C-UJ-gOo" secondAttribute="leading" id="Tz6-xZ-Z9y"/>
+                            <constraint firstItem="77C-UJ-gOo" firstAttribute="leading" secondItem="B7l-Qp-pcr" secondAttribute="leading" id="Wj7-dt-SCv"/>
+                            <constraint firstItem="B7l-Qp-pcr" firstAttribute="top" secondItem="77C-UJ-gOo" secondAttribute="bottom" constant="13" id="c5Y-uL-PI8"/>
+                            <constraint firstAttribute="trailing" secondItem="77C-UJ-gOo" secondAttribute="trailing" constant="20" symbolic="YES" id="dPJ-Vj-ajz"/>
+                            <constraint firstAttribute="bottom" secondItem="B7l-Qp-pcr" secondAttribute="bottom" constant="20" symbolic="YES" id="jtw-Uu-f3X"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="WjU-jj-AJQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="FxZ-d4-ZIn"/>
+                <userDefaultsController id="743-We-yT8"/>
+                <userDefaultsController id="PGn-wD-AEN"/>
+            </objects>
+            <point key="canvasLocation" x="2288" y="51"/>
         </scene>
     </scenes>
     <resources>

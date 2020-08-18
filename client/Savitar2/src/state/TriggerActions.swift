@@ -47,6 +47,7 @@ enum TriggerAction: UndoableAction {
     case setFace(SavitarObjectID, face: TrigFace)
     case setForeColor(SavitarObjectID, color: NSColor)
     case setMatching(SavitarObjectID, matching: TrigMatching)
+    case setReplyText(SavitarObjectID, text: String)
     case setSayText(SavitarObjectID, text: String)
     case setSound(SavitarObjectID, name: String)
     case setSpecifier(SavitarObjectID, specifier: TrigSpecifier)
@@ -55,6 +56,7 @@ enum TriggerAction: UndoableAction {
     case setVoice(SavitarObjectID, name: String)
     case setWordEnding(SavitarObjectID, wordEnding: String)
     case toggleCaseSensitive(SavitarObjectID)
+    case toggleEchoOutput(SavitarObjectID)
     case toggleUseSubstitution(SavitarObjectID)
 
     // MARK: Undoable
@@ -72,6 +74,7 @@ enum TriggerAction: UndoableAction {
         case .setFace: return "Change Trigger Face"
         case .setForeColor: return "Change Trigger Fore Color"
         case .setMatching: return "Change Trigger Matching"
+        case .setReplyText: return "Change Trigger Reply"
         case .setSayText: return "Change Trigger Spoken Text"
         case .setSound: return "Change Trigger Sound"
         case .setSpecifier: return "Change Trigger Specifier"
@@ -80,6 +83,7 @@ enum TriggerAction: UndoableAction {
         case .setVoice: return "Change Trigger Voice"
         case .setWordEnding: return "Change Trigger Word Ending"
         case .toggleCaseSensitive: return "Change Trigger Case Sensitive"
+        case .toggleEchoOutput: return "Change Trigger Echo to Output"
         case .toggleUseSubstitution: return "Change Trigger Use Substitution"
         }
     }
@@ -120,6 +124,10 @@ enum TriggerAction: UndoableAction {
             guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }
             return TriggerAction.setMatching(triggerID, matching: prev)
 
+        case let .setReplyText(triggerID, text: _):
+            guard let prev = context.triggerReplyText(triggerID: triggerID) else { return nil }
+            return TriggerAction.setReplyText(triggerID, text: prev)
+
         case let .setSayText(triggerID, text: _):
             guard let prev = context.triggerSayText(triggerID: triggerID) else { return nil }
             return TriggerAction.setSayText(triggerID, text: prev)
@@ -150,6 +158,9 @@ enum TriggerAction: UndoableAction {
 
         case let .toggleCaseSensitive(triggerID):
             return TriggerAction.toggleCaseSensitive(triggerID)
+
+        case let .toggleEchoOutput(triggerID):
+            return TriggerAction.toggleEchoOutput(triggerID)
 
         case let .toggleUseSubstitution(triggerID):
             return TriggerAction.toggleUseSubstitution(triggerID)

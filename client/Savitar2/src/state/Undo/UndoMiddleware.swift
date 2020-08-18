@@ -56,6 +56,10 @@ class UndoableStateAdapter: UndoActionContext {
         return state.triggerList.item(objectID: triggerID)?.name
     }
 
+    func triggerReplyText(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.reply
+    }
+
     func triggerSayText(triggerID: SavitarObjectID) -> String? {
         return state.triggerList.item(objectID: triggerID)?.say
     }

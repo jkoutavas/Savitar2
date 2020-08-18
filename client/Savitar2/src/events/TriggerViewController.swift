@@ -13,6 +13,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     var appearanceViewController: TriggerAppearanceViewController?
     var audioCueViewController: TriggerAudioCueViewController?
     var matchingViewController: TriggerMatchingViewController?
+    var replyViewController: TriggerReplyViewController?
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         // Go off and find the view controllers for each tab
@@ -25,6 +26,8 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
                         audioCueViewController = tabVC
                     } else if let tabVC = tabViewItem.viewController as? TriggerMatchingViewController {
                         matchingViewController = tabVC
+                    } else if let tabVC = tabViewItem.viewController as? TriggerReplyViewController {
+                        replyViewController = tabVC
                     }
                 }
             }
@@ -38,6 +41,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
         appearanceViewController?.setStore(reactionsStore: store)
         audioCueViewController?.setStore(reactionsStore: store)
         matchingViewController?.setStore(reactionsStore: store)
+        replyViewController?.setStore(reactionsStore: store)
     }
 
     override func viewWillAppear() {

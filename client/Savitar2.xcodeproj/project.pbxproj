@@ -57,6 +57,7 @@
 		698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698576D724C5BC9000B5B370 /* HotKeyEditor.swift */; };
 		698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667CF24E97E710061AA86 /* SpeakerMan.swift */; };
 		698667D424EA18500061AA86 /* Click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 698667D324EA17B40061AA86 /* Click.m4a */; };
+		698667D624EC02630061AA86 /* TriggerReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667D524EC02630061AA86 /* TriggerReplyViewController.swift */; };
 		6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4612393113700E2BFDB /* TelnetParser.swift */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
 		6991F46B2393F71700E2BFDB /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6991F46A2393F71700E2BFDB /* Logging */; };
@@ -188,6 +189,7 @@
 		698576D724C5BC9000B5B370 /* HotKeyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyEditor.swift; sourceTree = "<group>"; };
 		698667CF24E97E710061AA86 /* SpeakerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerMan.swift; sourceTree = "<group>"; };
 		698667D324EA17B40061AA86 /* Click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.m4a; sourceTree = "<group>"; };
+		698667D524EC02630061AA86 /* TriggerReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerReplyViewController.swift; sourceTree = "<group>"; };
 		6991F4612393113700E2BFDB /* TelnetParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		69928A70247AC8FF00571B21 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */,
 				694D375924E84E8800D375D4 /* TriggerAudioCueViewController.swift */,
 				69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */,
+				698667D524EC02630061AA86 /* TriggerReplyViewController.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
 				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
 				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
@@ -791,6 +794,7 @@
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				69B5D58324B559B0002BBF5C /* Keycode.swift in Sources */,
+				698667D624EC02630061AA86 /* TriggerReplyViewController.swift in Sources */,
 				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
 				69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */,

@@ -19,6 +19,7 @@ protocol UndoActionContext {
     func triggerFace(triggerID: SavitarObjectID) -> TrigFace?
     func triggerForeColor(triggerID: SavitarObjectID) -> NSColor?
     func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching?
+    func triggerReplyText(triggerID: SavitarObjectID) -> String?
     func triggerSayText(triggerID: SavitarObjectID) -> String?
     func triggerSound(triggerID: SavitarObjectID) -> String?
     func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier?
