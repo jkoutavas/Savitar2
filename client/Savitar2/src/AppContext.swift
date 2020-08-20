@@ -20,6 +20,10 @@ class AppContext {
     var speakerMan = SpeakerMan()
     var worldMan = WorldMan()
 
+    // TODO: this is a good start. See Savitar 1.x's "CViewAppMac.cp" for references to Savitar's
+    // "editing keys" (not support at this time) and the means used to add all menu command shortcut keys
+    let reservedKeyList = ["return", "space", "up arrow", "down arrow", "left arrow", "right arrow"]
+
     func load() throws {
         globalStoreUndoManagerProvider.undoManager = UndoManager()
 
@@ -35,27 +39,3 @@ class AppContext {
     private init() {
     }
 }
-
-
-/*
-
-
-struct AppContext {
-    static var isTerminating = false
-    static var prefs = AppPreferences()
-    static var speakerMan = SpeakerMan()
-    static var worldMan = WorldMan()
-
-    static func load() throws {
-        globalStoreUndoManagerProvider.undoManager = UndoManager()
-
-        try prefs.load()
-    }
-
-    static func save() {
-        do {
-            try prefs.save()
-        } catch {}
-    }
-}
-*/

@@ -25,13 +25,11 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
         store?.subscribe(self)
         hotKeyEditor.completionHandler = { (_ key: HotKey) in
             if key != self.macro?.hotKey && key.isKnown() {
-                if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
-                    let alert = NSAlert()
-                    alert.messageText = "Hotkey '\(key.toString() )' is already in use"
-                    alert.informativeText = "Please try another hotkey"
-                    alert.addButton(withTitle: "OK")
-                    alert.alertStyle = NSAlert.Style.warning
-                    alert.runModal()
+                let keyString = key.toString()
+                if AppContext.shared.reservedKeyList.contains(where: {$0 == keyString}) {
+                    self.displayError(msg: "'\(keyString)' is a reserved key.")
+                } else if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
+                   self.displayError(msg: "Hotkey '\(keyString)' is already in use")
                 } else {
                     if let _store = self.store, let _macroID = self.macro?.objectID {
                         _store.dispatch(MacroAction.changeKey(_macroID, key: key))
@@ -57,6 +55,15 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
             self.representedObject = nil
             self.macro = nil
         }
+    }
+
+    func displayError(msg: String) {
+        let alert = NSAlert()
+        alert.messageText = msg
+        alert.informativeText = "Please try another hotkey"
+        alert.addButton(withTitle: "OK")
+        alert.alertStyle = NSAlert.Style.warning
+        alert.runModal()
     }
 }
 
