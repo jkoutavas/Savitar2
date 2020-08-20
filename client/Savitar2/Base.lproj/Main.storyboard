@@ -784,6 +784,9 @@
                                             <size key="minSize" width="583" height="98"/>
                                             <size key="maxSize" width="600" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="5bW-Js-79f" id="dxP-xn-P6K"/>
+                                            </connections>
                                         </textView>
                                     </subviews>
                                 </clipView>
@@ -1048,7 +1051,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="400"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c0B-zC-x85">
+                            <colorWell focusRingType="exterior" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c0B-zC-x85">
                                 <rect key="frame" x="93" y="178" width="44" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1066,7 +1069,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7g-Fd-8dh">
+                            <colorWell focusRingType="exterior" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G7g-Fd-8dh">
                                 <rect key="frame" x="240" y="178" width="44" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1084,7 +1087,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfa-Gh-tlm">
+                            <colorWell focusRingType="exterior" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfa-Gh-tlm">
                                 <rect key="frame" x="386" y="178" width="44" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1294,11 +1297,11 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="titlebarViewController" id="h1D-5o-gDg" customClass="NSTitlebarAccessoryViewController" sceneMemberID="viewController">
                     <view key="view" id="n85-aq-ZEl">
-                        <rect key="frame" x="0.0" y="0.0" width="189" height="34"/>
+                        <rect key="frame" x="0.0" y="0.0" width="191" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="108.5" y="5" width="65" height="23"/>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
+                                <rect key="frame" x="109.5" y="5" width="66" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1307,8 +1310,8 @@ Gw
                                     <action selector="showWorldSetting:" target="iLh-qn-Ycd" id="A52-mR-SxS"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="41.5" y="5" width="55" height="23"/>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
+                                <rect key="frame" x="41.5" y="5" width="56" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: April 17th, 2020
+README last updated: August 19th, 2020
 
 ## Current state of the application
 
@@ -27,12 +27,17 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Integrated WKWebView as the output pane
 √ World settings Appearance tab is operational
 √ Output triggers are working
+√ Input macro hotkeys are supported
 √ Load Sav 1.x app settings (includes triggers)
 √ Load Sav 1.x world triggers
-_ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
+√ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 _ Input pane command recall and local commands supported
 _ Implement input triggers
-_ Implement Triggers Window
+√ Implement Trigger Matching tab view
+√ Implement Trigger Appearance tab view
+√ Implement Trigger Audio Cue tab view
+√ Implement Trigger Reply tab view
+√ Implement Macro editor
 _ Implement World settings Starting tab
 _ Connect/disconnect session handling
 _ Implement remaining World settings tabs
@@ -101,21 +106,19 @@ $ swift package generate-xcodeproj
 
 `cloc . --exclude-dir=Pods`
 
-### January 10th
-
 ```
-     162 text files.
-     156 unique files.                                          
-      58 files ignored.
+     215 text files.
+     204 unique files.                                          
+      78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.44 s (249.4 files/s, 35503.2 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.85 s (167.6 files/s, 23231.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           62           2107           2110           6439
-XML                             13              0             17           2067
+Swift                           96           2635           2418           8673
+XML                             12              0             26           3114
 C                                1             76             52           1008
-Markdown                         5            165              0            473
+Markdown                         5            172              0            506
 Bourne Shell                    10             66            173            287
 YAML                             4             11              5            158
 JSON                             5              0              0            104
@@ -124,6 +127,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           109           2455           2422          10642
+SUM:                           142           2990           2739          13956
 -------------------------------------------------------------------------------
 ```

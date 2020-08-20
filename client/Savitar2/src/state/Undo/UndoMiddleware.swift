@@ -6,11 +6,10 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import ReSwift
 
 class UndoableStateAdapter: UndoActionContext {
-
     let state: ReactionsState
 
     init(reactionsState: ReactionsState) {
@@ -21,8 +20,72 @@ class UndoableStateAdapter: UndoActionContext {
         return state.macroList.item(objectID: macroID)?.name
     }
 
+    func macroKey(macroID: SavitarObjectID) -> HotKey? {
+        return state.macroList.item(objectID: macroID)?.hotKey
+    }
+
+    func macroValue(macroID: SavitarObjectID) -> String? {
+        return state.macroList.item(objectID: macroID)?.value
+    }
+
+    func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance? {
+        return state.triggerList.item(objectID: triggerID)?.appearance
+    }
+
+    func triggerAudioType(triggerID: SavitarObjectID) -> TrigAudioType? {
+        return state.triggerList.item(objectID: triggerID)?.audioType
+    }
+
+    func triggerBackColor(triggerID: SavitarObjectID) -> NSColor? {
+        return state.triggerList.item(objectID: triggerID)?.style?.backColor
+    }
+
+    func triggerFace(triggerID: SavitarObjectID) -> TrigFace? {
+        return state.triggerList.item(objectID: triggerID)?.style?.face
+    }
+
+    func triggerForeColor(triggerID: SavitarObjectID) -> NSColor? {
+        return state.triggerList.item(objectID: triggerID)?.style?.foreColor
+    }
+
+    func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching? {
+        return state.triggerList.item(objectID: triggerID)?.matching
+    }
+
     func triggerName(triggerID: SavitarObjectID) -> String? {
         return state.triggerList.item(objectID: triggerID)?.name
+    }
+
+    func triggerReplyText(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.reply
+    }
+
+    func triggerSayText(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.say
+    }
+
+    func triggerSound(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.sound
+    }
+
+    func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier? {
+        return state.triggerList.item(objectID: triggerID)?.specifier
+    }
+
+    func triggerSubstitution(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.substitution
+    }
+
+    func triggerType(triggerID: SavitarObjectID) -> TrigType? {
+        return state.triggerList.item(objectID: triggerID)?.type
+    }
+
+    func triggerVoice(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.voice
+    }
+
+    func triggerWordEnding(triggerID: SavitarObjectID) -> String? {
+        return state.triggerList.item(objectID: triggerID)?.wordEnding
     }
 }
 

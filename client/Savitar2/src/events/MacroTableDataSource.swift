@@ -55,16 +55,19 @@ extension MacroTableDataSource: MacroTableDataSourceType {
             cell.checkableItemChangeDelegate = self
             cell.viewModel = vViewModel
             return cell
+
         case tableView.tableColumns[1]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
             setTextField(cell, vViewModel.hotKey)
             return cell
+
         case tableView.tableColumns[2]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
             setTextField(cell, vViewModel.value)
             return cell
+
         default:
             return nil
         }
@@ -78,8 +81,8 @@ extension MacroTableDataSource: CheckableItemChangeDelegate {
 
         let action: MacroAction = {
             switch checked {
-            case true: return MacroAction.enable(macroID)
             case false: return MacroAction.disable(macroID)
+            case true: return MacroAction.enable(macroID)
             }
         }()
 

@@ -28,6 +28,7 @@ struct PrefsFlags: OptionSet {
     static let monoFontsOnly = PrefsFlags(rawValue: 1 << 11)
     static let defaultWordWrap = PrefsFlags(rawValue: 1 << 12)
     static let dontWarnPicker = PrefsFlags(rawValue: 1 << 13)
+    static let startupEventsWindow = PrefsFlags(rawValue: 1 << 14)
 }
 
 class AppPreferences: SavitarXMLProtocol {
@@ -51,7 +52,7 @@ class AppPreferences: SavitarXMLProtocol {
     var colorMan = ColorMan()
 
     init() {
-        self.version = latestPrefsVersion
+        version = latestPrefsVersion
     }
 
     func load() throws {
@@ -104,7 +105,7 @@ class AppPreferences: SavitarXMLProtocol {
     }
 
     func save() throws {
-        let xmlOutputStr = try self.toXMLElement().xmlString.prettyXMLFormat()
+        let xmlOutputStr = try toXMLElement().xmlString.prettyXMLFormat()
 
         // Note: sandboxing must be turned off in order for the tilde expansion to occur in the right place
         let filename = NSString(string: v2PrefsPath).expandingTildeInPath
@@ -117,9 +118,11 @@ class AppPreferences: SavitarXMLProtocol {
         }
     }
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     enum PrefsAttribIdentifier: String {
         case version = "VERSION"
@@ -232,8 +235,9 @@ extension PrefsFlags: StrOptionSet {
         (.debug, "debug"),
         (.monoFontsOnly, "monoFontsOnly"),
         (.defaultWordWrap, "defaultWordWrap"),
-        (.dontWarnPicker, "dontWarnPicker")
-        ]}
+        (.dontWarnPicker, "dontWarnPicker"),
+        (.startupEventsWindow, "startupEventsWindow")
+        ] }
     static var labelDict: [String: Self] { return [
         "commandEcho": .commandEcho,
         "startupPicker": .startupPicker,
@@ -248,6 +252,7 @@ extension PrefsFlags: StrOptionSet {
         "debug": .debug,
         "monoFontsOnly": .monoFontsOnly,
         "defaultWordWrap": .defaultWordWrap,
-        "dontWarnPicker": .dontWarnPicker
-        ]}
+        "dontWarnPicker": .dontWarnPicker,
+        "startupEventsWindow": .startupEventsWindow
+        ] }
 }

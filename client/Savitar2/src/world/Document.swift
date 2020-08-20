@@ -21,6 +21,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     var endpoint: Endpoint?
     var splitViewController: SplitViewController?
 
+    var suppressChangeCount: Bool = false
+
     lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
@@ -52,6 +54,14 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
 
         store.dispatch(SetMacrosAction(macros: world.macroMan.get()))
         store.dispatch(SetTriggersAction(triggers: world.triggerMan.get()))
+    }
+
+    override func updateChangeCount(_ change: NSDocument.ChangeType) {
+        if !suppressChangeCount {
+            super.updateChangeCount(change)
+        } else {
+            suppressChangeCount = false
+        }
     }
 
     func output(result: OutputResult) {

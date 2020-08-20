@@ -6,7 +6,7 @@
 //  Copyright © 2018 Heynow Software. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import Logging
 import ReSwift
 
@@ -20,6 +20,7 @@ class Endpoint: NSObject, StreamDelegate {
     var logger: Logger
     var telnetParser: TelnetParser?
 
+    var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
     init(world: World, outputter: OutputProtocol) {
@@ -30,7 +31,7 @@ class Endpoint: NSObject, StreamDelegate {
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
         self.telnetParser = TelnetParser()
 
-        AppContext.worldMan.add(world)
+        AppContext.shared.worldMan.add(world)
     }
 
     func close() {
@@ -39,7 +40,7 @@ class Endpoint: NSObject, StreamDelegate {
         outputStream.close()
         logger.info("closed connection")
 
-        AppContext.worldMan.remove(world)
+        AppContext.shared.worldMan.remove(world)
     }
 
     func connectAndRun() {
@@ -73,6 +74,11 @@ class Endpoint: NSObject, StreamDelegate {
         } else {
             outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
+    }
+
+    func expandKeypress(with event: NSEvent) -> Bool {
+        return processMacros(with: event, macros: universalMacros) ||
+            processMacros(with: event, macros: world.macroMan.get())
     }
 
     func sendData(data: Data) {
@@ -124,6 +130,16 @@ class Endpoint: NSObject, StreamDelegate {
         }
     }
 
+    private func processMacros(with event: NSEvent, macros: [Macro]) -> Bool {
+        for macro in macros {
+            if macro.isHotKey(forEvent: event) {
+                sendString(string: macro.value)
+                return true
+            }
+        }
+        return false
+    }
+
     private func processTriggers(inputLine: String, triggers: [Trigger]) -> String {
         var line = inputLine
 
@@ -134,20 +150,20 @@ class Endpoint: NSObject, StreamDelegate {
         //    3. all the rest
         var processedTriggers: [Trigger] = []
         for trigger in triggers {
-            if trigger.flags.contains(.disabled) {
+            if !trigger.enabled {
                 continue
             }
-            if trigger.flags.contains(.gag) {
+            if trigger.appearance == .gag {
                 line = trigger.reactionTo(line: line)
                 processedTriggers.append(trigger)
             }
         }
         if line.count > 0 {
             for trigger in triggers {
-                if trigger.flags.contains(.disabled) {
+                if !trigger.enabled {
                     continue
                 }
-                if trigger.flags.contains(.useSubstitution) && !processedTriggers.contains(trigger) {
+                if trigger.useSubstitution && !processedTriggers.contains(trigger) {
                     line = trigger.reactionTo(line: line)
                     processedTriggers.append(trigger)
                 }
@@ -155,7 +171,7 @@ class Endpoint: NSObject, StreamDelegate {
         }
         if line.count > 0 {
             for trigger in triggers {
-                if trigger.flags.contains(.disabled) {
+                if !trigger.enabled {
                     continue
                 }
                 if !processedTriggers.contains(trigger) {
@@ -209,6 +225,7 @@ class Endpoint: NSObject, StreamDelegate {
 
 extension Endpoint: StoreSubscriber {
     func newState(state: ReactionsState) {
+        self.universalMacros = state.macroList.items
         self.universalTriggers = state.triggerList.items
     }
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2017 Heynow Software. All rights reserved.
 //
 
-import Cocoa
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import Cocoa
 
 var isRunningTests: Bool {
     return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
@@ -17,8 +17,7 @@ var isRunningTests: Bool {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         if isRunningTests {
             return
         }
@@ -29,40 +28,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ])
 
         do {
-            try AppContext.load()
+            try AppContext.shared.load()
         } catch {}
+
+        if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
+            showEventsWindowAction(self)
+        }
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
+    func applicationWillTerminate(_: Notification) {
         if isRunningTests {
             return
         }
-
-        do {
-            try AppContext.save()
-        } catch {}
+        AppContext.shared.isTerminating = true
+        AppContext.shared.save()
     }
 
-    func applicationOpenUntitledFile(_ sender: NSApplication) -> Bool {
+    func applicationOpenUntitledFile(_: NSApplication) -> Bool {
         return true
     }
 
-    @IBAction func showEventsWindowAction(_ sender: Any) {
+    @IBAction func showEventsWindowAction(_: Any) {
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
+        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else {
             return
         }
         guard let myWindow = controller.window else {
             return
         }
-        NSApp.activate(ignoringOtherApps: true)
-        let vc = NSWindowController(window: myWindow)
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             splitViewController.store = globalStore
-            vc.showWindow(self)
+            controller.showWindow(self)
+            AppContext.shared.prefs.flags.insert(.startupEventsWindow)
+            AppContext.shared.save()
         }
-        myWindow.makeKeyAndOrderFront(self)
     }
 }

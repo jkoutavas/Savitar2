@@ -15,11 +15,19 @@ class Macro: SavitarObject {
     public static let defaultName = "<new macro>"
     public static let defaultValue = "<new value>"
 
-    // default settings
-    var enabled = true
-    var readOnly = false
-    var value = defaultValue
-    var keySequence = ""
+    var enabled: Bool
+    var hotKey = HotKey(keyLabel: "")
+    var keyLabel: String {
+        get {
+            return hotKey.toString()
+        }
+        set(value) {
+            hotKey = HotKey(keyLabel: value)
+        }
+    }
+
+    var readOnly: Bool
+    var value: String
 
     //***************************
     // MARK: - SavitarXMLProtocol
@@ -35,9 +43,14 @@ class Macro: SavitarObject {
     }
 
     override init() {
+        enabled = true
+        readOnly = false
+        value = Self.defaultValue
+
         super.init()
 
         name = Self.defaultName
+        keyLabel = ""
     }
 
     override func parse(xml: XML.Accessor) throws {
@@ -49,7 +62,7 @@ class Macro: SavitarObject {
                 self.enabled = !attribute.value.contains("disabled")
                 self.readOnly = attribute.value.contains("readOnly")
             case MacroAttribIdentifier.key.rawValue:
-                self.keySequence = attribute.value
+                self.keyLabel = attribute.value
             default:
                 print("skipping macro attribute \(attribute.key)")
             }
@@ -65,7 +78,7 @@ class Macro: SavitarObject {
 
         varElem.addAttribute(name: MacroAttribIdentifier.name.rawValue, stringValue: self.name)
 
-        varElem.addAttribute(name: MacroAttribIdentifier.key.rawValue, stringValue: self.keySequence)
+        varElem.addAttribute(name: MacroAttribIdentifier.key.rawValue, stringValue: self.keyLabel)
 
         var flags = !self.enabled ? "disabled" : ""
         if self.readOnly {
@@ -81,5 +94,12 @@ class Macro: SavitarObject {
         varElem.addChild(XMLElement.init(name: ValueElemIdentifier, stringValue: value))
 
         return varElem
+    }
+
+    // stackoverflow.com/questions/6084266/check-modifierflags-of-nsevent-if-a-certain-modifier-was-pressed-but-no-other
+    func isHotKey(forEvent event: NSEvent) -> Bool {
+        return enabled && hotKey.keyCode == event.keyCode &&
+            hotKey.modifierFlags.intersection(.deviceIndependentFlagsMask) ==
+            event.modifierFlags.intersection(.deviceIndependentFlagsMask)
     }
 }
