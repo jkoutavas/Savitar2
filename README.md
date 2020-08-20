@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 18th, 2020
+README last updated: August 19th, 2020
 
 ## Current state of the application
 
@@ -111,12 +111,12 @@ $ swift package generate-xcodeproj
      204 unique files.                                          
       78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.83 s (170.4 files/s, 23585.1 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.85 s (167.6 files/s, 23231.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           96           2633           2418           8667
-XML                             12              0             26           3090
+Swift                           96           2635           2418           8673
+XML                             12              0             26           3114
 C                                1             76             52           1008
 Markdown                         5            172              0            506
 Bourne Shell                    10             66            173            287
@@ -127,6 +127,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           142           2988           2739          13926
+SUM:                           142           2990           2739          13956
 -------------------------------------------------------------------------------
 ```
