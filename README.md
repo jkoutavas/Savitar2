@@ -113,18 +113,18 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods`
 
 ```
-     215 text files.
-     204 unique files.                                          
+     216 text files.
+     205 unique files.                                          
       78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.85 s (167.6 files/s, 23231.0 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.96 s (149.4 files/s, 20713.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           96           2635           2418           8673
+Swift                           97           2660           2423           8785
 XML                             12              0             26           3114
 C                                1             76             52           1008
-Markdown                         5            172              0            506
+Markdown                         5            172              0            512
 Bourne Shell                    10             66            173            287
 YAML                             4             11              5            158
 JSON                             5              0              0            104
@@ -133,6 +133,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           142           2990           2739          13956
+SUM:                           143           3015           2744          14074
 -------------------------------------------------------------------------------
 ```
