@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 19th, 2020
+README last updated: August 23rd, 2020
 
 ## Current state of the application
 
@@ -31,8 +31,13 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Load Sav 1.x app settings (includes triggers)
 √ Load Sav 1.x world triggers
 √ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
-_ Input pane command recall and local commands supported
+√ Implement input pane command recall
+_ Implement the start of local commands, ##history
+_ Implement sticky commands
+_ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 _ Implement input triggers
+_ Implement audio cue triggers
+_ Implement reply triggers
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view
 √ Implement Trigger Audio Cue tab view
@@ -41,6 +46,7 @@ _ Implement input triggers
 _ Implement World settings Starting tab
 _ Connect/disconnect session handling
 _ Implement remaining World settings tabs
+_ Implement remaining local commands
 _ Menubar finalized
 _ Logging
 _ Add check for updates support (Sparkle?)
