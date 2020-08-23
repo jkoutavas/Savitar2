@@ -29,7 +29,7 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
                 if AppContext.shared.reservedKeyList.contains(where: {$0 == keyString}) {
                     self.displayError(msg: "'\(keyString)' is a reserved key.")
                 } else if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
-                   self.displayError(msg: "Hotkey '\(keyString)' is already in use")
+                    self.displayError(msg: "Hotkey '\(keyString)' is already in use")
                 } else {
                     if let _store = self.store, let _macroID = self.macro?.objectID {
                         _store.dispatch(MacroAction.changeKey(_macroID, key: key))
