@@ -81,6 +81,10 @@ class Endpoint: NSObject, StreamDelegate {
             processMacros(with: event, macros: world.macroMan.get())
     }
 
+    func sendCommand(cmd: Command) {
+        sendString(string: cmd.cmdStr)
+    }
+
     func sendData(data: Data) {
         _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
             let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)

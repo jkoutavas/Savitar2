@@ -80,7 +80,7 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
                 sayTextRadio.state = .on
             }
             self.representedObject = TriggerAudioCueController(trigger: trigger, store: store,
-                soundNames: currentSoundNames, voiceNames: currentVoiceNames)
+                                                               soundNames: currentSoundNames, voiceNames: currentVoiceNames)
         } else {
             self.representedObject = nil
         }
@@ -94,7 +94,7 @@ class TriggerAudioCueController: NSController {
     var voiceNames: [String]
 
     @objc dynamic var radioIsEnabled: Bool {
-       return store != nil
+        return store != nil
     }
 
     @objc dynamic var soundIndex: Int {

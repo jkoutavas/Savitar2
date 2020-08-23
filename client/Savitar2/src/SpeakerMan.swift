@@ -14,7 +14,7 @@ struct SpeakerMan {
     // https://stackoverflow.com/a/38445571/246887
     var soundNames: [String] {
         let soundPaths: [String] = ["~/Library/Sounds", "/Library/Sounds", "/Network/Library/Sounds",
-            "/System/Library/Sounds"]
+                                    "/System/Library/Sounds"]
 
         var names: [String] = ["Click"] // "Click" is part of the app's resource bundle
         for soundPath in soundPaths {
