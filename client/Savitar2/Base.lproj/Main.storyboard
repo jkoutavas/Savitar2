@@ -815,6 +815,7 @@
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="LVT-By-S2U" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem id="L5M-dx-VGf"/>
+                        <tabViewItem id="hdP-Ck-yig"/>
                         <tabViewItem id="LGU-Md-VYY"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="BjV-hZ-Klw">
@@ -828,6 +829,7 @@
                     <connections>
                         <outlet property="tabView" destination="BjV-hZ-Klw" id="czh-ct-D0G"/>
                         <segue destination="5bW-Js-79f" kind="relationship" relationship="tabItems" id="E0c-ru-dDe"/>
+                        <segue destination="i6P-qM-XBo" kind="relationship" relationship="tabItems" id="Cpj-r0-a39"/>
                         <segue destination="kFV-6n-HOO" kind="relationship" relationship="tabItems" id="oPu-F6-h8U"/>
                     </connections>
                 </tabViewController>
@@ -1427,6 +1429,59 @@ Gw
                 <customObject id="iLh-qn-Ycd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2281.5" y="-11011"/>
+        </scene>
+        <!--Connecting-->
+        <scene sceneID="eai-vu-b96">
+            <objects>
+                <viewController title="Connecting" id="i6P-qM-XBo" sceneMemberID="viewController">
+                    <view key="view" id="1jD-C0-LGI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yag-Gb-zmA">
+                                <rect key="frame" x="20" y="32" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="4VO-nZ-h4m"/>
+                                    <constraint firstAttribute="height" constant="48" id="yHP-Fw-cuM"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="World" id="m7J-7y-dKa"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vIf-tv-Y6e">
+                                <rect key="frame" x="76" y="56" width="86" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Connecting..." id="04k-DB-aGH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XvV-BR-rEl">
+                                <rect key="frame" x="509" y="38" width="69" height="32"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gSB-sJ-XDw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="t1h-dX-WSx">
+                                <rect key="frame" x="78" y="31" width="429" height="20"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="yag-Gb-zmA" firstAttribute="top" secondItem="1jD-C0-LGI" secondAttribute="top" constant="20" id="0LX-hG-cmI"/>
+                            <constraint firstItem="yag-Gb-zmA" firstAttribute="top" secondItem="1jD-C0-LGI" secondAttribute="top" constant="20" id="37c-Nb-jnP"/>
+                            <constraint firstItem="t1h-dX-WSx" firstAttribute="top" secondItem="vIf-tv-Y6e" secondAttribute="bottom" constant="6" id="Bp8-1T-uen"/>
+                            <constraint firstItem="yag-Gb-zmA" firstAttribute="leading" secondItem="1jD-C0-LGI" secondAttribute="leading" constant="20" id="TJ8-Mh-LYb"/>
+                            <constraint firstItem="vIf-tv-Y6e" firstAttribute="leading" secondItem="yag-Gb-zmA" secondAttribute="trailing" constant="10" id="TKz-0Y-Fi0"/>
+                            <constraint firstAttribute="trailing" secondItem="XvV-BR-rEl" secondAttribute="trailing" constant="28" id="Uc0-cz-S7c"/>
+                            <constraint firstItem="t1h-dX-WSx" firstAttribute="leading" secondItem="yag-Gb-zmA" secondAttribute="trailing" constant="10" id="VMt-ei-SRO"/>
+                            <constraint firstItem="vIf-tv-Y6e" firstAttribute="top" secondItem="1jD-C0-LGI" secondAttribute="top" constant="28" id="b0G-xW-wrV"/>
+                            <constraint firstItem="XvV-BR-rEl" firstAttribute="leading" secondItem="t1h-dX-WSx" secondAttribute="trailing" constant="8" id="uEf-Bw-NMi"/>
+                            <constraint firstItem="XvV-BR-rEl" firstAttribute="top" secondItem="1jD-C0-LGI" secondAttribute="top" constant="34" id="zi2-ID-83u"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="NGE-5r-t6x" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2519" y="-10020"/>
         </scene>
     </scenes>
     <resources>

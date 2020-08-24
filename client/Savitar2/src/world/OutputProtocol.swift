@@ -17,7 +17,6 @@ enum Result<T, E> {
 typealias OutputResult = Result<String, String>
 
 protocol OutputProtocol {
+    func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
-    func sessionClosed()
-    func sessionOpened()
 }

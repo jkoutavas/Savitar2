@@ -8,18 +8,18 @@
 
 import Cocoa
 
+enum InputPanelType: Int {
+    case Input = 0
+    case Connecting = 1
+    case Offline = 2
+}
+
 class SplitViewController: NSSplitViewController {
 
-    func selectInputViewController() {
+    func select(panel: InputPanelType) {
         let item = splitViewItems[1]
         guard let tabController = item.viewController as? NSTabViewController else { return }
-        tabController.selectedTabViewItemIndex = 0
-    }
-
-    func selectOfflineViewController() {
-        let item = splitViewItems[1]
-        guard let tabController = item.viewController as? NSTabViewController else { return }
-        tabController.selectedTabViewItemIndex = 1
+        tabController.selectedTabViewItemIndex = panel.rawValue
     }
 
     var inputViewController: InputViewController? {

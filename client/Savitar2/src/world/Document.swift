@@ -101,12 +101,20 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         }
     }
 
-    func sessionClosed() {
-        splitViewController?.selectOfflineViewController()
-    }
+    func connectionStatusChanged(status: ConnectionStatus) {
+        switch status {
+        case .BindStart:
+            splitViewController?.select(panel: .Connecting)
 
-    func sessionOpened() {
-        splitViewController?.selectInputViewController()
+        case .ConnectComplete:
+            splitViewController?.select(panel: .Input)
+
+        case .DisconnectComplete:
+            splitViewController?.select(panel: .Offline)
+
+        default:
+        break
+        }
     }
 
     //***************************

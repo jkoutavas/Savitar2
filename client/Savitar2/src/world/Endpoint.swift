@@ -22,7 +22,9 @@ enum ConnectionStatus {
 }
 
 class Endpoint: NSObject, StreamDelegate {
-    var status: ConnectionStatus = .New
+    var status: ConnectionStatus = .New {
+        didSet { outputter.connectionStatusChanged(status: status) }
+    }
 
     let world: World
     let outputter: OutputProtocol
@@ -54,7 +56,6 @@ class Endpoint: NSObject, StreamDelegate {
         outputStream.close()
         logger.info("closed connection")
         status = .DisconnectComplete
-        outputter.sessionClosed()
 
         AppContext.shared.worldMan.remove(world)
     }
@@ -231,7 +232,6 @@ class Endpoint: NSObject, StreamDelegate {
         switch eventCode {
         case Stream.Event.openCompleted:
             status = .ConnectComplete
-            outputter.sessionOpened()
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }
@@ -240,6 +240,7 @@ class Endpoint: NSObject, StreamDelegate {
             logger.info("new message received")
         case Stream.Event.errorOccurred:
             self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
+            close()
         case Stream.Event.hasSpaceAvailable:
             logger.info("has space available")
         default:
