@@ -64,6 +64,24 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         }
     }
 
+    /*
+     * Produce XML-based data for a v2 Savitar world document
+     */
+    override func data(ofType typeName: String) throws -> Data {
+        let docElem = try self.toXMLElement()
+        let xml = XMLDocument(rootElement: docElem)
+        let xmlStr = try xml.xmlString.prettyXMLFormat()
+        if let data = xmlStr.data(using: String.Encoding.utf8) {
+            return data
+        } else {
+            throw NSError()
+        }
+    }
+
+    //***************************
+    // MARK: - OutputProtocol
+    //***************************
+
     func output(result: OutputResult) {
         func output(string: String) {
             guard let svc = splitViewController else { return }
@@ -83,18 +101,12 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         }
     }
 
-    /*
-     * Produce XML-based data for a v2 Savitar world document
-     */
-    override func data(ofType typeName: String) throws -> Data {
-        let docElem = try self.toXMLElement()
-        let xml = XMLDocument(rootElement: docElem)
-        let xmlStr = try xml.xmlString.prettyXMLFormat()
-        if let data = xmlStr.data(using: String.Encoding.utf8) {
-            return data
-        } else {
-            throw NSError()
-        }
+    func sessionClosed() {
+        splitViewController?.selectOfflineViewController()
+    }
+
+    func sessionOpened() {
+        splitViewController?.selectInputViewController()
     }
 
     //***************************

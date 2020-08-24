@@ -18,4 +18,6 @@ typealias OutputResult = Result<String, String>
 
 protocol OutputProtocol {
     func output(result: OutputResult)
+    func sessionClosed()
+    func sessionOpened()
 }

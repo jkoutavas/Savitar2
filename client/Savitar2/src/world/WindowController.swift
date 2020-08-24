@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class WindowController: NSWindowController {
+class WindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
@@ -123,5 +123,22 @@ class WindowController: NSWindowController {
         }
 
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
+    }
+
+    //***************************
+    // MARK: - NSWindowDelegate
+    //***************************
+
+    internal func windowShouldClose(_: NSWindow) -> Bool {
+        if AppContext.shared.isTerminating {
+            return true
+        }
+        guard let doc = document as? Document else { return true }
+        guard let endpoint = doc.endpoint else { return true }
+        if endpoint.status == .ConnectComplete {
+            endpoint.close()
+            return false
+        }
+        return true
     }
 }

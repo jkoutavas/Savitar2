@@ -716,7 +716,7 @@
                 <splitViewController id="FEp-aJ-0Av" customClass="SplitViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="p8T-2f-63T"/>
-                        <splitViewItem id="yjR-bu-alr"/>
+                        <splitViewItem id="pfd-HG-UNu"/>
                     </splitViewItems>
                     <splitView key="splitView" misplaced="YES" dividerStyle="thin" id="8xE-Pl-uBd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -728,7 +728,7 @@
                     <connections>
                         <outlet property="splitView" destination="8xE-Pl-uBd" id="e6k-EE-SgY"/>
                         <segue destination="Umb-Bj-yZ8" kind="relationship" relationship="splitItems" id="v7f-P3-52h"/>
-                        <segue destination="5bW-Js-79f" kind="relationship" relationship="splitItems" id="mbc-yG-RU0"/>
+                        <segue destination="LVT-By-S2U" kind="relationship" relationship="splitItems" id="GbO-st-sn8"/>
                     </connections>
                 </splitViewController>
                 <customObject id="Zhx-cr-xnX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -759,12 +759,12 @@
                 </viewController>
                 <customObject id="eJ4-na-aGV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2547" y="-10776"/>
+            <point key="canvasLocation" x="-2519" y="-10609"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="Ozo-wY-4AX">
             <objects>
-                <viewController id="5bW-Js-79f" customClass="InputViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Input View Controller" id="5bW-Js-79f" customClass="InputViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="DeE-Og-Jsx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -807,7 +807,99 @@
                 </viewController>
                 <customObject id="Uqr-JY-xEG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2499" y="-10223"/>
+            <point key="canvasLocation" x="-2519" y="-10347"/>
+        </scene>
+        <!--Tab View Controller-->
+        <scene sceneID="mmC-V1-TRd">
+            <objects>
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="LVT-By-S2U" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem id="L5M-dx-VGf"/>
+                        <tabViewItem id="LGU-Md-VYY"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="BjV-hZ-Klw">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <connections>
+                            <outlet property="delegate" destination="LVT-By-S2U" id="RUE-bU-LP1"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="BjV-hZ-Klw" id="czh-ct-D0G"/>
+                        <segue destination="5bW-Js-79f" kind="relationship" relationship="tabItems" id="E0c-ru-dDe"/>
+                        <segue destination="kFV-6n-HOO" kind="relationship" relationship="tabItems" id="oPu-F6-h8U"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="lkD-pU-bz8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3219" y="-10146"/>
+        </scene>
+        <!--Offline-->
+        <scene sceneID="uy9-dh-e12">
+            <objects>
+                <viewController title="Offline" id="kFV-6n-HOO" sceneMemberID="viewController">
+                    <view key="view" id="ARR-tK-Etb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhn-Ef-jmj">
+                                <rect key="frame" x="20" y="32" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="MvD-kZ-SDe"/>
+                                    <constraint firstAttribute="width" constant="48" id="qb1-jR-jHM"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="World" id="K2G-P5-lQg"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="96v-A0-mfX">
+                                <rect key="frame" x="76" y="56" width="228" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="This session has been disconnected." id="aUL-pf-syC">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ot-Zj-vtK">
+                                <rect key="frame" x="74" y="32" width="155" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="What do you want to do?" id="Wsu-0B-5n6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n02-MO-gCn">
+                                <rect key="frame" x="503" y="38" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XQq-I1-Uu9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qBr-1q-R8V">
+                                <rect key="frame" x="402" y="38" width="92" height="32"/>
+                                <buttonCell key="cell" type="push" title="Connect" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qTf-Mv-JsC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="nhn-Ef-jmj" firstAttribute="top" secondItem="ARR-tK-Etb" secondAttribute="top" constant="20" id="Bnk-zb-RGr"/>
+                            <constraint firstItem="96v-A0-mfX" firstAttribute="top" secondItem="ARR-tK-Etb" secondAttribute="top" constant="28" id="EEg-BL-nAV"/>
+                            <constraint firstAttribute="trailing" secondItem="n02-MO-gCn" secondAttribute="trailing" constant="28" id="Glx-et-RLT"/>
+                            <constraint firstItem="n02-MO-gCn" firstAttribute="leading" secondItem="qBr-1q-R8V" secondAttribute="trailing" constant="21" id="JxF-3o-j5y"/>
+                            <constraint firstItem="96v-A0-mfX" firstAttribute="leading" secondItem="nhn-Ef-jmj" secondAttribute="trailing" constant="10" id="Lod-sI-f0B"/>
+                            <constraint firstItem="nhn-Ef-jmj" firstAttribute="top" secondItem="ARR-tK-Etb" secondAttribute="top" constant="20" id="bMx-JS-Frb"/>
+                            <constraint firstItem="4ot-Zj-vtK" firstAttribute="top" secondItem="96v-A0-mfX" secondAttribute="bottom" constant="8" id="dHM-7V-Ekg"/>
+                            <constraint firstItem="qBr-1q-R8V" firstAttribute="top" secondItem="ARR-tK-Etb" secondAttribute="top" constant="34" id="kME-Bi-dEL"/>
+                            <constraint firstItem="4ot-Zj-vtK" firstAttribute="leading" secondItem="nhn-Ef-jmj" secondAttribute="trailing" constant="8" id="nug-0t-Vj4"/>
+                            <constraint firstItem="n02-MO-gCn" firstAttribute="top" secondItem="ARR-tK-Etb" secondAttribute="top" constant="34" id="wBw-Gr-9f0"/>
+                            <constraint firstItem="nhn-Ef-jmj" firstAttribute="leading" secondItem="ARR-tK-Etb" secondAttribute="leading" constant="20" id="x7d-OF-8GV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="Swo-G2-Lcq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2519" y="-10182"/>
         </scene>
         <!--World Settings-->
         <scene sceneID="Ftl-vK-I0Y">
@@ -1337,4 +1429,7 @@ Gw
             <point key="canvasLocation" x="-2281.5" y="-11011"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="World" width="512" height="512"/>
+    </resources>
 </document>

@@ -10,7 +10,20 @@ import Cocoa
 import Logging
 import ReSwift
 
+enum ConnectionStatus {
+    case New
+    case BindStart
+    case Binding
+    case BindComplete
+    case ConnectComplete
+    case ConnectRetry
+    case Disconnecting
+    case DisconnectComplete
+}
+
 class Endpoint: NSObject, StreamDelegate {
+    var status: ConnectionStatus = .New
+
     let world: World
     let outputter: OutputProtocol
 
@@ -35,10 +48,13 @@ class Endpoint: NSObject, StreamDelegate {
     }
 
     func close() {
+        status = .Disconnecting
         globalStore.unsubscribe(self)
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
+        status = .DisconnectComplete
+        outputter.sessionClosed()
 
         AppContext.shared.worldMan.remove(world)
     }
@@ -55,6 +71,7 @@ class Endpoint: NSObject, StreamDelegate {
         telnetParser!.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
+        status = .BindStart
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                            world.host as CFString,
                                            world.port,
@@ -63,6 +80,7 @@ class Endpoint: NSObject, StreamDelegate {
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
 
+        status = .Binding
         if inputStream != nil && outputStream != nil {
             inputStream.delegate = self
 
@@ -71,6 +89,7 @@ class Endpoint: NSObject, StreamDelegate {
 
             inputStream.open()
             outputStream.open()
+            status = .BindComplete
         } else {
             outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
@@ -79,10 +98,6 @@ class Endpoint: NSObject, StreamDelegate {
     func expandKeypress(with event: NSEvent) -> Bool {
         return processMacros(with: event, macros: universalMacros) ||
             processMacros(with: event, macros: world.macroMan.get())
-    }
-
-    func sendCommand(cmd: Command) {
-        sendString(string: cmd.cmdStr)
     }
 
     func sendData(data: Data) {
@@ -94,6 +109,10 @@ class Endpoint: NSObject, StreamDelegate {
 
     func sendString(string: String) {
         sendData(data: string.data(using: .utf8)!)
+    }
+
+    func submitServerCmd(cmd: Command) {
+        sendString(string: cmd.cmdStr)
     }
 
     private func process(buffer: [UInt8]) -> Data {
@@ -211,6 +230,8 @@ class Endpoint: NSObject, StreamDelegate {
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.openCompleted:
+            status = .ConnectComplete
+            outputter.sessionOpened()
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
             guard let inputStream = aStream as? InputStream else { break }

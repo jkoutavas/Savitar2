@@ -89,9 +89,9 @@ class InputViewController: ViewController {
 
                 // send the processed command to the server
                 if let processedCmd = textToCmd() {
-                    ep.sendCommand(cmd: processedCmd)
+                    ep.submitServerCmd(cmd: processedCmd)
                 }
-             } else {
+            } else {
                 // just send the carriage return
                 ep.sendString(string: "\r")
             }
