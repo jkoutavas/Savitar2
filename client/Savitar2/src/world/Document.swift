@@ -11,7 +11,7 @@ import SwiftyXMLParser
 
 let DocumentElemIdentifier = "DOCUMENT"
 
-class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
+class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     let type = "Savitar World"
     var version = 1 // start with the assumption that a v1 world XML is being parsed
@@ -19,7 +19,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     var world = World()
 
     var endpoint: Endpoint?
-    var splitViewController: SplitViewController?
+    var splitViewController: SessionViewController?
 
     var suppressChangeCount: Bool = false
 
@@ -41,8 +41,8 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
-        endpoint = Endpoint(world: world, outputter: self)
-        splitViewController = windowController.contentViewController as? SplitViewController
+        endpoint = Endpoint(world: world, sessionHandler: self)
+        splitViewController = windowController.contentViewController as? SessionViewController
         guard let inputVC = splitViewController?.inputViewController else { return }
         inputVC.endpoint = endpoint
         endpoint?.connectAndRun()
@@ -79,7 +79,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
     }
 
     //***************************
-    // MARK: - OutputProtocol
+    // MARK: - SessionHandlerProtocol
     //***************************
 
     func output(result: OutputResult) {

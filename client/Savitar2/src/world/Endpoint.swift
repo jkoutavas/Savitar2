@@ -23,11 +23,11 @@ enum ConnectionStatus {
 
 class Endpoint: NSObject, StreamDelegate {
     var status: ConnectionStatus = .New {
-        didSet { outputter.connectionStatusChanged(status: status) }
+        didSet { sessionHandler.connectionStatusChanged(status: status) }
     }
 
     let world: World
-    let outputter: OutputProtocol
+    let sessionHandler: SessionHandlerProtocol
 
     var inputStream: InputStream!
     var outputStream: OutputStream!
@@ -38,9 +38,9 @@ class Endpoint: NSObject, StreamDelegate {
     var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
-    init(world: World, outputter: OutputProtocol) {
+    init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
-        self.outputter = outputter
+        self.sessionHandler = sessionHandler
         self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
@@ -92,7 +92,7 @@ class Endpoint: NSObject, StreamDelegate {
             outputStream.open()
             status = .BindComplete
         } else {
-            outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
+            sessionHandler.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
     }
 
@@ -149,7 +149,7 @@ class Endpoint: NSObject, StreamDelegate {
 
             // Processing is complete. Send the line off to the output view
             OperationQueue.main.addOperation({ [weak self] in
-                self?.outputter.output(result: .success(line))
+                self?.sessionHandler.output(result: .success(line))
             })
         }
     }
@@ -239,7 +239,7 @@ class Endpoint: NSObject, StreamDelegate {
         case Stream.Event.endEncountered:
             logger.info("new message received")
         case Stream.Event.errorOccurred:
-            self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
+            self.sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
             close()
         case Stream.Event.hasSpaceAvailable:
             logger.info("has space available")

@@ -710,10 +710,10 @@
             </objects>
             <point key="canvasLocation" x="-3279" y="-11110"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="8Dm-Bd-g8u">
             <objects>
-                <splitViewController id="FEp-aJ-0Av" customClass="SplitViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="FEp-aJ-0Av" customClass="SessionViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="p8T-2f-63T"/>
                         <splitViewItem id="pfd-HG-UNu"/>

@@ -86,7 +86,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
     func updateViews(_ newValue: World?) {
 
-        let splitViewController = contentViewController as? SplitViewController
+        let splitViewController = contentViewController as? SessionViewController
 
         guard let svc = splitViewController else { return }
         guard let inputVC = svc.inputViewController else { return }

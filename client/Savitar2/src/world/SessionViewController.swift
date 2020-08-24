@@ -1,5 +1,5 @@
 //
-//  SplitViewController.swift
+//  SessionViewController.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 11/22/17.
@@ -14,7 +14,7 @@ enum InputPanelType: Int {
     case Offline = 2
 }
 
-class SplitViewController: NSSplitViewController {
+class SessionViewController: NSSplitViewController {
 
     func select(panel: InputPanelType) {
         let item = splitViewItems[1]
