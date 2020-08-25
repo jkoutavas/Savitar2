@@ -134,9 +134,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
             return true
         }
         guard let doc = document as? Document else { return true }
-        guard let endpoint = doc.endpoint else { return true }
-        if endpoint.status == .ConnectComplete {
-            endpoint.close()
+        guard let session = doc.session else { return true }
+        if session.status == .ConnectComplete {
+            session.close()
             return false
         }
         return true

@@ -18,8 +18,8 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     var world = World()
 
-    var endpoint: Endpoint?
-    var splitViewController: SessionViewController?
+    var session: Session?
+    var sessionViewController: SessionViewController?
 
     var suppressChangeCount: Bool = false
 
@@ -27,7 +27,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     override func close() {
         super.close()
-        endpoint?.close()
+        session?.close()
     }
 
     override func makeWindowControllers() {
@@ -41,11 +41,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
-        endpoint = Endpoint(world: world, sessionHandler: self)
-        splitViewController = windowController.contentViewController as? SessionViewController
-        guard let inputVC = splitViewController?.inputViewController else { return }
-        inputVC.endpoint = endpoint
-        endpoint?.connectAndRun()
+        session = Session(world: world, sessionHandler: self)
+        sessionViewController = windowController.contentViewController as? SessionViewController
+        guard let inputVC = sessionViewController?.inputViewController else { return }
+        inputVC.session = session
+        session?.connectAndRun()
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
@@ -84,7 +84,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     func output(result: OutputResult) {
         func output(string: String) {
-            guard let svc = splitViewController else { return }
+            guard let svc = sessionViewController else { return }
             guard let outputVC = svc.outputViewController else { return }
             outputVC.output(string: string)
         }
@@ -104,13 +104,13 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     func connectionStatusChanged(status: ConnectionStatus) {
         switch status {
         case .BindStart:
-            splitViewController?.select(panel: .Connecting)
+            sessionViewController?.select(panel: .Connecting)
 
         case .ConnectComplete:
-            splitViewController?.select(panel: .Input)
+            sessionViewController?.select(panel: .Input)
 
         case .DisconnectComplete:
-            splitViewController?.select(panel: .Offline)
+            sessionViewController?.select(panel: .Offline)
 
         default:
         break

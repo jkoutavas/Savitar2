@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Session.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 2/13/18.
@@ -21,7 +21,7 @@ enum ConnectionStatus {
     case DisconnectComplete
 }
 
-class Endpoint: NSObject, StreamDelegate {
+class Session: NSObject, StreamDelegate {
     var status: ConnectionStatus = .New {
         didSet { sessionHandler.connectionStatusChanged(status: status) }
     }
@@ -43,7 +43,7 @@ class Endpoint: NSObject, StreamDelegate {
         self.sessionHandler = sessionHandler
         self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
-        self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
+        self.logger[metadataKey: "m"] = "Session" // "m" is for "module"
         self.telnetParser = TelnetParser()
 
         AppContext.shared.worldMan.add(world)
@@ -249,7 +249,7 @@ class Endpoint: NSObject, StreamDelegate {
     }
 }
 
-extension Endpoint: StoreSubscriber {
+extension Session: StoreSubscriber {
     func newState(state: ReactionsState) {
         self.universalMacros = state.macroList.items
         self.universalTriggers = state.triggerList.items
