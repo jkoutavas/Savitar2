@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 23rd, 2020
+README last updated: August 30th, 2020
 
 ## Current state of the application
 
@@ -44,9 +44,10 @@ _ Implement reply triggers
 √ Implement Trigger Reply tab view
 √ Implement Macro editor
 _ Implement World settings Starting tab
-_ Connect/disconnect session handling
+√ Connect/disconnect session handling
 _ Implement remaining World settings tabs
 _ Implement remaining local commands
+_ Implement scroll locking
 _ Menubar finalized
 _ Logging
 _ Add check for updates support (Sparkle?)
@@ -113,18 +114,18 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods`
 
 ```
-     216 text files.
-     205 unique files.                                          
+     217 text files.
+     206 unique files.                                          
       78 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.96 s (149.4 files/s, 20713.7 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.84 s (170.8 files/s, 23973.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           97           2660           2423           8785
-XML                             12              0             26           3114
+Swift                           98           2681           2437           8886
+XML                             12              0             30           3350
 C                                1             76             52           1008
-Markdown                         5            172              0            512
+Markdown                         5            172              0            513
 Bourne Shell                    10             66            173            287
 YAML                             4             11              5            158
 JSON                             5              0              0            104
@@ -133,6 +134,6 @@ Ruby                             1              1              0             18
 D                                4              0              0             12
 C/C++ Header                     3             10             35             11
 -------------------------------------------------------------------------------
-SUM:                           143           3015           2744          14074
+SUM:                           144           3036           2762          14412
 -------------------------------------------------------------------------------
 ```

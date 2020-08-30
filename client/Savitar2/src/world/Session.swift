@@ -19,6 +19,7 @@ enum ConnectionStatus {
     case ConnectRetry
     case Disconnecting
     case DisconnectComplete
+    case ReallyCloseWindow
 }
 
 class Session: NSObject, StreamDelegate {
@@ -99,6 +100,10 @@ class Session: NSObject, StreamDelegate {
     func expandKeypress(with event: NSEvent) -> Bool {
         return processMacros(with: event, macros: universalMacros) ||
             processMacros(with: event, macros: world.macroMan.get())
+    }
+
+    func reallyCloseWindow() {
+        status = .ReallyCloseWindow
     }
 
     func sendData(data: Data) {
@@ -231,9 +236,11 @@ class Session: NSObject, StreamDelegate {
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
         case Stream.Event.openCompleted:
-            status = .ConnectComplete
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
+            if status != .ConnectComplete {
+                status = .ConnectComplete
+            }
             guard let inputStream = aStream as? InputStream else { break }
             read(stream: inputStream)
         case Stream.Event.endEncountered:

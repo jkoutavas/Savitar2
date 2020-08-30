@@ -16,6 +16,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     let type = "Savitar World"
     var version = 1 // start with the assumption that a v1 world XML is being parsed
 
+    var windowController: WindowController?
     var world = World()
 
     var session: Session?
@@ -36,6 +37,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         guard let windowController = storyboard.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("Document Window Controller"))
             as? WindowController else { return }
+        self.windowController = windowController
 
         self.addWindowController(windowController)
         windowController.updateViews(world)
@@ -43,6 +45,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
         session = Session(world: world, sessionHandler: self)
         sessionViewController = windowController.contentViewController as? SessionViewController
+        sessionViewController?.session = session
         guard let inputVC = sessionViewController?.inputViewController else { return }
         inputVC.session = session
         session?.connectAndRun()
@@ -112,8 +115,10 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         case .DisconnectComplete:
             sessionViewController?.select(panel: .Offline)
 
+        case .ReallyCloseWindow:
+            windowController?.reallyClose()
         default:
-        break
+            break
         }
     }
 

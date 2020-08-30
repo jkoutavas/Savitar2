@@ -12,13 +12,18 @@ enum InputPanelType: Int {
     case Input = 0
     case Connecting = 1
     case Offline = 2
+    case Unreachable = 3
 }
 
 class SessionViewController: NSSplitViewController {
+    var session: Session?
 
     func select(panel: InputPanelType) {
         let item = splitViewItems[1]
         guard let tabController = item.viewController as? NSTabViewController else { return }
+        if let statusVC = tabController.tabViewItems[panel.rawValue].viewController as? ConnectionStatusViewController {
+            statusVC.session = session
+        }
         tabController.selectedTabViewItemIndex = panel.rawValue
     }
 

@@ -9,6 +9,8 @@
 import Cocoa
 
 class WindowController: NSWindowController, NSWindowDelegate {
+    internal var reallyClosing = false
+
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
@@ -125,12 +127,19 @@ class WindowController: NSWindowController, NSWindowDelegate {
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
     }
 
+    func reallyClose() {
+        reallyClosing = true
+        if let window = self.window {
+            window.close()
+        }
+    }
+
     //***************************
     // MARK: - NSWindowDelegate
     //***************************
 
     internal func windowShouldClose(_: NSWindow) -> Bool {
-        if AppContext.shared.isTerminating {
+        if AppContext.shared.isTerminating || reallyClosing {
             return true
         }
         guard let doc = document as? Document else { return true }

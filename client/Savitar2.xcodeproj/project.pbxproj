@@ -79,6 +79,7 @@
 		69B5D58324B559B0002BBF5C /* Keycode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5D58224B559AF002BBF5C /* Keycode.swift */; };
 		69BAE50D24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */; };
 		69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */; };
+		69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -211,6 +212,7 @@
 		69B5D58224B559AF002BBF5C /* Keycode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycode.swift; sourceTree = "<group>"; };
 		69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMatchingViewController.swift; sourceTree = "<group>"; };
 		69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
+		69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */,
 				69F9B27D24EF49F500C768C7 /* Command.swift */,
+				69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */,
 				69662B21204367BD00E7CC7B /* Document.swift */,
 				69F620DC204B86A000301A8D /* DocumentV1.swift */,
 				69F620E2204B881600301A8D /* DocumentV2.swift */,
@@ -814,6 +817,7 @@
 				698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */,
 				698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
+				69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */,
