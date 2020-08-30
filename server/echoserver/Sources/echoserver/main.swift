@@ -60,7 +60,7 @@ class EchoServer {
 
                 repeat {
                     let newSocket = try socket.acceptClientConnection()
-
+//sleep(10) // simulate a slow connection
                     print("Accepted connection from: \(newSocket.remoteHostname) on port \(newSocket.remotePort)")
 //                    print("Socket Signature: \(String(describing: newSocket.signature?.description))")
 

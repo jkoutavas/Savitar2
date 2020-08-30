@@ -40,11 +40,11 @@
 		695484A91FC4E6E400A6983F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695484A71FC4E6E400A6983F /* Main.storyboard */; };
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
 		69662B27204367BD00E7CC7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1D204367BD00E7CC7B /* ViewController.swift */; };
-		69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SplitViewController.swift */; };
+		69662B28204367BD00E7CC7B /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SessionViewController.swift */; };
 		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
-		69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B20204367BD00E7CC7B /* OutputProtocol.swift */; };
+		69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */; };
 		69662B2B204367BD00E7CC7B /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B21204367BD00E7CC7B /* Document.swift */; };
-		69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B22204367BD00E7CC7B /* Endpoint.swift */; };
+		69662B2C204367BD00E7CC7B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B22204367BD00E7CC7B /* Session.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -71,7 +71,6 @@
 		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
 		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
 		69928A89248742C000571B21 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* MacroReducer.swift */; };
-		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		699F5B7C24E72AAF0089C81E /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F5B7B24E72AAF0089C81E /* EventsWindowController.swift */; };
 		69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D6249EA7120058B067 /* EventsSplitViewController.swift */; };
 		69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerViewController.swift */; };
@@ -79,6 +78,9 @@
 		69B5D58324B559B0002BBF5C /* Keycode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B5D58224B559AF002BBF5C /* Keycode.swift */; };
 		69BAE50D24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */; };
 		69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */; };
+		69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */; };
+		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
+		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -170,11 +172,11 @@
 		695484B61FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69662B1D204367BD00E7CC7B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		69662B1E204367BD00E7CC7B /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		69662B1E204367BD00E7CC7B /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
-		69662B20204367BD00E7CC7B /* OutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputProtocol.swift; sourceTree = "<group>"; };
+		69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHandlerProtocol.swift; sourceTree = "<group>"; };
 		69662B21204367BD00E7CC7B /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		69662B22204367BD00E7CC7B /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		69662B22204367BD00E7CC7B /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,7 +205,6 @@
 		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
 		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
 		69928A88248742C000571B21 /* MacroReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
-		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		699F5B7B24E72AAF0089C81E /* EventsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
 		69B278D6249EA7120058B067 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
 		69B278D8249F824B0058B067 /* TriggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +212,9 @@
 		69B5D58224B559AF002BBF5C /* Keycode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycode.swift; sourceTree = "<group>"; };
 		69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMatchingViewController.swift; sourceTree = "<group>"; };
 		69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
+		69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
+		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -319,7 +323,6 @@
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
-				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
 				695204C624B1F29E004BDBE2 /* Savitar2UITests */,
@@ -401,14 +404,15 @@
 			children = (
 				69DE2D23209D433B00A4D3F2 /* AppearanceSettingsController.swift */,
 				69F9B27D24EF49F500C768C7 /* Command.swift */,
+				69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */,
 				69662B21204367BD00E7CC7B /* Document.swift */,
 				69F620DC204B86A000301A8D /* DocumentV1.swift */,
 				69F620E2204B881600301A8D /* DocumentV2.swift */,
-				69662B22204367BD00E7CC7B /* Endpoint.swift */,
 				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
-				69662B20204367BD00E7CC7B /* OutputProtocol.swift */,
 				696F77492390D2D2005E45EB /* OutputViewController.swift */,
-				69662B1E204367BD00E7CC7B /* SplitViewController.swift */,
+				69662B22204367BD00E7CC7B /* Session.swift */,
+				69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */,
+				69662B1E204367BD00E7CC7B /* SessionViewController.swift */,
 				6991F4612393113700E2BFDB /* TelnetParser.swift */,
 				69662B1D204367BD00E7CC7B /* ViewController.swift */,
 				69F620E6204BC19100301A8D /* WindowController.swift */,
@@ -530,8 +534,10 @@
 			isa = PBXGroup;
 			children = (
 				696F77472390D256005E45EB /* Appearance.txt */,
+				69BE3EAD24FC41C30035CF88 /* AppIcon.icns */,
 				698667D324EA17B40061AA86 /* Click.m4a */,
 				690B462C23B16B54000445E4 /* StartupPreferences.xml */,
+				69BE3EAE24FC41C30035CF88 /* World.icns */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -673,11 +679,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6994602E2041124800409308 /* World.icns in Resources */,
 				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				698667D424EA18500061AA86 /* Click.m4a in Resources */,
+				69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
+				69BE3EB024FC41C30035CF88 /* World.icns in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);
@@ -814,9 +821,10 @@
 				698576D824C5BC9000B5B370 /* HotKeyEditor.swift in Sources */,
 				698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */,
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
+				69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
-				69662B2A204367BD00E7CC7B /* OutputProtocol.swift in Sources */,
+				69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */,
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,
 				6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
@@ -843,7 +851,7 @@
 				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
-				69662B28204367BD00E7CC7B /* SplitViewController.swift in Sources */,
+				69662B28204367BD00E7CC7B /* SessionViewController.swift in Sources */,
 				696F77442390CFF2005E45EB /* aha.c in Sources */,
 				691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */,
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
@@ -856,7 +864,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
 				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
-				69662B2C204367BD00E7CC7B /* Endpoint.swift in Sources */,
+				69662B2C204367BD00E7CC7B /* Session.swift in Sources */,
 				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
 				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				69F620DD204B86A100301A8D /* DocumentV1.swift in Sources */,

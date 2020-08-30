@@ -1,5 +1,5 @@
 //
-//  OutputProtocol.swift
+//  SessionHandlerProtocol.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 2/13/18.
@@ -16,6 +16,7 @@ enum Result<T, E> {
 
 typealias OutputResult = Result<String, String>
 
-protocol OutputProtocol {
+protocol SessionHandlerProtocol {
+    func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
 }

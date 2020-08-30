@@ -1,5 +1,5 @@
 //
-//  Endpoint.swift
+//  Session.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 2/13/18.
@@ -10,9 +10,25 @@ import Cocoa
 import Logging
 import ReSwift
 
-class Endpoint: NSObject, StreamDelegate {
+enum ConnectionStatus {
+    case New
+    case BindStart
+    case Binding
+    case BindComplete
+    case ConnectComplete
+    case ConnectRetry
+    case Disconnecting
+    case DisconnectComplete
+    case ReallyCloseWindow
+}
+
+class Session: NSObject, StreamDelegate {
+    var status: ConnectionStatus = .New {
+        didSet { sessionHandler.connectionStatusChanged(status: status) }
+    }
+
     let world: World
-    let outputter: OutputProtocol
+    let sessionHandler: SessionHandlerProtocol
 
     var inputStream: InputStream!
     var outputStream: OutputStream!
@@ -23,22 +39,24 @@ class Endpoint: NSObject, StreamDelegate {
     var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
-    init(world: World, outputter: OutputProtocol) {
+    init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
-        self.outputter = outputter
+        self.sessionHandler = sessionHandler
         self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
-        self.logger[metadataKey: "m"] = "Endpoint" // "m" is for "module"
+        self.logger[metadataKey: "m"] = "Session" // "m" is for "module"
         self.telnetParser = TelnetParser()
 
         AppContext.shared.worldMan.add(world)
     }
 
     func close() {
+        status = .Disconnecting
         globalStore.unsubscribe(self)
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
+        status = .DisconnectComplete
 
         AppContext.shared.worldMan.remove(world)
     }
@@ -55,6 +73,7 @@ class Endpoint: NSObject, StreamDelegate {
         telnetParser!.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
+        status = .BindStart
         CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault,
                                            world.host as CFString,
                                            world.port,
@@ -63,6 +82,7 @@ class Endpoint: NSObject, StreamDelegate {
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
 
+        status = .Binding
         if inputStream != nil && outputStream != nil {
             inputStream.delegate = self
 
@@ -71,8 +91,9 @@ class Endpoint: NSObject, StreamDelegate {
 
             inputStream.open()
             outputStream.open()
+            status = .BindComplete
         } else {
-            outputter.output(result: .error("[SAVITAR] Failed Getting Streams"))
+            sessionHandler.output(result: .error("[SAVITAR] Failed Getting Streams"))
         }
     }
 
@@ -81,8 +102,8 @@ class Endpoint: NSObject, StreamDelegate {
             processMacros(with: event, macros: world.macroMan.get())
     }
 
-    func sendCommand(cmd: Command) {
-        sendString(string: cmd.cmdStr)
+    func reallyCloseWindow() {
+        status = .ReallyCloseWindow
     }
 
     func sendData(data: Data) {
@@ -94,6 +115,10 @@ class Endpoint: NSObject, StreamDelegate {
 
     func sendString(string: String) {
         sendData(data: string.data(using: .utf8)!)
+    }
+
+    func submitServerCmd(cmd: Command) {
+        sendString(string: cmd.cmdStr)
     }
 
     private func process(buffer: [UInt8]) -> Data {
@@ -129,7 +154,7 @@ class Endpoint: NSObject, StreamDelegate {
 
             // Processing is complete. Send the line off to the output view
             OperationQueue.main.addOperation({ [weak self] in
-                self?.outputter.output(result: .success(line))
+                self?.sessionHandler.output(result: .success(line))
             })
         }
     }
@@ -213,12 +238,16 @@ class Endpoint: NSObject, StreamDelegate {
         case Stream.Event.openCompleted:
             logger.info("open completed")
         case Stream.Event.hasBytesAvailable:
+            if status != .ConnectComplete {
+                status = .ConnectComplete
+            }
             guard let inputStream = aStream as? InputStream else { break }
             read(stream: inputStream)
         case Stream.Event.endEncountered:
             logger.info("new message received")
         case Stream.Event.errorOccurred:
-            self.outputter.output(result: .error("[SAVITAR] stream error occurred"))
+            self.sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
+            close()
         case Stream.Event.hasSpaceAvailable:
             logger.info("has space available")
         default:
@@ -227,7 +256,7 @@ class Endpoint: NSObject, StreamDelegate {
     }
 }
 
-extension Endpoint: StoreSubscriber {
+extension Session: StoreSubscriber {
     func newState(state: ReactionsState) {
         self.universalMacros = state.macroList.items
         self.universalTriggers = state.triggerList.items

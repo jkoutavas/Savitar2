@@ -112,7 +112,7 @@ let TERMINAL_TYPE_STRING = "ANSI"
 
 struct TelnetParser {
     // these get set by the user of TelnetParser
-    public var mEndpoint: Endpoint?
+    public var mEndpoint: Session?
     public var logger: Logger?
 
     private var mCommand: CommandsEnum

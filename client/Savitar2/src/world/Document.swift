@@ -11,15 +11,16 @@ import SwiftyXMLParser
 
 let DocumentElemIdentifier = "DOCUMENT"
 
-class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
+class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     let type = "Savitar World"
     var version = 1 // start with the assumption that a v1 world XML is being parsed
 
+    var windowController: WindowController?
     var world = World()
 
-    var endpoint: Endpoint?
-    var splitViewController: SplitViewController?
+    var session: Session?
+    var sessionViewController: SessionViewController?
 
     var suppressChangeCount: Bool = false
 
@@ -27,7 +28,7 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
 
     override func close() {
         super.close()
-        endpoint?.close()
+        session?.close()
     }
 
     override func makeWindowControllers() {
@@ -36,16 +37,18 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         guard let windowController = storyboard.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("Document Window Controller"))
             as? WindowController else { return }
+        self.windowController = windowController
 
         self.addWindowController(windowController)
         windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
-        endpoint = Endpoint(world: world, outputter: self)
-        splitViewController = windowController.contentViewController as? SplitViewController
-        guard let inputVC = splitViewController?.inputViewController else { return }
-        inputVC.endpoint = endpoint
-        endpoint?.connectAndRun()
+        session = Session(world: world, sessionHandler: self)
+        sessionViewController = windowController.contentViewController as? SessionViewController
+        sessionViewController?.session = session
+        guard let inputVC = sessionViewController?.inputViewController else { return }
+        inputVC.session = session
+        session?.connectAndRun()
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
@@ -64,9 +67,27 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         }
     }
 
+    /*
+     * Produce XML-based data for a v2 Savitar world document
+     */
+    override func data(ofType typeName: String) throws -> Data {
+        let docElem = try self.toXMLElement()
+        let xml = XMLDocument(rootElement: docElem)
+        let xmlStr = try xml.xmlString.prettyXMLFormat()
+        if let data = xmlStr.data(using: String.Encoding.utf8) {
+            return data
+        } else {
+            throw NSError()
+        }
+    }
+
+    //***************************
+    // MARK: - SessionHandlerProtocol
+    //***************************
+
     func output(result: OutputResult) {
         func output(string: String) {
-            guard let svc = splitViewController else { return }
+            guard let svc = sessionViewController else { return }
             guard let outputVC = svc.outputViewController else { return }
             outputVC.output(string: string)
         }
@@ -83,17 +104,21 @@ class Document: NSDocument, OutputProtocol, SavitarXMLProtocol {
         }
     }
 
-    /*
-     * Produce XML-based data for a v2 Savitar world document
-     */
-    override func data(ofType typeName: String) throws -> Data {
-        let docElem = try self.toXMLElement()
-        let xml = XMLDocument(rootElement: docElem)
-        let xmlStr = try xml.xmlString.prettyXMLFormat()
-        if let data = xmlStr.data(using: String.Encoding.utf8) {
-            return data
-        } else {
-            throw NSError()
+    func connectionStatusChanged(status: ConnectionStatus) {
+        switch status {
+        case .BindStart:
+            sessionViewController?.select(panel: .Connecting)
+
+        case .ConnectComplete:
+            sessionViewController?.select(panel: .Input)
+
+        case .DisconnectComplete:
+            sessionViewController?.select(panel: .Offline)
+
+        case .ReallyCloseWindow:
+            windowController?.reallyClose()
+        default:
+            break
         }
     }
 

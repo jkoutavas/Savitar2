@@ -13,7 +13,7 @@
 import Cocoa
 
 class InputViewController: ViewController {
-    public weak var endpoint: Endpoint?
+    public weak var session: Session?
 
     internal let MAX_CMD_COUNT = 100
     internal var cmdBuf: [Command] = []
@@ -63,8 +63,8 @@ class InputViewController: ViewController {
         guard let locWindow = self.view.window,
             NSApplication.shared.keyWindow === locWindow else { return false }
 
-        guard let ep = self.endpoint else { return false }
-        if ep.expandKeypress(with: event) { return true }
+        guard let sess = self.session else { return false }
+        if sess.expandKeypress(with: event) { return true }
 
         // swiftlint:disable force_cast
         guard let doc = locWindow.windowController?.document as! Document? else { return false }
@@ -89,11 +89,11 @@ class InputViewController: ViewController {
 
                 // send the processed command to the server
                 if let processedCmd = textToCmd() {
-                    ep.sendCommand(cmd: processedCmd)
+                    sess.submitServerCmd(cmd: processedCmd)
                 }
-             } else {
+            } else {
                 // just send the carriage return
-                ep.sendString(string: "\r")
+                sess.sendString(string: "\r")
             }
 
             if !stickyCmd {

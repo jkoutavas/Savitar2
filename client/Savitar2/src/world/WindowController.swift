@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class WindowController: NSWindowController {
+class WindowController: NSWindowController, NSWindowDelegate {
+    internal var reallyClosing = false
+
     override func windowDidLoad() {
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
@@ -86,7 +88,7 @@ class WindowController: NSWindowController {
 
     func updateViews(_ newValue: World?) {
 
-        let splitViewController = contentViewController as? SplitViewController
+        let splitViewController = contentViewController as? SessionViewController
 
         guard let svc = splitViewController else { return }
         guard let inputVC = svc.inputViewController else { return }
@@ -123,5 +125,29 @@ class WindowController: NSWindowController {
         }
 
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
+    }
+
+    func reallyClose() {
+        reallyClosing = true
+        if let window = self.window {
+            window.close()
+        }
+    }
+
+    //***************************
+    // MARK: - NSWindowDelegate
+    //***************************
+
+    internal func windowShouldClose(_: NSWindow) -> Bool {
+        if AppContext.shared.isTerminating || reallyClosing {
+            return true
+        }
+        guard let doc = document as? Document else { return true }
+        guard let session = doc.session else { return true }
+        if session.status == .ConnectComplete {
+            session.close()
+            return false
+        }
+        return true
     }
 }
