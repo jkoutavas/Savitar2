@@ -71,7 +71,6 @@
 		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
 		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
 		69928A89248742C000571B21 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* MacroReducer.swift */; };
-		6994602E2041124800409308 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6994602D2041124800409308 /* World.icns */; };
 		699F5B7C24E72AAF0089C81E /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F5B7B24E72AAF0089C81E /* EventsWindowController.swift */; };
 		69B278D7249EA7120058B067 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D6249EA7120058B067 /* EventsSplitViewController.swift */; };
 		69B278D9249F824B0058B067 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B278D8249F824B0058B067 /* TriggerViewController.swift */; };
@@ -80,6 +79,8 @@
 		69BAE50D24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */; };
 		69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */; };
 		69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */; };
+		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
+		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -204,7 +205,6 @@
 		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
 		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
 		69928A88248742C000571B21 /* MacroReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
-		6994602D2041124800409308 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = World.icns; path = Savitar2/World.icns; sourceTree = "<group>"; };
 		699F5B7B24E72AAF0089C81E /* EventsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
 		69B278D6249EA7120058B067 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
 		69B278D8249F824B0058B067 /* TriggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +213,8 @@
 		69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerMatchingViewController.swift; sourceTree = "<group>"; };
 		69BAE50E24D900FC007EBCD0 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
 		69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
+		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -321,7 +323,6 @@
 		695484931FC4E6E400A6983F = {
 			isa = PBXGroup;
 			children = (
-				6994602D2041124800409308 /* World.icns */,
 				6954849E1FC4E6E400A6983F /* Savitar2 */,
 				695484B31FC4E6E400A6983F /* Savitar2Tests */,
 				695204C624B1F29E004BDBE2 /* Savitar2UITests */,
@@ -533,8 +534,10 @@
 			isa = PBXGroup;
 			children = (
 				696F77472390D256005E45EB /* Appearance.txt */,
+				69BE3EAD24FC41C30035CF88 /* AppIcon.icns */,
 				698667D324EA17B40061AA86 /* Click.m4a */,
 				690B462C23B16B54000445E4 /* StartupPreferences.xml */,
+				69BE3EAE24FC41C30035CF88 /* World.icns */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -676,11 +679,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6994602E2041124800409308 /* World.icns in Resources */,
 				69CEEDE223BEDA7900E9F087 /* EventsWindow.storyboard in Resources */,
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				698667D424EA18500061AA86 /* Click.m4a in Resources */,
+				69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
+				69BE3EB024FC41C30035CF88 /* World.icns in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);

@@ -853,7 +853,7 @@
                                     <constraint firstAttribute="height" constant="48" id="MvD-kZ-SDe"/>
                                     <constraint firstAttribute="width" constant="48" id="qb1-jR-jHM"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="World" id="K2G-P5-lQg"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIcon" id="K2G-P5-lQg"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="96v-A0-mfX">
                                 <rect key="frame" x="76" y="56" width="228" height="16"/>
@@ -1454,7 +1454,7 @@ Gw
                                     <constraint firstAttribute="width" constant="48" id="4VO-nZ-h4m"/>
                                     <constraint firstAttribute="height" constant="48" id="yHP-Fw-cuM"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="World" id="m7J-7y-dKa"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIcon" id="m7J-7y-dKa"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vIf-tv-Y6e">
                                 <rect key="frame" x="76" y="56" width="86" height="16"/>
@@ -1513,7 +1513,7 @@ Gw
                                     <constraint firstAttribute="height" constant="48" id="3Ea-H4-Jsr"/>
                                     <constraint firstAttribute="width" constant="48" id="EZp-cr-VXe"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="World" id="S37-gi-gCo"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIcon" id="S37-gi-gCo"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmO-Dt-UD3">
                                 <rect key="frame" x="76" y="56" width="122" height="16"/>
@@ -1575,6 +1575,6 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="World" width="512" height="512"/>
+        <image name="AppIcon" width="512" height="512"/>
     </resources>
 </document>
