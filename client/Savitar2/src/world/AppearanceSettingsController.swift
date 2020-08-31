@@ -41,8 +41,7 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         if let filepath = Bundle.main.path(forResource: "Appearance", ofType: "txt") {
             do {
                 let contents = try String(contentsOfFile: filepath)
-                let esc = "\u{1B}"
-                webView.output(string: contents.replacingOccurrences(of: "^[", with: "\(esc)["))
+                webView.output(string: "\(contents)") // wrap contents in a string to preserve the \e characters
             } catch {
                 // contents could not be loaded
             }
