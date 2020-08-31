@@ -88,8 +88,7 @@ You'll want to `brew install swiftlint` to ensure coding style correctness.
 
 ### The echoserver
 
-There is a test echo server you'll need to have running before you can run the client. The echo server was a direct rip-off from here:
-http://masteringswift.blogspot.com/2017/01/using-bluesocket-framework-to-create.html
+There is an echo server you can use to test with. The echo server is derived from [Using the BlueSocket framework to create an echo server](http://masteringswift.blogspot.com/2017/01/using-bluesocket-framework-to-create.html)
 
 Here are the steps to build and run it on macOS:
 
@@ -98,8 +97,6 @@ $ cd server/echoserver
 $ swift build
 $ .build/debug/echoserver
 ```
-
-Don't sweat the build's compiler's warnings, those are just copy/paste results from the rip-off.
 
 If you want to generate an xcode project for the echoserver, do this:
 
@@ -111,29 +108,25 @@ $ swift package generate-xcodeproj
 
 ## Tracking lines of code
 
-`cloc . --exclude-dir=Pods`
+`cloc . --exclude-dir=Pods,.build`
 
 ```
-     217 text files.
-     206 unique files.                                          
-      78 files ignored.
+     132 text files.
+     128 unique files.                                          
+      29 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.84 s (170.8 files/s, 23973.4 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.15 s (722.2 files/s, 86624.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           98           2681           2437           8886
-XML                             12              0             30           3350
+Swift                           90           1291           1024           5748
+XML                              9              0             30           3246
 C                                1             76             52           1008
-Markdown                         5            172              0            513
-Bourne Shell                    10             66            173            287
-YAML                             4             11              5            158
-JSON                             5              0              0            104
-Perl                             1             19             30             65
-Ruby                             1              1              0             18
-D                                4              0              0             12
-C/C++ Header                     3             10             35             11
+Markdown                         2             31              0            104
+JSON                             1              0              0             68
+C/C++ Header                     2              6             14              8
+YAML                             1              1              0              8
 -------------------------------------------------------------------------------
-SUM:                           144           3036           2762          14412
+SUM:                           106           1405           1120          10190
 -------------------------------------------------------------------------------
 ```
