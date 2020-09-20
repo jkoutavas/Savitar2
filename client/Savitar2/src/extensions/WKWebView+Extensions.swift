@@ -15,6 +15,7 @@ extension WKWebView {
         let cleanString = string
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
+            .replacingOccurrences(of: "\r", with: "<br>")
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
