@@ -12,6 +12,8 @@ class WindowController: NSWindowController, NSWindowDelegate {
     internal var reallyClosing = false
 
     override func windowDidLoad() {
+        super.windowDidLoad()
+
         let titlebarController = self.storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
             as? NSTitlebarAccessoryViewController
@@ -87,6 +89,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     func updateViews(_ newValue: World?) {
+        let autosaveName = window?.representedFilename ?? "unknown"
+        window?.setFrameUsingName(autosaveName)
+        window?.setFrameAutosaveName(autosaveName)
 
         let splitViewController = contentViewController as? SessionViewController
 
