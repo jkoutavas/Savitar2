@@ -236,7 +236,11 @@ struct TelnetParser {
     // ---------------------------------------------------------------------------
     private mutating func receivedWill(option: UInt8) {
         telnetLog(message: "ReceivedWill", option: option)
-        receivedWont(option: option)
+        if option == 1 /* echo */ {
+            receivedDo(option: option)
+        } else {
+            receivedWont(option: option)
+        }
     }
 
     // ---------------------------------------------------------------------------
