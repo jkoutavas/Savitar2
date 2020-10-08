@@ -10,7 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    @IBOutlet var textView: NSTextView!
+    @IBOutlet weak var textView: NSTextView!
 
     public var backColor: NSColor {
         get {

@@ -11,9 +11,9 @@ import WebKit
 
 class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
 
-    @IBOutlet var fontPopup: NSPopUpButton!
-    @IBOutlet var monoFontPopup: NSPopUpButton!
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet weak var fontPopup: NSPopUpButton!
+    @IBOutlet weak var monoFontPopup: NSPopUpButton!
+    @IBOutlet weak var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

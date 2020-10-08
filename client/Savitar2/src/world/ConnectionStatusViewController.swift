@@ -11,7 +11,7 @@ import Cocoa
 class ConnectionStatusViewController: NSViewController {
     var session: Session?
 
-    @IBOutlet var progress: NSProgressIndicator?
+    @IBOutlet weak var progress: NSProgressIndicator?
 
     @IBAction func closeAction(_ sender: AnyObject) {
         session?.reallyCloseWindow()
