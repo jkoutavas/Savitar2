@@ -4,12 +4,13 @@ import Dispatch
 
 class EchoServer {
 
+    static let playbackCommand: String = "PLAY"
     static let quitCommand: String = "QUIT"
     static let shutdownCommand: String = "SHUTDOWN"
     static let bufferSize = 4096
 
     let port: Int
-    var listenSocket: Socket? = nil
+    var listenSocket: Socket?
     var continueRunningValue = true
     var connectedSockets = [Int32: Socket]()
     let socketLockQueue = DispatchQueue(label: "com.ibm.serverSwift.socketLockQueue")
@@ -43,13 +44,11 @@ class EchoServer {
         let queue = DispatchQueue.global(qos: .userInteractive)
 
         queue.async { [unowned self] in
-
             do {
                 // Create an IPV6 socket...
                 try self.listenSocket = Socket.create(family: .inet6)
 
                 guard let socket = self.listenSocket else {
-
                     print("Unable to unwrap socket...")
                     return
                 }
@@ -60,25 +59,22 @@ class EchoServer {
 
                 repeat {
                     let newSocket = try socket.acceptClientConnection()
-//sleep(10) // simulate a slow connection
+                    //sleep(10) // simulate a slow connection
                     print("Accepted connection from: \(newSocket.remoteHostname) on port \(newSocket.remotePort)")
-//                    print("Socket Signature: \(String(describing: newSocket.signature?.description))")
+                    //                    print("Socket Signature: \(String(describing: newSocket.signature?.description))")
 
                     self.addNewConnection(socket: newSocket)
 
                 } while self.continueRunning
 
-            }
-            catch let error {
+            } catch let error {
                 guard let socketError = error as? Socket.Error else {
                     print("Unexpected error...")
                     return
                 }
 
                 if self.continueRunning {
-
                     print("Error reported:\n \(socketError.description)")
-
                 }
             }
         }
@@ -86,10 +82,10 @@ class EchoServer {
     }
 
     func addNewConnection(socket: Socket) {
-    
+
         let esc = "\u{1B}"
         let ansiTestStr = "^[1mANSI Intense^[0m, ^[5mANSI Blink^[25m, ^[7mANSI Reverse^[27m, ^[3;4mANSI Italic and ANSI Underline^[0m, ^[38;2;20;50;100m24-bit fore color^[0m, ^[48;2;100;50;90m24-bit back color^[0m".replacingOccurrences(of: "^[", with: "\(esc)[")
-  
+
         // Add the new socket to the list of connected sockets...
         socketLockQueue.sync { [unowned self, socket] in
             self.connectedSockets[socket.socketfd] = socket
@@ -100,9 +96,7 @@ class EchoServer {
 
         // Create the run loop work item and dispatch to the default priority global queue...
         queue.async { [unowned self, socket] in
-
             var shouldKeepRunning = true
-
             var readData = Data(capacity: EchoServer.bufferSize)
 
             do {
@@ -120,8 +114,8 @@ class EchoServer {
                             readData.count = 0
                             break
                         }
-                        if response.hasPrefix(EchoServer.shutdownCommand) {
 
+                        if response.hasPrefix(EchoServer.shutdownCommand) {
                             print("Shutdown requested by connection at \(socket.remoteHostname):\(socket.remotePort)")
 
                             // Shut things down...
@@ -129,8 +123,22 @@ class EchoServer {
 
                             return
                         }
-//                        print("Server received from connection at \(socket.remoteHostname):\(socket.remotePort): \(response) ")
-                        let reply = "Server response: \n\(response)\n"
+                        var echo = response
+                        let arr = response.components(separatedBy: .whitespacesAndNewlines)
+                        if arr.count > 1 && arr[0] == EchoServer.playbackCommand {
+                            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                                let fileURL = dir.appendingPathComponent(arr[1])
+                                print("opening \(fileURL)")
+                                do {
+                                    echo = try String(contentsOf: fileURL, encoding: .utf8)
+                                    echo = echo.replacingOccurrences(of: "\\n", with: "\n").replacingOccurrences(of: "\\e", with: esc)
+                                } catch {
+                                    echo = "Play file not found.\n"
+                                }
+                             }
+                        }
+
+                        let reply = "Server response: \n\(echo)\n"
                         try socket.write(from: reply)
 
                         if (response.uppercased().hasPrefix(EchoServer.quitCommand) || response.uppercased().hasPrefix(EchoServer.shutdownCommand)) &&
@@ -139,13 +147,11 @@ class EchoServer {
                         }
 
                         if response.hasPrefix(EchoServer.quitCommand) || response.hasSuffix(EchoServer.quitCommand) {
-
                             shouldKeepRunning = false
                         }
                     }
 
                     if bytesRead == 0 {
-
                         shouldKeepRunning = false
                         break
                     }
@@ -161,8 +167,7 @@ class EchoServer {
                     self.connectedSockets[socket.socketfd] = nil
                 }
 
-            }
-            catch let error {
+            } catch let error {
                 guard let socketError = error as? Socket.Error else {
                     print("Unexpected error by connection at \(socket.remoteHostname):\(socket.remotePort)...")
                     return
