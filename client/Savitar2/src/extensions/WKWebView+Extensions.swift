@@ -138,4 +138,11 @@ extension WKWebView {
             }
         }
     }
+
+    func printSource() {
+        evaluateJavaScript("document.documentElement.outerHTML.toString()",
+                            completionHandler: { (html: Any?, _: Error?) in
+            print(html!)
+        })
+    }
 }
