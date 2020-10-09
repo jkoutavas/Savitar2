@@ -118,7 +118,13 @@ class Session: NSObject, StreamDelegate {
     }
 
     func submitServerCmd(cmd: Command) {
-        sendString(string: cmd.cmdStr)
+        // TODO: build out actual local command handler
+        if cmd.cmdStr == "##dump" {
+            self.sessionHandler.printSource()
+            return
+        }
+
+        sendString(string: "\(cmd.cmdStr)\r")
     }
 
     private func process(buffer: [UInt8]) -> Data {

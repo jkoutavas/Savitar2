@@ -122,6 +122,12 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         }
     }
 
+    func printSource() {
+        guard let svc = sessionViewController else { return }
+        guard let outputVC = svc.outputViewController else { return }
+        outputVC.printSource()
+    }
+
     //***************************
     // MARK: - SavitarXMLProtocol
     //***************************
