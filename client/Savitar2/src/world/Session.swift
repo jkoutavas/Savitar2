@@ -39,12 +39,16 @@ class Session: NSObject, StreamDelegate {
     var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
+    let queue = OperationQueue()
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
         self.logger = Logger(label: "savitar2")
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Session" // "m" is for "module"
+
+        self.queue.maxConcurrentOperationCount = 1
     }
 
     func close() {
@@ -109,12 +113,12 @@ class Session: NSObject, StreamDelegate {
     func sendData(data: Data) {
         let blockOperation = { [weak self] in
             _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
-                self?.logger.info("sendData: \(data.hexString)")
+ //               self?.logger.info("sendData: \(data.hexString)")
                 let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
                 self?.outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
             }
         }
-        OperationQueue().addOperation(blockOperation)
+        queue.addOperation(blockOperation)
     }
 
     func sendString(string: String) {
@@ -131,31 +135,35 @@ class Session: NSObject, StreamDelegate {
         sendString(string: "\(cmd.cmdStr)\r")
     }
 
-    private func process(buffer: [UInt8]) -> Data {
+    private func process(buffer: [UInt8], length: Int) -> Data {
         var data = Data()
+        var i = 0
         for char in buffer {
-            if char == 0 {
+            if i == length {
                 break
             }
             if !telnetParser!.isTelnetByte(char: char) {
                 data.append(char)
             }
+            i += 1
         }
         return data
     }
 
     private func processAcceptedText(text: String) {
+ //logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
+
         let lines = text.split(omittingEmptySubsequences: false) {
-            $0 == "\r\n" || $0 == "\n"
+            $0 == "\r" || $0 == "\n"
         }
 
-        for thisLine in lines {
+        for (index, thisLine) in lines.enumerated() {
             var line = String(thisLine)
-            if line.count == 0 {
-                // This was an empty subsequence, cause a line feed
-                line = "<br>"
-                continue
-            }
+
+            // re-insert line ending for every line except the last
+            if index < lines.count - 1 {
+                 line += "\r"
+             }
 
             line = processTriggers(inputLine: line, triggers: universalTriggers)
             if line.count > 0 {
@@ -226,13 +234,13 @@ class Session: NSObject, StreamDelegate {
         // Some data came in from the network. Queue its processing on a bzlock thread.
         let blockOperation = { [weak self] in
             var data = Data()
-            let maxReadLength = 4096
+            let maxReadLength = 32767
             var buffer = [UInt8](repeating: 0, count: maxReadLength)
             while stream.hasBytesAvailable {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
-                    self?.logger.info("\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
+//                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
+//                    self?.logger.info("\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
                     if let result = self?.process(buffer: buffer, length: read) {
                         if result.count > 0 {
                             data.append(result)
@@ -244,7 +252,7 @@ class Session: NSObject, StreamDelegate {
                 self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
             }
         }
-        OperationQueue().addOperation(blockOperation)
+        queue.addOperation(blockOperation)
     }
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {

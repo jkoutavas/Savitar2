@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <stdarg.h>
-static char output[60000];
+static char output[600000];
 void PRINTF(char *text, ...)
 {
     char buffer[4096];

@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: August 30th, 2020
+README last updated: October 30th, 2020
 
 ## Current state of the application
 
@@ -32,6 +32,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Load Sav 1.x world triggers
 √ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 √ Implement input pane command recall
+_ New world onboarding
 _ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
@@ -64,7 +65,6 @@ _ Enhanced analytics
 _ ANSI Color Settings window implemented
 _ Macro Clicker
 _ MCP (? does anyone use this?)
-_ Audio & Speech
 _ File upload
 _ Polish
 ```
@@ -111,22 +111,23 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     132 text files.
-     128 unique files.                                          
-      29 files ignored.
+jk-mbp2017:savitar2 jay$ cloc . --exclude-dir=Pods,.build
+     133 text files.
+     129 unique files.                                          
+      30 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.15 s (722.2 files/s, 86624.5 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.16 s (668.5 files/s, 81147.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           90           1291           1024           5748
-XML                              9              0             30           3246
+Swift                           90           1299           1033           5855
+XML                              9              0             30           3275
 C                                1             76             52           1008
 Markdown                         2             31              0            104
 JSON                             1              0              0             68
-C/C++ Header                     2              6             14              8
 YAML                             1              1              0              8
+C/C++ Header                     2              6             14              8
 -------------------------------------------------------------------------------
-SUM:                           106           1405           1120          10190
+SUM:                           106           1413           1129          10326
 -------------------------------------------------------------------------------
 ```

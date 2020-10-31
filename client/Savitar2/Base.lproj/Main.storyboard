@@ -742,28 +742,7 @@
                     <view key="view" id="jtg-Vt-Va2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QVO-Sc-zfN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="s41-dm-3ty"/>
-                                </constraints>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="QVO-Sc-zfN" secondAttribute="trailing" id="5KA-D5-RB8"/>
-                            <constraint firstItem="QVO-Sc-zfN" firstAttribute="top" secondItem="jtg-Vt-Va2" secondAttribute="top" id="TN1-94-2Tl"/>
-                            <constraint firstItem="QVO-Sc-zfN" firstAttribute="leading" secondItem="jtg-Vt-Va2" secondAttribute="leading" id="VZm-K6-Qrb"/>
-                            <constraint firstAttribute="bottom" secondItem="QVO-Sc-zfN" secondAttribute="bottom" id="u6m-YY-Fw2"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="webView" destination="QVO-Sc-zfN" id="ifr-CM-XwX"/>
-                    </connections>
                 </viewController>
                 <customObject id="eJ4-na-aGV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1431,8 +1410,8 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="191" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="110.5" y="5" width="66" height="23"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
+                                <rect key="frame" x="110" y="5" width="65" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1441,8 +1420,8 @@ Gw
                                     <action selector="showWorldSetting:" target="iLh-qn-Ycd" id="A52-mR-SxS"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="42.5" y="5" width="56" height="23"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
+                                <rect key="frame" x="42" y="5" width="55" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
