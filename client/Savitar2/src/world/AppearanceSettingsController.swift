@@ -11,9 +11,9 @@ import WebKit
 
 class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
 
-    @IBOutlet var fontPopup: NSPopUpButton!
-    @IBOutlet var monoFontPopup: NSPopUpButton!
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet weak var fontPopup: NSPopUpButton!
+    @IBOutlet weak var monoFontPopup: NSPopUpButton!
+    @IBOutlet weak var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +39,11 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         attributeChanged()
 
         if let filepath = Bundle.main.path(forResource: "Appearance", ofType: "txt") {
+            let esc = "\u{1B}"
             do {
                 let contents = try String(contentsOfFile: filepath)
-                let esc = "\u{1B}"
-                webView.output(string: contents.replacingOccurrences(of: "^[", with: "\(esc)["))
+                webView.output(string: contents.replacingOccurrences(of: "\\n", with: "\n")
+                    .replacingOccurrences(of: "\\e", with: "\(esc)"))
             } catch {
                 // contents could not be loaded
             }

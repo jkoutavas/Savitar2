@@ -9,7 +9,7 @@
 import Cocoa
 
 class EventsTabController: NSViewController, ReactionStoreSetter {
-    @IBOutlet var tableView: NSTableView!
+    @IBOutlet weak var tableView: NSTableView!
 
     internal var store: ReactionsStore? {
         didSet {

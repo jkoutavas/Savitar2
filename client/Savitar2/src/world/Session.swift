@@ -39,15 +39,16 @@ class Session: NSObject, StreamDelegate {
     var universalMacros: [Macro] = []
     var universalTriggers: [Trigger] = []
 
+    let queue = OperationQueue()
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
-        self.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
+        self.logger = Logger(label: "savitar2")
         self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         self.logger[metadataKey: "m"] = "Session" // "m" is for "module"
-        self.telnetParser = TelnetParser()
 
-        AppContext.shared.worldMan.add(world)
+        self.queue.maxConcurrentOperationCount = 1
     }
 
     func close() {
@@ -59,18 +60,21 @@ class Session: NSObject, StreamDelegate {
         status = .DisconnectComplete
 
         AppContext.shared.worldMan.remove(world)
+        telnetParser = nil
     }
 
     func connectAndRun() {
         globalStore.subscribe(self)
+        AppContext.shared.worldMan.add(world)
 
         logger.info("connecting...")
 
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
 
+        self.telnetParser = TelnetParser()
         telnetParser!.mEndpoint = self
-        telnetParser!.logger = Logger(label: String(describing: Bundle.main.bundleIdentifier))
+        telnetParser!.logger = Logger(label: "savitar2")
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
 
         status = .BindStart
@@ -107,10 +111,14 @@ class Session: NSObject, StreamDelegate {
     }
 
     func sendData(data: Data) {
-        _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
-            let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
-            outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
+        let blockOperation = { [weak self] in
+            _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+ //               self?.logger.info("sendData: \(data.hexString)")
+                let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+                self?.outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
+            }
         }
+        queue.addOperation(blockOperation)
     }
 
     func sendString(string: String) {
@@ -118,34 +126,44 @@ class Session: NSObject, StreamDelegate {
     }
 
     func submitServerCmd(cmd: Command) {
-        sendString(string: cmd.cmdStr)
+        // TODO: build out actual local command handler
+        if cmd.cmdStr == "##dump" {
+            self.sessionHandler.printSource()
+            return
+        }
+
+        sendString(string: "\(cmd.cmdStr)\r")
     }
 
-    private func process(buffer: [UInt8]) -> Data {
+    private func process(buffer: [UInt8], length: Int) -> Data {
         var data = Data()
+        var i = 0
         for char in buffer {
-            if char == 0 {
+            if i == length {
                 break
             }
             if !telnetParser!.isTelnetByte(char: char) {
                 data.append(char)
             }
+            i += 1
         }
         return data
     }
 
     private func processAcceptedText(text: String) {
+ //logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
+
         let lines = text.split(omittingEmptySubsequences: false) {
-            $0 == "\r\n" || $0 == "\n"
+            $0 == "\r" || $0 == "\n"
         }
 
-        for thisLine in lines {
+        for (index, thisLine) in lines.enumerated() {
             var line = String(thisLine)
-            if line.count == 0 {
-                // This was an empty subsequence, cause a line feed
-                line = "<br>"
-                continue
-            }
+
+            // re-insert line ending for every line except the last
+            if index < lines.count - 1 {
+                 line += "\r"
+             }
 
             line = processTriggers(inputLine: line, triggers: universalTriggers)
             if line.count > 0 {
@@ -213,24 +231,28 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func read(stream: InputStream) {
-        // Some data came in from the network. Queue its processing on a block thread.
+        // Some data came in from the network. Queue its processing on a bzlock thread.
         let blockOperation = { [weak self] in
             var data = Data()
-            let maxReadLength = 4096
+            let maxReadLength = 32767
+            var buffer = [UInt8](repeating: 0, count: maxReadLength)
             while stream.hasBytesAvailable {
-                var buffer = [UInt8](repeating: 0, count: maxReadLength)
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    if let result = self?.process(buffer: buffer) {
+//                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
+//                    self?.logger.info("\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
+                    if let result = self?.process(buffer: buffer, length: read) {
                         if result.count > 0 {
                             data.append(result)
                         }
                     }
                 }
             }
-            self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
+            if data.count > 0 {
+                self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
+            }
         }
-        OperationQueue().addOperation(blockOperation)
+        queue.addOperation(blockOperation)
     }
 
     public func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
@@ -244,7 +266,8 @@ class Session: NSObject, StreamDelegate {
             guard let inputStream = aStream as? InputStream else { break }
             read(stream: inputStream)
         case Stream.Event.endEncountered:
-            logger.info("new message received")
+            logger.info("end encountered")
+            close()
         case Stream.Event.errorOccurred:
             self.sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
             close()

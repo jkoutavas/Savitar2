@@ -183,6 +183,11 @@ class World: SavitarObject, NSCopying {
                         host = parts[0]
                         guard let p1 = UInt32(parts[1]) else { break }
                         port = p1
+                    } else if parts.count == 4 {
+                        // might have ::1 as the host
+                        host = "localhost"
+                        guard let p3 = UInt32(parts[3]) else { break }
+                        port = p3
                     }
                 }
 

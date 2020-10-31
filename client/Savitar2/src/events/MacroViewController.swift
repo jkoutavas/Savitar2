@@ -10,7 +10,7 @@ import Cocoa
 import ReSwift
 
 class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
-    @IBOutlet var hotKeyEditor: HotKeyEditor!
+    @IBOutlet weak var hotKeyEditor: HotKeyEditor!
     var macro: Macro?
     var macros: [Macro]?
     var store: ReactionsStore?

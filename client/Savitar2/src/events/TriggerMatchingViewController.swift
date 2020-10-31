@@ -10,9 +10,9 @@ import Cocoa
 import ReSwift
 
 class TriggerMatchingViewController: NSViewController, StoreSubscriber {
-    @IBOutlet var matchExactlyRadio: NSButton!
-    @IBOutlet var matchWholeLineRadio: NSButton!
-    @IBOutlet var matchWholeWordRadio: NSButton!
+    @IBOutlet weak var matchExactlyRadio: NSButton!
+    @IBOutlet weak var matchWholeLineRadio: NSButton!
+    @IBOutlet weak var matchWholeWordRadio: NSButton!
 
     var trigger: Trigger?
 

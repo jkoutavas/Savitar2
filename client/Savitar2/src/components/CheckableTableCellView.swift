@@ -25,7 +25,7 @@ class CheckableItemViewModel: Codable {
 }
 
 class CheckableTableCellView: NSTableCellView {
-    @IBOutlet var checkbox: CheckBox!
+    @IBOutlet weak var checkbox: CheckBox!
 
     weak var checkableItemChangeDelegate: CheckableItemChangeDelegate?
 

@@ -10,11 +10,17 @@ import Foundation
 import WebKit
 
 extension WKWebView {
-    func output(string: String, attributes: [NSAttributedString.Key: Any]? = nil) {
+
+    func output(string: String,
+                makeAppend: Bool = false,
+                appending: Bool = false,
+                appendID: Int = 0,
+                attributes: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
         let cleanString = string
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
+            .replacingOccurrences(of: "\r", with: "<br>")
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
@@ -24,26 +30,38 @@ extension WKWebView {
         if let resultCStr = resultCStrQ {
             let result = String(cString: resultCStr)
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
-            output(html: htmlStr)
+            output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
         }
     }
 
-    func output(html: String) {
-        // append this output as a new <div>
-
-        let js = """
-        var i=document.createElement('div');
-        i.setAttribute('class', 'reset bg-reset');
-        i.innerHTML=\"<pre>\(html)</pre>\";
-        document.body.appendChild(i);
-        """
-        run(javaScript: js)
-        scrollToEndOfDocument(nil)
-
-        #if DEBUG_WKWEBKIT
-        //        print(html)
-        //        printDOM(element: "document.body.innerHTML")
-        #endif
+    private func output(html: String, makeAppend: Bool, appending: Bool, appendID: Int) {
+        if appending {
+            // append this output to an existing <pre id={appendID}>
+            let js = """
+            //webkit.messageHandlers.logging.postMessage("appending text \(html) at \(appendID)");
+            var elem = document.getElementById(\(appendID));
+            if (elem !== null && elem.innerHTML !== null) {
+                elem.innerHTML = elem.innerHTML + \"\(html)\";
+            } else {
+                webkit.messageHandlers.logging.postMessage("failed to append text \(html) at \(appendID)");
+            }
+            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            """
+            run(javaScript: js)
+        } else {
+            // append this output as a new <div> element
+            let pre = makeAppend ? "<pre id=\(appendID)>" : "<pre>"
+            let js = """
+            //webkit.messageHandlers.logging.postMessage("making \(pre)");
+            var i=document.createElement('div');
+            i.setAttribute('class', 'reset bg-reset');
+            i.innerHTML=\"\(pre)\(html)</pre>\";
+            document.body.appendChild(i);
+            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            """
+            run(javaScript: js)
+        }
+//        scrollToEndOfDocument(nil)
     }
 
     func setStyle(world: World) {
@@ -111,7 +129,7 @@ extension WKWebView {
             """)
 
         #if DEBUG_WKWEBKIT
-        printDOM(element: "document.head.innerHTML")
+//        printDOM(element: "document.head.innerHTML")
         #endif
     }
 
@@ -136,5 +154,12 @@ extension WKWebView {
                 print(result!)
             }
         }
+    }
+
+    func printSource() {
+        evaluateJavaScript("document.documentElement.outerHTML.toString()",
+                            completionHandler: { (html: Any?, _: Error?) in
+            print(html!)
+        })
     }
 }

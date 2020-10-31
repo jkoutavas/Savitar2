@@ -11,9 +11,9 @@ import ReSwift
 
 class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
 
-    @IBOutlet var gagRadio: NSButton!
-    @IBOutlet var dontAlterRadio: NSButton!
-    @IBOutlet var changeRadio: NSButton!
+    @IBOutlet weak var gagRadio: NSButton!
+    @IBOutlet weak var dontAlterRadio: NSButton!
+    @IBOutlet weak var changeRadio: NSButton!
 
     var trigger: Trigger?
 

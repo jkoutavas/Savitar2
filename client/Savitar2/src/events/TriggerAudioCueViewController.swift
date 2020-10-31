@@ -10,10 +10,10 @@ import Cocoa
 import ReSwift
 
 class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
-    @IBOutlet var silentRadio: NSButton!
-    @IBOutlet var soundRadio: NSButton!
-    @IBOutlet var speakEventRadio: NSButton!
-    @IBOutlet var sayTextRadio: NSButton!
+    @IBOutlet weak var silentRadio: NSButton!
+    @IBOutlet weak var soundRadio: NSButton!
+    @IBOutlet weak var speakEventRadio: NSButton!
+    @IBOutlet weak var sayTextRadio: NSButton!
 
     let currentSoundNames = AppContext.shared.speakerMan.soundNames
     let currentVoiceNames = AppContext.shared.speakerMan.voiceNames

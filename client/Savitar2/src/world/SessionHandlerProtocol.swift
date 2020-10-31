@@ -19,4 +19,5 @@ typealias OutputResult = Result<String, String>
 protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
+    func printSource()
 }
