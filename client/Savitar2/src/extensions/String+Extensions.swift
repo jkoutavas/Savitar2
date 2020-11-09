@@ -9,6 +9,47 @@
 import Foundation
 
 extension String {
+
+    func asciiAt(index: Int) -> UInt32? {
+        let scalarIndex = unicodeScalars.index(unicodeScalars.startIndex, offsetBy: index)
+        let scalar = unicodeScalars[scalarIndex]
+
+        guard scalar.isASCII else {
+            return nil
+        }
+
+        return scalar.value
+    }
+
+    func charAt(_ offset: Int) -> Character {
+        let index = self.index(self.startIndex, offsetBy: offset) // BEWARE! This is O(n)
+        return self[index]
+    }
+
+    func dropPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
+
+    func endsWithNewline() -> Bool {
+        return hasSuffix("\n") || hasSuffix("\r")
+    }
+
+    // https://stackoverflow.com/a/53597089/246887
+    public var expandingTildeInPath: String {
+        return NSString(string: self).expandingTildeInPath
+    }
+
+    func fileName() -> String {
+        return URL(fileURLWithPath: self).deletingPathExtension().lastPathComponent
+    }
+
+    func fileExtension() -> String {
+        return URL(fileURLWithPath: self).pathExtension
+    }
+
+    var fullRange: Range<String.Index> { return startIndex..<endIndex }
+
     var html2AttributedString: String? {
         guard let data = data(using: .utf8) else { return nil }
         do {
@@ -21,12 +62,15 @@ extension String {
         }
     }
 
-    func dropPrefix(_ prefix: String) -> String {
-        guard self.hasPrefix(prefix) else { return self }
-        return String(self.dropFirst(prefix.count))
+    func prettyXMLFormat() throws -> String {
+        let xml = try XMLDocument.init(xmlString: self)
+        let data = xml.xmlData(options: .nodePrettyPrint)
+        if let str = String(data: data, encoding: .utf8) {
+            return str
+        } else {
+            throw NSError()
+        }
     }
-
-    var fullRange: Range<String.Index> { return startIndex..<endIndex }
 
     func ranges(of occurrence: String, options mask: String.CompareOptions = []) -> [Range<String.Index>] {
         var ranges = [Range<String.Index>]()
@@ -43,32 +87,5 @@ extension String {
             position = index(after: after)
         }
         return ranges
-    }
-
-    func prettyXMLFormat() throws -> String {
-        let xml = try XMLDocument.init(xmlString: self)
-        let data = xml.xmlData(options: .nodePrettyPrint)
-        if let str = String(data: data, encoding: .utf8) {
-            return str
-        } else {
-            throw NSError()
-        }
-    }
-
-    func fileName() -> String {
-        return URL(fileURLWithPath: self).deletingPathExtension().lastPathComponent
-    }
-
-    func fileExtension() -> String {
-        return URL(fileURLWithPath: self).pathExtension
-    }
-
-    // https://stackoverflow.com/a/53597089/246887
-    public var expandingTildeInPath: String {
-        return NSString(string: self).expandingTildeInPath
-    }
-
-    func endsWithNewline() -> Bool {
-        return hasSuffix("\n") || hasSuffix("\r")
     }
 }

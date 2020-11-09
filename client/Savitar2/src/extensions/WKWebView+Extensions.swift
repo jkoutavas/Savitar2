@@ -24,14 +24,9 @@ extension WKWebView {
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
-        var resultCStrQ: UnsafeMutablePointer<CChar>?
-        let unsafeInput = UnsafeMutablePointer<CChar>(mutating: cleanString)
-        ahamain(0, nil, unsafeInput, &resultCStrQ)
-        if let resultCStr = resultCStrQ {
-            let result = String(cString: resultCStr)
-            let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
-            output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
-        }
+        let result = ansiToHtml(ansi: cleanString)
+        let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
+        output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
     }
 
     private func output(html: String, makeAppend: Bool, appending: Bool, appendID: Int) {

@@ -234,7 +234,7 @@ class Session: NSObject, StreamDelegate {
         // Some data came in from the network. Queue its processing on a bzlock thread.
         let blockOperation = { [weak self] in
             var data = Data()
-            let maxReadLength = 32767
+            let maxReadLength = 4096
             var buffer = [UInt8](repeating: 0, count: maxReadLength)
             while stream.hasBytesAvailable {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
