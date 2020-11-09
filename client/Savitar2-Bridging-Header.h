@@ -9,6 +9,6 @@
 #ifndef Savitar2_Bridging_Header_h
 #define Savitar2_Bridging_Header_h
 
-#include "Aha.h"
+// put .h files here
 
 #endif /* Savitar2_Bridging_Header_h */
