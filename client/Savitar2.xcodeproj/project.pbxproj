@@ -51,6 +51,7 @@
 		69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69683027239C22550066CC48 /* TrigTextStyle.swift */; };
 		6968381025562F6C00F0BC20 /* Ansi2HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968380F25562F6C00F0BC20 /* Ansi2HtmlParser.swift */; };
 		6968381A2558FCC900F0BC20 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 696838192558FCC900F0BC20 /* Logging */; };
+		6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */; };
 		696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77452390D22A005E45EB /* WKWebView+Extensions.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
@@ -183,6 +184,7 @@
 		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
 		69683027239C22550066CC48 /* TrigTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigTextStyle.swift; sourceTree = "<group>"; };
 		6968380F25562F6C00F0BC20 /* Ansi2HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParser.swift; sourceTree = "<group>"; };
+		6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParserTests.swift; sourceTree = "<group>"; };
 		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		696F77452390D22A005E45EB /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
 		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				695484B61FC4E6E400A6983F /* Info.plist */,
+				6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */,
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
 				6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */,
@@ -880,6 +883,7 @@
 				69071B3F23A6EA51001C58B1 /* WorldTests.swift in Sources */,
 				695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */,
 				6952048D24B1EFB2004BDBE2 /* HotKeyTests.swift in Sources */,
+				6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */,
 				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,

@@ -179,7 +179,7 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(t1.type, .output)
         XCTAssertEqual(t1.flags, [.wholeLine, .startsWith])
         XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#26C9EE"))
-        XCTAssertEqual(t1.audioCue, .speakEvent)
+        XCTAssertEqual(t1.audioType, .speakEvent)
         XCTAssertEqual(t1.sound, "Click")
         XCTAssertEqual(t1.voice, "Ralph")
         XCTAssertEqual(t1.wordEnding, "&-\"")
@@ -216,7 +216,7 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(t1.flags, [.wholeLine, .useRegex])
         XCTAssertEqual(t1.style!.foreColor, NSColor(hex: "#EE42BB"))
         XCTAssertEqual(t1.style!.backColor, NSColor(hex: "#000000"))
-        XCTAssertEqual(t1.audioCue, .speakEvent)
+        XCTAssertEqual(t1.audioType, .speakEvent)
         XCTAssertEqual(t1.sound, "Click")
         XCTAssertEqual(t1.voice, "Princess")
         XCTAssertEqual(t1.wordEnding, "&-\"")
@@ -231,7 +231,7 @@ class TriggerTests: XCTestCase {
 
         XCTAssertEqual(t1.name, Trigger.defaultName)
         XCTAssertEqual(t1.type, .output)
-        XCTAssertEqual(t1.audioCue, .silent)
+        XCTAssertEqual(t1.audioType, .silent)
     }
 
     func testv1TriggerXMLtoV2() throws {

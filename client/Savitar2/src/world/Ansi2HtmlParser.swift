@@ -42,15 +42,29 @@ struct Selem {
 }
 
 let fcstyle = [
-    "dimgray",
-    "red",
-    "green",
-    "yellow",
-    "blue",
-    "cyan",
-    "white",
-    "inverted",
-    "reset"
+    "dimgray ",
+    "red ",
+    "green ",
+    "yellow ",
+    "blue ",
+    "purple ",
+    "cyan ",
+    "white ",
+    "inverted ",
+    "reset "
+]
+
+let bcstyle = [
+    "bg-black ",
+    "bg-red ",
+    "bg-green ",
+    "bg-yellow ",
+    "bg-blue ",
+    "bg-purple" ,
+    "bg-cyan ",
+    "bg-white ",
+    "bg-reset ",
+    "bg-inverted "
 ]
 
 func parseInsert(_ buffer: String) -> [Selem] {
@@ -91,32 +105,44 @@ func swapColors(_ state: inout State) {
     swap(&state.bc_colormode, &state.fc_colormode)
 }
 
-func updateColor(state: inout State, negative: Bool, color: Int) {
-    if negative {
-        state.bc = color
-    } else {
+func updateColor(state: inout State, fc: Bool, color: Int) {
+    if fc {
         state.fc = color
+    } else {
+        state.bc = color
     }
 }
 
-func updateColorState(momelem: inout Int, elems: [Selem], state: inout State, negative: Bool,
-                      val1: Int, val2: Int, val3: Int, colorOffset: Int) {
+func updateColorMode(state: inout State, fc: Bool, mode: ColorMode) {
+    if fc {
+        state.fc_colormode = mode
+    } else {
+        state.bc_colormode = mode
+    }
+}
+
+func updateColorState(momelem: inout Int, elems: [Selem], state: inout State, negative inNegative: Bool,
+                      fc: Bool) {
+    let val1 = fc ? 38 : 48
+    let colorOffset = fc ? 30 : 40
+    let negative = fc ? !inNegative : inNegative
+
     if elems[momelem].value == val1 &&
        elems.count - momelem > 1 &&
-       elems[momelem+1].value == val2 { // 38;5;<n> -> 8 Bit
+       elems[momelem+1].value == 5 { // {val1};5;<n> -> 8 Bit
         momelem += 2
-        state.fc_colormode = .MODE_8BIT
+        updateColorMode(state: &state, fc: fc, mode: .MODE_8BIT)
         let value = elems[momelem].value
         if value >= 8 && value <= 15 {
             state.highlighted = true
-            updateColor(state: &state, negative: negative, color: value - 8)
+            updateColor(state: &state, fc: negative, color: value - 8)
         } else {
             state.highlighted = false
-            updateColor(state: &state, negative: negative, color: value)
+            updateColor(state: &state, fc: negative, color: value)
         }
-    } else if elems[momelem].value  == val1 &&
+    } else if elems[momelem].value == val1 &&
               elems.count - momelem > 1 &&
-              elems[momelem+1].value == val3 { // 38;2;<n> -> 24 Bit
+              elems[momelem+1].value == 2 { // {val1};2;<n> -> 24 Bit
         momelem += 2
         let r = elems[momelem].value
         momelem += 1
@@ -126,13 +152,13 @@ func updateColorState(momelem: inout Int, elems: [Selem], state: inout State, ne
         }
         let b = elems[momelem].value
         state.highlighted = false
-        state.fc_colormode = .MODE_24BIT
-        updateColor(state: &state, negative: negative, color:
+        updateColorMode(state: &state, fc: fc, mode: .MODE_24BIT)
+        updateColor(state: &state, fc: negative, color:
             (r & 255) * 65536 + (g & 255) * 256 + (b & 255))
     } else {
-        state.fc_colormode = .MODE_3BIT
+        updateColorMode(state: &state, fc: fc, mode: .MODE_3BIT)
         state.highlighted = false
-        updateColor(state: &state, negative: negative, color: elems[momelem].value - colorOffset)
+        updateColor(state: &state, fc: negative, color: elems[momelem].value - colorOffset)
     }
 }
 
@@ -241,10 +267,13 @@ func ansiToHtml(ansi: String) -> String {
                         case 23: // 23 - Reset italic
                             state.italic = false
 
-                        case 25: // 24 - Reset underline
+                        case 24: // 24 - Reset underline
                             state.underline = false
 
-                        case 27: // Reset inverted
+                        case 25: // 25 - Reset blink
+                            state.blink = false
+
+                        case 27: // Reset Inverted
                             if negative {
                                 swapColors(&state)
                                 negative = false
@@ -255,21 +284,21 @@ func ansiToHtml(ansi: String) -> String {
 
                         case 30...39: // 3X - Set foreground color
                             updateColorState(momelem: &momelem, elems: elems, state: &state, negative: negative,
-                                val1: 38, val2: 5, val3: 2, colorOffset: 30)
+                                fc: true)
 
                         case 40...49: // 4X - Set background color
                             updateColorState(momelem: &momelem, elems: elems, state: &state, negative: negative,
-                                 val1: 48, val2: 5, val3: 2, colorOffset: 40)
+                                 fc: false)
 
                         case 90...97: // 9X - Set foreground color highlighted
                             state.fc_colormode = .MODE_3BIT
                             state.highlighted = true
-                            updateColor(state: &state, negative: negative, color: elems[momelem].value - 90)
+                            updateColor(state: &state, fc: negative, color: elems[momelem].value - 90)
 
                         case 100...107: // 10X Set background color hightlighted
                             state.fc_colormode = .MODE_3BIT
                             state.highlighted = true
-                            updateColor(state: &state, negative: negative, color: elems[momelem].value - 100)
+                            updateColor(state: &state, fc: negative, color: elems[momelem].value - 100)
 
                         default:
                             continue
@@ -288,7 +317,7 @@ func ansiToHtml(ansi: String) -> String {
                     }
                     // Open new <span> if current state differs from the default one
                     if state != State() {
-                        result.append("<span class=\"")
+                        result.append("<span class='")
                         if state.underline {
                             result.append("underline ")
                         }
@@ -309,7 +338,7 @@ func ansiToHtml(ansi: String) -> String {
                         }
                         if state.fc_colormode != .MODE_3BIT &&
                            (state.fc_colormode != .MODE_8BIT || state.fc > 15) {
-                            result.append("\" style=\"")
+                            result.append("' style='")
                         }
                         switch state.fc_colormode {
                         case .MODE_3BIT:
@@ -320,12 +349,32 @@ func ansiToHtml(ansi: String) -> String {
                             if state.fc >= 0 && state.fc <= 7 {
                                 result.append(fcstyle[state.fc])
                             } else {
-                                result.append("color:#\(make_rgb(state.fc))")
+                                result.append("color:#\(make_rgb(state.fc));")
                             }
                         case .MODE_24BIT:
                             result.append(String(format: "color:#%06x;", state.fc))
                         }
-                        result.append("\">")
+                        if !(state.fc_colormode != .MODE_3BIT &&
+                           (state.fc_colormode != .MODE_8BIT || state.fc>15)) && //already in style
+                           state.bc_colormode != .MODE_3BIT &&
+                           (state.bc_colormode != .MODE_8BIT || state.bc>15) {
+                            result.append("' style='")
+                           }
+                        switch state.bc_colormode {
+                        case .MODE_3BIT:
+                            if state.bc >= 0 && state.bc <= 9 {
+                                result.append(bcstyle[state.bc])
+                            }
+                        case .MODE_8BIT:
+                            if state.bc >= 0 && state.bc <= 7 {
+                                result.append(bcstyle[state.bc])
+                            } else {
+                                result.append("background-color:#\(make_rgb(state.bc));")
+                            }
+                        case .MODE_24BIT:
+                            result.append(String(format: "background-color:#%06x;", state.bc))
+                        }
+                        result.append("'>")
                     }
                 }
             }
