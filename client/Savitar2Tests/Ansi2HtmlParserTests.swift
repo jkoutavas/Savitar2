@@ -85,4 +85,9 @@ class Ansi2HtmlParserTests: XCTestCase {
         XCTAssertEqual(ansiToHtml(ansi: escape("^[48;2;100;50;90m24-bit back color^[0m")),
             "<span class='' style='background-color:#64325a;'>24-bit back color</span>")
     }
+
+    func testScrewy() {
+        XCTAssertEqual(ansiToHtml(ansi: escape("^[2;37;40mOld Reverse^[0;37;40m (SCREWY!)")),
+            "<span class='lighter white bg-black '>Old Reverse</span><span class='white bg-black '> (SCREWY!)</span>")
+    }
 }

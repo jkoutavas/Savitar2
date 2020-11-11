@@ -102,6 +102,7 @@ extension WKWebView {
         .bg-white    {background-color: gray;}
         .underline   {text-decoration: underline;}
         .bold        {font-weight: bold;}
+        .lighter       {font-weight: lighter;}
         .italic      {font-style: italic;}
         .blink       {animation: blink 2s ease infinite;}
         @keyframes blink{

@@ -20,6 +20,7 @@ struct State: Equatable {
     var fc = -1 //Standard Foreground Color //IRC-Color+8
     var bc = -1 //Standard Background Color //IRC-Color+8
     var bold = false
+    var lighter = false
     var italic = false
     var underline = false
     var blink = false
@@ -244,6 +245,9 @@ func ansiToHtml(ansi: String) -> String {
                         case 1: // 1 - Enable Bold
                             state.bold = true
 
+                        case 2: // 2 - Enable Lighter
+                            state.lighter = true
+
                         case 3: // 3 - Enable Italic
                             state.italic = true
 
@@ -261,8 +265,9 @@ func ansiToHtml(ansi: String) -> String {
                             state.crossedout = true
 
                         case 21, // 21 - Reset bold;
-                             22: // 22 - Not bold, not "high intensity" color
+                             22: // 22 - Not bold, Not lighter, not "high intensity" color
                             state.bold = false
+                            state.lighter = false
 
                         case 23: // 23 - Reset italic
                             state.italic = false
@@ -301,7 +306,7 @@ func ansiToHtml(ansi: String) -> String {
                             updateColor(state: &state, fc: negative, color: elems[momelem].value - 100)
 
                         default:
-                            continue
+                            print("ignoring SGR code \(elems[momelem].value)")
                         }
                         momelem += 1
                     }
@@ -323,6 +328,9 @@ func ansiToHtml(ansi: String) -> String {
                         }
                         if state.bold {
                            result.append("bold ")
+                        }
+                        if state.lighter {
+                            result.append("lighter ")
                         }
                         if state.italic {
                            result.append("italic ")
