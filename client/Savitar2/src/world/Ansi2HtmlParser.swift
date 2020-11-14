@@ -71,22 +71,20 @@ struct Ansi2HtmlParser {
 
     let esc: Character = "\u{1B}"
 
-    struct Parse {
-        var buffer = ""
-        var output = ""
-    }
-    var result = Parse()
+    var buffer = ""
 
     mutating func parse(ansi: String) -> String {
         var input: [Character]
-        if result.buffer.count == 0 || result.buffer.count > 100 /*safety*/ {
+        if buffer.count == 0 || buffer.count > 100 /*safety*/ {
             input = Array(ansi) // this gives us O(1) indexing performance
         } else {
             // resume from split ANSI code
-            input = [esc] + Array(result.buffer) + Array(ansi)
-            result.buffer = ""
+            input = [esc] + Array(buffer) + Array(ansi)
+            buffer = ""
         }
         let inputLen = input.count
+
+        var output = ""
 
         // Begin of Conversion
         var state = State()
@@ -107,18 +105,18 @@ struct Ansi2HtmlParser {
                      return ""
                 }
                 if c == "[" { // CSI code, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-                    result.buffer = "["
+                    buffer = "["
                     while (c<"A") || ((c>"Z") && (c<"a")) || (c>"z") {
                          if offset < inputLen - 1 {
                              offset += 1; c = input[offset]
                          } else {
                              return ""
                          }
-                         result.buffer.append(c)
+                         buffer.append(c)
                     }
                     switch c {
                     case "m":
-                        let elems = parseInsert(result.buffer)
+                        let elems = parseInsert(buffer)
                         var momelem = 0
                         while momelem < elems.count {
                             switch elems[momelem].value {
@@ -202,71 +200,71 @@ struct Ansi2HtmlParser {
                     if state != oldstate { //ANY Change
                         // If old state was different than the default one, close the current <span>
                         if oldstate != State() {
-                            result.output.append("</span>")
+                            output.append("</span>")
                         }
                         // Open new <span> if current state differs from the default one
                         if state != State() {
-                            result.output.append("<span class='")
+                            output.append("<span class='")
                             if state.underline {
-                                result.output.append("underline ")
+                                output.append("underline ")
                             }
                             if state.bold {
-                               result.output.append("bold ")
+                               output.append("bold ")
                             }
                             if state.lighter {
-                                result.output.append("lighter ")
+                                output.append("lighter ")
                             }
                             if state.italic {
-                               result.output.append("italic ")
+                               output.append("italic ")
                             }
                             if state.blink {
-                               result.output.append("blink ")
+                               output.append("blink ")
                             }
                             if state.crossedout {
-                               result.output.append("crossed-out ")
+                               output.append("crossed-out ")
                             }
                             if state.highlighted {
-                               result.output.append("highlighted ")
+                               output.append("highlighted ")
                             }
                             if state.fc_colormode != .MODE_3BIT &&
                                (state.fc_colormode != .MODE_8BIT || state.fc > 15) {
-                                result.output.append("' style='")
+                                output.append("' style='")
                             }
                             switch state.fc_colormode {
                             case .MODE_3BIT:
                                 if state.fc >= 0 && state.fc <= 9 {
-                                    result.output.append(fcstyle[state.fc])
+                                    output.append(fcstyle[state.fc])
                                 }
                             case .MODE_8BIT:
                                 if state.fc >= 0 && state.fc <= 7 {
-                                    result.output.append(fcstyle[state.fc])
+                                    output.append(fcstyle[state.fc])
                                 } else {
-                                    result.output.append("color:#\(make_rgb(state.fc));")
+                                    output.append("color:#\(make_rgb(state.fc));")
                                 }
                             case .MODE_24BIT:
-                                result.output.append(String(format: "color:#%06x;", state.fc))
+                                output.append(String(format: "color:#%06x;", state.fc))
                             }
                             if !(state.fc_colormode != .MODE_3BIT &&
                                (state.fc_colormode != .MODE_8BIT || state.fc>15)) && //already in style
                                state.bc_colormode != .MODE_3BIT &&
                                (state.bc_colormode != .MODE_8BIT || state.bc>15) {
-                                result.output.append("' style='")
+                                output.append("' style='")
                                }
                             switch state.bc_colormode {
                             case .MODE_3BIT:
                                 if state.bc >= 0 && state.bc <= 9 {
-                                    result.output.append(bcstyle[state.bc])
+                                    output.append(bcstyle[state.bc])
                                 }
                             case .MODE_8BIT:
                                 if state.bc >= 0 && state.bc <= 7 {
-                                    result.output.append(bcstyle[state.bc])
+                                    output.append(bcstyle[state.bc])
                                 } else {
-                                    result.output.append("background-color:#\(make_rgb(state.bc));")
+                                    output.append("background-color:#\(make_rgb(state.bc));")
                                 }
                             case .MODE_24BIT:
-                                result.output.append(String(format: "background-color:#%06x;", state.bc))
+                                output.append(String(format: "background-color:#%06x;", state.bc))
                             }
-                            result.output.append("'>")
+                            output.append("'>")
                         }
                     }
                 }
@@ -274,22 +272,22 @@ struct Ansi2HtmlParser {
                 line += 1
                 if newline >= 0 {
                     while newline > line {
-                        result.output.append(" ")
+                        output.append(" ")
                         line += 1
                     }
                     newline = -1
                 }
-                result.output.append(c)
+                output.append(c)
             }
             offset += 1
         }
 
         // If current state is different than the default, there is a <span> open - close it
         if state != State() {
-            result.output.append("</span>")
+            output.append("</span>")
         }
 
-        return result.output
+        return output
     }
 
     private func parseInsert(_ buffer: String) -> [Selem] {
