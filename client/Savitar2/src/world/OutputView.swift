@@ -27,10 +27,9 @@ class OutputView: WKWebView {
 
         // Convert any ANSI escape codes to HTML spans
         let result = ansiToHtml.parse(ansi: cleanString)
-        if result.done {
-            let htmlStr = result.output.replacingOccurrences(of: "\"", with: "'")
+        if result.count > 0 {
+            let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
-            ansiToHtml.clear()
         }
     }
 

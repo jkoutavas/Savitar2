@@ -72,24 +72,19 @@ struct Ansi2HtmlParser {
     let esc: Character = "\u{1B}"
 
     struct Parse {
-        var done = false
         var buffer = ""
         var output = ""
     }
     var result = Parse()
 
-    mutating func clear() {
-        result = Parse()
-    }
-
-    mutating func parse(ansi: String) -> Parse {
+    mutating func parse(ansi: String) -> String {
         var input: [Character]
         if result.buffer.count == 0 || result.buffer.count > 100 /*safety*/ {
             input = Array(ansi) // this gives us O(1) indexing performance
         } else {
             // resume from split ANSI code
             input = [esc] + Array(result.buffer) + Array(ansi)
-            clear()
+            result.buffer = ""
         }
         let inputLen = input.count
 
@@ -109,8 +104,7 @@ struct Ansi2HtmlParser {
                 if offset < inputLen - 1 {
                     offset += 1; c = input[offset]
                 } else {
-                    result.done = false
-                    return result
+                     return ""
                 }
                 if c == "[" { // CSI code, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
                     result.buffer = "["
@@ -118,8 +112,7 @@ struct Ansi2HtmlParser {
                          if offset < inputLen - 1 {
                              offset += 1; c = input[offset]
                          } else {
-                            result.done = false
-                            return result
+                             return ""
                          }
                          result.buffer.append(c)
                     }
@@ -296,8 +289,7 @@ struct Ansi2HtmlParser {
             result.output.append("</span>")
         }
 
-        result.done = true
-        return result
+        return result.output
     }
 
     private func parseInsert(_ buffer: String) -> [Selem] {
