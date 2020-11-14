@@ -27,6 +27,9 @@ class Session: NSObject, StreamDelegate {
         didSet { sessionHandler.connectionStatusChanged(status: status) }
     }
 
+    let captureReads = true
+    var captureURL : URL?
+
     let world: World
     let sessionHandler: SessionHandlerProtocol
 
@@ -85,6 +88,13 @@ class Session: NSObject, StreamDelegate {
                                            &writeStream)
         inputStream = readStream!.takeRetainedValue()
         outputStream = writeStream!.takeRetainedValue()
+
+        if captureReads {
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                captureURL = dir.appendingPathComponent("\(world.name).capture")
+                print("opening \(String(describing: captureURL))")
+            }
+        }
 
         status = .Binding
         if inputStream != nil && outputStream != nil {
@@ -239,8 +249,13 @@ class Session: NSObject, StreamDelegate {
             while stream.hasBytesAvailable {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-//                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
+                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
 //                    self?.logger.info("\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
+                    if let url = self?.captureURL {
+                        do {
+                            try debugStr.write(to: url, atomically: false, encoding: .utf8)
+                        } catch {}
+                    }
                     if let result = self?.process(buffer: buffer, length: read) {
                         if result.count > 0 {
                             data.append(result)
