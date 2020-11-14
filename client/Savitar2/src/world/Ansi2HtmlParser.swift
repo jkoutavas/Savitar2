@@ -83,7 +83,14 @@ struct Ansi2HtmlParser {
     }
 
     mutating func parse(ansi: String) -> Parse {
-        let input: [Character] = Array(ansi) // this gives us O(1) indexing performance
+        var input: [Character]
+        if result.buffer.count > 0 {
+            // resume from split ANSI code
+            input = [esc] + Array(result.buffer) + Array(ansi)
+            clear()
+        } else {
+            input = Array(ansi) // this gives us O(1) indexing performance
+        }
 
         // Begin of Conversion
         var state = State()
@@ -95,13 +102,6 @@ struct Ansi2HtmlParser {
         var offset = 0
         while offset < input.count {
             var c = input[offset]
-            if result.buffer.count > 0 {
-                // resume parsing
-                result.done = parseCSI(c: &c, input: input, offset: &offset)
-                if !result.done {
-                    return result
-                }
-            }
             if c == esc {
                 oldstate = state
                 //Searching the end (a letter) and safe the insert:
@@ -113,14 +113,18 @@ struct Ansi2HtmlParser {
                 }
                 if c == "[" { // CSI code, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
                     result.buffer = "["
-                    result.done = parseCSI(c: &c, input: input, offset: &offset)
-                    if !result.done {
-                        return result
+                    while (c<"A") || ((c>"Z") && (c<"a")) || (c>"z") {
+                         if offset < input.count - 1 {
+                             offset += 1; c = input[offset]
+                         } else {
+                            result.done = false
+                            return result
+                         }
+                         result.buffer.append(c)
                     }
                     switch c {
                     case "m":
                         let elems = parseInsert(result.buffer)
-                        result.buffer = ""
                         var momelem = 0
                         while momelem < elems.count {
                             switch elems[momelem].value {
@@ -293,21 +297,6 @@ struct Ansi2HtmlParser {
 
         result.done = true
         return result
-    }
-
-    private mutating func parseCSI(c: inout Character, input: [Character], offset: inout Int) -> Bool {
-        while (c<"A") || ((c>"Z") && (c<"a")) || (c>"z") {
-             if offset < input.count - 1 {
-                 offset += 1; c = input[offset]
-             } else {
-                 return false
-             }
-             result.buffer.append(c)
-             if c == ">" { //end of htop
-                 break
-             }
-         }
-         return true
     }
 
     private func parseInsert(_ buffer: String) -> [Selem] {
