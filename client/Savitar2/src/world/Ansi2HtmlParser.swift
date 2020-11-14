@@ -84,13 +84,14 @@ struct Ansi2HtmlParser {
 
     mutating func parse(ansi: String) -> Parse {
         var input: [Character]
-        if result.buffer.count > 0 {
+        if result.buffer.count == 0 || result.buffer.count > 100 /*safety*/ {
+            input = Array(ansi) // this gives us O(1) indexing performance
+        } else {
             // resume from split ANSI code
             input = [esc] + Array(result.buffer) + Array(ansi)
             clear()
-        } else {
-            input = Array(ansi) // this gives us O(1) indexing performance
         }
+        let inputLen = input.count
 
         // Begin of Conversion
         var state = State()
@@ -100,12 +101,12 @@ struct Ansi2HtmlParser {
         var newline = -1
 
         var offset = 0
-        while offset < input.count {
+        while offset < inputLen {
             var c = input[offset]
             if c == esc {
                 oldstate = state
                 //Searching the end (a letter) and safe the insert:
-                if offset < input.count - 1 {
+                if offset < inputLen - 1 {
                     offset += 1; c = input[offset]
                 } else {
                     result.done = false
@@ -114,7 +115,7 @@ struct Ansi2HtmlParser {
                 if c == "[" { // CSI code, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
                     result.buffer = "["
                     while (c<"A") || ((c>"Z") && (c<"a")) || (c>"z") {
-                         if offset < input.count - 1 {
+                         if offset < inputLen - 1 {
                              offset += 1; c = input[offset]
                          } else {
                             result.done = false
