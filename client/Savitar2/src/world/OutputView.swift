@@ -18,6 +18,8 @@ class OutputView: WKWebView {
                 attributes: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
         let cleanString = string
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
             .replacingOccurrences(of: "\r", with: "")
