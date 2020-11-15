@@ -982,6 +982,7 @@ Gw
                     <tabViewItems>
                         <tabViewItem identifier="" id="XlS-6G-She"/>
                         <tabViewItem identifier="" id="1r2-Xe-hzm"/>
+                        <tabViewItem id="zuS-O6-t75"/>
                     </tabViewItems>
                     <tabView key="tabView" misplaced="YES" type="noTabsNoBorder" id="Rdw-IL-vev">
                         <rect key="frame" x="0.0" y="0.0" width="454" height="472"/>
@@ -995,6 +996,7 @@ Gw
                         <outlet property="tabView" destination="Rdw-IL-vev" id="5u8-iZ-LyO"/>
                         <segue destination="Dhe-ko-nR0" kind="relationship" relationship="tabItems" id="ZHL-wH-9Ol"/>
                         <segue destination="lgo-as-i7Z" kind="relationship" relationship="tabItems" id="bJu-LR-sWv"/>
+                        <segue destination="qY0-Es-dDb" kind="relationship" relationship="tabItems" id="STX-Dc-coT"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mp8-W6-xPH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1151,7 +1153,7 @@ Gw
                 <customObject id="8Ec-iW-Cry" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="l6N-44-AYJ"/>
             </objects>
-            <point key="canvasLocation" x="-630" y="-10789"/>
+            <point key="canvasLocation" x="-784" y="-11394"/>
         </scene>
         <!--Appearance-->
         <scene sceneID="Yc4-nI-2mR">
@@ -1378,7 +1380,7 @@ Gw
                 <customObject id="yJY-r4-A1N" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="fnI-nK-upe"/>
             </objects>
-            <point key="canvasLocation" x="-689" y="-11391"/>
+            <point key="canvasLocation" x="-784" y="-10930"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="HEC-hR-9hS">
@@ -1411,7 +1413,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="110.5" y="5" width="65" height="23"/>
+                                <rect key="frame" x="111" y="5" width="64" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1421,7 +1423,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="42.5" y="5" width="55" height="23"/>
+                                <rect key="frame" x="43" y="5" width="54" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1601,6 +1603,77 @@ Gw
                 <customObject id="lzM-YY-iCW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2519" y="-9860"/>
+        </scene>
+        <!--Input-->
+        <scene sceneID="uDZ-FJ-52p">
+            <objects>
+                <viewController title="Input" id="qY0-Es-dDb" customClass="InputSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="O93-n9-JOi">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="22c-p1-evv">
+                                <rect key="frame" x="31" y="239" width="73" height="18"/>
+                                <buttonCell key="cell" type="radio" title="No echo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="SAs-C4-5iJ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="m7q-Bj-Oih"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="hzS-Ik-R70">
+                                <rect key="frame" x="31" y="217" width="175" height="18"/>
+                                <buttonCell key="cell" type="radio" title="Echo carriage return only" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="l6l-sd-N1c">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="s1x-cy-8XU"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-YY-jYP">
+                                <rect key="frame" x="31" y="195" width="104" height="18"/>
+                                <buttonCell key="cell" type="radio" title="Echo all input" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Jo2-48-iFf">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="Xrh-R5-nid"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1M4-Xc-s3s">
+                                <rect key="frame" x="18" y="264" width="88" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Input Echoing" id="jC9-Aj-I09">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="22c-p1-evv" firstAttribute="top" secondItem="1M4-Xc-s3s" secondAttribute="bottom" constant="8" id="3nh-VE-Lvz"/>
+                            <constraint firstItem="hzS-Ik-R70" firstAttribute="top" secondItem="22c-p1-evv" secondAttribute="bottom" constant="6" id="9Pc-by-NXg"/>
+                            <constraint firstItem="3dR-YY-jYP" firstAttribute="top" secondItem="hzS-Ik-R70" secondAttribute="bottom" constant="6" id="Aib-Sq-5bO"/>
+                            <constraint firstItem="hzS-Ik-R70" firstAttribute="top" secondItem="22c-p1-evv" secondAttribute="bottom" constant="6" id="Q87-f7-szT"/>
+                            <constraint firstItem="22c-p1-evv" firstAttribute="top" secondItem="1M4-Xc-s3s" secondAttribute="bottom" constant="8" id="Sml-hJ-doq"/>
+                            <constraint firstItem="3dR-YY-jYP" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="eg1-Va-zFW"/>
+                            <constraint firstItem="1M4-Xc-s3s" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" id="hYV-Ie-psH"/>
+                            <constraint firstItem="3dR-YY-jYP" firstAttribute="top" secondItem="hzS-Ik-R70" secondAttribute="bottom" constant="6" id="jYa-06-cvo"/>
+                            <constraint firstItem="hzS-Ik-R70" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="jh2-K7-mWF"/>
+                            <constraint firstItem="1M4-Xc-s3s" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" id="oRS-0H-VuU"/>
+                            <constraint firstItem="22c-p1-evv" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="s70-NI-4Zb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="echoAllRadio" destination="3dR-YY-jYP" id="MGV-qZ-tyx"/>
+                        <outlet property="echoCROnlyRadio" destination="hzS-Ik-R70" id="ZSQ-i0-uUV"/>
+                        <outlet property="noEchoRadio" destination="22c-p1-evv" id="157-gv-ICl"/>
+                    </connections>
+                </viewController>
+                <customObject id="nAz-Dp-AEK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-784" y="-10518"/>
         </scene>
     </scenes>
     <resources>

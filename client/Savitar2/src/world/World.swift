@@ -15,16 +15,22 @@ struct WorldFlags: OptionSet, Hashable {
     let rawValue: Int
 
     static let ansi = WorldFlags(rawValue: 1 << 0)
-    static let html = WorldFlags(rawValue: 1 << 1)
+    static let echoCmds = WorldFlags(rawValue: 1 << 1)
+    static let echoCR = WorldFlags(rawValue: 1 << 2)
+    static let html = WorldFlags(rawValue: 1 << 3)
 }
 extension WorldFlags: StrOptionSet {
     // TODO: I wonder if there's a DRY-er way to do these
     static var labels: [Label] { return [
         (.ansi, "ansi"),
+        (.echoCmds, "echoCmds"),
+        (.echoCR, "echoCR"),
         (.html, "html")
         ]}
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
+        "echoCmds": .echoCmds,
+        "echoCR": .echoCR,
         "html": .html
         ]}
 }

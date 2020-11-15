@@ -105,6 +105,7 @@ class EchoServer {
                 try socket.write(from: "Hello, type 'QUIT' to end session\nor 'SHUTDOWN' to stop server.\n")
 
                 repeat {
+                    try socket.write(from: "prompt: ")
                     let bytesRead = try socket.read(into: &readData)
 
                     if bytesRead > 0 {
@@ -138,7 +139,7 @@ class EchoServer {
                              }
                         }
 
-                        let reply = "Server response: \n\(echo)\n"
+                        let reply = "Server response: \n\(echo)"
                         try socket.write(from: reply)
 
                         if (response.uppercased().hasPrefix(EchoServer.quitCommand) || response.uppercased().hasPrefix(EchoServer.shutdownCommand)) &&

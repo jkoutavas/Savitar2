@@ -30,7 +30,7 @@ class Session: NSObject, StreamDelegate {
     let captureReads = true
     var captureURL : URL?
 
-    let world: World
+    var world: World
     let sessionHandler: SessionHandlerProtocol
 
     var inputStream: InputStream!
@@ -142,7 +142,13 @@ class Session: NSObject, StreamDelegate {
             return
         }
 
-        sendString(string: "\(cmd.cmdStr)\r")
+        let str = "\(cmd.cmdStr)\r"
+        if world.flags.contains(.echoCmds) {
+           acceptedText(text: str)
+        } else if world.flags.contains(.echoCR) {
+           acceptedText(text: "\r")
+        }
+        sendString(string: str)
     }
 
     private func process(buffer: [UInt8], length: Int) -> Data {
@@ -181,10 +187,14 @@ class Session: NSObject, StreamDelegate {
             }
 
             // Processing is complete. Send the line off to the output view
-            OperationQueue.main.addOperation({ [weak self] in
-                self?.sessionHandler.output(result: .success(line))
-            })
+            acceptedText(text: line)
         }
+    }
+
+    private func acceptedText(text: String) {
+        OperationQueue.main.addOperation({ [weak self] in
+            self?.sessionHandler.output(result: .success(text))
+        })
     }
 
     private func processMacros(with event: NSEvent, macros: [Macro]) -> Bool {
