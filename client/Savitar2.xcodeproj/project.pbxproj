@@ -53,6 +53,7 @@
 		6968381A2558FCC900F0BC20 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 696838192558FCC900F0BC20 /* Logging */; };
 		6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */; };
 		6968381E255F5D9C00F0BC20 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381D255F5D9C00F0BC20 /* OutputView.swift */; };
+		69683820255F8AC000F0BC20 /* InputSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381F255F8AC000F0BC20 /* InputSettingsController.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
@@ -186,6 +187,7 @@
 		6968380F25562F6C00F0BC20 /* Ansi2HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParser.swift; sourceTree = "<group>"; };
 		6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParserTests.swift; sourceTree = "<group>"; };
 		6968381D255F5D9C00F0BC20 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
+		6968381F255F8AC000F0BC20 /* InputSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSettingsController.swift; sourceTree = "<group>"; };
 		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
 		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				69662B21204367BD00E7CC7B /* Document.swift */,
 				69F620DC204B86A000301A8D /* DocumentV1.swift */,
 				69F620E2204B881600301A8D /* DocumentV2.swift */,
+				6968381F255F8AC000F0BC20 /* InputSettingsController.swift */,
 				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
 				6968381D255F5D9C00F0BC20 /* OutputView.swift */,
 				696F77492390D2D2005E45EB /* OutputViewController.swift */,
@@ -793,6 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
+				69683820255F8AC000F0BC20 /* InputSettingsController.swift in Sources */,
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
