@@ -65,8 +65,8 @@ struct Ansi2HtmlParser {
         "bg-purple" ,
         "bg-cyan ",
         "bg-white ",
-        "bg-reset ",
-        "bg-inverted "
+        "bg-inverted ",
+        "bg-reset "
     ]
 
     let esc: Character = "\u{1B}"
@@ -160,9 +160,9 @@ struct Ansi2HtmlParser {
                             case 25: // 25 - Reset blink
                                 state.blink = false
 
-                            case 27: // Reset Inverted
+                            case 27: // 27 - Reset Inverted
                                 if negative {
-                                    swapColors(&state)
+                                    state.fc = 9; state.bc = 9
                                     negative = false
                                 }
 
@@ -321,7 +321,7 @@ struct Ansi2HtmlParser {
         }
 
         if state.fc_colormode == .MODE_3BIT && state.fc == -1 {
-            state.fc = 9
+            state.fc = 8
         }
 
         swap(&state.bc, &state.fc)
