@@ -92,7 +92,7 @@ struct TrigFace: OptionSet, Hashable {
             .bold: 21,
             .inverse: 27,
             .italic: 23,
-            .underline: 23
+            .underline: 24
         ]
         return formANSICodes(dict: styleOffDict)
     }
