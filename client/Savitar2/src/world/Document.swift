@@ -67,6 +67,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         }
     }
 
+    func worldDidChange(fromWorld: World) {
+        self.world = fromWorld
+        session?.world = fromWorld
+    }
+
     /*
      * Produce XML-based data for a v2 Savitar world document
      */

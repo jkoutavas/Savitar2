@@ -1,15 +1,15 @@
 //
-//  WkWebView-extensions.swift
+//  OutputView.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 11/28/19.
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import WebKit
 
-extension WKWebView {
+class OutputView: WKWebView {
+    var ansiToHtml = Ansi2HtmlParser()
 
     func output(string: String,
                 makeAppend: Bool = false,
@@ -18,15 +18,19 @@ extension WKWebView {
                 attributes: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
         let cleanString = string
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
-            .replacingOccurrences(of: "\r", with: "<br>")
+            .replacingOccurrences(of: "\r", with: "")
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
-        let result = ansiToHtml(ansi: cleanString)
-        let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
-        output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
+        let result = ansiToHtml.parse(ansi: cleanString)
+        if result.count > 0 {
+            let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
+            output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
+        }
     }
 
     private func output(html: String, makeAppend: Bool, appending: Bool, appendID: Int) {
@@ -56,7 +60,6 @@ extension WKWebView {
             """
             run(javaScript: js)
         }
-//        scrollToEndOfDocument(nil)
     }
 
     func setStyle(world: World) {
@@ -65,20 +68,20 @@ extension WKWebView {
         let linkColor = world.linkColor.toHex ?? "blue"
 
         let ss = """
-        <style id='head-style' type="text/css">
-        body {font-family: '\(world.fontName)'; background-color: #\(backColor); font-size: \(world.fontSize)px;}
-        body * {font: \(world.fontSize)px \(world.fontName);}
-        a { color: #\(linkColor); }
+        <style id='head-style'>
+        body { background-color: #\(backColor); }
+        body * {font: \(world.fontSize)px \(world.fontName)}
         code {font: \(world.monoFontSize)px \(world.monoFontName);}
+        a { color: #\(linkColor); }
         pre {
-        overflow-x: auto;
-        white-space: pre-wrap;
-        white-space: -moz-pre-wrap;
-        white-space: -pre-wrap;
-        white-space: -o-pre-wrap;
-        word-wrap: break-word;
-        display: inline;
-        margin: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            display: inline;
+            margin: 0;
         }
         .reset       {color: #\(foreColor);}
         .bg-reset    {background-color: #\(backColor);}
@@ -102,13 +105,13 @@ extension WKWebView {
         .bg-white    {background-color: gray;}
         .underline   {text-decoration: underline;}
         .bold        {font-weight: bold;}
-        .lighter       {font-weight: lighter;}
+        .lighter     {font-weight: lighter;}
         .italic      {font-style: italic;}
         .blink       {animation: blink 2s ease infinite;}
         @keyframes blink{
-        0%{opacity:0;}
-        50%{opacity:1;}
-        100%{opacity:0;}
+            0%{opacity:0;}
+            50%{opacity:1;}
+            100%{opacity:0;}
         }
         .crossed-out {text-decoration: line-through;}
         .highlighted {filter: contrast(70%) brightness(190%);}

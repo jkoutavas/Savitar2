@@ -92,7 +92,7 @@ struct TrigFace: OptionSet, Hashable {
             .bold: 21,
             .inverse: 27,
             .italic: 23,
-            .underline: 23
+            .underline: 24
         ]
         return formANSICodes(dict: styleOffDict)
     }
@@ -145,16 +145,21 @@ struct TrigTextStyle: Equatable {
     }
 
     mutating func formOnOff() {
-        let faceOn = face?.formOnANSICode() ?? ""
-        let faceOff = face?.formOffANSICode() ?? ""
+        if let face = self.face, let foreColor = self.foreColor, let backColor = self.backColor {
+            let faceOn = face.formOnANSICode()
+            let faceOff = face.formOffANSICode()
 
-        let fgColorOn = foreColor?.formOnFGColorANSICode() ?? ""
-        let fgColorOff = foreColor?.formOffFGColorANSICode() ?? ""
+            let fgColorOn = face.contains(.foreColor) ? foreColor.formOnFGColorANSICode() : ""
+            let fgColorOff = face.contains(.foreColor) ? foreColor.formOffFGColorANSICode() : ""
 
-        let bgColorOn = backColor?.formOnBGColorANSICode() ?? ""
-        let bgColorOff = backColor?.formOffBGColorANSICode() ?? ""
+            let bgColorOn = face.contains(.backColor) ? backColor.formOnBGColorANSICode() : ""
+            let bgColorOff = face.contains(.backColor) ? backColor.formOffBGColorANSICode() : ""
 
-        self.on = formEscapeSequence(codes: faceOn + fgColorOn + bgColorOn)
-        self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
+            self.on = formEscapeSequence(codes: faceOn + fgColorOn + bgColorOn)
+            self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
+        } else {
+            self.on = ""
+            self.off = ""
+        }
     }
 }

@@ -83,8 +83,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
-
-        doc.world = fromWorld
+        doc.worldDidChange(fromWorld: fromWorld)
         self.updateViews(fromWorld)
     }
 

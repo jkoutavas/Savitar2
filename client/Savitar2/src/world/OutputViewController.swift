@@ -13,7 +13,7 @@ class OutputViewController: NSViewController {
     var makeAppend = false
     var lastAppendID = 0
 
-    lazy var webView: WKWebView = {
+    lazy var outputView: OutputView = {
 
         class LoggingMessageHandler: NSObject, WKScriptMessageHandler {
             func userContentController(_ userContentController: WKUserContentController,
@@ -29,10 +29,10 @@ class OutputViewController: NSViewController {
 
  //        webViewConfig.preferences.setValue(true, forKey: "developerExtrasEnabled")
 
-        let webView = WKWebView(frame: .zero, configuration: webViewConfig)
-        webView.translatesAutoresizingMaskIntoConstraints = false
+        let outputView = OutputView(frame: .zero, configuration: webViewConfig)
+        outputView.translatesAutoresizingMaskIntoConstraints = false
 
-        return webView
+        return outputView
     }()
 
     override func viewDidLoad() {
@@ -40,15 +40,15 @@ class OutputViewController: NSViewController {
         view.wantsLayer = true
         super.viewDidLoad()
 
-        view.addSubview(webView)
+        view.addSubview(outputView)
         NSLayoutConstraint.activate([
-            webView.topAnchor
+            outputView.topAnchor
                 .constraint(equalTo: self.view.topAnchor),
-            webView.leftAnchor
+            outputView.leftAnchor
                 .constraint(equalTo: self.view.leftAnchor),
-            webView.bottomAnchor
+            outputView.bottomAnchor
                 .constraint(equalTo: self.view.bottomAnchor),
-            webView.rightAnchor
+            outputView.rightAnchor
                 .constraint(equalTo: self.view.rightAnchor)
         ])
      }
@@ -56,17 +56,17 @@ class OutputViewController: NSViewController {
     func output(string: String) {
         let appending = makeAppend // appending will be true if last operation was an append
         makeAppend = !string.endsWithNewline() // determine now if we're going to need to append
-        webView.output(string: string, makeAppend: makeAppend, appending: appending, appendID: lastAppendID)
+        outputView.output(string: string, makeAppend: makeAppend, appending: appending, appendID: lastAppendID)
         if !makeAppend {
             lastAppendID += 1 // now prepare for the next element
         }
     }
 
     func setStyle(world: World) {
-        webView.setStyle(world: world)
+        outputView.setStyle(world: world)
     }
 
     func printSource() {
-        webView.printSource()
+        outputView.printSource()
     }
 }

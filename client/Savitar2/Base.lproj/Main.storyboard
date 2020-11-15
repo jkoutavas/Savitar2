@@ -1287,7 +1287,7 @@ Gw
                                     </textField>
                                 </subviews>
                             </customView>
-                            <wkWebView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-pH-UT2">
+                            <wkWebView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-pH-UT2" customClass="OutputView" customModule="Savitar2" customModuleProvider="target">
                                 <rect key="frame" x="20" y="209" width="410" height="171"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -1372,7 +1372,7 @@ Gw
                     <connections>
                         <outlet property="fontPopup" destination="9kW-La-fz3" id="dak-Id-NBF"/>
                         <outlet property="monoFontPopup" destination="axi-0k-bpl" id="uIx-HA-7lR"/>
-                        <outlet property="webView" destination="v2b-pH-UT2" id="ss9-J7-nd8"/>
+                        <outlet property="outputView" destination="v2b-pH-UT2" id="0UU-kr-tOF"/>
                     </connections>
                 </viewController>
                 <customObject id="yJY-r4-A1N" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1410,8 +1410,8 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="191" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="110" y="5" width="65" height="23"/>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
+                                <rect key="frame" x="110.5" y="5" width="65" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1420,8 +1420,8 @@ Gw
                                     <action selector="showWorldSetting:" target="iLh-qn-Ycd" id="A52-mR-SxS"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="42" y="5" width="55" height="23"/>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
+                                <rect key="frame" x="42.5" y="5" width="55" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

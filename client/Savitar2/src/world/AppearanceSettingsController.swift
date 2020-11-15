@@ -13,7 +13,7 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
 
     @IBOutlet weak var fontPopup: NSPopUpButton!
     @IBOutlet weak var monoFontPopup: NSPopUpButton!
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var outputView: OutputView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
             let esc = "\u{1B}"
             do {
                 let contents = try String(contentsOfFile: filepath)
-                webView.output(string: contents.replacingOccurrences(of: "\\n", with: "\n")
+                outputView.output(string: contents.replacingOccurrences(of: "\\n", with: "\n")
                     .replacingOccurrences(of: "\\e", with: "\(esc)"))
             } catch {
                 // contents could not be loaded
@@ -80,6 +80,6 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         guard let wc = self.representedObject as? WorldController else {
             return
         }
-        webView.setStyle(world: wc.world)
+        outputView.setStyle(world: wc.world)
     }
 }

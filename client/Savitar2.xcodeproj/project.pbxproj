@@ -52,7 +52,7 @@
 		6968381025562F6C00F0BC20 /* Ansi2HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968380F25562F6C00F0BC20 /* Ansi2HtmlParser.swift */; };
 		6968381A2558FCC900F0BC20 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 696838192558FCC900F0BC20 /* Logging */; };
 		6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */; };
-		696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77452390D22A005E45EB /* WKWebView+Extensions.swift */; };
+		6968381E255F5D9C00F0BC20 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381D255F5D9C00F0BC20 /* OutputView.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696F77492390D2D2005E45EB /* OutputViewController.swift */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
@@ -185,8 +185,8 @@
 		69683027239C22550066CC48 /* TrigTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigTextStyle.swift; sourceTree = "<group>"; };
 		6968380F25562F6C00F0BC20 /* Ansi2HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParser.swift; sourceTree = "<group>"; };
 		6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParserTests.swift; sourceTree = "<group>"; };
+		6968381D255F5D9C00F0BC20 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		696F77452390D22A005E45EB /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
 		696F77472390D256005E45EB /* Appearance.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appearance.txt; sourceTree = "<group>"; };
 		696F77492390D2D2005E45EB /* OutputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewController.swift; sourceTree = "<group>"; };
 		697D14A5239D828900BBF33C /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
@@ -412,6 +412,7 @@
 				69F620DC204B86A000301A8D /* DocumentV1.swift */,
 				69F620E2204B881600301A8D /* DocumentV2.swift */,
 				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
+				6968381D255F5D9C00F0BC20 /* OutputView.swift */,
 				696F77492390D2D2005E45EB /* OutputViewController.swift */,
 				69662B22204367BD00E7CC7B /* Session.swift */,
 				69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */,
@@ -437,7 +438,6 @@
 				69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */,
 				69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */,
 				69662B25204367BD00E7CC7B /* String+Extensions.swift */,
-				696F77452390D22A005E45EB /* WKWebView+Extensions.swift */,
 				69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */,
 			);
 			path = extensions;
@@ -830,7 +830,6 @@
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
 				699F5B7C24E72AAF0089C81E /* EventsWindowController.swift in Sources */,
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
-				696F77462390D22A005E45EB /* WKWebView+Extensions.swift in Sources */,
 				69F620E5204B889200301A8D /* World.swift in Sources */,
 				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
 				693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */,
@@ -857,6 +856,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */,
 				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
+				6968381E255F5D9C00F0BC20 /* OutputView.swift in Sources */,
 				69662B2C204367BD00E7CC7B /* Session.swift in Sources */,
 				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
 				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
