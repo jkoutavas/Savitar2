@@ -50,7 +50,8 @@ class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
         }
     }
 
-    @IBAction func attributeChangedAction(_ sender: Any) {
+    override func setValue(_ value: Any?, forKeyPath keyPath: String) {
+        super.setValue(value, forKeyPath: keyPath)
         attributeChanged()
     }
 

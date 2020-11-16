@@ -1168,7 +1168,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="4H1-fA-EiD"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.foreColor" id="4Dp-nD-nHN"/>
                                 </connections>
                             </colorWell>
@@ -1186,7 +1185,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="NI3-tU-g8q"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.backColor" id="mSP-ln-00e"/>
                                 </connections>
                             </colorWell>
@@ -1204,7 +1202,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="8hY-XV-k9r"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.linkColor" id="eZ8-uL-blP"/>
                                 </connections>
                             </colorWell>
@@ -1252,7 +1249,6 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="FBQ-wg-WHy"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="K6L-Ya-lj7">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1268,7 +1264,6 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="6Tf-Ey-5ud"/>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="i3n-mS-ulp"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="pdS-7v-XEb">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1332,7 +1327,6 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="8TP-Zj-qbw"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="SmO-UG-JeK">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1348,7 +1342,6 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="ST5-5E-GqA"/>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="p5m-SP-KCs"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="VyT-Cg-tGv">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1413,7 +1406,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="111" y="5" width="64" height="23"/>
+                                <rect key="frame" x="111.5" y="5" width="64" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1423,7 +1416,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="43" y="5" width="54" height="23"/>
+                                <rect key="frame" x="43.5" y="5" width="54" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
