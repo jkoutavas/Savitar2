@@ -44,12 +44,12 @@ struct Ansi2HtmlParser {
     }
 
     let fcstyle = [
-        "dimgray ",
+        "black ",
         "red ",
         "green ",
         "yellow ",
         "blue ",
-        "purple ",
+        "magenta ",
         "cyan ",
         "white ",
         "inverted ",
@@ -62,7 +62,7 @@ struct Ansi2HtmlParser {
         "bg-green ",
         "bg-yellow ",
         "bg-blue ",
-        "bg-purple" ,
+        "bg-magenta" ,
         "bg-cyan ",
         "bg-white ",
         "bg-inverted ",
