@@ -1296,7 +1296,7 @@ Gw
                                 <rect key="frame" x="17" y="16" width="416" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" id="qed-oJ-7S8">
-                                    <rect key="frame" x="3" y="3" width="410" height="57"/>
+                                    <rect key="frame" x="3" y="3" width="410" height="55"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axi-0k-bpl">
@@ -1374,9 +1374,10 @@ Gw
                                         </textField>
                                     </subviews>
                                 </view>
+                                <font key="titleFont" metaFont="system"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lOo-7q-9EL">
-                                <rect key="frame" x="18" y="76" width="22" height="18"/>
+                                <rect key="frame" x="18" y="75" width="22" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="6s7-ip-4fm">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

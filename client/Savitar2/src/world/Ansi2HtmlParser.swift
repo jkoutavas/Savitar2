@@ -197,76 +197,72 @@ struct Ansi2HtmlParser {
                         print("Ansi2HtmlParse is skipping \(c)")
                     }
                     //Checking the differences
-                    if state != oldstate { //ANY Change
+                    if !hideANSI && state != oldstate { //ANY Change
                         // If old state was different than the default one, close the current <span>
                         if oldstate != State() {
                             output.append("</span>")
                         }
                         // Open new <span> if current state differs from the default one
                         if state != State() {
-                            if hideANSI {
-                                output.append("<span")
-                            } else {
-                                output.append("<span class='")
-                                if state.underline {
-                                    output.append("underline ")
+                            output.append("<span class='")
+                            if state.underline {
+                                output.append("underline ")
+                            }
+                            if state.bold {
+                               output.append("bold ")
+                            }
+                            if state.lighter {
+                                output.append("lighter ")
+                            }
+                            if state.italic {
+                               output.append("italic ")
+                            }
+                            if state.blink {
+                               output.append("blink ")
+                            }
+                            if state.crossedout {
+                               output.append("crossed-out ")
+                            }
+                            if state.highlighted {
+                               output.append("highlighted ")
+                            }
+                            if state.fc_colormode != .MODE_3BIT &&
+                               (state.fc_colormode != .MODE_8BIT || state.fc > 15) {
+                                output.append("' style='")
+                            }
+                            switch state.fc_colormode {
+                            case .MODE_3BIT:
+                                if state.fc >= 0 && state.fc <= 9 {
+                                    output.append(fcstyle[state.fc])
                                 }
-                                if state.bold {
-                                   output.append("bold ")
+                            case .MODE_8BIT:
+                                if state.fc >= 0 && state.fc <= 7 {
+                                    output.append(fcstyle[state.fc])
+                                } else {
+                                    output.append("color:#\(make_rgb(state.fc));")
                                 }
-                                if state.lighter {
-                                    output.append("lighter ")
+                            case .MODE_24BIT:
+                                output.append(String(format: "color:#%06x;", state.fc))
+                            }
+                            if !(state.fc_colormode != .MODE_3BIT &&
+                               (state.fc_colormode != .MODE_8BIT || state.fc>15)) && //already in style
+                               state.bc_colormode != .MODE_3BIT &&
+                               (state.bc_colormode != .MODE_8BIT || state.bc>15) {
+                                output.append("' style='")
+                               }
+                            switch state.bc_colormode {
+                            case .MODE_3BIT:
+                                if state.bc >= 0 && state.bc <= 9 {
+                                    output.append(bcstyle[state.bc])
                                 }
-                                if state.italic {
-                                   output.append("italic ")
+                            case .MODE_8BIT:
+                                if state.bc >= 0 && state.bc <= 7 {
+                                    output.append(bcstyle[state.bc])
+                                } else {
+                                    output.append("background-color:#\(make_rgb(state.bc));")
                                 }
-                                if state.blink {
-                                   output.append("blink ")
-                                }
-                                if state.crossedout {
-                                   output.append("crossed-out ")
-                                }
-                                if state.highlighted {
-                                   output.append("highlighted ")
-                                }
-                                if state.fc_colormode != .MODE_3BIT &&
-                                   (state.fc_colormode != .MODE_8BIT || state.fc > 15) {
-                                    output.append("' style='")
-                                }
-                                switch state.fc_colormode {
-                                case .MODE_3BIT:
-                                    if state.fc >= 0 && state.fc <= 9 {
-                                        output.append(fcstyle[state.fc])
-                                    }
-                                case .MODE_8BIT:
-                                    if state.fc >= 0 && state.fc <= 7 {
-                                        output.append(fcstyle[state.fc])
-                                    } else {
-                                        output.append("color:#\(make_rgb(state.fc));")
-                                    }
-                                case .MODE_24BIT:
-                                    output.append(String(format: "color:#%06x;", state.fc))
-                                }
-                                if !(state.fc_colormode != .MODE_3BIT &&
-                                   (state.fc_colormode != .MODE_8BIT || state.fc>15)) && //already in style
-                                   state.bc_colormode != .MODE_3BIT &&
-                                   (state.bc_colormode != .MODE_8BIT || state.bc>15) {
-                                    output.append("' style='")
-                                   }
-                                switch state.bc_colormode {
-                                case .MODE_3BIT:
-                                    if state.bc >= 0 && state.bc <= 9 {
-                                        output.append(bcstyle[state.bc])
-                                    }
-                                case .MODE_8BIT:
-                                    if state.bc >= 0 && state.bc <= 7 {
-                                        output.append(bcstyle[state.bc])
-                                    } else {
-                                        output.append("background-color:#\(make_rgb(state.bc));")
-                                    }
-                                case .MODE_24BIT:
-                                    output.append(String(format: "background-color:#%06x;", state.bc))
-                                }
+                            case .MODE_24BIT:
+                                output.append(String(format: "background-color:#%06x;", state.bc))
                             }
                             output.append("'>")
                         }
