@@ -84,4 +84,50 @@ extension NSColor {
                           lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
     }
+
+    func darker(darker: CGFloat) -> NSColor {
+        guard let components = cgColor.components else {
+            return self
+        }
+
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+
+        if components.count == 2 {
+            red =  whiteComponent - darker
+            green = whiteComponent - darker
+            blue  = whiteComponent - darker
+        } else {
+            red = redComponent - darker
+            green = greenComponent - darker
+            blue = blueComponent - darker
+        }
+
+        if red < 0 {
+            green += red/2
+            blue += red/2
+        }
+
+        if green < 0 {
+            red += green/2
+            blue += green/2
+        }
+
+        if blue < 0 {
+            green += blue/2
+            red += blue/2
+        }
+
+        return NSColor(
+            calibratedRed: red,
+            green: green,
+            blue: blue,
+            alpha: alphaComponent
+        )
+    }
+
+    func lighter(lighter: CGFloat) -> NSColor {
+        return darker(darker: -lighter)
+    }
 }

@@ -10,6 +10,16 @@ import WebKit
 
 class OutputView: WKWebView {
     var ansiToHtml = Ansi2HtmlParser()
+    var useANSI = true
+    var useHTML = false
+
+    func clear() {
+        let js = """
+         document.body.innerHTML = ''
+         window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+         """
+         run(javaScript: js)
+    }
 
     func output(string: String,
                 makeAppend: Bool = false,
@@ -17,16 +27,20 @@ class OutputView: WKWebView {
                 appendID: Int = 0,
                 attributes: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
-        let cleanString = string
-            .replacingOccurrences(of: "<", with: "&lt;")
-            .replacingOccurrences(of: ">", with: "&gt;")
+        var cleanString = string
+        if !useHTML {
+            cleanString = cleanString
+                .replacingOccurrences(of: "<", with: "&lt;")
+                .replacingOccurrences(of: ">", with: "&gt;")
+        }
+        cleanString = cleanString
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
             .replacingOccurrences(of: "\r", with: "")
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
-        let result = ansiToHtml.parse(ansi: cleanString)
+        let result = ansiToHtml.parse(ansi: cleanString, hideANSI: !useANSI)
         if result.count > 0 {
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
@@ -62,10 +76,39 @@ class OutputView: WKWebView {
         }
     }
 
+    private func contrast(color: NSColor, withHex: String) -> String {
+        var colorHex = color.toHex()!
+        if colorHex == withHex {
+            colorHex = color.darker(darker: 0.4).toHex()!
+        }
+        return colorHex
+    }
+
     func setStyle(world: World) {
-        let backColor = world.backColor.toHex ?? "black"
-        let foreColor = world.foreColor.toHex ?? "white"
-        let linkColor = world.linkColor.toHex ?? "blue"
+        useANSI = world.flags.contains(.ansi)
+        useHTML = world.flags.contains(.html)
+
+        let backColor = world.backColor.toHex!
+        let foreColor = world.foreColor.toHex!
+        let linkColor = world.linkColor.toHex!
+
+        let black = contrast(color: NSColor.black, withHex: backColor)
+        let red = contrast(color: NSColor.red, withHex: backColor)
+        let green = contrast(color: NSColor.green, withHex: backColor)
+        let yellow = contrast(color: NSColor.yellow, withHex: backColor)
+        let blue = contrast(color: NSColor.blue, withHex: backColor)
+        let magenta = contrast(color: NSColor.magenta, withHex: backColor)
+        let cyan = contrast(color: NSColor.cyan, withHex: backColor)
+        let white = contrast(color: NSColor.white, withHex: backColor)
+
+        let bgblack = contrast(color: NSColor.black, withHex: foreColor)
+        let bgred = contrast(color: NSColor.red, withHex: foreColor)
+        let bggreen = contrast(color: NSColor.green, withHex: foreColor)
+        let bgyellow = contrast(color: NSColor.yellow, withHex: foreColor)
+        let bgblue = contrast(color: NSColor.blue, withHex: foreColor)
+        let bgmagenta = contrast(color: NSColor.magenta, withHex: foreColor)
+        let bgcyan = contrast(color: NSColor.cyan, withHex: foreColor)
+        let bgwhite = contrast(color: NSColor.white, withHex: foreColor)
 
         let ss = """
         <style id='head-style'>
@@ -87,22 +130,22 @@ class OutputView: WKWebView {
         .bg-reset    {background-color: #\(backColor);}
         .inverted    {color: #\(backColor);}
         .bg-inverted {background-color: #\(foreColor);}
-        .dimgray     {color: dimgray;}
-        .red         {color: red;}
-        .green       {color: green;}
-        .yellow      {color: olive;}
-        .blue        {color: blue;}
-        .purple      {color: purple;}
-        .cyan        {color: teal;}
-        .white       {color: gray;}
-        .bg-black    {background-color: black;}
-        .bg-red      {background-color: red;}
-        .bg-green    {background-color: green;}
-        .bg-yellow   {background-color: olive;}
-        .bg-blue     {background-color: blue;}
-        .bg-purple   {background-color: purple;}
-        .bg-cyan     {background-color: teal;}
-        .bg-white    {background-color: gray;}
+        .black       {color: #\(black);}
+        .red         {color: #\(red);}
+        .green       {color: #\(green);}
+        .yellow      {color: #\(yellow);}
+        .blue        {color: #\(blue);}
+        .magenta     {color: #\(magenta);}
+        .cyan        {color: #\(cyan);}
+        .white       {color: #\(white);}
+        .bg-black    {background-color: #\(bgblack);}
+        .bg-red      {background-color: #\(bgred);}
+        .bg-green    {background-color: #\(bggreen);}
+        .bg-yellow   {background-color: #\(bgyellow);}
+        .bg-blue     {background-color: #\(bgblue);}
+        .bg-magenta  {background-color: #\(bgmagenta);}
+        .bg-cyan     {background-color: #\(bgcyan);}
+        .bg-white    {background-color: #\(bgwhite);}
         .underline   {text-decoration: underline;}
         .bold        {font-weight: bold;}
         .lighter     {font-weight: lighter;}

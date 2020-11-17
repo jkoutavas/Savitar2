@@ -1168,7 +1168,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="4H1-fA-EiD"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.foreColor" id="4Dp-nD-nHN"/>
                                 </connections>
                             </colorWell>
@@ -1186,7 +1185,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="NI3-tU-g8q"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.backColor" id="mSP-ln-00e"/>
                                 </connections>
                             </colorWell>
@@ -1204,7 +1202,6 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="attributeChangedAction:" target="yJY-r4-A1N" id="8hY-XV-k9r"/>
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.linkColor" id="eZ8-uL-blP"/>
                                 </connections>
                             </colorWell>
@@ -1252,7 +1249,6 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="FBQ-wg-WHy"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="K6L-Ya-lj7">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1268,7 +1264,6 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="6Tf-Ey-5ud"/>
                                         <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="i3n-mS-ulp"/>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="pdS-7v-XEb">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -1297,78 +1292,112 @@ Gw
                                     <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uME-W9-yiz">
-                                <rect key="frame" x="20" y="75" width="410" height="43"/>
+                            <box fixedFrame="YES" title="  Interpret HTML tags" translatesAutoresizingMaskIntoConstraints="NO" id="fBQ-NO-Uf7">
+                                <rect key="frame" x="17" y="16" width="416" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axi-0k-bpl">
-                                        <rect key="frame" x="87" y="8" width="196" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Nwd-gA-8o5">
-                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="Mi0-fc-lf6"/>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="monoFontPopUpButtonWasSelectedWithSender:" target="lgo-as-i7Z" id="6go-4m-HkV"/>
-                                        </connections>
-                                    </popUpButton>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXM-ef-bw8">
-                                        <rect key="frame" x="286" y="13" width="32" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="size:" id="sns-Wl-sAl">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0N-dB-uev">
-                                        <rect key="frame" x="323" y="10" width="32" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="WNy-DW-2tS">
-                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="8Ez-Ls-9I9"/>
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="8TP-Zj-qbw"/>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="SmO-UG-JeK">
-                                                <dictionary key="options">
-                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </textField>
-                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qxl-dQ-mKn">
-                                        <rect key="frame" x="356" y="8" width="19" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="ST5-5E-GqA"/>
-                                        <connections>
-                                            <action selector="attributeChangedAction:" target="lgo-as-i7Z" id="p5m-SP-KCs"/>
-                                            <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="VyT-Cg-tGv">
-                                                <dictionary key="options">
-                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                    <bool key="NSConditionallySetsEnabled" value="NO"/>
-                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </stepper>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VEN-OA-97v">
-                                        <rect key="frame" x="13" y="15" width="70" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Code font:" id="qeT-dg-JqD">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                            </customView>
+                                <view key="contentView" id="qed-oJ-7S8">
+                                    <rect key="frame" x="3" y="3" width="410" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axi-0k-bpl">
+                                            <rect key="frame" x="91" y="18" width="196" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Nwd-gA-8o5">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="Mi0-fc-lf6"/>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <action selector="monoFontPopUpButtonWasSelectedWithSender:" target="lgo-as-i7Z" id="6go-4m-HkV"/>
+                                                <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="SV8-Mb-d1m"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXM-ef-bw8">
+                                            <rect key="frame" x="290" y="23" width="32" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="size:" id="sns-Wl-sAl">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="tX5-tN-qAk"/>
+                                            </connections>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0N-dB-uev">
+                                            <rect key="frame" x="327" y="20" width="32" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" usesSingleLineMode="YES" id="WNy-DW-2tS">
+                                                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="8Ez-Ls-9I9"/>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="0Ob-Al-bLH"/>
+                                                <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="SmO-UG-JeK">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </textField>
+                                        <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qxl-dQ-mKn">
+                                            <rect key="frame" x="360" y="18" width="19" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <stepperCell key="cell" continuous="YES" enabled="NO" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="ST5-5E-GqA"/>
+                                            <connections>
+                                                <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="ygb-us-7ta"/>
+                                                <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.monoFontSize" id="VyT-Cg-tGv">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </stepper>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VEN-OA-97v">
+                                            <rect key="frame" x="17" y="25" width="70" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="Code font:" id="qeT-dg-JqD">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="nR0-pu-4g5"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <font key="titleFont" metaFont="system"/>
+                            </box>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lOo-7q-9EL">
+                                <rect key="frame" x="18" y="75" width="22" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="6s7-ip-4fm">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.htmlEnabled" id="xvg-sK-Foq"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtB-0N-0Fd">
+                                <rect key="frame" x="18" y="102" width="149" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="check" title="Interpret ANSI codes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LUa-PL-qq1">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.ansiEnabled" id="bev-oX-wKj"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -1413,7 +1442,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9TJ-w7-3SB">
-                                <rect key="frame" x="111" y="5" width="64" height="23"/>
+                                <rect key="frame" x="111.5" y="5" width="64" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sCn-cL-HId">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1423,7 +1452,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ks-CJ-Gf8">
-                                <rect key="frame" x="43" y="5" width="54" height="23"/>
+                                <rect key="frame" x="43.5" y="5" width="54" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Events" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vow-G0-Ohf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1612,58 +1641,50 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="22c-p1-evv">
-                                <rect key="frame" x="31" y="239" width="73" height="18"/>
-                                <buttonCell key="cell" type="radio" title="No echo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="SAs-C4-5iJ">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="m7q-Bj-Oih"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="hzS-Ik-R70">
-                                <rect key="frame" x="31" y="217" width="175" height="18"/>
-                                <buttonCell key="cell" type="radio" title="Echo carriage return only" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="l6l-sd-N1c">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="s1x-cy-8XU"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-YY-jYP">
-                                <rect key="frame" x="31" y="195" width="104" height="18"/>
-                                <buttonCell key="cell" type="radio" title="Echo all input" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Jo2-48-iFf">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="Xrh-R5-nid"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1M4-Xc-s3s">
-                                <rect key="frame" x="18" y="264" width="88" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Input Echoing" id="jC9-Aj-I09">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <box fixedFrame="YES" title="Input Echoing" translatesAutoresizingMaskIntoConstraints="NO" id="gHN-R6-fEk">
+                                <rect key="frame" x="17" y="169" width="416" height="111"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="dFt-5R-AQZ">
+                                    <rect key="frame" x="3" y="3" width="410" height="93"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="22c-p1-evv">
+                                            <rect key="frame" x="19" y="61" width="73" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="radio" title="No echo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="SAs-C4-5iJ">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="m7q-Bj-Oih"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="hzS-Ik-R70">
+                                            <rect key="frame" x="19" y="39" width="175" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="radio" title="Echo carriage return only" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="l6l-sd-N1c">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="s1x-cy-8XU"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-YY-jYP">
+                                            <rect key="frame" x="19" y="17" width="104" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="radio" title="Echo all input" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Jo2-48-iFf">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="echoRadioButtonChanged:" target="qY0-Es-dDb" id="Xrh-R5-nid"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                            </box>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="22c-p1-evv" firstAttribute="top" secondItem="1M4-Xc-s3s" secondAttribute="bottom" constant="8" id="3nh-VE-Lvz"/>
-                            <constraint firstItem="hzS-Ik-R70" firstAttribute="top" secondItem="22c-p1-evv" secondAttribute="bottom" constant="6" id="9Pc-by-NXg"/>
-                            <constraint firstItem="3dR-YY-jYP" firstAttribute="top" secondItem="hzS-Ik-R70" secondAttribute="bottom" constant="6" id="Aib-Sq-5bO"/>
-                            <constraint firstItem="hzS-Ik-R70" firstAttribute="top" secondItem="22c-p1-evv" secondAttribute="bottom" constant="6" id="Q87-f7-szT"/>
-                            <constraint firstItem="22c-p1-evv" firstAttribute="top" secondItem="1M4-Xc-s3s" secondAttribute="bottom" constant="8" id="Sml-hJ-doq"/>
-                            <constraint firstItem="3dR-YY-jYP" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="eg1-Va-zFW"/>
-                            <constraint firstItem="1M4-Xc-s3s" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" id="hYV-Ie-psH"/>
-                            <constraint firstItem="3dR-YY-jYP" firstAttribute="top" secondItem="hzS-Ik-R70" secondAttribute="bottom" constant="6" id="jYa-06-cvo"/>
-                            <constraint firstItem="hzS-Ik-R70" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="jh2-K7-mWF"/>
-                            <constraint firstItem="1M4-Xc-s3s" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" id="oRS-0H-VuU"/>
-                            <constraint firstItem="22c-p1-evv" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="32" id="s70-NI-4Zb"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="echoAllRadio" destination="3dR-YY-jYP" id="MGV-qZ-tyx"/>

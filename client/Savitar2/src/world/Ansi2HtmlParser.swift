@@ -44,12 +44,12 @@ struct Ansi2HtmlParser {
     }
 
     let fcstyle = [
-        "dimgray ",
+        "black ",
         "red ",
         "green ",
         "yellow ",
         "blue ",
-        "purple ",
+        "magenta ",
         "cyan ",
         "white ",
         "inverted ",
@@ -62,7 +62,7 @@ struct Ansi2HtmlParser {
         "bg-green ",
         "bg-yellow ",
         "bg-blue ",
-        "bg-purple" ,
+        "bg-magenta" ,
         "bg-cyan ",
         "bg-white ",
         "bg-inverted ",
@@ -73,7 +73,7 @@ struct Ansi2HtmlParser {
 
     var buffer = ""
 
-    mutating func parse(ansi: String) -> String {
+    mutating func parse(ansi: String, hideANSI: Bool) -> String {
         var input: [Character]
         if buffer.count == 0 || buffer.count > 100 /*safety*/ {
             input = Array(ansi) // this gives us O(1) indexing performance
@@ -197,7 +197,7 @@ struct Ansi2HtmlParser {
                         print("Ansi2HtmlParse is skipping \(c)")
                     }
                     //Checking the differences
-                    if state != oldstate { //ANY Change
+                    if !hideANSI && state != oldstate { //ANY Change
                         // If old state was different than the default one, close the current <span>
                         if oldstate != State() {
                             output.append("</span>")
