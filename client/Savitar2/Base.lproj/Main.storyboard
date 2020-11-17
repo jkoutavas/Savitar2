@@ -1386,6 +1386,17 @@ Gw
                                     <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.htmlEnabled" id="xvg-sK-Foq"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtB-0N-0Fd">
+                                <rect key="frame" x="18" y="102" width="149" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="check" title="Interpret ANSI codes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LUa-PL-qq1">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.ansiEnabled" id="bev-oX-wKj"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>

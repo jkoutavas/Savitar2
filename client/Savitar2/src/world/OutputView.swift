@@ -40,7 +40,7 @@ class OutputView: WKWebView {
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
-        let result = ansiToHtml.parse(ansi: cleanString)
+        let result = ansiToHtml.parse(ansi: cleanString, hideANSI: !useANSI)
         if result.count > 0 {
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
