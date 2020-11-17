@@ -10,6 +10,16 @@ import WebKit
 
 class OutputView: WKWebView {
     var ansiToHtml = Ansi2HtmlParser()
+    var useANSI = true
+    var useHTML = false
+
+    func clear() {
+        let js = """
+         document.body.innerHTML = ''
+         window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+         """
+         run(javaScript: js)
+    }
 
     func output(string: String,
                 makeAppend: Bool = false,
@@ -17,9 +27,13 @@ class OutputView: WKWebView {
                 appendID: Int = 0,
                 attributes: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
-        let cleanString = string
-            .replacingOccurrences(of: "<", with: "&lt;")
-            .replacingOccurrences(of: ">", with: "&gt;")
+        var cleanString = string
+        if !useHTML {
+            cleanString = cleanString
+                .replacingOccurrences(of: "<", with: "&lt;")
+                .replacingOccurrences(of: ">", with: "&gt;")
+        }
+        cleanString = cleanString
             .replacingOccurrences(of: "\r\n", with: "<br>")
             .replacingOccurrences(of: "\n", with: "<br>")
             .replacingOccurrences(of: "\r", with: "")
@@ -66,6 +80,8 @@ class OutputView: WKWebView {
         let backColor = world.backColor.toHex ?? "black"
         let foreColor = world.foreColor.toHex ?? "white"
         let linkColor = world.linkColor.toHex ?? "blue"
+        useANSI = world.flags.contains(.ansi)
+        useHTML = world.flags.contains(.html)
 
         let ss = """
         <style id='head-style'>

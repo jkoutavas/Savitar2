@@ -32,6 +32,17 @@ class WorldController: NSController {
     @objc dynamic var MCPFontName: String { get { world.MCPFontName } set(MCPFontName) { world.MCPFontName = MCPFontName } }
     @objc dynamic var MCPFontSize: CGFloat { get { world.MCPFontSize } set(MCPFontSize) { world.MCPFontSize = MCPFontSize } }
 
+    @objc dynamic var htmlEnabled: Bool {
+        get { world.flags.contains(.html) }
+        set(enabled) {
+            if enabled {
+                world.flags.insert(.html)
+            } else {
+                world.flags.remove(.html)
+            }
+        }
+    }
+
     init(world: World) {
         self.world = world
 
