@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: November 16th, 2020
+README last updated: November 18th, 2020
 
 ## Current state of the application
 
@@ -25,6 +25,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ App is integrated with AppCenter, handles crash reporting and basic analytics
 √ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
+√ rewrite Aha
 √ World settings Appearance tab is operational
 √ Output triggers are working
 √ Input macro hotkeys are supported
@@ -50,6 +51,7 @@ _ Implement remaining World settings tabs
 _ Implement remaining local commands
 _ Implement scroll locking
 _ Menubar finalized
+√ Text Editing menu items finalized
 _ Logging
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
@@ -60,7 +62,8 @@ _ Add bug reporting support
 ```
 _ Move github repo to public
 _ Release alpha to select testers, start geting feedback
-_ rewrite Aha
+_ Find/Find Next supported
+_ Printing supported
 _ Enhanced analytics
 _ ANSI Color Settings window implemented
 _ Macro Clicker
@@ -111,21 +114,21 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     134 text files.
-     130 unique files.                                          
+     133 text files.
+     129 unique files.                                          
       30 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.17 s (629.7 files/s, 73875.7 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.15 s (722.4 files/s, 83335.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           93           1398           1060           6473
-XML                              9              0             31           3368
-Markdown                         2             31              0            102
+Swift                           92           1402           1057           6491
+XML                              9              0             31           3019
+Markdown                         2             31              0            106
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           107           1433           1099          10022
+SUM:                           106           1437           1096           9695
 -------------------------------------------------------------------------------
 ```

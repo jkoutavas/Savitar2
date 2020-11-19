@@ -12,7 +12,7 @@
 
 import Cocoa
 
-class InputViewController: ViewController {
+class InputViewController: NSViewController, NSTextViewDelegate {
     public weak var session: Session?
 
     internal let MAX_CMD_COUNT = 100
@@ -20,6 +20,39 @@ class InputViewController: ViewController {
     internal var cmdIndex: Int = 0 // 0 == nothing in the command buffer. [1..MAX_CMD_COUNT] is 0-based array index +1
 
     internal var eventMonitor: Any?
+
+    @IBOutlet weak var textView: NSTextView!
+
+    public var backColor: NSColor {
+        get {
+            return textView.backgroundColor
+        }
+        set {
+            textView.backgroundColor = newValue
+        }
+    }
+
+    public var foreColor: NSColor {
+        get {
+            return textView.textColor ?? NSColor.white
+        }
+        set {
+            textView.textColor = newValue
+        }
+    }
+
+    public var font: NSFont {
+        get {
+            return textView.font ?? NSFont.systemFont(ofSize: 9)
+        }
+        set {
+            textView.font = newValue
+        }
+    }
+
+    func rowHeight() -> CGFloat {
+        return textView.layoutManager?.defaultLineHeight(for: font) ?? 0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +67,8 @@ class InputViewController: ViewController {
 
     override func viewWillAppear() {
         super.viewWillAppear()
+
+        textView.isAutomaticSpellingCorrectionEnabled = false
 
         eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             return self.myKeyDown(with: $0) ? nil : $0
@@ -184,5 +219,14 @@ class InputViewController: ViewController {
         // TODO HTML parsing
 
         return Command(text: textView.string)
+    }
+
+    //**************************************
+    // MARK: - NSTextViewDelegate
+    //**************************************
+
+    func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
+        // No contextual menu for our input view please
+        return nil
     }
 }
