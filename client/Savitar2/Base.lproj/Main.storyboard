@@ -135,6 +135,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="WRV-NI-Exz"/>
+                                        <menuItem title="Clear Output" keyEquivalent="k" id="gtn-te-G66">
+                                            <connections>
+                                                <action selector="clearOutputAction:" target="Ady-hI-5gd" id="gJo-zv-Qzz"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Cut" keyEquivalent="x" id="uRl-iY-unG">
                                             <connections>
                                                 <action selector="cut:" target="Ady-hI-5gd" id="YJe-68-I9s"/>

@@ -13,6 +13,19 @@ class OutputView: WKWebView {
     var useANSI = true
     var useHTML = false
 
+    override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+        menu.removeAllItems()
+        let menuItem = NSMenuItem()
+        menuItem.title = "Clear"
+        menuItem.action = #selector(clearAction)
+        menuItem.target = self
+        menu.addItem(menuItem)
+    }
+
+    @objc func clearAction(_ sender: AnyObject) {
+        clear()
+    }
+
     func clear() {
         let js = """
          document.body.innerHTML = ''

@@ -58,6 +58,13 @@ class WindowController: NSWindowController, NSWindowDelegate {
         myWindow.makeKeyAndOrderFront(self)
     }
 
+    @IBAction func clearOutputAction(_: Any) {
+        let splitViewController = contentViewController as? SessionViewController
+        guard let svc = splitViewController else { return }
+        guard let outputVC = svc.outputViewController else { return }
+        outputVC.outputView.clear()
+    }
+
     @IBAction func showWorldSetting(_ sender: Any) {
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
         guard let wc = storyboard?.instantiateController(withIdentifier:
