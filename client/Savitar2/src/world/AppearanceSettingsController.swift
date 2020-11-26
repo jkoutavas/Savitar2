@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-class AppearanceSettingsController: NSViewController, WKNavigationDelegate {
+class AppearanceSettingsController: OutputViewNavigationDelegate {
 
     @IBOutlet weak var fontPopup: NSPopUpButton!
     @IBOutlet weak var monoFontPopup: NSPopUpButton!
