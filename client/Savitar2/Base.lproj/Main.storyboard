@@ -942,6 +942,9 @@ Gw
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO"/>
                                 </wkWebViewConfiguration>
+                                <connections>
+                                    <outlet property="navigationDelegate" destination="lgo-as-i7Z" id="6v4-1K-2c1"/>
+                                </connections>
                             </wkWebView>
                             <box fixedFrame="YES" title="  Interpret HTML tags" translatesAutoresizingMaskIntoConstraints="NO" id="fBQ-NO-Uf7">
                                 <rect key="frame" x="17" y="16" width="416" height="75"/>

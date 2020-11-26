@@ -31,6 +31,7 @@ class OutputViewController: NSViewController {
 
         let outputView = OutputView(frame: .zero, configuration: webViewConfig)
         outputView.translatesAutoresizingMaskIntoConstraints = false
+        outputView.navigationDelegate = self
 
         return outputView
     }()
