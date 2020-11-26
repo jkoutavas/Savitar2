@@ -44,6 +44,8 @@ class Session: NSObject, StreamDelegate {
 
     let queue = OperationQueue()
 
+    var didStartupCmd = false
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
@@ -69,6 +71,8 @@ class Session: NSObject, StreamDelegate {
     func connectAndRun() {
         globalStore.subscribe(self)
         AppContext.shared.worldMan.add(world)
+
+        didStartupCmd = false
 
         logger.info("connecting...")
 
@@ -275,6 +279,12 @@ class Session: NSObject, StreamDelegate {
             }
             if data.count > 0 {
                 self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
+                if let didStartupCmd = self?.didStartupCmd, !didStartupCmd {
+                    self?.didStartupCmd = true
+                    if let logonCmd = self?.world.logonCmd, logonCmd.count > 0 {
+                        self?.submitServerCmd(cmd: Command(text: logonCmd))
+                    }
+                }
             }
         }
         queue.addOperation(blockOperation)
