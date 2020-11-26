@@ -49,6 +49,9 @@ class World: SavitarObject, NSCopying {
     var port: UInt32 = 1337
     var host = "::1"
 
+    var logonCmd = ""
+    var logoffCmd = ""
+
     var cmdMarker = "##"
     var varMarker = "%%"
     var wildMarker = "$$"
@@ -113,6 +116,8 @@ class World: SavitarObject, NSCopying {
         self.flushTicks = world.flushTicks
         self.retrySecs = world.retrySecs
         self.keepAliveMins = world.keepAliveMins
+        self.logonCmd = world.logonCmd
+        self.logoffCmd = world.logoffCmd
     }
 
     override init() {
@@ -259,6 +264,12 @@ class World: SavitarObject, NSCopying {
                 guard let size = CGFloat(attribute.value) else { break }
                 MCPFontSize = size
 
+            case WorldAttribIdentifier.logonCmd.rawValue:
+                logonCmd = attribute.value
+
+            case WorldAttribIdentifier.logoffCmd.rawValue:
+                logoffCmd = attribute.value
+
             case WorldAttribIdentifier.resolution.rawValue:
                 let parts = attribute.value.components(separatedBy: "x")
                 if parts.count == 3 {
@@ -375,6 +386,10 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.MCPFont.rawValue, stringValue: monoFontName)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.MCPFontSize.rawValue, stringValue: "\(Int(monoFontSize))")
+
+        worldElem.addAttribute(name: WorldAttribIdentifier.logonCmd.rawValue, stringValue: logonCmd)
+
+        worldElem.addAttribute(name: WorldAttribIdentifier.logoffCmd.rawValue, stringValue: logoffCmd)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.resolution.rawValue,
                                stringValue: "\(outputRows)x\(columns)x\(inputRows)")

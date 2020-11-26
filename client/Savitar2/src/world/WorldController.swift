@@ -17,7 +17,7 @@ class WorldController: NSController {
     @objc dynamic var name: String { get { world.name } set(name) { world.name = name } }
     @objc dynamic var port: UInt32 { get { world.port } set(port) { world.port = port } }
     @objc dynamic var host: String { get { world.host } set(host) { world.host = host } }
-    @objc dynamic var cmdMarker: String { get { world.cmdMarker } set(cmdMarker) { world.cmdMarker = host } }
+    @objc dynamic var cmdMarker: String { get { world.cmdMarker } set(cmdMarker) { world.cmdMarker = cmdMarker } }
     @objc dynamic var varMarker: String { get { world.varMarker } set(varMarker) { world.varMarker = varMarker } }
     @objc dynamic var wildMarker: String { get { world.wildMarker } set(wildMarker) { world.wildMarker = wildMarker } }
     @objc dynamic var backColor: NSColor { get { world.backColor } set(backColor) { world.backColor = backColor } }
@@ -31,6 +31,8 @@ class WorldController: NSController {
     @objc dynamic var monoFontSize: CGFloat { get { world.monoFontSize } set(monoFontSize) { world.monoFontSize = monoFontSize } }
     @objc dynamic var MCPFontName: String { get { world.MCPFontName } set(MCPFontName) { world.MCPFontName = MCPFontName } }
     @objc dynamic var MCPFontSize: CGFloat { get { world.MCPFontSize } set(MCPFontSize) { world.MCPFontSize = MCPFontSize } }
+    @objc dynamic var logonCmd: String { get { world.logonCmd } set(logonCmd) { world.logonCmd = logonCmd } }
+    @objc dynamic var logoffCmd: String { get { world.logoffCmd } set(logoffCmd) { world.logoffCmd = logoffCmd } }
 
     @objc dynamic var ansiEnabled: Bool {
         get { world.flags.contains(.ansi) }
