@@ -73,7 +73,7 @@ struct Ansi2HtmlParser {
 
     var buffer = ""
 
-    mutating func parse(ansi: String, hideANSI: Bool) -> String {
+    mutating func parse(ansi: String, hideANSI: Bool = false) -> String {
         var input: [Character]
         if buffer.count == 0 || buffer.count > 100 /*safety*/ {
             input = Array(ansi) // this gives us O(1) indexing performance

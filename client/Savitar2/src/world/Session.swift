@@ -184,14 +184,17 @@ class Session: NSObject, StreamDelegate {
             if index < lines.count - 1 {
                  line += "\r"
              }
-
-            line = processTriggers(inputLine: line, triggers: universalTriggers)
+            var replies: [Command] = []
+            line = processTriggers(inputLine: line, triggers: universalTriggers, replies: &replies)
             if line.count > 0 {
-                line = processTriggers(inputLine: line, triggers: world.triggerMan.get())
+                line = processTriggers(inputLine: line, triggers: world.triggerMan.get(), replies: &replies)
             }
 
             // Processing is complete. Send the line off to the output view
             acceptedText(text: line)
+            for reply in replies {
+                submitServerCmd(cmd: reply)
+            }
         }
     }
 
@@ -211,7 +214,7 @@ class Session: NSObject, StreamDelegate {
         return false
     }
 
-    private func processTriggers(inputLine: String, triggers: [Trigger]) -> String {
+    private func processTriggers(inputLine: String, triggers: [Trigger], replies: inout [Command]) -> String {
         var line = inputLine
 
         // Handle trigger reactions. Often it'll result in a modification of the line, so let's
@@ -225,17 +228,7 @@ class Session: NSObject, StreamDelegate {
                 continue
             }
             if trigger.appearance == .gag {
-                line = trigger.reactionTo(line: line)
-                processedTriggers.append(trigger)
-            }
-        }
-        if line.count > 0 {
-            for trigger in triggers {
-                if !trigger.enabled {
-                    continue
-                }
-                if trigger.useSubstitution && !processedTriggers.contains(trigger) {
-                    line = trigger.reactionTo(line: line)
+                if trigger.reactionTo(line: &line) {
                     processedTriggers.append(trigger)
                 }
             }
@@ -245,9 +238,30 @@ class Session: NSObject, StreamDelegate {
                 if !trigger.enabled {
                     continue
                 }
-                if !processedTriggers.contains(trigger) {
-                    line = trigger.reactionTo(line: line)
+                if trigger.useSubstitution && !processedTriggers.contains(trigger) {
+                    if trigger.reactionTo(line: &line) {
+                        processedTriggers.append(trigger)
+                    }
                 }
+            }
+        }
+        if line.count > 0 {
+            for trigger in triggers {
+                if !trigger.enabled {
+                    continue
+                }
+                if !processedTriggers.contains(trigger) {
+                    if trigger.reactionTo(line: &line) {
+                        processedTriggers.append(trigger)
+                    }
+                }
+            }
+        }
+
+        // now handle any replies
+        for trigger in processedTriggers {
+            if let reply = trigger.reply, reply.count > 0 {
+                replies.append(Command(text: reply))
             }
         }
 
