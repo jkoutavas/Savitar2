@@ -49,7 +49,7 @@ struct TrigFlags: OptionSet {
     static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
-    //    static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
+//  static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
     static let gag = TrigFlags(rawValue: 1 << 5)
     static let startsWith = TrigFlags(rawValue: 1 << 6)
     static let echoReply = TrigFlags(rawValue: 1 << 7)
@@ -246,8 +246,9 @@ class Trigger: SavitarObject, NSCopying {
         }
     }
 
-    public func reactionTo(line: String) -> String {
+    public func reactionTo(line: inout String) -> Bool {
         var pattern = name
+        var matched = false
 
         // TODO: optimization: form the options at trigger init / setting
         var options: String.CompareOptions = []
@@ -267,6 +268,7 @@ class Trigger: SavitarObject, NSCopying {
         }
 
         var ranges = line.ranges(of: pattern, options: options)
+        matched = ranges.count > 0
         if ranges.count > 0 && matching == .wholeLine {
             ranges = [line.fullRange]
         }
@@ -294,7 +296,8 @@ class Trigger: SavitarObject, NSCopying {
         if pos < line.endIndex {
             resultLine += line[pos..<line.endIndex]
         }
-        return resultLine
+        line = resultLine
+        return matched
     }
 
     let audioCueDict: [TrigAudioType: String] = [
@@ -447,7 +450,8 @@ class Trigger: SavitarObject, NSCopying {
             trigElem.addAttribute(name: TriggerAttribIdentifier.type.rawValue, stringValue: value)
         }
 
-        trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue, stringValue: getFlagsFromValues().description)
+        trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue,
+                       stringValue: getFlagsFromValues().description)
 
         if let value = self.wordEnding {
             trigElem.addChild(
@@ -478,6 +482,11 @@ class Trigger: SavitarObject, NSCopying {
 
         if let value = self.voice {
             trigElem.addAttribute(name: TriggerAttribIdentifier.voice.rawValue, stringValue: value)
+        }
+
+        if let value = self.reply {
+            trigElem.addChild(
+                XMLElement.init(name: ReplyElemIdentifier, stringValue: value))
         }
 
         if let value = self.say {

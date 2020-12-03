@@ -79,8 +79,9 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
             case .sayText:
                 sayTextRadio.state = .on
             }
-            self.representedObject = TriggerAudioCueController(trigger: trigger, store: store,
-                                                               soundNames: currentSoundNames, voiceNames: currentVoiceNames)
+            self.representedObject =
+                TriggerAudioCueController(trigger: trigger, store: store, soundNames: currentSoundNames,
+                                          voiceNames: currentVoiceNames)
         } else {
             self.representedObject = nil
         }

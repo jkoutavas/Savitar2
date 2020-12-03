@@ -24,6 +24,7 @@
 		691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A52453D98E0057DD34 /* TriggersViewModel.swift */; };
 		691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B52453EA700057DD34 /* TriggersTabController.swift */; };
 		691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */; };
+		69376D4D256DE4CC00A99245 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */; };
 		693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E52466245E00931FA8 /* MacrosTabController.swift */; };
 		693944E82466248C00931FA8 /* EventsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E72466248C00931FA8 /* EventsTabController.swift */; };
 		693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* MacroTableDataSource.swift */; };
@@ -151,6 +152,7 @@
 		691963A52453D98E0057DD34 /* TriggersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggersViewModel.swift; sourceTree = "<group>"; };
 		691963B52453EA700057DD34 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
 		691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
+		69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
 		693944E52466245E00931FA8 /* MacrosTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosTabController.swift; sourceTree = "<group>"; };
 		693944E72466248C00931FA8 /* EventsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabController.swift; sourceTree = "<group>"; };
 		693944E924662F3F00931FA8 /* MacroTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTableDataSource.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				69662B1F204367BD00E7CC7B /* InputViewController.swift */,
 				6968381D255F5D9C00F0BC20 /* OutputView.swift */,
 				696F77492390D2D2005E45EB /* OutputViewController.swift */,
+				69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */,
 				69662B22204367BD00E7CC7B /* Session.swift */,
 				69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */,
 				69662B1E204367BD00E7CC7B /* SessionViewController.swift */,
@@ -826,6 +829,7 @@
 				69CEEDEA23C2C8B900E9F087 /* WorldController.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */,
+				69376D4D256DE4CC00A99245 /* OutputViewNavigationDelegate.swift in Sources */,
 				69F620E3204B881600301A8D /* DocumentV2.swift in Sources */,
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
 				699F5B7C24E72AAF0089C81E /* EventsWindowController.swift in Sources */,
@@ -1055,7 +1059,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1082,7 +1086,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_NAME = "$(TARGET_NAME)";

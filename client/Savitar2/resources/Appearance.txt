@@ -8,4 +8,4 @@ Try out different fonts and colors using the Text menu and/or controls below to 
     /____/\__,_/ |___/_/\__/\__,_/_/
 </code>
 Copyright 1996-2020 Heynow Software, LLC
-<a href="https://heynow.com/Savitar">https://heynow.com/Savitar</a>
+<a href="https://heynow.com/Savitar" title="Savitar website">https://heynow.com/Savitar</a>

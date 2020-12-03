@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: November 18th, 2020
+README last updated: December 2nd, 2020
 
 ## Current state of the application
 
@@ -40,6 +40,7 @@ _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 _ Implement input triggers
 _ Implement audio cue triggers
 _ Implement reply triggers
+_ Implement next gen startup commands (trigger based)
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view
 √ Implement Trigger Audio Cue tab view
@@ -52,24 +53,29 @@ _ Implement remaining local commands
 _ Implement scroll locking
 _ Menubar finalized
 √ Text Editing menu items finalized
-_ Logging
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
+_ Release alpha to select testers, start geting feedback
+_ Address key things found in alpha test
 ```
 
 ### start of beta
 
 ```
 _ Move github repo to public
-_ Release alpha to select testers, start geting feedback
+_ start promoting the beta test
 _ Find/Find Next supported
+_ Logging support
 _ Printing supported
 _ Enhanced analytics
 _ ANSI Color Settings window implemented
 _ Macro Clicker
+_ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
-_ Polish
+_ text to emoji support
+_ divider status bar support
+_ Polish, address beta test issues
 ```
 
 ### Post first release
@@ -114,21 +120,21 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     133 text files.
-     129 unique files.                                          
+     134 text files.
+     130 unique files.                                          
       30 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.15 s (722.4 files/s, 83335.7 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.14 s (765.0 files/s, 89535.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           92           1402           1057           6491
-XML                              9              0             31           3019
-Markdown                         2             31              0            106
+Swift                           93           1414           1068           6600
+XML                              9              0             31           3177
+Markdown                         2             31              0            112
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           106           1437           1096           9695
+SUM:                           107           1449           1107           9968
 -------------------------------------------------------------------------------
 ```

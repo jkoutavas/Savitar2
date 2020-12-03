@@ -49,6 +49,9 @@ class World: SavitarObject, NSCopying {
     var port: UInt32 = 1337
     var host = "::1"
 
+    var logonCmd = ""
+    var logoffCmd = ""
+
     var cmdMarker = "##"
     var varMarker = "%%"
     var wildMarker = "$$"
@@ -113,6 +116,8 @@ class World: SavitarObject, NSCopying {
         self.flushTicks = world.flushTicks
         self.retrySecs = world.retrySecs
         self.keepAliveMins = world.keepAliveMins
+        self.logonCmd = world.logonCmd
+        self.logoffCmd = world.logoffCmd
     }
 
     override init() {
@@ -132,6 +137,8 @@ class World: SavitarObject, NSCopying {
     //***************************
 
     let TelnetIdentifier = "telnet://"
+    let LogonCmdElemIdentifier = "LOGONCMD"
+    let LogoffCmdElemIdentifier = "LOGOFFCMD"
 
     // These are the <WORLD> XML element attributes
     enum WorldAttribIdentifier: String {
@@ -259,6 +266,9 @@ class World: SavitarObject, NSCopying {
                 guard let size = CGFloat(attribute.value) else { break }
                 MCPFontSize = size
 
+            case WorldAttribIdentifier.logoffCmd.rawValue:
+                logoffCmd = attribute.value
+
             case WorldAttribIdentifier.resolution.rawValue:
                 let parts = attribute.value.components(separatedBy: "x")
                 if parts.count == 3 {
@@ -317,6 +327,14 @@ class World: SavitarObject, NSCopying {
             default:
                 print("skipping world XML attribute \(attribute.key)")
             }
+        }
+
+        if let text = xml[LogonCmdElemIdentifier].text {
+             self.logonCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+        if let text = xml[LogoffCmdElemIdentifier].text {
+             self.logoffCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if case .singleElement = xml[TriggersElemIdentifier] {
@@ -397,6 +415,15 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.retrySecs.rawValue, stringValue: String(retrySecs))
 
         worldElem.addAttribute(name: WorldAttribIdentifier.keepAliveMins.rawValue, stringValue: String(keepAliveMins))
+
+        if self.logonCmd.count > 0 {
+            worldElem.addChild(XMLElement.init(name: LogonCmdElemIdentifier, stringValue:
+                self.logonCmd))
+        }
+
+        if self.logoffCmd.count > 0 {
+            worldElem.addChild(XMLElement.init(name: LogoffCmdElemIdentifier, stringValue: self.logoffCmd))
+        }
 
         let triggersElem = try triggerMan.toXMLElement()
         if triggersElem.childCount > 0 {

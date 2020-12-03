@@ -195,7 +195,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     }
 
     func saveCmd() -> Bool {
-        var newCmd: Command! = textToCmd()
+        let newCmd: Command! = textToCmd()
 
         // Determine if it is really worth saving
         var index = cmdIndex < cmdBuf.count ? cmdIndex : cmdIndex - 1

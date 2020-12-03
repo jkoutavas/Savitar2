@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XVw-G3-IPJ">
     <dependencies>
-        <deployment identifier="macosx"/>
+        <deployment version="101300" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                         <rect key="contentRect" x="294" y="362" width="900" height="400"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
                         <value key="minSize" type="size" width="900" height="400"/>
-                        <value key="maxSize" type="size" width="800" height="400"/>
+                        <value key="maxSize" type="size" width="900" height="400"/>
                         <connections>
                             <outlet property="delegate" destination="XVw-G3-IPJ" id="P5W-jF-wla"/>
                         </connections>
@@ -172,14 +172,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="PCe-Bo-jnY">
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="zxZ-vx-nke"/>
+                                    <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="muy-gO-ser">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="zxZ-vx-nke"/>
                                 </connections>
                             </textField>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AbX-pi-qyO">
@@ -316,10 +317,11 @@
                                         <connections>
                                             <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="7Dj-jF-lXI"/>
                                             <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="7Dj-jF-lXI" id="LAJ-NP-NE0"/>
-                                            <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="LRV-sn-bia">
+                                            <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.value" id="3s6-uL-2ps">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                                     <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                     <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                                 </dictionary>
                                             </binding>
@@ -334,15 +336,16 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="dU7-vc-I0b">
+                                            <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="rcr-0w-OOh" id="diy-zq-gHp"/>
+                                            <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="rcr-0w-OOh"/>
+                                            <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="f4U-pO-1AE">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                                     <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                     <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="rcr-0w-OOh" id="diy-zq-gHp"/>
-                                            <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="rcr-0w-OOh"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -465,10 +468,11 @@
                                         </dictionary>
                                     </binding>
                                     <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useWordEnding" id="OsN-mm-0bg"/>
-                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="l7a-5d-bZU">
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.wordEnding" id="WEa-MV-A2f">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
@@ -504,14 +508,15 @@
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="epg-Xd-jSa">
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
+                                    <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="uqB-9o-RwU">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -1343,8 +1348,12 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u43-3v-IaC" name="value" keyPath="representedObject.replyText" id="sz3-l9-AJh"/>
                                     <binding destination="u43-3v-IaC" name="enabled" keyPath="representedObject.storeIsPresent" id="O7d-eS-4rC"/>
+                                    <binding destination="u43-3v-IaC" name="value" keyPath="representedObject.replyText" id="XwP-ZB-55d">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </textField>
                         </subviews>

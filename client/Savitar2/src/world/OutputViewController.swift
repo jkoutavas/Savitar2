@@ -9,9 +9,9 @@
 import Cocoa
 import WebKit
 
-class OutputViewController: NSViewController {
-    var makeAppend = false
-    var lastAppendID = 0
+class OutputViewController: OutputViewNavigationDelegate {
+    private var makeAppend = false
+    private var lastAppendID = 0
 
     lazy var outputView: OutputView = {
 
@@ -31,6 +31,7 @@ class OutputViewController: NSViewController {
 
         let outputView = OutputView(frame: .zero, configuration: webViewConfig)
         outputView.translatesAutoresizingMaskIntoConstraints = false
+        outputView.navigationDelegate = self
 
         return outputView
     }()

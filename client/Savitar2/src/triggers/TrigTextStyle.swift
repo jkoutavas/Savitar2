@@ -145,21 +145,25 @@ struct TrigTextStyle: Equatable {
     }
 
     mutating func formOnOff() {
-        if let face = self.face, let foreColor = self.foreColor, let backColor = self.backColor {
-            let faceOn = face.formOnANSICode()
-            let faceOff = face.formOffANSICode()
+        var codesOn = ""
+        var codesOff = ""
 
-            let fgColorOn = face.contains(.foreColor) ? foreColor.formOnFGColorANSICode() : ""
-            let fgColorOff = face.contains(.foreColor) ? foreColor.formOffFGColorANSICode() : ""
+        if let face = self.face {
+            codesOn = face.formOnANSICode()
+            codesOff = face.formOffANSICode()
 
-            let bgColorOn = face.contains(.backColor) ? backColor.formOnBGColorANSICode() : ""
-            let bgColorOff = face.contains(.backColor) ? backColor.formOffBGColorANSICode() : ""
+            if face.contains(.foreColor), let foreColor = self.foreColor {
+                codesOn += foreColor.formOnFGColorANSICode()
+                codesOff += foreColor.formOffFGColorANSICode()
+            }
 
-            self.on = formEscapeSequence(codes: faceOn + fgColorOn + bgColorOn)
-            self.off = formEscapeSequence(codes: faceOff + fgColorOff + bgColorOff)
-        } else {
-            self.on = ""
-            self.off = ""
+            if face.contains(.backColor), let backColor = self.backColor {
+                codesOn += backColor.formOnBGColorANSICode()
+                codesOff += backColor.formOffBGColorANSICode()
+            }
         }
+
+        self.on = formEscapeSequence(codes: codesOn)
+        self.off = formEscapeSequence(codes: codesOff)
     }
 }

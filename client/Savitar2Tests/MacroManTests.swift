@@ -15,6 +15,7 @@ class VariableManTests: XCTestCase {
 
     func testMacros() throws {
         // These are the macros lifted directly from StarupPreferences.xml
+        // swiftlint:disable line_length
         let xmlString = """
         <!DOCTYPE doc [
             <!ENTITY ret "&#38;#13;">
