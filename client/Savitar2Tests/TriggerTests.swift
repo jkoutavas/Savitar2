@@ -333,7 +333,8 @@ class TriggerTests: XCTestCase {
         let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
 
         // v2 XML
-        // Here we're expecting that "FLAG"="foreColor" does not get generated. That's because there's a "useFore" in the v1 text XML
+        // Here we're expecting that "FLAG"="foreColor" does not get generated. That's because there's a "useFore"
+        // in the v1 text XML
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>

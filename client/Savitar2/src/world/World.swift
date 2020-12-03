@@ -266,7 +266,7 @@ class World: SavitarObject, NSCopying {
                 guard let size = CGFloat(attribute.value) else { break }
                 MCPFontSize = size
 
-             case WorldAttribIdentifier.logoffCmd.rawValue:
+            case WorldAttribIdentifier.logoffCmd.rawValue:
                 logoffCmd = attribute.value
 
             case WorldAttribIdentifier.resolution.rawValue:

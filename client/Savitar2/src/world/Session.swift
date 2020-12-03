@@ -27,8 +27,8 @@ class Session: NSObject, StreamDelegate {
         didSet { sessionHandler.connectionStatusChanged(status: status) }
     }
 
-    let captureReads = true
-    var captureURL : URL?
+    let captureReads = false // set to true for debugging
+    var captureURL: URL?
 
     var world: World
     let sessionHandler: SessionHandlerProtocol
@@ -278,7 +278,8 @@ class Session: NSObject, StreamDelegate {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
                     let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
-//                    self?.logger.info("\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
+//                    self?.logger.info(
+//                      "\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
                     if let url = self?.captureURL {
                         do {
                             try debugStr.write(to: url, atomically: false, encoding: .utf8)

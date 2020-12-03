@@ -345,7 +345,7 @@ struct Ansi2HtmlParser {
     }
 
     private func updateColorState(momelem: inout Int, elems: [Selem], state: inout State, negative inNegative: Bool,
-                          fc: Bool) {
+                                  fc: Bool) {
         let val1 = fc ? 38 : 48
         let colorOffset = fc ? 30 : 40
         let negative = fc ? !inNegative : inNegative

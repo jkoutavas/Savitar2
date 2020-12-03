@@ -101,7 +101,8 @@ extension UndoCommand {
 }
 
 func undoMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
-    func undoAction(action: UndoableAction, state: ReactionsState, dispatch: @escaping DispatchFunction) -> UndoCommand? {
+    func undoAction(action: UndoableAction, state: ReactionsState,
+                    dispatch: @escaping DispatchFunction) -> UndoCommand? {
         let context = UndoableStateAdapter(reactionsState: state)
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
