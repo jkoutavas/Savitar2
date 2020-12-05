@@ -15,9 +15,40 @@ protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
-struct ItemListState<T>: StateType {
+struct MoveTriggerAction: UndoableAction, ReactionAction {
+    let from: Int
+    let to: Int
+
+    init(from: Int, to: Int) {
+        self.from = from
+        self.to = to
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.triggerList.moveItems(from: from, to: to)
+        return result
+    }
+
+    var name: String { return "Move Trigger" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context _: UndoActionContext) -> UndoableAction? {
+        let movedDown = to > from
+        let inversedFrom = movedDown ? to - 1 : to
+        let inversedTo = movedDown ? from : from + 1
+
+        return MoveTriggerAction(from: inversedFrom, to: inversedTo)
+    }
+}
+
+struct ItemListState<T: Equatable>: StateType {
     var items: [T] = []
     var selection: SelectionState = nil
+
+    mutating func moveItems(from: Int, to: Int) {
+        items.move(from: from, to: to)
+    }
 
     func indexOf(objectID: SavitarObjectID) -> Int? {
         // swiftlint:disable force_cast

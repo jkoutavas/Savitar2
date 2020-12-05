@@ -200,9 +200,13 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(worldsElem)
         }
 
-        let triggersElem = try triggerMan.toXMLElement()
-        if triggersElem.childCount > 0 {
-            prefsElem.addChild(triggersElem)
+        // reset triggerMan based on current global state.
+        if let triggers = globalStore.state?.triggerList.items {
+            triggerMan = TriggerMan(triggers)
+            let triggersElem = try triggerMan.toXMLElement()
+            if triggersElem.childCount > 0 {
+                prefsElem.addChild(triggersElem)
+            }
         }
 
         let macrosElem = try macroMan.toXMLElement()

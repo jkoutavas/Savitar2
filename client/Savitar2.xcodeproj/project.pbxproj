@@ -84,6 +84,7 @@
 		69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
+		69C49DD2257B350200E7A16C /* SavitarObjectPasteboardWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C49DD1257B350100E7A16C /* SavitarObjectPasteboardWriter.swift */; };
 		69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDC823B27BCD00E9F087 /* Macro.swift */; };
 		69CEEDCD23B3967300E9F087 /* MacroMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCC23B3967300E9F087 /* MacroMan.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -220,6 +221,7 @@
 		69BE3EAB24F894460035CF88 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
+		69C49DD1257B350100E7A16C /* SavitarObjectPasteboardWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarObjectPasteboardWriter.swift; sourceTree = "<group>"; };
 		69CEEDC823B27BCD00E9F087 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		69CEEDCC23B3967300E9F087 /* MacroMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroMan.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				690B462623B0063F000445E4 /* ModelManager.swift */,
 				69CEEDE723C2C48C00E9F087 /* SavitarObject.swift */,
 				69CEEDF423D9382F00E9F087 /* SavitarObjectId.swift */,
+				69C49DD1257B350100E7A16C /* SavitarObjectPasteboardWriter.swift */,
 				69FC914823A0789600980CBF /* SavitarXMLProtocol.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69CEEDD223B4001E00E9F087 /* colors */,
@@ -823,6 +826,7 @@
 				69000EDC23942523009976E0 /* Trigger.swift in Sources */,
 				69BE3EAC24F894460035CF88 /* ConnectionStatusViewController.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
+				69C49DD2257B350200E7A16C /* SavitarObjectPasteboardWriter.swift in Sources */,
 				69FC914923A0789600980CBF /* SavitarXMLProtocol.swift in Sources */,
 				69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */,
 				696F774A2390D2D2005E45EB /* OutputViewController.swift in Sources */,

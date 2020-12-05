@@ -36,6 +36,7 @@ class TriggersTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+        tableView.registerForDraggedTypes([.trigger, .tableViewIndex])
     }
 
     override func viewWillAppear() {

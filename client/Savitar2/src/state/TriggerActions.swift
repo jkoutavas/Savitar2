@@ -65,8 +65,8 @@ enum TriggerAction: UndoableAction {
 
     var name: String {
         switch self {
-        case .enable: return "Enable Trigger"
         case .disable: return "Disable Trigger"
+        case .enable: return "Enable Trigger"
         case .rename: return "Rename Trigger"
         case .setAppearance: return "Change Trigger Appearance Type"
         case .setAudioType: return "Change Trigger Audio Type"
@@ -164,7 +164,6 @@ enum TriggerAction: UndoableAction {
 
         case let .toggleUseSubstitution(triggerID):
             return TriggerAction.toggleUseSubstitution(triggerID)
-
         }
     }
 }
