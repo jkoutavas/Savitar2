@@ -25,6 +25,7 @@
 		691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B52453EA700057DD34 /* TriggersTabController.swift */; };
 		691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */; };
 		69376D4D256DE4CC00A99245 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */; };
+		69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4E2579B01A00A99245 /* Collection+Extensions.swift */; };
 		693944E62466245F00931FA8 /* MacrosTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E52466245E00931FA8 /* MacrosTabController.swift */; };
 		693944E82466248C00931FA8 /* EventsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E72466248C00931FA8 /* EventsTabController.swift */; };
 		693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* MacroTableDataSource.swift */; };
@@ -153,6 +154,7 @@
 		691963B52453EA700057DD34 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
 		691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
 		69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
+		69376D4E2579B01A00A99245 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		693944E52466245E00931FA8 /* MacrosTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosTabController.swift; sourceTree = "<group>"; };
 		693944E72466248C00931FA8 /* EventsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabController.swift; sourceTree = "<group>"; };
 		693944E924662F3F00931FA8 /* MacroTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTableDataSource.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 			children = (
 				69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */,
 				69F620E0204B872400301A8D /* CGFloat+Extensions.swift */,
+				69376D4E2579B01A00A99245 /* Collection+Extensions.swift */,
 				6991F4632393245B00E2BFDB /* Data+Extensions.swift */,
 				69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */,
 				69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */,
@@ -802,6 +805,7 @@
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
 				69B5D58324B559B0002BBF5C /* Keycode.swift in Sources */,
 				698667D624EC02630061AA86 /* TriggerReplyViewController.swift in Sources */,
+				69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */,
 				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
 				6991F4622393113700E2BFDB /* TelnetParser.swift in Sources */,
 				69CEEDC923B27BCD00E9F087 /* Macro.swift in Sources */,
