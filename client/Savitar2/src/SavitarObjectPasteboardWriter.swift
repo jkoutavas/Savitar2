@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class TriggerPasteboardWriter: NSObject, NSPasteboardWriting {
+class SavitarObjectPasteboardWriter: NSObject, NSPasteboardWriting {
     var object: SavitarObject
     var index: Int
 
