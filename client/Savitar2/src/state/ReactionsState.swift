@@ -15,6 +15,33 @@ protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
+struct MoveMacroAction: UndoableAction, ReactionAction {
+    let from: Int
+    let to: Int
+
+    init(from: Int, to: Int) {
+        self.from = from
+        self.to = to
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.macroList.moveItems(from: from, to: to)
+        return result
+    }
+
+    var name: String { return "Move Macro" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context _: UndoActionContext) -> UndoableAction? {
+        let movedDown = to > from
+        let inversedFrom = movedDown ? to - 1 : to
+        let inversedTo = movedDown ? from : from + 1
+
+        return MoveMacroAction(from: inversedFrom, to: inversedTo)
+    }
+}
+
 struct MoveTriggerAction: UndoableAction, ReactionAction {
     let from: Int
     let to: Int

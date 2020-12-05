@@ -209,9 +209,13 @@ class AppPreferences: SavitarXMLProtocol {
             }
         }
 
-        let macrosElem = try macroMan.toXMLElement()
-        if macrosElem.childCount > 0 {
-            prefsElem.addChild(macrosElem)
+        // reset macroMan based on current global state.
+        if let macros = globalStore.state?.macroList.items {
+            macroMan = MacroMan(macros)
+            let macrosElem = try macroMan.toXMLElement()
+            if macrosElem.childCount > 0 {
+                prefsElem.addChild(macrosElem)
+            }
         }
 
         let colorsElem = try colorMan.toXMLElement()

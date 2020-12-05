@@ -36,6 +36,7 @@ class MacrosTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+        tableView.registerForDraggedTypes([.macro, .tableViewIndex])
     }
 
     override func viewWillAppear() {
