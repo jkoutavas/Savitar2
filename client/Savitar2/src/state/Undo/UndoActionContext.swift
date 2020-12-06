@@ -28,4 +28,8 @@ protocol UndoActionContext {
     func triggerVoice(triggerID: SavitarObjectID) -> String?
     func triggerWordEnding(triggerID: SavitarObjectID) -> String?
     func triggerName(triggerID: SavitarObjectID) -> String?
+
+    func triggerListContext(triggerID: SavitarObjectID) -> TriggerListContext?
 }
+
+typealias TriggerListContext = (trigger: Trigger, index: Int)

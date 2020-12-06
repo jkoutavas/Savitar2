@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-class EventsViewController: NSTabViewController, NSWindowDelegate {
+class EventsViewController: NSTabViewController, NSWindowDelegate, NSMenuItemValidation {
     var store: ReactionsStore?
     var detailViewController: NSTabViewController?
 
@@ -60,6 +60,24 @@ class EventsViewController: NSTabViewController, NSWindowDelegate {
         if !AppContext.shared.isTerminating {
             AppContext.shared.prefs.flags.remove(.startupEventsWindow)
             AppContext.shared.save()
+        }
+    }
+
+    //**************************************
+    // MARK: - NSMenuItemValidation
+    //**************************************
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(newItem(_:)) {
+            menuItem.title = selectedTabViewItemIndex == 0 ? "New Trigger" : "New Macro"
+        }
+        return true
+    }
+
+    @IBAction func newItem(_: Any) {
+        if selectedTabViewItemIndex == 0 {
+            store?.dispatch(InsertTriggerAction(trigger: Trigger(), atIndex: 0))
+        } else {
         }
     }
 }

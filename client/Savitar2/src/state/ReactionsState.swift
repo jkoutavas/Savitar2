@@ -69,6 +69,51 @@ struct MoveTriggerAction: UndoableAction, ReactionAction {
     }
 }
 
+struct InsertTriggerAction: UndoableAction, ReactionAction {
+    let trigger: Trigger
+    let index: Int
+
+    init(trigger: Trigger, atIndex: Int) {
+        self.trigger = trigger
+        self.index = atIndex
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.triggerList.insertItem(trigger, atIndex: index)
+        return result
+    }
+
+    var name: String { return "New Trigger" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context _: UndoActionContext) -> UndoableAction? {
+        return RemoveTriggerAction(triggerID: trigger.objectID)
+    }
+}
+
+struct RemoveTriggerAction: UndoableAction, ReactionAction {
+    let triggerID: SavitarObjectID
+
+    init(triggerID: SavitarObjectID) {
+        self.triggerID = triggerID
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.triggerList.removeItem(itemID: triggerID)
+        return result
+    }
+
+    var name: String { return "Delete Trigger" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context: UndoActionContext) -> UndoableAction? {
+        guard let ti = context.triggerListContext(triggerID: triggerID) else { return nil }
+        return InsertTriggerAction(trigger: ti.trigger, atIndex: ti.index)
+    }
+}
+
 struct ItemListState<T: Equatable>: StateType {
     var items: [T] = []
     var selection: SelectionState = nil
@@ -83,11 +128,30 @@ struct ItemListState<T: Equatable>: StateType {
         // swiftlint:enable force_cast
     }
 
+    /// Always inserts `item` into the list:
+    ///
+    /// - if `index` exceeds the bounds of the collection it will be appended or prepended;
+    /// - if `index` falls inside these bounds, it will be inserted between existing elements.
+    mutating func insertItem(_ item: T, atIndex index: Int) {
+        if index < 1 {
+            items.insert(item, at: 0)
+        } else if index < items.count {
+            items.insert(item, at: index)
+        } else {
+            items.append(item)
+        }
+    }
+
     func item(objectID: SavitarObjectID) -> T? {
         guard let index = indexOf(objectID: objectID)
             else { return nil }
 
         return items[index]
+    }
+
+    mutating func removeItem(itemID: SavitarObjectID) {
+        guard let index = indexOf(objectID: itemID) else { return }
+        items.remove(at: index)
     }
 }
 
