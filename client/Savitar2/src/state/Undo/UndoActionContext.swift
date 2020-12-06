@@ -9,10 +9,12 @@
 import Cocoa
 
 protocol UndoActionContext {
+    func macroListContext(macroID: SavitarObjectID) -> MacroListContext?
     func macroName(macroID: SavitarObjectID) -> String?
     func macroKey(macroID: SavitarObjectID) -> HotKey?
     func macroValue(macroID: SavitarObjectID) -> String?
 
+    func triggerListContext(triggerID: SavitarObjectID) -> TriggerListContext?
     func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance?
     func triggerAudioType(triggerID: SavitarObjectID) -> TrigAudioType?
     func triggerBackColor(triggerID: SavitarObjectID) -> NSColor?
@@ -28,8 +30,7 @@ protocol UndoActionContext {
     func triggerVoice(triggerID: SavitarObjectID) -> String?
     func triggerWordEnding(triggerID: SavitarObjectID) -> String?
     func triggerName(triggerID: SavitarObjectID) -> String?
-
-    func triggerListContext(triggerID: SavitarObjectID) -> TriggerListContext?
 }
 
+typealias MacroListContext = (macro: Macro, index: Int)
 typealias TriggerListContext = (trigger: Trigger, index: Int)

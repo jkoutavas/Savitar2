@@ -15,6 +15,52 @@ protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
+struct InsertMacroAction: UndoableAction, ReactionAction {
+    let macro: Macro
+    let index: Int
+
+    init(macro: Macro, atIndex: Int) {
+        self.macro = macro
+        self.index = atIndex
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.macroList.insertItem(macro, atIndex: index)
+        return result
+    }
+
+    var name: String { return "New Macro" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context _: UndoActionContext) -> UndoableAction? {
+        return RemoveMacroAction(macroID: macro.objectID)
+    }
+}
+
+struct InsertTriggerAction: UndoableAction, ReactionAction {
+    let trigger: Trigger
+    let index: Int
+
+    init(trigger: Trigger, atIndex: Int) {
+        self.trigger = trigger
+        self.index = atIndex
+    }
+
+    func apply(oldState: ReactionsState) -> ReactionsState {
+        var result = oldState
+        result.triggerList.insertItem(trigger, atIndex: index)
+        return result
+    }
+
+    var name: String { return "New Trigger" }
+    var isUndoable: Bool { return true }
+
+    func inverse(context _: UndoActionContext) -> UndoableAction? {
+        return RemoveTriggerAction(triggerID: trigger.objectID)
+    }
+}
+
 struct MoveMacroAction: UndoableAction, ReactionAction {
     let from: Int
     let to: Int
@@ -69,26 +115,25 @@ struct MoveTriggerAction: UndoableAction, ReactionAction {
     }
 }
 
-struct InsertTriggerAction: UndoableAction, ReactionAction {
-    let trigger: Trigger
-    let index: Int
+struct RemoveMacroAction: UndoableAction, ReactionAction {
+    let macroID: SavitarObjectID
 
-    init(trigger: Trigger, atIndex: Int) {
-        self.trigger = trigger
-        self.index = atIndex
+    init(macroID: SavitarObjectID) {
+        self.macroID = macroID
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
-        result.triggerList.insertItem(trigger, atIndex: index)
+        result.macroList.removeItem(itemID: macroID)
         return result
     }
 
-    var name: String { return "New Trigger" }
+    var name: String { return "Delete Macro" }
     var isUndoable: Bool { return true }
 
-    func inverse(context _: UndoActionContext) -> UndoableAction? {
-        return RemoveTriggerAction(triggerID: trigger.objectID)
+    func inverse(context: UndoActionContext) -> UndoableAction? {
+        guard let mlc = context.macroListContext(macroID: macroID) else { return nil }
+        return InsertMacroAction(macro: mlc.macro, atIndex: mlc.index)
     }
 }
 
@@ -109,8 +154,8 @@ struct RemoveTriggerAction: UndoableAction, ReactionAction {
     var isUndoable: Bool { return true }
 
     func inverse(context: UndoActionContext) -> UndoableAction? {
-        guard let ti = context.triggerListContext(triggerID: triggerID) else { return nil }
-        return InsertTriggerAction(trigger: ti.trigger, atIndex: ti.index)
+        guard let tlc = context.triggerListContext(triggerID: triggerID) else { return nil }
+        return InsertTriggerAction(trigger: tlc.trigger, atIndex: tlc.index)
     }
 }
 

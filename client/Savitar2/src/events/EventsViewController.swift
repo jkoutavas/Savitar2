@@ -78,6 +78,7 @@ class EventsViewController: NSTabViewController, NSWindowDelegate, NSMenuItemVal
         if selectedTabViewItemIndex == 0 {
             store?.dispatch(InsertTriggerAction(trigger: Trigger(), atIndex: 0))
         } else {
+            store?.dispatch(InsertMacroAction(macro: Macro(), atIndex: 0))
         }
     }
 }
