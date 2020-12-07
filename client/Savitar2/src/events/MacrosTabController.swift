@@ -22,7 +22,7 @@ protocol MacroTableDataSourceType {
     func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 
-class MacrosTabController: EventsTabController, NSMenuItemValidation {
+class MacrosTabController: EventsTabController {
     private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
     private var selectionIsChanging = false
 
@@ -49,11 +49,9 @@ class MacrosTabController: EventsTabController, NSMenuItemValidation {
 
         store?.unsubscribe(self)
     }
+}
 
-    //**************************************
-    // MARK: - NSMenuItemValidation
-    //**************************************
-
+extension MacrosTabController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(delete(_:)) {
             return dataSource.selectedMacro != nil

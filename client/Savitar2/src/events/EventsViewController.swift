@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-class EventsViewController: NSTabViewController, NSWindowDelegate, NSMenuItemValidation {
+class EventsViewController: NSTabViewController, NSWindowDelegate {
     var store: ReactionsStore?
     var detailViewController: NSTabViewController?
 
@@ -62,11 +62,9 @@ class EventsViewController: NSTabViewController, NSWindowDelegate, NSMenuItemVal
             AppContext.shared.save()
         }
     }
+}
 
-    //**************************************
-    // MARK: - NSMenuItemValidation
-    //**************************************
-
+extension EventsViewController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(newItem(_:)) {
             menuItem.title = selectedTabViewItemIndex == 0 ? "New Trigger" : "New Macro"

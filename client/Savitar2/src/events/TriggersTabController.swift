@@ -22,7 +22,7 @@ protocol TriggerTableDataSourceType {
     func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 
-class TriggersTabController: EventsTabController, NSMenuItemValidation {
+class TriggersTabController: EventsTabController {
     private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
     private var selectionIsChanging = false
 
@@ -49,11 +49,9 @@ class TriggersTabController: EventsTabController, NSMenuItemValidation {
 
         store?.unsubscribe(self)
     }
+}
 
-    //**************************************
-    // MARK: - NSMenuItemValidation
-    //**************************************
-
+extension TriggersTabController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(delete(_:)) {
             return dataSource.selectedTrigger != nil
