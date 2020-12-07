@@ -22,8 +22,7 @@ protocol MacroTableDataSourceType {
     func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 
-class MacrosTabController: EventsTabController {
-
+class MacrosTabController: EventsTabController, NSMenuItemValidation {
     private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
     private var selectionIsChanging = false
 
@@ -49,6 +48,23 @@ class MacrosTabController: EventsTabController {
         super.viewWillDisappear()
 
         store?.unsubscribe(self)
+    }
+
+    //**************************************
+    // MARK: - NSMenuItemValidation
+    //**************************************
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(delete(_:)) {
+            return dataSource.selectedMacro != nil
+        }
+        return true
+    }
+
+    @IBAction func delete(_ sender: AnyObject) {
+        guard let viewModel = dataSource.selectedMacro else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
+        store?.dispatch(RemoveMacroAction(macroID: objID))
     }
 }
 

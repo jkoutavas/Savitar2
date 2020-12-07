@@ -507,11 +507,11 @@
 		69CEEDE023BEDA7900E9F087 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				69B278DA249FA1990058B067 /* DetailsTabViewController.swift */,
 				698576D724C5BC9000B5B370 /* HotKeyEditor.swift */,
 				69B278D6249EA7120058B067 /* EventsSplitViewController.swift */,
 				693944E72466248C00931FA8 /* EventsTabController.swift */,
-				69CEEDE123BEDA7900E9F087 /* EventsWindow.storyboard */,
 				699F5B7B24E72AAF0089C81E /* EventsWindowController.swift */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
 				693944E52466245E00931FA8 /* MacrosTabController.swift */,
