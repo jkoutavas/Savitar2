@@ -42,6 +42,10 @@ class MacrosTabController: EventsTabController {
         super.viewWillAppear()
 
         store?.subscribe(self)
+
+        if let window = view.window {
+            window.makeFirstResponder(view) // useful for selection state
+        }
     }
 
     override func viewWillDisappear() {
