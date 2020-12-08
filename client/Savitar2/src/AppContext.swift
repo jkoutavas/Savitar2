@@ -42,7 +42,7 @@ class AppContext {
     }
 }
 
-class UnioversalEventsWindowDelegate: NSObject, NSWindowDelegate {
+class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
     func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
          return universalStoreUndoManagerProvider.undoManager
      }
