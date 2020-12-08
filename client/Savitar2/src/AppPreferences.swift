@@ -162,11 +162,11 @@ class AppPreferences: SavitarXMLProtocol {
 
         let triggerMan = TriggerMan()
         try triggerMan.parse(xml: xml)
-        globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+        universalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
 
         let macroMan = MacroMan()
         try macroMan.parse(xml: xml)
-        globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
+        universalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
 
         try prefs.colorMan.parse(xml: xml)
     }
@@ -199,7 +199,7 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(worldsElem)
         }
 
-        if let triggers = globalStore.state?.triggerList.items {
+        if let triggers = universalStore.state?.triggerList.items {
             let triggerMan = TriggerMan(triggers)
             let triggersElem = try triggerMan.toXMLElement()
             if triggersElem.childCount > 0 {
@@ -207,7 +207,7 @@ class AppPreferences: SavitarXMLProtocol {
             }
         }
 
-        if let macros = globalStore.state?.macroList.items {
+        if let macros = universalStore.state?.macroList.items {
             let macroMan = MacroMan(macros)
             let macrosElem = try macroMan.toXMLElement()
             if macrosElem.childCount > 0 {

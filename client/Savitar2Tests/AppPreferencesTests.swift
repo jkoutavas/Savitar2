@@ -46,11 +46,11 @@ class AppPreferencesTests: XCTestCase {
     }
 
     func testTriggerMan() {
-        XCTAssertEqual(globalStore.state?.triggerList.items.count, 2)
+        XCTAssertEqual(universalStore.state?.triggerList.items.count, 2)
     }
 
     func testMacroMan() {
-        XCTAssertEqual(globalStore.state?.macroList.items.count, 15)
+        XCTAssertEqual(universalStore.state?.macroList.items.count, 15)
     }
 
     func testColorMan() {

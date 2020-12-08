@@ -52,8 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func showEventsWindowAction(_: Any) {
-        if globalEventsWindowController != nil {
-            globalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+        if universalEventsWindowController != nil {
+            universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
             return
         }
 
@@ -66,11 +66,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        globalEventsWindowController = controller
-        myWindow.delegate = globalEventsWindowDelegate
+        universalEventsWindowController = controller
+        myWindow.delegate = universalEventsWindowDelegate
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            splitViewController.store = globalStore
+            splitViewController.store = universalStore
             controller.showWindow(self)
             AppContext.shared.prefs.flags.insert(.startupEventsWindow)
             AppContext.shared.save()
