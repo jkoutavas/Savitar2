@@ -9,6 +9,8 @@
 import Cocoa
 import ReSwift
 
+var globalEventsWindowController: EventsWindowController?
+var globalEventsWindowDelegate = GlobalEventsWindowDelegate()
 var globalStoreUndoManagerProvider = UndoManagerProvider()
 var globalStore = reactionsStore(undoManagerProvider: { globalStoreUndoManagerProvider.undoManager })
 
@@ -38,4 +40,20 @@ class AppContext {
 
     private init() {
     }
+}
+
+class GlobalEventsWindowDelegate: NSObject, NSWindowDelegate {
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+         return globalStoreUndoManagerProvider.undoManager
+     }
+
+     func windowWillClose(_ notification: Notification) {
+         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
+         // on application termination too.)
+         if !AppContext.shared.isTerminating {
+             AppContext.shared.prefs.flags.remove(.startupEventsWindow)
+             AppContext.shared.save()
+         }
+         globalEventsWindowController = nil
+     }
 }

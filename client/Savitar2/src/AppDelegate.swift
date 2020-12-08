@@ -52,6 +52,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func showEventsWindowAction(_: Any) {
+        if globalEventsWindowController != nil {
+            globalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+            return
+        }
+
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
         guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else {
@@ -60,6 +65,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let myWindow = controller.window else {
             return
         }
+
+        globalEventsWindowController = controller
+        myWindow.delegate = globalEventsWindowDelegate
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             splitViewController.store = globalStore
