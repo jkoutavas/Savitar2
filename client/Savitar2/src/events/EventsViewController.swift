@@ -63,3 +63,20 @@ class EventsViewController: NSTabViewController, NSWindowDelegate {
         }
     }
 }
+
+extension EventsViewController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(newItem(_:)) {
+            menuItem.title = selectedTabViewItemIndex == 0 ? "New Trigger" : "New Macro"
+        }
+        return true
+    }
+
+    @IBAction func newItem(_: Any) {
+        if selectedTabViewItemIndex == 0 {
+            store?.dispatch(InsertTriggerAction(trigger: Trigger(), atIndex: 0))
+        } else {
+            store?.dispatch(InsertMacroAction(macro: Macro(), atIndex: 0))
+        }
+    }
+}

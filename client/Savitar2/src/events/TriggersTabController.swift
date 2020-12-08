@@ -23,7 +23,6 @@ protocol TriggerTableDataSourceType {
 }
 
 class TriggersTabController: EventsTabController {
-
     private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
     private var selectionIsChanging = false
 
@@ -36,18 +35,38 @@ class TriggersTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+        tableView.registerForDraggedTypes([.trigger, .tableViewIndex])
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
         store?.subscribe(self)
+
+        if let window = view.window {
+            window.makeFirstResponder(view) // useful for selection state
+        }
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
         store?.unsubscribe(self)
+    }
+}
+
+extension TriggersTabController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(delete(_:)) {
+            return dataSource.selectedTrigger != nil
+        }
+        return true
+    }
+
+    @IBAction func delete(_ sender: AnyObject) {
+        guard let viewModel = dataSource.selectedTrigger else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
+        store?.dispatch(RemoveTriggerAction(triggerID: objID))
     }
 }
 

@@ -17,6 +17,39 @@ extension TriggerTableDataSource: NSTableViewDataSource {
     func numberOfRows(in _: NSTableView) -> Int {
         return viewModel?.itemCount ?? 0
     }
+
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        guard let viewModel = viewModel?.triggers[safe: row] else { return nil }
+        guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
+        guard let object = store?.state?.triggerList.item(objectID: objID) else { return nil }
+        return SavitarObjectPasteboardWriter(object: object, at: row)
+     }
+
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
+                   proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        if let source = info.draggingSource as? NSTableView, source === tableView {
+            // We're moving an item within the same tableview
+            tableView.draggingDestinationFeedbackStyle = .gap
+            return .move
+        } else {
+            // We're copying an item from another table view
+            tableView.draggingDestinationFeedbackStyle = .regular
+            return .copy
+        }
+    }
+
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int,
+                   dropOperation: NSTableView.DropOperation) -> Bool {
+        guard let items = info.draggingPasteboard.pasteboardItems else { return false }
+
+        let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
+        if !indexes.isEmpty {
+            store?.dispatch(MoveTriggerAction(from: indexes[0], to: row))
+            return true
+        }
+
+        return false
+    }
 }
 
 extension TriggerTableDataSourceType where Self: NSTableViewDataSource {

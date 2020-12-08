@@ -47,8 +47,6 @@ class AppPreferences: SavitarXMLProtocol {
 
     // TODO: these are deprecating
     var worldMan = WorldMan()
-    var triggerMan = TriggerMan()
-    var macroMan = MacroMan()
     var colorMan = ColorMan()
 
     init() {
@@ -69,9 +67,6 @@ class AppPreferences: SavitarXMLProtocol {
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
-
-            globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
-            globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
         } catch {
             // It's okay if loading v2 prefs failed. It simply means Savitar v2 is not installed, or the v2 preferences
             // are corrupt.
@@ -95,9 +90,6 @@ class AppPreferences: SavitarXMLProtocol {
             let xml = try XML.parse(xmlStr)
             try parse(xml: xml[PreferencesElemIdentifier])
             loaded = true
-
-            globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
-            globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
         } catch {
             // It's okay if loading v1 prefs failed. It simply means Savitar v1 is not installed, or the v1 preferences
             // are corrupt.
@@ -167,8 +159,15 @@ class AppPreferences: SavitarXMLProtocol {
         }
 
         try prefs.worldMan.parse(xml: xml)
-        try prefs.triggerMan.parse(xml: xml)
-        try prefs.macroMan.parse(xml: xml)
+
+        let triggerMan = TriggerMan()
+        try triggerMan.parse(xml: xml)
+        globalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+
+        let macroMan = MacroMan()
+        try macroMan.parse(xml: xml)
+        globalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
+
         try prefs.colorMan.parse(xml: xml)
     }
 
@@ -200,14 +199,20 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(worldsElem)
         }
 
-        let triggersElem = try triggerMan.toXMLElement()
-        if triggersElem.childCount > 0 {
-            prefsElem.addChild(triggersElem)
+        if let triggers = globalStore.state?.triggerList.items {
+            let triggerMan = TriggerMan(triggers)
+            let triggersElem = try triggerMan.toXMLElement()
+            if triggersElem.childCount > 0 {
+                prefsElem.addChild(triggersElem)
+            }
         }
 
-        let macrosElem = try macroMan.toXMLElement()
-        if macrosElem.childCount > 0 {
-            prefsElem.addChild(macrosElem)
+        if let macros = globalStore.state?.macroList.items {
+            let macroMan = MacroMan(macros)
+            let macrosElem = try macroMan.toXMLElement()
+            if macrosElem.childCount > 0 {
+                prefsElem.addChild(macrosElem)
+            }
         }
 
         let colorsElem = try colorMan.toXMLElement()

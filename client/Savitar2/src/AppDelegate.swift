@@ -17,16 +17,19 @@ var isRunningTests: Bool {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+
     func applicationDidFinishLaunching(_: Notification) {
         if isRunningTests {
             return
         }
 
+// TODO: consider re-enabling this
+/*
         MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
             MSAnalytics.self,
             MSCrashes.self
         ])
-
+*/
         do {
             try AppContext.shared.load()
         } catch {}

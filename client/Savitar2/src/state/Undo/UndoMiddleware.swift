@@ -16,6 +16,14 @@ class UndoableStateAdapter: UndoActionContext {
         state = reactionsState
     }
 
+    func macroListContext(macroID: SavitarObjectID) -> MacroListContext? {
+        guard let index = state.macroList.indexOf(objectID: macroID),
+            let macro = state.macroList.item(objectID: macroID)
+        else { return nil }
+
+        return (macro, index)
+    }
+
     func macroName(macroID: SavitarObjectID) -> String? {
         return state.macroList.item(objectID: macroID)?.name
     }
@@ -26,6 +34,14 @@ class UndoableStateAdapter: UndoActionContext {
 
     func macroValue(macroID: SavitarObjectID) -> String? {
         return state.macroList.item(objectID: macroID)?.value
+    }
+
+    func triggerListContext(triggerID: SavitarObjectID) -> TriggerListContext? {
+        guard let index = state.triggerList.indexOf(objectID: triggerID),
+            let trigger = state.triggerList.item(objectID: triggerID)
+        else { return nil }
+
+        return (trigger, index)
     }
 
     func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance? {

@@ -23,7 +23,6 @@ protocol MacroTableDataSourceType {
 }
 
 class MacrosTabController: EventsTabController {
-
     private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
     private var selectionIsChanging = false
 
@@ -36,18 +35,38 @@ class MacrosTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+        tableView.registerForDraggedTypes([.macro, .tableViewIndex])
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
         store?.subscribe(self)
+
+        if let window = view.window {
+            window.makeFirstResponder(view) // useful for selection state
+        }
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
         store?.unsubscribe(self)
+    }
+}
+
+extension MacrosTabController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(delete(_:)) {
+            return dataSource.selectedMacro != nil
+        }
+        return true
+    }
+
+    @IBAction func delete(_ sender: AnyObject) {
+        guard let viewModel = dataSource.selectedMacro else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
+        store?.dispatch(RemoveMacroAction(macroID: objID))
     }
 }
 
