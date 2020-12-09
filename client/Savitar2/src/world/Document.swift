@@ -170,6 +170,14 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         docElem.addAttribute(name: DocumentAttribIdentifier.type.rawValue, stringValue: type)
         docElem.addAttribute(name: DocumentAttribIdentifier.version.rawValue, stringValue: "\(version)")
 
+        if let triggers = store.state?.triggerList.items {
+            world.triggerMan = TriggerMan(triggers)
+        }
+
+        if let macros = store.state?.macroList.items {
+            world.macroMan = MacroMan(macros)
+        }
+
         let worldElem = try world.toXMLElement()
         docElem.addChild(worldElem)
 
