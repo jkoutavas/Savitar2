@@ -167,8 +167,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
             return true
         } else if window == eventsWindowController?.window {
             eventsWindowController = nil
+            return true
         }
 
-        return false
+        return false // this shouldn't ever be reached
     }
 }
