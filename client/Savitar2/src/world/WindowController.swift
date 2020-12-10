@@ -152,6 +152,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
     // MARK: - NSWindowDelegate
     //***************************
 
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+        guard let doc = document as? Document else { return nil }
+        return doc.undoManager
+     }
+
     internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {
             return true
