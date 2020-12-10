@@ -44,16 +44,25 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
 
     case let .setBackColor(triggerID, color: color):
         guard trigger.objectID == triggerID else { return trigger }
+        if trigger.style == nil && color != nil {
+            trigger.style = TrigTextStyle()
+        }
         trigger.style?.backColor = color
         trigger.style?.formOnOff()
 
     case let .setFace(triggerID, face: face):
         guard trigger.objectID == triggerID else { return trigger }
+        if trigger.style == nil && face != nil {
+            trigger.style = TrigTextStyle()
+        }
         trigger.style?.face = face
         trigger.style?.formOnOff()
 
     case let .setForeColor(triggerID, color: color):
         guard trigger.objectID == triggerID else { return trigger }
+        if trigger.style == nil && color != nil {
+            trigger.style = TrigTextStyle()
+        }
         trigger.style?.foreColor = color
         trigger.style?.formOnOff()
 
