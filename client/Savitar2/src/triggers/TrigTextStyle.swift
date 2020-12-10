@@ -39,7 +39,7 @@ extension NSColor {
     }
 
     func formOffFGColorANSICode() -> String {
-        return ";39" // default foreground color
+        return ";39" // reset to default foreground color
     }
 
     func formOnBGColorANSICode() -> String {
@@ -48,7 +48,7 @@ extension NSColor {
     }
 
     func formOffBGColorANSICode() -> String {
-        return ";49" // default background color
+        return ";49" // reset to default background color
     }
 }
 
@@ -63,6 +63,9 @@ struct TrigFace: OptionSet, Hashable {
     static let inverse = TrigFace(rawValue: 1 << 5) // new with version 2.0
     static let foreColor = TrigFace(rawValue: 1 << 6) // new with version 2.0
     static let backColor = TrigFace(rawValue: 1 << 7) // new with version 2.0
+
+    static let defaultBackColor = NSColor.black
+    static let defaultForeColor = NSColor.white
 
     private func formANSICodes(dict: [TrigFace: Int]) -> String {
         var result = ""

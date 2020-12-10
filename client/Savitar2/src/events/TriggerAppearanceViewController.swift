@@ -85,7 +85,7 @@ class TriggerAppearanceController: NSController {
     var faceDescription: String
 
     @objc dynamic var backColorColor: NSColor {
-        return trigger.style?.backColor ?? NSColor.black
+        return trigger.style?.backColor ?? TrigFace.defaultBackColor
         // For unknown reasons, this setter doesn't get called. Have to use the backColorChanged outlet as a workaround
         //        set { store?.dispatch(TriggerAction.setBackColor(trigger.objectID, color: newValue)) }
     }
@@ -96,7 +96,7 @@ class TriggerAppearanceController: NSController {
     }
 
     @objc dynamic var foreColorColor: NSColor {
-        return trigger.style?.foreColor ?? NSColor.white
+        return trigger.style?.foreColor ?? TrigFace.defaultForeColor
         // For unknown reasons, this setter doesn't get called. Have to use the foreColorChanged outlet as a workaround
         //       set { store?.dispatch(TriggerAction.setForeColor(trigger.objectID, color: newValue)) }
     }

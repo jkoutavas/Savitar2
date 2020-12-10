@@ -16,12 +16,21 @@ enum TrigAppearance {
     case dontUseStyle
     case changeAppearance
 }
-
+extension TrigAppearance {
+    init() {
+        self = .dontUseStyle
+    }
+}
 enum TrigAudioType {
     case silent
     case sound
     case speakEvent
     case sayText
+}
+extension TrigAudioType {
+    init() {
+        self = .silent
+    }
 }
 
 enum TrigMatching {
@@ -29,17 +38,32 @@ enum TrigMatching {
     case wholeLine
     case wholeWord
 }
+extension TrigMatching {
+    init() {
+        self = .exact
+    }
+}
 
 enum TrigSpecifier {
     case startsWith
     case lineContains
     case useRegex
 }
+extension TrigSpecifier {
+    init() {
+        self = .lineContains
+    }
+}
 
 enum TrigType {
     case input
     case output
     case both
+}
+extension TrigType {
+    init() {
+        self = .output
+    }
 }
 
 struct TrigFlags: OptionSet {
