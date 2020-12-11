@@ -11,6 +11,7 @@ import Cocoa
 class WindowController: NSWindowController, NSWindowDelegate {
     internal var reallyClosing = false
     private var eventsWindowController: EventsWindowController?
+    private var windowTitle = ""
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -34,7 +35,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
         if !doc.world.editable {
             status = " [READ ONLY]"
         }
-        return components[0] + status
+
+        windowTitle = components[0] + status
+        return windowTitle
     }
 
     @IBAction func showWorldEvents(_ sender: Any) {
@@ -51,6 +54,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let myWindow = controller.window else {
             return
         }
+        myWindow.title = "\(windowTitle) - \(myWindow.title)"
         myWindow.delegate = self
         eventsWindowController = controller
 
