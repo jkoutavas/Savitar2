@@ -23,7 +23,7 @@ extension MacroTableDataSource: NSTableViewDataSource {
         guard let viewModel = viewModel?.macros[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.macroList.item(objectID: objID) else { return nil }
-        return SavitarObjectPasteboardWriter(object: object, at: row)
+        return MacroPasteboardWriter(object: object, at: row)
      }
 
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,

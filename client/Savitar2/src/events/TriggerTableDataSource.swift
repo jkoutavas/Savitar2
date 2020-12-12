@@ -23,7 +23,7 @@ extension TriggerTableDataSource: NSTableViewDataSource {
         guard let viewModel = viewModel?.triggers[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.triggerList.item(objectID: objID) else { return nil }
-        return SavitarObjectPasteboardWriter(object: object, at: row)
+        return TriggerPasteboardWriter(object: object, at: row)
      }
 
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
