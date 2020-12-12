@@ -47,7 +47,7 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionStoreSette
 
     func newState(state: ReactionsState) {
         self.macros = state.macroList.items
-        if let index = state.macroList.selection {
+        if let index = state.macroList.selection, index < state.macroList.items.count {
             let macro = state.macroList.items[index]
             self.macro = macro
             self.representedObject = MacroController(macro: macro, store: store)

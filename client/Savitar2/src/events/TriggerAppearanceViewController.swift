@@ -61,7 +61,7 @@ class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
     }
 
     func newState(state: ReactionsState) {
-        if let index = state.triggerList.selection {
+        if let index = state.triggerList.selection, index < state.triggerList.items.count {
             let trigger = state.triggerList.items[index]
             self.trigger = trigger
             switch trigger.appearance {
