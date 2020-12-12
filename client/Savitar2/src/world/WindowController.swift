@@ -10,7 +10,7 @@ import Cocoa
 
 class WindowController: NSWindowController, NSWindowDelegate {
     internal var reallyClosing = false
-    private var eventsWindowController: EventsWindowController?
+    private var eventsWindowController: NSWindowController?
     private var windowTitle = ""
 
     override func windowDidLoad() {
@@ -48,14 +48,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else {
-            return
-        }
-        guard let myWindow = controller.window else {
-            return
-        }
+        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
+        guard let myWindow = controller.window else { return }
         myWindow.title = "\(windowTitle) - \(myWindow.title)"
         myWindow.delegate = self
+        controller.windowFrameAutosaveName = "EventsWindowFrame - \(windowTitle)"
         eventsWindowController = controller
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {

@@ -59,18 +59,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else {
-            return
-        }
-        guard let myWindow = controller.window else {
-            return
-        }
+        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
+        guard let myWindow = controller.window else { return }
 
         universalEventsWindowController = controller
         myWindow.delegate = universalEventsWindowDelegate
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             splitViewController.store = universalStore
+            controller.windowFrameAutosaveName = "EventsWindowFrame"
             controller.showWindow(self)
             AppContext.shared.prefs.flags.insert(.startupEventsWindow)
             AppContext.shared.save()

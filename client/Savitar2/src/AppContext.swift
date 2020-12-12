@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-var universalEventsWindowController: EventsWindowController?
+var universalEventsWindowController: NSWindowController?
 var universalEventsWindowDelegate = UniversalEventsWindowDelegate()
 var universalStoreUndoManagerProvider = UndoManagerProvider()
 var universalStore = reactionsStore(undoManagerProvider: { universalStoreUndoManagerProvider.undoManager })
