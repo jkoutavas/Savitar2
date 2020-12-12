@@ -10,6 +10,8 @@ import Cocoa
 
 class WindowController: NSWindowController, NSWindowDelegate {
     internal var reallyClosing = false
+    private var eventsWindowController: NSWindowController?
+    private var windowTitle = ""
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -33,29 +35,31 @@ class WindowController: NSWindowController, NSWindowDelegate {
         if !doc.world.editable {
             status = " [READ ONLY]"
         }
-        return components[0] + status
+
+        windowTitle = components[0] + status
+        return windowTitle
     }
 
     @IBAction func showWorldEvents(_ sender: Any) {
+        if eventsWindowController != nil {
+            eventsWindowController?.window?.makeKeyAndOrderFront(self)
+            return
+        }
+
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else {
-            return
-        }
-        guard let myWindow = controller.window else {
-            return
-        }
-        NSApp.activate(ignoringOtherApps: true)
-        let vc = NSWindowController(window: myWindow)
+        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
+        guard let myWindow = controller.window else { return }
+        myWindow.title = "\(windowTitle) - \(myWindow.title)"
+        myWindow.delegate = self
+        controller.windowFrameAutosaveName = "EventsWindowFrame - \(windowTitle)"
+        eventsWindowController = controller
 
-        if let eventsController = myWindow.contentViewController as? EventsViewController {
+        if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
             guard let doc = document as? Document else { return }
-            controller.document = doc
-            eventsController.store = doc.store
-
-            vc.showWindow(self)
+            splitViewController.store = doc.store
+            controller.showWindow(self)
         }
-        myWindow.makeKeyAndOrderFront(self)
     }
 
     @IBAction func clearOutputAction(_: Any) {
@@ -149,16 +153,29 @@ class WindowController: NSWindowController, NSWindowDelegate {
     // MARK: - NSWindowDelegate
     //***************************
 
-    internal func windowShouldClose(_: NSWindow) -> Bool {
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+        guard let doc = document as? Document else { return nil }
+        return doc.undoManager
+     }
+
+    internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {
             return true
         }
-        guard let doc = document as? Document else { return true }
-        guard let session = doc.session else { return true }
-        if session.status == .ConnectComplete {
-            session.close()
-            return false
+
+        if window == self.window {
+            guard let doc = document as? Document else { return true }
+            guard let session = doc.session else { return true }
+            if session.status == .ConnectComplete {
+                session.close()
+                return false
+            }
+            return true
+        } else if window == eventsWindowController?.window {
+            eventsWindowController = nil
+            return true
         }
-        return true
+
+        return false // this shouldn't ever be reached
     }
 }

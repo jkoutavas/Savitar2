@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftyXMLParser
 
 class MacroTableDataSource: NSObject, ReactionStoreSetter {
     var viewModel: MacrosViewModel?
@@ -22,7 +23,7 @@ extension MacroTableDataSource: NSTableViewDataSource {
         guard let viewModel = viewModel?.macros[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.macroList.item(objectID: objID) else { return nil }
-        return SavitarObjectPasteboardWriter(object: object, at: row)
+        return MacroPasteboardWriter(object: object, at: row)
      }
 
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
@@ -42,12 +43,32 @@ extension MacroTableDataSource: NSTableViewDataSource {
                    dropOperation: NSTableView.DropOperation) -> Bool {
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
-        let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
-        if !indexes.isEmpty {
-            store?.dispatch(MoveMacroAction(from: indexes[0], to: row))
-            return true
+        if let source = info.draggingSource as? NSTableView, source === tableView {
+            // We're moving an item within the same tableview
+            let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
+            if !indexes.isEmpty {
+                store?.dispatch(MoveMacroAction(from: indexes[0], to: row))
+                return true
+            }
+        } else {
+            // We're copying an item from another table view
+            let macros = items.compactMap { $0.string(forType: .macro) }
+            if !macros.isEmpty {
+                do {
+                    let xml = try XML.parse(macros[0])
+                    let elem = xml[MacroElemIdentifier]
+                    if case .failure = elem {
+                        return false
+                    }
+                    let macro = Macro()
+                    try macro.parse(xml: elem)
+                    store?.dispatch(InsertMacroAction(macro: macro, atIndex: row))
+                    return true
+                } catch {
+                    return false
+                }
+            }
         }
-
         return false
     }
 }

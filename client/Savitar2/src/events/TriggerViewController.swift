@@ -57,7 +57,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSet
     }
 
     func newState(state: ReactionsState) {
-        if let index = state.triggerList.selection {
+        if let index = state.triggerList.selection, index < state.triggerList.items.count {
             let trigger = state.triggerList.items[index]
             self.representedObject = TriggerController(trigger: trigger, store: store)
         } else {

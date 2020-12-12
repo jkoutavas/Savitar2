@@ -18,7 +18,7 @@ class SavitarObjectPasteboardWriter: NSObject, NSPasteboardWriting {
     }
 
     func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
-        return [.macro, .trigger, .tableViewIndex]
+        return []
     }
 
     func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
@@ -52,5 +52,17 @@ extension NSPasteboardItem {
             options: .mutableContainers,
             format: nil)
         return plist as? Int
+    }
+}
+
+class MacroPasteboardWriter: SavitarObjectPasteboardWriter {
+    override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.macro, .tableViewIndex]
+    }
+}
+
+class TriggerPasteboardWriter: SavitarObjectPasteboardWriter {
+    override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.trigger, .tableViewIndex]
     }
 }

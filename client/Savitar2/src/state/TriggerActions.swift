@@ -43,18 +43,18 @@ enum TriggerAction: UndoableAction {
     case rename(SavitarObjectID, name: String)
     case setAppearance(SavitarObjectID, type: TrigAppearance)
     case setAudioType(SavitarObjectID, type: TrigAudioType)
-    case setBackColor(SavitarObjectID, color: NSColor)
-    case setFace(SavitarObjectID, face: TrigFace)
-    case setForeColor(SavitarObjectID, color: NSColor)
+    case setBackColor(SavitarObjectID, color: NSColor?)
+    case setFace(SavitarObjectID, face: TrigFace?)
+    case setForeColor(SavitarObjectID, color: NSColor?)
     case setMatching(SavitarObjectID, matching: TrigMatching)
-    case setReplyText(SavitarObjectID, text: String)
-    case setSayText(SavitarObjectID, text: String)
-    case setSound(SavitarObjectID, name: String)
+    case setReplyText(SavitarObjectID, text: String?)
+    case setSayText(SavitarObjectID, text: String?)
+    case setSound(SavitarObjectID, name: String?)
     case setSpecifier(SavitarObjectID, specifier: TrigSpecifier)
-    case setSubstitution(SavitarObjectID, substitution: String)
+    case setSubstitution(SavitarObjectID, substitution: String?)
     case setType(SavitarObjectID, type: TrigType)
-    case setVoice(SavitarObjectID, name: String)
-    case setWordEnding(SavitarObjectID, wordEnding: String)
+    case setVoice(SavitarObjectID, name: String?)
+    case setWordEnding(SavitarObjectID, wordEnding: String?)
     case toggleCaseSensitive(SavitarObjectID)
     case toggleEchoOutput(SavitarObjectID)
     case toggleUseSubstitution(SavitarObjectID)
@@ -97,64 +97,57 @@ enum TriggerAction: UndoableAction {
             return TriggerAction.disable(triggerID)
 
         case let .rename(triggerID, name: _):
-            guard let prev = context.triggerName(triggerID: triggerID) else { return nil }
-            return TriggerAction.rename(triggerID, name: prev)
+            return TriggerAction.rename(triggerID, name:
+                context.triggerName(triggerID: triggerID) ?? "")
 
         case let .setAppearance(triggerID, type: _):
-            guard let prev = context.triggerAppearance(triggerID: triggerID) else { return nil }
-            return TriggerAction.setAppearance(triggerID, type: prev)
+            return TriggerAction.setAppearance(triggerID, type:
+                context.triggerAppearance(triggerID: triggerID) ?? TrigAppearance())
 
         case let .setAudioType(triggerID, type: _):
-            guard let prev = context.triggerAudioType(triggerID: triggerID) else { return nil }
-            return TriggerAction.setAudioType(triggerID, type: prev)
+            return TriggerAction.setAudioType(triggerID, type:
+                context.triggerAudioType(triggerID: triggerID) ?? TrigAudioType())
 
         case let .setBackColor(triggerID, color: _):
-            guard let prev = context.triggerBackColor(triggerID: triggerID) else { return nil }
-            return TriggerAction.setBackColor(triggerID, color: prev)
+            return TriggerAction.setBackColor(triggerID, color:
+                context.triggerBackColor(triggerID: triggerID) ?? nil)
 
         case let .setFace(triggerID, face: _):
-            guard let prev = context.triggerFace(triggerID: triggerID) else { return nil }
-            return TriggerAction.setFace(triggerID, face: prev)
+            return TriggerAction.setFace(triggerID, face: context.triggerFace(triggerID: triggerID))
 
         case let .setForeColor(triggerID, color: _):
-            guard let prev = context.triggerForeColor(triggerID: triggerID) else { return nil }
-            return TriggerAction.setForeColor(triggerID, color: prev)
+            return TriggerAction.setForeColor(triggerID, color:
+                 context.triggerForeColor(triggerID: triggerID) ?? nil)
 
         case let .setMatching(triggerID, matching: _):
-            guard let prev = context.triggerMatching(triggerID: triggerID) else { return nil }
-            return TriggerAction.setMatching(triggerID, matching: prev)
+            return TriggerAction.setMatching(triggerID, matching:
+                context.triggerMatching(triggerID: triggerID) ?? TrigMatching())
 
         case let .setReplyText(triggerID, text: _):
-            guard let prev = context.triggerReplyText(triggerID: triggerID) else { return nil }
-            return TriggerAction.setReplyText(triggerID, text: prev)
+            return TriggerAction.setReplyText(triggerID, text: context.triggerReplyText(triggerID: triggerID))
 
         case let .setSayText(triggerID, text: _):
-            guard let prev = context.triggerSayText(triggerID: triggerID) else { return nil }
-            return TriggerAction.setSayText(triggerID, text: prev)
+            return TriggerAction.setSayText(triggerID, text: context.triggerSayText(triggerID: triggerID))
 
         case let .setSound(triggerID, name: _):
-            guard let prev = context.triggerSound(triggerID: triggerID) else { return nil }
-            return TriggerAction.setSound(triggerID, name: prev)
+            return TriggerAction.setSound(triggerID, name: context.triggerSound(triggerID: triggerID))
 
         case let .setSpecifier(triggerID, specifier: _):
-            guard let prev = context.triggerSpecifier(triggerID: triggerID) else { return nil }
-            return TriggerAction.setSpecifier(triggerID, specifier: prev)
+            return TriggerAction.setSpecifier(triggerID, specifier:
+                context.triggerSpecifier(triggerID: triggerID) ?? TrigSpecifier())
 
         case let .setSubstitution(triggerID, substitution: _):
-            guard let prev = context.triggerSubstitution(triggerID: triggerID) else { return nil }
-            return TriggerAction.setSubstitution(triggerID, substitution: prev)
+            return TriggerAction.setSubstitution(triggerID, substitution:
+                context.triggerSubstitution(triggerID: triggerID))
 
         case let .setType(triggerID, type: _):
-            guard let prev = context.triggerType(triggerID: triggerID) else { return nil }
-            return TriggerAction.setType(triggerID, type: prev)
+            return TriggerAction.setType(triggerID, type: context.triggerType(triggerID: triggerID) ?? TrigType())
 
         case let .setVoice(triggerID, name: _):
-            guard let prev = context.triggerVoice(triggerID: triggerID) else { return nil }
-            return TriggerAction.setVoice(triggerID, name: prev)
+            return TriggerAction.setVoice(triggerID, name: context.triggerVoice(triggerID: triggerID))
 
         case let .setWordEnding(triggerID, wordEnding: _):
-            guard let prev = context.triggerWordEnding(triggerID: triggerID) else { return nil }
-            return TriggerAction.setWordEnding(triggerID, wordEnding: prev)
+            return TriggerAction.setWordEnding(triggerID, wordEnding: context.triggerWordEnding(triggerID: triggerID))
 
         case let .toggleCaseSensitive(triggerID):
             return TriggerAction.toggleCaseSensitive(triggerID)

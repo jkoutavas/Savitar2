@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftyXMLParser
 
 class TriggerTableDataSource: NSObject, ReactionStoreSetter {
     var viewModel: TriggersViewModel?
@@ -22,7 +23,7 @@ extension TriggerTableDataSource: NSTableViewDataSource {
         guard let viewModel = viewModel?.triggers[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.triggerList.item(objectID: objID) else { return nil }
-        return SavitarObjectPasteboardWriter(object: object, at: row)
+        return TriggerPasteboardWriter(object: object, at: row)
      }
 
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
@@ -42,10 +43,31 @@ extension TriggerTableDataSource: NSTableViewDataSource {
                    dropOperation: NSTableView.DropOperation) -> Bool {
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
-        let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
-        if !indexes.isEmpty {
-            store?.dispatch(MoveTriggerAction(from: indexes[0], to: row))
-            return true
+        if let source = info.draggingSource as? NSTableView, source === tableView {
+            // We're moving an item within the same tableview
+            let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
+            if !indexes.isEmpty {
+                store?.dispatch(MoveTriggerAction(from: indexes[0], to: row))
+                return true
+            }
+        } else {
+            // We're copying an item from another table view
+            let triggers = items.compactMap { $0.string(forType: .trigger) }
+            if !triggers.isEmpty {
+                do {
+                    let xml = try XML.parse(triggers[0])
+                    let elem = xml[TriggerElemIdentifier]
+                    if case .failure = elem {
+                        return false
+                    }
+                    let trigger = Trigger()
+                    try trigger.parse(xml: elem)
+                    store?.dispatch(InsertTriggerAction(trigger: trigger, atIndex: row))
+                    return true
+                } catch {
+                    return false
+                }
+            }
         }
 
         return false

@@ -9,8 +9,10 @@
 import Cocoa
 import ReSwift
 
-var globalStoreUndoManagerProvider = UndoManagerProvider()
-var globalStore = reactionsStore(undoManagerProvider: { globalStoreUndoManagerProvider.undoManager })
+var universalEventsWindowController: NSWindowController?
+var universalEventsWindowDelegate = UniversalEventsWindowDelegate()
+var universalStoreUndoManagerProvider = UndoManagerProvider()
+var universalStore = reactionsStore(undoManagerProvider: { universalStoreUndoManagerProvider.undoManager })
 
 class AppContext {
     static let shared = AppContext()
@@ -25,7 +27,7 @@ class AppContext {
     let reservedKeyList = ["return", "space", "up arrow", "down arrow", "left arrow", "right arrow"]
 
     func load() throws {
-        globalStoreUndoManagerProvider.undoManager = UndoManager()
+        universalStoreUndoManagerProvider.undoManager = UndoManager()
 
         try prefs.load()
     }
@@ -38,4 +40,20 @@ class AppContext {
 
     private init() {
     }
+}
+
+class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
+    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+         return universalStoreUndoManagerProvider.undoManager
+     }
+
+     func windowWillClose(_ notification: Notification) {
+         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
+         // on application termination too.)
+         if !AppContext.shared.isTerminating {
+             AppContext.shared.prefs.flags.remove(.startupEventsWindow)
+             AppContext.shared.save()
+         }
+         universalEventsWindowController = nil
+     }
 }

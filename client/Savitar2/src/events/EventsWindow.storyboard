@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="v7Q-MB-zTA">
             <objects>
-                <windowController id="XVw-G3-IPJ" customClass="EventsWindowController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="XVw-G3-IPJ" sceneMemberID="viewController">
                     <window key="window" title="Events Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PNs-S1-sj8">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -172,7 +172,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="zxZ-vx-nke"/>
                                     <binding destination="vHs-hi-qJN" name="value" keyPath="representedObject.name" id="muy-gO-ser">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -181,6 +180,7 @@
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="vHs-hi-qJN" name="enabled" keyPath="representedObject.storeIsPresent" id="zxZ-vx-nke"/>
                                 </connections>
                             </textField>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="AbX-pi-qyO">
@@ -336,8 +336,6 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="rcr-0w-OOh" id="diy-zq-gHp"/>
-                                            <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="rcr-0w-OOh"/>
                                             <binding destination="IJa-KX-xEG" name="value" keyPath="representedObject.name" id="f4U-pO-1AE">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -346,6 +344,8 @@
                                                     <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                                 </dictionary>
                                             </binding>
+                                            <binding destination="IJa-KX-xEG" name="enabled" keyPath="representedObject.storeIsPresent" previousBinding="rcr-0w-OOh" id="diy-zq-gHp"/>
+                                            <binding destination="IJa-KX-xEG" name="editable" keyPath="representedObject.storeIsPresent" id="rcr-0w-OOh"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -508,7 +508,6 @@
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
                                     <binding destination="XPq-gT-6kf" name="value" keyPath="representedObject.substitution" id="uqB-9o-RwU">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -517,6 +516,7 @@
                                             <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="XPq-gT-6kf" name="enabled" keyPath="representedObject.useSubstitution" id="U1Z-TQ-hCT"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -1033,7 +1033,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1073,7 +1073,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">
@@ -1348,12 +1348,12 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u43-3v-IaC" name="enabled" keyPath="representedObject.storeIsPresent" id="O7d-eS-4rC"/>
                                     <binding destination="u43-3v-IaC" name="value" keyPath="representedObject.replyText" id="XwP-ZB-55d">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="u43-3v-IaC" name="enabled" keyPath="representedObject.storeIsPresent" id="O7d-eS-4rC"/>
                                 </connections>
                             </textField>
                         </subviews>

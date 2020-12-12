@@ -58,7 +58,7 @@ class Session: NSObject, StreamDelegate {
 
     func close() {
         status = .Disconnecting
-        globalStore.unsubscribe(self)
+        universalStore.unsubscribe(self)
         inputStream.close()
         outputStream.close()
         logger.info("closed connection")
@@ -69,7 +69,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     func connectAndRun() {
-        globalStore.subscribe(self)
+        universalStore.subscribe(self)
         AppContext.shared.worldMan.add(world)
 
         didStartupCmd = false

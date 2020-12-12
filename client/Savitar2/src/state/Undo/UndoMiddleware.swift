@@ -45,63 +45,78 @@ class UndoableStateAdapter: UndoActionContext {
     }
 
     func triggerAppearance(triggerID: SavitarObjectID) -> TrigAppearance? {
-        return state.triggerList.item(objectID: triggerID)?.appearance
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.appearance
     }
 
     func triggerAudioType(triggerID: SavitarObjectID) -> TrigAudioType? {
-        return state.triggerList.item(objectID: triggerID)?.audioType
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.audioType
     }
 
     func triggerBackColor(triggerID: SavitarObjectID) -> NSColor? {
-        return state.triggerList.item(objectID: triggerID)?.style?.backColor
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.style?.backColor
     }
 
     func triggerFace(triggerID: SavitarObjectID) -> TrigFace? {
-        return state.triggerList.item(objectID: triggerID)?.style?.face
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.style?.face
     }
 
     func triggerForeColor(triggerID: SavitarObjectID) -> NSColor? {
-        return state.triggerList.item(objectID: triggerID)?.style?.foreColor
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.style?.foreColor
     }
 
     func triggerMatching(triggerID: SavitarObjectID) -> TrigMatching? {
-        return state.triggerList.item(objectID: triggerID)?.matching
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.matching
     }
 
     func triggerName(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.name
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.name
     }
 
     func triggerReplyText(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.reply
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.reply
     }
 
     func triggerSayText(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.say
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.say
     }
 
     func triggerSound(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.sound
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.sound
     }
 
     func triggerSpecifier(triggerID: SavitarObjectID) -> TrigSpecifier? {
-        return state.triggerList.item(objectID: triggerID)?.specifier
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.specifier
     }
 
     func triggerSubstitution(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.substitution
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.substitution
     }
 
     func triggerType(triggerID: SavitarObjectID) -> TrigType? {
-        return state.triggerList.item(objectID: triggerID)?.type
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.type
     }
 
     func triggerVoice(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.voice
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.voice
     }
 
     func triggerWordEnding(triggerID: SavitarObjectID) -> String? {
-        return state.triggerList.item(objectID: triggerID)?.wordEnding
+        guard let trigger = state.triggerList.item(objectID: triggerID) else { return nil }
+        return trigger.wordEnding
     }
 }
 

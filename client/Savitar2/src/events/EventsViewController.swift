@@ -9,14 +9,12 @@
 import Cocoa
 import ReSwift
 
-class EventsViewController: NSTabViewController, NSWindowDelegate {
+class EventsViewController: NSTabViewController {
     var store: ReactionsStore?
     var detailViewController: NSTabViewController?
 
     override func viewWillAppear() {
         super.viewWillAppear()
-
-        view.window!.delegate = self
 
         for tabViewItem in tabViewItems {
             if let tabVC = tabViewItem.viewController as? EventsTabController {
@@ -43,23 +41,6 @@ class EventsViewController: NSTabViewController, NSWindowDelegate {
         // Keep the detail tab selection in lock-step with the events tab selection
         if let vc = self.detailViewController {
             vc.selectedTabViewItemIndex = selectedTabViewItemIndex
-        }
-    }
-
-    //***************************
-    // MARK: - NSWindowDelegate
-    //***************************
-
-    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
-        return globalStoreUndoManagerProvider.undoManager
-    }
-
-    func windowWillClose(_ notification: Notification) {
-        // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
-        // on application termination too.)
-        if !AppContext.shared.isTerminating {
-            AppContext.shared.prefs.flags.remove(.startupEventsWindow)
-            AppContext.shared.save()
         }
     }
 }
