@@ -70,10 +70,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func showWorldSetting(_ sender: Any) {
+        let bundle = Bundle(for: Self.self)
+        let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
+
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
-        guard let wc = storyboard?.instantiateController(withIdentifier:
-            NSStoryboard.SceneIdentifier("World Settings Window Controller"))
-            as? NSWindowController else { return }
+        guard let wc = settingsStoryboard.instantiateInitialController() as? NSWindowController else { return }
         guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
         vc.world = doc.world
