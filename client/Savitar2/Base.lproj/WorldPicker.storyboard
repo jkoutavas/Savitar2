@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-3257" y="-11633"/>
         </scene>
-        <!--View Controller-->
+        <!--World Picker Controller-->
         <scene sceneID="piQ-a4-mOt">
             <objects>
-                <viewController id="xdQ-Db-Fg2" sceneMemberID="viewController">
+                <viewController id="xdQ-Db-Fg2" customClass="WorldPickerController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="e5u-ed-our">
                         <rect key="frame" x="0.0" y="0.0" width="344" height="412"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -142,6 +142,9 @@
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="y5D-65-fkx" id="Th7-1q-zDD"/>
+                    </connections>
                 </viewController>
                 <customObject id="i8T-Bm-BeY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

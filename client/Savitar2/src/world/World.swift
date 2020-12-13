@@ -45,9 +45,9 @@ class World: SavitarObject, NSCopying {
     // KVO-based world settings with their defaults
     @objc dynamic var editable = true
 
-    // TODO: just some hard-coded connection settings right now
-    var port: UInt32 = 1337
-    var host = "::1"
+    // the Savitar 1 defaults for a new world port and host
+    var port: UInt32 = 7777
+    var host = "newworld@somewhere.org"
 
     var logonCmd = ""
     var logoffCmd = ""
