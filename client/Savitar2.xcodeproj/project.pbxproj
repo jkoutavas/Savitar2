@@ -43,6 +43,7 @@
 		695484B51FC4E6E400A6983F /* Savitar2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695484B41FC4E6E400A6983F /* Savitar2Tests.swift */; };
 		695F5A4D2585BD8300AB6BA6 /* WorldSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5A4B2585BD8300AB6BA6 /* WorldSettings.storyboard */; };
 		695F5A502585C00100AB6BA6 /* WorldPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5A4E2585C00100AB6BA6 /* WorldPicker.storyboard */; };
+		695F5A592586762F00AB6BA6 /* TitledTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */; };
 		69662B28204367BD00E7CC7B /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SessionViewController.swift */; };
 		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
 		69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */; };
@@ -180,6 +181,7 @@
 		695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Savitar2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		695F5A4C2585BD8300AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldSettings.storyboard; sourceTree = "<group>"; };
 		695F5A4F2585C00100AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldPicker.storyboard; sourceTree = "<group>"; };
+		695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledTableCellView.swift; sourceTree = "<group>"; };
 		69662B1E204367BD00E7CC7B /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHandlerProtocol.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			children = (
 				693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */,
 				693944F4246F7C9E00931FA8 /* CheckBox.swift */,
+				695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
 				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */,
+				695F5A592586762F00AB6BA6 /* TitledTableCellView.swift in Sources */,
 				6968381025562F6C00F0BC20 /* Ansi2HtmlParser.swift in Sources */,
 				69683028239C22550066CC48 /* TrigTextStyle.swift in Sources */,
 				69662B28204367BD00E7CC7B /* SessionViewController.swift in Sources */,

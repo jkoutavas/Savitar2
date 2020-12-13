@@ -8,15 +8,16 @@
 
 import Cocoa
 
-class CheckableItemViewModel: Codable {
-    let identifier: String
+class CheckableItemViewModel: TitledItemViewModel {
     let enabled: Bool
-    let title: String
 
     init(identifier: String, title: String, enabled: Bool) {
-        self.identifier = identifier
-        self.title = title
         self.enabled = enabled
+        super.init(identifier: identifier, title: title)
+    }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }
 
@@ -24,17 +25,12 @@ class CheckableItemViewModel: Codable {
     func checkableItem(identifier: String, didChangeChecked checked: Bool)
 }
 
-class CheckableTableCellView: NSTableCellView {
+class CheckableTableCellView: TitledTableCellView {
     @IBOutlet weak var checkbox: CheckBox!
 
     weak var checkableItemChangeDelegate: CheckableItemChangeDelegate?
 
-    var titleTextField: NSTextField! {
-        get { return textField }
-        set { textField = newValue }
-    }
-
-    var viewModel: CheckableItemViewModel! {
+    override var viewModel: CheckableItemViewModel! {
         didSet {
             titleTextField.stringValue = viewModel.title
             checkbox.checked = viewModel.enabled
