@@ -73,4 +73,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             AppContext.shared.save()
         }
     }
+
+    @IBAction func showWorldPickerAction(_: Any) {
+        if worldPickerController == nil {
+            let bundle = Bundle(for: Self.self)
+            let storyboard = NSStoryboard(name: "WorldPicker", bundle: bundle)
+            guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
+            controller.window!.delegate = WorldPickerWindowDelegate()
+            worldPickerController = controller
+        }
+        worldPickerController?.showWindow(self)
+    }
 }

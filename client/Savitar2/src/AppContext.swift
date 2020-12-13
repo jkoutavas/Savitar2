@@ -13,6 +13,7 @@ var universalEventsWindowController: NSWindowController?
 var universalEventsWindowDelegate = UniversalEventsWindowDelegate()
 var universalStoreUndoManagerProvider = UndoManagerProvider()
 var universalStore = reactionsStore(undoManagerProvider: { universalStoreUndoManagerProvider.undoManager })
+var worldPickerController: NSWindowController?
 
 class AppContext {
     static let shared = AppContext()
@@ -57,3 +58,10 @@ class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
          universalEventsWindowController = nil
      }
 }
+
+class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+          worldPickerController = nil
+    }
+}
+
