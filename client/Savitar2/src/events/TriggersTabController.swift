@@ -16,7 +16,7 @@ protocol TriggerTableDataSourceType {
     var selectedTrigger: TriggerViewModel? { get }
     var triggerCount: Int { get }
 
-    func updateContents(triggersViewModel viewModel: TriggersViewModel)
+    func updateContents(listModel: TriggerListViewModel)
     func getStore() -> ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?)
     func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
@@ -24,6 +24,7 @@ protocol TriggerTableDataSourceType {
 
 class TriggersTabController: EventsTabController {
     private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
+    private var subscriber: TriggersSubscriber<ItemListState<Trigger>>?
     private var selectionIsChanging = false
 
     override func setStore(reactionsStore: ReactionsStore?) {
@@ -36,12 +37,15 @@ class TriggersTabController: EventsTabController {
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
         tableView.registerForDraggedTypes([.trigger, .tableViewIndex])
+        subscriber = TriggersSubscriber<ItemListState<Trigger>>(self)
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        store?.subscribe(self)
+        store?.subscribe(subscriber!) {
+            $0.select { $0.triggerList }
+        }
 
         if let window = view.window {
             window.makeFirstResponder(view) // useful for selection state
@@ -51,7 +55,7 @@ class TriggersTabController: EventsTabController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        store?.unsubscribe(self)
+        store?.unsubscribe(subscriber!)
     }
 }
 
@@ -92,21 +96,21 @@ extension TriggersTabController: NSTableViewDelegate {
 }
 
 extension TriggersTabController {
-    func displayTriggers(triggersViewModel viewModel: TriggersViewModel) {
-        updateTableDataSource(viewModel: viewModel)
+    func displayTriggers(listModel: TriggerListViewModel) {
+        updateTableDataSource(listModel: listModel)
 
         selectionIsChanging = true
-        displaySelection(viewModel: viewModel)
+        displaySelection(listModel: listModel)
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(viewModel: TriggersViewModel) {
-        dataSource.updateContents(triggersViewModel: viewModel)
+    fileprivate func updateTableDataSource(listModel: TriggerListViewModel) {
+        dataSource.updateContents(listModel: listModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(viewModel: TriggersViewModel) {
-        guard let selectedRow = viewModel.selectedRow else {
+    fileprivate func displaySelection(listModel: TriggerListViewModel) {
+        guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return
         }
@@ -115,14 +119,20 @@ extension TriggersTabController {
     }
 }
 
-extension TriggersTabController: StoreSubscriber {
-    func newState(state: ReactionsState) {
-        let triggerViewModels = state.triggerList.items.map(TriggerViewModel.init)
-        let triggersViewModel = TriggersViewModel(
-            triggers: triggerViewModels,
-            selectedRow: state.triggerList.selection
+class TriggersSubscriber<T>: StoreSubscriber {
+    var tableController: TriggersTabController?
+
+    init(_ tableController: TriggersTabController) {
+        self.tableController = tableController
+    }
+
+    func newState(state: ItemListState<Trigger>) {
+        let viewModels = state.items.map(TriggerViewModel.init)
+        let listModel = TriggerListViewModel(
+            viewModels: viewModels,
+            selectedRow: state.selection
         )
 
-        displayTriggers(triggersViewModel: triggersViewModel)
+        tableController?.displayTriggers(listModel: listModel)
     }
 }

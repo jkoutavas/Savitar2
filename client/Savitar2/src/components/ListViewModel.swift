@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct TriggersViewModel {
-    let triggers: [TriggerViewModel]
-    var itemCount: Int { return triggers.count }
+struct ListViewModel<T> {
+    let viewModels: [T]
+    var itemCount: Int { return viewModels.count }
 
     let selectedRow: Int?
-    var selectedTrigger: TriggerViewModel? {
+    var selectedItem: T? {
         guard let selectedRow = selectedRow else { return nil }
-        return triggers[selectedRow]
+        return viewModels[selectedRow]
     }
 }
+

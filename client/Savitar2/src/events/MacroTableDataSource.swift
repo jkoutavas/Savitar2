@@ -9,18 +9,20 @@
 import Cocoa
 import SwiftyXMLParser
 
+typealias MacroListViewModel = ListViewModel<MacroViewModel>
+
 class MacroTableDataSource: NSObject, ReactionStoreSetter {
-    var viewModel: MacrosViewModel?
+    var listModel: MacroListViewModel?
     var store: ReactionsStore?
 }
 
 extension MacroTableDataSource: NSTableViewDataSource {
     func numberOfRows(in _: NSTableView) -> Int {
-        return viewModel?.itemCount ?? 0
+        return listModel?.itemCount ?? 0
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        guard let viewModel = viewModel?.macros[safe: row] else { return nil }
+        guard let viewModel = listModel?.viewModels[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.macroList.item(objectID: objID) else { return nil }
         return MacroPasteboardWriter(object: object, at: row)
@@ -80,9 +82,9 @@ extension MacroTableDataSourceType where Self: NSTableViewDataSource {
 }
 
 extension MacroTableDataSource: MacroTableDataSourceType {
-    var selectedRow: Int? { return viewModel?.selectedRow }
-    var selectedMacro: MacroViewModel? { return viewModel?.selectedMacro }
-    var macroCount: Int { return viewModel?.itemCount ?? 0 }
+    var selectedRow: Int? { return listModel?.selectedRow }
+    var selectedMacro: MacroViewModel? { return listModel?.selectedItem }
+    var macroCount: Int { return listModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -92,8 +94,8 @@ extension MacroTableDataSource: MacroTableDataSourceType {
         store = reactionsStore
     }
 
-    func updateContents(macrosViewModel viewModel: MacrosViewModel) {
-        self.viewModel = viewModel
+    func updateContents(listModel: MacroListViewModel) {
+        self.listModel = listModel
     }
 
     func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -101,25 +103,25 @@ extension MacroTableDataSource: MacroTableDataSourceType {
             guard let textField = cell.textField else { return }
             textField.stringValue = value
         }
-        guard let vViewModel = viewModel?.macros[row] else { return nil }
+        guard let viewModel = listModel?.viewModels[row] else { return nil }
         switch tableColumn {
         case tableView.tableColumns[0]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? CheckableTableCellView else { return nil }
             cell.checkableItemChangeDelegate = self
-            cell.viewModel = vViewModel
+            cell.viewModel = viewModel
             return cell
 
         case tableView.tableColumns[1]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
-            setTextField(cell, vViewModel.hotKey)
+            setTextField(cell, viewModel.hotKey)
             return cell
 
         case tableView.tableColumns[2]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
-            setTextField(cell, vViewModel.value)
+            setTextField(cell, viewModel.value)
             return cell
 
         default:

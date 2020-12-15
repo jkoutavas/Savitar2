@@ -21,7 +21,6 @@
 		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		691963A22453D6F20057DD34 /* TriggerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A12453D6F20057DD34 /* TriggerViewModel.swift */; };
-		691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963A52453D98E0057DD34 /* TriggersViewModel.swift */; };
 		691963B62453EA710057DD34 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B52453EA700057DD34 /* TriggersTabController.swift */; };
 		691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */; };
 		69376D4D256DE4CC00A99245 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */; };
@@ -30,7 +29,6 @@
 		693944E82466248C00931FA8 /* EventsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E72466248C00931FA8 /* EventsTabController.swift */; };
 		693944EA24662F3F00931FA8 /* MacroTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944E924662F3F00931FA8 /* MacroTableDataSource.swift */; };
 		693944EC24662FF300931FA8 /* MacroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944EB24662FF300931FA8 /* MacroViewModel.swift */; };
-		693944EE246630E300931FA8 /* MacrosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944ED246630E300931FA8 /* MacrosViewModel.swift */; };
 		693944F3246F7C8900931FA8 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */; };
 		693944F5246F7C9E00931FA8 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693944F4246F7C9E00931FA8 /* CheckBox.swift */; };
 		6946AB7A208435320075610C /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6946AB79208435320075610C /* WorldSettingsController.swift */; };
@@ -48,6 +46,7 @@
 		695F5A592586762F00AB6BA6 /* TitledTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */; };
 		695F5A5B258678AE00AB6BA6 /* WorldPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A5A258678AE00AB6BA6 /* WorldPickerController.swift */; };
 		695F5A612588562E00AB6BA6 /* ReSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A602588562E00AB6BA6 /* ReSwiftTests.swift */; };
+		695F5A632588FAF300AB6BA6 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A622588FAF300AB6BA6 /* ListViewModel.swift */; };
 		69662B28204367BD00E7CC7B /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1E204367BD00E7CC7B /* SessionViewController.swift */; };
 		69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B1F204367BD00E7CC7B /* InputViewController.swift */; };
 		69662B2A204367BD00E7CC7B /* SessionHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */; };
@@ -157,7 +156,6 @@
 		690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesTests.swift; sourceTree = "<group>"; };
 		690B462C23B16B54000445E4 /* StartupPreferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StartupPreferences.xml; sourceTree = "<group>"; };
 		691963A12453D6F20057DD34 /* TriggerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerViewModel.swift; sourceTree = "<group>"; };
-		691963A52453D98E0057DD34 /* TriggersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggersViewModel.swift; sourceTree = "<group>"; };
 		691963B52453EA700057DD34 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
 		691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
 		69376D4C256DE4CC00A99245 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		693944E72466248C00931FA8 /* EventsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabController.swift; sourceTree = "<group>"; };
 		693944E924662F3F00931FA8 /* MacroTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTableDataSource.swift; sourceTree = "<group>"; };
 		693944EB24662FF300931FA8 /* MacroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroViewModel.swift; sourceTree = "<group>"; };
-		693944ED246630E300931FA8 /* MacrosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosViewModel.swift; sourceTree = "<group>"; };
 		693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		693944F4246F7C9E00931FA8 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		6946AB79208435320075610C /* WorldSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
@@ -190,6 +187,7 @@
 		695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledTableCellView.swift; sourceTree = "<group>"; };
 		695F5A5A258678AE00AB6BA6 /* WorldPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldPickerController.swift; sourceTree = "<group>"; };
 		695F5A602588562E00AB6BA6 /* ReSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReSwiftTests.swift; sourceTree = "<group>"; };
+		695F5A622588FAF300AB6BA6 /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		69662B1E204367BD00E7CC7B /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		69662B1F204367BD00E7CC7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		69662B20204367BD00E7CC7B /* SessionHandlerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHandlerProtocol.swift; sourceTree = "<group>"; };
@@ -326,6 +324,7 @@
 			children = (
 				693944F2246F7C8900931FA8 /* CheckableTableCellView.swift */,
 				693944F4246F7C9E00931FA8 /* CheckBox.swift */,
+				695F5A622588FAF300AB6BA6 /* ListViewModel.swift */,
 				695F5A582586762F00AB6BA6 /* TitledTableCellView.swift */,
 			);
 			path = components;
@@ -542,7 +541,6 @@
 				693944E72466248C00931FA8 /* EventsTabController.swift */,
 				69CEEDE323BEDA9600E9F087 /* EventsViewController.swift */,
 				693944E52466245E00931FA8 /* MacrosTabController.swift */,
-				693944ED246630E300931FA8 /* MacrosViewModel.swift */,
 				693944E924662F3F00931FA8 /* MacroTableDataSource.swift */,
 				69F629C224A8D9480067CAE8 /* MacroViewController.swift */,
 				693944EB24662FF300931FA8 /* MacroViewModel.swift */,
@@ -551,7 +549,6 @@
 				69BAE50C24D8F8B6007EBCD0 /* TriggerMatchingViewController.swift */,
 				698667D524EC02630061AA86 /* TriggerReplyViewController.swift */,
 				691963B52453EA700057DD34 /* TriggersTabController.swift */,
-				691963A52453D98E0057DD34 /* TriggersViewModel.swift */,
 				691963B924550E7A0057DD34 /* TriggerTableDataSource.swift */,
 				69B278D8249F824B0058B067 /* TriggerViewController.swift */,
 				691963A12453D6F20057DD34 /* TriggerViewModel.swift */,
@@ -832,6 +829,7 @@
 			files = (
 				69662B29204367BD00E7CC7B /* InputViewController.swift in Sources */,
 				69683820255F8AC000F0BC20 /* InputSettingsController.swift in Sources */,
+				695F5A632588FAF300AB6BA6 /* ListViewModel.swift in Sources */,
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
 				69CEEDD423B4003400E9F087 /* ColorMan.swift in Sources */,
 				69F620E7204BC19100301A8D /* WindowController.swift in Sources */,
@@ -882,7 +880,6 @@
 				695F5A57258674E200AB6BA6 /* WorldViewModel.swift in Sources */,
 				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
 				69B278DC24A19B1A0058B067 /* DetailsTabViewController.swift in Sources */,
-				691963A62453D98E0057DD34 /* TriggersViewModel.swift in Sources */,
 				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				69BAE50F24D900FC007EBCD0 /* TriggerAppearanceViewController.swift in Sources */,
 				695F5A592586762F00AB6BA6 /* TitledTableCellView.swift in Sources */,
@@ -892,7 +889,6 @@
 				691963BA24550E7A0057DD34 /* TriggerTableDataSource.swift in Sources */,
 				69CEEDD623B4011500E9F087 /* SavColor.swift in Sources */,
 				69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */,
-				693944EE246630E300931FA8 /* MacrosViewModel.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69DE2D24209D433B00A4D3F2 /* AppearanceSettingsController.swift in Sources */,
 				69CEEDF523D9382F00E9F087 /* SavitarObjectId.swift in Sources */,

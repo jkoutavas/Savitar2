@@ -11,12 +11,11 @@ import ReSwift
 
 protocol MacroTableDataSourceType {
     var tableDataSource: NSTableViewDataSource { get }
-
     var selectedRow: SelectionState { get }
     var selectedMacro: MacroViewModel? { get }
     var macroCount: Int { get }
 
-    func updateContents(macrosViewModel viewModel: MacrosViewModel)
+    func updateContents(listModel: MacroListViewModel)
     func getStore() -> ReactionsStore?
     func setStore(reactionsStore: ReactionsStore?)
     func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
@@ -24,6 +23,7 @@ protocol MacroTableDataSourceType {
 
 class MacrosTabController: EventsTabController {
     private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
+    private var subscriber: MacrosSubscriber<ItemListState<Macro>>?
     private var selectionIsChanging = false
 
     override func setStore(reactionsStore: ReactionsStore?) {
@@ -36,12 +36,15 @@ class MacrosTabController: EventsTabController {
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
         tableView.registerForDraggedTypes([.macro, .tableViewIndex])
+        subscriber = MacrosSubscriber<ItemListState<Macro>>(self)
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        store?.subscribe(self)
+        store?.subscribe(subscriber!) {
+            $0.select { $0.macroList }
+        }
 
         if let window = view.window {
             window.makeFirstResponder(view) // useful for selection state
@@ -51,7 +54,7 @@ class MacrosTabController: EventsTabController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        store?.unsubscribe(self)
+        store?.unsubscribe(subscriber!)
     }
 }
 
@@ -92,21 +95,21 @@ extension MacrosTabController: NSTableViewDelegate {
 }
 
 extension MacrosTabController {
-    func displayMacros(macrosViewModel viewModel: MacrosViewModel) {
-        updateTableDataSource(viewModel: viewModel)
+    func displayMacros(listModel: MacroListViewModel) {
+        updateTableDataSource(listModel: listModel)
 
         selectionIsChanging = true
-        displaySelection(viewModel: viewModel)
+        displaySelection(listModel: listModel)
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(viewModel: MacrosViewModel) {
-        dataSource.updateContents(macrosViewModel: viewModel)
+    fileprivate func updateTableDataSource(listModel: MacroListViewModel) {
+        dataSource.updateContents(listModel: listModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(viewModel: MacrosViewModel) {
-        guard let selectedRow = viewModel.selectedRow else {
+    fileprivate func displaySelection(listModel: MacroListViewModel) {
+        guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return
         }
@@ -115,14 +118,20 @@ extension MacrosTabController {
     }
 }
 
-extension MacrosTabController: StoreSubscriber {
-    func newState(state: ReactionsState) {
-        let macroViewModels = state.macroList.items.map(MacroViewModel.init)
-        let macrosViewModel = MacrosViewModel(
-            macros: macroViewModels,
-            selectedRow: state.macroList.selection
+class MacrosSubscriber<T>: StoreSubscriber {
+    var tableController: MacrosTabController?
+
+    init(_ tableController: MacrosTabController) {
+        self.tableController = tableController
+    }
+
+    func newState(state: ItemListState<Macro>) {
+        let viewModels = state.items.map(MacroViewModel.init)
+        let listModel = MacroListViewModel(
+            viewModels: viewModels,
+            selectedRow: state.selection
         )
 
-        displayMacros(macrosViewModel: macrosViewModel)
+        tableController?.displayMacros(listModel: listModel)
     }
 }

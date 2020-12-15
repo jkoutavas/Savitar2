@@ -9,18 +9,20 @@
 import Cocoa
 import SwiftyXMLParser
 
+typealias TriggerListViewModel = ListViewModel<TriggerViewModel>
+
 class TriggerTableDataSource: NSObject, ReactionStoreSetter {
-    var viewModel: TriggersViewModel?
+    var listModel: TriggerListViewModel?
     var store: ReactionsStore?
 }
 
 extension TriggerTableDataSource: NSTableViewDataSource {
     func numberOfRows(in _: NSTableView) -> Int {
-        return viewModel?.itemCount ?? 0
+        return listModel?.itemCount ?? 0
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        guard let viewModel = viewModel?.triggers[safe: row] else { return nil }
+        guard let viewModel = listModel?.viewModels[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
         guard let object = store?.state?.triggerList.item(objectID: objID) else { return nil }
         return TriggerPasteboardWriter(object: object, at: row)
@@ -81,9 +83,9 @@ extension TriggerTableDataSourceType where Self: NSTableViewDataSource {
 }
 
 extension TriggerTableDataSource: TriggerTableDataSourceType {
-    var selectedRow: Int? { return viewModel?.selectedRow }
-    var selectedTrigger: TriggerViewModel? { return viewModel?.selectedTrigger }
-    var triggerCount: Int { return viewModel?.itemCount ?? 0 }
+    var selectedRow: Int? { return listModel?.selectedRow }
+    var selectedTrigger: TriggerViewModel? { return listModel?.selectedItem }
+    var triggerCount: Int { return listModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -93,8 +95,8 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
         store = reactionsStore
     }
 
-    func updateContents(triggersViewModel viewModel: TriggersViewModel) {
-        self.viewModel = viewModel
+    func updateContents(listModel: TriggerListViewModel) {
+        self.listModel = listModel
     }
 
     func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -102,25 +104,25 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
             guard let textField = cell.textField else { return }
             textField.stringValue = value
         }
-        guard let tViewModel = viewModel?.triggers[row] else { return nil }
+        guard let viewModel = listModel?.viewModels[row] else { return nil }
         switch tableColumn {
         case tableView.tableColumns[0]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? CheckableTableCellView else { return nil }
             cell.checkableItemChangeDelegate = self
-            cell.viewModel = tViewModel
+            cell.viewModel = viewModel
             return cell
 
         case tableView.tableColumns[1]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
-            setTextField(cell, tViewModel.type)
+            setTextField(cell, viewModel.type)
             return cell
 
         case tableView.tableColumns[2]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? NSTableCellView else { return nil }
-            setTextField(cell, tViewModel.audioCue)
+            setTextField(cell, viewModel.audioCue)
             return cell
 
         default:
