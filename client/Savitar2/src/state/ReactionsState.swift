@@ -201,8 +201,8 @@ struct ItemListState<T: Equatable>: StateType {
 }
 
 struct ReactionsState: StateType {
-    var macroList: ItemListState<Macro> = ItemListState<Macro>()
-    var triggerList: ItemListState<Trigger> = ItemListState<Trigger>()
+    var macroList = ItemListState<Macro>()
+    var triggerList = ItemListState<Trigger>()
 }
 
 func reactionsReducer(action: Action, state: ReactionsState?) -> ReactionsState {
