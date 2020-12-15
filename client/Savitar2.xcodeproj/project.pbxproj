@@ -1298,7 +1298,7 @@
 			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 6.0.0;
 			};
 		};
 		69D6E5ED24B203CB00058D70 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
