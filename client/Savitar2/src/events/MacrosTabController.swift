@@ -9,20 +9,8 @@
 import Cocoa
 import ReSwift
 
-protocol MacroTableDataSourceType {
-    var tableDataSource: NSTableViewDataSource { get }
-    var selectedRow: SelectionState { get }
-    var selectedMacro: MacroViewModel? { get }
-    var macroCount: Int { get }
-
-    func updateContents(listModel: MacroListViewModel)
-    func getStore() -> ReactionsStore?
-    func setStore(reactionsStore: ReactionsStore?)
-    func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
-}
-
 class MacrosTabController: EventsTabController {
-    private var dataSource: MacroTableDataSourceType = MacroTableDataSource()
+    private var dataSource = MacroTableDataSource()
     private var subscriber: MacrosSubscriber<ItemListState<Macro>>?
     private var selectionIsChanging = false
 
@@ -61,13 +49,13 @@ class MacrosTabController: EventsTabController {
 extension MacrosTabController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(delete(_:)) {
-            return dataSource.selectedMacro != nil
+            return dataSource.selectedItem != nil
         }
         return true
     }
 
     @IBAction func delete(_ sender: AnyObject) {
-        guard let viewModel = dataSource.selectedMacro else { return }
+        guard let viewModel = dataSource.selectedItem else { return }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
         store?.dispatch(RemoveMacroAction(macroID: objID))
     }
@@ -75,7 +63,7 @@ extension MacrosTabController: NSMenuItemValidation {
 
 extension MacrosTabController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        return dataSource.macroCellView(tableView, viewFor: tableColumn, row: row)
+        return dataSource.itemCellView(tableView, viewFor: tableColumn, row: row)
     }
 
     func tableViewSelectionDidChange(_: Notification) {
@@ -95,7 +83,7 @@ extension MacrosTabController: NSTableViewDelegate {
 }
 
 extension MacrosTabController {
-    func displayMacros(listModel: MacroListViewModel) {
+    func displayList(listModel: MacroListViewModel) {
         updateTableDataSource(listModel: listModel)
 
         selectionIsChanging = true
@@ -132,6 +120,6 @@ class MacrosSubscriber<T>: StoreSubscriber {
             selectedRow: state.selection
         )
 
-        tableController?.displayMacros(listModel: listModel)
+        tableController?.displayList(listModel: listModel)
     }
 }

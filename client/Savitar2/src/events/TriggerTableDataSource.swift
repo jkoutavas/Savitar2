@@ -76,16 +76,10 @@ extension TriggerTableDataSource: NSTableViewDataSource {
     }
 }
 
-extension TriggerTableDataSourceType where Self: NSTableViewDataSource {
-    var tableDataSource: NSTableViewDataSource {
-        return self
-    }
-}
-
-extension TriggerTableDataSource: TriggerTableDataSourceType {
+extension TriggerTableDataSource: ItemTableDataSourceType {
     var selectedRow: Int? { return listModel?.selectedRow }
-    var selectedTrigger: TriggerViewModel? { return listModel?.selectedItem }
-    var triggerCount: Int { return listModel?.itemCount ?? 0 }
+    var selectedItem: TriggerViewModel? { return listModel?.selectedItem }
+    var itemCount: Int { return listModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -99,7 +93,7 @@ extension TriggerTableDataSource: TriggerTableDataSourceType {
         self.listModel = listModel
     }
 
-    func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func itemCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         func setTextField(_ cell: NSTableCellView, _ value: String) {
             guard let textField = cell.textField else { return }
             textField.stringValue = value

@@ -9,21 +9,8 @@
 import Cocoa
 import ReSwift
 
-protocol TriggerTableDataSourceType {
-    var tableDataSource: NSTableViewDataSource { get }
-
-    var selectedRow: SelectionState { get }
-    var selectedTrigger: TriggerViewModel? { get }
-    var triggerCount: Int { get }
-
-    func updateContents(listModel: TriggerListViewModel)
-    func getStore() -> ReactionsStore?
-    func setStore(reactionsStore: ReactionsStore?)
-    func triggerCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
-}
-
 class TriggersTabController: EventsTabController {
-    private var dataSource: TriggerTableDataSourceType = TriggerTableDataSource()
+    private var dataSource = TriggerTableDataSource()
     private var subscriber: TriggersSubscriber<ItemListState<Trigger>>?
     private var selectionIsChanging = false
 
@@ -62,13 +49,13 @@ class TriggersTabController: EventsTabController {
 extension TriggersTabController: NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(delete(_:)) {
-            return dataSource.selectedTrigger != nil
+            return dataSource.selectedItem != nil
         }
         return true
     }
 
     @IBAction func delete(_ sender: AnyObject) {
-        guard let viewModel = dataSource.selectedTrigger else { return }
+        guard let viewModel = dataSource.selectedItem else { return }
         guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
         store?.dispatch(RemoveTriggerAction(triggerID: objID))
     }
@@ -76,7 +63,7 @@ extension TriggersTabController: NSMenuItemValidation {
 
 extension TriggersTabController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        return dataSource.triggerCellView(tableView, viewFor: tableColumn, row: row)
+        return dataSource.itemCellView(tableView, viewFor: tableColumn, row: row)
     }
 
     func tableViewSelectionDidChange(_: Notification) {
@@ -96,7 +83,7 @@ extension TriggersTabController: NSTableViewDelegate {
 }
 
 extension TriggersTabController {
-    func displayTriggers(listModel: TriggerListViewModel) {
+    func displayList(listModel: TriggerListViewModel) {
         updateTableDataSource(listModel: listModel)
 
         selectionIsChanging = true
@@ -133,6 +120,25 @@ class TriggersSubscriber<T>: StoreSubscriber {
             selectedRow: state.selection
         )
 
-        tableController?.displayTriggers(listModel: listModel)
+        tableController?.displayList(listModel: listModel)
+    }
+}
+
+
+class ItemsSubscriber<T>: StoreSubscriber {
+    var tableController: TriggersTabController?
+
+    init(_ tableController: TriggersTabController) {
+        self.tableController = tableController
+    }
+
+    func newState(state: ItemListState<Trigger>) {
+        let viewModels = state.items.map(TriggerViewModel.init)
+        let listModel = TriggerListViewModel(
+            viewModels: viewModels,
+            selectedRow: state.selection
+        )
+
+        tableController?.displayList(listModel: listModel)
     }
 }

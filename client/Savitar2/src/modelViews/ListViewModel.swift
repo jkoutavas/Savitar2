@@ -18,4 +18,3 @@ struct ListViewModel<T> {
         return viewModels[selectedRow]
     }
 }
-

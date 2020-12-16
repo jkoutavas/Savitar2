@@ -75,16 +75,10 @@ extension MacroTableDataSource: NSTableViewDataSource {
     }
 }
 
-extension MacroTableDataSourceType where Self: NSTableViewDataSource {
-    var tableDataSource: NSTableViewDataSource {
-        return self
-    }
-}
-
-extension MacroTableDataSource: MacroTableDataSourceType {
+extension MacroTableDataSource: ItemTableDataSourceType {
     var selectedRow: Int? { return listModel?.selectedRow }
-    var selectedMacro: MacroViewModel? { return listModel?.selectedItem }
-    var macroCount: Int { return listModel?.itemCount ?? 0 }
+    var selectedItem: MacroViewModel? { return listModel?.selectedItem }
+    var itemCount: Int { return listModel?.itemCount ?? 0 }
 
     func getStore() -> ReactionsStore? {
         return store
@@ -98,7 +92,7 @@ extension MacroTableDataSource: MacroTableDataSourceType {
         self.listModel = listModel
     }
 
-    func macroCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func itemCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         func setTextField(_ cell: NSTableCellView, _ value: String) {
             guard let textField = cell.textField else { return }
             textField.stringValue = value
