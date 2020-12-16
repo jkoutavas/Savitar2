@@ -8,15 +8,11 @@
 
 import Cocoa
 
+typealias WorldListViewModel = ListViewModel<WorldViewModel>
+
 class WorldTableDataSource: NSObject {
-    var viewModel: WorldsViewModel?
+    var listModel: WorldListViewModel?
 }
 
 extension WorldTableDataSource: NSTableViewDataSource {
-}
-
-extension WorldTableDataSourceType where Self: NSTableViewDataSource {
-    var tableDataSource: NSTableViewDataSource {
-        return self
-    }
 }

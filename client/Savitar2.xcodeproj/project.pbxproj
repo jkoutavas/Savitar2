@@ -79,7 +79,6 @@
 		695F5AF325899FA400AB6BA6 /* TitledTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */; };
 		695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */; };
 		695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */; };
-		695F5AF625899FA400AB6BA6 /* WorldsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADD25899FA400AB6BA6 /* WorldsViewModel.swift */; };
 		695F5AF725899FA400AB6BA6 /* WorldPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADE25899FA400AB6BA6 /* WorldPickerController.swift */; };
 		695F5AF825899FA400AB6BA6 /* WorldTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADF25899FA400AB6BA6 /* WorldTableDataSource.swift */; };
 		695F5AF925899FA400AB6BA6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AE025899FA400AB6BA6 /* CheckBox.swift */; };
@@ -221,7 +220,6 @@
 		695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldViewModel.swift; sourceTree = "<group>"; };
-		695F5ADD25899FA400AB6BA6 /* WorldsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsViewModel.swift; sourceTree = "<group>"; };
 		695F5ADE25899FA400AB6BA6 /* WorldPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerController.swift; sourceTree = "<group>"; };
 		695F5ADF25899FA400AB6BA6 /* WorldTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldTableDataSource.swift; sourceTree = "<group>"; };
 		695F5AE025899FA400AB6BA6 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -475,23 +473,23 @@
 		695F5AC625899FA400AB6BA6 /* eventsWindow */ = {
 			isa = PBXGroup;
 			children = (
-				695F5AC725899FA400AB6BA6 /* TriggerMatchingViewController.swift */,
-				695F5AC925899FA400AB6BA6 /* MacrosTabController.swift */,
-				695F5ACA25899FA400AB6BA6 /* MacroViewModel.swift */,
-				695F5ACB25899FA400AB6BA6 /* MacroViewController.swift */,
-				695F5ACC25899FA400AB6BA6 /* EventsTabController.swift */,
-				695F5ACD25899FA400AB6BA6 /* EventsViewController.swift */,
-				695F5ACE25899FA400AB6BA6 /* TriggerReplyViewController.swift */,
-				695F5ACF25899FA400AB6BA6 /* TriggerViewModel.swift */,
-				695F5AD025899FA400AB6BA6 /* TriggerViewController.swift */,
-				695F5AD125899FA400AB6BA6 /* TriggersTabController.swift */,
-				695F5AD225899FA400AB6BA6 /* TriggerAudioCueViewController.swift */,
-				695F5AD325899FA400AB6BA6 /* HotKeyEditor.swift */,
-				695F5AD425899FA400AB6BA6 /* TriggerTableDataSource.swift */,
-				695F5AD525899FA400AB6BA6 /* MacroTableDataSource.swift */,
-				695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */,
 				695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */,
 				695F5AD825899FA400AB6BA6 /* EventsSplitViewController.swift */,
+				695F5ACC25899FA400AB6BA6 /* EventsTabController.swift */,
+				695F5ACD25899FA400AB6BA6 /* EventsViewController.swift */,
+				695F5AD325899FA400AB6BA6 /* HotKeyEditor.swift */,
+				695F5AC925899FA400AB6BA6 /* MacrosTabController.swift */,
+				695F5AD525899FA400AB6BA6 /* MacroTableDataSource.swift */,
+				695F5ACA25899FA400AB6BA6 /* MacroViewModel.swift */,
+				695F5ACB25899FA400AB6BA6 /* MacroViewController.swift */,
+				695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */,
+				695F5AD225899FA400AB6BA6 /* TriggerAudioCueViewController.swift */,
+				695F5AC725899FA400AB6BA6 /* TriggerMatchingViewController.swift */,
+				695F5ACE25899FA400AB6BA6 /* TriggerReplyViewController.swift */,
+				695F5AD125899FA400AB6BA6 /* TriggersTabController.swift */,
+				695F5AD425899FA400AB6BA6 /* TriggerTableDataSource.swift */,
+				695F5AD025899FA400AB6BA6 /* TriggerViewController.swift */,
+				695F5ACF25899FA400AB6BA6 /* TriggerViewModel.swift */,
 			);
 			path = eventsWindow;
 			sourceTree = "<group>";
@@ -500,7 +498,6 @@
 			isa = PBXGroup;
 			children = (
 				695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */,
-				695F5ADD25899FA400AB6BA6 /* WorldsViewModel.swift */,
 				695F5ADE25899FA400AB6BA6 /* WorldPickerController.swift */,
 				695F5ADF25899FA400AB6BA6 /* WorldTableDataSource.swift */,
 			);
@@ -871,7 +868,6 @@
 				695F5ABE25899EFD00AB6BA6 /* Document.swift in Sources */,
 				695F5A9025899EBC00AB6BA6 /* Macro.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
-				695F5AF625899FA400AB6BA6 /* WorldsViewModel.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
