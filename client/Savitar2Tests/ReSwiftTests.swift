@@ -32,14 +32,14 @@ struct Foo: Equatable {
 }
 
 struct TestAppState: StateType {
-    var itemList: ItemListState<Foo>?
+    var itemList = ItemListState<Foo>()
 }
 
 struct ItemListState<T: Equatable>: StateType {
     var items: [T]
     var selection: Int?
 
-    init(_ items: [T], _ selection: Int? = nil) {
+    init(_ items: [T] = [], _ selection: Int? = nil) {
         self.items = items
         self.selection = selection
     }
@@ -68,7 +68,7 @@ struct TestReducer {
     }
 }
 
-class ReSwift: XCTestCase {
+class ReSwiftTests: XCTestCase {
     // The traditional way to do substate subscription
     func testSubstateSelectSubscription() {
         let reducer = TestReducer()
@@ -91,9 +91,80 @@ class ReSwift: XCTestCase {
         let reducer = TestReducer()
         let state = TestAppState()
         let store = Store(reducer: reducer.handleAction, state: state)
-        let subscriber = TestSubscriber<ItemListState<Foo>?>()
+        let subscriber = TestSubscriber<ItemListState<Foo>>()
         store.subscribe(subscriber) {
             $0.select(\.itemList)
+        }
+
+        let foo = Foo("heythen")
+        store.dispatch(SetItemsAction(ItemListState<Foo>([foo], 24)))
+        XCTAssertEqual(subscriber.receivedList?.items.count, 1)
+        XCTAssertEqual(subscriber.receivedList?.items[0].name, "heythen")
+        XCTAssertEqual(subscriber.receivedList?.selection, 24)
+    }
+}
+
+struct TestAppState2: StateType {
+    var subState = SubState()
+}
+
+struct SubState: StateType {
+    var subsub = SubSubState()
+}
+
+struct SubSubState: StateType {
+    var itemList = ItemListState<Foo>()
+}
+
+struct SetSubItemsAction: Action {
+    let itemList: ItemListState<Foo>
+    static let type = "SetSubItemsAction"
+
+    init (_ itemList: ItemListState<Foo>) {
+        self.itemList = itemList
+    }
+}
+
+struct TestSubReducer {
+     func handleAction(action: Action, state: TestAppState2?) -> TestAppState2 {
+        var state = state ?? TestAppState2()
+
+        switch action {
+        case let action as SetItemsAction:
+            state.subState.subsub.itemList = action.itemList
+            return state
+        default:
+            return state
+        }
+    }
+}
+
+class ReSwiftTests2: XCTestCase {
+    func testSubSubstateSelectSubscription() {
+        let reducer = TestSubReducer()
+        let state = TestAppState2()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestSubscriber<ItemListState<Foo>?>()
+        store.subscribe(subscriber) {
+            $0.select { $0.subState.subsub.itemList }
+        }
+
+        // The traditional way to do subsubstate subscription
+        let foo = Foo("heynow")
+        store.dispatch(SetItemsAction(ItemListState<Foo>([foo], 23)))
+        XCTAssertEqual(subscriber.receivedList?.items.count, 1)
+        XCTAssertEqual(subscriber.receivedList?.items[0].name, "heynow")
+        XCTAssertEqual(subscriber.receivedList?.selection, 23)
+    }
+
+    // Keypath is new with v6.0 of ReSwift
+    func testSubstateSelectKeypathSubscription() {
+        let reducer = TestSubReducer()
+        let state = TestAppState2()
+        let store = Store(reducer: reducer.handleAction, state: state)
+        let subscriber = TestSubscriber<ItemListState<Foo>>()
+        store.subscribe(subscriber) {
+            $0.select(\.subState.subsub.itemList)
         }
 
         let foo = Foo("heythen")
