@@ -9,6 +9,11 @@
 import Foundation
 
 class WorldViewModel: TitledItemViewModel {
+
+    init(world: World) {
+        super.init(itemID: world.objectID.identifier, title:world.name)
+    }
+
     required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }

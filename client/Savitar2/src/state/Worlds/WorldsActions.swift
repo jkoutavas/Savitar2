@@ -16,6 +16,20 @@ protocol WorldAction: Action {
     func apply(oldState: WorldsState) -> WorldsState
 }
 
+struct SelectWorldAction: WorldAction {
+    let selection: SelectionState
+
+    init(selection: SelectionState) {
+        self.selection = selection
+    }
+
+    func apply(oldState: WorldsState) -> WorldsState {
+        var result = oldState
+        result.worldList.selection = selection
+        return result
+    }
+}
+
 struct InsertWorldAction: WorldUndoableAction, WorldAction {
     let world: World
     let index: Int

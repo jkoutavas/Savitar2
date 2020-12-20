@@ -12,7 +12,7 @@ import ReSwift
 typealias WorldsStore = Store<WorldsState>
 
 protocol WorldsStoreSetter {
-    func setStore(worldsStore: WorldsStore?)
+    func setStore(_ store: WorldsStore?)
 }
 
 func worldsStore(undoManagerProvider: @escaping () -> UndoManager?) -> WorldsStore {
