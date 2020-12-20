@@ -64,4 +64,3 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
           worldPickerController = nil
     }
 }
-

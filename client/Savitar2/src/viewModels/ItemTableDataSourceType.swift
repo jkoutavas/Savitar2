@@ -28,4 +28,3 @@ extension ItemTableDataSourceType where Self: NSTableViewDataSource {
         return self
     }
 }
-

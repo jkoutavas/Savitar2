@@ -124,7 +124,6 @@ class TriggersSubscriber<T>: StoreSubscriber {
     }
 }
 
-
 class ItemsSubscriber<T>: StoreSubscriber {
     var tableController: TriggersTabController?
 
