@@ -18,12 +18,13 @@ class AppContext {
     var speakerMan: SpeakerMan
     var worldMan: WorldMan
 
-    var universalReactionsStore = reactionsStore(undoManagerProvider: { appUndoManager })
-
     internal var isTerminating: Bool
 
+    var universalReactionsStore = reactionsStore(undoManagerProvider: { appUndoManager })
+    var worldPickerStore = worldsStore(undoManagerProvider: { appUndoManager })
+
     internal var universalEventsWindowController: NSWindowController?
-    internal var worldPickerController: NSWindowController?
+    internal var worldPickerWindowController: NSWindowController?
 
     // swiftlint:disable weak_delegate
     private var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
@@ -68,30 +69,40 @@ class AppContext {
 
          let bundle = Bundle(for: Self.self)
          let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-         guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-         guard let myWindow = controller.window else { return }
+         guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
+         guard let window = windowController.window else { return }
 
-         universalEventsWindowController = controller
-         myWindow.delegate = universalEventsWindowDelegate
+         universalEventsWindowController = windowController
+         window.delegate = universalEventsWindowDelegate
 
-         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-             splitViewController.store = universalReactionsStore
-             controller.windowFrameAutosaveName = "EventsWindowFrame"
-             controller.showWindow(self)
+         if let contentController = window.contentViewController as? EventsSplitViewController {
+             contentController.store = universalReactionsStore
+             windowController.windowFrameAutosaveName = "EventsWindowFrame"
+             windowController.showWindow(self)
              prefs.flags.insert(.startupEventsWindow)
              save()
          }
     }
 
     func showWorldPicker() {
-        if worldPickerController == nil {
-            let bundle = Bundle(for: Self.self)
-            let storyboard = NSStoryboard(name: "WorldPicker", bundle: bundle)
-            guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-            controller.window!.delegate = worldPickerWindowDelegate
-            worldPickerController = controller
+        if worldPickerWindowController != nil {
+            worldPickerWindowController?.window?.makeKeyAndOrderFront(self)
+            return
         }
-        worldPickerController?.showWindow(self)
+
+        let bundle = Bundle(for: Self.self)
+        let storyboard = NSStoryboard(name: "WorldPicker", bundle: bundle)
+        guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
+        guard let window = windowController.window else { return }
+
+        worldPickerWindowController = windowController
+        window.delegate = worldPickerWindowDelegate
+
+        if let contentController = window.contentViewController as? WorldPickerController {
+            contentController.store = worldPickerStore
+            windowController.windowFrameAutosaveName = "WorldPickerFrame"
+            windowController.showWindow(self)
+        }
     }
 }
 
@@ -123,6 +134,6 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
     }
 
     func windowWillClose(_ notification: Notification) {
-          ctx.worldPickerController = nil
+          ctx.worldPickerWindowController = nil
     }
 }

@@ -42,7 +42,7 @@ class AppPreferencesTests: XCTestCase {
     }
 
     func testWorldMan() {
-        XCTAssertEqual(startingPrefs.worldMan.get().count, 11)
+        XCTAssertEqual(AppContext.shared.worldPickerStore.state.worldList.items.count, 11)
     }
 
     func testTriggerMan() {
