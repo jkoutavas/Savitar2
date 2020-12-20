@@ -9,11 +9,11 @@
 import Cocoa
 
 class TitledItemViewModel: Codable {
-    let identifier: String
+    let itemID: String
     let title: String
 
-    init(identifier: String, title: String) {
-        self.identifier = identifier
+    init(itemID: String, title: String) {
+        self.itemID = itemID
         self.title = title
     }
 }
@@ -24,9 +24,10 @@ class TitledTableCellView: NSTableCellView {
         set { textField = newValue }
     }
 
-    var viewModel: CheckableItemViewModel! {
-        didSet {
-            titleTextField.stringValue = viewModel.title
-        }
+    var itemID: String = ""
+
+    func updateContent(viewModel: TitledItemViewModel) {
+        titleTextField.stringValue = viewModel.title
+        itemID = viewModel.itemID
     }
 }

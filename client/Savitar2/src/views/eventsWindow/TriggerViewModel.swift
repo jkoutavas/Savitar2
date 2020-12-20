@@ -19,7 +19,7 @@ class TriggerViewModel: CheckableItemViewModel {
     init(trigger: Trigger) {
         type = "type" // TODO
         audioCue = "audioCue" // TODO
-        super.init(identifier: trigger.objectID.identifier,
+        super.init(itemID: trigger.objectID.identifier,
                    title: trigger.name,
                    enabled: trigger.enabled)
     }

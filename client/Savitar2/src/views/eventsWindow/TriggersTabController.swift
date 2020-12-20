@@ -56,7 +56,7 @@ extension TriggersTabController: NSMenuItemValidation {
 
     @IBAction func delete(_ sender: AnyObject) {
         guard let viewModel = dataSource.selectedItem else { return }
-        guard let objID = SavitarObjectID(identifier: viewModel.identifier ) else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID ) else { return }
         store?.dispatch(RemoveTriggerAction(triggerID: objID))
     }
 }

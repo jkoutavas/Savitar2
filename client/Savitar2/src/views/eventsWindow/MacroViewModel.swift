@@ -19,7 +19,7 @@ class MacroViewModel: CheckableItemViewModel {
     init(macro: Macro) {
         hotKey = macro.keyLabel
         value = macro.value
-        super.init(identifier: macro.objectID.identifier,
+        super.init(itemID: macro.objectID.identifier,
                    title: macro.name,
                    enabled: macro.enabled)
 

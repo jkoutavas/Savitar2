@@ -23,7 +23,7 @@ extension TriggerTableDataSource: NSTableViewDataSource {
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         guard let viewModel = listModel?.viewModels[safe: row] else { return nil }
-        guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return nil }
         guard let object = store?.state?.triggerList.item(objectID: objID) else { return nil }
         return TriggerPasteboardWriter(object: object, at: row)
      }
@@ -104,7 +104,7 @@ extension TriggerTableDataSource: ItemTableDataSourceType {
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? CheckableTableCellView else { return nil }
             cell.checkableItemChangeDelegate = self
-            cell.viewModel = viewModel
+            cell.updateContent(viewModel: viewModel)
             return cell
 
         case tableView.tableColumns[1]:
@@ -126,9 +126,9 @@ extension TriggerTableDataSource: ItemTableDataSourceType {
 }
 
 extension TriggerTableDataSource: CheckableItemChangeDelegate {
-    func checkableItem(identifier: String, didChangeChecked checked: Bool) {
-        guard let triggerID = SavitarObjectID(identifier: identifier)
-            else { preconditionFailure("Invalid Trigger identifier \(identifier).") }
+    func checkableItem(itemID: String, didChangeChecked checked: Bool) {
+        guard let triggerID = SavitarObjectID(identifier: itemID)
+            else { preconditionFailure("Invalid Trigger identifier \(itemID).") }
 
         let action: TriggerAction = {
             switch checked {

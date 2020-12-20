@@ -11,9 +11,9 @@ import Cocoa
 class CheckableItemViewModel: TitledItemViewModel {
     let enabled: Bool
 
-    init(identifier: String, title: String, enabled: Bool) {
+    init(itemID: String, title: String, enabled: Bool) {
         self.enabled = enabled
-        super.init(identifier: identifier, title: title)
+        super.init(itemID: itemID, title: title)
     }
 
     required init(from decoder: Decoder) throws {
@@ -22,7 +22,7 @@ class CheckableItemViewModel: TitledItemViewModel {
 }
 
 @objc protocol CheckableItemChangeDelegate: class {
-    func checkableItem(identifier: String, didChangeChecked checked: Bool)
+    func checkableItem(itemID: String, didChangeChecked checked: Bool)
 }
 
 class CheckableTableCellView: TitledTableCellView {
@@ -30,14 +30,12 @@ class CheckableTableCellView: TitledTableCellView {
 
     weak var checkableItemChangeDelegate: CheckableItemChangeDelegate?
 
-    override var viewModel: CheckableItemViewModel! {
-        didSet {
-            titleTextField.stringValue = viewModel.title
-            checkbox.checked = viewModel.enabled
-        }
+    func updateContent(viewModel: CheckableItemViewModel) {
+        super.updateContent(viewModel: viewModel)
+        checkbox.checked = viewModel.enabled
     }
 
     @IBAction func checkboxChanged(_ sender: AnyObject) {
-        checkableItemChangeDelegate?.checkableItem(identifier: viewModel.identifier, didChangeChecked: checkbox.checked)
+        checkableItemChangeDelegate?.checkableItem(itemID: itemID, didChangeChecked: checkbox.checked)
     }
 }

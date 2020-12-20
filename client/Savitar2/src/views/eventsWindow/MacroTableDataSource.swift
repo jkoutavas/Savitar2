@@ -23,7 +23,7 @@ extension MacroTableDataSource: NSTableViewDataSource {
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         guard let viewModel = listModel?.viewModels[safe: row] else { return nil }
-        guard let objID = SavitarObjectID(identifier: viewModel.identifier) else { return nil }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return nil }
         guard let object = store?.state?.macroList.item(objectID: objID) else { return nil }
         return MacroPasteboardWriter(object: object, at: row)
      }
@@ -103,7 +103,7 @@ extension MacroTableDataSource: ItemTableDataSourceType {
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? CheckableTableCellView else { return nil }
             cell.checkableItemChangeDelegate = self
-            cell.viewModel = viewModel
+            cell.updateContent(viewModel: viewModel)
             return cell
 
         case tableView.tableColumns[1]:
@@ -125,9 +125,9 @@ extension MacroTableDataSource: ItemTableDataSourceType {
 }
 
 extension MacroTableDataSource: CheckableItemChangeDelegate {
-    func checkableItem(identifier: String, didChangeChecked checked: Bool) {
-        guard let macroID = SavitarObjectID(identifier: identifier)
-            else { preconditionFailure("Invalid macro identifier \(identifier).") }
+    func checkableItem(itemID: String, didChangeChecked checked: Bool) {
+        guard let macroID = SavitarObjectID(identifier: itemID)
+            else { preconditionFailure("Invalid macro identifier \(itemID).") }
 
         let action: MacroAction = {
             switch checked {
