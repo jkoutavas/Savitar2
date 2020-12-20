@@ -159,4 +159,3 @@ struct RemoveTriggerAction: ReactionUndoableAction, ReactionAction {
         return InsertTriggerAction(trigger: tlc.trigger, atIndex: tlc.index)
     }
 }
-
