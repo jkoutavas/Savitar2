@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class DetailsTabViewController: NSTabViewController, ReactionStoreSetter {
+class DetailsTabViewController: NSTabViewController, ReactionsStoreSetter {
     var store: ReactionsStore?
 
     func setStore(reactionsStore: ReactionsStore?) {

@@ -11,7 +11,7 @@ import ReSwift
 
 typealias ReactionsStore = Store<ReactionsState>
 
-protocol ReactionStoreSetter {
+protocol ReactionsStoreSetter {
     func setStore(reactionsStore: ReactionsStore?)
 }
 

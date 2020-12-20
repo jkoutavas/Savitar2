@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-class TriggerViewController: NSViewController, StoreSubscriber, ReactionStoreSetter {
+class TriggerViewController: NSViewController, StoreSubscriber, ReactionsStoreSetter {
     var appearanceViewController: TriggerAppearanceViewController?
     var audioCueViewController: TriggerAudioCueViewController?
     var matchingViewController: TriggerMatchingViewController?

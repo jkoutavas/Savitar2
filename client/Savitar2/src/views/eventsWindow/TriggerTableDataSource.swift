@@ -11,7 +11,7 @@ import SwiftyXMLParser
 
 typealias TriggerListViewModel = ListViewModel<TriggerViewModel>
 
-class TriggerTableDataSource: NSObject, ReactionStoreSetter {
+class TriggerTableDataSource: NSObject, ReactionsStoreSetter {
     var listModel: TriggerListViewModel?
     var store: ReactionsStore?
 }

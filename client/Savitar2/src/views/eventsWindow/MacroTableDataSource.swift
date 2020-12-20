@@ -11,7 +11,7 @@ import SwiftyXMLParser
 
 typealias MacroListViewModel = ListViewModel<MacroViewModel>
 
-class MacroTableDataSource: NSObject, ReactionStoreSetter {
+class MacroTableDataSource: NSObject, ReactionsStoreSetter {
     var listModel: MacroListViewModel?
     var store: ReactionsStore?
 }
