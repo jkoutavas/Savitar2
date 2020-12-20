@@ -39,52 +39,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func applicationWillTerminate(_: Notification) {
-        if isRunningTests {
-            return
-        }
-        AppContext.shared.isTerminating = true
-        AppContext.shared.save()
-    }
-
     func applicationOpenUntitledFile(_: NSApplication) -> Bool {
         return true
     }
 
-    @IBAction func showEventsWindowAction(_: Any) {
-        let ctx = AppContext.shared
-        if ctx.universalEventsWindowController != nil {
-            ctx.universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+    func applicationWillTerminate(_: Notification) {
+        if isRunningTests {
             return
         }
+        AppContext.shared.appIsTerminating()
+    }
 
-        let bundle = Bundle(for: Self.self)
-        let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let myWindow = controller.window else { return }
-
-        ctx.universalEventsWindowController = controller
-        ctx.universalEventsWindowDelegate = UniversalEventsWindowDelegate()
-        myWindow.delegate = ctx.universalEventsWindowDelegate
-
-        if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            splitViewController.store = ctx.universalReactionsStore
-            controller.windowFrameAutosaveName = "EventsWindowFrame"
-            controller.showWindow(self)
-            AppContext.shared.prefs.flags.insert(.startupEventsWindow)
-            AppContext.shared.save()
-        }
+    @IBAction func showEventsWindowAction(_: Any) {
+        AppContext.shared.showUniversalEventsWindow()
     }
 
     @IBAction func showWorldPickerAction(_: Any) {
-        let ctx = AppContext.shared
-        if ctx.worldPickerController == nil {
-            let bundle = Bundle(for: Self.self)
-            let storyboard = NSStoryboard(name: "WorldPicker", bundle: bundle)
-            guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-            controller.window!.delegate = ctx.worldPickerWindowDelegate
-            ctx.worldPickerController = controller
-        }
-        ctx.worldPickerController?.showWindow(self)
+        AppContext.shared.showWorldPicker()
     }
 }
