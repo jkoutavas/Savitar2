@@ -96,7 +96,6 @@
 		695F5B34258EE13600AB6BA6 /* UndoableReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */; };
 		695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */; };
 		695F5B38258EE35000AB6BA6 /* ReactionsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B37258EE35000AB6BA6 /* ReactionsActions.swift */; };
-		695F5B3A258EE3D300AB6BA6 /* UndoManagerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */; };
 		695F5B3C258EE42A00AB6BA6 /* ItemListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */; };
 		695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */; };
 		695F5B46258EE73800AB6BA6 /* WorldsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B40258EE73800AB6BA6 /* WorldsState.swift */; };
@@ -247,7 +246,6 @@
 		695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoableReaction.swift; sourceTree = "<group>"; };
 		695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsUndoContext.swift; sourceTree = "<group>"; };
 		695F5B37258EE35000AB6BA6 /* ReactionsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsActions.swift; sourceTree = "<group>"; };
-		695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManagerProvider.swift; sourceTree = "<group>"; };
 		695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListState.swift; sourceTree = "<group>"; };
 		695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsStore.swift; sourceTree = "<group>"; };
 		695F5B40258EE73800AB6BA6 /* WorldsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsState.swift; sourceTree = "<group>"; };
@@ -566,7 +564,6 @@
 			children = (
 				695F5B24258E8EB100AB6BA6 /* NotUndoable.swift */,
 				695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */,
-				695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */,
 			);
 			path = Undo;
 			sourceTree = "<group>";
@@ -927,7 +924,6 @@
 				695F5AFE25899FD500AB6BA6 /* ItemTableDataSourceType.swift in Sources */,
 				695F5B27258E8EB100AB6BA6 /* TriggerReducer.swift in Sources */,
 				695F5AB525899EFD00AB6BA6 /* Session.swift in Sources */,
-				695F5B3A258EE3D300AB6BA6 /* UndoManagerProvider.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */,

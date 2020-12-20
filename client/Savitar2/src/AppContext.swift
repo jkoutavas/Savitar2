@@ -9,27 +9,31 @@
 import Cocoa
 import ReSwift
 
-var universalEventsWindowController: NSWindowController?
-var universalEventsWindowDelegate = UniversalEventsWindowDelegate()
-var universalStoreUndoManagerProvider = UndoManagerProvider()
-var universalStore = reactionsStore(undoManagerProvider: { universalStoreUndoManagerProvider.undoManager })
-var worldPickerController: NSWindowController?
+var appUndoManager = UndoManager()
 
 class AppContext {
     static let shared = AppContext()
 
-    var isTerminating = false
-    var prefs = AppPreferences()
-    var speakerMan = SpeakerMan()
-    var worldMan = WorldMan()
+    var isTerminating: Bool
+    var prefs: AppPreferences
+    var speakerMan: SpeakerMan
+    var worldMan: WorldMan
+
+    var universalReactionsStore = reactionsStore(undoManagerProvider: { appUndoManager })
+
+    var universalEventsWindowController: NSWindowController?
+    var worldPickerController: NSWindowController?
+
+    // swiftlint:disable weak_delegate
+    var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
+    var worldPickerWindowDelegate: WorldPickerWindowDelegate?
+    // swiftlint:enable weak_delegate
 
     // TODO: this is a good start. See Savitar 1.x's "CViewAppMac.cp" for references to Savitar's
     // "editing keys" (not support at this time) and the means used to add all menu command shortcut keys
     let reservedKeyList = ["return", "space", "up arrow", "down arrow", "left arrow", "right arrow"]
 
     func load() throws {
-        universalStoreUndoManagerProvider.undoManager = UndoManager()
-
         try prefs.load()
     }
 
@@ -40,12 +44,20 @@ class AppContext {
     }
 
     private init() {
+        isTerminating = false
+
+        prefs = AppPreferences()
+        speakerMan = SpeakerMan()
+        worldMan = WorldMan()
+
+        universalEventsWindowDelegate = UniversalEventsWindowDelegate()
+        worldPickerWindowDelegate = WorldPickerWindowDelegate()
     }
 }
 
 class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
     func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
-         return universalStoreUndoManagerProvider.undoManager
+         return appUndoManager
      }
 
      func windowWillClose(_ notification: Notification) {
@@ -55,12 +67,12 @@ class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
              AppContext.shared.prefs.flags.remove(.startupEventsWindow)
              AppContext.shared.save()
          }
-         universalEventsWindowController = nil
+         AppContext.shared.universalEventsWindowController = nil
      }
 }
 
 class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
-          worldPickerController = nil
+          AppContext.shared.worldPickerController = nil
     }
 }

@@ -52,8 +52,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func showEventsWindowAction(_: Any) {
-        if universalEventsWindowController != nil {
-            universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+        let ctx = AppContext.shared
+        if ctx.universalEventsWindowController != nil {
+            ctx.universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
             return
         }
 
@@ -62,11 +63,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
         guard let myWindow = controller.window else { return }
 
-        universalEventsWindowController = controller
-        myWindow.delegate = universalEventsWindowDelegate
+        ctx.universalEventsWindowController = controller
+        ctx.universalEventsWindowDelegate = UniversalEventsWindowDelegate()
+        myWindow.delegate = ctx.universalEventsWindowDelegate
 
         if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            splitViewController.store = universalStore
+            splitViewController.store = ctx.universalReactionsStore
             controller.windowFrameAutosaveName = "EventsWindowFrame"
             controller.showWindow(self)
             AppContext.shared.prefs.flags.insert(.startupEventsWindow)
@@ -75,13 +77,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func showWorldPickerAction(_: Any) {
-        if worldPickerController == nil {
+        let ctx = AppContext.shared
+        if ctx.worldPickerController == nil {
             let bundle = Bundle(for: Self.self)
             let storyboard = NSStoryboard(name: "WorldPicker", bundle: bundle)
             guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-            controller.window!.delegate = WorldPickerWindowDelegate()
-            worldPickerController = controller
+            controller.window!.delegate = ctx.worldPickerWindowDelegate
+            ctx.worldPickerController = controller
         }
-        worldPickerController?.showWindow(self)
+        ctx.worldPickerController?.showWindow(self)
     }
 }
