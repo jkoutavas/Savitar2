@@ -85,6 +85,16 @@
 		695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AFB25899FD500AB6BA6 /* ListViewModel.swift */; };
 		695F5AFE25899FD500AB6BA6 /* ItemTableDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AFC25899FD500AB6BA6 /* ItemTableDataSourceType.swift */; };
 		695F5B012589A0B300AB6BA6 /* EventsWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5AFF2589A0B200AB6BA6 /* EventsWindow.storyboard */; };
+		695F5B27258E8EB100AB6BA6 /* TriggerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B1C258E8EB100AB6BA6 /* TriggerReducer.swift */; };
+		695F5B28258E8EB100AB6BA6 /* MacroActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B1D258E8EB100AB6BA6 /* MacroActions.swift */; };
+		695F5B29258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B1E258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift */; };
+		695F5B2A258E8EB100AB6BA6 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B1F258E8EB100AB6BA6 /* MacroReducer.swift */; };
+		695F5B2B258E8EB100AB6BA6 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B20258E8EB100AB6BA6 /* TriggerActions.swift */; };
+		695F5B2C258E8EB100AB6BA6 /* ReactionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B21258E8EB100AB6BA6 /* ReactionsState.swift */; };
+		695F5B2E258E8EB100AB6BA6 /* NotUndoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B24258E8EB100AB6BA6 /* NotUndoable.swift */; };
+		695F5B2F258E8EB100AB6BA6 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */; };
+		695F5B34258EE13600AB6BA6 /* UndoableReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */; };
+		695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -95,16 +105,6 @@
 		698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667CF24E97E710061AA86 /* SpeakerMan.swift */; };
 		698667D424EA18500061AA86 /* Click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 698667D324EA17B40061AA86 /* Click.m4a */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
-		69928A73247AC8FF00571B21 /* MacroActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A70247AC8FF00571B21 /* MacroActions.swift */; };
-		69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A71247AC8FF00571B21 /* TriggerActions.swift */; };
-		69928A79247AC96900571B21 /* Undoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A78247AC96900571B21 /* Undoable.swift */; };
-		69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7A247AC99A00571B21 /* NotUndoable.swift */; };
-		69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A7E247ACB4E00571B21 /* ReactionsState.swift */; };
-		69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A80247CB80A00571B21 /* TriggerReducer.swift */; };
-		69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A82247CBCAF00571B21 /* UndoActionContext.swift */; };
-		69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A842481E1B700571B21 /* UndoMiddleware.swift */; };
-		69928A872481E2F600571B21 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A862481E2F600571B21 /* UndoCommand.swift */; };
-		69928A89248742C000571B21 /* MacroReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69928A88248742C000571B21 /* MacroReducer.swift */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
@@ -226,6 +226,16 @@
 		695F5AFB25899FD500AB6BA6 /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		695F5AFC25899FD500AB6BA6 /* ItemTableDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableDataSourceType.swift; sourceTree = "<group>"; };
 		695F5B002589A0B200AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EventsWindow.storyboard; sourceTree = "<group>"; };
+		695F5B1C258E8EB100AB6BA6 /* TriggerReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerReducer.swift; sourceTree = "<group>"; };
+		695F5B1D258E8EB100AB6BA6 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
+		695F5B1E258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsUndoMiddleware.swift; sourceTree = "<group>"; };
+		695F5B1F258E8EB100AB6BA6 /* MacroReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
+		695F5B20258E8EB100AB6BA6 /* TriggerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerActions.swift; sourceTree = "<group>"; };
+		695F5B21258E8EB100AB6BA6 /* ReactionsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsState.swift; sourceTree = "<group>"; };
+		695F5B24258E8EB100AB6BA6 /* NotUndoable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotUndoable.swift; sourceTree = "<group>"; };
+		695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
+		695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoableReaction.swift; sourceTree = "<group>"; };
+		695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsUndoContext.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -237,16 +247,6 @@
 		698667CF24E97E710061AA86 /* SpeakerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerMan.swift; sourceTree = "<group>"; };
 		698667D324EA17B40061AA86 /* Click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.m4a; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		69928A70247AC8FF00571B21 /* MacroActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroActions.swift; sourceTree = "<group>"; };
-		69928A71247AC8FF00571B21 /* TriggerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerActions.swift; sourceTree = "<group>"; };
-		69928A78247AC96900571B21 /* Undoable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Undoable.swift; sourceTree = "<group>"; };
-		69928A7A247AC99A00571B21 /* NotUndoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotUndoable.swift; sourceTree = "<group>"; };
-		69928A7E247ACB4E00571B21 /* ReactionsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsState.swift; sourceTree = "<group>"; };
-		69928A80247CB80A00571B21 /* TriggerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerReducer.swift; sourceTree = "<group>"; };
-		69928A82247CBCAF00571B21 /* UndoActionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoActionContext.swift; sourceTree = "<group>"; };
-		69928A842481E1B700571B21 /* UndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoMiddleware.swift; sourceTree = "<group>"; };
-		69928A862481E2F600571B21 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
-		69928A88248742C000571B21 /* MacroReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroReducer.swift; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
@@ -513,6 +513,39 @@
 			path = viewModels;
 			sourceTree = "<group>";
 		};
+		695F5B1A258E8EB100AB6BA6 /* state */ = {
+			isa = PBXGroup;
+			children = (
+				695F5B1B258E8EB100AB6BA6 /* Reactions */,
+				695F5B22258E8EB100AB6BA6 /* Undo */,
+			);
+			path = state;
+			sourceTree = "<group>";
+		};
+		695F5B1B258E8EB100AB6BA6 /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				695F5B1D258E8EB100AB6BA6 /* MacroActions.swift */,
+				695F5B1F258E8EB100AB6BA6 /* MacroReducer.swift */,
+				695F5B21258E8EB100AB6BA6 /* ReactionsState.swift */,
+				695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */,
+				695F5B1E258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift */,
+				695F5B20258E8EB100AB6BA6 /* TriggerActions.swift */,
+				695F5B1C258E8EB100AB6BA6 /* TriggerReducer.swift */,
+				695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */,
+			);
+			path = Reactions;
+			sourceTree = "<group>";
+		};
+		695F5B22258E8EB100AB6BA6 /* Undo */ = {
+			isa = PBXGroup;
+			children = (
+				695F5B24258E8EB100AB6BA6 /* NotUndoable.swift */,
+				695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */,
+			);
+			path = Undo;
+			sourceTree = "<group>";
+		};
 		69662B1B204367BD00E7CC7B /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,7 +555,7 @@
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
 				695F5A6625899CE000AB6BA6 /* models */,
-				69928A6E247AC8FF00571B21 /* state */,
+				695F5B1A258E8EB100AB6BA6 /* state */,
 				695F5AFA25899FD500AB6BA6 /* viewModels */,
 				695F5AC525899FA400AB6BA6 /* views */,
 				695F5A9E25899EFD00AB6BA6 /* worldDocument */,
@@ -544,31 +577,6 @@
 				69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */,
 			);
 			path = extensions;
-			sourceTree = "<group>";
-		};
-		69928A6E247AC8FF00571B21 /* state */ = {
-			isa = PBXGroup;
-			children = (
-				69928A75247AC91B00571B21 /* Undo */,
-				69928A70247AC8FF00571B21 /* MacroActions.swift */,
-				69928A88248742C000571B21 /* MacroReducer.swift */,
-				69928A7E247ACB4E00571B21 /* ReactionsState.swift */,
-				69928A71247AC8FF00571B21 /* TriggerActions.swift */,
-				69928A80247CB80A00571B21 /* TriggerReducer.swift */,
-			);
-			path = state;
-			sourceTree = "<group>";
-		};
-		69928A75247AC91B00571B21 /* Undo */ = {
-			isa = PBXGroup;
-			children = (
-				69928A7A247AC99A00571B21 /* NotUndoable.swift */,
-				69928A78247AC96900571B21 /* Undoable.swift */,
-				69928A82247CBCAF00571B21 /* UndoActionContext.swift */,
-				69928A862481E2F600571B21 /* UndoCommand.swift */,
-				69928A842481E1B700571B21 /* UndoMiddleware.swift */,
-			);
-			path = Undo;
 			sourceTree = "<group>";
 		};
 		69DE2D20209D40A900A4D3F2 /* resources */ = {
@@ -843,6 +851,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				695F5AC025899EFD00AB6BA6 /* Ansi2HtmlParser.swift in Sources */,
+				695F5B2F258E8EB100AB6BA6 /* UndoCommand.swift in Sources */,
 				695F5AEA25899FA400AB6BA6 /* TriggerViewController.swift in Sources */,
 				695F5AE825899FA400AB6BA6 /* TriggerReplyViewController.swift in Sources */,
 				695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */,
@@ -853,12 +862,13 @@
 				695F5AEC25899FA400AB6BA6 /* TriggerAudioCueViewController.swift in Sources */,
 				695F5AB725899EFD00AB6BA6 /* SessionViewController.swift in Sources */,
 				695F5A9625899EBC00AB6BA6 /* TriggerMan.swift in Sources */,
+				695F5B2A258E8EB100AB6BA6 /* MacroReducer.swift in Sources */,
 				695F5A9725899EBC00AB6BA6 /* WorldMan.swift in Sources */,
 				695F5AF225899FA400AB6BA6 /* EventsSplitViewController.swift in Sources */,
 				69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */,
-				69928A74247AC8FF00571B21 /* TriggerActions.swift in Sources */,
 				695F5AE725899FA400AB6BA6 /* EventsViewController.swift in Sources */,
 				695F5A9325899EBC00AB6BA6 /* MacroMan.swift in Sources */,
+				695F5B2C258E8EB100AB6BA6 /* ReactionsState.swift in Sources */,
 				69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */,
 				695F5A9225899EBC00AB6BA6 /* HotKey.swift in Sources */,
 				698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */,
@@ -874,35 +884,30 @@
 				695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */,
 				695F5A9D25899EE200AB6BA6 /* SavColor.swift in Sources */,
 				695F5AFE25899FD500AB6BA6 /* ItemTableDataSourceType.swift in Sources */,
+				695F5B27258E8EB100AB6BA6 /* TriggerReducer.swift in Sources */,
 				695F5AB525899EFD00AB6BA6 /* Session.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */,
 				695F5ABD25899EFD00AB6BA6 /* SessionHandlerProtocol.swift in Sources */,
+				695F5B2E258E8EB100AB6BA6 /* NotUndoable.swift in Sources */,
 				695F5AB225899EFD00AB6BA6 /* ConnectionStatusViewController.swift in Sources */,
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
 				695F5A7325899CE100AB6BA6 /* ModelManager.swift in Sources */,
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
-				69928A89248742C000571B21 /* MacroReducer.swift in Sources */,
-				69928A7B247AC99A00571B21 /* NotUndoable.swift in Sources */,
-				69928A872481E2F600571B21 /* UndoCommand.swift in Sources */,
-				69928A7F247ACB4E00571B21 /* ReactionsState.swift in Sources */,
 				695F5AE525899FA400AB6BA6 /* MacroViewController.swift in Sources */,
 				695F5ABB25899EFD00AB6BA6 /* InputViewController.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
 				695F5AB625899EFD00AB6BA6 /* WorldController.swift in Sources */,
-				69928A81247CB80A00571B21 /* TriggerReducer.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,
-				69928A79247AC96900571B21 /* Undoable.swift in Sources */,
 				695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */,
 				695F5AE625899FA400AB6BA6 /* EventsTabController.swift in Sources */,
-				69928A83247CBCAF00571B21 /* UndoActionContext.swift in Sources */,
 				695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */,
+				695F5B29258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift in Sources */,
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
-				69928A852481E1B700571B21 /* UndoMiddleware.swift in Sources */,
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,
 				695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */,
@@ -916,12 +921,15 @@
 				695F5A7025899CE100AB6BA6 /* SavitarObject.swift in Sources */,
 				695F5A9125899EBC00AB6BA6 /* Keycode.swift in Sources */,
 				695F5ABA25899EFD00AB6BA6 /* Command.swift in Sources */,
+				695F5B2B258E8EB100AB6BA6 /* TriggerActions.swift in Sources */,
 				695F5AE925899FA400AB6BA6 /* TriggerViewModel.swift in Sources */,
+				695F5B28258E8EB100AB6BA6 /* MacroActions.swift in Sources */,
 				695F5AF325899FA400AB6BA6 /* TitledTableCellView.swift in Sources */,
-				69928A73247AC8FF00571B21 /* MacroActions.swift in Sources */,
+				695F5B34258EE13600AB6BA6 /* UndoableReaction.swift in Sources */,
 				695F5AE425899FA400AB6BA6 /* MacroViewModel.swift in Sources */,
 				695F5AE125899FA400AB6BA6 /* TriggerMatchingViewController.swift in Sources */,
 				695F5AF925899FA400AB6BA6 /* CheckBox.swift in Sources */,
+				695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */,
 				695F5ABF25899EFD00AB6BA6 /* DocumentV1.swift in Sources */,
 				695F5A6F25899CE100AB6BA6 /* SavitarXMLProtocol.swift in Sources */,
 				695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */,

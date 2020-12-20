@@ -15,7 +15,7 @@ protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
 }
 
-struct InsertMacroAction: UndoableAction, ReactionAction {
+struct InsertMacroAction: ReactionUndoableAction, ReactionAction {
     let macro: Macro
     let index: Int
 
@@ -33,12 +33,12 @@ struct InsertMacroAction: UndoableAction, ReactionAction {
     var name: String { return "New Macro" }
     var isUndoable: Bool { return true }
 
-    func inverse(context _: UndoActionContext) -> UndoableAction? {
+    func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         return RemoveMacroAction(macroID: macro.objectID)
     }
 }
 
-struct InsertTriggerAction: UndoableAction, ReactionAction {
+struct InsertTriggerAction: ReactionUndoableAction, ReactionAction {
     let trigger: Trigger
     let index: Int
 
@@ -56,12 +56,12 @@ struct InsertTriggerAction: UndoableAction, ReactionAction {
     var name: String { return "New Trigger" }
     var isUndoable: Bool { return true }
 
-    func inverse(context _: UndoActionContext) -> UndoableAction? {
+    func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         return RemoveTriggerAction(triggerID: trigger.objectID)
     }
 }
 
-struct MoveMacroAction: UndoableAction, ReactionAction {
+struct MoveMacroAction: ReactionUndoableAction, ReactionAction {
     let from: Int
     let to: Int
 
@@ -79,7 +79,7 @@ struct MoveMacroAction: UndoableAction, ReactionAction {
     var name: String { return "Move Macro" }
     var isUndoable: Bool { return true }
 
-    func inverse(context _: UndoActionContext) -> UndoableAction? {
+    func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         let movedDown = to > from
         let inversedFrom = movedDown ? to - 1 : to
         let inversedTo = movedDown ? from : from + 1
@@ -88,7 +88,7 @@ struct MoveMacroAction: UndoableAction, ReactionAction {
     }
 }
 
-struct MoveTriggerAction: UndoableAction, ReactionAction {
+struct MoveTriggerAction: ReactionUndoableAction, ReactionAction {
     let from: Int
     let to: Int
 
@@ -106,7 +106,7 @@ struct MoveTriggerAction: UndoableAction, ReactionAction {
     var name: String { return "Move Trigger" }
     var isUndoable: Bool { return true }
 
-    func inverse(context _: UndoActionContext) -> UndoableAction? {
+    func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         let movedDown = to > from
         let inversedFrom = movedDown ? to - 1 : to
         let inversedTo = movedDown ? from : from + 1
@@ -115,7 +115,7 @@ struct MoveTriggerAction: UndoableAction, ReactionAction {
     }
 }
 
-struct RemoveMacroAction: UndoableAction, ReactionAction {
+struct RemoveMacroAction: ReactionUndoableAction, ReactionAction {
     let macroID: SavitarObjectID
 
     init(macroID: SavitarObjectID) {
@@ -131,13 +131,13 @@ struct RemoveMacroAction: UndoableAction, ReactionAction {
     var name: String { return "Delete Macro" }
     var isUndoable: Bool { return true }
 
-    func inverse(context: UndoActionContext) -> UndoableAction? {
+    func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
         guard let mlc = context.macroListContext(macroID: macroID) else { return nil }
         return InsertMacroAction(macro: mlc.macro, atIndex: mlc.index)
     }
 }
 
-struct RemoveTriggerAction: UndoableAction, ReactionAction {
+struct RemoveTriggerAction: ReactionUndoableAction, ReactionAction {
     let triggerID: SavitarObjectID
 
     init(triggerID: SavitarObjectID) {
@@ -153,7 +153,7 @@ struct RemoveTriggerAction: UndoableAction, ReactionAction {
     var name: String { return "Delete Trigger" }
     var isUndoable: Bool { return true }
 
-    func inverse(context: UndoActionContext) -> UndoableAction? {
+    func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
         guard let tlc = context.triggerListContext(triggerID: triggerID) else { return nil }
         return InsertTriggerAction(trigger: tlc.trigger, atIndex: tlc.index)
     }
@@ -234,7 +234,7 @@ struct UndoManagerProvider {
 typealias ReactionsStore = Store<ReactionsState>
 
 // A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
-protocol UndoableAction: Action, Undoable { }
+protocol ReactionUndoableAction: Action, UndoableReaction { }
 
 protocol ReactionStoreSetter {
     func setStore(reactionsStore: ReactionsStore?)
@@ -244,10 +244,6 @@ func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> Reacti
     return ReactionsStore(
         reducer: reactionsReducer,
         state: nil,
-        middleware: [
-            //            removeIdempotentActionsMiddleware,
-            //            loggingMiddleware,
-            undoMiddleware(undoManagerProvider: undoManagerProvider)
-        ]
+        middleware: [undoReactionsStateMiddleware(undoManagerProvider: undoManagerProvider)]
     )
 }

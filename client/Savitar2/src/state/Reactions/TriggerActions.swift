@@ -37,7 +37,7 @@ struct SetTriggersAction: ReactionAction {
     }
 }
 
-enum TriggerAction: UndoableAction {
+enum TriggerAction: ReactionUndoableAction {
     case disable(SavitarObjectID)
     case enable(SavitarObjectID)
     case rename(SavitarObjectID, name: String)
@@ -88,7 +88,7 @@ enum TriggerAction: UndoableAction {
         }
     }
 
-    func inverse(context: UndoActionContext) -> UndoableAction? {
+    func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
         switch self {
         case let .disable(triggerID):
             return TriggerAction.enable(triggerID)

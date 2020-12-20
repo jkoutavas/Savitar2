@@ -1,5 +1,5 @@
 //
-//  UndoMiddleware.swift
+//  ReactionsUndoMiddleware.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/29/20.
@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-class UndoableStateAdapter: UndoActionContext {
+class UndoableReactionsStateAdapter: ReactionsUndoContext {
     let state: ReactionsState
 
     init(reactionsState: ReactionsState) {
@@ -121,7 +121,9 @@ class UndoableStateAdapter: UndoActionContext {
 }
 
 extension UndoCommand {
-    convenience init?(appAction: UndoableAction, context: UndoActionContext, dispatch: @escaping DispatchFunction) {
+    convenience init?(appAction: ReactionUndoableAction,
+                      context: ReactionsUndoContext,
+                      dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context)
             else { return nil }
 
@@ -131,10 +133,10 @@ extension UndoCommand {
     }
 }
 
-func undoMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
-    func undoAction(action: UndoableAction, state: ReactionsState,
+func undoReactionsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<ReactionsState> {
+    func undoAction(action: ReactionUndoableAction, state: ReactionsState,
                     dispatch: @escaping DispatchFunction) -> UndoCommand? {
-        let context = UndoableStateAdapter(reactionsState: state)
+        let context = UndoableReactionsStateAdapter(reactionsState: state)
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
     }
@@ -148,7 +150,7 @@ func undoMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middle
                 return
             }
 
-            if let undoableAction = action as? UndoableAction, undoableAction.isUndoable,
+            if let undoableAction = action as? ReactionUndoableAction, undoableAction.isUndoable,
                 let state = getState(),
                 let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
                 let undoManager = undoManagerProvider() {

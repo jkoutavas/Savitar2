@@ -1,5 +1,5 @@
 //
-//  UndoActionContext.swift
+//  ReactionsUndoContext.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 5/24/20.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol UndoActionContext {
+protocol ReactionsUndoContext {
     func macroListContext(macroID: SavitarObjectID) -> MacroListContext?
     func macroName(macroID: SavitarObjectID) -> String?
     func macroKey(macroID: SavitarObjectID) -> HotKey?

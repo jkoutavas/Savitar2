@@ -37,7 +37,7 @@ struct SetMacrosAction: ReactionAction {
     }
 }
 
-enum MacroAction: UndoableAction {
+enum MacroAction: ReactionUndoableAction {
     case changeKey(SavitarObjectID, key: HotKey)
     case changeValue(SavitarObjectID, value: String)
     case disable(SavitarObjectID)
@@ -58,7 +58,7 @@ enum MacroAction: UndoableAction {
         }
     }
 
-    func inverse(context: UndoActionContext) -> UndoableAction? {
+    func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
 
         switch self {
         case let .changeKey(macroID, key: _):

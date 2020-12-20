@@ -8,21 +8,18 @@
 
 import Foundation
 
-protocol Undoable {
-
+protocol UndoableReaction {
     /// Name used for e.g. "Undo" menu items.
     var name: String { get }
 
     var notUndoable: NotUndoable { get }
     var isUndoable: Bool { get }
 
-    func inverse(context: UndoActionContext) -> UndoableAction?
+    func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction?
 }
 
-extension Undoable where Self: UndoableAction {
-
+extension UndoableReaction where Self: ReactionUndoableAction {
     var notUndoable: NotUndoable {
-
         return NotUndoable(self)
     }
 }
