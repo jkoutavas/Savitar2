@@ -99,6 +99,12 @@
 		695F5B3A258EE3D300AB6BA6 /* UndoManagerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */; };
 		695F5B3C258EE42A00AB6BA6 /* ItemListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */; };
 		695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */; };
+		695F5B46258EE73800AB6BA6 /* WorldsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B40258EE73800AB6BA6 /* WorldsState.swift */; };
+		695F5B47258EE73800AB6BA6 /* WorldsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B41258EE73800AB6BA6 /* WorldsActions.swift */; };
+		695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */; };
+		695F5B4A258EE73800AB6BA6 /* WorldsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B44258EE73800AB6BA6 /* WorldsStore.swift */; };
+		695F5B4B258EE73800AB6BA6 /* UndoableWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */; };
+		695F5B4D258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -244,6 +250,12 @@
 		695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManagerProvider.swift; sourceTree = "<group>"; };
 		695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListState.swift; sourceTree = "<group>"; };
 		695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsStore.swift; sourceTree = "<group>"; };
+		695F5B40258EE73800AB6BA6 /* WorldsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsState.swift; sourceTree = "<group>"; };
+		695F5B41258EE73800AB6BA6 /* WorldsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsActions.swift; sourceTree = "<group>"; };
+		695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsUndoContext.swift; sourceTree = "<group>"; };
+		695F5B44258EE73800AB6BA6 /* WorldsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsStore.swift; sourceTree = "<group>"; };
+		695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoableWorld.swift; sourceTree = "<group>"; };
+		695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsUndoMiddleware.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -527,6 +539,7 @@
 				695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */,
 				695F5B1B258E8EB100AB6BA6 /* Reactions */,
 				695F5B22258E8EB100AB6BA6 /* Undo */,
+				695F5B3F258EE73800AB6BA6 /* Worlds */,
 			);
 			path = state;
 			sourceTree = "<group>";
@@ -556,6 +569,19 @@
 				695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */,
 			);
 			path = Undo;
+			sourceTree = "<group>";
+		};
+		695F5B3F258EE73800AB6BA6 /* Worlds */ = {
+			isa = PBXGroup;
+			children = (
+				695F5B40258EE73800AB6BA6 /* WorldsState.swift */,
+				695F5B41258EE73800AB6BA6 /* WorldsActions.swift */,
+				695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */,
+				695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */,
+				695F5B44258EE73800AB6BA6 /* WorldsStore.swift */,
+				695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */,
+			);
+			path = Worlds;
 			sourceTree = "<group>";
 		};
 		69662B1B204367BD00E7CC7B /* src */ = {
@@ -864,6 +890,7 @@
 			files = (
 				695F5AC025899EFD00AB6BA6 /* Ansi2HtmlParser.swift in Sources */,
 				695F5B2F258E8EB100AB6BA6 /* UndoCommand.swift in Sources */,
+				695F5B4D258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift in Sources */,
 				695F5AEA25899FA400AB6BA6 /* TriggerViewController.swift in Sources */,
 				695F5AE825899FA400AB6BA6 /* TriggerReplyViewController.swift in Sources */,
 				695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */,
@@ -886,6 +913,7 @@
 				695F5A9225899EBC00AB6BA6 /* HotKey.swift in Sources */,
 				698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */,
 				695F5AC225899EFD00AB6BA6 /* InputSettingsController.swift in Sources */,
+				695F5B46258EE73800AB6BA6 /* WorldsState.swift in Sources */,
 				695F5AB825899EFD00AB6BA6 /* TelnetParser.swift in Sources */,
 				695F5A9C25899EE200AB6BA6 /* ColorMan.swift in Sources */,
 				695F5ABE25899EFD00AB6BA6 /* Document.swift in Sources */,
@@ -913,6 +941,7 @@
 				695F5ABB25899EFD00AB6BA6 /* InputViewController.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
+				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
 				695F5AB625899EFD00AB6BA6 /* WorldController.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
@@ -925,6 +954,7 @@
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,
+				695F5B4B258EE73800AB6BA6 /* UndoableWorld.swift in Sources */,
 				695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */,
 				695F5AF825899FA400AB6BA6 /* WorldTableDataSource.swift in Sources */,
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,
@@ -947,7 +977,9 @@
 				695F5AF925899FA400AB6BA6 /* CheckBox.swift in Sources */,
 				695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */,
 				695F5ABF25899EFD00AB6BA6 /* DocumentV1.swift in Sources */,
+				695F5B4A258EE73800AB6BA6 /* WorldsStore.swift in Sources */,
 				695F5A6F25899CE100AB6BA6 /* SavitarXMLProtocol.swift in Sources */,
+				695F5B47258EE73800AB6BA6 /* WorldsActions.swift in Sources */,
 				695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
