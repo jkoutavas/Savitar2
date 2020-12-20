@@ -95,6 +95,10 @@
 		695F5B2F258E8EB100AB6BA6 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */; };
 		695F5B34258EE13600AB6BA6 /* UndoableReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */; };
 		695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */; };
+		695F5B38258EE35000AB6BA6 /* ReactionsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B37258EE35000AB6BA6 /* ReactionsActions.swift */; };
+		695F5B3A258EE3D300AB6BA6 /* UndoManagerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */; };
+		695F5B3C258EE42A00AB6BA6 /* ItemListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */; };
+		695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -236,6 +240,10 @@
 		695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
 		695F5B33258EE13600AB6BA6 /* UndoableReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoableReaction.swift; sourceTree = "<group>"; };
 		695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionsUndoContext.swift; sourceTree = "<group>"; };
+		695F5B37258EE35000AB6BA6 /* ReactionsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsActions.swift; sourceTree = "<group>"; };
+		695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManagerProvider.swift; sourceTree = "<group>"; };
+		695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListState.swift; sourceTree = "<group>"; };
+		695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsStore.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -516,6 +524,7 @@
 		695F5B1A258E8EB100AB6BA6 /* state */ = {
 			isa = PBXGroup;
 			children = (
+				695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */,
 				695F5B1B258E8EB100AB6BA6 /* Reactions */,
 				695F5B22258E8EB100AB6BA6 /* Undo */,
 			);
@@ -527,7 +536,9 @@
 			children = (
 				695F5B1D258E8EB100AB6BA6 /* MacroActions.swift */,
 				695F5B1F258E8EB100AB6BA6 /* MacroReducer.swift */,
+				695F5B37258EE35000AB6BA6 /* ReactionsActions.swift */,
 				695F5B21258E8EB100AB6BA6 /* ReactionsState.swift */,
+				695F5B3D258EE49B00AB6BA6 /* ReactionsStore.swift */,
 				695F5B35258EE20E00AB6BA6 /* ReactionsUndoContext.swift */,
 				695F5B1E258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift */,
 				695F5B20258E8EB100AB6BA6 /* TriggerActions.swift */,
@@ -542,6 +553,7 @@
 			children = (
 				695F5B24258E8EB100AB6BA6 /* NotUndoable.swift */,
 				695F5B25258E8EB100AB6BA6 /* UndoCommand.swift */,
+				695F5B39258EE3D300AB6BA6 /* UndoManagerProvider.swift */,
 			);
 			path = Undo;
 			sourceTree = "<group>";
@@ -864,6 +876,7 @@
 				695F5A9625899EBC00AB6BA6 /* TriggerMan.swift in Sources */,
 				695F5B2A258E8EB100AB6BA6 /* MacroReducer.swift in Sources */,
 				695F5A9725899EBC00AB6BA6 /* WorldMan.swift in Sources */,
+				695F5B38258EE35000AB6BA6 /* ReactionsActions.swift in Sources */,
 				695F5AF225899FA400AB6BA6 /* EventsSplitViewController.swift in Sources */,
 				69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */,
 				695F5AE725899FA400AB6BA6 /* EventsViewController.swift in Sources */,
@@ -886,6 +899,7 @@
 				695F5AFE25899FD500AB6BA6 /* ItemTableDataSourceType.swift in Sources */,
 				695F5B27258E8EB100AB6BA6 /* TriggerReducer.swift in Sources */,
 				695F5AB525899EFD00AB6BA6 /* Session.swift in Sources */,
+				695F5B3A258EE3D300AB6BA6 /* UndoManagerProvider.swift in Sources */,
 				69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */,
 				69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */,
 				69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */,
@@ -904,6 +918,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,
 				695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */,
+				695F5B3C258EE42A00AB6BA6 /* ItemListState.swift in Sources */,
 				695F5AE625899FA400AB6BA6 /* EventsTabController.swift in Sources */,
 				695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */,
 				695F5B29258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift in Sources */,
@@ -915,6 +930,7 @@
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,
 				695F5AEB25899FA400AB6BA6 /* TriggersTabController.swift in Sources */,
 				695F5AC425899EFD00AB6BA6 /* DocumentV2.swift in Sources */,
+				695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */,
 				695F5AE325899FA400AB6BA6 /* MacrosTabController.swift in Sources */,
 				695F5AF725899FA400AB6BA6 /* WorldPickerController.swift in Sources */,
 				695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */,
