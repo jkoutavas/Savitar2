@@ -26,7 +26,7 @@ extension Array where Element: Equatable {
         }
         insert(contentsOf: movingData, at: targetIndex)
     }
-    
+
     // Remove first collection element that is equal to the given `object`:
     mutating func remove(object: Element) {
         guard let index = firstIndex(of: object) else {return}
