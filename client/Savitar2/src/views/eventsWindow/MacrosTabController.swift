@@ -14,8 +14,8 @@ class MacrosTabController: EventsTabController {
     private var subscriber: MacrosSubscriber<ItemListState<Macro>>?
     private var selectionIsChanging = false
 
-    override func setStore(reactionsStore: ReactionsStore?) {
-        dataSource.setStore(reactionsStore: store)
+    override func setStore(_ store: ReactionsStore?) {
+        dataSource.setStore(store)
     }
 
     override func viewDidLoad() {

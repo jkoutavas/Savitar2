@@ -19,7 +19,7 @@ class EventsSplitViewController: NSSplitViewController {
                 evc.store = store
             }
             if let dvc = detailViewController {
-                dvc.setStore(reactionsStore: store)
+                dvc.setStore(store)
             }
         }
     }

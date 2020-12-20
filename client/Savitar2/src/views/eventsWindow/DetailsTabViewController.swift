@@ -11,19 +11,19 @@ import Cocoa
 class DetailsTabViewController: NSTabViewController, ReactionsStoreSetter {
     var store: ReactionsStore?
 
-    func setStore(reactionsStore: ReactionsStore?) {
-        store = reactionsStore
+    func setStore(_ store: ReactionsStore?) {
+        self.store = store
     }
 
     override func viewWillAppear() {
         super.viewWillAppear()
 
         if let triggerViewController = tabView.tabViewItems[0].viewController as? TriggerViewController {
-            triggerViewController.setStore(reactionsStore: store)
+            triggerViewController.setStore(store)
         }
 
         if let macroViewController = tabView.tabViewItems[1].viewController as? MacroViewController {
-            macroViewController.setStore(reactionsStore: store)
+            macroViewController.setStore(store)
         }
     }
 }

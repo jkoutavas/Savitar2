@@ -12,7 +12,7 @@ import ReSwift
 typealias ReactionsStore = Store<ReactionsState>
 
 protocol ReactionsStoreSetter {
-    func setStore(reactionsStore: ReactionsStore?)
+    func setStore(_ store: ReactionsStore?)
 }
 
 func reactionsStore(undoManagerProvider: @escaping () -> UndoManager?) -> ReactionsStore {

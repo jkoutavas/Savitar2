@@ -9,17 +9,18 @@
 import Cocoa
 
 protocol ItemTableDataSourceType {
-    associatedtype ItemViewModel
-    associatedtype ListViewModel
+    associatedtype ItemViewModelT
+    associatedtype ListViewModelT
+    associatedtype StoreT
     var tableDataSource: NSTableViewDataSource { get }
 
     var selectedRow: SelectionState { get }
-    var selectedItem: ItemViewModel? { get }
+    var selectedItem: ItemViewModelT? { get }
     var itemCount: Int { get }
 
-    func updateContents(listModel: ListViewModel)
-    func getStore() -> ReactionsStore?
-    func setStore(reactionsStore: ReactionsStore?)
+    func updateContents(listModel: ListViewModelT)
+    func getStore() -> StoreT?
+    func setStore(_ store: StoreT?)
     func itemCellView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
 }
 

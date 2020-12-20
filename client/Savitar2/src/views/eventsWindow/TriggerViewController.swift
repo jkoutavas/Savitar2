@@ -36,12 +36,12 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionsStoreSe
 
     var store: ReactionsStore?
 
-    func setStore(reactionsStore: ReactionsStore?) {
-        store = reactionsStore
-        appearanceViewController?.setStore(reactionsStore: store)
-        audioCueViewController?.setStore(reactionsStore: store)
-        matchingViewController?.setStore(reactionsStore: store)
-        replyViewController?.setStore(reactionsStore: store)
+    func setStore(_ store: ReactionsStore?) {
+        self.store = store
+        appearanceViewController?.setStore(store)
+        audioCueViewController?.setStore(store)
+        matchingViewController?.setStore(store)
+        replyViewController?.setStore(store)
     }
 
     override func viewWillAppear() {

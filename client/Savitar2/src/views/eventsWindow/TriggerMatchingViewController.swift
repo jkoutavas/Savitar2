@@ -17,8 +17,8 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
     var trigger: Trigger?
 
     var store: ReactionsStore?
-    func setStore(reactionsStore: ReactionsStore?) {
-        store = reactionsStore
+    func setStore(_ store: ReactionsStore?) {
+        self.store = store
     }
 
     override func viewWillAppear() {

@@ -13,11 +13,11 @@ class EventsTabController: NSViewController, ReactionsStoreSetter {
 
     internal var store: ReactionsStore? {
         didSet {
-            setStore(reactionsStore: store)
+            setStore(store)
         }
     }
 
-    func setStore(reactionsStore: ReactionsStore?) {
+    func setStore(_ store: ReactionsStore?) {
         fatalError("Must Override")
     }
 }

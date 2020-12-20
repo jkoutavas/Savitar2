@@ -14,8 +14,8 @@ class TriggersTabController: EventsTabController {
     private var subscriber: TriggersSubscriber<ItemListState<Trigger>>?
     private var selectionIsChanging = false
 
-    override func setStore(reactionsStore: ReactionsStore?) {
-        dataSource.setStore(reactionsStore: store)
+    override func setStore(_ store: ReactionsStore?) {
+        dataSource.setStore(store)
     }
 
     override func viewDidLoad() {

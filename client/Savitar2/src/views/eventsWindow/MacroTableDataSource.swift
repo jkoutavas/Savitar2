@@ -84,8 +84,8 @@ extension MacroTableDataSource: ItemTableDataSourceType {
         return store
     }
 
-    func setStore(reactionsStore: ReactionsStore?) {
-        store = reactionsStore
+    func setStore(_ store: ReactionsStore?) {
+        self.store = store
     }
 
     func updateContents(listModel: MacroListViewModel) {
