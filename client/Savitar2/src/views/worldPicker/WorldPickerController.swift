@@ -10,7 +10,7 @@ import Cocoa
 import ReSwift
 
 class WorldPickerController: NSViewController, WorldsStoreSetter {
-    private var store: WorldsStore?
+    var store: WorldsStore?
     private var dataSource = WorldTableDataSource()
     private var subscriber: WorldsSubscriber<ItemListState<World>>?
     private var selectionIsChanging = false
@@ -123,6 +123,9 @@ class WorldsSubscriber<T>: StoreSubscriber {
             viewModels: viewModels,
             selectedRow: state.selection
         )
+        if let index = state.selection, index < state.items.count {
+            tableController?.representedObject = WorldController(world: state.items[index])
+        }
 
         tableController?.displayList(listModel: listModel)
     }

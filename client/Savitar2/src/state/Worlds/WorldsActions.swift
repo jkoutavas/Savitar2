@@ -16,6 +16,20 @@ protocol WorldAction: Action {
     func apply(oldState: WorldsState) -> WorldsState
 }
 
+struct SetWorldsAction: WorldAction {
+    let worlds: [World]
+
+    init(worlds: [World]) {
+        self.worlds = worlds
+    }
+
+    func apply(oldState: WorldsState) -> WorldsState {
+        var result = oldState
+        result.worldList.items = worlds
+        return result
+    }
+}
+
 struct SelectWorldAction: WorldAction {
     let selection: SelectionState
 

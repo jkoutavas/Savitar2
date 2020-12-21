@@ -43,12 +43,12 @@ extension WorldTableDataSource: ItemTableDataSourceType {
             guard let textField = cell.textField else { return }
             textField.stringValue = value
         }
-//        guard let viewModel = listModel?.viewModels[row] else { return nil }
+        guard let viewModel = listModel?.viewModels[row] else { return nil }
         switch tableColumn {
         case tableView.tableColumns[0]:
             guard let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self)
                 as? TitledTableCellView else { return nil }
- //           cell.viewModel = viewModel
+            cell.updateContent(viewModel: viewModel)
             return cell
 
         default:

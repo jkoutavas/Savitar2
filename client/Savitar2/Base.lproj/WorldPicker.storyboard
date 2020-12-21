@@ -62,7 +62,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="wzS-R6-ohH">
+                                                        <tableCellView id="wzS-R6-ohH" customClass="TitledTableCellView" customModule="Savitar2" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="299" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -139,6 +139,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="representedObject.telnetString" id="0CQ-eh-VfN"/>
+                                </connections>
                             </textField>
                         </subviews>
                     </view>
@@ -147,6 +150,7 @@
                     </connections>
                 </viewController>
                 <customObject id="i8T-Bm-BeY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="2Gr-Vo-NmD"/>
             </objects>
             <point key="canvasLocation" x="-2725" y="-11633"/>
         </scene>
