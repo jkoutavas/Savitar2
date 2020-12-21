@@ -17,6 +17,7 @@ class WorldController: NSController {
     @objc dynamic var name: String { get { world.name } set(name) { world.name = name } }
     @objc dynamic var port: UInt32 { get { world.port } set(port) { world.port = port } }
     @objc dynamic var host: String { get { world.host } set(host) { world.host = host } }
+    @objc dynamic var telnetString: String { get { world.telnetString } set(telnet) { world.telnetString = telnet } }
     @objc dynamic var cmdMarker: String { get { world.cmdMarker } set(cmdMarker) { world.cmdMarker = cmdMarker } }
     @objc dynamic var varMarker: String { get { world.varMarker } set(varMarker) { world.varMarker = varMarker } }
     @objc dynamic var wildMarker: String { get { world.wildMarker } set(wildMarker) { world.wildMarker = wildMarker } }

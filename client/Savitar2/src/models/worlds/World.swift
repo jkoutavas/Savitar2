@@ -49,6 +49,26 @@ class World: SavitarObject, NSCopying {
     var port: UInt32 = 7777
     var host = "newworld@somewhere.org"
 
+    var telnetString: String {
+        get {
+            "\(TelnetIdentifier)\(host):\(port)"
+        }
+        set {
+            let body = newValue.dropPrefix(TelnetIdentifier)
+             let parts = body.components(separatedBy: ":")
+             if parts.count == 2 {
+                 host = parts[0]
+                 guard let p1 = UInt32(parts[1]) else { return }
+                 port = p1
+             } else if parts.count == 4 {
+                 // might have ::1 as the host
+                 host = "localhost"
+                 guard let p3 = UInt32(parts[3]) else { return }
+                 port = p3
+             }
+        }
+    }
+
     var logonCmd = ""
     var logoffCmd = ""
 
@@ -190,18 +210,7 @@ class World: SavitarObject, NSCopying {
 
             case WorldAttribIdentifier.URL.rawValue:
                 if attribute.value.hasPrefix(TelnetIdentifier) {
-                    let body = attribute.value.dropPrefix(TelnetIdentifier)
-                    let parts = body.components(separatedBy: ":")
-                    if parts.count == 2 {
-                        host = parts[0]
-                        guard let p1 = UInt32(parts[1]) else { break }
-                        port = p1
-                    } else if parts.count == 4 {
-                        // might have ::1 as the host
-                        host = "localhost"
-                        guard let p3 = UInt32(parts[3]) else { break }
-                        port = p3
-                    }
+                    telnetString = attribute.value
                 }
 
             case WorldAttribIdentifier.flags.rawValue:
@@ -349,8 +358,7 @@ class World: SavitarObject, NSCopying {
     override func toXMLElement() throws -> XMLElement {
         let worldElem = XMLElement(name: WorldElemIdentifier)
 
-        worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,
-                               stringValue: "\(TelnetIdentifier)\(host):\(port)")
+        worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,stringValue: telnetString)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.name.rawValue, stringValue: name)
 
