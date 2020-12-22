@@ -130,6 +130,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="connectAction:" target="xdQ-Db-Fg2" id="KmI-ae-XVm"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBE-c6-hFX">
                                 <rect key="frame" x="23" y="49" width="301" height="24"/>

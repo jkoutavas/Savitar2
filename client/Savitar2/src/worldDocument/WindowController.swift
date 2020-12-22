@@ -31,8 +31,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
         // world is read-only (v1.0) then append an indication of that.
         var status = ""
         guard let doc = document as? Document else { return "" }
-        doc.world.editable = doc.version != 1
-        if !doc.world.editable {
+        guard let world = doc.world else { return "" }
+        world.editable = doc.version != 1
+        if !world.editable {
             status = " [READ ONLY]"
         }
 
@@ -90,7 +91,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private func worldDidChange(from fromWorld: World) {
         guard let doc = document as? Document else { return }
         doc.undoManager?.registerUndo(withTarget: self, handler: { [oldWorld = doc.world] (_) in
-            self.worldDidChange(from: oldWorld)
+            self.worldDidChange(from: oldWorld!)
         })
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
@@ -100,16 +101,18 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     func updateViews(_ newValue: World?) {
-        let autosaveName = window?.representedFilename ?? "unknown"
-        window?.setFrameUsingName(autosaveName)
-        window?.setFrameAutosaveName(autosaveName)
+        guard let window = self.window else { return }
+
+        let autosaveName = window.representedFilename
+        window.setFrameUsingName(autosaveName)
+        window.setFrameAutosaveName(autosaveName)
 
         let splitViewController = contentViewController as? SessionViewController
 
         guard let svc = splitViewController else { return }
         guard let inputVC = svc.inputViewController else { return }
         guard let outputVC = svc.outputViewController else { return }
-        window?.makeFirstResponder(inputVC.textView)
+        window.makeFirstResponder(inputVC.textView)
 
         guard let w = newValue else { return }
 
@@ -124,12 +127,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         guard let doc = document as? Document else { return }
         if doc.version == 1 {
-            window?.setContentSize(w.windowSize)
-            if let titleHeight = window?.titlebarHeight {
-                if let screenSize = NSScreen.main?.frame.size {
-                    window?.setFrameTopLeftPoint(NSPoint(x: w.position.x,
-                                                         y: screenSize.height - w.position.y + titleHeight))
-                }
+            window.setContentSize(w.windowSize)
+            if let screenSize = NSScreen.main?.frame.size {
+                window.setFrameTopLeftPoint(NSPoint(x: w.position.x,
+                                                     y: screenSize.height - w.position.y + window.titlebarHeight))
             }
 
             let dividerHeight: CGFloat = svc.splitView.dividerThickness
@@ -137,7 +138,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
             let split: CGFloat = w.windowSize.height - dividerHeight - rowHeight() * CGFloat(w.inputRows+1)
             svc.splitView.setPosition(split, ofDividerAt: 0)
 
-            window?.setIsZoomed(w.zoomed)
+            window.setIsZoomed(w.zoomed)
         }
 
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving

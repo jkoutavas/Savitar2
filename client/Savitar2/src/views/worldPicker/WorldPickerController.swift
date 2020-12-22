@@ -9,6 +9,15 @@
 import Cocoa
 import ReSwift
 
+extension Document {
+    func loadAndShow(world: World) {
+        version = 2
+        self.world = world
+        makeWindowControllers()
+        showWindows()
+    }
+}
+
 class WorldPickerController: NSViewController, WorldsStoreSetter {
     var store: WorldsStore?
     private var dataSource = WorldTableDataSource()
@@ -45,6 +54,17 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         super.viewWillDisappear()
 
         store?.unsubscribe(subscriber!)
+    }
+
+    @IBAction func connectAction(_ sender: AnyObject) {
+        if let worldController = representedObject as? WorldController {
+            do {
+                let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
+                if let worldDocument = document as? Document {
+                    worldDocument.loadAndShow(world: worldController.world)
+                }
+            } catch {}
+        }
     }
 }
 

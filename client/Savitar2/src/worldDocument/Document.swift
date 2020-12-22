@@ -17,8 +17,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     var version = 1 // start with the assumption that a v1 world XML is being parsed
 
     var windowController: WindowController?
-    var world = World()
-
+    var world: World?
     var session: Session?
     var sessionViewController: SessionViewController?
 
@@ -32,6 +31,8 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     }
 
     override func makeWindowControllers() {
+        guard let world = self.world else { return }
+
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         guard let windowController = storyboard.instantiateController(withIdentifier:
@@ -52,6 +53,9 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     }
 
     override func read(from data: Data, ofType typeName: String) throws {
+        self.world = World()
+        guard let world = self.world else { return }
+
         let xml = XML.parse(data)
         try self.parse(xml: xml[DocumentElemIdentifier])
 
@@ -96,6 +100,8 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
             guard let outputVC = svc.outputViewController else { return }
             outputVC.output(string: string)
         }
+
+        guard let world = self.world else { return }
 
         var attributes = [NSAttributedString.Key: AnyObject]()
         attributes[NSAttributedString.Key.font] = NSFont(name: world.fontName, size: world.fontSize)
@@ -159,13 +165,16 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
             }
         }
 
-        try self.world.parse(xml: xml[WorldElemIdentifier])
+        guard let world = self.world else { return }
+        try world.parse(xml: xml[WorldElemIdentifier])
     }
 
     func toXMLElement() throws -> XMLElement {
         let docElem = XMLElement(name: DocumentElemIdentifier)
 
         version = 2
+
+        guard let world = self.world else { return XMLElement() }
 
         docElem.addAttribute(name: DocumentAttribIdentifier.type.rawValue, stringValue: type)
         docElem.addAttribute(name: DocumentAttribIdentifier.version.rawValue, stringValue: "\(version)")
