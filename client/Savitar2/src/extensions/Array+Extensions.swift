@@ -19,8 +19,8 @@ extension Array where Element: Equatable {
     }
 
     mutating func move(from indexes: IndexSet, to toIndex: Index) {
-        let movingData = indexes.map{ self[$0] }
-        let targetIndex = toIndex - indexes.filter{ $0 < toIndex }.count
+        let movingData = indexes.map { self[$0] }
+        let targetIndex = toIndex - indexes.filter { $0 < toIndex }.count
         for (i, e) in indexes.enumerated() {
             remove(at: e - i)
         }

@@ -358,7 +358,7 @@ class World: SavitarObject, NSCopying {
     override func toXMLElement() throws -> XMLElement {
         let worldElem = XMLElement(name: WorldElemIdentifier)
 
-        worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue,stringValue: telnetString)
+        worldElem.addAttribute(name: WorldAttribIdentifier.URL.rawValue, stringValue: telnetString)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.name.rawValue, stringValue: name)
 
