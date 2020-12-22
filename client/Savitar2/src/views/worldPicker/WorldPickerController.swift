@@ -35,6 +35,9 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
+        tableView.target = self
+        tableView.doubleAction = #selector(tableViewDoubleAction)
+
         subscriber = WorldsSubscriber<ItemListState<World>>(self)
     }
 
@@ -56,7 +59,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         store?.unsubscribe(subscriber!)
     }
 
-    @IBAction func connectAction(_ sender: AnyObject) {
+    @objc func tableViewDoubleAction(sender: AnyObject) {
         if let worldController = representedObject as? WorldController {
             do {
                 let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
@@ -65,6 +68,10 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
                 }
             } catch {}
         }
+    }
+
+    @IBAction func connectAction(_ sender: AnyObject) {
+        tableViewDoubleAction(sender: sender)
     }
 }
 
