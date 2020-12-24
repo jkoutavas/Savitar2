@@ -18,6 +18,12 @@ extension Document {
     }
 }
 
+class PickedWorldController: WorldController {
+    @objc dynamic var worldIsSelected: Bool {
+        return true
+    }
+}
+
 class WorldPickerController: NSViewController, WorldsStoreSetter {
     var store: WorldsStore?
     private var dataSource = WorldTableDataSource()
@@ -68,6 +74,28 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
                 }
             } catch {}
         }
+    }
+
+    @IBAction func addAction(_ sender: Any) {
+        let bundle = Bundle(for: Self.self)
+        let wizardStoryboard = NSStoryboard(name: "WorldWizard", bundle: bundle)
+
+        // we contain the WorldWizardController into a NSWindowController so we can set a minimum resize on the sheet
+        guard let wc = wizardStoryboard.instantiateInitialController() as? NSWindowController else { return }
+
+/*
+        guard let vc = wc.window?.contentViewController as? WorldWizardController else { return }
+
+        guard let doc = document as? Document else { return }
+        vc.world = doc.world
+        vc.completionHandler = { apply, editedWorld in
+            if apply == true {
+                self.worldDidChange(from: editedWorld!)
+            }
+            self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
+        }
+*/
+        wc.showWindow(self)
     }
 
     @IBAction func connectAction(_ sender: AnyObject) {
@@ -150,8 +178,11 @@ class WorldsSubscriber<T>: StoreSubscriber {
             viewModels: viewModels,
             selectedRow: state.selection
         )
+
         if let index = state.selection, index < state.items.count {
-            tableController?.representedObject = WorldController(world: state.items[index])
+            tableController?.representedObject = PickedWorldController(world: state.items[index])
+        } else {
+           tableController?.representedObject = nil
         }
 
         tableController?.displayList(listModel: listModel)

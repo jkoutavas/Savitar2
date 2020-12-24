@@ -42,16 +42,16 @@ enum IntensityType: Int {
 }
 
 class World: SavitarObject, NSCopying {
+    // TODO: consider moving this to WorldController
     // KVO-based world settings with their defaults
     @objc dynamic var editable = true
 
-    // the Savitar 1 defaults for a new world port and host
-    var port: UInt32 = 7777
-    var host = "newworld@somewhere.org"
+    var port: UInt32 = 0
+    var host = ""
 
     var telnetString: String {
         get {
-            "\(TelnetIdentifier)\(host):\(port)"
+            host.count > 0 ? "\(TelnetIdentifier)\(host):\(port)" : ""
         }
         set {
             let body = newValue.dropPrefix(TelnetIdentifier)
