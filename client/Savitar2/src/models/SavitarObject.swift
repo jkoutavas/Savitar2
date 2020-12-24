@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyXMLParser
 
-class SavitarObject: Equatable, SavitarXMLProtocol {
+class SavitarObject: NSObject, SavitarXMLProtocol {
     let objectID: SavitarObjectID
     @objc dynamic var name = ""
 
@@ -17,7 +17,7 @@ class SavitarObject: Equatable, SavitarXMLProtocol {
         self.objectID = objectID
     }
 
-    init() {
+    override init() {
         objectID = SavitarObjectID()
     }
 

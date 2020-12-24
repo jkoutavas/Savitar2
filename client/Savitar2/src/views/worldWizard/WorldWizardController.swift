@@ -8,9 +8,9 @@
 
 import Cocoa
 
-class WizardWorldController: WorldController {
+class WizardWorldController: World {
     @objc dynamic var worldIsOkay: Bool {
-        return world.name.count > 0 && world.telnetString.count > 0
+        return name.count > 0 && telnetString.count > 0
     }
 }
 

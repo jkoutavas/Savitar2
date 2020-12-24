@@ -44,7 +44,6 @@
 		695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */; };
 		695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA125899EFD00AB6BA6 /* OutputView.swift */; };
 		695F5AB525899EFD00AB6BA6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA225899EFD00AB6BA6 /* Session.swift */; };
-		695F5AB625899EFD00AB6BA6 /* WorldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA325899EFD00AB6BA6 /* WorldController.swift */; };
 		695F5AB725899EFD00AB6BA6 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */; };
 		695F5AB825899EFD00AB6BA6 /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */; };
 		695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA625899EFD00AB6BA6 /* WindowController.swift */; };
@@ -196,7 +195,6 @@
 		695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
 		695F5AA125899EFD00AB6BA6 /* OutputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 		695F5AA225899EFD00AB6BA6 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		695F5AA325899EFD00AB6BA6 /* WorldController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldController.swift; sourceTree = "<group>"; };
 		695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
 		695F5AA625899EFD00AB6BA6 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
@@ -462,7 +460,6 @@
 				695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */,
 				695F5AA125899EFD00AB6BA6 /* OutputView.swift */,
 				695F5AA225899EFD00AB6BA6 /* Session.swift */,
-				695F5AA325899EFD00AB6BA6 /* WorldController.swift */,
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
 				695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */,
 				695F5AA625899EFD00AB6BA6 /* WindowController.swift */,
@@ -954,7 +951,6 @@
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
-				695F5AB625899EFD00AB6BA6 /* WorldController.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,

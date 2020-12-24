@@ -18,12 +18,6 @@ extension Document {
     }
 }
 
-class PickedWorldController: WorldController {
-    @objc dynamic var worldIsSelected: Bool {
-        return true
-    }
-}
-
 class WorldPickerController: NSViewController, WorldsStoreSetter {
     var store: WorldsStore?
     private var dataSource = WorldTableDataSource()
@@ -31,6 +25,8 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     private var selectionIsChanging = false
 
     @IBOutlet weak var tableView: NSTableView!
+
+    @objc dynamic var worldIsSelected = false
 
     func setStore(_ store: WorldsStore?) {
         dataSource.setStore(store)
@@ -66,11 +62,11 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     }
 
     @objc func tableViewDoubleAction(sender: AnyObject) {
-        if let worldController = representedObject as? WorldController {
+        if let world = representedObject as? World {
             do {
                 let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
                 if let worldDocument = document as? Document {
-                    worldDocument.loadAndShow(world: worldController.world)
+                    worldDocument.loadAndShow(world: world)
                 }
             } catch {}
         }
@@ -180,9 +176,11 @@ class WorldsSubscriber<T>: StoreSubscriber {
         )
 
         if let index = state.selection, index < state.items.count {
-            tableController?.representedObject = PickedWorldController(world: state.items[index])
+            tableController?.representedObject = state.items[index]
+            tableController?.worldIsSelected = true
         } else {
-           tableController?.representedObject = nil
+            tableController?.representedObject = nil
+            tableController?.worldIsSelected = false
         }
 
         tableController?.displayList(listModel: listModel)

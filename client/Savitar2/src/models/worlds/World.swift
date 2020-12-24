@@ -42,14 +42,13 @@ enum IntensityType: Int {
 }
 
 class World: SavitarObject, NSCopying {
-    // TODO: consider moving this to WorldController
     // KVO-based world settings with their defaults
     @objc dynamic var editable = true
 
-    var port: UInt32 = 0
-    var host = ""
+    @objc dynamic var port: UInt32 = 0
+    @objc dynamic var host = ""
 
-    var telnetString: String {
+    @objc dynamic var telnetString: String {
         get {
             host.count > 0 ? "\(TelnetIdentifier)\(host):\(port)" : ""
         }
@@ -69,37 +68,60 @@ class World: SavitarObject, NSCopying {
         }
     }
 
-    var logonCmd = ""
-    var logoffCmd = ""
+    @objc dynamic var logonCmd = ""
+    @objc dynamic var logoffCmd = ""
 
-    var cmdMarker = "##"
-    var varMarker = "%%"
-    var wildMarker = "$$"
-    var backColor = NSColor.white
-    var foreColor = NSColor.black
-    var linkColor = NSColor.blue
-    var echoBackColor = NSColor.init(hex: "9CA6FF")!
-    var intenseColor = NSColor.white
-    var fontName = "Monaco"
-    var fontSize: CGFloat = 9
-    var monoFontName = "Monaco"
-    var monoFontSize: CGFloat = 9
-    var MCPFontName = "Monaco"
-    var MCPFontSize: CGFloat = 9
+    @objc dynamic var cmdMarker = "##"
+    @objc dynamic var varMarker = "%%"
+    @objc dynamic var wildMarker = "$$"
+    @objc dynamic var backColor = NSColor.white
+    @objc dynamic var foreColor = NSColor.black
+    @objc dynamic var linkColor = NSColor.blue
+    @objc dynamic var echoBackColor = NSColor.init(hex: "9CA6FF")!
+    @objc dynamic var intenseColor = NSColor.white
+    @objc dynamic var fontName = "Monaco"
+    @objc dynamic var fontSize: CGFloat = 9
+    @objc dynamic var monoFontName = "Monaco"
+    @objc dynamic var monoFontSize: CGFloat = 9
+    @objc dynamic var MCPFontName = "Monaco"
+    @objc dynamic var MCPFontSize: CGFloat = 9
+
+    @objc dynamic var inputRows = 2
+    @objc dynamic var outputRows = 24
+    @objc dynamic var columns = 80
+    @objc dynamic var position = NSPoint(x: 44, y: 0)
+    @objc dynamic var windowSize = NSSize(width: 480, height: 270)
+    @objc dynamic var zoomed = false
+    @objc dynamic var outputMax = 100 * 1024
+    @objc dynamic var outputMin = 25 * 1024
+    @objc dynamic  var flushTicks = 30
+    @objc dynamic var retrySecs = 0
+    @objc dynamic var keepAliveMins = 0
+
+    @objc dynamic var ansiEnabled: Bool {
+        get { flags.contains(.ansi) }
+        set(enabled) {
+            if enabled {
+                flags.insert(.ansi)
+            } else {
+                flags.remove(.ansi)
+            }
+        }
+    }
+
+    @objc dynamic var htmlEnabled: Bool {
+        get { flags.contains(.html) }
+        set(enabled) {
+            if enabled {
+                flags.insert(.html)
+            } else {
+                flags.remove(.html)
+            }
+        }
+    }
 
     var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
-    var inputRows = 2
-    var outputRows = 24
-    var columns = 80
-    var position = NSPoint(x: 44, y: 0)
-    var windowSize = NSSize(width: 480, height: 270)
-    var zoomed = false
-    var outputMax = 100 * 1024
-    var outputMin = 25 * 1024
-    var flushTicks = 30
-    var retrySecs = 0
-    var keepAliveMins = 0
 
     var macroMan = MacroMan()
     var triggerMan = TriggerMan()

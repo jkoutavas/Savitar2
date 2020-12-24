@@ -16,24 +16,24 @@ class InputSettingsController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
-        noEchoRadio.state = !wc.world.flags.contains(.echoCmds) && !wc.world.flags.contains(.echoCR) ? .on : .off
-        echoCROnlyRadio.state = wc.world.flags.contains(.echoCR) ? .on : .off
-        echoAllRadio.state = wc.world.flags.contains(.echoCmds) ? .on : .off
+        noEchoRadio.state = !world.flags.contains(.echoCmds) && !world.flags.contains(.echoCR) ? .on : .off
+        echoCROnlyRadio.state = world.flags.contains(.echoCR) ? .on : .off
+        echoAllRadio.state = world.flags.contains(.echoCmds) ? .on : .off
     }
 
     @IBAction func echoRadioButtonChanged(_ sender: AnyObject) {
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
         if noEchoRadio.state == .on {
-            wc.world.flags.remove([.echoCmds, .echoCR])
+            world.flags.remove([.echoCmds, .echoCR])
         } else if echoCROnlyRadio.state == .on {
-            wc.world.flags.remove(.echoCmds)
-            wc.world.flags.insert(.echoCR)
+            world.flags.remove(.echoCmds)
+            world.flags.insert(.echoCR)
         } else {
-            wc.world.flags.remove(.echoCR)
-            wc.world.flags.insert(.echoCmds)
+            world.flags.remove(.echoCR)
+            world.flags.insert(.echoCmds)
         }
     }
 }

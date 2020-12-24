@@ -25,7 +25,7 @@ class WorldSettingsController: NSViewController {
             // gets called at storyboard instantiation, before we have
             // the chance to set the world value
             for viewItem in (_tabViewController?.tabViewItems)! {
-                viewItem.viewController?.representedObject = WorldController(world: _editedWorld!)
+                viewItem.viewController?.representedObject = _editedWorld!
             }
         }
     }

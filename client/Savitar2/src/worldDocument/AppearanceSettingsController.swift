@@ -29,10 +29,10 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
             }
          }
 
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
-        fontPopup.selectItem(withTitle: wc.world.fontName)
-        monoFontPopup.selectItem(withTitle: wc.world.monoFontName)
+        fontPopup.selectItem(withTitle: world.fontName)
+        monoFontPopup.selectItem(withTitle: world.monoFontName)
         attributeChanged()
     }
 
@@ -42,28 +42,28 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     }
 
     @IBAction func fontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
-            wc.world.fontName = family
+            world.fontName = family
             attributeChanged()
         }
     }
 
     @IBAction func monoFontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
-            wc.world.monoFontName = family
+            world.monoFontName = family
             attributeChanged()
         }
     }
 
     func attributeChanged() {
-        guard let wc = self.representedObject as? WorldController else { return }
+        guard let world = self.representedObject as? World else { return }
 
         outputView.clear()
-        outputView.setStyle(world: wc.world)
+        outputView.setStyle(world: world)
 
         if let filepath = Bundle.main.path(forResource: "Appearance", ofType: "txt") {
             let esc = "\u{1B}"

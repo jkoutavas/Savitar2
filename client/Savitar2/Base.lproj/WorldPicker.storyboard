@@ -119,7 +119,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="connectAction:" target="xdQ-Db-Fg2" id="KmI-ae-XVm"/>
-                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="representedObject.worldIsSelected" id="jsd-4J-vJM"/>
+                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="worldIsSelected" id="VCv-2X-fPI"/>
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBE-c6-hFX">
@@ -146,7 +146,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="representedObject.worldIsSelected" id="smm-Ba-wGF"/>
+                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="worldIsSelected" id="9RZ-0d-bZF"/>
                                 </connections>
                             </button>
                         </subviews>
