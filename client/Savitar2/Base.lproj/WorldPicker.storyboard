@@ -146,6 +146,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="removeAction:" target="xdQ-Db-Fg2" id="gxL-C2-ybh"/>
                                     <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="worldIsSelected" id="9RZ-0d-bZF"/>
                                 </connections>
                             </button>

@@ -61,15 +61,14 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     }
 
     @objc func tableViewDoubleAction(sender: AnyObject) {
-        if let world = self.world {
-            do {
-                let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
-                if let worldDocument = document as? Document {
-                    worldDocument.loadAndShow(world: world)
-                }
-            } catch {}
-        }
-    }
+        guard let world = self.world else { return }
+        do {
+            let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
+            if let worldDocument = document as? Document {
+                worldDocument.loadAndShow(world: world)
+            }
+        } catch {}
+     }
 
     @IBAction func addAction(_ sender: Any) {
         let bundle = Bundle(for: Self.self)
@@ -78,7 +77,6 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         guard let wc = wizardStoryboard.instantiateInitialController() as? NSWindowController else { return }
         guard let vc = wc.window?.contentViewController as? WorldWizardController else { return }
         vc.completionHandler = { apply, newWorld in
- //           self.view.window?.makeKeyAndOrderFront(self)
             if apply == true {
                 let rows = self.dataSource.listModel?.itemCount ?? 0
                 let row = self.tableView.selectedRow >= 0 ? self.tableView.selectedRow + 1 : rows
@@ -89,6 +87,11 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
             }
         }
         wc.showWindow(self)
+    }
+
+    @IBAction func removeAction(_ sender: Any) {
+        guard let world = self.world else { return }
+        self.store?.dispatch(RemoveWorldAction(worldID: world.objectID))
     }
 
     @IBAction func connectAction(_ sender: AnyObject) {
