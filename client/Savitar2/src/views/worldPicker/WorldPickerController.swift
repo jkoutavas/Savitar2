@@ -26,6 +26,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
 
     @IBOutlet weak var tableView: NSTableView!
 
+    @objc dynamic var world: World?
     @objc dynamic var worldIsSelected = false
 
     func setStore(_ store: WorldsStore?) {
@@ -60,7 +61,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     }
 
     @objc func tableViewDoubleAction(sender: AnyObject) {
-        if let world = representedObject as? World {
+        if let world = self.world {
             do {
                 let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
                 if let worldDocument = document as? Document {
@@ -74,21 +75,19 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         let bundle = Bundle(for: Self.self)
         let wizardStoryboard = NSStoryboard(name: "WorldWizard", bundle: bundle)
 
-        // we contain the WorldWizardController into a NSWindowController so we can set a minimum resize on the sheet
         guard let wc = wizardStoryboard.instantiateInitialController() as? NSWindowController else { return }
-
-/*
         guard let vc = wc.window?.contentViewController as? WorldWizardController else { return }
-
-        guard let doc = document as? Document else { return }
-        vc.world = doc.world
-        vc.completionHandler = { apply, editedWorld in
+        vc.completionHandler = { apply, newWorld in
+ //           self.view.window?.makeKeyAndOrderFront(self)
             if apply == true {
-                self.worldDidChange(from: editedWorld!)
+                let rows = self.dataSource.listModel?.itemCount ?? 0
+                let row = self.tableView.selectedRow >= 0 ? self.tableView.selectedRow + 1 : rows
+                self.store?.dispatch(InsertWorldAction(world: newWorld!, atIndex: row))
+                let sel: SelectionState = { return row }()
+                self.store?.dispatch(SelectWorldAction(selection: sel))
+                self.tableView.scrollRowToVisible(row)
             }
-            self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
         }
-*/
         wc.showWindow(self)
     }
 
@@ -174,10 +173,10 @@ class WorldsSubscriber<T>: StoreSubscriber {
         )
 
         if let index = state.selection, index < state.items.count {
-            tableController?.representedObject = state.items[index]
+            tableController?.world = state.items[index]
             tableController?.worldIsSelected = true
         } else {
-            tableController?.representedObject = nil
+            tableController?.world = nil
             tableController?.worldIsSelected = false
         }
 

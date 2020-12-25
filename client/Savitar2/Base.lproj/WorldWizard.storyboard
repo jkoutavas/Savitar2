@@ -44,7 +44,11 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="doneAction:" target="xdQ-Db-Fg2" id="kR3-30-SEK"/>
-                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="representedObject.worldIsOkay" id="Bwq-jT-S9y"/>
+                                    <binding destination="xdQ-Db-Fg2" name="enabled" keyPath="worldIsOkay" id="L3B-qS-wF7">
+                                        <dictionary key="options">
+                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5lw-Sz-EO7">
@@ -70,7 +74,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="representedObject.name" id="C3g-jN-t6e">
+                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="world.name" id="het-l7-Ut0">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
@@ -81,20 +85,39 @@ Gw
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gKI-4A-aL8">
-                                <rect key="frame" x="20" y="63" width="301" height="24"/>
+                                <rect key="frame" x="20" y="63" width="236" height="24"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="newworld@somewhere.org" drawsBackground="YES" id="5IL-ds-1DK">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Address" drawsBackground="YES" id="5IL-ds-1DK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="representedObject.telnetString" id="B5m-k4-txc">
+                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="world.host" id="xDD-MF-nII">
                                         <dictionary key="options">
                                             <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                             <bool key="NSConditionallySetsEditable" value="NO"/>
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                            <string key="NSNullPlaceholder">newworld@somewhere.org</string>
+                                            <string key="NSNullPlaceholder">Address</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-sF-W0d">
+                                <rect key="frame" x="270" y="63" width="51" height="24"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="right" placeholderString="port" drawsBackground="YES" id="Erb-VJ-tvH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="world.port" id="kSG-D9-ewX">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">Port</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
@@ -105,7 +128,7 @@ Gw
                 <customObject id="i8T-Bm-BeY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="2Gr-Vo-NmD"/>
             </objects>
-            <point key="canvasLocation" x="-2708" y="-11644"/>
+            <point key="canvasLocation" x="-2708.5" y="-11644"/>
         </scene>
     </scenes>
 </document>

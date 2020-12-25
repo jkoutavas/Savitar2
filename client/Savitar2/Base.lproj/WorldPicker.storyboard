@@ -131,7 +131,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="representedObject.telnetString" id="uMD-0s-tQC">
+                                    <binding destination="xdQ-Db-Fg2" name="value" keyPath="world.telnetString" id="nLW-US-MnV">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                         </dictionary>
