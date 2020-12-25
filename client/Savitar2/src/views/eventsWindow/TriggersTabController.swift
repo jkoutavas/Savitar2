@@ -34,9 +34,7 @@ class TriggersTabController: EventsTabController {
             $0.select { $0.triggerList }
         }
 
-        if let window = view.window {
-            window.makeFirstResponder(view) // useful for selection state
-        }
+       view.window?.makeFirstResponder(tableView)
     }
 
     override func viewWillDisappear() {

@@ -34,9 +34,7 @@ class MacrosTabController: EventsTabController {
             $0.select { $0.macroList }
         }
 
-        if let window = view.window {
-            window.makeFirstResponder(view) // useful for selection state
-        }
+        view.window?.makeFirstResponder(tableView)
     }
 
     override func viewWillDisappear() {

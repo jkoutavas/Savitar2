@@ -50,9 +50,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
             $0.select { $0.worldList }
         }
 
-        if let window = view.window {
-            window.makeFirstResponder(view) // useful for selection state
-        }
+        view.window?.makeFirstResponder(tableView)
     }
 
     override func viewWillDisappear() {
