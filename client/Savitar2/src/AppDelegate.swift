@@ -39,38 +39,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func applicationWillTerminate(_: Notification) {
-        if isRunningTests {
-            return
-        }
-        AppContext.shared.isTerminating = true
-        AppContext.shared.save()
-    }
-
     func applicationOpenUntitledFile(_: NSApplication) -> Bool {
         return true
     }
 
-    @IBAction func showEventsWindowAction(_: Any) {
-        if universalEventsWindowController != nil {
-            universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+    func applicationWillTerminate(_: Notification) {
+        if isRunningTests {
             return
         }
+        AppContext.shared.appIsTerminating()
+    }
 
-        let bundle = Bundle(for: Self.self)
-        let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let myWindow = controller.window else { return }
+    @IBAction func showEventsWindowAction(_: Any) {
+        AppContext.shared.showUniversalEventsWindow()
+    }
 
-        universalEventsWindowController = controller
-        myWindow.delegate = universalEventsWindowDelegate
-
-        if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            splitViewController.store = universalStore
-            controller.windowFrameAutosaveName = "EventsWindowFrame"
-            controller.showWindow(self)
-            AppContext.shared.prefs.flags.insert(.startupEventsWindow)
-            AppContext.shared.save()
-        }
+    @IBAction func showWorldPickerAction(_: Any) {
+        AppContext.shared.showWorldPicker()
     }
 }

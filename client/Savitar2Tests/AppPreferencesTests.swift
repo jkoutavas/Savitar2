@@ -42,15 +42,15 @@ class AppPreferencesTests: XCTestCase {
     }
 
     func testWorldMan() {
-        XCTAssertEqual(startingPrefs.worldMan.get().count, 11)
+        XCTAssertEqual(AppContext.shared.worldPickerStore.state.worldList.items.count, 11)
     }
 
     func testTriggerMan() {
-        XCTAssertEqual(universalStore.state?.triggerList.items.count, 2)
+        XCTAssertEqual(AppContext.shared.universalReactionsStore.state.triggerList.items.count, 2)
     }
 
     func testMacroMan() {
-        XCTAssertEqual(universalStore.state?.macroList.items.count, 15)
+        XCTAssertEqual(AppContext.shared.universalReactionsStore.state.macroList.items.count, 15)
     }
 
     func testColorMan() {

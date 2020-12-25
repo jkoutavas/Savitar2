@@ -45,8 +45,7 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
 
-    // TODO: these are deprecating
-    var worldMan = WorldMan()
+    // TODO: this is deprecating
     var colorMan = ColorMan()
 
     init() {
@@ -158,15 +157,17 @@ class AppPreferences: SavitarXMLProtocol {
             }
         }
 
-        try prefs.worldMan.parse(xml: xml)
+        let worldMan = WorldMan()
+        try worldMan.parse(xml: xml)
+        AppContext.shared.worldPickerStore.dispatch(SetWorldsAction(worlds: worldMan.get()))
 
         let triggerMan = TriggerMan()
         try triggerMan.parse(xml: xml)
-        universalStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
+        AppContext.shared.universalReactionsStore.dispatch(SetTriggersAction(triggers: triggerMan.get()))
 
         let macroMan = MacroMan()
         try macroMan.parse(xml: xml)
-        universalStore.dispatch(SetMacrosAction(macros: macroMan.get()))
+        AppContext.shared.universalReactionsStore.dispatch(SetMacrosAction(macros: macroMan.get()))
 
         try prefs.colorMan.parse(xml: xml)
     }
@@ -194,12 +195,15 @@ class AppPreferences: SavitarXMLProtocol {
         prefsElem.addAttribute(name: PrefsAttribIdentifier.updatingEnabled.rawValue,
                                stringValue: updatingEnabled ? "TRUE" : "FALSE")
 
-        let worldsElem = try worldMan.toXMLElement()
-        if worldsElem.childCount > 0 {
-            prefsElem.addChild(worldsElem)
+        if let worlds = AppContext.shared.worldPickerStore.state?.worldList.items {
+            let worldMan = WorldMan(worlds)
+            let worldsElem = try worldMan.toXMLElement()
+            if worldsElem.childCount > 0 {
+                prefsElem.addChild(worldsElem)
+            }
         }
 
-        if let triggers = universalStore.state?.triggerList.items {
+        if let triggers = AppContext.shared.universalReactionsStore.state?.triggerList.items {
             let triggerMan = TriggerMan(triggers)
             let triggersElem = try triggerMan.toXMLElement()
             if triggersElem.childCount > 0 {
@@ -207,7 +211,7 @@ class AppPreferences: SavitarXMLProtocol {
             }
         }
 
-        if let macros = universalStore.state?.macroList.items {
+        if let macros = AppContext.shared.universalReactionsStore.state?.macroList.items {
             let macroMan = MacroMan(macros)
             let macrosElem = try macroMan.toXMLElement()
             if macrosElem.childCount > 0 {
