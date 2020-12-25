@@ -57,10 +57,19 @@ struct SpeakerMan {
     func playAudio(trigger: Trigger) {
         if trigger.audioType == .sound, let soundName = trigger.sound {
             NSSound(named: NSSound.Name(soundName))?.play()
-        } else if trigger.audioType == .sayText, let say = trigger.say, let voiceName = trigger.voice {
+
+        } else {
+            guard let voiceName = trigger.voice else { return }
+            var say: String?
+            if trigger.audioType == .sayText {
+                say = trigger.say
+            } else if trigger.audioType == .speakEvent {
+                say = trigger.matchedText
+            }
             speechSynth.stopSpeaking()
             speechSynth.setVoice(identifierForVoiceName(voiceName))
-            speechSynth.startSpeaking(say)
+            guard let text = say else { return }
+            speechSynth.startSpeaking(text)
         }
     }
 }

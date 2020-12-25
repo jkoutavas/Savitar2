@@ -197,6 +197,9 @@ class Session: NSObject, StreamDelegate {
                 if let reply = effect.reply, reply.count > 0 {
                     submitServerCmd(cmd: Command(text: reply))
                 }
+                if effect.audioType != .silent {
+                    AppContext.shared.speakerMan.playAudio(trigger: effect)
+                }
             }
         }
     }
@@ -220,12 +223,12 @@ class Session: NSObject, StreamDelegate {
     private func processTriggers(inputLine: String, triggers: [Trigger], effects: inout [Trigger]) -> String {
         var line = inputLine
 
-        // Handle trigger reactions. Often it'll result in a modification of the line, so let's
+        // Determine the effects of the triggers. Often it'll result in a modification of the line, so let's
         // process triggers in this order:
         //    1. gagging triggers
         //    2. subsitution triggers
-        //    3. all the rest
         for trigger in triggers {
+            trigger.matchedText = ""
             if !trigger.enabled {
                 continue
             }
