@@ -184,16 +184,19 @@ class Session: NSObject, StreamDelegate {
             if index < lines.count - 1 {
                 line += "\r"
             }
-            var replies: [Command] = []
-            line = processTriggers(inputLine: line, triggers: universalTriggers, replies: &replies)
+            var effects: [Trigger] = []
+            line = processTriggers(inputLine: line, triggers: universalTriggers, effects: &effects)
             if line.count > 0 {
-                line = processTriggers(inputLine: line, triggers: world.triggerMan.get(), replies: &replies)
+                line = processTriggers(inputLine: line, triggers: world.triggerMan.get(), effects: &effects)
             }
 
             // Processing is complete. Send the line off to the output view
             acceptedText(text: line)
-            for reply in replies {
-                submitServerCmd(cmd: reply)
+
+            for effect in effects {
+                if let reply = effect.reply, reply.count > 0 {
+                    submitServerCmd(cmd: Command(text: reply))
+                }
             }
         }
     }
@@ -214,7 +217,7 @@ class Session: NSObject, StreamDelegate {
         return false
     }
 
-    private func processTriggers(inputLine: String, triggers: [Trigger], replies: inout [Command]) -> String {
+    private func processTriggers(inputLine: String, triggers: [Trigger], effects: inout [Trigger]) -> String {
         var line = inputLine
 
         // Handle trigger reactions. Often it'll result in a modification of the line, so let's
@@ -222,14 +225,13 @@ class Session: NSObject, StreamDelegate {
         //    1. gagging triggers
         //    2. subsitution triggers
         //    3. all the rest
-        var processedTriggers: [Trigger] = []
         for trigger in triggers {
             if !trigger.enabled {
                 continue
             }
             if trigger.appearance == .gag {
                 if trigger.reactionTo(line: &line) {
-                    processedTriggers.append(trigger)
+                    effects.append(trigger)
                 }
             }
         }
@@ -238,9 +240,9 @@ class Session: NSObject, StreamDelegate {
                 if !trigger.enabled {
                     continue
                 }
-                if trigger.useSubstitution, !processedTriggers.contains(trigger) {
+                if trigger.useSubstitution, !effects.contains(trigger) {
                     if trigger.reactionTo(line: &line) {
-                        processedTriggers.append(trigger)
+                        effects.append(trigger)
                     }
                 }
             }
@@ -250,18 +252,11 @@ class Session: NSObject, StreamDelegate {
                 if !trigger.enabled {
                     continue
                 }
-                if !processedTriggers.contains(trigger) {
+                if !effects.contains(trigger) {
                     if trigger.reactionTo(line: &line) {
-                        processedTriggers.append(trigger)
+                        effects.append(trigger)
                     }
                 }
-            }
-        }
-
-        // now handle any replies
-        for trigger in processedTriggers {
-            if let reply = trigger.reply, reply.count > 0 {
-                replies.append(Command(text: reply))
             }
         }
 
