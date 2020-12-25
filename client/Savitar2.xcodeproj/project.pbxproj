@@ -456,24 +456,24 @@
 		695F5A9E25899EFD00AB6BA6 /* worldDocument */ = {
 			isa = PBXGroup;
 			children = (
+				695F5AAD25899EFD00AB6BA6 /* Ansi2HtmlParser.swift */,
+				695F5AAE25899EFD00AB6BA6 /* AppearanceSettingsController.swift */,
+				695F5AA725899EFD00AB6BA6 /* Command.swift */,
 				695F5A9F25899EFD00AB6BA6 /* ConnectionStatusViewController.swift */,
+				695F5AAB25899EFD00AB6BA6 /* Document.swift */,
+				695F5AAC25899EFD00AB6BA6 /* DocumentV1.swift */,
+				695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */,
+				695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */,
+				695F5AA825899EFD00AB6BA6 /* InputViewController.swift */,
+				695F5AA925899EFD00AB6BA6 /* OutputViewController.swift */,
 				695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */,
 				695F5AA125899EFD00AB6BA6 /* OutputView.swift */,
 				695F5AA225899EFD00AB6BA6 /* Session.swift */,
+				695F5AAA25899EFD00AB6BA6 /* SessionHandlerProtocol.swift */,
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
 				695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */,
 				695F5AA625899EFD00AB6BA6 /* WindowController.swift */,
-				695F5AA725899EFD00AB6BA6 /* Command.swift */,
-				695F5AA825899EFD00AB6BA6 /* InputViewController.swift */,
-				695F5AA925899EFD00AB6BA6 /* OutputViewController.swift */,
-				695F5AAA25899EFD00AB6BA6 /* SessionHandlerProtocol.swift */,
-				695F5AAB25899EFD00AB6BA6 /* Document.swift */,
-				695F5AAC25899EFD00AB6BA6 /* DocumentV1.swift */,
-				695F5AAD25899EFD00AB6BA6 /* Ansi2HtmlParser.swift */,
-				695F5AAE25899EFD00AB6BA6 /* AppearanceSettingsController.swift */,
-				695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */,
 				695F5AB025899EFD00AB6BA6 /* WorldSettingsController.swift */,
-				695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */,
 			);
 			path = worldDocument;
 			sourceTree = "<group>";

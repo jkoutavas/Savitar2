@@ -57,14 +57,13 @@ struct SpeakerMan {
     func playAudio(trigger: Trigger) {
         if trigger.audioType == .sound, let soundName = trigger.sound {
             NSSound(named: NSSound.Name(soundName))?.play()
-
         } else {
             guard let voiceName = trigger.voice else { return }
             var say: String?
             if trigger.audioType == .sayText {
                 say = trigger.say
             } else if trigger.audioType == .speakEvent {
-                say = trigger.matchedText
+                say = trigger.matchedText.count > 0 ? trigger.matchedText : trigger.name
             }
             speechSynth.stopSpeaking()
             speechSynth.setVoice(identifierForVoiceName(voiceName))

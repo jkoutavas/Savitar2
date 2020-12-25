@@ -1033,7 +1033,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1073,7 +1073,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">
@@ -1222,8 +1222,8 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.speakerIsEnabled" id="rVY-Aw-7zC"/>
                                     <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.voiceIndex" previousBinding="PMF-cu-S8t" id="t5l-qJ-lyQ"/>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.voicePopUpIsEnabled" id="eJj-4C-Rca"/>
                                     <binding destination="VPe-q3-3HZ" name="content" keyPath="voiceNames" id="PMF-cu-S8t"/>
                                 </connections>
                             </popUpButton>
@@ -1239,13 +1239,10 @@
                                             <menuItem title="Item 3" id="rFh-25-lSU"/>
                                         </items>
                                     </menu>
-                                    <connections>
-                                        <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.soundPopUpIsEnabled" id="AX6-eI-XBe"/>
-                                    </connections>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.speakerIsEnabled" id="JJT-Vv-NaU"/>
                                     <binding destination="VPe-q3-3HZ" name="selectedIndex" keyPath="representedObject.soundIndex" previousBinding="aCP-VO-cBI" id="Xh5-Qs-LDl"/>
-                                    <binding destination="VPe-q3-3HZ" name="enabled" keyPath="representedObject.soundPopUpIsEnabled" id="ALZ-8S-QKZ"/>
                                     <binding destination="VPe-q3-3HZ" name="content" keyPath="soundNames" id="aCP-VO-cBI"/>
                                 </connections>
                             </popUpButton>

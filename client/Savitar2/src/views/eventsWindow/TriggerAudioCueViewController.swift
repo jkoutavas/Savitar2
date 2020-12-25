@@ -52,6 +52,9 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .silent))
         } else if soundRadio.state == .on {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .sound))
+            if trigger.sound == nil {
+                store?.dispatch(TriggerAction.setSound(trigger.objectID, name: soundNames[0]))
+            }
         } else if speakEventRadio.state == .on {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .speakEvent))
         } else {
@@ -105,10 +108,6 @@ class TriggerAudioCueController: NSController {
             return index ?? 0
         }
         set { store?.dispatch(TriggerAction.setSound(trigger.objectID, name: soundNames[newValue])) }
-    }
-
-    @objc dynamic var soundPopUpIsEnabled: Bool {
-        return store != nil && trigger.audioType == .sound
     }
 
     @objc dynamic var sayText: String {
