@@ -18,7 +18,7 @@ class UndoableReactionsStateAdapter: ReactionsUndoContext {
 
     func macroListContext(macroID: SavitarObjectID) -> MacroListContext? {
         guard let index = state.macroList.indexOf(objectID: macroID),
-            let macro = state.macroList.item(objectID: macroID)
+              let macro = state.macroList.item(objectID: macroID)
         else { return nil }
 
         return (macro, index)
@@ -38,7 +38,7 @@ class UndoableReactionsStateAdapter: ReactionsUndoContext {
 
     func triggerListContext(triggerID: SavitarObjectID) -> TriggerListContext? {
         guard let index = state.triggerList.indexOf(objectID: triggerID),
-            let trigger = state.triggerList.item(objectID: triggerID)
+              let trigger = state.triggerList.item(objectID: triggerID)
         else { return nil }
 
         return (trigger, index)
@@ -125,7 +125,7 @@ extension UndoCommand {
                       context: ReactionsUndoContext,
                       dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context)
-            else { return nil }
+        else { return nil }
 
         self.init(undoBlock: { _ = dispatch(inverseAction.notUndoable) },
                   undoName: appAction.name,
@@ -151,15 +151,15 @@ func undoReactionsStateMiddleware(undoManagerProvider: @escaping () -> UndoManag
             }
 
             if let undoableAction = action as? ReactionUndoableAction, undoableAction.isUndoable,
-                let state = getState(),
-                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
-                let undoManager = undoManagerProvider() {
+               let state = getState(),
+               let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
+               let undoManager = undoManagerProvider() {
                 undo.register(undoManager: undoManager)
             }
 
             next(action)
         }
-        }
+    }
     }
 
     return undoMiddleware

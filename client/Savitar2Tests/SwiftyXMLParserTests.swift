@@ -6,18 +6,15 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class SwiftyXMLParserTests: XCTestCase {
+    override func setUp() {}
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
+    override func tearDown() {}
 
     func testCustomEntities() throws {
         let xmlString = """

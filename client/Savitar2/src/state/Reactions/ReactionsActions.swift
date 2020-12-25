@@ -10,7 +10,7 @@ import Foundation
 import ReSwift
 
 // A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
-protocol ReactionUndoableAction: Action, UndoableReaction { }
+protocol ReactionUndoableAction: Action, UndoableReaction {}
 
 protocol ReactionAction: Action {
     func apply(oldState: ReactionsState) -> ReactionsState
@@ -22,7 +22,7 @@ struct InsertMacroAction: ReactionUndoableAction, ReactionAction {
 
     init(macro: Macro, atIndex: Int) {
         self.macro = macro
-        self.index = atIndex
+        index = atIndex
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
@@ -45,7 +45,7 @@ struct InsertTriggerAction: ReactionUndoableAction, ReactionAction {
 
     init(trigger: Trigger, atIndex: Int) {
         self.trigger = trigger
-        self.index = atIndex
+        index = atIndex
     }
 
     func apply(oldState: ReactionsState) -> ReactionsState {

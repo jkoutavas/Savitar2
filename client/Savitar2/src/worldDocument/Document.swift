@@ -12,7 +12,6 @@ import SwiftyXMLParser
 let DocumentElemIdentifier = "DOCUMENT"
 
 class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
-
     let type = "Savitar World"
     var version = 1 // start with the assumption that a v1 world XML is being parsed
 
@@ -40,7 +39,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
             as? WindowController else { return }
         self.windowController = windowController
 
-        self.addWindowController(windowController)
+        addWindowController(windowController)
         windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar 2.0!\n\n"))
@@ -52,12 +51,12 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         session?.connectAndRun()
     }
 
-    override func read(from data: Data, ofType typeName: String) throws {
+    override func read(from data: Data, ofType _: String) throws {
         self.world = World()
         guard let world = self.world else { return }
 
         let xml = XML.parse(data)
-        try self.parse(xml: xml[DocumentElemIdentifier])
+        try parse(xml: xml[DocumentElemIdentifier])
 
         store.dispatch(SetMacrosAction(macros: world.macroMan.get()))
         store.dispatch(SetTriggersAction(triggers: world.triggerMan.get()))
@@ -72,15 +71,15 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     }
 
     func worldDidChange(fromWorld: World) {
-        self.world = fromWorld
+        world = fromWorld
         session?.world = fromWorld
     }
 
     /*
      * Produce XML-based data for a v2 Savitar world document
      */
-    override func data(ofType typeName: String) throws -> Data {
-        let docElem = try self.toXMLElement()
+    override func data(ofType _: String) throws -> Data {
+        let docElem = try toXMLElement()
         let xml = XMLDocument(rootElement: docElem)
         let xmlStr = try xml.xmlString.prettyXMLFormat()
         if let data = xmlStr.data(using: String.Encoding.utf8) {
@@ -90,9 +89,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         }
     }
 
-    //***************************
+    // ***************************
+
     // MARK: - SessionHandlerProtocol
-    //***************************
+
+    // ***************************
 
     func output(result: OutputResult) {
         func output(string: String) {
@@ -106,10 +107,10 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         var attributes = [NSAttributedString.Key: AnyObject]()
         attributes[NSAttributedString.Key.font] = NSFont(name: world.fontName, size: world.fontSize)
         switch result {
-        case .success(let message):
+        case let .success(message):
             attributes[NSAttributedString.Key.foregroundColor] = world.foreColor
             output(string: message)
-        case .error(let error):
+        case let .error(error):
             attributes[NSAttributedString.Key.foregroundColor] = NSColor.red
             output(string: error)
         }
@@ -139,9 +140,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         outputVC.printSource()
     }
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     // These are the MacroElemIdentifier attributes
     enum DocumentAttribIdentifier: String {
@@ -153,12 +156,12 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         for attribute in xml.attributes {
             switch attribute.key {
             case DocumentAttribIdentifier.type.rawValue:
-                if attribute.value != self.type {
+                if attribute.value != type {
                     throw NSError()
                 }
             case DocumentAttribIdentifier.version.rawValue:
                 if let v = Int(attribute.value) {
-                    self.version = v
+                    version = v
                 }
             default:
                 Swift.print("skipping document attribute \(attribute.key)")

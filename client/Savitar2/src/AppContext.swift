@@ -63,25 +63,25 @@ class AppContext {
 
     func showUniversalEventsWindow() {
         if universalEventsWindowController != nil {
-             universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
-             return
-         }
+            universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+            return
+        }
 
-         let bundle = Bundle(for: Self.self)
-         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-         guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
-         guard let window = windowController.window else { return }
+        let bundle = Bundle(for: Self.self)
+        let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
+        guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
+        guard let window = windowController.window else { return }
 
-         universalEventsWindowController = windowController
-         window.delegate = universalEventsWindowDelegate
+        universalEventsWindowController = windowController
+        window.delegate = universalEventsWindowDelegate
 
-         if let contentController = window.contentViewController as? EventsSplitViewController {
-             contentController.store = universalReactionsStore
-             windowController.windowFrameAutosaveName = "EventsWindowFrame"
-             windowController.showWindow(self)
-             prefs.flags.insert(.startupEventsWindow)
-             save()
-         }
+        if let contentController = window.contentViewController as? EventsSplitViewController {
+            contentController.store = universalReactionsStore
+            windowController.windowFrameAutosaveName = "EventsWindowFrame"
+            windowController.showWindow(self)
+            prefs.flags.insert(.startupEventsWindow)
+            save()
+        }
     }
 
     func showWorldPicker() {
@@ -112,19 +112,19 @@ class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
         self.ctx = ctx
     }
 
-    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
-         return appUndoManager
-     }
+    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
+        return appUndoManager
+    }
 
-     func windowWillClose(_ notification: Notification) {
-         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
-         // on application termination too.)
-         if !ctx.isTerminating {
-             ctx.prefs.flags.remove(.startupEventsWindow)
-             ctx.save()
-         }
-         ctx.universalEventsWindowController = nil
-     }
+    func windowWillClose(_: Notification) {
+        // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
+        // on application termination too.)
+        if !ctx.isTerminating {
+            ctx.prefs.flags.remove(.startupEventsWindow)
+            ctx.save()
+        }
+        ctx.universalEventsWindowController = nil
+    }
 }
 
 class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
@@ -133,7 +133,7 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
         self.ctx = ctx
     }
 
-    func windowWillClose(_ notification: Notification) {
-          ctx.worldPickerWindowController = nil
+    func windowWillClose(_: Notification) {
+        ctx.worldPickerWindowController = nil
     }
 }

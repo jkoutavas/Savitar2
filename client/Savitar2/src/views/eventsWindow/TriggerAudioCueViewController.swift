@@ -10,10 +10,10 @@ import Cocoa
 import ReSwift
 
 class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
-    @IBOutlet weak var silentRadio: NSButton!
-    @IBOutlet weak var soundRadio: NSButton!
-    @IBOutlet weak var speakEventRadio: NSButton!
-    @IBOutlet weak var sayTextRadio: NSButton!
+    @IBOutlet var silentRadio: NSButton!
+    @IBOutlet var soundRadio: NSButton!
+    @IBOutlet var speakEventRadio: NSButton!
+    @IBOutlet var sayTextRadio: NSButton!
 
     let currentSoundNames = AppContext.shared.speakerMan.soundNames
     let currentVoiceNames = AppContext.shared.speakerMan.voiceNames
@@ -45,7 +45,7 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
         store?.unsubscribe(self)
     }
 
-    @IBAction func audioCueRadioButtonChanged(_ sender: AnyObject) {
+    @IBAction func audioCueRadioButtonChanged(_: AnyObject) {
         guard let trigger = self.trigger else { return }
 
         if silentRadio.state == .on {
@@ -59,7 +59,7 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
         }
     }
 
-    @IBAction func speakerButtonAction(_ sender: AnyObject) {
+    @IBAction func speakerButtonAction(_: AnyObject) {
         if let trigger = self.trigger {
             AppContext.shared.speakerMan.playAudio(trigger: trigger)
         }
@@ -79,11 +79,11 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
             case .sayText:
                 sayTextRadio.state = .on
             }
-            self.representedObject =
+            representedObject =
                 TriggerAudioCueController(trigger: trigger, store: store, soundNames: currentSoundNames,
                                           voiceNames: currentVoiceNames)
         } else {
-            self.representedObject = nil
+            representedObject = nil
         }
     }
 }
@@ -146,7 +146,8 @@ class TriggerAudioCueController: NSController {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

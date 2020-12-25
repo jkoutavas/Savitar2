@@ -9,12 +9,11 @@
 import Cocoa
 
 class DocumentV1: Document {
-
     override class var autosavesInPlace: Bool {
         return false
     }
 
-    override func writableTypes(for saveOperation: NSDocument.SaveOperationType) -> [String] {
+    override func writableTypes(for _: NSDocument.SaveOperationType) -> [String] {
         // we only Save As v2
         return [DocumentV2.FileType]
     }

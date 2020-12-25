@@ -9,16 +9,14 @@
 import ReSwift
 
 func macroReducer(_ action: Action, state: Macro?) -> Macro? {
-
     guard let action = action as? MacroAction,
-        let macro = state
-        else { return state }
+          let macro = state
+    else { return state }
 
     return handleMacroAction(action, macro: macro)
 }
 
 private func handleMacroAction(_ action: MacroAction, macro: Macro) -> Macro {
-
     let macro = macro
 
     switch action {

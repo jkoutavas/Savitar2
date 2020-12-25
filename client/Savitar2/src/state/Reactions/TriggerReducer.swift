@@ -9,16 +9,14 @@
 import ReSwift
 
 func triggerReducer(_ action: Action, state: Trigger?) -> Trigger? {
-
     guard let action = action as? TriggerAction,
-        let trigger = state
-        else { return state }
+          let trigger = state
+    else { return state }
 
     return handleTriggerAction(action, trigger: trigger)
 }
 
 private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> Trigger {
-
     let trigger = trigger
 
     switch action {
@@ -44,7 +42,7 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
 
     case let .setBackColor(triggerID, color: color):
         guard trigger.objectID == triggerID else { return trigger }
-        if trigger.style == nil && color != nil {
+        if trigger.style == nil, color != nil {
             trigger.style = TrigTextStyle()
         }
         trigger.style?.backColor = color
@@ -52,7 +50,7 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
 
     case let .setFace(triggerID, face: face):
         guard trigger.objectID == triggerID else { return trigger }
-        if trigger.style == nil && face != nil {
+        if trigger.style == nil, face != nil {
             trigger.style = TrigTextStyle()
         }
         trigger.style?.face = face
@@ -60,7 +58,7 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
 
     case let .setForeColor(triggerID, color: color):
         guard trigger.objectID == triggerID else { return trigger }
-        if trigger.style == nil && color != nil {
+        if trigger.style == nil, color != nil {
             trigger.style = TrigTextStyle()
         }
         trigger.style?.foreColor = color

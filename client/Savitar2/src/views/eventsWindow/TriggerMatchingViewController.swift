@@ -10,9 +10,9 @@ import Cocoa
 import ReSwift
 
 class TriggerMatchingViewController: NSViewController, StoreSubscriber {
-    @IBOutlet weak var matchExactlyRadio: NSButton!
-    @IBOutlet weak var matchWholeLineRadio: NSButton!
-    @IBOutlet weak var matchWholeWordRadio: NSButton!
+    @IBOutlet var matchExactlyRadio: NSButton!
+    @IBOutlet var matchWholeLineRadio: NSButton!
+    @IBOutlet var matchWholeWordRadio: NSButton!
 
     var trigger: Trigger?
 
@@ -33,7 +33,7 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
         store?.unsubscribe(self)
     }
 
-    @IBAction func matchingRadioButtonChanged(_ sender: AnyObject) {
+    @IBAction func matchingRadioButtonChanged(_: AnyObject) {
         guard let trigger = self.trigger else { return }
 
         if matchExactlyRadio.state == .on {
@@ -57,9 +57,9 @@ class TriggerMatchingViewController: NSViewController, StoreSubscriber {
             case .wholeWord:
                 matchWholeWordRadio.state = .on
             }
-            self.representedObject = TriggerMatchingController(trigger: trigger, store: store)
+            representedObject = TriggerMatchingController(trigger: trigger, store: store)
         } else {
-            self.representedObject = nil
+            representedObject = nil
         }
     }
 }
@@ -106,7 +106,8 @@ class TriggerMatchingController: NSController {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

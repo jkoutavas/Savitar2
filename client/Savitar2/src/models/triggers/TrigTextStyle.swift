@@ -20,21 +20,21 @@ extension NSColor {
             return result
         }
         if components.count >= 3 {
-            result.append(Int(components[0]*255.0))
-            result.append(Int(components[1]*255.0))
-            result.append(Int(components[2]*255.0))
+            result.append(Int(components[0] * 255.0))
+            result.append(Int(components[1] * 255.0))
+            result.append(Int(components[2] * 255.0))
         } else {
             // colors such as black and white have two components (color and alpha)
-            result.append(Int(components[0]*255.0))
-            result.append(Int(components[0]*255.0))
-            result.append(Int(components[0]*255.0))
+            result.append(Int(components[0] * 255.0))
+            result.append(Int(components[0] * 255.0))
+            result.append(Int(components[0] * 255.0))
         }
 
         return result
     }
 
     func formOnFGColorANSICode() -> String {
-        let rgb = self.toIntArray()
+        let rgb = toIntArray()
         return rgb.count >= 3 ? ";38:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
     }
 
@@ -43,7 +43,7 @@ extension NSColor {
     }
 
     func formOnBGColorANSICode() -> String {
-        let rgb = self.toIntArray()
+        let rgb = toIntArray()
         return rgb.count >= 3 ? ";48:2;\(rgb[0]);\(rgb[1]);\(rgb[2])" : ""
     }
 
@@ -70,7 +70,7 @@ struct TrigFace: OptionSet, Hashable {
     private func formANSICodes(dict: [TrigFace: Int]) -> String {
         var result = ""
         for (key, value) in dict.sorted(by: { $0.1 < $1.1 }) {
-            if self.contains(key) {
+            if contains(key) {
                 result += ";\(value)"
             }
         }
@@ -100,6 +100,7 @@ struct TrigFace: OptionSet, Hashable {
         return formANSICodes(dict: styleOffDict)
     }
 }
+
 extension TrigFace: StrOptionSet {
     // TODO: I wonder if there's a DRY-er way to do these
     static var labels: [Label] { return [
@@ -111,7 +112,7 @@ extension TrigFace: StrOptionSet {
         (.inverse, "inverse"),
         (.foreColor, "foreColor"),
         (.backColor, "backColor")
-        ]}
+    ] }
     static var labelDict: [String: Self] { return [
         "normal": .normal,
         "bold": .bold,
@@ -121,7 +122,7 @@ extension TrigFace: StrOptionSet {
         "inverse": .inverse,
         "foreColor": .foreColor,
         "backColor": .backColor
-        ]}
+    ] }
 }
 
 struct TrigTextStyle: Equatable {
@@ -141,7 +142,6 @@ struct TrigTextStyle: Equatable {
     init(face: TrigFace? = nil,
          foreColor: NSColor? = nil,
          backColor: NSColor? = nil) {
-
         self.face = face
         self.foreColor = foreColor
         self.backColor = backColor
@@ -166,7 +166,7 @@ struct TrigTextStyle: Equatable {
             }
         }
 
-        self.on = formEscapeSequence(codes: codesOn)
-        self.off = formEscapeSequence(codes: codesOff)
+        on = formEscapeSequence(codes: codesOn)
+        off = formEscapeSequence(codes: codesOff)
     }
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 extension String {
-
     func asciiAt(index: Int) -> UInt32? {
         let scalarIndex = unicodeScalars.index(unicodeScalars.startIndex, offsetBy: index)
         let scalar = unicodeScalars[scalarIndex]
@@ -22,13 +21,13 @@ extension String {
     }
 
     func charAt(_ offset: Int) -> Character {
-        let index = self.index(self.startIndex, offsetBy: offset) // BEWARE! This is O(n)
+        let index = self.index(startIndex, offsetBy: offset) // BEWARE! This is O(n)
         return self[index]
     }
 
     func dropPrefix(_ prefix: String) -> String {
-        guard self.hasPrefix(prefix) else { return self }
-        return String(self.dropFirst(prefix.count))
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count))
     }
 
     func endsWithNewline() -> Bool {
@@ -48,22 +47,22 @@ extension String {
         return URL(fileURLWithPath: self).pathExtension
     }
 
-    var fullRange: Range<String.Index> { return startIndex..<endIndex }
+    var fullRange: Range<String.Index> { return startIndex ..< endIndex }
 
     var html2AttributedString: String? {
         guard let data = data(using: .utf8) else { return nil }
         do {
             return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html,
                                                                 .characterEncoding: String.Encoding.utf8.rawValue],
-                                                                documentAttributes: nil).string
+                                          documentAttributes: nil).string
         } catch let error as NSError {
             print(error.localizedDescription)
-            return  nil
+            return nil
         }
     }
 
     func prettyXMLFormat() throws -> String {
-        let xml = try XMLDocument.init(xmlString: self)
+        let xml = try XMLDocument(xmlString: self)
         let data = xml.xmlData(options: .nodePrettyPrint)
         if let str = String(data: data, encoding: .utf8) {
             return str
@@ -75,14 +74,14 @@ extension String {
     func ranges(of occurrence: String, options mask: String.CompareOptions = []) -> [Range<String.Index>] {
         var ranges = [Range<String.Index>]()
         var position = startIndex
-        while let range = range(of: occurrence, options: mask, range: position..<endIndex) {
+        while let range = range(of: occurrence, options: mask, range: position ..< endIndex) {
             ranges.append(range)
             let offset = distance(from: range.lowerBound,
                                   to: range.upperBound) - 1
             guard let after = index(range.lowerBound,
                                     offsetBy: offset,
                                     limitedBy: endIndex) else {
-                                        break
+                break
             }
             position = index(after: after)
         }

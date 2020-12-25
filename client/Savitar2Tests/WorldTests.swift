@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class WorldTests: XCTestCase {
-
     func testv1WorldXMLtoV2() throws {
         // v1 XML
         let xmlInString = """
@@ -146,5 +145,4 @@ class WorldTests: XCTestCase {
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
-
 }

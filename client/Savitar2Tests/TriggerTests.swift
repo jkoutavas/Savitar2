@@ -6,18 +6,15 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class TriggerTests: XCTestCase {
+    override func setUp() {}
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
+    override func tearDown() {}
 
     func testGag() {
         var t = Trigger(name: "hide", flags: [.caseSensitive, .exact, .gag])
@@ -155,7 +152,7 @@ class TriggerTests: XCTestCase {
         line = "a super combo match"
         XCTAssertTrue(t.reactionTo(line: &line))
         XCTAssertEqual(line,
-            "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;24;25;39;49m match")
+                       "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;24;25;39;49m match")
         // swiftlint:enable line_length
     }
 

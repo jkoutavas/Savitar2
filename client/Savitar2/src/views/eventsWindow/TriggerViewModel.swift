@@ -17,14 +17,14 @@ class TriggerViewModel: CheckableItemViewModel {
     let audioCue: String
 
     init(trigger: Trigger) {
-        type = "type" // TODO
-        audioCue = "audioCue" // TODO
+        type = "type" // TODO:
+        audioCue = "audioCue" // TODO:
         super.init(itemID: trigger.objectID.identifier,
                    title: trigger.name,
                    enabled: trigger.enabled)
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from _: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
 }

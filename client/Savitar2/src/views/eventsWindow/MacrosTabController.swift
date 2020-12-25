@@ -52,9 +52,9 @@ extension MacrosTabController: NSMenuItemValidation {
         return true
     }
 
-    @IBAction func delete(_ sender: AnyObject) {
+    @IBAction func delete(_: AnyObject) {
         guard let viewModel = dataSource.selectedItem else { return }
-        guard let objID = SavitarObjectID(identifier: viewModel.itemID ) else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return }
         store?.dispatch(RemoveMacroAction(macroID: objID))
     }
 }
@@ -89,12 +89,12 @@ extension MacrosTabController {
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(listModel: MacroListViewModel) {
+    private func updateTableDataSource(listModel: MacroListViewModel) {
         dataSource.updateContents(listModel: listModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(listModel: MacroListViewModel) {
+    private func displaySelection(listModel: MacroListViewModel) {
         guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return

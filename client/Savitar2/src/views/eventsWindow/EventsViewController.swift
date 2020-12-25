@@ -33,13 +33,15 @@ class EventsViewController: NSTabViewController {
         }
     }
 
-    //**************************************
-    // MARK: - NSTabViewControllerDelegate
-    //**************************************
+    // **************************************
 
-    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+    // MARK: - NSTabViewControllerDelegate
+
+    // **************************************
+
+    override func tabView(_: NSTabView, didSelect _: NSTabViewItem?) {
         // Keep the detail tab selection in lock-step with the events tab selection
-        if let vc = self.detailViewController {
+        if let vc = detailViewController {
             vc.selectedTabViewItemIndex = selectedTabViewItemIndex
         }
     }

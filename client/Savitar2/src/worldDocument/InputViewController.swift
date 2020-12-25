@@ -21,7 +21,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
     internal var eventMonitor: Any?
 
-    @IBOutlet weak var textView: NSTextView!
+    @IBOutlet var textView: NSTextView!
 
     public var backColor: NSColor {
         get {
@@ -59,8 +59,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
         // Not setting the checkmark in the interface builder doesn't seem to work since OS X 10.9 Mavericks.
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
-        self.textView.isAutomaticQuoteSubstitutionEnabled = false
-        self.textView.isAutomaticDashSubstitutionEnabled = false
+        textView.isAutomaticQuoteSubstitutionEnabled = false
+        textView.isAutomaticDashSubstitutionEnabled = false
 
         newCmd()
     }
@@ -71,14 +71,14 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         textView.isAutomaticSpellingCorrectionEnabled = false
 
         eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
-            return self.myKeyDown(with: $0) ? nil : $0
+            self.myKeyDown(with: $0) ? nil : $0
         }
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
 
-        if let monitor = self.eventMonitor {
+        if let monitor = eventMonitor {
             NSEvent.removeMonitor(monitor)
         }
     }
@@ -86,19 +86,19 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     // MARK: - Command Handling
 
     func clear() {
-        self.textView.string = ""
+        textView.string = ""
     }
 
     func getTextLength() -> Int {
-        return self.textView.string.count
+        return textView.string.count
     }
 
     func myKeyDown(with event: NSEvent) -> Bool {
         // handle keyDown only if current window has focus, i.e. is keyWindow
-        guard let locWindow = self.view.window,
-            NSApplication.shared.keyWindow === locWindow else { return false }
+        guard let locWindow = view.window,
+              NSApplication.shared.keyWindow === locWindow else { return false }
 
-        guard let sess = self.session else { return false }
+        guard let sess = session else { return false }
         if sess.expandKeypress(with: event) { return true }
 
         // swiftlint:disable force_cast
@@ -113,14 +113,14 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             }
 
             var wasSaved = false
-            let stickyCmd = false // TODO mConnection->GetWorld()->UseStickyCommands()
+            let stickyCmd = false // TODO: mConnection->GetWorld()->UseStickyCommands()
 
             if getTextLength() > 0 {
                 // TODO: input trigger processing
 
                 // save away the original command
-                self.cmdIndex = cmdBuf.count
-                wasSaved = self.saveCmd()
+                cmdIndex = cmdBuf.count
+                wasSaved = saveCmd()
 
                 // send the processed command to the server
                 if let processedCmd = textToCmd() {
@@ -178,7 +178,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
     func prepareForNewCommand(_ wasSaved: Bool) {
         clear()
-        self.undoManager?.removeAllActions(withTarget: self.view)
+        undoManager?.removeAllActions(withTarget: view)
         setDefaultTextStyle()
         if wasSaved {
             newCmd()
@@ -190,7 +190,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
         // TODO: determine what word or words in the output are triggers
 
-        let cmd = cmdBuf[index-1]
+        let cmd = cmdBuf[index - 1]
         textView.string = cmd.cmdStr
     }
 
@@ -202,30 +202,32 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         if index == 0 {
             index = 1
         }
-        let lastCmd = cmdBuf[index-1]
+        let lastCmd = cmdBuf[index - 1]
         if newCmd != lastCmd {
             // save away the command
-            cmdBuf[cmdIndex-1] = newCmd
+            cmdBuf[cmdIndex - 1] = newCmd
             return true
         }
         return false
     }
 
     func setDefaultTextStyle() {
-        // TODO
+        // TODO:
     }
 
     func textToCmd() -> Command? {
-        // TODO HTML parsing
+        // TODO: HTML parsing
 
         return Command(text: textView.string)
     }
 
-    //**************************************
-    // MARK: - NSTextViewDelegate
-    //**************************************
+    // **************************************
 
-    func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
+    // MARK: - NSTextViewDelegate
+
+    // **************************************
+
+    func textView(_: NSTextView, menu _: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
         // No contextual menu for our input view please
         return nil
     }

@@ -29,9 +29,11 @@ class Macro: SavitarObject {
     var readOnly: Bool
     var value: String
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     let ValueElemIdentifier = "VALUE"
 
@@ -57,31 +59,31 @@ class Macro: SavitarObject {
         for attribute in xml.attributes {
             switch attribute.key {
             case MacroAttribIdentifier.name.rawValue:
-                self.name = attribute.value
+                name = attribute.value
             case MacroAttribIdentifier.flags.rawValue:
-                self.enabled = !attribute.value.contains("disabled")
-                self.readOnly = attribute.value.contains("readOnly")
+                enabled = !attribute.value.contains("disabled")
+                readOnly = attribute.value.contains("readOnly")
             case MacroAttribIdentifier.key.rawValue:
-                self.keyLabel = attribute.value
+                keyLabel = attribute.value
             default:
                 print("skipping macro attribute \(attribute.key)")
             }
         }
 
         if let text = xml[ValueElemIdentifier].text {
-            self.value = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            value = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
     override func toXMLElement() throws -> XMLElement {
         let varElem = XMLElement(name: MacroElemIdentifier)
 
-        varElem.addAttribute(name: MacroAttribIdentifier.name.rawValue, stringValue: self.name)
+        varElem.addAttribute(name: MacroAttribIdentifier.name.rawValue, stringValue: name)
 
-        varElem.addAttribute(name: MacroAttribIdentifier.key.rawValue, stringValue: self.keyLabel)
+        varElem.addAttribute(name: MacroAttribIdentifier.key.rawValue, stringValue: keyLabel)
 
-        var flags = !self.enabled ? "disabled" : ""
-        if self.readOnly {
+        var flags = !enabled ? "disabled" : ""
+        if readOnly {
             if flags.count > 0 {
                 flags = "\(flags)+"
             }
@@ -91,7 +93,7 @@ class Macro: SavitarObject {
             varElem.addAttribute(name: MacroAttribIdentifier.flags.rawValue, stringValue: flags)
         }
 
-        varElem.addChild(XMLElement.init(name: ValueElemIdentifier, stringValue: value))
+        varElem.addChild(XMLElement(name: ValueElemIdentifier, stringValue: value))
 
         return varElem
     }

@@ -49,11 +49,11 @@ class Session: NSObject, StreamDelegate {
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
-        self.logger = Logger(label: "savitar2")
-        self.logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
-        self.logger[metadataKey: "m"] = "Session" // "m" is for "module"
+        logger = Logger(label: "savitar2")
+        logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
+        logger[metadataKey: "m"] = "Session" // "m" is for "module"
 
-        self.queue.maxConcurrentOperationCount = 1
+        queue.maxConcurrentOperationCount = 1
     }
 
     func close() {
@@ -79,7 +79,7 @@ class Session: NSObject, StreamDelegate {
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
 
-        self.telnetParser = TelnetParser()
+        telnetParser = TelnetParser()
         telnetParser!.mEndpoint = self
         telnetParser!.logger = Logger(label: "savitar2")
         telnetParser!.logger?[metadataKey: "m"] = "TelnetParser" // "m" is for "module"
@@ -101,7 +101,7 @@ class Session: NSObject, StreamDelegate {
         }
 
         status = .Binding
-        if inputStream != nil && outputStream != nil {
+        if inputStream != nil, outputStream != nil {
             inputStream.delegate = self
 
             inputStream.schedule(in: .main, forMode: .common)
@@ -127,7 +127,7 @@ class Session: NSObject, StreamDelegate {
     func sendData(data: Data) {
         let blockOperation = { [weak self] in
             _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
- //               self?.logger.info("sendData: \(data.hexString)")
+                //               self?.logger.info("sendData: \(data.hexString)")
                 let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
                 self?.outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
             }
@@ -142,15 +142,15 @@ class Session: NSObject, StreamDelegate {
     func submitServerCmd(cmd: Command) {
         // TODO: build out actual local command handler
         if cmd.cmdStr == "##dump" {
-            self.sessionHandler.printSource()
+            sessionHandler.printSource()
             return
         }
 
         let str = "\(cmd.cmdStr)\r"
         if world.flags.contains(.echoCmds) {
-           acceptedText(text: str)
+            acceptedText(text: str)
         } else if world.flags.contains(.echoCR) {
-           acceptedText(text: "\r")
+            acceptedText(text: "\r")
         }
         sendString(string: str)
     }
@@ -171,7 +171,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func processAcceptedText(text: String) {
- //logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
+        // logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
 
         let lines = text.split(omittingEmptySubsequences: false) {
             $0 == "\r" || $0 == "\n"
@@ -182,8 +182,8 @@ class Session: NSObject, StreamDelegate {
 
             // re-insert line ending for every line except the last
             if index < lines.count - 1 {
-                 line += "\r"
-             }
+                line += "\r"
+            }
             var replies: [Command] = []
             line = processTriggers(inputLine: line, triggers: universalTriggers, replies: &replies)
             if line.count > 0 {
@@ -199,9 +199,9 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func acceptedText(text: String) {
-        OperationQueue.main.addOperation({ [weak self] in
+        OperationQueue.main.addOperation { [weak self] in
             self?.sessionHandler.output(result: .success(text))
-        })
+        }
     }
 
     private func processMacros(with event: NSEvent, macros: [Macro]) -> Bool {
@@ -238,7 +238,7 @@ class Session: NSObject, StreamDelegate {
                 if !trigger.enabled {
                     continue
                 }
-                if trigger.useSubstitution && !processedTriggers.contains(trigger) {
+                if trigger.useSubstitution, !processedTriggers.contains(trigger) {
                     if trigger.reactionTo(line: &line) {
                         processedTriggers.append(trigger)
                     }
@@ -277,7 +277,7 @@ class Session: NSObject, StreamDelegate {
             while stream.hasBytesAvailable {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    let debugStr = String(decoding: buffer[0...read-1], as: UTF8.self)
+                    let debugStr = String(decoding: buffer[0 ... read - 1], as: UTF8.self)
 //                    self?.logger.info(
 //                      "\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
                     if let url = self?.captureURL {
@@ -319,7 +319,7 @@ class Session: NSObject, StreamDelegate {
             logger.info("end encountered")
             close()
         case Stream.Event.errorOccurred:
-            self.sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
+            sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
             close()
         case Stream.Event.hasSpaceAvailable:
             logger.info("has space available")
@@ -331,7 +331,7 @@ class Session: NSObject, StreamDelegate {
 
 extension Session: StoreSubscriber {
     func newState(state: ReactionsState) {
-        self.universalMacros = state.macroList.items
-        self.universalTriggers = state.triggerList.items
+        universalMacros = state.macroList.items
+        universalTriggers = state.triggerList.items
     }
 }

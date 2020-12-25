@@ -33,7 +33,7 @@ class WorldSettingsController: NSViewController {
     private var _editedWorld: World?
     private var _tabViewController: NSTabViewController?
 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: NSStoryboardSegue, sender _: Any?) {
         // grab a reference to the tabViewController, we'll use it in the
         // world setter to propagate the world down into the tab controllers
         if segue.destinationController is NSTabViewController {
@@ -41,11 +41,11 @@ class WorldSettingsController: NSViewController {
         }
     }
 
-    @IBAction func applyWorldSetting(_ sender: Any) {
+    @IBAction func applyWorldSetting(_: Any) {
         completionHandler?(true, _editedWorld)
     }
 
-    @IBAction func cancelWorldSetting(_ sender: Any) {
+    @IBAction func cancelWorldSetting(_: Any) {
         completionHandler?(false, nil)
     }
 }

@@ -16,12 +16,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        let titlebarController = self.storyboard?.instantiateController(withIdentifier:
+        let titlebarController = storyboard?.instantiateController(withIdentifier:
             NSStoryboard.SceneIdentifier("titlebarViewController"))
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
-        self.window?.addTitlebarAccessoryViewController(titlebarController!)
+        window?.addTitlebarAccessoryViewController(titlebarController!)
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -41,7 +41,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         return windowTitle
     }
 
-    @IBAction func showWorldEvents(_ sender: Any) {
+    @IBAction func showWorldEvents(_: Any) {
         if eventsWindowController != nil {
             eventsWindowController?.window?.makeKeyAndOrderFront(self)
             return
@@ -70,7 +70,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         outputVC.outputView.clear()
     }
 
-    @IBAction func showWorldSetting(_ sender: Any) {
+    @IBAction func showWorldSetting(_: Any) {
         let bundle = Bundle(for: Self.self)
         let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
 
@@ -85,19 +85,19 @@ class WindowController: NSWindowController, NSWindowDelegate {
             }
             self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
         }
-        self.window?.beginSheet(wc.window!)
+        window?.beginSheet(wc.window!)
     }
 
     private func worldDidChange(from fromWorld: World) {
         guard let doc = document as? Document else { return }
-        doc.undoManager?.registerUndo(withTarget: self, handler: { [oldWorld = doc.world] (_) in
+        doc.undoManager?.registerUndo(withTarget: self, handler: { [oldWorld = doc.world] _ in
             self.worldDidChange(from: oldWorld!)
         })
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
         doc.worldDidChange(fromWorld: fromWorld)
-        self.updateViews(fromWorld)
+        updateViews(fromWorld)
     }
 
     func updateViews(_ newValue: World?) {
@@ -130,12 +130,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
             window.setContentSize(w.windowSize)
             if let screenSize = NSScreen.main?.frame.size {
                 window.setFrameTopLeftPoint(NSPoint(x: w.position.x,
-                                                     y: screenSize.height - w.position.y + window.titlebarHeight))
+                                                    y: screenSize.height - w.position.y + window.titlebarHeight))
             }
 
             let dividerHeight: CGFloat = svc.splitView.dividerThickness
             let rowHeight = inputVC.rowHeight
-            let split: CGFloat = w.windowSize.height - dividerHeight - rowHeight() * CGFloat(w.inputRows+1)
+            let split: CGFloat = w.windowSize.height - dividerHeight - rowHeight() * CGFloat(w.inputRows + 1)
             svc.splitView.setPosition(split, ofDividerAt: 0)
 
             window.setIsZoomed(w.zoomed)
@@ -151,14 +151,16 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
     }
 
-    //***************************
-    // MARK: - NSWindowDelegate
-    //***************************
+    // ***************************
 
-    func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+    // MARK: - NSWindowDelegate
+
+    // ***************************
+
+    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
         guard let doc = document as? Document else { return nil }
         return doc.undoManager
-     }
+    }
 
     internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {

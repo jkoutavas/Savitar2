@@ -9,7 +9,7 @@
 import Cocoa
 
 class EventsTabController: NSViewController, ReactionsStoreSetter {
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet var tableView: NSTableView!
 
     internal var store: ReactionsStore? {
         didSet {
@@ -17,7 +17,7 @@ class EventsTabController: NSViewController, ReactionsStoreSetter {
         }
     }
 
-    func setStore(_ store: ReactionsStore?) {
+    func setStore(_: ReactionsStore?) {
         fatalError("Must Override")
     }
 }

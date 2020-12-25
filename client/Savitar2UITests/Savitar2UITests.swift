@@ -9,7 +9,6 @@
 import XCTest
 
 class Savitar2UITests: XCTestCase {
-
     override func setUp() {
         super.setUp()
 

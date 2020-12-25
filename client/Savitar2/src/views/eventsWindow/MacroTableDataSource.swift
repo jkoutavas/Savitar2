@@ -21,15 +21,15 @@ extension MacroTableDataSource: NSTableViewDataSource {
         return listModel?.itemCount ?? 0
     }
 
-    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+    func tableView(_: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         guard let viewModel = listModel?.viewModels[safe: row] else { return nil }
         guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return nil }
         guard let object = store?.state?.macroList.item(objectID: objID) else { return nil }
         return MacroPasteboardWriter(object: object, at: row)
-     }
+    }
 
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
-                   proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow _: Int,
+                   proposedDropOperation _: NSTableView.DropOperation) -> NSDragOperation {
         if let source = info.draggingSource as? NSTableView, source === tableView {
             // We're moving an item within the same tableview
             tableView.draggingDestinationFeedbackStyle = .gap
@@ -42,12 +42,12 @@ extension MacroTableDataSource: NSTableViewDataSource {
     }
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int,
-                   dropOperation: NSTableView.DropOperation) -> Bool {
+                   dropOperation _: NSTableView.DropOperation) -> Bool {
         guard let items = info.draggingPasteboard.pasteboardItems else { return false }
 
         if let source = info.draggingSource as? NSTableView, source === tableView {
             // We're moving an item within the same tableview
-            let indexes = items.compactMap {$0.integer(forType: .tableViewIndex)}
+            let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
             if !indexes.isEmpty {
                 store?.dispatch(MoveMacroAction(from: indexes[0], to: row))
                 return true
@@ -127,7 +127,7 @@ extension MacroTableDataSource: ItemTableDataSourceType {
 extension MacroTableDataSource: CheckableItemChangeDelegate {
     func checkableItem(itemID: String, didChangeChecked checked: Bool) {
         guard let macroID = SavitarObjectID(identifier: itemID)
-            else { preconditionFailure("Invalid macro identifier \(itemID).") }
+        else { preconditionFailure("Invalid macro identifier \(itemID).") }
 
         let action: MacroAction = {
             switch checked {

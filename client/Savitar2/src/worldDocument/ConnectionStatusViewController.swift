@@ -11,23 +11,23 @@ import Cocoa
 class ConnectionStatusViewController: NSViewController {
     var session: Session?
 
-    @IBOutlet weak var progress: NSProgressIndicator?
+    @IBOutlet var progress: NSProgressIndicator?
 
-    @IBAction func closeAction(_ sender: AnyObject) {
+    @IBAction func closeAction(_: AnyObject) {
         session?.reallyCloseWindow()
     }
 
-    @IBAction func connectAction(_ sender: AnyObject) {
+    @IBAction func connectAction(_: AnyObject) {
         session?.connectAndRun()
     }
 
-    @IBAction func stopAction(_ sender: AnyObject) {
+    @IBAction func stopAction(_: AnyObject) {
         session?.close()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let prog = self.progress {
+        if let prog = progress {
             prog.startAnimation(self)
         }
     }

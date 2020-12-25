@@ -14,9 +14,11 @@ let ColorElemIdentifier = "COLOR"
 class SavColor: SavitarObject {
     var color: NSColor?
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     // These are the ColorElemIdentifier attributes
     enum ColorAttribIdentifier: String {
@@ -28,9 +30,9 @@ class SavColor: SavitarObject {
         for attribute in xml.attributes {
             switch attribute.key {
             case ColorAttribIdentifier.name.rawValue:
-                self.name = attribute.value
+                name = attribute.value
             case ColorAttribIdentifier.rgb.rawValue:
-                self.color = NSColor.init(hex: attribute.value)
+                color = NSColor(hex: attribute.value)
             default:
                 print("skipping color attribute \(attribute.key)")
             }
@@ -40,8 +42,8 @@ class SavColor: SavitarObject {
     override func toXMLElement() throws -> XMLElement {
         let colorElem = XMLElement(name: ColorElemIdentifier)
 
-        if let colorStr = self.color?.toHex() {
-            colorElem.addAttribute(name: ColorAttribIdentifier.name.rawValue, stringValue: self.name)
+        if let colorStr = color?.toHex() {
+            colorElem.addAttribute(name: ColorAttribIdentifier.name.rawValue, stringValue: name)
 
             colorElem.addAttribute(name: ColorAttribIdentifier.rgb.rawValue, stringValue: "#\(colorStr)")
         }

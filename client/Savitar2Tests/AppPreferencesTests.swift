@@ -6,8 +6,8 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 @testable import Savitar2
+import XCTest
 
 import SwiftyXMLParser
 
@@ -63,5 +63,4 @@ class AppPreferencesTests: XCTestCase {
 
         XCTAssertEqual(xmlOutputStr, xmlInputStr)
     }
-
 }

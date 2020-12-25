@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class ColorManTests: XCTestCase {
-
     func testColors() throws {
         // These are the colors lifted directly from StarupPreferences.xml
         let xmlString = """
@@ -124,6 +123,6 @@ class ColorManTests: XCTestCase {
 
         XCTAssertEqual(cm.get()[23].name, "whitei")
 
-        XCTAssertEqual(cm.get()[23].color, NSColor.init(hex: "#FFFFFF"))
+        XCTAssertEqual(cm.get()[23].color, NSColor(hex: "#FFFFFF"))
     }
 }

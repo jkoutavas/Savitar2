@@ -13,7 +13,7 @@ class OutputView: WKWebView {
     var useANSI = true
     var useHTML = false
 
-    override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
+    override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
         menu.removeAllItems()
         let menuItem = NSMenuItem()
         menuItem.title = "Clear"
@@ -22,23 +22,23 @@ class OutputView: WKWebView {
         menu.addItem(menuItem)
     }
 
-    @objc func clearAction(_ sender: AnyObject) {
+    @objc func clearAction(_: AnyObject) {
         clear()
     }
 
     func clear() {
         let js = """
-         document.body.innerHTML = ''
-         window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-         """
-         run(javaScript: js)
+        document.body.innerHTML = ''
+        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        """
+        run(javaScript: js)
     }
 
     func output(string: String,
                 makeAppend: Bool = false,
                 appending: Bool = false,
                 appendID: Int = 0,
-                attributes: [NSAttributedString.Key: Any]? = nil) {
+                attributes _: [NSAttributedString.Key: Any]? = nil) {
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
         var cleanString = string
         if !useHTML {
@@ -176,12 +176,12 @@ class OutputView: WKWebView {
 
         // update the head <style> element
         run(javaScript: """
-            var ss = document.getElementById('head-style');
-            if (ss !== null) {
-            ss.remove();
-            }
-            document.head.insertAdjacentHTML('beforeend', `\(ss)`)
-            """)
+        var ss = document.getElementById('head-style');
+        if (ss !== null) {
+        ss.remove();
+        }
+        document.head.insertAdjacentHTML('beforeend', `\(ss)`)
+        """)
 
         #if DEBUG_WKWEBKIT
 //        printDOM(element: "document.head.innerHTML")
@@ -189,12 +189,12 @@ class OutputView: WKWebView {
     }
 
     func run(javaScript: String) {
-        evaluateJavaScript("(function() {\(javaScript); })();") { (result, error) in
+        evaluateJavaScript("(function() {\(javaScript); })();") { result, error in
             if error != nil {
                 print("javascript run error: \(error!)")
             } else if result != nil {
                 #if DEBUG_WKWEBKIT
-                print(result!)
+                    print(result!)
                 #endif
             }
         }
@@ -202,7 +202,7 @@ class OutputView: WKWebView {
 
     // Debug function, dump current html to the console
     func printDOM(element: String) {
-        evaluateJavaScript(element) { (result, error) in
+        evaluateJavaScript(element) { result, error in
             if error != nil {
                 print("javascript print error: \(error!)")
             } else if result != nil {
@@ -213,8 +213,8 @@ class OutputView: WKWebView {
 
     func printSource() {
         evaluateJavaScript("document.documentElement.outerHTML.toString()",
-                            completionHandler: { (html: Any?, _: Error?) in
-            print(html!)
-        })
+                           completionHandler: { (html: Any?, _: Error?) in
+                               print(html!)
+                           })
     }
 }

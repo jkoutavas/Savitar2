@@ -6,8 +6,8 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import ReSwift
+import XCTest
 
 /*
     This set of tests are based on watered-down version we use in Savitar's ReactionsState
@@ -49,13 +49,13 @@ struct SetItemsAction: Action {
     let itemList: ItemListState<Foo>
     static let type = "SetItemsAction"
 
-    init (_ itemList: ItemListState<Foo>) {
+    init(_ itemList: ItemListState<Foo>) {
         self.itemList = itemList
     }
 }
 
 struct TestReducer {
-     func handleAction(action: Action, state: TestAppState?) -> TestAppState {
+    func handleAction(action: Action, state: TestAppState?) -> TestAppState {
         var state = state ?? TestAppState()
 
         switch action {
@@ -120,13 +120,13 @@ struct SetSubItemsAction: Action {
     let itemList: ItemListState<Foo>
     static let type = "SetSubItemsAction"
 
-    init (_ itemList: ItemListState<Foo>) {
+    init(_ itemList: ItemListState<Foo>) {
         self.itemList = itemList
     }
 }
 
 struct TestSubReducer {
-     func handleAction(action: Action, state: TestAppState2?) -> TestAppState2 {
+    func handleAction(action: Action, state: TestAppState2?) -> TestAppState2 {
         var state = state ?? TestAppState2()
 
         switch action {

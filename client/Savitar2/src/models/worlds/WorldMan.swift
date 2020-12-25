@@ -12,10 +12,11 @@ import SwiftyXMLParser
 let WorldsElemIdentifier = "WORLDS"
 
 class WorldMan: ModelManager<World>, SavitarXMLProtocol {
+    // ***************************
 
-    //***************************
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     func parse(xml: XML.Accessor) throws {
         for elem in xml[WorldsElemIdentifier][WorldElemIdentifier] {

@@ -12,7 +12,7 @@ extension Array where Element: Equatable {
     // These functions from sooop on GitHub
     // https://gist.github.com/sooop/3c964900d429516ba48bd75050d0de0a
     mutating func move(from start: Index, to end: Index) {
-        guard (0..<count) ~= start, (0...count) ~= end else { return }
+        guard (0 ..< count) ~= start, (0 ... count) ~= end else { return }
         if start == end { return }
         let targetIndex = start < end ? end - 1 : end
         insert(remove(at: start), at: targetIndex)
@@ -29,7 +29,7 @@ extension Array where Element: Equatable {
 
     // Remove first collection element that is equal to the given `object`:
     mutating func remove(object: Element) {
-        guard let index = firstIndex(of: object) else {return}
+        guard let index = firstIndex(of: object) else { return }
         remove(at: index)
     }
 }

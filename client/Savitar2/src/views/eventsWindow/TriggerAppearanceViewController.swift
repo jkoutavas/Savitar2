@@ -10,10 +10,9 @@ import Cocoa
 import ReSwift
 
 class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
-
-    @IBOutlet weak var gagRadio: NSButton!
-    @IBOutlet weak var dontAlterRadio: NSButton!
-    @IBOutlet weak var changeRadio: NSButton!
+    @IBOutlet var gagRadio: NSButton!
+    @IBOutlet var dontAlterRadio: NSButton!
+    @IBOutlet var changeRadio: NSButton!
 
     var trigger: Trigger?
 
@@ -34,7 +33,7 @@ class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
         store?.unsubscribe(self)
     }
 
-    @IBAction func appearanceRadioButtonChanged(_ sender: AnyObject) {
+    @IBAction func appearanceRadioButtonChanged(_: AnyObject) {
         guard let trigger = self.trigger else { return }
 
         if gagRadio.state == .on {
@@ -72,9 +71,9 @@ class TriggerAppearanceViewController: NSViewController, StoreSubscriber {
             case .changeAppearance:
                 changeRadio.state = .on
             }
-            self.representedObject = TriggerAppearanceController(trigger: trigger, store: store)
+            representedObject = TriggerAppearanceController(trigger: trigger, store: store)
         } else {
-            self.representedObject = nil
+            representedObject = nil
         }
     }
 }
@@ -118,7 +117,7 @@ class TriggerAppearanceController: NSController {
         return faceDescription.contains(key)
     }
 
-    override func setValue(_ value: Any?, forKeyPath keyPath: String) {
+    override func setValue(_: Any?, forKeyPath keyPath: String) {
         let thisFace = TrigFace.from(string: keyPath)
         if var faces = trigger.style?.face {
             if faces.contains(thisFace) {
@@ -135,12 +134,13 @@ class TriggerAppearanceController: NSController {
     init(trigger: Trigger, store: ReactionsStore?) {
         self.trigger = trigger
         self.store = store
-        self.faceDescription = trigger.style?.face?.description ?? ""
+        faceDescription = trigger.style?.face?.description ?? ""
 
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

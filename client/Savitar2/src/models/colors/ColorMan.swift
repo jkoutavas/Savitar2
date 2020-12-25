@@ -12,10 +12,11 @@ import SwiftyXMLParser
 let ColorsElemIdentifier = "COLORS"
 
 class ColorMan: ModelManager<SavColor>, SavitarXMLProtocol {
+    // ***************************
 
-    //***************************
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     func parse(xml: XML.Accessor) throws {
         for elem in xml[ColorsElemIdentifier][ColorElemIdentifier] {

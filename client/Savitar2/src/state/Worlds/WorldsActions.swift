@@ -10,7 +10,7 @@ import Foundation
 import ReSwift
 
 // A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
-protocol WorldUndoableAction: Action, UndoableWorld { }
+protocol WorldUndoableAction: Action, UndoableWorld {}
 
 protocol WorldAction: Action {
     func apply(oldState: WorldsState) -> WorldsState
@@ -50,7 +50,7 @@ struct InsertWorldAction: WorldUndoableAction, WorldAction {
 
     init(world: World, atIndex: Int) {
         self.world = world
-        self.index = atIndex
+        index = atIndex
     }
 
     func apply(oldState: WorldsState) -> WorldsState {

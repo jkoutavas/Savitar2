@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class MacroTests: XCTestCase {
-
     func testV1RetEntity() throws {
         // v1 Savitar macros use the "&ret;" custom entity to separate lines of text.
         // XMLParser has a known bug with handling custom entities (of which SwiftyXMLParser is based)
@@ -38,8 +37,7 @@ class MacroTests: XCTestCase {
 
         XCTAssertEqual(v1.name, "MACRO_5")
 
-        XCTAssertEqual(v1.value, "say Here is command one...say ...and here is command two!"
-        )
+        XCTAssertEqual(v1.value, "say Here is command one...say ...and here is command two!")
 
         XCTAssertEqual(v1.keyLabel, "F5")
     }
@@ -71,15 +69,15 @@ class MacroTests: XCTestCase {
     func testNewLine() throws {
         // Here we're simply just doing a newline
         let xmlString = """
-<MACRO
-    NAME="MACRO_5"
-    KEY="F5">
-    <VALUE>
-        say Here is command one...
-say ...and here is command two!
-    </VALUE>
-</MACRO>
-"""
+        <MACRO
+            NAME="MACRO_5"
+            KEY="F5">
+            <VALUE>
+                say Here is command one...
+        say ...and here is command two!
+            </VALUE>
+        </MACRO>
+        """
 
         let xml = try XML.parse(xmlString)
         let v1 = Macro()

@@ -10,26 +10,25 @@ import Cocoa
 import WebKit
 
 class AppearanceSettingsController: OutputViewNavigationDelegate {
-
-    @IBOutlet weak var fontPopup: NSPopUpButton!
-    @IBOutlet weak var monoFontPopup: NSPopUpButton!
-    @IBOutlet weak var outputView: OutputView!
+    @IBOutlet var fontPopup: NSPopUpButton!
+    @IBOutlet var monoFontPopup: NSPopUpButton!
+    @IBOutlet var outputView: OutputView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         for family in NSFontManager.shared.availableFontFamilies {
             let font = NSFont(name: family, size: 11)
-            let menuItem = NSMenuItem.init()
+            let menuItem = NSMenuItem()
             menuItem.title = family
             fontPopup.menu?.addItem(menuItem)
             if font!.isFixedPitch {
-                let menuItem = NSMenuItem.init()
+                let menuItem = NSMenuItem()
                 menuItem.title = family
                 monoFontPopup.menu?.addItem(menuItem)
             }
-         }
+        }
 
-        guard let world = self.representedObject as? World else { return }
+        guard let world = representedObject as? World else { return }
 
         fontPopup.selectItem(withTitle: world.fontName)
         monoFontPopup.selectItem(withTitle: world.monoFontName)
@@ -42,7 +41,7 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     }
 
     @IBAction func fontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let world = self.representedObject as? World else { return }
+        guard let world = representedObject as? World else { return }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
             world.fontName = family
@@ -51,7 +50,7 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     }
 
     @IBAction func monoFontPopUpButtonWasSelected(sender: AnyObject) {
-        guard let world = self.representedObject as? World else { return }
+        guard let world = representedObject as? World else { return }
 
         if let popup = sender as? NSPopUpButton, let family = popup.selectedItem?.title {
             world.monoFontName = family
@@ -60,7 +59,7 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     }
 
     func attributeChanged() {
-        guard let world = self.representedObject as? World else { return }
+        guard let world = representedObject as? World else { return }
 
         outputView.clear()
         outputView.setStyle(world: world)

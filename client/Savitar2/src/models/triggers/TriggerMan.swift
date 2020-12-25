@@ -12,10 +12,11 @@ import SwiftyXMLParser
 let TriggersElemIdentifier = "TRIGGERS"
 
 class TriggerMan: ModelManager<Trigger>, SavitarXMLProtocol {
+    // ***************************
 
-    //***************************
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     func parse(xml: XML.Accessor) throws {
         for elem in xml[TriggersElemIdentifier][TriggerElemIdentifier] {

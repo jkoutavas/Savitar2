@@ -16,17 +16,20 @@ enum TrigAppearance {
     case dontUseStyle
     case changeAppearance
 }
+
 extension TrigAppearance {
     init() {
         self = .dontUseStyle
     }
 }
+
 enum TrigAudioType {
     case silent
     case sound
     case speakEvent
     case sayText
 }
+
 extension TrigAudioType {
     init() {
         self = .silent
@@ -38,6 +41,7 @@ enum TrigMatching {
     case wholeLine
     case wholeWord
 }
+
 extension TrigMatching {
     init() {
         self = .exact
@@ -49,6 +53,7 @@ enum TrigSpecifier {
     case lineContains
     case useRegex
 }
+
 extension TrigSpecifier {
     init() {
         self = .lineContains
@@ -60,6 +65,7 @@ enum TrigType {
     case output
     case both
 }
+
 extension TrigType {
     init() {
         self = .output
@@ -73,7 +79,7 @@ struct TrigFlags: OptionSet {
     static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
-//  static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
+    //  static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
     static let gag = TrigFlags(rawValue: 1 << 5)
     static let startsWith = TrigFlags(rawValue: 1 << 6)
     static let echoReply = TrigFlags(rawValue: 1 << 7)
@@ -106,14 +112,14 @@ class Trigger: SavitarObject, NSCopying {
     var voice: String?
     var wordEnding: String?
 
-    func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with _: NSZone? = nil) -> Any {
         return Trigger(trigger: self)
     }
 
     func getFlagsFromValues() -> TrigFlags {
         var flags = TrigFlags()
 
-        switch self.appearance {
+        switch appearance {
         case .dontUseStyle:
             flags.insert(.dontUseStyle)
         case .gag:
@@ -122,7 +128,7 @@ class Trigger: SavitarObject, NSCopying {
             flags.remove([.dontUseStyle, .gag])
         }
 
-        switch self.matching {
+        switch matching {
         case .exact:
             flags.insert(.exact)
         case .wholeLine:
@@ -131,7 +137,7 @@ class Trigger: SavitarObject, NSCopying {
             flags.insert(.toEndOfWord)
         }
 
-        switch self.specifier {
+        switch specifier {
         case .startsWith:
             flags.insert(.startsWith)
         case .useRegex:
@@ -140,19 +146,19 @@ class Trigger: SavitarObject, NSCopying {
             flags.remove([.startsWith, .useRegex])
         }
 
-        if self.caseSensitive {
+        if caseSensitive {
             flags.insert(.caseSensitive)
         }
 
-        if !self.enabled {
+        if !enabled {
             flags.insert(.disabled)
         }
 
-        if self.useSubstitution {
+        if useSubstitution {
             flags.insert(.useSubstitution)
         }
 
-        if self.echoReply {
+        if echoReply {
             flags.insert(.echoReply)
         }
 
@@ -161,33 +167,33 @@ class Trigger: SavitarObject, NSCopying {
 
     func setValuesFrom(flags: TrigFlags) {
         if flags.contains(.dontUseStyle) {
-            self.appearance = .dontUseStyle
+            appearance = .dontUseStyle
         } else if flags.contains(.gag) {
-            self.appearance = .gag
+            appearance = .gag
         } else {
-            self.appearance = .changeAppearance
+            appearance = .changeAppearance
         }
 
         if flags.contains(.exact) {
-            self.matching = .exact
+            matching = .exact
         } else if flags.contains(.wholeLine) {
-            self.matching = .wholeLine
+            matching = .wholeLine
         } else if flags.contains(.toEndOfWord) {
-            self.matching = .wholeWord
+            matching = .wholeWord
         }
 
         if flags.contains(.startsWith) {
-            self.specifier = .startsWith
+            specifier = .startsWith
         } else if flags.contains(.useRegex) {
-            self.specifier = .useRegex
+            specifier = .useRegex
         } else {
-            self.specifier = .lineContains
+            specifier = .lineContains
         }
 
-        self.caseSensitive = flags.contains(.caseSensitive)
-        self.enabled = !flags.contains(.disabled)
-        self.useSubstitution = flags.contains(.useSubstitution)
-        self.echoReply = flags.contains(.echoReply)
+        caseSensitive = flags.contains(.caseSensitive)
+        enabled = !flags.contains(.disabled)
+        useSubstitution = flags.contains(.useSubstitution)
+        echoReply = flags.contains(.echoReply)
     }
 
     var flags: TrigFlags {
@@ -198,24 +204,24 @@ class Trigger: SavitarObject, NSCopying {
     init(trigger: Trigger) {
         super.init()
 
-        self.name = trigger.name
-        self.audioType = trigger.audioType
-        self.appearance = trigger.appearance
-        self.matching = trigger.matching
-        self.specifier = trigger.specifier
-        self.type = trigger.type
-        self.caseSensitive = trigger.caseSensitive
-        self.enabled = trigger.enabled
-        self.useSubstitution = trigger.useSubstitution
-        self.echoReply = trigger.echoReply
-        self.reply = trigger.reply
-        self.say = trigger.say
-        self.sound = trigger.sound
-        self.style = trigger.style
-        self.substitution = trigger.substitution
-        self.type = trigger.type
-        self.voice = trigger.voice
-        self.wordEnding = trigger.wordEnding
+        name = trigger.name
+        audioType = trigger.audioType
+        appearance = trigger.appearance
+        matching = trigger.matching
+        specifier = trigger.specifier
+        type = trigger.type
+        caseSensitive = trigger.caseSensitive
+        enabled = trigger.enabled
+        useSubstitution = trigger.useSubstitution
+        echoReply = trigger.echoReply
+        reply = trigger.reply
+        say = trigger.say
+        sound = trigger.sound
+        style = trigger.style
+        substitution = trigger.substitution
+        type = trigger.type
+        voice = trigger.voice
+        wordEnding = trigger.wordEnding
     }
 
     init(
@@ -238,12 +244,12 @@ class Trigger: SavitarObject, NSCopying {
         style: TrigTextStyle? = nil,
         substitution: String? = nil,
         voice: String? = nil,
-        wordEnding: String? = nil) {
-
+        wordEnding: String? = nil
+    ) {
         super.init()
 
         self.name = name
-        self.audioType = audioCue
+        audioType = audioCue
         self.appearance = appearance
         self.matching = matching
         self.specifier = specifier
@@ -293,17 +299,17 @@ class Trigger: SavitarObject, NSCopying {
 
         var ranges = line.ranges(of: pattern, options: options)
         matched = ranges.count > 0
-        if ranges.count > 0 && matching == .wholeLine {
+        if ranges.count > 0, matching == .wholeLine {
             ranges = [line.fullRange]
         }
         var resultLine = ""
         var pos = line.startIndex
         for range in ranges {
             if pos != range.lowerBound {
-                resultLine += line[pos..<range.lowerBound]
+                resultLine += line[pos ..< range.lowerBound]
             }
             if appearance != .gag {
-                if let subst = self.substitution, useSubstitution {
+                if let subst = substitution, useSubstitution {
                     if let style = self.style, appearance == .changeAppearance {
                         resultLine += style.on + subst + style.off
                     } else {
@@ -318,7 +324,7 @@ class Trigger: SavitarObject, NSCopying {
             pos = range.upperBound
         }
         if pos < line.endIndex {
-            resultLine += line[pos..<line.endIndex]
+            resultLine += line[pos ..< line.endIndex]
         }
         line = resultLine
         return matched
@@ -337,9 +343,11 @@ class Trigger: SavitarObject, NSCopying {
         .both: "both"
     ]
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     let ReplyElemIdentifier = "REPLY"
     let SayElemIdentifier = "SAY"
@@ -389,47 +397,47 @@ class Trigger: SavitarObject, NSCopying {
             switch attribute.key {
             case TriggerAttribIdentifier.audio.rawValue:
                 if let type = audioLabels[attribute.value] {
-                    self.audioType = type
+                    audioType = type
                 }
             case TriggerAttribIdentifier.bgColor.rawValue:
-                if self.style == nil {
-                    self.style = TrigTextStyle()
+                if style == nil {
+                    style = TrigTextStyle()
                 }
-                self.style!.backColor = NSColor(hex: attribute.value)
-                if self.style!.face == nil {
-                    self.style!.face = .backColor
+                style!.backColor = NSColor(hex: attribute.value)
+                if style!.face == nil {
+                    style!.face = .backColor
                 } else {
-                    self.style!.face!.insert(.backColor)
+                    style!.face!.insert(.backColor)
                 }
             case TriggerAttribIdentifier.color.rawValue, TriggerAttribIdentifier.fgColor.rawValue:
-                if self.style == nil {
-                    self.style = TrigTextStyle()
+                if style == nil {
+                    style = TrigTextStyle()
                 }
-                self.style!.foreColor = NSColor(hex: attribute.value)
-                if self.style!.face == nil {
-                    self.style!.face = .foreColor
+                style!.foreColor = NSColor(hex: attribute.value)
+                if style!.face == nil {
+                    style!.face = .foreColor
                 } else {
-                    self.style!.face!.insert(.foreColor)
+                    style!.face!.insert(.foreColor)
                 }
             case TriggerAttribIdentifier.face.rawValue:
-                if self.style == nil {
-                    self.style = TrigTextStyle()
+                if style == nil {
+                    style = TrigTextStyle()
                 }
-                self.style!.face = TrigFace.from(string: attribute.value)
+                style!.face = TrigFace.from(string: attribute.value)
             case TriggerAttribIdentifier.flags.rawValue:
                 let flags = TrigFlags.from(string: attribute.value)
                 setValuesFrom(flags: flags)
                 hasUseFore = attribute.value.contains("useFore") // only present in v1.x documents
             case TriggerAttribIdentifier.name.rawValue:
-                self.name = attribute.value
+                name = attribute.value
             case TriggerAttribIdentifier.sound.rawValue:
-                self.sound = attribute.value
+                sound = attribute.value
             case TriggerAttribIdentifier.type.rawValue:
                 if let type = typeLabels[attribute.value] {
                     self.type = type
                 }
             case TriggerAttribIdentifier.voice.rawValue:
-                self.voice = attribute.value
+                voice = attribute.value
             default:
                 print("skipping trigger attribute \(attribute.key)")
             }
@@ -439,88 +447,88 @@ class Trigger: SavitarObject, NSCopying {
             // color for the trigger. In v2.0, we translate the v1.x "useFore" flag to mean, "set the face's
             // "foreColor" if there's not a v1.x "useFor" flag." Basically, we're saying:
             //      face.foreColor == !flags.useFore
-            if self.style != nil {
-                if self.style!.face != nil {
-                    self.style!.face!.remove(.foreColor)
+            if style != nil {
+                if style!.face != nil {
+                    style!.face!.remove(.foreColor)
                 }
             }
         }
 
         if let text = xml[ReplyElemIdentifier].text {
-            self.reply = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            reply = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[SayElemIdentifier].text {
-            self.say = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            say = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[SubsitutionElemIdentifier].text {
-            self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         } else if let text = xml[SubstitutionElemIdentifier].text {
-            self.substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            substitution = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[WordEndElemIdentifier].text {
-            self.wordEnding = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            wordEnding = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 
     override func toXMLElement() throws -> XMLElement {
         let trigElem = XMLElement(name: TriggerElemIdentifier)
 
-        trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: self.name)
+        trigElem.addAttribute(name: TriggerAttribIdentifier.name.rawValue, stringValue: name)
 
-        if let value = typeDict[self.type] {
+        if let value = typeDict[type] {
             trigElem.addAttribute(name: TriggerAttribIdentifier.type.rawValue, stringValue: value)
         }
 
         trigElem.addAttribute(name: TriggerAttribIdentifier.flags.rawValue,
-                       stringValue: getFlagsFromValues().description)
+                              stringValue: getFlagsFromValues().description)
 
-        if let value = self.wordEnding {
+        if let value = wordEnding {
             trigElem.addChild(
-                XMLElement.init(name: WordEndElemIdentifier, stringValue: value))
+                XMLElement(name: WordEndElemIdentifier, stringValue: value))
         }
 
-        if let value = self.style?.face?.description {
+        if let value = style?.face?.description {
             if value.count > 0 {
                 trigElem.addAttribute(name: TriggerAttribIdentifier.face.rawValue, stringValue: value)
             }
         }
 
-        if let value = self.style?.backColor?.toHex() {
+        if let value = style?.backColor?.toHex() {
             trigElem.addAttribute(name: TriggerAttribIdentifier.bgColor.rawValue, stringValue: "#\(value)")
         }
 
-        if let value = self.style?.foreColor?.toHex() {
+        if let value = style?.foreColor?.toHex() {
             trigElem.addAttribute(name: TriggerAttribIdentifier.fgColor.rawValue, stringValue: "#\(value)")
         }
 
-        if let value = self.sound {
+        if let value = sound {
             trigElem.addAttribute(name: TriggerAttribIdentifier.sound.rawValue, stringValue: value)
         }
 
-        if let value = audioCueDict[self.audioType] {
+        if let value = audioCueDict[audioType] {
             trigElem.addAttribute(name: TriggerAttribIdentifier.audio.rawValue, stringValue: value)
         }
 
-        if let value = self.voice {
+        if let value = voice {
             trigElem.addAttribute(name: TriggerAttribIdentifier.voice.rawValue, stringValue: value)
         }
 
-        if let value = self.reply {
+        if let value = reply {
             trigElem.addChild(
-                XMLElement.init(name: ReplyElemIdentifier, stringValue: value))
+                XMLElement(name: ReplyElemIdentifier, stringValue: value))
         }
 
-        if let value = self.say {
+        if let value = say {
             trigElem.addChild(
-                XMLElement.init(name: SayElemIdentifier, stringValue: value))
+                XMLElement(name: SayElemIdentifier, stringValue: value))
         }
 
-        if let value = self.substitution {
+        if let value = substitution {
             trigElem.addChild(
-                XMLElement.init(name: SubstitutionElemIdentifier, stringValue: value))
+                XMLElement(name: SubstitutionElemIdentifier, stringValue: value))
         }
 
         return trigElem
@@ -541,7 +549,7 @@ extension TrigFlags: StrOptionSet {
         (.dontUseStyle, "dontUseStyle"),
         (.useSubstitution, "useSubstitution"), // Note: new label correct spelling for v2
         (.useRegex, "useRegex")
-        ]}
+    ] }
     static var labelDict: [String: Self] { return [
         "matchExactly": .exact,
         "matchToEndOfWord": .toEndOfWord,
@@ -555,5 +563,5 @@ extension TrigFlags: StrOptionSet {
         "useSubstitution": .useSubstitution, // Note: new v2.0 correctly spelled label
         "useSubsitution": .useSubstitution, // Note: old (misspelled) v1.0 label
         "useRegex": .useRegex
-        ]}
+    ] }
 }

@@ -39,7 +39,7 @@ class UndoCommand: NSObject {
 
         // Don't overwrite the inferred name when undoing.
         if !undoManager.isUndoing,
-            let undoName = self.undoName {
+           let undoName = self.undoName {
             undoManager.setActionName(undoName)
         }
     }

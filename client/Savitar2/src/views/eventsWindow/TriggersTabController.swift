@@ -34,7 +34,7 @@ class TriggersTabController: EventsTabController {
             $0.select { $0.triggerList }
         }
 
-       view.window?.makeFirstResponder(tableView)
+        view.window?.makeFirstResponder(tableView)
     }
 
     override func viewWillDisappear() {
@@ -52,9 +52,9 @@ extension TriggersTabController: NSMenuItemValidation {
         return true
     }
 
-    @IBAction func delete(_ sender: AnyObject) {
+    @IBAction func delete(_: AnyObject) {
         guard let viewModel = dataSource.selectedItem else { return }
-        guard let objID = SavitarObjectID(identifier: viewModel.itemID ) else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return }
         store?.dispatch(RemoveTriggerAction(triggerID: objID))
     }
 }
@@ -89,12 +89,12 @@ extension TriggersTabController {
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(listModel: TriggerListViewModel) {
+    private func updateTableDataSource(listModel: TriggerListViewModel) {
         dataSource.updateContents(listModel: listModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(listModel: TriggerListViewModel) {
+    private func displaySelection(listModel: TriggerListViewModel) {
         guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return

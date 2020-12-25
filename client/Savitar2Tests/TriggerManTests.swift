@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class TriggerManTests: XCTestCase {
-
     func testParseV1Triggers() throws {
         // These are the triggers lifted directly from Jay's "The Camp" v1 world document
         let xmlString = """

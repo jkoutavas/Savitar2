@@ -59,7 +59,6 @@ enum MacroAction: ReactionUndoableAction {
     }
 
     func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
-
         switch self {
         case let .changeKey(macroID, key: _):
             guard let prev = context.macroKey(macroID: macroID) else { return nil }

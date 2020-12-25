@@ -15,7 +15,7 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionsStoreSe
     var matchingViewController: TriggerMatchingViewController?
     var replyViewController: TriggerReplyViewController?
 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: NSStoryboardSegue, sender _: Any?) {
         // Go off and find the view controllers for each tab
         if segue.destinationController is NSTabViewController {
             if let tabViewController = segue.destinationController as? NSTabViewController {
@@ -59,9 +59,9 @@ class TriggerViewController: NSViewController, StoreSubscriber, ReactionsStoreSe
     func newState(state: ReactionsState) {
         if let index = state.triggerList.selection, index < state.triggerList.items.count {
             let trigger = state.triggerList.items[index]
-            self.representedObject = TriggerController(trigger: trigger, store: store)
+            representedObject = TriggerController(trigger: trigger, store: store)
         } else {
-            self.representedObject = nil
+            representedObject = nil
         }
     }
 }
@@ -162,7 +162,8 @@ class TriggerController: NSController {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

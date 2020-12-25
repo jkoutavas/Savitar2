@@ -14,9 +14,8 @@ class OutputViewController: OutputViewNavigationDelegate {
     private var lastAppendID = 0
 
     lazy var outputView: OutputView = {
-
         class LoggingMessageHandler: NSObject, WKScriptMessageHandler {
-            func userContentController(_ userContentController: WKUserContentController,
+            func userContentController(_: WKUserContentController,
                                        didReceive message: WKScriptMessage) {
                 print("📗webkit: \(message.body)")
             }
@@ -27,7 +26,7 @@ class OutputViewController: OutputViewNavigationDelegate {
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
 
- //        webViewConfig.preferences.setValue(true, forKey: "developerExtrasEnabled")
+        //        webViewConfig.preferences.setValue(true, forKey: "developerExtrasEnabled")
 
         let outputView = OutputView(frame: .zero, configuration: webViewConfig)
         outputView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,15 +43,15 @@ class OutputViewController: OutputViewNavigationDelegate {
         view.addSubview(outputView)
         NSLayoutConstraint.activate([
             outputView.topAnchor
-                .constraint(equalTo: self.view.topAnchor),
+                .constraint(equalTo: view.topAnchor),
             outputView.leftAnchor
-                .constraint(equalTo: self.view.leftAnchor),
+                .constraint(equalTo: view.leftAnchor),
             outputView.bottomAnchor
-                .constraint(equalTo: self.view.bottomAnchor),
+                .constraint(equalTo: view.bottomAnchor),
             outputView.rightAnchor
-                .constraint(equalTo: self.view.rightAnchor)
+                .constraint(equalTo: view.rightAnchor)
         ])
-     }
+    }
 
     func output(string: String) {
         let appending = makeAppend // appending will be true if last operation was an append

@@ -17,14 +17,14 @@ class WorldWizardController: NSViewController {
     var hostObserver: NSKeyValueObservation?
     var nameObserver: NSKeyValueObservation?
 
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func cancelAction(_: Any) {
         completionHandler?(false, nil)
-        self.view.window?.close()
+        view.window?.close()
     }
 
-    @IBAction func doneAction(_ sender: Any) {
+    @IBAction func doneAction(_: Any) {
         completionHandler?(true, world)
-        self.view.window?.close()
+        view.window?.close()
     }
 
     override func viewDidLoad() {

@@ -19,6 +19,7 @@ struct WorldFlags: OptionSet, Hashable {
     static let echoCR = WorldFlags(rawValue: 1 << 2)
     static let html = WorldFlags(rawValue: 1 << 3)
 }
+
 extension WorldFlags: StrOptionSet {
     // TODO: I wonder if there's a DRY-er way to do these
     static var labels: [Label] { return [
@@ -26,13 +27,13 @@ extension WorldFlags: StrOptionSet {
         (.echoCmds, "echoCmds"),
         (.echoCR, "echoCR"),
         (.html, "html")
-        ]}
+    ] }
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
         "echoCmds": .echoCmds,
         "echoCR": .echoCR,
         "html": .html
-        ]}
+    ] }
 }
 
 enum IntensityType: Int {
@@ -54,17 +55,17 @@ class World: SavitarObject, NSCopying {
         }
         set {
             let body = newValue.dropPrefix(TelnetIdentifier)
-             let parts = body.components(separatedBy: ":")
-             if parts.count == 2 {
-                 host = parts[0]
-                 guard let p1 = UInt32(parts[1]) else { return }
-                 port = p1
-             } else if parts.count == 4 {
-                 // might have ::1 as the host
-                 host = "localhost"
-                 guard let p3 = UInt32(parts[3]) else { return }
-                 port = p3
-             }
+            let parts = body.components(separatedBy: ":")
+            if parts.count == 2 {
+                host = parts[0]
+                guard let p1 = UInt32(parts[1]) else { return }
+                port = p1
+            } else if parts.count == 4 {
+                // might have ::1 as the host
+                host = "localhost"
+                guard let p3 = UInt32(parts[3]) else { return }
+                port = p3
+            }
         }
     }
 
@@ -77,7 +78,7 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var backColor = NSColor.white
     @objc dynamic var foreColor = NSColor.black
     @objc dynamic var linkColor = NSColor.blue
-    @objc dynamic var echoBackColor = NSColor.init(hex: "9CA6FF")!
+    @objc dynamic var echoBackColor = NSColor(hex: "9CA6FF")!
     @objc dynamic var intenseColor = NSColor.white
     @objc dynamic var fontName = "Monaco"
     @objc dynamic var fontSize: CGFloat = 9
@@ -94,7 +95,7 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var zoomed = false
     @objc dynamic var outputMax = 100 * 1024
     @objc dynamic var outputMin = 25 * 1024
-    @objc dynamic  var flushTicks = 30
+    @objc dynamic var flushTicks = 30
     @objc dynamic var retrySecs = 0
     @objc dynamic var keepAliveMins = 0
 
@@ -129,54 +130,57 @@ class World: SavitarObject, NSCopying {
     init(world: World) {
         super.init()
 
-        self.port = world.port
-        self.host = world.host
-        self.name = world.name
-        self.flags = world.flags
-        self.cmdMarker = world.cmdMarker
-        self.varMarker = world.varMarker
-        self.wildMarker = world.wildMarker
-        self.backColor = world.backColor
-        self.foreColor = world.foreColor
-        self.linkColor = world.linkColor
-        self.echoBackColor = world.echoBackColor
-        self.intenseColor = world.intenseColor
-        self.intensityType = world.intensityType
-        self.fontName = world.fontName
-        self.fontSize = world.fontSize
-        self.monoFontName = world.monoFontName
-        self.monoFontSize = world.monoFontSize
-        self.MCPFontName = world.MCPFontName
-        self.MCPFontSize = world.MCPFontSize
-        self.inputRows = world.inputRows
-        self.columns = world.columns
-        self.position = world.position
-        self.windowSize = world.windowSize
-        self.zoomed = world.zoomed
-        self.outputMax = world.outputMax
-        self.outputMin = world.outputMin
-        self.flushTicks = world.flushTicks
-        self.retrySecs = world.retrySecs
-        self.keepAliveMins = world.keepAliveMins
-        self.logonCmd = world.logonCmd
-        self.logoffCmd = world.logoffCmd
+        port = world.port
+        host = world.host
+        name = world.name
+        flags = world.flags
+        cmdMarker = world.cmdMarker
+        varMarker = world.varMarker
+        wildMarker = world.wildMarker
+        backColor = world.backColor
+        foreColor = world.foreColor
+        linkColor = world.linkColor
+        echoBackColor = world.echoBackColor
+        intenseColor = world.intenseColor
+        intensityType = world.intensityType
+        fontName = world.fontName
+        fontSize = world.fontSize
+        monoFontName = world.monoFontName
+        monoFontSize = world.monoFontSize
+        MCPFontName = world.MCPFontName
+        MCPFontSize = world.MCPFontSize
+        inputRows = world.inputRows
+        columns = world.columns
+        position = world.position
+        windowSize = world.windowSize
+        zoomed = world.zoomed
+        outputMax = world.outputMax
+        outputMin = world.outputMin
+        flushTicks = world.flushTicks
+        retrySecs = world.retrySecs
+        keepAliveMins = world.keepAliveMins
+        logonCmd = world.logonCmd
+        logoffCmd = world.logoffCmd
     }
 
     override init() {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func copy(with zone: NSZone? = nil) -> Any {
+    func copy(with _: NSZone? = nil) -> Any {
         return World(world: self)
     }
 
-    //***************************
+    // ***************************
+
     // MARK: - SavitarXMLProtocol
-    //***************************
+
+    // ***************************
 
     let TelnetIdentifier = "telnet://"
     let LogonCmdElemIdentifier = "LOGONCMD"
@@ -192,7 +196,7 @@ class World: SavitarObject, NSCopying {
 
         // these are shared between v1 and v2
         case name = "NAME"
-        case URL = "URL"
+        case URL
         case flags = "FLAGS"
         case cmdMarker = "CMDMARKER"
         case varMarker = "VARMARKER"
@@ -361,11 +365,11 @@ class World: SavitarObject, NSCopying {
         }
 
         if let text = xml[LogonCmdElemIdentifier].text {
-             self.logonCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            logonCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if let text = xml[LogoffCmdElemIdentifier].text {
-             self.logoffCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            logoffCmd = text.trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         if case .singleElement = xml[TriggersElemIdentifier] {
@@ -446,13 +450,13 @@ class World: SavitarObject, NSCopying {
 
         worldElem.addAttribute(name: WorldAttribIdentifier.keepAliveMins.rawValue, stringValue: String(keepAliveMins))
 
-        if self.logonCmd.count > 0 {
-            worldElem.addChild(XMLElement.init(name: LogonCmdElemIdentifier, stringValue:
-                self.logonCmd))
+        if logonCmd.count > 0 {
+            worldElem.addChild(XMLElement(name: LogonCmdElemIdentifier, stringValue:
+                logonCmd))
         }
 
-        if self.logoffCmd.count > 0 {
-            worldElem.addChild(XMLElement.init(name: LogoffCmdElemIdentifier, stringValue: self.logoffCmd))
+        if logoffCmd.count > 0 {
+            worldElem.addChild(XMLElement(name: LogoffCmdElemIdentifier, stringValue: logoffCmd))
         }
 
         let triggersElem = try triggerMan.toXMLElement()

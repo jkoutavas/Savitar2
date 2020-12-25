@@ -9,7 +9,6 @@
 import Cocoa
 
 class DocumentV2: Document {
-
     static let FileType = "com.heynow.savitar.world"
 
     override class var autosavesInPlace: Bool {

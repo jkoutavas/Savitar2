@@ -36,7 +36,7 @@ let KeyCodeLabelDict: [KeyCodeType: String] = [
     Keycode.f18: "F18",
     Keycode.f19: "F19",
     Keycode.f20: "F20",
-    Keycode.delete: "del",  // Savitar 1.x legacy abbreviation
+    Keycode.delete: "del", // Savitar 1.x legacy abbreviation
     Keycode.home: "home",
     Keycode.end: "end",
     Keycode.pageUp: "page up",
@@ -96,7 +96,7 @@ struct HotKey: Equatable {
     init(keyLabel: String) {
         var label = keyLabel
 
-        modifierFlags = NSEvent.ModifierFlags.init(rawValue: 0)
+        modifierFlags = NSEvent.ModifierFlags(rawValue: 0)
         modifierFlags = HotKey.handleFlag(&label, "shift-", .shift, modifierFlags)
         modifierFlags = HotKey.handleFlag(&label, "control-", .control, modifierFlags)
         modifierFlags = HotKey.handleFlag(&label, "option-", .option, modifierFlags)

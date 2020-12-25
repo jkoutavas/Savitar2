@@ -22,10 +22,9 @@ class MacroViewModel: CheckableItemViewModel {
         super.init(itemID: macro.objectID.identifier,
                    title: macro.name,
                    enabled: macro.enabled)
-
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from _: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
 }

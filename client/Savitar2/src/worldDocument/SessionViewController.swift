@@ -45,5 +45,4 @@ class SessionViewController: NSSplitViewController {
         }
         return vc
     }
-
 }

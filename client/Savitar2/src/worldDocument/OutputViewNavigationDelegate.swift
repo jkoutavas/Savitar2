@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 
 class OutputViewNavigationDelegate: NSViewController, WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+    func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .other {
             if let url = navigationAction.request.url {

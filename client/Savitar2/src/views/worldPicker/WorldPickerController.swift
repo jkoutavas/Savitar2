@@ -24,7 +24,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     private var subscriber: WorldsSubscriber<ItemListState<World>>?
     private var selectionIsChanging = false
 
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet var tableView: NSTableView!
 
     @objc dynamic var world: World?
     @objc dynamic var worldIsSelected = false
@@ -60,7 +60,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         store?.unsubscribe(subscriber!)
     }
 
-    @objc func tableViewDoubleAction(sender: AnyObject) {
+    @objc func tableViewDoubleAction(sender _: AnyObject) {
         guard let world = self.world else { return }
         do {
             let document = try NSDocumentController.shared.makeUntitledDocument(ofType: DocumentV2.FileType)
@@ -68,9 +68,9 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
                 worldDocument.loadAndShow(world: world)
             }
         } catch {}
-     }
+    }
 
-    @IBAction func addAction(_ sender: Any) {
+    @IBAction func addAction(_: Any) {
         let bundle = Bundle(for: Self.self)
         let wizardStoryboard = NSStoryboard(name: "WorldWizard", bundle: bundle)
 
@@ -81,7 +81,7 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
                 let rows = self.dataSource.listModel?.itemCount ?? 0
                 let row = self.tableView.selectedRow >= 0 ? self.tableView.selectedRow + 1 : rows
                 self.store?.dispatch(InsertWorldAction(world: newWorld!, atIndex: row))
-                let sel: SelectionState = { return row }()
+                let sel: SelectionState = { row }()
                 self.store?.dispatch(SelectWorldAction(selection: sel))
                 self.tableView.scrollRowToVisible(row)
             }
@@ -89,9 +89,9 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         wc.showWindow(self)
     }
 
-    @IBAction func removeAction(_ sender: Any) {
+    @IBAction func removeAction(_: Any) {
         guard let world = self.world else { return }
-        self.store?.dispatch(RemoveWorldAction(worldID: world.objectID))
+        store?.dispatch(RemoveWorldAction(worldID: world.objectID))
     }
 
     @IBAction func connectAction(_ sender: AnyObject) {
@@ -108,9 +108,9 @@ extension WorldPickerController: NSMenuItemValidation {
         return true
     }
 
-    @IBAction func delete(_ sender: AnyObject) {
+    @IBAction func delete(_: AnyObject) {
         guard let viewModel = dataSource.selectedItem else { return }
-        guard let objID = SavitarObjectID(identifier: viewModel.itemID ) else { return }
+        guard let objID = SavitarObjectID(identifier: viewModel.itemID) else { return }
         store?.dispatch(RemoveWorldAction(worldID: objID))
     }
 }
@@ -146,12 +146,12 @@ extension WorldPickerController {
         selectionIsChanging = false
     }
 
-    fileprivate func updateTableDataSource(listModel: WorldListViewModel) {
+    private func updateTableDataSource(listModel: WorldListViewModel) {
         dataSource.updateContents(listModel: listModel)
         tableView.reloadData()
     }
 
-    fileprivate func displaySelection(listModel: WorldListViewModel) {
+    private func displaySelection(listModel: WorldListViewModel) {
         guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return

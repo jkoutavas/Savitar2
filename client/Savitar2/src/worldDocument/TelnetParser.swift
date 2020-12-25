@@ -76,37 +76,37 @@ import Logging
 enum CommandsEnum: UInt8 {
     case escIS = 0
     case escTerminalType = 24
-    case escSE = 240                        // end of subnegotiation
-    case escNOP                             // no-operation
-    case escDM                              // data mark (data stream portion of a Synch)
-    case escBRK                             // break key
-    case escIP                              // interrupt process
-    case escAO                              // abort output
-    case escAYT                             // are you there?
-    case escEC                              // erase character
-    case escEL                              // erase line
-    case escGA                              // go ahead
-    case escSB                              // begin subnegotiation
+    case escSE = 240 // end of subnegotiation
+    case escNOP // no-operation
+    case escDM // data mark (data stream portion of a Synch)
+    case escBRK // break key
+    case escIP // interrupt process
+    case escAO // abort output
+    case escAYT // are you there?
+    case escEC // erase character
+    case escEL // erase line
+    case escGA // go ahead
+    case escSB // begin subnegotiation
     case escWILL
     case escWONT
     case escDO
     case escDONT
-    case escIAC                            // data byte 255
+    case escIAC // data byte 255
 }
 
-enum StateEnum                // a simple state machine
+enum StateEnum // a simple state machine
 {
-    case normalChar                         // interpret as character
-    case gotIAC                             // received an IAC character
-    case gotSB                              // in subnegotiation
-    case gotWILL                            // received a WILL option
-    case gotWONT                            // received a WONT option
-    case gotDO                              // received a DO option
-    case gotDONT                            // received a DONT option
-    case gotIACinSB                         // received IAC while in SB
+    case normalChar // interpret as character
+    case gotIAC // received an IAC character
+    case gotSB // in subnegotiation
+    case gotWILL // received a WILL option
+    case gotWONT // received a WONT option
+    case gotDO // received a DO option
+    case gotDONT // received a DONT option
+    case gotIACinSB // received IAC while in SB
 }
 
-let kSubBufferMax = 80            // max size of subnegotiation buffer, plenty big (I hope)
+let kSubBufferMax = 80 // max size of subnegotiation buffer, plenty big (I hope)
 
 let TERMINAL_TYPE_STRING = "ANSI"
 
@@ -222,7 +222,7 @@ struct TelnetParser {
             } else {
                 // for case of escIAC escIAC
                 mState = .normalChar
-                return false  // pass second escIAC to higher level protocol
+                return false // pass second escIAC to higher level protocol
             }
         }
 
@@ -302,34 +302,34 @@ struct TelnetParser {
 
     private func telnetLog(message: String, option: UInt8) {
         #if DEBUG_TELNET
-        var label: String
-        switch option {
-        case 0:
-            label = "binary xfer"
-        case 1:
-            label = "local echo"
-        case 3:
-            label = "go ahead"
-        case 5:
-            label = "status"
-        case 24:
-            label = "term type"
-        case 31:
-            label = "window size"
-        case 32:
-            label = "term speed"
-        case 33:
-            label = "remote flow"
-        case 34:
-            label = "line mode"
-        case 37:
-            label = "authentication"
-        case 38:
-            label = "encryption"
-        default:
-            label = String(option)
-        }
-        logger?.info("\(message) \(label)")
+            var label: String
+            switch option {
+            case 0:
+                label = "binary xfer"
+            case 1:
+                label = "local echo"
+            case 3:
+                label = "go ahead"
+            case 5:
+                label = "status"
+            case 24:
+                label = "term type"
+            case 31:
+                label = "window size"
+            case 32:
+                label = "term speed"
+            case 33:
+                label = "remote flow"
+            case 34:
+                label = "line mode"
+            case 37:
+                label = "authentication"
+            case 38:
+                label = "encryption"
+            default:
+                label = String(option)
+            }
+            logger?.info("\(message) \(label)")
         #endif
     }
 }

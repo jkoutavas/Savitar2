@@ -1,9 +1,8 @@
+import Dispatch
 import Foundation
 import Socket
-import Dispatch
 
 class EchoServer {
-
     static let playbackCommand: String = "PLAY"
     static let quitCommand: String = "QUIT"
     static let shutdownCommand: String = "SHUTDOWN"
@@ -40,7 +39,6 @@ class EchoServer {
     }
 
     func run() {
-
         let queue = DispatchQueue.global(qos: .userInteractive)
 
         queue.async { [unowned self] in
@@ -59,7 +57,7 @@ class EchoServer {
 
                 repeat {
                     let newSocket = try socket.acceptClientConnection()
-                    //sleep(10) // simulate a slow connection
+                    // sleep(10) // simulate a slow connection
                     print("Accepted connection from: \(newSocket.remoteHostname) on port \(newSocket.remotePort)")
                     //                    print("Socket Signature: \(String(describing: newSocket.signature?.description))")
 
@@ -67,7 +65,7 @@ class EchoServer {
 
                 } while self.continueRunning
 
-            } catch let error {
+            } catch {
                 guard let socketError = error as? Socket.Error else {
                     print("Unexpected error...")
                     return
@@ -82,7 +80,6 @@ class EchoServer {
     }
 
     func addNewConnection(socket: Socket) {
-
         let esc = "\u{1B}"
         let ansiTestStr = "^[1mANSI Intense^[0m, ^[5mANSI Blink^[25m, ^[7mANSI Reverse^[27m, ^[3;4mANSI Italic and ANSI Underline^[0m, ^[9mANSI Crossed-out^[0m, ^[38;2;20;50;100m24-bit fore color^[0m, ^[48;2;100;50;90m24-bit back color^[0m".replacingOccurrences(of: "^[", with: "\(esc)[")
 
@@ -110,7 +107,6 @@ class EchoServer {
 
                     if bytesRead > 0 {
                         guard let response = String(data: readData, encoding: .utf8) else {
-
                             print("Error decoding response...")
                             readData.count = 0
                             break
@@ -136,7 +132,7 @@ class EchoServer {
                                 } catch {
                                     echo = "Play file not found.\n"
                                 }
-                             }
+                            }
                         }
 
                         let reply = "Server response: \n\(echo)"
@@ -168,7 +164,7 @@ class EchoServer {
                     self.connectedSockets[socket.socketfd] = nil
                 }
 
-            } catch let error {
+            } catch {
                 guard let socketError = error as? Socket.Error else {
                     print("Unexpected error by connection at \(socket.remoteHostname):\(socket.remotePort)...")
                     return
@@ -186,7 +182,7 @@ class EchoServer {
 
         // Close all open sockets...
         for socket in connectedSockets.values {
-            self.socketLockQueue.sync { [unowned self, socket] in
+            socketLockQueue.sync { [unowned self, socket] in
                 self.connectedSockets[socket.socketfd] = nil
                 socket.close()
             }

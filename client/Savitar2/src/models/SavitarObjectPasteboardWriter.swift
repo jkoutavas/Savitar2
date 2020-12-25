@@ -17,7 +17,7 @@ class SavitarObjectPasteboardWriter: NSObject, NSPasteboardWriting {
         self.index = index
     }
 
-    func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    func writableTypes(for _: NSPasteboard) -> [NSPasteboard.PasteboardType] {
         return []
     }
 
@@ -50,19 +50,20 @@ extension NSPasteboardItem {
         let plist = try? PropertyListSerialization.propertyList(
             from: data,
             options: .mutableContainers,
-            format: nil)
+            format: nil
+        )
         return plist as? Int
     }
 }
 
 class MacroPasteboardWriter: SavitarObjectPasteboardWriter {
-    override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    override func writableTypes(for _: NSPasteboard) -> [NSPasteboard.PasteboardType] {
         return [.macro, .tableViewIndex]
     }
 }
 
 class TriggerPasteboardWriter: SavitarObjectPasteboardWriter {
-    override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    override func writableTypes(for _: NSPasteboard) -> [NSPasteboard.PasteboardType] {
         return [.trigger, .tableViewIndex]
     }
 }

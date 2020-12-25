@@ -33,9 +33,9 @@ class TriggerReplyViewController: NSViewController, StoreSubscriber {
         if let index = state.triggerList.selection, index < state.triggerList.items.count {
             let trigger = state.triggerList.items[index]
             self.trigger = trigger
-            self.representedObject = TriggerReplyController(trigger: trigger, store: store)
+            representedObject = TriggerReplyController(trigger: trigger, store: store)
         } else {
-            self.representedObject = nil
+            representedObject = nil
         }
     }
 }
@@ -69,7 +69,8 @@ class TriggerReplyController: NSController {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

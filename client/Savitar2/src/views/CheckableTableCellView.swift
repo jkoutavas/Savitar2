@@ -16,17 +16,17 @@ class CheckableItemViewModel: TitledItemViewModel {
         super.init(itemID: itemID, title: title)
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from _: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
 }
 
-@objc protocol CheckableItemChangeDelegate: class {
+@objc protocol CheckableItemChangeDelegate: AnyObject {
     func checkableItem(itemID: String, didChangeChecked checked: Bool)
 }
 
 class CheckableTableCellView: TitledTableCellView {
-    @IBOutlet weak var checkbox: CheckBox!
+    @IBOutlet var checkbox: CheckBox!
 
     weak var checkableItemChangeDelegate: CheckableItemChangeDelegate?
 
@@ -35,7 +35,7 @@ class CheckableTableCellView: TitledTableCellView {
         checkbox.checked = viewModel.enabled
     }
 
-    @IBAction func checkboxChanged(_ sender: AnyObject) {
+    @IBAction func checkboxChanged(_: AnyObject) {
         checkableItemChangeDelegate?.checkableItem(itemID: itemID, didChangeChecked: checkbox.checked)
     }
 }

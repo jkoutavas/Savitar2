@@ -10,7 +10,7 @@ import Cocoa
 import ReSwift
 
 class MacroViewController: NSViewController, StoreSubscriber, ReactionsStoreSetter {
-    @IBOutlet weak var hotKeyEditor: HotKeyEditor!
+    @IBOutlet var hotKeyEditor: HotKeyEditor!
     var macro: Macro?
     var macros: [Macro]?
     var store: ReactionsStore?
@@ -24,11 +24,11 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionsStoreSett
 
         store?.subscribe(self)
         hotKeyEditor.completionHandler = { (_ key: HotKey) in
-            if key != self.macro?.hotKey && key.isKnown() {
+            if key != self.macro?.hotKey, key.isKnown() {
                 let keyString = key.toString()
-                if AppContext.shared.reservedKeyList.contains(where: {$0 == keyString}) {
+                if AppContext.shared.reservedKeyList.contains(where: { $0 == keyString }) {
                     self.displayError(msg: "'\(keyString)' is a reserved key.")
-                } else if let _macros = self.macros, _macros.contains(where: {$0.hotKey == key}) {
+                } else if let _macros = self.macros, _macros.contains(where: { $0.hotKey == key }) {
                     self.displayError(msg: "Hotkey '\(keyString)' is already in use")
                 } else {
                     if let _store = self.store, let _macroID = self.macro?.objectID {
@@ -46,14 +46,14 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionsStoreSett
     }
 
     func newState(state: ReactionsState) {
-        self.macros = state.macroList.items
+        macros = state.macroList.items
         if let index = state.macroList.selection, index < state.macroList.items.count {
             let macro = state.macroList.items[index]
             self.macro = macro
-            self.representedObject = MacroController(macro: macro, store: store)
+            representedObject = MacroController(macro: macro, store: store)
         } else {
-            self.representedObject = nil
-            self.macro = nil
+            representedObject = nil
+            macro = nil
         }
     }
 
@@ -98,7 +98,8 @@ class MacroController: NSController {
         super.init()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

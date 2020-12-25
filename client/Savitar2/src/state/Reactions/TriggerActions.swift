@@ -117,7 +117,7 @@ enum TriggerAction: ReactionUndoableAction {
 
         case let .setForeColor(triggerID, color: _):
             return TriggerAction.setForeColor(triggerID, color:
-                 context.triggerForeColor(triggerID: triggerID) ?? nil)
+                context.triggerForeColor(triggerID: triggerID) ?? nil)
 
         case let .setMatching(triggerID, matching: _):
             return TriggerAction.setMatching(triggerID, matching:

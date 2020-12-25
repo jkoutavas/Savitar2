@@ -41,7 +41,7 @@ struct ItemListState<T: Equatable>: StateType {
 
     func item(objectID: SavitarObjectID) -> T? {
         guard let index = indexOf(objectID: objectID)
-            else { return nil }
+        else { return nil }
 
         return items[index]
     }

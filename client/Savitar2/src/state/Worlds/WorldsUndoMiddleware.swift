@@ -18,7 +18,7 @@ class UndoableWorldsStateAdapter: WorldsUndoContext {
 
     func worldListContext(worldID: SavitarObjectID) -> WorldListContext? {
         guard let index = state.worldList.indexOf(objectID: worldID),
-            let world = state.worldList.item(objectID: worldID)
+              let world = state.worldList.item(objectID: worldID)
         else { return nil }
 
         return (world, index)
@@ -27,7 +27,6 @@ class UndoableWorldsStateAdapter: WorldsUndoContext {
     func worldName(worldID: SavitarObjectID) -> String? {
         return state.worldList.item(objectID: worldID)?.name
     }
-
 }
 
 extension UndoCommand {
@@ -35,7 +34,7 @@ extension UndoCommand {
                       context: WorldsUndoContext,
                       dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context)
-            else { return nil }
+        else { return nil }
 
         self.init(undoBlock: { _ = dispatch(inverseAction.notUndoable) },
                   undoName: appAction.name,
@@ -61,15 +60,15 @@ func undoWorldsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?
             }
 
             if let undoableAction = action as? WorldUndoableAction, undoableAction.isUndoable,
-                let state = getState(),
-                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
-                let undoManager = undoManagerProvider() {
+               let state = getState(),
+               let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
+               let undoManager = undoManagerProvider() {
                 undo.register(undoManager: undoManager)
             }
 
             next(action)
         }
-        }
+    }
     }
 
     return undoMiddleware

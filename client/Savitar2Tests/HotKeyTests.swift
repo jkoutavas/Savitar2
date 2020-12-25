@@ -11,7 +11,6 @@ import XCTest
 @testable import Savitar2
 
 class HotKeyTests: XCTestCase {
-
     func testKeyCodeLabels() {
         XCTAssertEqual(HotKey(keyLabel: "up arrow").keyCode, Keycode.upArrow)
         XCTAssertEqual(HotKey(keyLabel: "down arrow").keyCode, Keycode.downArrow)

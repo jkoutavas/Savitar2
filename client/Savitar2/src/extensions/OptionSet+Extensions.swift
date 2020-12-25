@@ -15,13 +15,14 @@ protocol StrOptionSet: OptionSet, CustomStringConvertible {
     static var labels: [Label] { get } // used for going from set to string
     static var labelDict: [String: Self] { get } // used for going from string to set
 }
+
 extension StrOptionSet {
     var strs: [String] { return Self.labels
         .filter { (label: Label) in self.isDisjoint(with: label.0) == false }
         .map { (label: Label) in label.1 }
     }
 
-    static public func from(string: String) -> Self {
+    public static func from(string: String) -> Self {
         let components = string.components(separatedBy: "+")
         var result: Self = []
         for str in components {

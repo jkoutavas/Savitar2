@@ -1,4 +1,4 @@
-# Savitar v2.0 #
+# Savitar v2.0
 
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
@@ -89,7 +89,7 @@ _ Javascript scripting?
 _ ???
 ```
 
-## How to setup development ##
+## How to setup development
 
 In the `client` directory you'll find `Savitar2.xcworkspace`. 
 
@@ -114,27 +114,46 @@ $ cd server/echoserver
 $ swift package generate-xcodeproj
 ```
 
+## Formatting code
+
+Install the formatter:
+
+```bash
+$ brew install swiftformat
+```
+
+Then issue this at the command at the root of the clone:
+
+```bash
+$ swiftformat .
+```
+
+There's already a `.swiftformat` config file that contains this:
+
+```
+--swiftversion 5 
+--disable wrapMultilineStatementBraces, trailingCommas
+```
 
 ## Tracking lines of code
 
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     152 text files.
-     148 unique files.                                          
-      30 files ignored.
+     153 text files.
+     149 unique files.                                          
+      31 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.16 s (788.2 files/s, 90357.1 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.16 s (798.4 files/s, 91601.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          107           1641           1196           7568
+Swift                          107           1629           1195           7573
 XML                             13              0             37           3654
-Markdown                         2             31              0            112
+Markdown                         2             37              0            125
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           125           1676           1241          11413
--------------------------------------------------------------------------------
+SUM:                           125           1670           1240          11431
 ```

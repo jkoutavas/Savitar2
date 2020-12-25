@@ -9,22 +9,22 @@
 import Cocoa
 
 class InputSettingsController: NSViewController {
-    @IBOutlet weak var noEchoRadio: NSButton!
-    @IBOutlet weak var echoCROnlyRadio: NSButton!
-    @IBOutlet weak var echoAllRadio: NSButton!
+    @IBOutlet var noEchoRadio: NSButton!
+    @IBOutlet var echoCROnlyRadio: NSButton!
+    @IBOutlet var echoAllRadio: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let world = self.representedObject as? World else { return }
+        guard let world = representedObject as? World else { return }
 
         noEchoRadio.state = !world.flags.contains(.echoCmds) && !world.flags.contains(.echoCR) ? .on : .off
         echoCROnlyRadio.state = world.flags.contains(.echoCR) ? .on : .off
         echoAllRadio.state = world.flags.contains(.echoCmds) ? .on : .off
     }
 
-    @IBAction func echoRadioButtonChanged(_ sender: AnyObject) {
-        guard let world = self.representedObject as? World else { return }
+    @IBAction func echoRadioButtonChanged(_: AnyObject) {
+        guard let world = representedObject as? World else { return }
 
         if noEchoRadio.state == .on {
             world.flags.remove([.echoCmds, .echoCR])

@@ -246,7 +246,7 @@ extension PrefsFlags: StrOptionSet {
         (.defaultWordWrap, "defaultWordWrap"),
         (.dontWarnPicker, "dontWarnPicker"),
         (.startupEventsWindow, "startupEventsWindow")
-        ] }
+    ] }
     static var labelDict: [String: Self] { return [
         "commandEcho": .commandEcho,
         "startupPicker": .startupPicker,
@@ -263,5 +263,5 @@ extension PrefsFlags: StrOptionSet {
         "defaultWordWrap": .defaultWordWrap,
         "dontWarnPicker": .dontWarnPicker,
         "startupEventsWindow": .startupEventsWindow
-        ] }
+    ] }
 }

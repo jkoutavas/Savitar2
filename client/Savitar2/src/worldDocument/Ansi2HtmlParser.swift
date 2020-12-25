@@ -18,8 +18,8 @@ struct Ansi2HtmlParser {
     }
 
     struct State: Equatable {
-        var fc = -1 //Standard Foreground Color //IRC-Color+8
-        var bc = -1 //Standard Background Color //IRC-Color+8
+        var fc = -1 // Standard Foreground Color //IRC-Color+8
+        var bc = -1 // Standard Background Color //IRC-Color+8
         var bold = false
         var lighter = false
         var italic = false
@@ -62,7 +62,7 @@ struct Ansi2HtmlParser {
         "bg-green ",
         "bg-yellow ",
         "bg-blue ",
-        "bg-magenta" ,
+        "bg-magenta",
         "bg-cyan ",
         "bg-white ",
         "bg-inverted ",
@@ -75,7 +75,7 @@ struct Ansi2HtmlParser {
 
     mutating func parse(ansi: String, hideANSI: Bool = false) -> String {
         var input: [Character]
-        if buffer.count == 0 || buffer.count > 100 /*safety*/ {
+        if buffer.count == 0 || buffer.count > 100 /* safety */ {
             input = Array(ansi) // this gives us O(1) indexing performance
         } else {
             // resume from split ANSI code
@@ -89,7 +89,7 @@ struct Ansi2HtmlParser {
         // Begin of Conversion
         var state = State()
         var oldstate: State
-        var negative = false //No negative image
+        var negative = false // No negative image
         var line = 0
         var newline = -1
 
@@ -98,21 +98,21 @@ struct Ansi2HtmlParser {
             var c = input[offset]
             if c == esc {
                 oldstate = state
-                //Searching the end (a letter) and safe the insert:
+                // Searching the end (a letter) and safe the insert:
                 if offset < inputLen - 1 {
                     offset += 1; c = input[offset]
                 } else {
-                     return ""
+                    return ""
                 }
                 if c == "[" { // CSI code, see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
                     buffer = "["
-                    while (c<"A") || ((c>"Z") && (c<"a")) || (c>"z") {
-                         if offset < inputLen - 1 {
-                             offset += 1; c = input[offset]
-                         } else {
-                             return ""
-                         }
-                         buffer.append(c)
+                    while (c < "A") || ((c > "Z") && (c < "a")) || (c > "z") {
+                        if offset < inputLen - 1 {
+                            offset += 1; c = input[offset]
+                        } else {
+                            return ""
+                        }
+                        buffer.append(c)
                     }
                     switch c {
                     case "m":
@@ -169,20 +169,20 @@ struct Ansi2HtmlParser {
                             case 29: // Reset crossed-out
                                 state.crossedout = false
 
-                            case 30...39: // 3X - Set foreground color
+                            case 30 ... 39: // 3X - Set foreground color
                                 updateColorState(momelem: &momelem, elems: elems, state: &state, negative: negative,
-                                    fc: true)
+                                                 fc: true)
 
-                            case 40...49: // 4X - Set background color
+                            case 40 ... 49: // 4X - Set background color
                                 updateColorState(momelem: &momelem, elems: elems, state: &state, negative: negative,
-                                     fc: false)
+                                                 fc: false)
 
-                            case 90...97: // 9X - Set foreground color highlighted
+                            case 90 ... 97: // 9X - Set foreground color highlighted
                                 state.fc_colormode = .MODE_3BIT
                                 state.highlighted = true
                                 updateColor(state: &state, fc: negative, color: elems[momelem].value - 90)
 
-                            case 100...107: // 10X Set background color hightlighted
+                            case 100 ... 107: // 10X Set background color hightlighted
                                 state.fc_colormode = .MODE_3BIT
                                 state.highlighted = true
                                 updateColor(state: &state, fc: negative, color: elems[momelem].value - 100)
@@ -196,8 +196,8 @@ struct Ansi2HtmlParser {
                     default:
                         print("Ansi2HtmlParse is skipping \(c)")
                     }
-                    //Checking the differences
-                    if !hideANSI && state != oldstate { //ANY Change
+                    // Checking the differences
+                    if !hideANSI, state != oldstate { // ANY Change
                         // If old state was different than the default one, close the current <span>
                         if oldstate != State() {
                             output.append("</span>")
@@ -209,34 +209,34 @@ struct Ansi2HtmlParser {
                                 output.append("underline ")
                             }
                             if state.bold {
-                               output.append("bold ")
+                                output.append("bold ")
                             }
                             if state.lighter {
                                 output.append("lighter ")
                             }
                             if state.italic {
-                               output.append("italic ")
+                                output.append("italic ")
                             }
                             if state.blink {
-                               output.append("blink ")
+                                output.append("blink ")
                             }
                             if state.crossedout {
-                               output.append("crossed-out ")
+                                output.append("crossed-out ")
                             }
                             if state.highlighted {
-                               output.append("highlighted ")
+                                output.append("highlighted ")
                             }
-                            if state.fc_colormode != .MODE_3BIT &&
-                               (state.fc_colormode != .MODE_8BIT || state.fc > 15) {
+                            if state.fc_colormode != .MODE_3BIT,
+                               state.fc_colormode != .MODE_8BIT || state.fc > 15 {
                                 output.append("' style='")
                             }
                             switch state.fc_colormode {
                             case .MODE_3BIT:
-                                if state.fc >= 0 && state.fc <= 9 {
+                                if state.fc >= 0, state.fc <= 9 {
                                     output.append(fcstyle[state.fc])
                                 }
                             case .MODE_8BIT:
-                                if state.fc >= 0 && state.fc <= 7 {
+                                if state.fc >= 0, state.fc <= 7 {
                                     output.append(fcstyle[state.fc])
                                 } else {
                                     output.append("color:#\(make_rgb(state.fc));")
@@ -245,18 +245,18 @@ struct Ansi2HtmlParser {
                                 output.append(String(format: "color:#%06x;", state.fc))
                             }
                             if !(state.fc_colormode != .MODE_3BIT &&
-                               (state.fc_colormode != .MODE_8BIT || state.fc>15)) && //already in style
-                               state.bc_colormode != .MODE_3BIT &&
-                               (state.bc_colormode != .MODE_8BIT || state.bc>15) {
+                                (state.fc_colormode != .MODE_8BIT || state.fc > 15)), // already in style
+                                state.bc_colormode != .MODE_3BIT,
+                                state.bc_colormode != .MODE_8BIT || state.bc > 15 {
                                 output.append("' style='")
-                               }
+                            }
                             switch state.bc_colormode {
                             case .MODE_3BIT:
-                                if state.bc >= 0 && state.bc <= 9 {
+                                if state.bc >= 0, state.bc <= 9 {
                                     output.append(bcstyle[state.bc])
                                 }
                             case .MODE_8BIT:
-                                if state.bc >= 0 && state.bc <= 7 {
+                                if state.bc >= 0, state.bc <= 7 {
                                     output.append(bcstyle[state.bc])
                                 } else {
                                     output.append("background-color:#\(make_rgb(state.bc));")
@@ -300,7 +300,7 @@ struct Ansi2HtmlParser {
             if char == "[" {
                 continue
             }
-            if char==";" || char==":" || pos == buffer.count-1 {
+            if char == ";" || char == ":" || pos == buffer.count - 1 {
                 if digit.count == 0 {
                     digit.append(0)
                 }
@@ -309,18 +309,18 @@ struct Ansi2HtmlParser {
                 value = 0
             } else {
                 digit.append(Digit(String(char)) ?? 0)
-                value = (value*10) + Int(digit.last ?? 0)
+                value = (value * 10) + Int(digit.last ?? 0)
             }
         }
         return momelem
     }
 
     private func swapColors(_ state: inout State) {
-        if state.bc_colormode == .MODE_3BIT && state.bc == -1 {
+        if state.bc_colormode == .MODE_3BIT, state.bc == -1 {
             state.bc = 8
         }
 
-        if state.fc_colormode == .MODE_3BIT && state.fc == -1 {
+        if state.fc_colormode == .MODE_3BIT, state.fc == -1 {
             state.fc = 8
         }
 
@@ -350,22 +350,22 @@ struct Ansi2HtmlParser {
         let colorOffset = fc ? 30 : 40
         let negative = fc ? !inNegative : inNegative
 
-        if elems[momelem].value == val1 &&
-           elems.count - momelem > 1 &&
-           elems[momelem+1].value == 5 { // {val1};5;<n> -> 8 Bit
+        if elems[momelem].value == val1,
+           elems.count - momelem > 1,
+           elems[momelem + 1].value == 5 { // {val1};5;<n> -> 8 Bit
             momelem += 2
             updateColorMode(state: &state, fc: fc, mode: .MODE_8BIT)
             let value = elems[momelem].value
-            if value >= 8 && value <= 15 {
+            if value >= 8, value <= 15 {
                 state.highlighted = true
                 updateColor(state: &state, fc: negative, color: value - 8)
             } else {
                 state.highlighted = false
                 updateColor(state: &state, fc: negative, color: value)
             }
-        } else if elems[momelem].value == val1 &&
-                  elems.count - momelem > 1 &&
-                  elems[momelem+1].value == 2 { // {val1};2;<n> -> 24 Bit
+        } else if elems[momelem].value == val1,
+                  elems.count - momelem > 1,
+                  elems[momelem + 1].value == 2 { // {val1};2;<n> -> 24 Bit
             momelem += 2
             let r = elems[momelem].value
             momelem += 1
@@ -400,7 +400,7 @@ struct Ansi2HtmlParser {
             let grey = index * 256 / 24
             return String(format: "02x%02x%02x", grey, grey, grey)
         }
-        let index_R = divide((color_id - 16), 36)
+        let index_R = divide(color_id - 16, 36)
         var rgb_R: Int
         if index_R > 0 {
             rgb_R = 55 + index_R * 40

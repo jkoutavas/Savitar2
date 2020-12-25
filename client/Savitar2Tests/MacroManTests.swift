@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class VariableManTests: XCTestCase {
-
     func testMacros() throws {
         // These are the macros lifted directly from StarupPreferences.xml
         // swiftlint:disable line_length

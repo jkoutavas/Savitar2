@@ -6,13 +6,12 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
-import XCTest
 import SwiftyXMLParser
+import XCTest
 
 @testable import Savitar2
 
 class SavColorTests: XCTestCase {
-
     func testV2CarriageReturn() throws {
         let xmlString = """
         <COLOR
@@ -27,6 +26,6 @@ class SavColorTests: XCTestCase {
 
         XCTAssertEqual(c1.name, "red")
 
-        XCTAssertEqual(c1.color, NSColor.init(hex: "#B00707"))
+        XCTAssertEqual(c1.color, NSColor(hex: "#B00707"))
     }
 }
