@@ -112,6 +112,13 @@ class TriggerTests: XCTestCase {
         line = "a super combo match"
         XCTAssertTrue(t.reactionTo(line: &line))
         XCTAssertEqual(line, "a \(esc)[;1;3;4;5msuper combo\(esc)[;21;23;24;25m match")
+
+        t = Trigger(name: "whole", flags: .wholeLine,
+                    style: TrigTextStyle(face: .underline))
+        line = "This is a whole line match\r"
+        XCTAssertTrue(t.reactionTo(line: &line))
+        // it's important that the \r ends the line
+        XCTAssertEqual(line, "\(esc)[;4mThis is a whole line match\(esc)[;24m\r")
     }
 
     func testColorExtension() {
