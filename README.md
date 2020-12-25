@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: December 11th, 2020
+README last updated: December 24th, 2020
 
 ## Current state of the application
 
@@ -33,7 +33,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Load Sav 1.x world triggers
 √ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 √ Implement input pane command recall
-_ New world onboarding
+√ New world onboarding
 _ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
@@ -120,21 +120,21 @@ $ swift package generate-xcodeproj
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     135 text files.
-     131 unique files.                                          
+     152 text files.
+     148 unique files.                                          
       30 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.16 s (670.5 files/s, 81065.6 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.16 s (788.2 files/s, 90357.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                           94           1487           1099           7020
-XML                              9              0             31           3186
+Swift                          107           1641           1196           7568
+XML                             13              0             37           3654
 Markdown                         2             31              0            112
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           108           1522           1138          10397
+SUM:                           125           1676           1241          11413
 -------------------------------------------------------------------------------
 ```
