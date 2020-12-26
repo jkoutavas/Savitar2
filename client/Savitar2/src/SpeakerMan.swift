@@ -71,4 +71,8 @@ struct SpeakerMan {
             speechSynth.startSpeaking(text)
         }
     }
+
+    func flushSpeech() {
+        speechSynth.stopSpeaking()
+    }
 }

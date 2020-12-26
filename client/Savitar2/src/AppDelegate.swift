@@ -75,6 +75,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppContext.shared.appIsTerminating()
     }
 
+    @IBAction func flushSpeachAction(_: Any) {
+        AppContext.shared.speakerMan.flushSpeech()
+    }
+
     @IBAction func showEventsWindowAction(_: Any) {
         AppContext.shared.showUniversalEventsWindow()
     }
