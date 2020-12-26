@@ -285,6 +285,8 @@ class Trigger: SavitarObject, NSCopying {
         var pattern = name
         var matched = false
 
+        matchedText = ""
+
         // TODO: optimization: form the options at trigger init / setting
         var options: String.CompareOptions = []
         if caseSensitive == false {

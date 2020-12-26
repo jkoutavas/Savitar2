@@ -228,42 +228,33 @@ class Session: NSObject, StreamDelegate {
     private func processTriggers(inputLine: String, triggers: [Trigger], effects: inout [Trigger]) -> String {
         var line = inputLine
 
-        // Determine the effects of the triggers. Often it'll result in a modification of the line, so let's
-        // process triggers in this order:
+        // Determine the effects of enabled triggers of type .output or .both.
+        // Often it'll result in a modification of the line, so let's process these triggers in this order:
         //    1. gagging triggers
         //    2. subsitution triggers
-        for trigger in triggers {
-            trigger.matchedText = ""
-            if !trigger.enabled {
-                continue
+
+        var filteredTriggers = triggers
+        filteredTriggers.removeAll(where: { !$0.enabled || $0.type == .input })
+
+        // Check for gag reactions
+        for trigger in filteredTriggers where trigger.appearance == .gag {
+             if trigger.reactionTo(line: &line) {
+                effects.append(trigger)
             }
-            if trigger.appearance == .gag {
+        }
+        if line.count > 0 {
+            // Some text remains? (not all gagged away?) Check for subsitution reactions
+            for trigger in filteredTriggers where !effects.contains(trigger) && trigger.useSubstitution {
                 if trigger.reactionTo(line: &line) {
                     effects.append(trigger)
                 }
             }
         }
         if line.count > 0 {
-            for trigger in triggers {
-                if !trigger.enabled {
-                    continue
-                }
-                if trigger.useSubstitution, !effects.contains(trigger) {
-                    if trigger.reactionTo(line: &line) {
-                        effects.append(trigger)
-                    }
-                }
-            }
-        }
-        if line.count > 0 {
-            for trigger in triggers {
-                if !trigger.enabled {
-                    continue
-                }
-                if !effects.contains(trigger) {
-                    if trigger.reactionTo(line: &line) {
-                        effects.append(trigger)
-                    }
+            // Check for remaining trigger reactions
+            for trigger in filteredTriggers where !effects.contains(trigger) {
+                if trigger.reactionTo(line: &line) {
+                    effects.append(trigger)
                 }
             }
         }
