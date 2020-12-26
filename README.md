@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: December 24th, 2020
+README last updated: December 26th, 2020
 
 ## Current state of the application
 
@@ -25,7 +25,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ App is integrated with AppCenter, handles crash reporting and basic analytics
 √ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
-√ rewrite Aha
+√ Rewrite Aha (ANSI to HTML parser)
 √ World settings Appearance tab is operational
 √ Output triggers are working
 √ Input macro hotkeys are supported
@@ -38,7 +38,7 @@ _ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 _ Implement input triggers
-_ Implement audio cue triggers
+√ Implement audio cue triggers
 _ Implement reply triggers
 _ Implement next gen startup commands (trigger based)
 √ Implement Trigger Matching tab view
@@ -63,7 +63,8 @@ _ Address key things found in alpha test
 
 ```
 _ Move github repo to public
-_ start promoting the beta test
+_ Start promoting the beta test
+_ Implement Continuous Speech (using new AVSpeechSynthesizer)
 _ Find/Find Next supported
 _ Logging support
 _ Printing supported
@@ -73,8 +74,7 @@ _ Macro Clicker
 _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
-_ text to emoji support
-_ divider status bar support
+_ Divider status bar support
 _ Polish, address beta test issues
 ```
 
@@ -85,6 +85,7 @@ These features take Savitar 2.0 beyond what 1.6.x provides:
 ```
 _ SSL support
 _ Dark Mode support
+_ Text to emoji support
 _ Javascript scripting?
 _ ???
 ```
@@ -144,16 +145,17 @@ There's already a `.swiftformat` config file that contains this:
      149 unique files.                                          
       31 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.16 s (798.4 files/s, 91601.3 lines/s)
+github.com/AlDanial/cloc v 1.84  T=0.20 s (623.6 files/s, 71388.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          107           1629           1195           7573
-XML                             13              0             37           3654
-Markdown                         2             37              0            125
+Swift                          107           1639           1199           7650
+XML                             13              0             35           3532
+Markdown                         2             37              0            127
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           125           1670           1240          11431
+SUM:                           125           1680           1242          11388
+-------------------------------------------------------------------------------
 ```

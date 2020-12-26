@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment version="101300" identifier="macosx"/>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -260,6 +260,43 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Audio" id="xc8-gc-PKQ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Audio" id="UKF-TX-6Da">
+                                    <items>
+                                        <menuItem title="Mute Sound Cues" id="QCf-15-M7M">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSound" id="QE6-Qr-Oq7">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Vnv-NZ-Z97"/>
+                                        <menuItem title="Mute Speaking Cues" id="bsB-ff-kwh" userLabel="Mute Speaking Cues">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSpeaking" id="aKH-VF-dca">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Flush Speech Buffer" keyEquivalent="l" id="yhk-Mb-gAl" userLabel="Flush Speech Buffer">
+                                            <connections>
+                                                <action selector="flushSpeachAction:" target="Voe-Tx-rLC" id="fZI-Hz-S04"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="View" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
@@ -344,8 +381,9 @@ CA
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Savitar2" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="ahS-iK-UTo"/>
             </objects>
-            <point key="canvasLocation" x="-3279" y="-11518"/>
+            <point key="canvasLocation" x="-3297" y="-11615"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">

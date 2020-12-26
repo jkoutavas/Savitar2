@@ -112,6 +112,9 @@ class Trigger: SavitarObject, NSCopying {
     var voice: String?
     var wordEnding: String?
 
+    // transitory data (doesn't get loaded or saved)
+    var matchedText = ""
+
     func copy(with _: NSZone? = nil) -> Any {
         return Trigger(trigger: self)
     }
@@ -222,6 +225,8 @@ class Trigger: SavitarObject, NSCopying {
         type = trigger.type
         voice = trigger.voice
         wordEnding = trigger.wordEnding
+
+        matchedText = trigger.matchedText
     }
 
     init(
@@ -307,18 +312,29 @@ class Trigger: SavitarObject, NSCopying {
         for range in ranges {
             if pos != range.lowerBound {
                 resultLine += line[pos ..< range.lowerBound]
+                matchedText += line[pos ..< range.lowerBound]
             }
             if appearance != .gag {
                 if let subst = substitution, useSubstitution {
                     if let style = self.style, appearance == .changeAppearance {
                         resultLine += style.on + subst + style.off
+                        matchedText += subst
                     } else {
                         resultLine += subst
+                        matchedText += subst
                     }
                 } else if let style = self.style, appearance == .changeAppearance {
-                    resultLine += style.on + line[range] + style.off
+                    let content = line[range]
+                    if content.hasSuffix("\r") {
+                        // Close-off trigger appearance styling before the carriage return
+                        resultLine += style.on + content.dropLast() + style.off + "\r"
+                    } else {
+                        resultLine += style.on + content + style.off
+                    }
+                    matchedText += content
                 } else {
                     resultLine = String(line[range])
+                    matchedText = resultLine
                 }
             }
             pos = range.upperBound
@@ -327,6 +343,7 @@ class Trigger: SavitarObject, NSCopying {
             resultLine += line[pos ..< line.endIndex]
         }
         line = resultLine
+
         return matched
     }
 
