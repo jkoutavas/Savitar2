@@ -383,7 +383,7 @@ CA
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="ahS-iK-UTo"/>
             </objects>
-            <point key="canvasLocation" x="-3279" y="-11518"/>
+            <point key="canvasLocation" x="-3297" y="-11615"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">

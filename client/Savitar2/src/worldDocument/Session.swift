@@ -177,6 +177,9 @@ class Session: NSObject, StreamDelegate {
             $0 == "\r" || $0 == "\n"
         }
 
+        let muteSound = AppContext.shared.prefs.flags.contains(.muteSound)
+        let muteSpeaking = AppContext.shared.prefs.flags.contains(.muteSpeaking)
+
         for (index, thisLine) in lines.enumerated() {
             var line = String(thisLine)
 
@@ -193,8 +196,6 @@ class Session: NSObject, StreamDelegate {
             // Processing is complete. Send the line off to the output view
             acceptedText(text: line)
 
-            let muteSound = AppContext.shared.prefs.flags.contains(.muteSound)
-            let muteSpeaking = AppContext.shared.prefs.flags.contains(.muteSpeaking)
             for effect in effects {
                 if let reply = effect.reply, reply.count > 0 {
                     submitServerCmd(cmd: Command(text: reply))

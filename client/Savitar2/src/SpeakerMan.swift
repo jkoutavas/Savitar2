@@ -65,11 +65,15 @@ struct SpeakerMan {
             } else if trigger.audioType == .speakEvent {
                 say = trigger.matchedText.count > 0 ? trigger.matchedText : trigger.name
             }
-            speechSynth.stopSpeaking()
-            speechSynth.setVoice(identifierForVoiceName(voiceName))
             guard let text = say else { return }
-            speechSynth.startSpeaking(text)
+             speak(text: text, voiceName: voiceName)
         }
+    }
+
+    func speak(text: String, voiceName: String) {
+        speechSynth.stopSpeaking()
+        speechSynth.setVoice(identifierForVoiceName(voiceName))
+        speechSynth.startSpeaking(text)
     }
 
     func flushSpeech() {
