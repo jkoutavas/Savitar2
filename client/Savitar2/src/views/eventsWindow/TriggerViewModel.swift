@@ -17,8 +17,22 @@ class TriggerViewModel: CheckableItemViewModel {
     let audioCue: String
 
     init(trigger: Trigger) {
-        type = "type" // TODO:
-        audioCue = "audioCue" // TODO:
+        switch trigger.type {
+        case .input:
+            type = "Input"
+        case .output:
+            type = "Output"
+        case .both:
+            type = "Both"
+        }
+        switch trigger.audioType {
+        case .silent:
+            audioCue = "silent"
+        case .sound:
+            audioCue = trigger.sound ?? ""
+        case .speakEvent, .sayText:
+            audioCue = "spoken"
+        }
         super.init(itemID: trigger.objectID.identifier,
                    title: trigger.name,
                    enabled: trigger.enabled)
