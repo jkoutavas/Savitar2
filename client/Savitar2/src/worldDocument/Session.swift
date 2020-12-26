@@ -193,12 +193,16 @@ class Session: NSObject, StreamDelegate {
             // Processing is complete. Send the line off to the output view
             acceptedText(text: line)
 
+            let muteSound = AppContext.shared.prefs.flags.contains(.muteSound)
+            let muteSpeaking = AppContext.shared.prefs.flags.contains(.muteSpeaking)
             for effect in effects {
                 if let reply = effect.reply, reply.count > 0 {
                     submitServerCmd(cmd: Command(text: reply))
                 }
                 if effect.audioType != .silent {
-                    AppContext.shared.speakerMan.playAudio(trigger: effect)
+                    AppContext.shared.speakerMan.playAudio(trigger: effect,
+                                                           muteSound: muteSound,
+                                                           muteSpeaking: muteSpeaking)
                 }
             }
         }

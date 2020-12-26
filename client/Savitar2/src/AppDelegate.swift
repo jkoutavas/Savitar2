@@ -6,9 +6,9 @@
 //  Copyright © 2017 Heynow Software. All rights reserved.
 //
 
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
+// import AppCenter
+// import AppCenterAnalytics
+// import AppCenterCrashes
 import Cocoa
 
 var isRunningTests: Bool {
@@ -17,6 +17,35 @@ var isRunningTests: Bool {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    @objc dynamic var muteSound: Bool {
+        get { AppContext.shared.prefs.flags.contains(.muteSound) }
+        set {
+            if newValue == false {
+                AppContext.shared.prefs.flags.remove(.muteSound)
+            } else {
+                AppContext.shared.prefs.flags.insert(.muteSound)
+            }
+        }
+    }
+
+    @objc dynamic var muteSpeaking: Bool {
+        get { AppContext.shared.prefs.flags.contains(.muteSpeaking) }
+        set {
+            if newValue == false {
+                AppContext.shared.prefs.flags.remove(.muteSpeaking)
+            } else {
+                AppContext.shared.prefs.flags.insert(.muteSpeaking)
+            }
+        }
+    }
+
+    override init() {
+        super.init()
+        do {
+            try AppContext.shared.load()
+        } catch {}
+    }
+
     func applicationDidFinishLaunching(_: Notification) {
         if isRunningTests {
             return
@@ -29,9 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
              MSCrashes.self
          ])
          */
-        do {
-            try AppContext.shared.load()
-        } catch {}
 
         if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
             showEventsWindowAction(self)

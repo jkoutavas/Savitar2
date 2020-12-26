@@ -54,10 +54,10 @@ struct SpeakerMan {
         return nil
     }
 
-    func playAudio(trigger: Trigger) {
-        if trigger.audioType == .sound, let soundName = trigger.sound {
+    func playAudio(trigger: Trigger, muteSound: Bool = false, muteSpeaking: Bool = false) {
+        if !muteSound && trigger.audioType == .sound, let soundName = trigger.sound {
             NSSound(named: NSSound.Name(soundName))?.play()
-        } else {
+        } else if !muteSpeaking {
             guard let voiceName = trigger.voice else { return }
             var say: String?
             if trigger.audioType == .sayText {
