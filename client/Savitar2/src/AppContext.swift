@@ -133,6 +133,10 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
         self.ctx = ctx
     }
 
+    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
+        return appUndoManager
+    }
+    
     func windowWillClose(_: Notification) {
         ctx.worldPickerWindowController = nil
     }
