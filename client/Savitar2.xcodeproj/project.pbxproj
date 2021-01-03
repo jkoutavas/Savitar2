@@ -101,7 +101,6 @@
 		695F5B47258EE73800AB6BA6 /* WorldsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B41258EE73800AB6BA6 /* WorldsActions.swift */; };
 		695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */; };
 		695F5B4A258EE73800AB6BA6 /* WorldsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B44258EE73800AB6BA6 /* WorldsStore.swift */; };
-		695F5B4B258EE73800AB6BA6 /* UndoableWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */; };
 		695F5B4D258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */; };
 		695F5B502592E64E00AB6BA6 /* WorldWizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5B4E2592E64E00AB6BA6 /* WorldWizard.storyboard */; };
 		695F5B532592E71000AB6BA6 /* WorldWizardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B522592E71000AB6BA6 /* WorldWizardController.swift */; };
@@ -252,7 +251,6 @@
 		695F5B41258EE73800AB6BA6 /* WorldsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsActions.swift; sourceTree = "<group>"; };
 		695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsUndoContext.swift; sourceTree = "<group>"; };
 		695F5B44258EE73800AB6BA6 /* WorldsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsStore.swift; sourceTree = "<group>"; };
-		695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UndoableWorld.swift; sourceTree = "<group>"; };
 		695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldsUndoMiddleware.swift; sourceTree = "<group>"; };
 		695F5B4F2592E64E00AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldWizard.storyboard; sourceTree = "<group>"; };
 		695F5B522592E71000AB6BA6 /* WorldWizardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldWizardController.swift; sourceTree = "<group>"; };
@@ -574,12 +572,11 @@
 		695F5B3F258EE73800AB6BA6 /* Worlds */ = {
 			isa = PBXGroup;
 			children = (
-				695F5B40258EE73800AB6BA6 /* WorldsState.swift */,
 				695F5B41258EE73800AB6BA6 /* WorldsActions.swift */,
+				695F5B40258EE73800AB6BA6 /* WorldsState.swift */,
 				695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */,
 				695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */,
 				695F5B44258EE73800AB6BA6 /* WorldsStore.swift */,
-				695F5B45258EE73800AB6BA6 /* UndoableWorld.swift */,
 			);
 			path = Worlds;
 			sourceTree = "<group>";
@@ -962,7 +959,6 @@
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,
-				695F5B4B258EE73800AB6BA6 /* UndoableWorld.swift in Sources */,
 				695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */,
 				695F5AF825899FA400AB6BA6 /* WorldTableDataSource.swift in Sources */,
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,

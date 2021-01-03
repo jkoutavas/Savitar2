@@ -9,11 +9,24 @@
 import Foundation
 import ReSwift
 
-// A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
-protocol WorldUndoableAction: Action, UndoableWorld {}
-
 protocol WorldAction: Action {
     func apply(oldState: WorldsState) -> WorldsState
+}
+
+protocol WorldUndoableAction: Action {
+    /// Name used for e.g. "Undo" menu items.
+    var name: String { get }
+
+    var notUndoable: NotUndoable { get }
+    var isUndoable: Bool { get }
+
+    func inverse(context: WorldsUndoContext) -> WorldUndoableAction?
+}
+
+extension WorldUndoableAction where Self: WorldAction {
+    var notUndoable: NotUndoable {
+        return NotUndoable(self)
+    }
 }
 
 struct SetWorldsAction: WorldAction {
