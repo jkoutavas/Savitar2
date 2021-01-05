@@ -6,7 +6,6 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
 
 struct SelectMacroAction: ReactionAction {

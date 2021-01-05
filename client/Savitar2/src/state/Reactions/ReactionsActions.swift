@@ -6,10 +6,8 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
 
-// A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
 protocol ReactionUndoableAction: Action, UndoableReaction {}
 
 protocol ReactionAction: Action {

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 protocol WorldsUndoContext {
     func worldListContext(worldID: SavitarObjectID) -> WorldListContext?
