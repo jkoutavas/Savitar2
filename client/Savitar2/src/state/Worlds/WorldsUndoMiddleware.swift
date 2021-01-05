@@ -59,7 +59,7 @@ func undoWorldsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?
                 return
             }
 
-            if let undoableAction = action as? WorldUndoableAction, undoableAction.isUndoable,
+            if let undoableAction = action as? WorldUndoableAction,
                let state = getState(),
                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
                let undoManager = undoManagerProvider() {

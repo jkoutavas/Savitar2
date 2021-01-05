@@ -45,8 +45,6 @@ enum MacroAction: ReactionUndoableAction {
 
     // MARK: Undoable
 
-    var isUndoable: Bool { return true }
-
     var name: String {
         switch self {
         case .changeKey: return "Change Macro Key"

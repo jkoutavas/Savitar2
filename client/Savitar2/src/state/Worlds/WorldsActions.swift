@@ -17,7 +17,6 @@ protocol WorldUndoableAction: Action {
     var name: String { get }
 
     var notUndoable: NotUndoable { get }
-    var isUndoable: Bool { get }
 
     func inverse(context: WorldsUndoContext) -> WorldUndoableAction?
 }
@@ -71,8 +70,7 @@ struct InsertWorldAction: WorldUndoableAction, WorldAction {
         return result
     }
 
-    var name: String { return "New World" }
-    var isUndoable: Bool { return true }
+    var name = "New World"
 
     func inverse(context _: WorldsUndoContext) -> WorldUndoableAction? {
         return RemoveWorldAction(worldID: world.objectID)
@@ -92,8 +90,7 @@ struct RemoveWorldAction: WorldUndoableAction, WorldAction {
         return result
     }
 
-    var name: String { return "Delete World" }
-    var isUndoable: Bool { return true }
+    var name = "Delete World"
 
     func inverse(context: WorldsUndoContext) -> WorldUndoableAction? {
         guard let wlc = context.worldListContext(worldID: worldID) else { return nil }

@@ -150,7 +150,7 @@ func undoReactionsStateMiddleware(undoManagerProvider: @escaping () -> UndoManag
                 return
             }
 
-            if let undoableAction = action as? ReactionUndoableAction, undoableAction.isUndoable,
+            if let undoableAction = action as? ReactionUndoableAction,
                let state = getState(),
                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
                let undoManager = undoManagerProvider() {

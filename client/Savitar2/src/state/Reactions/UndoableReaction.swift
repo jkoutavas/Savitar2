@@ -13,7 +13,6 @@ protocol UndoableReaction {
     var name: String { get }
 
     var notUndoable: NotUndoable { get }
-    var isUndoable: Bool { get }
 
     func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction?
 }
