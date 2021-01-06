@@ -32,21 +32,21 @@ class SpeechPrefsViewController: NSViewController, StoreSubscriber {
 
 class SpeechPrefsPresenter: NSObject {
     private var store: AppPreferencesStore
-    
+
     init(store: AppPreferencesStore) {
         self.store = store
         super.init()
     }
-    
+
     @objc dynamic var hasContinuousSpeech: Bool { AppContext.hasContinuousSpeech() }
-    
+
     @objc dynamic var enabled: Bool {
         get { store.state.prefs.continuousSpeechEnabled }
         set { store.dispatch(SetContinuousSpeechEnabledAction(newValue)) }
     }
-    
+
     @objc dynamic var rate: Int {
         get { store.state.prefs.continuousSpeechRate }
         set { store.dispatch(SetContinuousSpeechRateAction(newValue)) }
-    }        
+    }
 }

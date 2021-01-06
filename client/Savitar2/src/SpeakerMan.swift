@@ -43,16 +43,16 @@ class SpeakerMan {
             speak(text: text, voiceName: voiceName)
         }
     }
-    
+
     func voiceNames() -> [String] {
         // Override this
         return []
     }
-    
+
     func speak(text: String, voiceName: String) {
         // Override this
     }
-    
+
     func flushSpeech() {
         // Override this
     }
@@ -61,7 +61,7 @@ class SpeakerMan {
 class SpeakerManNS: SpeakerMan {
     var speechSynth = NSSpeechSynthesizer()
     var voices: [NSSpeechSynthesizer.VoiceName] { NSSpeechSynthesizer.availableVoices }
-    
+
     override func voiceNames() -> [String] {
         let voices = NSSpeechSynthesizer.availableVoices
 
@@ -86,13 +86,13 @@ class SpeakerManNS: SpeakerMan {
 
         return nil
     }
-    
+
     override func speak(text: String, voiceName: String) {
         speechSynth.stopSpeaking()
         speechSynth.setVoice(identifierForVoiceName(voiceName))
         speechSynth.startSpeaking(text)
     }
-    
+
     override func flushSpeech() {
         speechSynth.stopSpeaking()
         speechSynth = NSSpeechSynthesizer()
@@ -102,9 +102,9 @@ class SpeakerManNS: SpeakerMan {
 class SpeakerManAV: SpeakerMan {
     var speechSynth = AVSpeechSynthesizer()
     var voices: [AVSpeechSynthesisVoice] {
-        AVSpeechSynthesisVoice.speechVoices().filter{ $0.language.hasPrefix("en-") }
+        AVSpeechSynthesisVoice.speechVoices().filter { $0.language.hasPrefix("en-") }
     }
-    
+
     override func voiceNames() -> [String] {
         var names: [String] = []
         for voice in voices {
@@ -115,13 +115,13 @@ class SpeakerManAV: SpeakerMan {
         }
         return names
     }
-    
+
     override func speak(text: String, voiceName: String) {
         let utterance = AVSpeechUtterance(string: text)
         for voice in voices {
             if voice.identifier.hasSuffix(voiceName) {
                 utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
-                var adjustedRate = AVSpeechUtteranceDefaultSpeechRate * 
+                var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
                     (Float(AppContext.shared.prefs.continuousSpeechRate-5) / 10.0)
                 if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
                     adjustedRate = AVSpeechUtteranceMinimumSpeechRate

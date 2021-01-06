@@ -43,7 +43,7 @@ class AppContext {
         let version = ProcessInfo.processInfo.operatingSystemVersion
         return (version.majorVersion == 10 && version.minorVersion >= 15) || version.majorVersion >= 11
     }
-    
+
     private init() {
         isTerminating = false
 
@@ -67,13 +67,13 @@ class AppContext {
         isTerminating = true
         save()
     }
-    
+
     func showContinuousSpeechPrefsWindow() {
         if speechPrefsWindowController != nil {
             speechPrefsWindowController?.window?.makeKeyAndOrderFront(self)
             return
         }
-        
+
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "SpeechPrefs", bundle: bundle)
         guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
@@ -139,7 +139,7 @@ class SpeechPrefsWindowDelegate: NSObject, NSWindowDelegate {
     init(_ ctx: AppContext) {
         self.ctx = ctx
     }
-    
+
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
         return appUndoManager
     }
@@ -179,7 +179,7 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
         return appUndoManager
     }
-    
+
     func windowWillClose(_: Notification) {
         ctx.worldPickerWindowController = nil
     }

@@ -30,11 +30,11 @@ extension AppPreferencesUndoableAction where Self: AppPreferencesAction {
 // TODO: promote this to an undoable action once the App Preferences window is implemented
 struct SetWorldPickerAtStartup: AppPreferencesAction {
     let enabled: Bool
-    
+
     init(_ enabled: Bool) {
         self.enabled = enabled
     }
-    
+
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
         let result = oldState
         if enabled {
@@ -51,9 +51,9 @@ struct SetWorldPickerAtStartup: AppPreferencesAction {
 
 struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPreferencesAction {
     let enabled: Bool
-    
+
     var name = "Toggle Continuous Speech"
-    
+
     init(_ enabled: Bool) {
         self.enabled = enabled
     }
@@ -63,7 +63,7 @@ struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPrefer
         result.prefs.continuousSpeechEnabled = enabled
         return result
     }
-    
+
     func inverse(context: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
         return SetContinuousSpeechEnabledAction(!enabled)
     }
@@ -71,9 +71,9 @@ struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPrefer
 
 struct SetContinuousSpeechRateAction: AppPreferencesUndoableAction, AppPreferencesAction {
     let rate: Int
-    
+
     var name = "Change Speech Rate"
-    
+
     init(_ rate: Int) {
         self.rate = rate
     }
@@ -83,7 +83,7 @@ struct SetContinuousSpeechRateAction: AppPreferencesUndoableAction, AppPreferenc
         result.prefs.continuousSpeechRate = rate
         return result
     }
-    
+
     func inverse(context: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
         return SetContinuousSpeechRateAction(context.continuousSpeechRate())
     }
