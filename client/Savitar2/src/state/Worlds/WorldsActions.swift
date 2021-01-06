@@ -55,6 +55,8 @@ struct SelectWorldAction: WorldAction {
     }
 }
 
+// MARK: Undoable
+
 struct InsertWorldAction: WorldUndoableAction, WorldAction {
     let world: World
     let index: Int

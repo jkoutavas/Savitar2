@@ -16,6 +16,7 @@
 		690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */; };
 		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
+		691696D125A0CCC700569021 /* AppPreferencesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691696D025A0CCC700569021 /* AppPreferencesState.swift */; };
 		69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4E2579B01A00A99245 /* Collection+Extensions.swift */; };
 		6952048D24B1EFB2004BDBE2 /* HotKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */; };
 		695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */; };
@@ -114,8 +115,14 @@
 		698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667CF24E97E710061AA86 /* SpeakerMan.swift */; };
 		698667D424EA18500061AA86 /* Click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 698667D324EA17B40061AA86 /* Click.m4a */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
+		69AA616425A535A900736894 /* SpeechPrefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69AA616225A535A900736894 /* SpeechPrefs.storyboard */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
+		69C1F0D225A3E5480048A739 /* AppPreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */; };
+		69C1F0D625A3E6D70048A739 /* AppPreferencesActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D525A3E6D70048A739 /* AppPreferencesActions.swift */; };
+		69C1F0D825A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D725A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift */; };
+		69C1F0DA25A3E8A90048A739 /* AppPreferencesUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D925A3E8A90048A739 /* AppPreferencesUndoContext.swift */; };
+		69C1F0DC25A4A9F60048A739 /* SpeechPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
 		69CEEDD123B3EEA700E9F087 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD023B3EEA700E9F087 /* MacroTests.swift */; };
 		69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD723B4064D00E9F087 /* ColorManTests.swift */; };
@@ -160,6 +167,7 @@
 		690B462223AA4CB0000445E4 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesTests.swift; sourceTree = "<group>"; };
 		690B462C23B16B54000445E4 /* StartupPreferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StartupPreferences.xml; sourceTree = "<group>"; };
+		691696D025A0CCC700569021 /* AppPreferencesState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPreferencesState.swift; sourceTree = "<group>"; };
 		69376D4E2579B01A00A99245 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyTests.swift; sourceTree = "<group>"; };
 		695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
@@ -265,8 +273,14 @@
 		698667CF24E97E710061AA86 /* SpeakerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerMan.swift; sourceTree = "<group>"; };
 		698667D324EA17B40061AA86 /* Click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.m4a; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		69AA616325A535A900736894 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SpeechPrefs.storyboard; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
+		69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesStore.swift; sourceTree = "<group>"; };
+		69C1F0D525A3E6D70048A739 /* AppPreferencesActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPreferencesActions.swift; sourceTree = "<group>"; };
+		69C1F0D725A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesUndoMiddleware.swift; sourceTree = "<group>"; };
+		69C1F0D925A3E8A90048A739 /* AppPreferencesUndoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesUndoContext.swift; sourceTree = "<group>"; };
+		69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechPrefsViewController.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
 		69CEEDD023B3EEA700E9F087 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		69CEEDD723B4064D00E9F087 /* ColorManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManTests.swift; sourceTree = "<group>"; };
@@ -327,6 +341,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		691696CF25A0CCC700569021 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				69C1F0D525A3E6D70048A739 /* AppPreferencesActions.swift */,
+				691696D025A0CCC700569021 /* AppPreferencesState.swift */,
+				69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */,
+				69C1F0D925A3E8A90048A739 /* AppPreferencesUndoContext.swift */,
+				69C1F0D725A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		695204C624B1F29E004BDBE2 /* Savitar2UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +394,7 @@
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
 				695F5AFF2589A0B200AB6BA6 /* EventsWindow.storyboard */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
+				69AA616225A535A900736894 /* SpeechPrefs.storyboard */,
 				695F5A4E2585C00100AB6BA6 /* WorldPicker.storyboard */,
 				695F5A4B2585BD8300AB6BA6 /* WorldSettings.storyboard */,
 				695F5B4E2592E64E00AB6BA6 /* WorldWizard.storyboard */,
@@ -482,6 +509,7 @@
 				695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */,
 				695F5AE025899FA400AB6BA6 /* CheckBox.swift */,
 				695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */,
+				69C1F0CE25A2538E0048A739 /* AppPreferences */,
 				695F5AC625899FA400AB6BA6 /* eventsWindow */,
 				695F5ADB25899FA400AB6BA6 /* worldPicker */,
 				695F5B512592E6B300AB6BA6 /* worldWizard */,
@@ -536,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				695F5B3B258EE42A00AB6BA6 /* ItemListState.swift */,
+				691696CF25A0CCC700569021 /* App */,
 				695F5B1B258E8EB100AB6BA6 /* Reactions */,
 				695F5B22258E8EB100AB6BA6 /* Undo */,
 				695F5B3F258EE73800AB6BA6 /* Worlds */,
@@ -574,9 +603,9 @@
 			children = (
 				695F5B41258EE73800AB6BA6 /* WorldsActions.swift */,
 				695F5B40258EE73800AB6BA6 /* WorldsState.swift */,
+				695F5B44258EE73800AB6BA6 /* WorldsStore.swift */,
 				695F5B43258EE73800AB6BA6 /* WorldsUndoContext.swift */,
 				695F5B4C258EEBD200AB6BA6 /* WorldsUndoMiddleware.swift */,
-				695F5B44258EE73800AB6BA6 /* WorldsStore.swift */,
 			);
 			path = Worlds;
 			sourceTree = "<group>";
@@ -620,6 +649,14 @@
 				69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		69C1F0CE25A2538E0048A739 /* AppPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */,
+			);
+			path = AppPreferences;
 			sourceTree = "<group>";
 		};
 		69DE2D20209D40A900A4D3F2 /* resources */ = {
@@ -776,6 +813,7 @@
 				695F5A502585C00100AB6BA6 /* WorldPicker.storyboard in Resources */,
 				69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */,
 				695F5A4D2585BD8300AB6BA6 /* WorldSettings.storyboard in Resources */,
+				69AA616425A535A900736894 /* SpeechPrefs.storyboard in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
 				69BE3EB024FC41C30035CF88 /* World.icns in Resources */,
 				695F5B012589A0B300AB6BA6 /* EventsWindow.storyboard in Resources */,
@@ -943,6 +981,7 @@
 				69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */,
 				695F5A7325899CE100AB6BA6 /* ModelManager.swift in Sources */,
 				6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */,
+				69C1F0DC25A4A9F60048A739 /* SpeechPrefsViewController.swift in Sources */,
 				695F5AE525899FA400AB6BA6 /* MacroViewController.swift in Sources */,
 				695F5ABB25899EFD00AB6BA6 /* InputViewController.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
@@ -952,6 +991,7 @@
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,
 				695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */,
+				691696D125A0CCC700569021 /* AppPreferencesState.swift in Sources */,
 				695F5B3C258EE42A00AB6BA6 /* ItemListState.swift in Sources */,
 				695F5AE625899FA400AB6BA6 /* EventsTabController.swift in Sources */,
 				695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */,
@@ -960,12 +1000,15 @@
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,
 				695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */,
+				69C1F0D825A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift in Sources */,
 				695F5AF825899FA400AB6BA6 /* WorldTableDataSource.swift in Sources */,
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,
 				695F5AEB25899FA400AB6BA6 /* TriggersTabController.swift in Sources */,
 				695F5AC425899EFD00AB6BA6 /* DocumentV2.swift in Sources */,
+				69C1F0D225A3E5480048A739 /* AppPreferencesStore.swift in Sources */,
 				695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */,
 				695F5AE325899FA400AB6BA6 /* MacrosTabController.swift in Sources */,
+				69C1F0DA25A3E8A90048A739 /* AppPreferencesUndoContext.swift in Sources */,
 				695F5AF725899FA400AB6BA6 /* WorldPickerController.swift in Sources */,
 				695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */,
 				695F5A7025899CE100AB6BA6 /* SavitarObject.swift in Sources */,
@@ -978,6 +1021,7 @@
 				695F5B34258EE13600AB6BA6 /* UndoableReaction.swift in Sources */,
 				695F5AE425899FA400AB6BA6 /* MacroViewModel.swift in Sources */,
 				695F5AE125899FA400AB6BA6 /* TriggerMatchingViewController.swift in Sources */,
+				69C1F0D625A3E6D70048A739 /* AppPreferencesActions.swift in Sources */,
 				695F5AF925899FA400AB6BA6 /* CheckBox.swift in Sources */,
 				695F5B36258EE20E00AB6BA6 /* ReactionsUndoContext.swift in Sources */,
 				695F5ABF25899EFD00AB6BA6 /* DocumentV1.swift in Sources */,
@@ -1069,6 +1113,14 @@
 				695F5B4F2592E64E00AB6BA6 /* Base */,
 			);
 			name = WorldWizard.storyboard;
+			sourceTree = "<group>";
+		};
+		69AA616225A535A900736894 /* SpeechPrefs.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69AA616325A535A900736894 /* Base */,
+			);
+			name = SpeechPrefs.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

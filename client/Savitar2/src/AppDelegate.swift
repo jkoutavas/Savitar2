@@ -79,6 +79,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppContext.shared.speakerMan.flushSpeech()
     }
 
+    @IBAction func showContinuousSpeechPrefsAction(_: Any) {
+        AppContext.shared.showContinuousSpeechPrefsWindow()
+    }
+    
     @IBAction func showEventsWindowAction(_: Any) {
         AppContext.shared.showUniversalEventsWindow()
     }

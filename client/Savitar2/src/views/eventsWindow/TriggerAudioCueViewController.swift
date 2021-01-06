@@ -15,15 +15,15 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
     @IBOutlet var speakEventRadio: NSButton!
     @IBOutlet var sayTextRadio: NSButton!
 
-    let currentSoundNames = AppContext.shared.speakerMan.soundNames
-    let currentVoiceNames = AppContext.shared.speakerMan.voiceNames
+    let currentSoundNames = AppContext.shared.speakerMan.soundNames()
+    let currentVoiceNames = AppContext.shared.speakerMan.voiceNames()
 
     @objc dynamic var soundNames: [String] {
         return currentSoundNames
     }
 
     @objc dynamic var voiceNames: [String] {
-        return AppContext.shared.speakerMan.voiceNames
+        return AppContext.shared.speakerMan.voiceNames()
     }
 
     var trigger: Trigger?
