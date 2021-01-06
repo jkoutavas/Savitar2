@@ -64,7 +64,7 @@ struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPrefer
         return result
     }
 
-    func inverse(context: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
+    func inverse(context _: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
         return SetContinuousSpeechEnabledAction(!enabled)
     }
 }

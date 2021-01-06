@@ -14,7 +14,7 @@ private var appUndoManager = UndoManager()
 class AppContext {
     static let shared = AppContext()
 
-    var prefs: AppPreferences {appPrefsStore.state.prefs}
+    var prefs: AppPreferences { appPrefsStore.state.prefs }
     var speakerMan: SpeakerMan
     var worldMan: WorldMan
 

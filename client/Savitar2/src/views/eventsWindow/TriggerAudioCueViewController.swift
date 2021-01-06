@@ -52,17 +52,17 @@ class TriggerAudioCueViewController: NSViewController, StoreSubscriber {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .silent))
         } else if soundRadio.state == .on {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .sound))
-            if trigger.sound == nil && soundNames.count > 0 {
+            if trigger.sound == nil, soundNames.count > 0 {
                 store?.dispatch(TriggerAction.setSound(trigger.objectID, name: soundNames[0]))
             }
         } else if speakEventRadio.state == .on {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .speakEvent))
-            if trigger.voice == nil && currentVoiceNames.count > 0 {
+            if trigger.voice == nil, currentVoiceNames.count > 0 {
                 store?.dispatch(TriggerAction.setVoice(trigger.objectID, name: voiceNames[0]))
             }
         } else {
             store?.dispatch(TriggerAction.setAudioType(trigger.objectID, type: .sayText))
-            if trigger.voice == nil && currentVoiceNames.count > 0 {
+            if trigger.voice == nil, currentVoiceNames.count > 0 {
                 store?.dispatch(TriggerAction.setVoice(trigger.objectID, name: voiceNames[0]))
             }
         }

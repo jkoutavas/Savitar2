@@ -10,9 +10,8 @@ import Cocoa
 import ReSwift
 
 class SpeechPrefsViewController: NSViewController, StoreSubscriber {
-    
     var store: AppPreferencesStore?
-    
+
     override func viewWillAppear() {
         super.viewWillAppear()
 
@@ -24,8 +23,8 @@ class SpeechPrefsViewController: NSViewController, StoreSubscriber {
 
         store?.unsubscribe(self)
     }
-    
-    func newState(state: AppPreferencesState) {
+
+    func newState(state _: AppPreferencesState) {
         representedObject = SpeechPrefsPresenter(store: store!)
     }
 }

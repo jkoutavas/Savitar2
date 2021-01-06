@@ -15,7 +15,7 @@ class UndoableAppPreferencesStateAdapter: AppPreferencesUndoContext {
     init(prefsState: AppPreferencesState) {
         state = prefsState
     }
-    
+
     func continuousSpeechRate() -> Int {
         return state.prefs.continuousSpeechRate
     }

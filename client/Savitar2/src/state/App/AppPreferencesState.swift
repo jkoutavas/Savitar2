@@ -9,7 +9,7 @@
 import ReSwift
 
 struct AppPreferencesState: StateType {
-    var prefs: AppPreferences = AppPreferences()
+    var prefs = AppPreferences()
 }
 
 func appPreferencesReducer(action: Action, state: AppPreferencesState?) -> AppPreferencesState {

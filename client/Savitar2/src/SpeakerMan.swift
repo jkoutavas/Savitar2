@@ -6,12 +6,12 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Cocoa
 import AVFoundation
+import Cocoa
 
 class SpeakerMan {
     // https://stackoverflow.com/a/38445571/246887
-   func soundNames() -> [String] {
+    func soundNames() -> [String] {
         let soundPaths: [String] = ["~/Library/Sounds", "/Library/Sounds", "/Network/Library/Sounds",
                                     "/System/Library/Sounds"]
 
@@ -49,14 +49,14 @@ class SpeakerMan {
         return []
     }
 
-    func speak(text: String, voiceName: String) {
+    func speak(text _: String, voiceName _: String) {
         // Override this
     }
 
     func flushSpeech() {
         // Override this
     }
- }
+}
 
 class SpeakerManNS: SpeakerMan {
     var speechSynth = NSSpeechSynthesizer()
@@ -122,7 +122,7 @@ class SpeakerManAV: SpeakerMan {
             if voice.identifier.hasSuffix(voiceName) {
                 utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
                 var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
-                    (Float(AppContext.shared.prefs.continuousSpeechRate-5) / 10.0)
+                    (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
                 if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
                     adjustedRate = AVSpeechUtteranceMinimumSpeechRate
                 } else if adjustedRate > AVSpeechUtteranceMaximumSpeechRate {
