@@ -90,6 +90,8 @@ class SpeakerManNS: SpeakerMan {
     override func speak(text: String, voiceName: String) {
         speechSynth.stopSpeaking()
         speechSynth.setVoice(identifierForVoiceName(voiceName))
+        // rate here is words per minute and it varies by voice
+        speechSynth.rate *= (Float)(AppContext.shared.prefs.continuousSpeechRate) / 10.0
         speechSynth.startSpeaking(text)
     }
 
@@ -121,6 +123,7 @@ class SpeakerManAV: SpeakerMan {
         for voice in voices {
             if voice.identifier.hasSuffix(voiceName) {
                 utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
+                // rate here is a percentage (0.0..1.0)
                 var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
                     (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
                 if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
