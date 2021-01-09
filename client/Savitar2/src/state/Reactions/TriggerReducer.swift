@@ -91,6 +91,9 @@ private func handleTriggerAction(_ action: TriggerAction, trigger: Trigger) -> T
     case let .setType(triggerID, type: type):
         guard trigger.objectID == triggerID else { return trigger }
         trigger.type = type
+        if type == .input {
+            trigger.appearance = .gag
+        }
 
     case let .setVoice(triggerID, name: name):
         guard trigger.objectID == triggerID else { return trigger }

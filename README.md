@@ -38,9 +38,10 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 _ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
-_ Implement input triggers
 √ Implement audio cue triggers
-_ Implement reply triggers
+√ Implement reply triggers
+√ Implement input triggers
+_ Implement input trigger variables
 _ Implement next gen startup commands (trigger based)
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view
@@ -145,17 +146,17 @@ There's already a `.swiftformat` config file that contains this:
      155 unique files.                                          
       19 files ignored.
 
-github.com/AlDanial/cloc v 1.88  T=0.25 s (569.0 files/s, 62263.0 lines/s)
+github.com/AlDanial/cloc v 1.88  T=0.23 s (634.4 files/s, 69549.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          112           1719           1246           7946
-XML                             26              0             37           4445
-Markdown                         2             37              0            127
+Swift                          112           1723           1253           7940
+XML                             26              0             37           4467
+Markdown                         2             37              0            128
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           143           1760           1291          12597
+SUM:                           143           1764           1298          12614
 -------------------------------------------------------------------------------
 ```

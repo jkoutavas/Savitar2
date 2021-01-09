@@ -24,34 +24,22 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var textView: NSTextView!
 
     public var backColor: NSColor {
-        get {
-            return textView.backgroundColor
-        }
-        set {
-            textView.backgroundColor = newValue
-        }
+        get { textView.backgroundColor }
+        set { textView.backgroundColor = newValue }
     }
 
     public var foreColor: NSColor {
-        get {
-            return textView.textColor ?? NSColor.white
-        }
-        set {
-            textView.textColor = newValue
-        }
+        get { textView.textColor ?? NSColor.white }
+        set { textView.textColor = newValue }
     }
 
     public var font: NSFont {
-        get {
-            return textView.font ?? NSFont.systemFont(ofSize: 9)
-        }
-        set {
-            textView.font = newValue
-        }
+        get { textView.font ?? NSFont.systemFont(ofSize: 9) }
+        set { textView.font = newValue }
     }
 
     func rowHeight() -> CGFloat {
-        return textView.layoutManager?.defaultLineHeight(for: font) ?? 0
+        textView.layoutManager?.defaultLineHeight(for: font) ?? 0
     }
 
     override func viewDidLoad() {
@@ -89,9 +77,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         textView.string = ""
     }
 
-    func getTextLength() -> Int {
-        return textView.string.count
-    }
+    func getTextLength() -> Int { textView.string.count }
 
     func myKeyDown(with event: NSEvent) -> Bool {
         // handle keyDown only if current window has focus, i.e. is keyWindow
@@ -116,15 +102,22 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             let stickyCmd = false // TODO: mConnection->GetWorld()->UseStickyCommands()
 
             if getTextLength() > 0 {
-                // TODO: input trigger processing
-
                 // save away the original command
                 cmdIndex = cmdBuf.count
                 wasSaved = saveCmd()
 
-                // send the processed command to the server
                 if let processedCmd = textToCmd() {
-                    sess.submitServerCmd(cmd: processedCmd)
+                    // input trigger processing
+                    var line = processedCmd.cmdStr
+                    let effects = sess.determineEffects(line: &line, excludedType: .output)
+                    if effects.count > 0 {
+                        // We've got an input trigger effect, don't send a command, but process its effect(s).
+                        // (Input triggers are intrinsically gagged.)
+                        sess.handleEffects(effects)
+                    } else {
+                        // send the processed command to the server
+                        sess.submitServerCmd(cmd: processedCmd)
+                    }
                 }
             } else {
                 // just send the carriage return

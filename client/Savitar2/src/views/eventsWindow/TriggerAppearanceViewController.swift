@@ -91,7 +91,7 @@ class TriggerAppearanceController: NSController {
 
     @objc dynamic var backColorWellEnabled: Bool {
         guard let face = trigger.style?.face else { return false }
-        return trigger.appearance == .changeAppearance && face.contains(.backColor)
+        return appearanceIsApplicable && trigger.appearance == .changeAppearance && face.contains(.backColor)
     }
 
     @objc dynamic var foreColorColor: NSColor {
@@ -102,15 +102,15 @@ class TriggerAppearanceController: NSController {
 
     @objc dynamic var foreColorWellEnabled: Bool {
         guard let face = trigger.style?.face else { return false }
-        return trigger.appearance == .changeAppearance && face.contains(.foreColor)
+        return appearanceIsApplicable && trigger.appearance == .changeAppearance && face.contains(.foreColor)
     }
 
-    @objc dynamic var storeIsPresent: Bool {
-        return store != nil
+    @objc dynamic var appearanceIsApplicable: Bool {
+        return store != nil && trigger.type != .input
     }
 
     @objc dynamic var styleEnabled: Bool {
-        return trigger.appearance == .changeAppearance
+        return appearanceIsApplicable && trigger.appearance == .changeAppearance
     }
 
     override func value(forUndefinedKey key: String) -> Any? {
