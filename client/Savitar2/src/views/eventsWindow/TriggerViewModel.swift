@@ -22,8 +22,6 @@ class TriggerViewModel: CheckableItemViewModel {
             type = "Input"
         case .output:
             type = "Output"
-        case .both:
-            type = "Both"
         }
         switch trigger.audioType {
         case .silent:

@@ -61,7 +61,7 @@ class OutputView: WKWebView {
 
         if AppContext.hasContinuousSpeech(), AppContext.shared.prefs.continuousSpeechEnabled {
             let plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
-            AppContext.shared.speakerMan.speak(text: plainText, 
+            AppContext.shared.speakerMan.speak(text: plainText,
                                                voiceName: AppContext.shared.prefs.continuousSpeechVoice)
         }
     }

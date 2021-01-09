@@ -206,7 +206,7 @@ class AppPreferences: SavitarXMLProtocol {
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechRate.rawValue,
                                stringValue: "\(continuousSpeechRate)")
-        
+
         if continuousSpeechVoice.count > 0 {
             prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechVoice.rawValue,
                                    stringValue: "\(continuousSpeechVoice)")

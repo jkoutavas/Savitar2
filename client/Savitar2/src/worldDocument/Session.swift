@@ -170,15 +170,12 @@ class Session: NSObject, StreamDelegate {
         return data
     }
 
-    private func processAcceptedText(text: String) {
+    private func processAcceptedText(text: String, excludedTriggerType: TrigType) {
         // logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
 
         let lines = text.split(omittingEmptySubsequences: false) {
             $0 == "\r" || $0 == "\n"
         }
-
-        let muteSound = AppContext.shared.prefs.flags.contains(.muteSound)
-        let muteSpeaking = AppContext.shared.prefs.flags.contains(.muteSpeaking)
 
         for (index, thisLine) in lines.enumerated() {
             var line = String(thisLine)
@@ -187,24 +184,42 @@ class Session: NSObject, StreamDelegate {
             if index < lines.count - 1 {
                 line += "\r"
             }
-            var effects: [Trigger] = []
-            line = processTriggers(inputLine: line, triggers: universalTriggers, effects: &effects)
-            if line.count > 0 {
-                line = processTriggers(inputLine: line, triggers: world.triggerMan.get(), effects: &effects)
-            }
+            let effects = determineEffects(line: &line, excludedType: excludedTriggerType)
 
-            // Processing is complete. Send the line off to the output view
+            // Processing is complete. Send the resulting line off to the output view
             acceptedText(text: line)
 
-            for effect in effects {
-                if let reply = effect.reply, reply.count > 0 {
-                    submitServerCmd(cmd: Command(text: reply))
-                }
-                if effect.audioType != .silent {
-                    AppContext.shared.speakerMan.playAudio(trigger: effect,
-                                                           muteSound: muteSound,
-                                                           muteSpeaking: muteSpeaking)
-                }
+            // if there are some effects, handle them now
+            if effects.count > 0 {
+                handleEffects(effects)
+            }
+        }
+    }
+
+    func determineEffects(line: inout String, excludedType: TrigType) -> [Trigger] {
+        var effects: [Trigger] = []
+        line = processTriggers(inputLine: line, triggers: universalTriggers, excludedType: excludedType,
+                               effects: &effects)
+        if line.count > 0 {
+            line = processTriggers(inputLine: line, triggers: world.triggerMan.get(),
+                                   excludedType: excludedType, effects: &effects)
+        }
+        return effects
+    }
+
+    func handleEffects(_ effects: [Trigger]) {
+        // handle any audio or and/or reply effect
+        let muteSound = AppContext.shared.prefs.flags.contains(.muteSound)
+        let muteSpeaking = AppContext.shared.prefs.flags.contains(.muteSpeaking)
+
+        for effect in effects {
+            if let reply = effect.reply, reply.count > 0 {
+                submitServerCmd(cmd: Command(text: reply))
+            }
+            if effect.audioType != .silent {
+                AppContext.shared.speakerMan.playAudio(trigger: effect,
+                                                       muteSound: muteSound,
+                                                       muteSpeaking: muteSpeaking)
             }
         }
     }
@@ -225,45 +240,37 @@ class Session: NSObject, StreamDelegate {
         return false
     }
 
-    private func processTriggers(inputLine: String, triggers: [Trigger], effects: inout [Trigger]) -> String {
+    func processTriggers(inputLine: String, triggers: [Trigger], excludedType: TrigType,
+                         effects: inout [Trigger]) -> String {
         var line = inputLine
 
-        // Determine the effects of the triggers. Often it'll result in a modification of the line, so let's
-        // process triggers in this order:
+        // Determine the effects of enabled triggers of expected type
+        // Often it'll result in a modification of the line, so let's process these triggers in this order:
         //    1. gagging triggers
         //    2. subsitution triggers
-        for trigger in triggers {
-            trigger.matchedText = ""
-            if !trigger.enabled {
-                continue
+
+        var filteredTriggers = triggers
+        filteredTriggers.removeAll(where: { !$0.enabled || $0.type == excludedType })
+
+        // Check for gag reactions
+        for trigger in filteredTriggers where trigger.appearance == .gag {
+            if trigger.reactionTo(line: &line) {
+                effects.append(trigger)
             }
-            if trigger.appearance == .gag {
+        }
+        if line.count > 0 {
+            // Some text remains? (not all gagged away?) Check for subsitution reactions
+            for trigger in filteredTriggers where !effects.contains(trigger) && trigger.useSubstitution {
                 if trigger.reactionTo(line: &line) {
                     effects.append(trigger)
                 }
             }
         }
         if line.count > 0 {
-            for trigger in triggers {
-                if !trigger.enabled {
-                    continue
-                }
-                if trigger.useSubstitution, !effects.contains(trigger) {
-                    if trigger.reactionTo(line: &line) {
-                        effects.append(trigger)
-                    }
-                }
-            }
-        }
-        if line.count > 0 {
-            for trigger in triggers {
-                if !trigger.enabled {
-                    continue
-                }
-                if !effects.contains(trigger) {
-                    if trigger.reactionTo(line: &line) {
-                        effects.append(trigger)
-                    }
+            // Check for remaining trigger reactions
+            for trigger in filteredTriggers where !effects.contains(trigger) {
+                if trigger.reactionTo(line: &line) {
+                    effects.append(trigger)
                 }
             }
         }
@@ -296,7 +303,7 @@ class Session: NSObject, StreamDelegate {
                 }
             }
             if data.count > 0 {
-                self?.processAcceptedText(text: String(decoding: data, as: UTF8.self))
+                self?.processAcceptedText(text: String(decoding: data, as: UTF8.self), excludedTriggerType: .input)
                 if let didStartupCmd = self?.didStartupCmd, !didStartupCmd {
                     self?.didStartupCmd = true
                     if let logonCmd = self?.world.logonCmd, logonCmd.count > 0 {
