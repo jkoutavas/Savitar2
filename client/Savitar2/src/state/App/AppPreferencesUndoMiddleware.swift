@@ -1,37 +1,33 @@
 //
-//  WorldsUndoMiddleware.swift
+//  AppPreferencesUndoMiddleware.swift
 //  Savitar2
 //
-//  Created by Jay Koutavas on 12/19/20.
-//  Copyright © 2020 Heynow Software. All rights reserved.
+//  Created by Jay Koutavas on 1/4/21.
+//  Copyright © 2021 Heynow Software. All rights reserved.
 //
 
 import Foundation
 import ReSwift
 
-class UndoableWorldsStateAdapter: WorldsUndoContext {
-    let state: WorldsState
+class UndoableAppPreferencesStateAdapter: AppPreferencesUndoContext {
+    let state: AppPreferencesState
 
-    init(worldsState: WorldsState) {
-        state = worldsState
+    init(prefsState: AppPreferencesState) {
+        state = prefsState
     }
 
-    func worldListContext(worldID: SavitarObjectID) -> WorldListContext? {
-        guard let index = state.worldList.indexOf(objectID: worldID),
-              let world = state.worldList.item(objectID: worldID)
-        else { return nil }
-
-        return (world, index)
+    func continuousSpeechRate() -> Int {
+        return state.prefs.continuousSpeechRate
     }
-
-    func worldName(worldID: SavitarObjectID) -> String? {
-        return state.worldList.item(objectID: worldID)?.name
+    
+    func continuousSpeechVoice() -> String {
+        return state.prefs.continuousSpeechVoice
     }
 }
 
 extension UndoCommand {
-    convenience init?(appAction: WorldUndoableAction,
-                      context: WorldsUndoContext,
+    convenience init?(appAction: AppPreferencesUndoableAction,
+                      context: AppPreferencesUndoContext,
                       dispatch: @escaping DispatchFunction) {
         guard let inverseAction = appAction.inverse(context: context) else { return nil }
 
@@ -41,14 +37,14 @@ extension UndoCommand {
     }
 }
 
-func undoWorldsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<WorldsState> {
-    func undoAction(action: WorldUndoableAction, state: WorldsState,
+func undoAppPreferencesStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<AppPreferencesState> {
+    func undoAction(action: AppPreferencesUndoableAction, state: AppPreferencesState,
                     dispatch: @escaping DispatchFunction) -> UndoCommand? {
-        let context = UndoableWorldsStateAdapter(worldsState: state)
+        let context = UndoableAppPreferencesStateAdapter(prefsState: state)
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
     }
-    let undoMiddleware: Middleware<WorldsState> = { dispatch, getState in {
+    let undoMiddleware: Middleware<AppPreferencesState> = { dispatch, getState in {
         next in {
             action in
 
@@ -58,7 +54,7 @@ func undoWorldsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?
                 return
             }
 
-            if let undoableAction = action as? WorldUndoableAction,
+            if let undoableAction = action as? AppPreferencesUndoableAction,
                let state = getState(),
                let undo = undoAction(action: undoableAction, state: state, dispatch: dispatch),
                let undoManager = undoManagerProvider() {

@@ -6,14 +6,25 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
-
-// A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
-protocol WorldUndoableAction: Action, UndoableWorld {}
 
 protocol WorldAction: Action {
     func apply(oldState: WorldsState) -> WorldsState
+}
+
+protocol WorldUndoableAction: Action {
+    /// Name used for e.g. "Undo" menu items.
+    var name: String { get }
+
+    var notUndoable: NotUndoable { get }
+
+    func inverse(context: WorldsUndoContext) -> WorldUndoableAction?
+}
+
+extension WorldUndoableAction where Self: WorldAction {
+    var notUndoable: NotUndoable {
+        return NotUndoable(self)
+    }
 }
 
 struct SetWorldsAction: WorldAction {
@@ -44,6 +55,8 @@ struct SelectWorldAction: WorldAction {
     }
 }
 
+// MARK: Undoable
+
 struct InsertWorldAction: WorldUndoableAction, WorldAction {
     let world: World
     let index: Int
@@ -59,8 +72,7 @@ struct InsertWorldAction: WorldUndoableAction, WorldAction {
         return result
     }
 
-    var name: String { return "New World" }
-    var isUndoable: Bool { return true }
+    var name = "New World"
 
     func inverse(context _: WorldsUndoContext) -> WorldUndoableAction? {
         return RemoveWorldAction(worldID: world.objectID)
@@ -80,8 +92,7 @@ struct RemoveWorldAction: WorldUndoableAction, WorldAction {
         return result
     }
 
-    var name: String { return "Delete World" }
-    var isUndoable: Bool { return true }
+    var name = "Delete World"
 
     func inverse(context: WorldsUndoContext) -> WorldUndoableAction? {
         guard let wlc = context.worldListContext(worldID: worldID) else { return nil }

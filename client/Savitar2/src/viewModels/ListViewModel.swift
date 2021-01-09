@@ -1,5 +1,5 @@
 //
-//  TriggersViewModel.swift
+//  ListViewModel.swift
 //  Savitar2
 //
 //  Created by Jay Koutavas on 4/24/20.

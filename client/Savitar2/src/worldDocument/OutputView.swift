@@ -58,6 +58,12 @@ class OutputView: WKWebView {
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
         }
+
+        if AppContext.hasContinuousSpeech(), AppContext.shared.prefs.continuousSpeechEnabled {
+            let plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
+            AppContext.shared.speakerMan.speak(text: plainText, 
+                                               voiceName: AppContext.shared.prefs.continuousSpeechVoice)
+        }
     }
 
     private func output(html: String, makeAppend: Bool, appending: Bool, appendID: Int) {

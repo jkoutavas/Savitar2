@@ -61,8 +61,6 @@ enum TriggerAction: ReactionUndoableAction {
 
     // MARK: Undoable
 
-    var isUndoable: Bool { return true }
-
     var name: String {
         switch self {
         case .disable: return "Disable Trigger"
