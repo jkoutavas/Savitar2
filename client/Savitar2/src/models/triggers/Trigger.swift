@@ -63,7 +63,6 @@ extension TrigSpecifier {
 enum TrigType {
     case input
     case output
-    case both
 }
 
 extension TrigType {
@@ -358,8 +357,7 @@ class Trigger: SavitarObject, NSCopying {
 
     let typeDict: [TrigType: String] = [
         .input: "input",
-        .output: "output",
-        .both: "both"
+        .output: "output"
     ]
 
     // ***************************
@@ -407,8 +405,7 @@ class Trigger: SavitarObject, NSCopying {
 
         let typeLabels: [String: TrigType] = [
             "input": .input,
-            "output": .output,
-            "both": .both
+            "output": .output
         ]
 
         var hasUseFore = false
@@ -454,6 +451,8 @@ class Trigger: SavitarObject, NSCopying {
             case TriggerAttribIdentifier.type.rawValue:
                 if let type = typeLabels[attribute.value] {
                     self.type = type
+                } else {
+                    self.type = .input // we no longer support trigger type "both"
                 }
             case TriggerAttribIdentifier.voice.rawValue:
                 voice = attribute.value

@@ -135,8 +135,6 @@ class TriggerController: NSController {
                 return 0
             case .input:
                 return 1
-            case .both:
-                return 2
             }
         }
         set {
@@ -146,8 +144,6 @@ class TriggerController: NSController {
                 type = .output
             case 1:
                 type = .input
-            case 2:
-                type = .both
             default:
                 type = .output
             }
