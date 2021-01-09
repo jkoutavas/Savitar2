@@ -177,7 +177,7 @@ class Session: NSObject, StreamDelegate {
             $0 == "\r" || $0 == "\n"
         }
 
-         for (index, thisLine) in lines.enumerated() {
+        for (index, thisLine) in lines.enumerated() {
             var line = String(thisLine)
 
             // re-insert line ending for every line except the last
@@ -241,7 +241,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     func processTriggers(inputLine: String, triggers: [Trigger], excludedType: TrigType,
-                                 effects: inout [Trigger]) -> String {
+                         effects: inout [Trigger]) -> String {
         var line = inputLine
 
         // Determine the effects of enabled triggers of expected type
@@ -254,7 +254,7 @@ class Session: NSObject, StreamDelegate {
 
         // Check for gag reactions
         for trigger in filteredTriggers where trigger.appearance == .gag {
-             if trigger.reactionTo(line: &line) {
+            if trigger.reactionTo(line: &line) {
                 effects.append(trigger)
             }
         }

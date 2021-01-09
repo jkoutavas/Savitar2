@@ -27,11 +27,11 @@ class SpeechPrefsViewController: NSViewController, StoreSubscriber {
     func newState(state _: AppPreferencesState) {
         representedObject = SpeechPrefsPresenter(store: store!)
     }
-    
+
     @objc dynamic var voiceNames: [String] {
         return AppContext.shared.speakerMan.voiceNames()
     }
-    
+
     @IBAction func speakerButtonAction(_: AnyObject) {
         AppContext.shared.speakerMan.speak(text: "The rain falls mainly in the plain.",
                                            voiceName: AppContext.shared.prefs.continuousSpeechVoice)
@@ -57,7 +57,7 @@ class SpeechPrefsPresenter: NSObject {
         get { store.state.prefs.continuousSpeechRate }
         set { store.dispatch(SetContinuousSpeechRateAction(newValue)) }
     }
-    
+
     @objc dynamic var voiceIndex: Int {
         get {
             let voiceName = AppContext.shared.prefs.continuousSpeechVoice

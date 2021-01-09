@@ -452,7 +452,7 @@ class Trigger: SavitarObject, NSCopying {
                 if let type = typeLabels[attribute.value] {
                     self.type = type
                 } else {
-                    self.type = .input // we no longer support trigger type "both"
+                    type = .input // we no longer support trigger type "both"
                 }
             case TriggerAttribIdentifier.voice.rawValue:
                 voice = attribute.value
