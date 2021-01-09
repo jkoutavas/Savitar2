@@ -6,7 +6,6 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
 
 /// Wrapper around an action to flag it as not undoable, like when it's

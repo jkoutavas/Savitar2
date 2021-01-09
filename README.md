@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: December 26th, 2020
+README last updated: January 8th, 2021
 
 ## Current state of the application
 
@@ -34,6 +34,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 √ Implement input pane command recall
 √ New world onboarding
+√ Implement Continuous Speech (using new AVSpeechSynthesizer)
 _ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
@@ -64,7 +65,6 @@ _ Address key things found in alpha test
 ```
 _ Move github repo to public
 _ Start promoting the beta test
-_ Implement Continuous Speech (using new AVSpeechSynthesizer)
 _ Find/Find Next supported
 _ Logging support
 _ Printing supported
@@ -141,21 +141,21 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     153 text files.
-     149 unique files.                                          
-      31 files ignored.
+     159 text files.
+     155 unique files.                                          
+      19 files ignored.
 
-github.com/AlDanial/cloc v 1.84  T=0.20 s (623.6 files/s, 71388.6 lines/s)
+github.com/AlDanial/cloc v 1.88  T=0.25 s (569.0 files/s, 62263.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          107           1639           1199           7650
-XML                             13              0             35           3532
+Swift                          112           1719           1246           7946
+XML                             26              0             37           4445
 Markdown                         2             37              0            127
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           125           1680           1242          11388
+SUM:                           143           1760           1291          12597
 -------------------------------------------------------------------------------
 ```

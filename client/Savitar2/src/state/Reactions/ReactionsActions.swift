@@ -6,10 +6,8 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
 
-// A typealias will not work and only raise EXC_BAD_ACCESS exceptions. ¯\_(ツ)_/¯
 protocol ReactionUndoableAction: Action, UndoableReaction {}
 
 protocol ReactionAction: Action {
@@ -31,8 +29,7 @@ struct InsertMacroAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "New Macro" }
-    var isUndoable: Bool { return true }
+    var name = "New Macro"
 
     func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         return RemoveMacroAction(macroID: macro.objectID)
@@ -54,8 +51,7 @@ struct InsertTriggerAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "New Trigger" }
-    var isUndoable: Bool { return true }
+    var name = "New Trigger"
 
     func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         return RemoveTriggerAction(triggerID: trigger.objectID)
@@ -77,8 +73,7 @@ struct MoveMacroAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "Move Macro" }
-    var isUndoable: Bool { return true }
+    var name = "Move Macro"
 
     func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         let movedDown = to > from
@@ -104,8 +99,7 @@ struct MoveTriggerAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "Move Trigger" }
-    var isUndoable: Bool { return true }
+    var name = "Move Trigger"
 
     func inverse(context _: ReactionsUndoContext) -> ReactionUndoableAction? {
         let movedDown = to > from
@@ -129,8 +123,7 @@ struct RemoveMacroAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "Delete Macro" }
-    var isUndoable: Bool { return true }
+    var name = "Delete Macro"
 
     func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
         guard let mlc = context.macroListContext(macroID: macroID) else { return nil }
@@ -151,8 +144,7 @@ struct RemoveTriggerAction: ReactionUndoableAction, ReactionAction {
         return result
     }
 
-    var name: String { return "Delete Trigger" }
-    var isUndoable: Bool { return true }
+    var name = "Delete Trigger"
 
     func inverse(context: ReactionsUndoContext) -> ReactionUndoableAction? {
         guard let tlc = context.triggerListContext(triggerID: triggerID) else { return nil }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -294,6 +294,13 @@ CA
                                                 <action selector="flushSpeachAction:" target="Voe-Tx-rLC" id="fZI-Hz-S04"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Iia-3w-GH7"/>
+                                        <menuItem title="Speech Preferences…" id="h6J-0U-LkL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showContinuousSpeechPrefsAction:" target="Voe-Tx-rLC" id="Jux-Oy-IWX"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -456,15 +463,15 @@ CA
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3c-uJ-AG6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                                 <clipView key="contentView" drawsBackground="NO" id="lw8-rh-jFh">
-                                    <rect key="frame" x="1" y="1" width="583" height="78"/>
+                                    <rect key="frame" x="1" y="1" width="598" height="78"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" verticallyResizable="YES" findStyle="panel" allowsDocumentBackgroundColorChange="YES" allowsUndo="YES" smartInsertDelete="YES" id="z73-YD-nRv">
-                                            <rect key="frame" x="0.0" y="0.0" width="583" height="78"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="598" height="78"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="583" height="78"/>
+                                            <size key="minSize" width="598" height="78"/>
                                             <size key="maxSize" width="600" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
@@ -476,12 +483,12 @@ CA
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="tlN-GA-S9c"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="MEV-ex-mYI">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="MEV-ex-mYI">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Iql-DW-89f">
-                                    <rect key="frame" x="584" y="1" width="15" height="78"/>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Iql-DW-89f">
+                                    <rect key="frame" x="583" y="1" width="16" height="78"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -514,7 +521,7 @@ CA
                     <tabView key="tabView" type="noTabsNoBorder" id="BjV-hZ-Klw">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
+                        <font key="font" metaFont="system"/>
                         <connections>
                             <outlet property="delegate" destination="LVT-By-S2U" id="RUE-bU-LP1"/>
                         </connections>

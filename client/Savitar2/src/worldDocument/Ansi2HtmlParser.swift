@@ -283,7 +283,7 @@ struct Ansi2HtmlParser {
         }
 
         // If current state is different than the default, there is a <span> open - close it
-        if state != State() {
+        if !hideANSI, state != State() {
             output.append("</span>")
         }
 

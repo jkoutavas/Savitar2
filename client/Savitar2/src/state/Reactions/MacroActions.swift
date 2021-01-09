@@ -6,7 +6,6 @@
 //  Copyright © 2020 Heynow Software. All rights reserved.
 //
 
-import Foundation
 import ReSwift
 
 struct SelectMacroAction: ReactionAction {
@@ -45,8 +44,6 @@ enum MacroAction: ReactionUndoableAction {
     case rename(SavitarObjectID, name: String)
 
     // MARK: Undoable
-
-    var isUndoable: Bool { return true }
 
     var name: String {
         switch self {

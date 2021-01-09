@@ -41,9 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override init() {
         super.init()
-        do {
-            try AppContext.shared.load()
-        } catch {}
+        AppContext.shared.load()
     }
 
     func applicationDidFinishLaunching(_: Notification) {
@@ -77,6 +75,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func flushSpeachAction(_: Any) {
         AppContext.shared.speakerMan.flushSpeech()
+    }
+
+    @IBAction func showContinuousSpeechPrefsAction(_: Any) {
+        AppContext.shared.showContinuousSpeechPrefsWindow()
     }
 
     @IBAction func showEventsWindowAction(_: Any) {
