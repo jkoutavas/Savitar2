@@ -41,6 +41,7 @@ class AppPreferences: SavitarXMLProtocol {
 
     var continuousSpeechEnabled = false
     var continuousSpeechRate = 10 // 5..20, whereas 10 is normal, 5 is 1/2 speed and 20 is 2x speed
+    var continuousSpeechVoice = ""
     var flags: PrefsFlags = [.startupPicker, .useKeypad]
     var lastUpdateSecs = 0
     var updatingEnabled = true
@@ -139,6 +140,7 @@ class AppPreferences: SavitarXMLProtocol {
         case lastUpdateCheck = "LAST_UPDATE_CHECK"
         case continuousSpeechEnabled = "CONTINUOUS_SPEECH_ENABLED"
         case continuousSpeechRate = "CONTINUOUS_SPEECH_RATE"
+        case continuousSpeechVoice = "CONTINUOUS_SPEECH_VOICE"
     }
 
     func parse(xml: XML.Accessor) throws {
@@ -167,6 +169,8 @@ class AppPreferences: SavitarXMLProtocol {
                 if let v = Int(attribute.value) {
                     prefs.continuousSpeechRate = v
                 }
+            case PrefsAttribIdentifier.continuousSpeechVoice.rawValue:
+                prefs.continuousSpeechVoice = attribute.value
             case PrefsAttribIdentifier.updatingEnabled.rawValue:
                 prefs.updatingEnabled = attribute.value == "TRUE"
             default:
@@ -202,6 +206,11 @@ class AppPreferences: SavitarXMLProtocol {
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechRate.rawValue,
                                stringValue: "\(continuousSpeechRate)")
+        
+        if continuousSpeechVoice.count > 0 {
+            prefsElem.addAttribute(name: PrefsAttribIdentifier.continuousSpeechVoice.rawValue,
+                                   stringValue: "\(continuousSpeechVoice)")
+        }
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.flags.rawValue,
                                stringValue: flags.description)
