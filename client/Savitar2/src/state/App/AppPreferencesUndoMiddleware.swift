@@ -19,6 +19,10 @@ class UndoableAppPreferencesStateAdapter: AppPreferencesUndoContext {
     func continuousSpeechRate() -> Int {
         return state.prefs.continuousSpeechRate
     }
+    
+    func continuousSpeechVoice() -> String {
+        return state.prefs.continuousSpeechVoice
+    }
 }
 
 extension UndoCommand {

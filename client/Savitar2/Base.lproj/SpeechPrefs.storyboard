@@ -59,7 +59,9 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <binding destination="6Xd-xb-Jmr" name="content" keyPath="voiceNames" id="XGo-cz-V3S"/>
                                     <binding destination="6Xd-xb-Jmr" name="enabled" keyPath="representedObject.enabled" id="Bi1-5e-Rsu"/>
+                                    <binding destination="6Xd-xb-Jmr" name="selectedIndex" keyPath="representedObject.voiceIndex" previousBinding="XGo-cz-V3S" id="pbM-il-tHD"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ril-Lb-fGt">
@@ -79,6 +81,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="speakerButtonAction:" target="6Xd-xb-Jmr" id="h44-wg-Xnh"/>
                                     <binding destination="6Xd-xb-Jmr" name="enabled" keyPath="representedObject.enabled" id="sPh-fn-zRG"/>
                                 </connections>
                             </button>

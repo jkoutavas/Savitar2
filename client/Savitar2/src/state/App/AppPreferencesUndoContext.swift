@@ -10,4 +10,5 @@ import Foundation
 
 protocol AppPreferencesUndoContext {
     func continuousSpeechRate() -> Int
+    func continuousSpeechVoice() -> String
 }

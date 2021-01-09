@@ -88,3 +88,23 @@ struct SetContinuousSpeechRateAction: AppPreferencesUndoableAction, AppPreferenc
         return SetContinuousSpeechRateAction(context.continuousSpeechRate())
     }
 }
+
+struct SetContinuousSpeechVoiceAction: AppPreferencesUndoableAction, AppPreferencesAction {
+    let voice: String
+
+    var name = "Change Speech Voice"
+
+    init(_ voice: String) {
+        self.voice = voice
+    }
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        result.prefs.continuousSpeechVoice = voice
+        return result
+    }
+
+    func inverse(context: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
+        return SetContinuousSpeechVoiceAction(context.continuousSpeechVoice())
+    }
+}
