@@ -69,7 +69,11 @@ class SpeakerManNS: SpeakerMan {
         for voice in voices {
             let attributes = NSSpeechSynthesizer.attributes(forVoice:
                 NSSpeechSynthesizer.VoiceName(rawValue: voice.rawValue))
-            names.append((attributes[NSSpeechSynthesizer.VoiceAttributeKey.name] as? String)!)
+            if let locale = attributes[NSSpeechSynthesizer.VoiceAttributeKey.localeIdentifier] as? String {
+                if locale.hasPrefix("en_") {
+                    names.append((attributes[NSSpeechSynthesizer.VoiceAttributeKey.name] as? String)!)
+                }
+            }
         }
         return names
     }
