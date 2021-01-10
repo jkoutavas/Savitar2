@@ -6,9 +6,9 @@
 //  Copyright © 2017 Heynow Software. All rights reserved.
 //
 
-// import AppCenter
-// import AppCenterAnalytics
-// import AppCenterCrashes
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import Cocoa
 
 var isRunningTests: Bool {
@@ -49,13 +49,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        // TODO: consider re-enabling this
-        /*
          MSAppCenter.start("773fa530-0ff3-4a5a-984f-32fdf7b29baa", withServices: [
              MSAnalytics.self,
              MSCrashes.self
          ])
-         */
 
         if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
             showEventsWindowAction(self)
