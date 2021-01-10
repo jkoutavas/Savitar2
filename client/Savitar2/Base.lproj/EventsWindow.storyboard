@@ -95,7 +95,6 @@
                                         <items>
                                             <menuItem title="Output" state="on" id="hZl-fq-JHS"/>
                                             <menuItem title="Input" id="77y-ac-lOd"/>
-                                            <menuItem title="Both" id="hBB-2Q-Lut"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
@@ -1068,7 +1067,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="r8E-QO-4Zy">
-                                                    <rect key="frame" x="221" y="1" width="118" height="20"/>
+                                                    <rect key="frame" x="220.5" y="1" width="118" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="0Fa-e2-gYh">
@@ -1108,7 +1107,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="dV8-RE-L0X">
-                                                    <rect key="frame" x="342" y="1" width="135" height="20"/>
+                                                    <rect key="frame" x="341.5" y="1" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rzj-YN-ZX8">
