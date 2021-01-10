@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: January 8th, 2021
+README last updated: January 9th, 2021
 
 ## Current state of the application
 
@@ -142,21 +142,21 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     159 text files.
-     155 unique files.                                          
+     158 text files.
+     154 unique files.                                          
       19 files ignored.
 
-github.com/AlDanial/cloc v 1.88  T=0.20 s (731.1 files/s, 80117.0 lines/s)
+github.com/AlDanial/cloc v 1.88  T=0.22 s (643.1 files/s, 70752.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          112           1723           1253           7934
-XML                             26              0             37           4467
+Swift                          112           1723           1243           7940
+XML                             25              0             35           4425
 Markdown                         2             37              0            128
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           143           1764           1298          12608
+SUM:                           142           1764           1286          12572
 -------------------------------------------------------------------------------
 ```
