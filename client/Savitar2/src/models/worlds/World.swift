@@ -75,8 +75,8 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var cmdMarker = "##"
     @objc dynamic var varMarker = "%%"
     @objc dynamic var wildMarker = "$$"
-    @objc dynamic var backColor = NSColor.white
-    @objc dynamic var foreColor = NSColor.black
+    @objc dynamic var backColor = NSColor(hex: "#666699")!
+    @objc dynamic var foreColor = NSColor.white
     @objc dynamic var linkColor = NSColor.blue
     @objc dynamic var echoBackColor = NSColor(hex: "9CA6FF")!
     @objc dynamic var intenseColor = NSColor.white
