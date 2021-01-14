@@ -146,11 +146,11 @@ class Session: NSObject, StreamDelegate {
             return
         }
 
-        let str = "\(cmd.cmdStr)\r"
+        let str = "\(cmd.cmdStr)\n"
         if world.flags.contains(.echoCmds) {
             acceptedText(text: str)
         } else if world.flags.contains(.echoCR) {
-            acceptedText(text: "\r")
+            acceptedText(text: "\n")
         }
         sendString(string: str)
     }
