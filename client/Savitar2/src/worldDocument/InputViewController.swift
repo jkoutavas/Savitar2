@@ -30,7 +30,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
     public var foreColor: NSColor {
         get { textView.textColor ?? NSColor.white }
-        set { textView.textColor = newValue }
+        set {
+            textView.textColor = newValue
+            textView.insertionPointColor = newValue
+        }
     }
 
     public var font: NSFont {
