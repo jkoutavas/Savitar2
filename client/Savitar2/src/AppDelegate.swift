@@ -54,6 +54,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
              MSCrashes.self
          ])
 
+        if AppContext.shared.prefs.flags.contains(.startupPicker) {
+            showWorldPickerAction(self)
+        }
+
         if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
             showEventsWindowAction(self)
         }
@@ -72,6 +76,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func flushSpeachAction(_: Any) {
         AppContext.shared.speakerMan.flushSpeech()
+    }
+
+    @IBAction func showAppPrefsAction(_: Any) {
+        AppContext.shared.showAppPrefsWindow()
     }
 
     @IBAction func showContinuousSpeechPrefsAction(_: Any) {
