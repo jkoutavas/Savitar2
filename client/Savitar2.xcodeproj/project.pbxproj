@@ -115,6 +115,8 @@
 		698667D024E97E710061AA86 /* SpeakerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698667CF24E97E710061AA86 /* SpeakerMan.swift */; };
 		698667D424EA18500061AA86 /* Click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 698667D324EA17B40061AA86 /* Click.m4a */; };
 		6991F4642393245B00E2BFDB /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991F4632393245B00E2BFDB /* Data+Extensions.swift */; };
+		699A413025CE2C190001C033 /* AppPrefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A412E25CE2C190001C033 /* AppPrefs.storyboard */; };
+		699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */; };
 		69AA616425A535A900736894 /* SpeechPrefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69AA616225A535A900736894 /* SpeechPrefs.storyboard */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
@@ -273,6 +275,8 @@
 		698667CF24E97E710061AA86 /* SpeakerMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerMan.swift; sourceTree = "<group>"; };
 		698667D324EA17B40061AA86 /* Click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Click.m4a; sourceTree = "<group>"; };
 		6991F4632393245B00E2BFDB /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		699A412F25CE2C190001C033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AppPrefs.storyboard; sourceTree = "<group>"; };
+		699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrefsViewController.swift; sourceTree = "<group>"; };
 		69AA616325A535A900736894 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SpeechPrefs.storyboard; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 				69662B1B204367BD00E7CC7B /* src */,
 				69DE2D20209D40A900A4D3F2 /* resources */,
 				695484A51FC4E6E400A6983F /* Assets.xcassets */,
+				699A412E25CE2C190001C033 /* AppPrefs.storyboard */,
 				695F5AFF2589A0B200AB6BA6 /* EventsWindow.storyboard */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				69AA616225A535A900736894 /* SpeechPrefs.storyboard */,
@@ -654,6 +659,7 @@
 		69C1F0CE25A2538E0048A739 /* AppPreferences */ = {
 			isa = PBXGroup;
 			children = (
+				699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */,
 				69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */,
 			);
 			path = AppPreferences;
@@ -819,6 +825,7 @@
 				695F5B012589A0B300AB6BA6 /* EventsWindow.storyboard in Resources */,
 				696F77482390D256005E45EB /* Appearance.txt in Resources */,
 				695F5B502592E64E00AB6BA6 /* WorldWizard.storyboard in Resources */,
+				699A413025CE2C190001C033 /* AppPrefs.storyboard in Resources */,
 				695484A91FC4E6E400A6983F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -989,6 +996,7 @@
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
+				699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,
 				695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */,
 				691696D125A0CCC700569021 /* AppPreferencesState.swift in Sources */,
@@ -1113,6 +1121,14 @@
 				695F5B4F2592E64E00AB6BA6 /* Base */,
 			);
 			name = WorldWizard.storyboard;
+			sourceTree = "<group>";
+		};
+		699A412E25CE2C190001C033 /* AppPrefs.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				699A412F25CE2C190001C033 /* Base */,
+			);
+			name = AppPrefs.storyboard;
 			sourceTree = "<group>";
 		};
 		69AA616225A535A900736894 /* SpeechPrefs.storyboard */ = {

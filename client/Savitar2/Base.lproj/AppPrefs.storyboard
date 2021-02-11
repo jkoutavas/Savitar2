@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="h3d-z1-wlU">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="5se-PY-sIq">
+            <objects>
+                <windowController id="h3d-z1-wlU" sceneMemberID="viewController">
+                    <window key="window" title="Savitar Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="DFR-0C-cvo">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="686" y="756" width="290" height="168"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="3840" height="2137"/>
+                    </window>
+                    <connections>
+                        <segue destination="6Xd-xb-Jmr" kind="relationship" relationship="window.shadowedContentViewController" id="0ea-Lk-REp"/>
+                    </connections>
+                </windowController>
+                <customObject id="F7I-Kg-V0d" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-155" y="-244"/>
+        </scene>
+        <!--App Prefs View Controller-->
+        <scene sceneID="eyb-S2-q37">
+            <objects>
+                <viewController id="6Xd-xb-Jmr" customClass="AppPrefsViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="4UY-bb-Rze">
+                        <rect key="frame" x="0.0" y="0.0" width="290" height="187"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fSz-iT-DQH">
+                                <rect key="frame" x="18" y="151" width="198" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Show World Picker at startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jKk-t5-3MZ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="6Xd-xb-Jmr" name="value" keyPath="representedObject.showStartupPicker" id="MkP-vK-IUR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="kRa-xA-Ytd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="O8G-nj-ob6"/>
+            </objects>
+            <point key="canvasLocation" x="266" y="-233.5"/>
+        </scene>
+    </scenes>
+</document>

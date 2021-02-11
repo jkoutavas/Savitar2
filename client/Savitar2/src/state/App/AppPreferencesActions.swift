@@ -69,6 +69,30 @@ struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPrefer
     }
 }
 
+struct SetShowStartupPickerAction: AppPreferencesUndoableAction, AppPreferencesAction {
+    let enabled: Bool
+
+    var name = "Toggle Show World Picker at Startup"
+
+    init(_ enabled: Bool) {
+        self.enabled = enabled
+    }
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        if enabled {
+            result.prefs.flags.insert(.startupPicker)
+        } else {
+            result.prefs.flags.remove(.startupPicker)
+        }
+        return result
+    }
+
+    func inverse(context _: AppPreferencesUndoContext) -> AppPreferencesUndoableAction? {
+        return SetShowStartupPickerAction(!enabled)
+    }
+}
+
 struct SetContinuousSpeechRateAction: AppPreferencesUndoableAction, AppPreferencesAction {
     let rate: Int
 
