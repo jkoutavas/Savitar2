@@ -3,7 +3,7 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: January 9th, 2021
+README last updated: June 27th, 2021
 
 ## Current state of the application
 
@@ -67,7 +67,7 @@ _ Address key things found in alpha test
 _ Move github repo to public
 _ Start promoting the beta test
 _ Find/Find Next supported
-_ Logging support
+√ Logging support
 _ Printing supported
 _ Enhanced analytics
 _ ANSI Color Settings window implemented
@@ -142,21 +142,21 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     158 text files.
-     154 unique files.                                          
+     163 text files.
+     159 unique files.                                          
       19 files ignored.
 
-github.com/AlDanial/cloc v 1.88  T=0.22 s (643.1 files/s, 70752.4 lines/s)
+github.com/AlDanial/cloc v 1.88  T=0.18 s (813.9 files/s, 89359.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          112           1723           1243           7940
-XML                             25              0             35           4425
-Markdown                         2             37              0            128
+Swift                          115           1773           1270           8160
+XML                             26              0             38           4622
+Markdown                         3             46              0            140
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           142           1764           1286          12572
+SUM:                           147           1823           1316          13001
 -------------------------------------------------------------------------------
 ```

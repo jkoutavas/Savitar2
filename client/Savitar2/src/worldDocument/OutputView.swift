@@ -13,6 +13,8 @@ class OutputView: WKWebView {
     var useANSI = true
     var useHTML = false
 
+    private var loggingFileHandle : FileHandle?
+
     override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
         menu.removeAllItems()
         let menuItem = NSMenuItem()
@@ -59,10 +61,22 @@ class OutputView: WKWebView {
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
         }
 
+        var plainText: String?
+        if let fh = loggingFileHandle {
+            plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
+            if let text = plainText, let data = text.data(using: String.Encoding.utf8) {
+                fh.write(data)
+            }
+        }
+
         if AppContext.hasContinuousSpeech(), AppContext.shared.prefs.continuousSpeechEnabled {
-            let plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
-            AppContext.shared.speakerMan.speak(text: plainText,
-                                               voiceName: AppContext.shared.prefs.continuousSpeechVoice)
+            if plainText == nil {
+                plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
+            }
+            if let text = plainText {
+                AppContext.shared.speakerMan.speak(text: text,
+                                                   voiceName: AppContext.shared.prefs.continuousSpeechVoice)
+            }
         }
     }
 
@@ -192,6 +206,28 @@ class OutputView: WKWebView {
         #if DEBUG_WKWEBKIT
 //        printDOM(element: "document.head.innerHTML")
         #endif
+    }
+
+    func setLogging(world: World) {
+        if loggingFileHandle != nil {
+            loggingFileHandle!.closeFile()
+            loggingFileHandle = nil
+        }
+        if world.logfilePath.count > 0 && world.loggingEnabled.boolValue {
+            let url = URL(fileURLWithPath: world.logfilePath)
+            if FileManager.default.fileExists(atPath: url.path) {
+                if let fh = try? FileHandle(forWritingTo: url) {
+                    if world.loggingType == .append {
+                        fh.seekToEndOfFile()
+                        loggingFileHandle = fh
+                    } else {
+                        fh.truncateFile(atOffset: 0)
+                        fh.closeFile()
+                        loggingFileHandle = try? FileHandle(forWritingTo: url)
+                    }
+                }
+            }
+        }
     }
 
     func run(javaScript: String) {

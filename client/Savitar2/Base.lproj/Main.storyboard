@@ -255,23 +255,43 @@ CA
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
-                                        <menuItem title="World Settings…" keyEquivalent="J" id="MEz-75-Dnr">
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="World" id="H8h-7b-M4v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="World" id="HyV-fh-RgO">
+                                    <items>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="showWorldSetting:" target="Ady-hI-5gd" id="25J-Hm-ccm"/>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
+                                        <menuItem title="Show World Events…" id="inP-pn-qUA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showWorldEvents:" target="Ady-hI-5gd" id="Ud4-N9-8cr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show World Settings…" keyEquivalent="J" id="LCt-gD-msI">
+                                            <connections>
+                                                <action selector="showWorldSetting:" target="Ady-hI-5gd" id="e2R-uX-Nlx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="bHX-os-Jm1"/>
                                     </items>
                                 </menu>
                             </menuItem>
                             <menuItem title="Audio" id="xc8-gc-PKQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Audio" id="UKF-TX-6Da">
+                                <menu key="submenu" title="Audio" id="G5f-Ju-biM">
                                     <items>
-                                        <menuItem title="Mute Sound Cues" id="QCf-15-M7M">
+                                        <menuItem title="Mute Sound Cues" id="pHX-PB-Fgj">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSound" id="QE6-Qr-Oq7">
+                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSound" id="tfd-jF-8VS">
                                                     <dictionary key="options">
                                                         <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                                         <bool key="NSConditionallySetsEnabled" value="NO"/>
@@ -280,11 +300,11 @@ CA
                                                 </binding>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Vnv-NZ-Z97"/>
-                                        <menuItem title="Mute Speaking Cues" id="bsB-ff-kwh" userLabel="Mute Speaking Cues">
+                                        <menuItem isSeparatorItem="YES" id="K0h-1F-q4m"/>
+                                        <menuItem title="Mute Speaking Cues" id="Bx9-Z6-5l7" userLabel="Mute Speaking Cues">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSpeaking" id="aKH-VF-dca">
+                                                <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSpeaking" id="VoK-Yb-cwN">
                                                     <dictionary key="options">
                                                         <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                                         <bool key="NSConditionallySetsEnabled" value="NO"/>
@@ -293,48 +313,16 @@ CA
                                                 </binding>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Flush Speech Buffer" keyEquivalent="l" id="yhk-Mb-gAl" userLabel="Flush Speech Buffer">
+                                        <menuItem title="Flush Speech Buffer" keyEquivalent="l" id="2Rp-TG-xFE" userLabel="Flush Speech Buffer">
                                             <connections>
-                                                <action selector="flushSpeachAction:" target="Voe-Tx-rLC" id="fZI-Hz-S04"/>
+                                                <action selector="flushSpeachAction:" target="Voe-Tx-rLC" id="OoL-Ld-zde"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Iia-3w-GH7"/>
-                                        <menuItem title="Speech Preferences…" id="h6J-0U-LkL">
+                                        <menuItem isSeparatorItem="YES" id="Hf7-f0-W54"/>
+                                        <menuItem title="Speech Preferences…" id="5ue-kS-vmd">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showContinuousSpeechPrefsAction:" target="Voe-Tx-rLC" id="Jux-Oy-IWX"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="View" id="H8h-7b-M4v">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="View" id="HyV-fh-RgO">
-                                    <items>
-                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="BXY-wc-z0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
+                                                <action selector="showContinuousSpeechPrefsAction:" target="Voe-Tx-rLC" id="nrC-4C-kPE"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -363,7 +351,7 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wl3-W1-gTE"/>
-                                        <menuItem title="Show Events Window" keyEquivalent="E" id="kRU-49-nfY">
+                                        <menuItem title="Show App-wide Events Window" keyEquivalent="E" id="kRU-49-nfY">
                                             <connections>
                                                 <action selector="showEventsWindowAction:" target="Voe-Tx-rLC" id="7mA-cl-DqA"/>
                                             </connections>
