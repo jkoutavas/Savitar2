@@ -281,12 +281,6 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="bHX-os-Jm1"/>
-                                        <menuItem title="Capture To File…" id="G4q-jU-JJg">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="toggleLogging:" target="Ady-hI-5gd" id="juO-D3-dbe"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

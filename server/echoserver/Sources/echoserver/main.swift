@@ -100,6 +100,7 @@ class EchoServer {
                 // Write the welcome string...
                 try socket.write(from: "\(ansiTestStr)\n")
                 try socket.write(from: "Hello, type 'QUIT' to end session\nor 'SHUTDOWN' to stop server.\n")
+                try socket.write(from: "https://www.heynow.com/savitar\n")
 
                 repeat {
                     try socket.write(from: "prompt: ")

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ijf-De-pS1">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ijf-De-pS1">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -84,6 +84,7 @@ Gw
                         <tabViewItem identifier="" id="XlS-6G-She"/>
                         <tabViewItem identifier="" id="1r2-Xe-hzm"/>
                         <tabViewItem id="zuS-O6-t75"/>
+                        <tabViewItem id="dUn-gf-y9d"/>
                     </tabViewItems>
                     <tabView key="tabView" misplaced="YES" type="noTabsNoBorder" id="Rdw-IL-vev">
                         <rect key="frame" x="0.0" y="0.0" width="454" height="472"/>
@@ -98,6 +99,7 @@ Gw
                         <segue destination="Dhe-ko-nR0" kind="relationship" relationship="tabItems" id="ZHL-wH-9Ol"/>
                         <segue destination="lgo-as-i7Z" kind="relationship" relationship="tabItems" id="bJu-LR-sWv"/>
                         <segue destination="qY0-Es-dDb" kind="relationship" relationship="tabItems" id="STX-Dc-coT"/>
+                        <segue destination="LSE-x8-mPF" kind="relationship" relationship="tabItems" id="Hh7-AF-1GG"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mp8-W6-xPH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -373,7 +375,7 @@ Gw
                                         <rect key="frame" x="87" y="7" width="196" height="27"/>
                                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="IrB-r5-Ere">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="9YP-0u-w1G"/>
                                         </popUpButtonCell>
                                         <connections>
@@ -411,7 +413,7 @@ Gw
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc7-xc-i2a">
-                                        <rect key="frame" x="356" y="7" width="19" height="29"/>
+                                        <rect key="frame" x="356" y="8" width="19" height="27"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="6Tf-Ey-5ud"/>
                                         <connections>
                                             <binding destination="lgo-as-i7Z" name="value" keyPath="representedObject.fontSize" id="pdS-7v-XEb">
@@ -474,7 +476,7 @@ Gw
                                             <rect key="frame" x="89" y="18" width="198" height="26"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Nwd-gA-8o5">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="menu"/>
                                                 <menu key="menu" id="Mi0-fc-lf6"/>
                                             </popUpButtonCell>
                                             <connections>
@@ -517,7 +519,7 @@ Gw
                                             </connections>
                                         </textField>
                                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qxl-dQ-mKn">
-                                            <rect key="frame" x="360" y="18" width="19" height="28"/>
+                                            <rect key="frame" x="360" y="19" width="19" height="26"/>
                                             <stepperCell key="cell" continuous="YES" enabled="NO" alignment="left" minValue="6" maxValue="999" doubleValue="9" id="ST5-5E-GqA"/>
                                             <connections>
                                                 <binding destination="lgo-as-i7Z" name="enabled" keyPath="representedObject.htmlEnabled" id="ygb-us-7ta"/>
@@ -732,6 +734,112 @@ Gw
                 <customObject id="nAz-Dp-AEK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-784" y="-10518"/>
+        </scene>
+        <!--Output-->
+        <scene sceneID="WXg-V4-S8F">
+            <objects>
+                <viewController title="Output" id="LSE-x8-mPF" customClass="OutputSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="GBc-Re-jLb">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-Ex-TVS">
+                                <rect key="frame" x="18" y="264" width="123" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Logging Enabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Iu1-Dy-26R">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="LSE-x8-mPF" name="value" keyPath="representedObject.loggingEnabled" id="Jgr-ZV-kso"/>
+                                </connections>
+                            </button>
+                            <box fixedFrame="YES" title="Log File" translatesAutoresizingMaskIntoConstraints="NO" id="lPo-Sr-NmA">
+                                <rect key="frame" x="17" y="91" width="416" height="152"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <view key="contentView" id="rDY-yK-EPr">
+                                    <rect key="frame" x="3" y="3" width="410" height="134"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Fua-59-zcl">
+                                            <rect key="frame" x="12" y="34" width="208" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="radio" title="Append to existing file content" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="sp5-3x-ppi">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="loggingRadioButtonChanged:" target="LSE-x8-mPF" id="MpH-aK-ui0"/>
+                                                <binding destination="LSE-x8-mPF" name="enabled" keyPath="representedObject.loggingEnabled" id="qBS-xu-gMc"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="nF1-Pi-ox0">
+                                            <rect key="frame" x="12" y="12" width="203" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="radio" title="Overwrite existing file content" bezelStyle="regularSquare" imagePosition="left" alignment="left" enabled="NO" inset="2" id="vMc-va-vaV">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="loggingRadioButtonChanged:" target="LSE-x8-mPF" id="ViM-Oe-8Vp"/>
+                                                <binding destination="LSE-x8-mPF" name="enabled" keyPath="representedObject.loggingEnabled" id="QAX-tk-UvE"/>
+                                            </connections>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ev1-Ch-GYD">
+                                            <rect key="frame" x="13" y="93" width="318" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="khx-8u-bzC">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="LSE-x8-mPF" name="enabled" keyPath="representedObject.loggingEnabled" id="xrh-K9-DHb"/>
+                                                <binding destination="LSE-x8-mPF" name="value" keyPath="self.logfilePath" id="z2h-L1-TGE">
+                                                    <dictionary key="options">
+                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7V2-7B-vSZ">
+                                            <rect key="frame" x="331" y="86" width="72" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="push" title="File…" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bD8-FJ-Za9">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="fileSaveAction:" target="LSE-x8-mPF" id="ZsP-8t-Lih"/>
+                                                <binding destination="LSE-x8-mPF" name="enabled" keyPath="representedObject.loggingEnabled" id="CEp-DN-KRq"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnH-vo-pUy">
+                                            <rect key="frame" x="11" y="58" width="141" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="When opening the file:" id="Aiv-eX-rH4">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </box>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="appendLoggingRadio" destination="Fua-59-zcl" id="wrr-cn-Eib"/>
+                        <outlet property="overwriteLoggingRadio" destination="nF1-Pi-ox0" id="iZV-QX-v5Q"/>
+                    </connections>
+                </viewController>
+                <customObject id="7Z6-4l-WKT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="B9m-h7-1Da"/>
+            </objects>
+            <point key="canvasLocation" x="-784" y="-10158"/>
         </scene>
     </scenes>
 </document>

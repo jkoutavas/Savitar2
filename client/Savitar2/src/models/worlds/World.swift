@@ -93,6 +93,8 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var position = NSPoint(x: 44, y: 0)
     @objc dynamic var windowSize = NSSize(width: 480, height: 270)
     @objc dynamic var zoomed = false
+
+    // v1.0 settings currently not in use in v2.0
     @objc dynamic var outputMax = 100 * 1024
     @objc dynamic var outputMin = 25 * 1024
     @objc dynamic var flushTicks = 30
@@ -120,6 +122,15 @@ class World: SavitarObject, NSCopying {
             }
         }
     }
+
+    // new v2.0 settings
+    @objc enum LoggingType: Int {
+        case append
+        case overwrite
+    }
+    var logfilePath = ""
+    @objc dynamic var loggingEnabled: ObjCBool = false
+    @objc dynamic var loggingType = LoggingType.append
 
     var flags: WorldFlags = [.ansi, .html]
     var intensityType: IntensityType = .auto
@@ -161,6 +172,11 @@ class World: SavitarObject, NSCopying {
         keepAliveMins = world.keepAliveMins
         logonCmd = world.logonCmd
         logoffCmd = world.logoffCmd
+
+        // new v2.0 settings
+        logfilePath = world.logfilePath
+        loggingEnabled = world.loggingEnabled
+        loggingType = world.loggingType
     }
 
     override init() {
@@ -220,16 +236,26 @@ class World: SavitarObject, NSCopying {
         case keepAliveMins = "KEEPALIVEMINS"
         case logonCmd = "LOGONCMD"
         case logoffCmd = "LOGOFFCMD"
+
+        // new with V2
+        case logfilePath = "LOGFILEPATH"
+        case loggingEnabled = "LOGGINGENABLED"
+        case loggingType = "LOGGINGTYPE"
     }
 
-    override func parse(xml: XML.Accessor) throws {
-        let intensityLabels: [String: IntensityType] = [
-            "auto": .auto,
-            "bold": .bold,
-            "color": .color
-        ]
+    let intensityLabelDict: [String: IntensityType] = [
+         "auto": .auto,
+         "bold": .bold,
+         "color": .color
+     ]
 
-        for attribute in xml.attributes {
+     let loggingLabelDict: [String: LoggingType] = [
+         "append": .append,
+         "overwrite": .overwrite
+     ]
+
+    override func parse(xml: XML.Accessor) throws {
+         for attribute in xml.attributes {
             switch attribute.key {
             case WorldAttribIdentifier.name.rawValue:
                 name = attribute.value
@@ -268,7 +294,7 @@ class World: SavitarObject, NSCopying {
 
             case WorldAttribIdentifier.intenseType.rawValue:
                 intensityType = .auto
-                if let type = intensityLabels[attribute.value] {
+                if let type = intensityLabelDict[attribute.value] {
                     // v2 uses a string description
                     intensityType = type
                 } else {
@@ -358,6 +384,17 @@ class World: SavitarObject, NSCopying {
                 if let value = Int(attribute.value) {
                     keepAliveMins = value
                 }
+
+            // new with V2
+            case WorldAttribIdentifier.logfilePath.rawValue:
+                 logfilePath = attribute.value
+            case WorldAttribIdentifier.loggingEnabled.rawValue:
+                loggingEnabled = ObjCBool(attribute.value == "TRUE")
+            case WorldAttribIdentifier.loggingType.rawValue:
+                 loggingType = .append
+                 if let type = loggingLabelDict[attribute.value] {
+                     loggingType = type
+                 }
 
             default:
                 print("skipping world XML attribute \(attribute.key)")
@@ -449,6 +486,15 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.retrySecs.rawValue, stringValue: String(retrySecs))
 
         worldElem.addAttribute(name: WorldAttribIdentifier.keepAliveMins.rawValue, stringValue: String(keepAliveMins))
+
+        // TODO: intenseType not being written (and is not used)
+
+        worldElem.addAttribute(name: WorldAttribIdentifier.logfilePath.rawValue,
+             stringValue: logfilePath)
+        worldElem.addAttribute(name: WorldAttribIdentifier.loggingEnabled.rawValue,
+                               stringValue: loggingEnabled.boolValue ? "TRUE" : "FALSE")
+        worldElem.addAttribute(name: WorldAttribIdentifier.loggingType.rawValue,
+             stringValue: loggingLabelDict.key(from: loggingType)!)
 
         if logonCmd.count > 0 {
             worldElem.addChild(XMLElement(name: LogonCmdElemIdentifier, stringValue:

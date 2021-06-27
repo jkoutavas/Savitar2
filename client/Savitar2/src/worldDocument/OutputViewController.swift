@@ -66,6 +66,10 @@ class OutputViewController: OutputViewNavigationDelegate {
         outputView.setStyle(world: world)
     }
 
+    func setLogging(world: World) {
+        outputView.setLogging(world: world)
+    }
+
     func printSource() {
         outputView.printSource()
     }

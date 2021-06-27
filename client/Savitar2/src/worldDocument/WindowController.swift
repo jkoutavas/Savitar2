@@ -41,6 +41,13 @@ class WindowController: NSWindowController, NSWindowDelegate {
         return windowTitle
     }
 
+    @IBAction func clearOutputAction(_: Any) {
+        let splitViewController = contentViewController as? SessionViewController
+        guard let svc = splitViewController else { return }
+        guard let outputVC = svc.outputViewController else { return }
+        outputVC.outputView.clear()
+    }
+
     @IBAction func showWorldEvents(_: Any) {
         if eventsWindowController != nil {
             eventsWindowController?.window?.makeKeyAndOrderFront(self)
@@ -61,13 +68,6 @@ class WindowController: NSWindowController, NSWindowDelegate {
             splitViewController.store = doc.store
             controller.showWindow(self)
         }
-    }
-
-    @IBAction func clearOutputAction(_: Any) {
-        let splitViewController = contentViewController as? SessionViewController
-        guard let svc = splitViewController else { return }
-        guard let outputVC = svc.outputViewController else { return }
-        outputVC.outputView.clear()
     }
 
     @IBAction func showWorldSetting(_: Any) {
@@ -125,7 +125,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
             inputVC.font = font
         }
 
+        outputVC.setLogging(world: w)
+
         guard let doc = document as? Document else { return }
+
         if doc.version == 1 {
             window.setContentSize(w.windowSize)
             if let screenSize = NSScreen.main?.frame.size {
