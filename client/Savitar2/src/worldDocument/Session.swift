@@ -126,7 +126,7 @@ class Session: NSObject, StreamDelegate {
 
     func sendData(data: Data) {
         let blockOperation = { [weak self] in
-            _ = data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+            data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
                 //               self?.logger.info("sendData: \(data.hexString)")
                 let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
                 self?.outputStream.write(bufferPointer.baseAddress!, maxLength: data.count)
