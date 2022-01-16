@@ -191,6 +191,17 @@ class OutputView: WKWebView {
         }
         .crossed-out {text-decoration: line-through;}
         .highlighted {filter: contrast(70%) brightness(190%);}
+
+        ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 16px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(255,255,255,1);
+            box-shadow: 0 0 1px rgba(0,0,0,.5);
+        }
+
         </style>
         """
 
