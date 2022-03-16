@@ -13,7 +13,7 @@ class OutputView: WKWebView {
     var useANSI = true
     var useHTML = false
 
-    private var loggingFileHandle : FileHandle?
+    private var loggingFileHandle: FileHandle?
 
     override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
         menu.removeAllItems()
