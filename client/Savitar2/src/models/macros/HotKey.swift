@@ -101,6 +101,9 @@ struct HotKey: Equatable {
         modifierFlags = HotKey.handleFlag(&label, "control-", .control, modifierFlags)
         modifierFlags = HotKey.handleFlag(&label, "option-", .option, modifierFlags)
         modifierFlags = HotKey.handleFlag(&label, "command-", .command, modifierFlags)
+        if label.contains("KP") {
+            modifierFlags.insert(.numericPad)
+        }
 
         // we do a "bijective" dictionary lookup
         // https://stackoverflow.com/questions/27218669/swift-dictionary-get-key-for-value
