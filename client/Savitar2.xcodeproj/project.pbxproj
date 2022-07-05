@@ -17,6 +17,8 @@
 		690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		690B462E23B16B54000445E4 /* StartupPreferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 690B462C23B16B54000445E4 /* StartupPreferences.xml */; };
 		691696D125A0CCC700569021 /* AppPreferencesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691696D025A0CCC700569021 /* AppPreferencesState.swift */; };
+		69241E4B2874677000CDDE09 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 69241E4A2874677000CDDE09 /* AppCenterAnalytics */; };
+		69241E4D2874677000CDDE09 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 69241E4C2874677000CDDE09 /* AppCenterCrashes */; };
 		69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69376D4E2579B01A00A99245 /* Collection+Extensions.swift */; };
 		6952048D24B1EFB2004BDBE2 /* HotKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */; };
 		695204C924B1F29E004BDBE2 /* Savitar2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */; };
@@ -311,8 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */,
+				69241E4D2874677000CDDE09 /* AppCenterCrashes in Frameworks */,
 				B95AD7509F50F626C209BE85 /* Pods_Savitar2.framework in Frameworks */,
 				6968381A2558FCC900F0BC20 /* Logging in Frameworks */,
+				69241E4B2874677000CDDE09 /* AppCenterAnalytics in Frameworks */,
 				69D6E5EF24B203CB00058D70 /* SwiftyXMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,6 +719,8 @@
 				69CEEDF223D6213900E9F087 /* ReSwift */,
 				69D6E5EE24B203CB00058D70 /* SwiftyXMLParser */,
 				696838192558FCC900F0BC20 /* Logging */,
+				69241E4A2874677000CDDE09 /* AppCenterAnalytics */,
+				69241E4C2874677000CDDE09 /* AppCenterCrashes */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
@@ -803,6 +809,7 @@
 				69CEEDF123D6213900E9F087 /* XCRemoteSwiftPackageReference "ReSwift" */,
 				69D6E5ED24B203CB00058D70 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 				696838182558FCC900F0BC20 /* XCRemoteSwiftPackageReference "swift-log" */,
+				69241E492874677000CDDE09 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -1450,6 +1457,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		69241E492874677000CDDE09 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		696838182558FCC900F0BC20 /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log.git";
@@ -1477,6 +1492,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		69241E4A2874677000CDDE09 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69241E492874677000CDDE09 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		69241E4C2874677000CDDE09 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69241E492874677000CDDE09 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
 		696838192558FCC900F0BC20 /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 696838182558FCC900F0BC20 /* XCRemoteSwiftPackageReference "swift-log" */;
