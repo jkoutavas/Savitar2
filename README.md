@@ -3,11 +3,14 @@
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 
-README last updated: June 27th, 2021
+README last updated: July 5th, 2022
 
-## Current state of the application
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
+
+Chronological [Software Design Notes](docs/Savitar2DevNotes.md) are available for viewing.
+
+## Current state of the application
 
 With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha). 
 
@@ -64,7 +67,7 @@ _ Address key things found in alpha test
 ### start of beta
 
 ```
-_ Move github repo to public
+√ Move github repo to public
 _ Start promoting the beta test
 _ Find/Find Next supported
 √ Logging support
@@ -142,21 +145,21 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build`
 
 ```
-     163 text files.
-     159 unique files.                                          
-      19 files ignored.
+     167 text files.
+     151 unique files.                                          
+      71 files ignored.
 
-github.com/AlDanial/cloc v 1.88  T=0.18 s (813.9 files/s, 89359.4 lines/s)
+github.com/AlDanial/cloc v 1.92  T=0.32 s (478.6 files/s, 53394.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          115           1773           1270           8160
-XML                             26              0             38           4622
-Markdown                         3             46              0            140
+Swift                          115           1773           1270           8162
+XML                             27              0             38           4758
+Markdown                         6            263              0            490
 JSON                             1              0              0             68
 YAML                             1              1              0              8
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           147           1823           1316          13001
+SUM:                           151           2040           1316          13489
 -------------------------------------------------------------------------------
 ```
