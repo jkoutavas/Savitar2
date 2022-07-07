@@ -1,10 +1,10 @@
 # Savitar v2.0
 
+Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
+
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
-
 README last updated: July 5th, 2022
-
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
