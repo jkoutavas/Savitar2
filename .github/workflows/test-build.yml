@@ -1,0 +1,63 @@
+name: Test Build
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos-test-build:
+    name: macOS unsigned test build
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show tool versions
+        run: |
+          xcodebuild -version
+          pod --version
+
+      - name: Generate CocoaPods support files
+        working-directory: client
+        run: pod install
+
+      - name: Resolve Swift packages
+        working-directory: client
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -workspace Savitar2.xcworkspace \
+            -scheme Savitar2 \
+            -derivedDataPath build
+
+      - name: Build for testing
+        working-directory: client
+        run: |
+          xcodebuild build-for-testing \
+            -workspace Savitar2.xcworkspace \
+            -scheme Savitar2 \
+            -destination 'platform=macOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            ONLY_ACTIVE_ARCH=YES
+
+      - name: Package unsigned app
+        working-directory: client/build/Build/Products/Debug
+        run: zip -r Savitar2-debug.zip Savitar2.app
+
+      - name: Upload unsigned app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Savitar2-debug-unsigned
+          path: client/build/Build/Products/Debug/Savitar2-debug.zip
