@@ -4,7 +4,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
-README last updated: July 5th, 2022
+README last updated: June 6th, 2026
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
@@ -12,7 +12,7 @@ Chronological [Software Design Notes](docs/Savitar2DevNotes.md) are available fo
 
 ## Current state of the application
 
-With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha). 
+With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha).
 
 Although the first release of Savitar 2.0 is aimed at feature parity with current production Savitar, v1.6.3, future releases of Savitar 2 will start taking advantages with all the goodies of having an HTML engine for output.
 
@@ -38,7 +38,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Implement input pane command recall
 √ New world onboarding
 √ Implement Continuous Speech (using new AVSpeechSynthesizer)
-_ Implement the start of local commands, ##history
+~ Implement the start of local commands, ##history
 _ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 √ Implement audio cue triggers
@@ -96,7 +96,7 @@ _ ???
 
 ## How to setup development
 
-In the `client` directory you'll find `Savitar2.xcworkspace`. 
+In the `client` directory you'll find `Savitar2.xcworkspace`.
 
 You'll want to `brew install swiftlint` to ensure coding style correctness.
 
@@ -136,7 +136,7 @@ $ swiftformat .
 There's already a `.swiftformat` config file that contains this:
 
 ```
---swiftversion 5 
+--swiftversion 5
 --disable wrapMultilineStatementBraces, trailingCommas
 ```
 
@@ -146,7 +146,7 @@ There's already a `.swiftformat` config file that contains this:
 
 ```
      167 text files.
-     151 unique files.                                          
+     151 unique files.
       71 files ignored.
 
 github.com/AlDanial/cloc v 1.92  T=0.32 s (478.6 files/s, 53394.6 lines/s)
