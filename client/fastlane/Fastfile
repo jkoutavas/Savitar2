@@ -1,0 +1,95 @@
+require "shellwords"
+
+default_platform(:mac)
+
+PROJECT_ROOT = File.expand_path("..", __dir__)
+WORKSPACE = "Savitar2.xcworkspace"
+SCHEME = "Savitar2"
+BUILD_DIR = "build/fastlane"
+RELEASE_DIR = "fastlane/release"
+ARCHIVE_PATH = "#{BUILD_DIR}/Savitar2.xcarchive"
+APP_PATH = "#{ARCHIVE_PATH}/Products/Applications/Savitar2.app"
+ZIP_PATH = "#{RELEASE_DIR}/Savitar2.zip"
+
+def require_env!(name)
+  value = ENV[name]
+  UI.user_error!("Missing required environment variable: #{name}") if value.to_s.empty?
+  value
+end
+
+def run_pod_install
+  Dir.chdir(PROJECT_ROOT) do
+    sh("bundle exec pod install")
+  end
+end
+
+platform :mac do
+  desc "Build the app locally without signing, matching the pull request test build."
+  lane :test_build do
+    run_pod_install
+
+    sh(
+      "xcodebuild build-for-testing " \
+      "-workspace #{WORKSPACE.shellescape} " \
+      "-scheme #{SCHEME.shellescape} " \
+      "-destination 'platform=macOS' " \
+      "-derivedDataPath #{BUILD_DIR.shellescape} " \
+      "CODE_SIGNING_ALLOWED=NO " \
+      "CODE_SIGNING_REQUIRED=NO " \
+      "CODE_SIGN_IDENTITY='' " \
+      "ONLY_ACTIVE_ARCH=YES"
+    )
+  end
+
+  desc "Create a Developer ID signed release archive and zip it for notarization."
+  lane :release_archive do
+    team_id = require_env!("APPLE_TEAM_ID")
+    signing_identity = require_env!("DEVELOPER_ID_APPLICATION")
+
+    run_pod_install
+    sh("rm -rf #{ARCHIVE_PATH.shellescape} #{ZIP_PATH.shellescape}")
+    sh("mkdir -p #{RELEASE_DIR.shellescape}")
+
+    sh(
+      "xcodebuild archive " \
+      "-workspace #{WORKSPACE.shellescape} " \
+      "-scheme #{SCHEME.shellescape} " \
+      "-configuration Release " \
+      "-archivePath #{ARCHIVE_PATH.shellescape} " \
+      "-destination 'generic/platform=macOS' " \
+      "CODE_SIGN_STYLE=Manual " \
+      "DEVELOPMENT_TEAM=#{team_id.shellescape} " \
+      "CODE_SIGN_IDENTITY=#{signing_identity.shellescape}"
+    )
+
+    sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+    UI.success("Created #{ZIP_PATH}")
+  end
+
+  desc "Submit the release zip to Apple notarization and staple the accepted ticket."
+  lane :notarize do
+    key_id = require_env!("APP_STORE_CONNECT_KEY_ID")
+    issuer_id = require_env!("APP_STORE_CONNECT_ISSUER_ID")
+    key_path = require_env!("APP_STORE_CONNECT_KEY_PATH")
+
+    UI.user_error!("Missing release zip. Run `bundle exec fastlane release_archive` first.") unless File.exist?(ZIP_PATH)
+
+    sh(
+      "xcrun notarytool submit #{ZIP_PATH.shellescape} " \
+      "--key #{key_path.shellescape} " \
+      "--key-id #{key_id.shellescape} " \
+      "--issuer #{issuer_id.shellescape} " \
+      "--wait"
+    )
+
+    sh("xcrun stapler staple #{APP_PATH.shellescape}")
+    sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+    UI.success("Notarized, stapled, and repackaged #{ZIP_PATH}")
+  end
+
+  desc "Build, notarize, staple, and package a local release zip."
+  lane :release do
+    release_archive
+    notarize
+  end
+end
