@@ -20,4 +20,5 @@ protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
     func printSource()
+    func commandHistory() -> [String]
 }
