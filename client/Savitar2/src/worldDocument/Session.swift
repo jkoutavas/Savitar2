@@ -140,9 +140,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     func submitServerCmd(cmd: Command) {
-        // TODO: build out actual local command handler
-        if cmd.cmdStr == "##dump" {
-            sessionHandler.printSource()
+        if handleLocalCommand(cmd) {
             return
         }
 
@@ -153,6 +151,46 @@ class Session: NSObject, StreamDelegate {
             acceptedText(text: "\n")
         }
         sendString(string: str)
+    }
+
+    private func handleLocalCommand(_ cmd: Command) -> Bool {
+        let trimmedCmd = cmd.cmdStr.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !world.cmdMarker.isEmpty else { return false }
+        guard trimmedCmd.hasPrefix(world.cmdMarker) else { return false }
+
+        let localCmd = trimmedCmd.dropFirst(world.cmdMarker.count)
+        guard let commandName = localCmd.split(separator: " ").first?.lowercased() else {
+            localCommandOutput("Unknown local command: \(trimmedCmd)\n")
+            return true
+        }
+
+        switch commandName {
+        case "dump":
+            sessionHandler.printSource()
+        case "history":
+            localCommandOutput(commandHistoryText())
+        default:
+            localCommandOutput("Unknown local command: \(trimmedCmd)\n")
+        }
+        return true
+    }
+
+    private func commandHistoryText() -> String {
+        let history = sessionHandler.commandHistory()
+        guard history.count > 0 else {
+            return "[SAVITAR] No command history.\n"
+        }
+
+        let width = String(history.count).count
+        let lines = history.enumerated().map { index, command -> String in
+            let number = String(format: "%\(width)d", index + 1)
+            return "\(number)  \(command)"
+        }
+        return "[SAVITAR] Command history:\n\(lines.joined(separator: "\n"))\n"
+    }
+
+    private func localCommandOutput(_ text: String) {
+        sessionHandler.output(result: .success(text))
     }
 
     private func process(buffer: [UInt8], length: Int) -> Data {

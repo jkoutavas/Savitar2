@@ -715,15 +715,43 @@ Gw
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3dR-YY-jYP" secondAttribute="trailing" constant="20" symbolic="YES" id="lhr-m1-cVA"/>
                                         <constraint firstItem="3dR-YY-jYP" firstAttribute="top" secondItem="hzS-Ik-R70" secondAttribute="bottom" constant="6" symbolic="YES" id="udA-gv-SYR"/>
                                         <constraint firstAttribute="bottom" secondItem="3dR-YY-jYP" secondAttribute="bottom" constant="18" id="wkf-2b-Wlh"/>
-                                    </constraints>
-                                </view>
-                            </box>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="gHN-R6-fEk" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" symbolic="YES" id="JL1-gq-Usm"/>
-                            <constraint firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" constant="20" symbolic="YES" id="iNa-3u-gRc"/>
-                            <constraint firstItem="gHN-R6-fEk" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" symbolic="YES" id="mBj-gc-ben"/>
-                        </constraints>
+	                                    </constraints>
+	                                </view>
+	                            </box>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-sS-92T">
+                                        <rect key="frame" x="18" y="126" width="116" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Command marker:" id="euq-gd-X9S">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yui-BG-0lR">
+                                        <rect key="frame" x="140" y="123" width="64" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="NjQ-el-c5k">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="qY0-Es-dDb" name="value" keyPath="self.cmdMarker" id="QyU-Zg-ZAo">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </textField>
+	                        </subviews>
+	                        <constraints>
+	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" symbolic="YES" id="JL1-gq-Usm"/>
+		                            <constraint firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" constant="20" symbolic="YES" id="iNa-3u-gRc"/>
+	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" symbolic="YES" id="mBj-gc-ben"/>
+	                        </constraints>
                     </view>
                     <connections>
                         <outlet property="echoAllRadio" destination="3dR-YY-jYP" id="MGV-qZ-tyx"/>

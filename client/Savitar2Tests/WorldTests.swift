@@ -145,4 +145,89 @@ class WorldTests: XCTestCase {
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
+
+    func testCommandMarkerRoundTripsThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            CMDMARKER="//"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertEqual(world.cmdMarker, "//")
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"//\""))
+    }
+}
+
+private class MockSessionHandler: SessionHandlerProtocol {
+    var outputs: [String] = []
+    var errors: [String] = []
+    var printedSource = false
+    var history: [String] = []
+
+    func connectionStatusChanged(status _: ConnectionStatus) {}
+
+    func output(result: OutputResult) {
+        switch result {
+        case let .success(output):
+            outputs.append(output)
+        case let .error(error):
+            errors.append(error)
+        }
+    }
+
+    func printSource() {
+        printedSource = true
+    }
+
+    func commandHistory() -> [String] {
+        return history
+    }
+}
+
+class SessionLocalCommandTests: XCTestCase {
+    func testHistoryCommandPrintsCommandHistory() {
+        let world = World()
+        let handler = MockSessionHandler()
+        handler.history = ["look", "say hello", "##history"]
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##history"))
+
+        XCTAssertEqual(handler.outputs, [
+            "[SAVITAR] Command history:\n1  look\n2  say hello\n3  ##history\n"
+        ])
+        XCTAssertTrue(handler.errors.isEmpty)
+        XCTAssertFalse(handler.printedSource)
+    }
+
+    func testHistoryCommandUsesWorldCommandMarker() {
+        let world = World()
+        world.cmdMarker = "//"
+        let handler = MockSessionHandler()
+        handler.history = ["//history"]
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "//history"))
+
+        XCTAssertEqual(handler.outputs, ["[SAVITAR] Command history:\n1  //history\n"])
+    }
+
+    func testDumpCommandUsesLocalCommandDispatcher() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##dump"))
+
+        XCTAssertTrue(handler.printedSource)
+        XCTAssertTrue(handler.outputs.isEmpty)
+    }
 }

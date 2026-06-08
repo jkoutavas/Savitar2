@@ -190,6 +190,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         textView.string = cmd.cmdStr
     }
 
+    func commandHistory() -> [String] {
+        return cmdBuf.map { $0.cmdStr }.filter { !$0.isEmpty }
+    }
+
     func saveCmd() -> Bool {
         let newCmd: Command! = textToCmd()
 

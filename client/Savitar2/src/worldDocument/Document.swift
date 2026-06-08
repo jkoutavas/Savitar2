@@ -140,6 +140,12 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         outputVC.printSource()
     }
 
+    func commandHistory() -> [String] {
+        guard let svc = sessionViewController else { return [] }
+        guard let inputVC = svc.inputViewController else { return [] }
+        return inputVC.commandHistory()
+    }
+
     // ***************************
 
     // MARK: - SavitarXMLProtocol
