@@ -6,6 +6,7 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
+import Cocoa
 import SwiftyXMLParser
 import XCTest
 
@@ -164,6 +165,25 @@ class WorldTests: XCTestCase {
         let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
         XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"//\""))
     }
+
+    func testStickyCommandsRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            FLAGS="html+ansi+stickyCmds"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertTrue(world.flags.contains(.stickyCmds))
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("FLAGS=\"ansi+html+stickyCmds\""))
+    }
 }
 
 private class MockSessionHandler: SessionHandlerProtocol {
@@ -229,5 +249,35 @@ class SessionLocalCommandTests: XCTestCase {
 
         XCTAssertTrue(handler.printedSource)
         XCTAssertTrue(handler.outputs.isEmpty)
+    }
+}
+
+class StickyCommandInputTests: XCTestCase {
+    func testTypingOverStickyCommandStartsFreshHistorySlot() {
+        let world = World()
+        world.flags.insert(.stickyCmds)
+        let handler = MockSessionHandler()
+        let inputController = InputViewController()
+        inputController.textView = NSTextView()
+        let session = Session(world: world, sessionHandler: handler)
+        inputController.session = session
+        inputController.newCmd()
+
+        inputController.textView.string = "look"
+        inputController.cmdIndex = inputController.cmdBuf.count
+        XCTAssertTrue(inputController.saveCmd())
+
+        inputController.textView.selectAll(nil)
+        inputController.stickyGotSaved = true
+
+        let shouldChange = inputController.textView(inputController.textView,
+                                                    shouldChangeTextIn: NSRange(location: 0, length: 4),
+                                                    replacementString: "say")
+
+        XCTAssertFalse(shouldChange)
+        XCTAssertEqual(inputController.textView.string, "say")
+        XCTAssertEqual(inputController.commandHistory(), ["look"])
+        XCTAssertEqual(inputController.cmdBuf.count, 2)
+        XCTAssertEqual(inputController.cmdIndex, 2)
     }
 }
