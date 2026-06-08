@@ -718,56 +718,38 @@ Gw
 	                                    </constraints>
 	                                </view>
 	                            </box>
-	                            <box title="Markers" translatesAutoresizingMaskIntoConstraints="NO" id="5wt-A7-eOb">
-	                                <rect key="frame" x="17" y="87" width="416" height="65"/>
-	                                <view key="contentView" id="jff-07-uCO">
-	                                    <rect key="frame" x="3" y="3" width="410" height="47"/>
-	                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-	                                    <subviews>
-	                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-sS-92T">
-	                                            <rect key="frame" x="18" y="15" width="120" height="17"/>
-	                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Command marker:" id="euq-gd-X9S">
-	                                                <font key="font" metaFont="system"/>
-	                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-	                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-	                                            </textFieldCell>
-	                                        </textField>
-	                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yui-BG-0lR">
-	                                            <rect key="frame" x="145" y="12" width="64" height="22"/>
-	                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="NjQ-el-c5k">
-	                                                <font key="font" metaFont="system"/>
-	                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-	                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-	                                            </textFieldCell>
-	                                            <connections>
-	                                                <binding destination="qY0-Es-dDb" name="value" keyPath="self.cmdMarker" id="QyU-Zg-ZAo">
-	                                                    <dictionary key="options">
-	                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-	                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
-	                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-	                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-	                                                    </dictionary>
-	                                                </binding>
-	                                            </connections>
-	                                        </textField>
-	                                    </subviews>
-	                                    <constraints>
-	                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yui-BG-0lR" secondAttribute="trailing" constant="20" symbolic="YES" id="3gu-y2-nbI"/>
-	                                        <constraint firstItem="iqH-sS-92T" firstAttribute="leading" secondItem="jff-07-uCO" secondAttribute="leading" constant="20" symbolic="YES" id="6wF-14-Vtj"/>
-	                                        <constraint firstItem="yui-BG-0lR" firstAttribute="centerY" secondItem="iqH-sS-92T" secondAttribute="centerY" id="B15-r8-dgq"/>
-	                                        <constraint firstItem="yui-BG-0lR" firstAttribute="leading" secondItem="iqH-sS-92T" secondAttribute="trailing" constant="10" id="D9o-Yu-Yhw"/>
-	                                        <constraint firstItem="iqH-sS-92T" firstAttribute="centerY" secondItem="jff-07-uCO" secondAttribute="centerY" id="VmI-i0-XTR"/>
-	                                        <constraint firstItem="yui-BG-0lR" firstAttribute="width" constant="64" id="fg6-Ri-TXh"/>
-	                                    </constraints>
-	                                </view>
-	                            </box>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-sS-92T">
+                                        <rect key="frame" x="18" y="126" width="116" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Command marker:" id="euq-gd-X9S">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yui-BG-0lR">
+                                        <rect key="frame" x="140" y="123" width="64" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="NjQ-el-c5k">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="qY0-Es-dDb" name="value" keyPath="self.cmdMarker" id="QyU-Zg-ZAo">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </textField>
 	                        </subviews>
 	                        <constraints>
 	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" symbolic="YES" id="JL1-gq-Usm"/>
-	                            <constraint firstItem="5wt-A7-eOb" firstAttribute="top" secondItem="gHN-R6-fEk" secondAttribute="bottom" constant="20" id="Via-4h-tCJ"/>
-	                            <constraint firstItem="5wt-A7-eOb" firstAttribute="leading" secondItem="gHN-R6-fEk" secondAttribute="leading" id="ifk-NE-XdC"/>
-	                            <constraint firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" constant="20" symbolic="YES" id="iNa-3u-gRc"/>
-	                            <constraint firstItem="5wt-A7-eOb" firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" id="kf2-z4-S92"/>
+		                            <constraint firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" constant="20" symbolic="YES" id="iNa-3u-gRc"/>
 	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" symbolic="YES" id="mBj-gc-ben"/>
 	                        </constraints>
                     </view>
