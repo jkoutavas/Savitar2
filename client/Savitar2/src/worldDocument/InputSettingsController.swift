@@ -13,6 +13,17 @@ class InputSettingsController: NSViewController {
     @IBOutlet var echoCROnlyRadio: NSButton!
     @IBOutlet var echoAllRadio: NSButton!
 
+    @objc dynamic var cmdMarker: String {
+        get {
+            guard let world = representedObject as? World else { return "##" }
+            return world.cmdMarker
+        }
+        set(value) {
+            guard let world = representedObject as? World else { return }
+            world.cmdMarker = value
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

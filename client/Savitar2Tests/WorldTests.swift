@@ -145,6 +145,25 @@ class WorldTests: XCTestCase {
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
+
+    func testCommandMarkerRoundTripsThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            CMDMARKER="//"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertEqual(world.cmdMarker, "//")
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"//\""))
+    }
 }
 
 private class MockSessionHandler: SessionHandlerProtocol {
