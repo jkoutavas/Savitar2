@@ -62,6 +62,19 @@ class OutputViewController: OutputViewNavigationDelegate {
         }
     }
 
+    var isScrollLocked: Bool {
+        return outputView.isScrollLocked
+    }
+
+    func setScrollLocked(_ locked: Bool) {
+        outputView.setScrollLocked(locked)
+    }
+
+    @discardableResult
+    func toggleScrollLock() -> Bool {
+        return outputView.toggleScrollLock()
+    }
+
     func setStyle(world: World) {
         outputView.setStyle(world: world)
     }

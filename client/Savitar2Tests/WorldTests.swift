@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftyXMLParser
+import WebKit
 import XCTest
 
 @testable import Savitar2
@@ -279,5 +280,22 @@ class StickyCommandInputTests: XCTestCase {
         XCTAssertEqual(inputController.commandHistory(), ["look"])
         XCTAssertEqual(inputController.cmdBuf.count, 2)
         XCTAssertEqual(inputController.cmdIndex, 2)
+    }
+}
+
+class OutputViewScrollLockTests: XCTestCase {
+    func testScrollLockSuppressesAutoScrollJavaScript() {
+        let outputView = OutputView(frame: .zero, configuration: WKWebViewConfiguration())
+
+        XCTAssertFalse(outputView.isScrollLocked)
+        XCTAssertTrue(outputView.scrollToBottomJavaScript().contains("scrollTo"))
+
+        XCTAssertTrue(outputView.toggleScrollLock())
+        XCTAssertTrue(outputView.isScrollLocked)
+        XCTAssertEqual(outputView.scrollToBottomJavaScript(), "")
+
+        outputView.setScrollLocked(false)
+        XCTAssertFalse(outputView.isScrollLocked)
+        XCTAssertTrue(outputView.scrollToBottomJavaScript().contains("scrollTo"))
     }
 }

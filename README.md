@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last Updated June 8th, 2026_
+_README last Updated June 27th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
 
@@ -55,7 +55,7 @@ _ Implement World settings Starting tab
 √ Connect/disconnect session handling
 _ Implement remaining World settings tabs
 _ Implement remaining local commands
-_ Implement scroll locking
+√ Implement scroll locking
 _ Menubar finalized
 √ Text Editing menu items finalized
 _ Add check for updates support (Sparkle?)

@@ -12,8 +12,26 @@ class OutputView: WKWebView {
     var ansiToHtml = Ansi2HtmlParser()
     var useANSI = true
     var useHTML = false
+    private(set) var isScrollLocked = false
 
     private var loggingFileHandle: FileHandle?
+
+    func setScrollLocked(_ locked: Bool) {
+        isScrollLocked = locked
+    }
+
+    @discardableResult
+    func toggleScrollLock() -> Bool {
+        isScrollLocked.toggle()
+        return isScrollLocked
+    }
+
+    func scrollToBottomJavaScript() -> String {
+        guard !isScrollLocked else { return "" }
+        return """
+        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        """
+    }
 
     override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
         menu.removeAllItems()
@@ -31,7 +49,7 @@ class OutputView: WKWebView {
     func clear() {
         let js = """
         document.body.innerHTML = ''
-        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        \(scrollToBottomJavaScript())
         """
         run(javaScript: js)
     }
@@ -91,7 +109,7 @@ class OutputView: WKWebView {
             } else {
                 webkit.messageHandlers.logging.postMessage("failed to append text \(html) at \(appendID)");
             }
-            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            \(scrollToBottomJavaScript())
             """
             run(javaScript: js)
         } else {
@@ -103,7 +121,7 @@ class OutputView: WKWebView {
             i.setAttribute('class', 'reset bg-reset');
             i.innerHTML=\"\(pre)\(html)</pre>\";
             document.body.appendChild(i);
-            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            \(scrollToBottomJavaScript())
             """
             run(javaScript: js)
         }

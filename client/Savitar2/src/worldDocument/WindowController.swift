@@ -9,8 +9,13 @@
 import Cocoa
 
 class WindowController: NSWindowController, NSWindowDelegate {
+    private static let scrollLockButtonTag = 1001
+    private static let eventsButtonTag = 1002
+    private static let settingsButtonTag = 1003
+
     internal var reallyClosing = false
     private var eventsWindowController: NSWindowController?
+    private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
 
     override func windowDidLoad() {
@@ -21,7 +26,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
-        window?.addTitlebarAccessoryViewController(titlebarController!)
+        if let titlebarController = titlebarController {
+            configureTitlebarButtons(in: titlebarController.view)
+            window?.addTitlebarAccessoryViewController(titlebarController)
+        }
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -46,6 +54,16 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let svc = splitViewController else { return }
         guard let outputVC = svc.outputViewController else { return }
         outputVC.outputView.clear()
+    }
+
+    @IBAction func toggleScrollLockAction(_ sender: Any) {
+        let splitViewController = contentViewController as? SessionViewController
+        guard let svc = splitViewController else { return }
+        let locked = svc.toggleScrollLock()
+        updateScrollLockControl(locked: locked)
+        if let menuItem = sender as? NSMenuItem {
+            menuItem.state = locked ? .on : .off
+        }
     }
 
     @IBAction func showWorldEvents(_: Any) {
@@ -145,6 +163,125 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
 
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
+        updateScrollLockControl(locked: svc.isScrollLocked)
+    }
+
+    private func configureTitlebarButtons(in titlebarView: NSView) {
+        guard let button = titlebarView.viewWithTag(Self.scrollLockButtonTag) as? NSButton else { return }
+        configureTitlebarButton(button,
+                                action: #selector(toggleScrollLockAction(_:)),
+                                image: Self.lockIcon(locked: false),
+                                alternateImage: Self.lockIcon(locked: true),
+                                label: "Scroll Lock")
+        scrollLockButton = button
+        updateScrollLockControl(locked: false)
+
+        if let eventsButton = titlebarView.viewWithTag(Self.eventsButtonTag) as? NSButton {
+            configureTitlebarButton(eventsButton,
+                                    action: #selector(showWorldEvents(_:)),
+                                    image: Self.eventsIcon(),
+                                    alternateImage: nil,
+                                    label: "World Events")
+        }
+
+        if let settingsButton = titlebarView.viewWithTag(Self.settingsButtonTag) as? NSButton {
+            configureTitlebarButton(settingsButton,
+                                    action: #selector(showWorldSetting(_:)),
+                                    image: Self.settingsIcon(),
+                                    alternateImage: nil,
+                                    label: "World Settings")
+        }
+    }
+
+    private func configureTitlebarButton(_ button: NSButton,
+                                         action: Selector,
+                                         image: NSImage,
+                                         alternateImage: NSImage?,
+                                         label: String) {
+        button.target = self
+        button.action = action
+        button.title = ""
+        button.image = image
+        button.alternateImage = alternateImage
+        button.imagePosition = .imageOnly
+        button.toolTip = label
+        button.setAccessibilityLabel(label)
+        button.bezelStyle = .texturedRounded
+        button.imageScaling = .scaleProportionallyDown
+    }
+
+    private func updateScrollLockControl(locked: Bool) {
+        scrollLockButton?.state = locked ? .on : .off
+        scrollLockButton?.toolTip = locked ? "Scroll lock is on" : "Scroll lock is off"
+        scrollLockButton?.setAccessibilityValue(locked ? "On" : "Off")
+    }
+
+    private static func iconImage(_ drawing: @escaping (NSRect) -> Void) -> NSImage {
+        let image = NSImage(size: NSSize(width: 16, height: 16), flipped: false) { rect in
+            NSColor.black.setFill()
+            NSColor.black.setStroke()
+            drawing(rect)
+            return true
+        }
+        image.isTemplate = true
+        return image
+    }
+
+    private static func lockIcon(locked: Bool) -> NSImage {
+        return iconImage { _ in
+            let body = NSBezierPath(roundedRect: NSRect(x: 3, y: 1.8, width: 10, height: 7.6),
+                                    xRadius: 1.3,
+                                    yRadius: 1.3)
+            body.fill()
+
+            let shackle = NSBezierPath()
+            shackle.lineWidth = 2
+            shackle.lineCapStyle = .round
+            shackle.move(to: NSPoint(x: locked ? 5 : 6.5, y: 8.4))
+            shackle.line(to: NSPoint(x: locked ? 5 : 6.5, y: 10.9))
+            shackle.curve(to: NSPoint(x: locked ? 11 : 13.2, y: 10.9),
+                          controlPoint1: NSPoint(x: locked ? 5 : 6.5, y: 14),
+                          controlPoint2: NSPoint(x: locked ? 11 : 13.2, y: 14))
+            shackle.line(to: NSPoint(x: locked ? 11 : 13.2, y: locked ? 8.4 : 10.4))
+            shackle.stroke()
+        }
+    }
+
+    private static func eventsIcon() -> NSImage {
+        return iconImage { _ in
+            let bolt = NSBezierPath()
+            bolt.move(to: NSPoint(x: 9.2, y: 15))
+            bolt.line(to: NSPoint(x: 3.8, y: 7.3))
+            bolt.line(to: NSPoint(x: 8.1, y: 7.3))
+            bolt.line(to: NSPoint(x: 6.5, y: 1))
+            bolt.line(to: NSPoint(x: 12.4, y: 9.1))
+            bolt.line(to: NSPoint(x: 8, y: 9.1))
+            bolt.close()
+            bolt.fill()
+        }
+    }
+
+    private static func settingsIcon() -> NSImage {
+        return iconImage { _ in
+            let center = NSPoint(x: 8, y: 8)
+            let teeth = 8
+            let path = NSBezierPath()
+            for index in 0..<(teeth * 2) {
+                let angle = CGFloat(index) * .pi / CGFloat(teeth) - .pi / 2
+                let radius: CGFloat = index.isMultiple(of: 2) ? 7 : 5.3
+                let point = NSPoint(x: center.x + cos(angle) * radius,
+                                    y: center.y + sin(angle) * radius)
+                if index == 0 {
+                    path.move(to: point)
+                } else {
+                    path.line(to: point)
+                }
+            }
+            path.close()
+            path.appendOval(in: NSRect(x: 5.4, y: 5.4, width: 5.2, height: 5.2))
+            path.windingRule = .evenOdd
+            path.fill()
+        }
     }
 
     func reallyClose() {
@@ -184,5 +321,15 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
 
         return false // this shouldn't ever be reached
+    }
+}
+
+extension WindowController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(toggleScrollLockAction(_:)) {
+            let splitViewController = contentViewController as? SessionViewController
+            menuItem.state = splitViewController?.isScrollLocked == true ? .on : .off
+        }
+        return true
     }
 }

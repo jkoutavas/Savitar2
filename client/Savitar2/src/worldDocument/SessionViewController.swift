@@ -45,4 +45,17 @@ class SessionViewController: NSSplitViewController {
         }
         return vc
     }
+
+    var isScrollLocked: Bool {
+        return outputViewController?.isScrollLocked ?? false
+    }
+
+    @discardableResult
+    func toggleScrollLock() -> Bool {
+        return outputViewController?.toggleScrollLock() ?? false
+    }
+
+    func setScrollLocked(_ locked: Bool) {
+        outputViewController?.setScrollLocked(locked)
+    }
 }
