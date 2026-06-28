@@ -91,6 +91,11 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         guard let sess = session else { return false }
         if sess.expandKeypress(with: event) { return true }
 
+        if event.modifierFlags.contains(.control), event.keyCode == Keycode.s {
+            toggleScrollLock()
+            return true
+        }
+
         // swiftlint:disable force_cast
         guard let doc = locWindow.windowController?.document as! Document? else { return false }
         doc.suppressChangeCount = true
@@ -165,6 +170,11 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         }
 
         return true
+    }
+
+    private func toggleScrollLock() {
+        guard let windowController = view.window?.windowController as? WindowController else { return }
+        windowController.toggleScrollLockAction(self)
     }
 
     func newCmd() {

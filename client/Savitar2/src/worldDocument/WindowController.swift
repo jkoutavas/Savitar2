@@ -9,8 +9,11 @@
 import Cocoa
 
 class WindowController: NSWindowController, NSWindowDelegate {
+    private static let scrollLockButtonTag = 1001
+
     internal var reallyClosing = false
     private var eventsWindowController: NSWindowController?
+    private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
 
     override func windowDidLoad() {
@@ -21,7 +24,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
             as? NSTitlebarAccessoryViewController
         titlebarController?.layoutAttribute = .right
         // layoutAttribute has to be set before added to window
-        window?.addTitlebarAccessoryViewController(titlebarController!)
+        if let titlebarController = titlebarController {
+            configureScrollLockButton(in: titlebarController.view)
+            window?.addTitlebarAccessoryViewController(titlebarController)
+        }
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -46,6 +52,16 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let svc = splitViewController else { return }
         guard let outputVC = svc.outputViewController else { return }
         outputVC.outputView.clear()
+    }
+
+    @IBAction func toggleScrollLockAction(_ sender: Any) {
+        let splitViewController = contentViewController as? SessionViewController
+        guard let svc = splitViewController else { return }
+        let locked = svc.toggleScrollLock()
+        updateScrollLockControl(locked: locked)
+        if let menuItem = sender as? NSMenuItem {
+            menuItem.state = locked ? .on : .off
+        }
     }
 
     @IBAction func showWorldEvents(_: Any) {
@@ -145,6 +161,24 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
 
         splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
+        updateScrollLockControl(locked: svc.isScrollLocked)
+    }
+
+    private func configureScrollLockButton(in titlebarView: NSView) {
+        guard let button = titlebarView.viewWithTag(Self.scrollLockButtonTag) as? NSButton else { return }
+        button.target = self
+        button.action = #selector(toggleScrollLockAction(_:))
+        button.image = NSImage(named: NSImage.Name("NSLockUnlockedTemplate"))
+        button.alternateImage = NSImage(named: NSImage.Name("NSLockLockedTemplate"))
+        button.imagePosition = .imageOnly
+        button.setButtonType(.toggle)
+        scrollLockButton = button
+        updateScrollLockControl(locked: false)
+    }
+
+    private func updateScrollLockControl(locked: Bool) {
+        scrollLockButton?.state = locked ? .on : .off
+        scrollLockButton?.toolTip = locked ? "Scroll lock is on" : "Scroll lock is off"
     }
 
     func reallyClose() {
@@ -184,5 +218,15 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
 
         return false // this shouldn't ever be reached
+    }
+}
+
+extension WindowController: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(toggleScrollLockAction(_:)) {
+            let splitViewController = contentViewController as? SessionViewController
+            menuItem.state = splitViewController?.isScrollLocked == true ? .on : .off
+        }
+        return true
     }
 }
