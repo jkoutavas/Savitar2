@@ -13,6 +13,21 @@ class InputSettingsController: NSViewController {
     @IBOutlet var echoCROnlyRadio: NSButton!
     @IBOutlet var echoAllRadio: NSButton!
 
+    @objc dynamic var stickyCommands: Bool {
+        get {
+            guard let world = representedObject as? World else { return false }
+            return world.flags.contains(.stickyCmds)
+        }
+        set(value) {
+            guard let world = representedObject as? World else { return }
+            if value {
+                world.flags.insert(.stickyCmds)
+            } else {
+                world.flags.remove(.stickyCmds)
+            }
+        }
+    }
+
     @objc dynamic var cmdMarker: String {
         get {
             guard let world = representedObject as? World else { return "##" }

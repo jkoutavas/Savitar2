@@ -18,6 +18,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     internal let MAX_CMD_COUNT = 100
     internal var cmdBuf: [Command] = []
     internal var cmdIndex: Int = 0 // 0 == nothing in the command buffer. [1..MAX_CMD_COUNT] is 0-based array index +1
+    internal var stickyGotSaved = false
 
     internal var eventMonitor: Any?
 
@@ -102,7 +103,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             }
 
             var wasSaved = false
-            let stickyCmd = false // TODO: mConnection->GetWorld()->UseStickyCommands()
+            let stickyCmd = sess.world.flags.contains(.stickyCmds)
 
             if getTextLength() > 0 {
                 // save away the original command
@@ -129,6 +130,9 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
             if !stickyCmd {
                 prepareForNewCommand(wasSaved)
+            } else {
+                stickyGotSaved = true
+                textView.selectAll(nil)
             }
 
         case Keycode.upArrow:
@@ -226,6 +230,19 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     // MARK: - NSTextViewDelegate
 
     // **************************************
+
+    func textView(_: NSTextView, shouldChangeTextIn affectedCharRange: NSRange,
+                  replacementString: String?) -> Bool {
+        guard session?.world.flags.contains(.stickyCmds) == true,
+              affectedCharRange.location == 0,
+              affectedCharRange.length > 0,
+              let replacementString = replacementString,
+              !replacementString.isEmpty else { return true }
+
+        prepareForNewCommand(stickyGotSaved)
+        textView.insertText(replacementString, replacementRange: NSRange(location: 0, length: 0))
+        return false
+    }
 
     func textView(_: NSTextView, menu _: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
         // No contextual menu for our input view please

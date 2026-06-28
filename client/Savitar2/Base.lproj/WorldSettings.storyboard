@@ -746,6 +746,24 @@ Gw
                                             </binding>
                                         </connections>
                                     </textField>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9hd-go-wtt">
+                                        <rect key="frame" x="18" y="91" width="155" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="check" title="Sticky commands" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jYm-57-ZeE">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="qY0-Es-dDb" name="value" keyPath="self.stickyCommands" id="hrE-Jg-kJd">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </button>
 	                        </subviews>
 	                        <constraints>
 	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" symbolic="YES" id="JL1-gq-Usm"/>

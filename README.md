@@ -1,10 +1,10 @@
 # Savitar v2.0
 
+_README last Updated June 8th, 2026_
+
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
 
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
-
-README last updated: June 6th, 2026
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
@@ -38,8 +38,8 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Implement input pane command recall
 √ New world onboarding
 √ Implement Continuous Speech (using new AVSpeechSynthesizer)
-~ Implement the start of local commands, ##history
-_ Implement sticky commands
+√ Implement the start of local commands, ##history
+√ Implement sticky commands
 _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 √ Implement audio cue triggers
 √ Implement reply triggers
