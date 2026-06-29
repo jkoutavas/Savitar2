@@ -51,7 +51,7 @@ _ Implement next gen startup commands (trigger based)
 √ Implement Trigger Audio Cue tab view
 √ Implement Trigger Reply tab view
 √ Implement Macro editor
-_ Implement World settings Starting tab
+√ Implement World settings Starting tab
 √ Connect/disconnect session handling
 _ Implement remaining World settings tabs
 _ Implement remaining local commands
