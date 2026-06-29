@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last Updated June 27th, 2026_
+_README last Updated June 29th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
 
@@ -84,9 +84,10 @@ _ Polish, address beta test issues
 
 ### Post first release
 
-These features take Savitar 2.0 beyond what 1.6.x provides:
+These features take Savitar 2.1 beyond what 1.6.x provides:
 
 ```
+- macOS 11 and beyond capabilities
 _ SSL support
 _ Dark Mode support
 _ Text to emoji support
@@ -142,24 +143,25 @@ There's already a `.swiftformat` config file that contains this:
 
 ## Tracking lines of code
 
-`cloc . --exclude-dir=Pods,.build`
+`cloc . --exclude-dir=Pods,.build,build`
 
-```
-     167 text files.
-     151 unique files.
-      71 files ignored.
+``` 
+     157 text files.
+     142 unique files.                                          
+      49 files ignored.
 
-github.com/AlDanial/cloc v 1.92  T=0.32 s (478.6 files/s, 53394.6 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.06 s (2325.3 files/s, 275075.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          115           1773           1270           8162
-XML                             27              0             38           4758
-Markdown                         6            263              0            490
+Swift                          115           1844           1269           8563
+XML                             15              0             38           4080
+Markdown                         7            286              0            553
 JSON                             1              0              0             68
-YAML                             1              1              0              8
+YAML                             2             11              0             61
+Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           151           2040           1316          13489
+SUM:                           142           2144           1315          13339
 -------------------------------------------------------------------------------
 ```
