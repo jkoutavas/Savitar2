@@ -24,8 +24,8 @@ struct Command: Equatable {
     let cmdStr: String
     var flags: CmdFlags
 
-    init(text: String = "") {
+    init(text: String = "", flags: CmdFlags = []) {
         cmdStr = text
-        flags = []
+        self.flags = flags
     }
 }

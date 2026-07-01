@@ -88,6 +88,16 @@ struct TrigFlags: OptionSet {
     static let useRegex = TrigFlags(rawValue: 1 << 11)
 }
 
+struct TriggerReaction {
+    let matched: Bool
+    let captures: [String: String]
+}
+
+private enum TriggerPatternPart {
+    case literal(String)
+    case wildcard(String?)
+}
+
 class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
@@ -281,8 +291,13 @@ class Trigger: SavitarObject, NSCopying {
     }
 
     public func reactionTo(line: inout String) -> Bool {
+        return reactionTo(line: &line, wildMarker: nil).matched
+    }
+
+    public func reactionTo(line: inout String, wildMarker: String?) -> TriggerReaction {
         var pattern = name
         var matched = false
+        var captures: [String: String] = [:]
 
         matchedText = ""
 
@@ -303,7 +318,21 @@ class Trigger: SavitarObject, NSCopying {
             options = [options, .regularExpression]
         }
 
-        var ranges = line.ranges(of: pattern, options: options)
+        var ranges: [Range<String.Index>]
+        if let wildMarker = wildMarker,
+           specifier != .useRegex,
+           !wildMarker.isEmpty,
+           name.contains(wildMarker) {
+            let literalOptions = caseSensitive ? String.CompareOptions() : .caseInsensitive
+            let variableMatch = wildcardMatches(in: line, wildMarker: wildMarker, options: literalOptions)
+            ranges = variableMatch.ranges
+            captures = variableMatch.captures
+        } else {
+            ranges = line.ranges(of: pattern, options: options)
+            if specifier == .useRegex {
+                captures = regexCaptures(in: line, pattern: pattern)
+            }
+        }
         matched = ranges.count > 0
         if ranges.count > 0, matching == .wholeLine {
             ranges = [line.fullRange]
@@ -345,7 +374,155 @@ class Trigger: SavitarObject, NSCopying {
         }
         line = resultLine
 
-        return matched
+        return TriggerReaction(matched: matched, captures: captures)
+    }
+
+    private func regexCaptures(in line: String, pattern: String) -> [String: String] {
+        var captures: [String: String] = [:]
+        let options: NSRegularExpression.Options = caseSensitive ? [] : .caseInsensitive
+        guard let expression = try? NSRegularExpression(pattern: pattern, options: options) else {
+            return captures
+        }
+
+        let nsRange = NSRange(line.startIndex ..< line.endIndex, in: line)
+        expression.enumerateMatches(in: line, options: [], range: nsRange) { match, _, _ in
+            guard let match = match else { return }
+            for index in 0 ..< match.numberOfRanges {
+                let range = match.range(at: index)
+                guard range.location != NSNotFound,
+                      let swiftRange = Range(range, in: line) else { continue }
+                captures["\(index)"] = String(line[swiftRange])
+            }
+        }
+
+        return captures
+    }
+
+    private func wildcardMatches(in line: String, wildMarker: String,
+                                 options: String.CompareOptions) -> (ranges: [Range<String.Index>],
+                                                                     captures: [String: String]) {
+        let parts = wildcardPatternParts(wildMarker: wildMarker)
+        guard parts.contains(where: {
+            if case .wildcard = $0 { return true }
+            return false
+        }) else {
+            return ([], [:])
+        }
+
+        var ranges: [Range<String.Index>] = []
+        var captures: [String: String] = [:]
+        var searchStart = line.startIndex
+        while searchStart < line.endIndex,
+              let match = wildcardMatch(in: line, parts: parts, searchRange: searchStart ..< line.endIndex,
+                                        options: options) {
+            ranges.append(match.range)
+            for capture in match.captures {
+                captures[capture.key] = capture.value
+            }
+
+            guard match.range.upperBound > searchStart else { break }
+            searchStart = match.range.upperBound
+        }
+
+        return (ranges, captures)
+    }
+
+    private func wildcardPatternParts(wildMarker: String) -> [TriggerPatternPart] {
+        var parts: [TriggerPatternPart] = []
+        var position = name.startIndex
+
+        while position < name.endIndex,
+              let markerRange = name.range(of: wildMarker, range: position ..< name.endIndex) {
+            if markerRange.lowerBound > position {
+                parts.append(.literal(String(name[position ..< markerRange.lowerBound])))
+            }
+
+            var variableEnd = markerRange.upperBound
+            while variableEnd < name.endIndex,
+                  VariableMan.isValidVariableCharacter(name[variableEnd]) {
+                variableEnd = name.index(after: variableEnd)
+            }
+
+            let variableName = String(name[markerRange.upperBound ..< variableEnd])
+            parts.append(.wildcard(variableName.isEmpty ? nil : variableName))
+            position = variableEnd
+        }
+
+        if position < name.endIndex {
+            parts.append(.literal(String(name[position ..< name.endIndex])))
+        }
+
+        return parts
+    }
+
+    private func wildcardMatch(in line: String, parts: [TriggerPatternPart], searchRange: Range<String.Index>,
+                               options: String.CompareOptions) -> (range: Range<String.Index>,
+                                                                   captures: [String: String])? {
+        var position = searchRange.lowerBound
+        var matchStart: String.Index?
+        var captures: [String: String] = [:]
+        var index = parts.startIndex
+
+        while index < parts.endIndex {
+            switch parts[index] {
+            case let .literal(literal):
+                if literal.isEmpty {
+                    index = parts.index(after: index)
+                    continue
+                }
+
+                guard let range = line.range(of: literal, options: options, range: position ..< searchRange.upperBound) else {
+                    return nil
+                }
+                if matchStart == nil {
+                    matchStart = range.lowerBound
+                }
+                position = range.upperBound
+
+            case let .wildcard(variableName):
+                if matchStart == nil {
+                    matchStart = position
+                }
+
+                let captureStart = position
+                let captureEnd: String.Index
+                if let nextLiteral = nextLiteral(after: index, in: parts), !nextLiteral.isEmpty {
+                    guard let nextRange = line.range(of: nextLiteral, options: options,
+                                                     range: position ..< searchRange.upperBound) else {
+                        return nil
+                    }
+                    captureEnd = nextRange.lowerBound
+                    position = captureEnd
+                } else {
+                    captureEnd = line[captureStart ..< searchRange.upperBound].firstIndex(where: {
+                        $0 == "\r" || $0 == "\n"
+                    }) ?? searchRange.upperBound
+                    position = captureEnd
+                }
+
+                if let variableName = variableName {
+                    let name = caseSensitive ? variableName : variableName.lowercased()
+                    captures[name] = String(line[captureStart ..< captureEnd])
+                }
+            }
+
+            index = parts.index(after: index)
+        }
+
+        guard let lowerBound = matchStart else { return nil }
+        return (lowerBound ..< position, captures)
+    }
+
+    private func nextLiteral(after index: [TriggerPatternPart].Index,
+                             in parts: [TriggerPatternPart]) -> String? {
+        var nextIndex = parts.index(after: index)
+        while nextIndex < parts.endIndex {
+            if case let .literal(literal) = parts[nextIndex] {
+                return literal
+            }
+            nextIndex = parts.index(after: nextIndex)
+        }
+        return nil
     }
 
     let audioCueDict: [TrigAudioType: String] = [

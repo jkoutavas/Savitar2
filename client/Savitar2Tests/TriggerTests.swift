@@ -87,6 +87,41 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(line, "HEYNOW is cool, HEYNOW")
     }
 
+    func testWildcardVariablesCaptureWithV1WorldMarker() {
+        let t = Trigger(name: "the time is $$hour:$$minute:$$second", flags: [.caseSensitive, .gag])
+        var line = "the time is 10:42:09"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertTrue(reaction.matched)
+        XCTAssertEqual(line, "")
+        XCTAssertEqual(reaction.captures["hour"], "10")
+        XCTAssertEqual(reaction.captures["minute"], "42")
+        XCTAssertEqual(reaction.captures["second"], "09")
+    }
+
+    func testAnonymousWildcardCapturesWithoutSettingVariable() {
+        let t = Trigger(name: "tell $$ $$target", flags: [.caseSensitive, .gag])
+        var line = "tell Jay dragon"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertTrue(reaction.matched)
+        XCTAssertEqual(reaction.captures, ["target": "dragon"])
+    }
+
+    func testRegexTriggersSetNumberedVariables() {
+        let t = Trigger(name: "(\\w+) hits (\\w+)", flags: [.caseSensitive, .useRegex, .gag])
+        var line = "orc hits elf"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertTrue(reaction.matched)
+        XCTAssertEqual(reaction.captures["0"], "orc hits elf")
+        XCTAssertEqual(reaction.captures["1"], "orc")
+        XCTAssertEqual(reaction.captures["2"], "elf")
+    }
+
     func testTextStyleFaces() {
         let esc = "\u{1B}"
         var t = Trigger(name: "bold",
