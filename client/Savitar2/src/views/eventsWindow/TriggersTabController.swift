@@ -14,6 +14,10 @@ class TriggersTabController: EventsTabController {
     private var subscriber: TriggersSubscriber<ItemListState<Trigger>>?
     private var selectionIsChanging = false
 
+    override var itemName: String {
+        return "trigger"
+    }
+
     override func setStore(_ store: ReactionsStore?) {
         dataSource.setStore(store)
     }
@@ -41,6 +45,17 @@ class TriggersTabController: EventsTabController {
         super.viewWillDisappear()
 
         store?.unsubscribe(subscriber!)
+    }
+
+    override func addItem(_: Any) {
+        let row = tableView.selectedRow >= 0 ? tableView.selectedRow + 1 : dataSource.itemCount
+        store?.dispatch(InsertTriggerAction(trigger: Trigger(), atIndex: row))
+        store?.dispatch(SelectTriggerAction(selection: row))
+        tableView.scrollRowToVisible(row)
+    }
+
+    override func removeItem(_: Any) {
+        delete(self)
     }
 }
 
@@ -97,10 +112,12 @@ extension TriggersTabController {
     private func displaySelection(listModel: TriggerListViewModel) {
         guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+            setRemoveItemEnabled(false)
             return
         }
 
         tableView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
+        setRemoveItemEnabled(true)
     }
 }
 

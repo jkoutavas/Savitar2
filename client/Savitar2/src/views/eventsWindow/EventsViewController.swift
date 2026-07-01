@@ -56,10 +56,7 @@ extension EventsViewController: NSMenuItemValidation {
     }
 
     @IBAction func newItem(_: Any) {
-        if selectedTabViewItemIndex == 0 {
-            store?.dispatch(InsertTriggerAction(trigger: Trigger(), atIndex: 0))
-        } else {
-            store?.dispatch(InsertMacroAction(macro: Macro(), atIndex: 0))
-        }
+        guard let tabVC = tabViewItems[selectedTabViewItemIndex].viewController as? EventsTabController else { return }
+        tabVC.addItem(self)
     }
 }
