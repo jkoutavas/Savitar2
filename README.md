@@ -44,7 +44,7 @@ _ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 √ Implement audio cue triggers
 √ Implement reply triggers
 √ Implement input triggers
-_ Implement input trigger variables
+√ Implement input trigger variables
 _ Implement next gen startup commands (trigger based)
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view

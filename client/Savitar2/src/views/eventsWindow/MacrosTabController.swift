@@ -14,6 +14,10 @@ class MacrosTabController: EventsTabController {
     private var subscriber: MacrosSubscriber<ItemListState<Macro>>?
     private var selectionIsChanging = false
 
+    override var itemName: String {
+        return "macro"
+    }
+
     override func setStore(_ store: ReactionsStore?) {
         dataSource.setStore(store)
     }
@@ -41,6 +45,17 @@ class MacrosTabController: EventsTabController {
         super.viewWillDisappear()
 
         store?.unsubscribe(subscriber!)
+    }
+
+    override func addItem(_: Any) {
+        let row = tableView.selectedRow >= 0 ? tableView.selectedRow + 1 : dataSource.itemCount
+        store?.dispatch(InsertMacroAction(macro: Macro(), atIndex: row))
+        store?.dispatch(SelectMacroAction(selection: row))
+        tableView.scrollRowToVisible(row)
+    }
+
+    override func removeItem(_: Any) {
+        delete(self)
     }
 }
 
@@ -97,10 +112,12 @@ extension MacrosTabController {
     private func displaySelection(listModel: MacroListViewModel) {
         guard let selectedRow = listModel.selectedRow else {
             tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+            setRemoveItemEnabled(false)
             return
         }
 
         tableView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
+        setRemoveItemEnabled(true)
     }
 }
 

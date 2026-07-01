@@ -58,7 +58,7 @@ class WorldTests: XCTestCase {
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0"></WORLD>
+        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append"></WORLD>
         """
         // swiftlint:enable line_length
 
@@ -132,7 +132,7 @@ class WorldTests: XCTestCase {
         // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0">
+        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append">
             <LOGONCMD>connect spinlock fnordy\nwho</LOGONCMD>
             <LOGOFFCMD>@quit</LOGOFFCMD>
             <TRIGGERS>
@@ -272,6 +272,44 @@ class SessionLocalCommandTests: XCTestCase {
 
         XCTAssertTrue(handler.printedSource)
         XCTAssertTrue(handler.outputs.isEmpty)
+    }
+
+    func testLocalCommandExpandsV1VariablesBeforeDispatch() {
+        let world = World()
+        world.variableMan.set("cmd", value: "##history")
+        let handler = MockSessionHandler()
+        handler.history = ["look", "%%cmd"]
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "%%cmd"))
+
+        XCTAssertEqual(handler.outputs, [
+            "[SAVITAR] Command history:\n1  look\n2  %%cmd\n"
+        ])
+    }
+}
+
+class InputTriggerVariableTests: XCTestCase {
+    func testInputTriggerSetsVariableForReplyExpansion() {
+        let world = World()
+        let handler = MockSessionHandler()
+        handler.history = ["set ##history"]
+        let session = Session(world: world, sessionHandler: handler)
+        let trigger = Trigger(name: "set $$cmd", flags: .gag, type: .input, reply: "%%cmd")
+        world.triggerMan.add(trigger)
+
+        var line = "set ##history"
+        let effects = session.determineEffects(line: &line, excludedType: .output)
+
+        XCTAssertEqual(line, "")
+        XCTAssertEqual(effects, [trigger])
+        XCTAssertEqual(world.variableMan.get("cmd"), "##history")
+
+        session.handleEffects(effects)
+
+        XCTAssertEqual(handler.outputs, [
+            "[SAVITAR] Command history:\n1  set ##history\n"
+        ])
     }
 }
 

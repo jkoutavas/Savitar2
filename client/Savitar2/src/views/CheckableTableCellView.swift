@@ -33,9 +33,18 @@ class CheckableTableCellView: TitledTableCellView {
     func updateContent(viewModel: CheckableItemViewModel) {
         super.updateContent(viewModel: viewModel)
         checkbox.checked = viewModel.enabled
+        styleTitleTextField()
     }
 
     @IBAction func checkboxChanged(_: AnyObject) {
         checkableItemChangeDelegate?.checkableItem(itemID: itemID, didChangeChecked: checkbox.checked)
+    }
+
+    private func styleTitleTextField() {
+        titleTextField.isBordered = true
+        titleTextField.isBezeled = true
+        titleTextField.bezelStyle = .roundedBezel
+        titleTextField.drawsBackground = true
+        titleTextField.backgroundColor = .textBackgroundColor
     }
 }

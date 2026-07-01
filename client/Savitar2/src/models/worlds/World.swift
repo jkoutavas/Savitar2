@@ -45,6 +45,67 @@ enum IntensityType: Int {
     case color
 }
 
+class VariableMan {
+    private var variables: [String: String] = [:]
+
+    static func isValidVariableCharacter(_ char: Character) -> Bool {
+        return char.isLetter || char.isNumber || char == "_"
+    }
+
+    func clear() {
+        variables.removeAll()
+    }
+
+    func get(_ name: String) -> String? {
+        return variables[name.lowercased()]
+    }
+
+    func set(_ name: String, value: String) {
+        guard !name.isEmpty else { return }
+        variables[name.lowercased()] = value
+    }
+
+    func set(_ captures: [String: String]) {
+        for capture in captures {
+            set(capture.key, value: capture.value)
+        }
+    }
+
+    func expand(_ text: String, marker: String) -> String {
+        guard !marker.isEmpty else { return text }
+        guard text.contains(marker) else { return text }
+
+        var result = ""
+        var position = text.startIndex
+        while position < text.endIndex {
+            guard text[position...].hasPrefix(marker) else {
+                result.append(text[position])
+                position = text.index(after: position)
+                continue
+            }
+
+            let variableStart = text.index(position, offsetBy: marker.count)
+            var variableEnd = variableStart
+            while variableEnd < text.endIndex,
+                  Self.isValidVariableCharacter(text[variableEnd]) {
+                variableEnd = text.index(after: variableEnd)
+            }
+
+            let variableName = String(text[variableStart ..< variableEnd])
+            if !variableName.isEmpty,
+               let value = get(variableName) {
+                result += value
+                position = variableEnd
+            } else {
+                result += marker
+                position = variableStart
+            }
+        }
+
+        return result
+    }
+}
+
 class World: SavitarObject, NSCopying {
     // KVO-based world settings with their defaults
     @objc dynamic var editable = true
@@ -140,6 +201,7 @@ class World: SavitarObject, NSCopying {
 
     var macroMan = MacroMan()
     var triggerMan = TriggerMan()
+    let variableMan = VariableMan()
 
     init(world: World) {
         super.init()

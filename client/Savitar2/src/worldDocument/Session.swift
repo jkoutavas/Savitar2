@@ -140,17 +140,26 @@ class Session: NSObject, StreamDelegate {
     }
 
     func submitServerCmd(cmd: Command) {
-        if handleLocalCommand(cmd) {
+        let expandedCmd = expandVariables(in: cmd)
+        if handleLocalCommand(expandedCmd) {
             return
         }
 
-        let str = "\(cmd.cmdStr)\n"
+        let str = "\(expandedCmd.cmdStr)\n"
         if world.flags.contains(.echoCmds) {
             acceptedText(text: str)
         } else if world.flags.contains(.echoCR) {
             acceptedText(text: "\n")
         }
         sendString(string: str)
+    }
+
+    private func expandVariables(in cmd: Command) -> Command {
+        guard !cmd.flags.contains(.dontProcess) else { return cmd }
+
+        let expandedText = world.variableMan.expand(cmd.cmdStr, marker: world.varMarker)
+        guard expandedText != cmd.cmdStr else { return cmd }
+        return Command(text: expandedText, flags: cmd.flags)
     }
 
     private func handleLocalCommand(_ cmd: Command) -> Bool {
@@ -292,14 +301,18 @@ class Session: NSObject, StreamDelegate {
 
         // Check for gag reactions
         for trigger in filteredTriggers where trigger.appearance == .gag {
-            if trigger.reactionTo(line: &line) {
+            let reaction = trigger.reactionTo(line: &line, wildMarker: world.wildMarker)
+            if reaction.matched {
+                world.variableMan.set(reaction.captures)
                 effects.append(trigger)
             }
         }
         if line.count > 0 {
             // Some text remains? (not all gagged away?) Check for subsitution reactions
             for trigger in filteredTriggers where !effects.contains(trigger) && trigger.useSubstitution {
-                if trigger.reactionTo(line: &line) {
+                let reaction = trigger.reactionTo(line: &line, wildMarker: world.wildMarker)
+                if reaction.matched {
+                    world.variableMan.set(reaction.captures)
                     effects.append(trigger)
                 }
             }
@@ -307,7 +320,9 @@ class Session: NSObject, StreamDelegate {
         if line.count > 0 {
             // Check for remaining trigger reactions
             for trigger in filteredTriggers where !effects.contains(trigger) {
-                if trigger.reactionTo(line: &line) {
+                let reaction = trigger.reactionTo(line: &line, wildMarker: world.wildMarker)
+                if reaction.matched {
+                    world.variableMan.set(reaction.captures)
                     effects.append(trigger)
                 }
             }
