@@ -161,7 +161,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="sDK-Xe-hjB"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" title="name" drawsBackground="YES" usesSingleLineMode="YES" id="7ou-hV-rcO">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
