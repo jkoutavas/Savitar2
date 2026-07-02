@@ -23,7 +23,7 @@ class WindowRestorationTests: XCTestCase {
             return
         }
 
-        let xml = XML.parse(openSessionsElem.xmlString)
+        let xml = try XML.parse(openSessionsElem.xmlString)
         let parsed = WindowRestoration.parseOpenSessions(xml: xml)
 
         XCTAssertEqual(parsed.count, 2)
@@ -31,8 +31,8 @@ class WindowRestorationTests: XCTestCase {
         XCTAssertEqual(parsed[1], .pickerWorld(worldID))
     }
 
-    func testParseOpenSessionsMissingElement() {
-        let xml = XML.parse("<PREFERENCES></PREFERENCES>")
+    func testParseOpenSessionsMissingElement() throws {
+        let xml = try XML.parse("<PREFERENCES></PREFERENCES>")
         XCTAssertTrue(WindowRestoration.parseOpenSessions(xml: xml).isEmpty)
     }
 
@@ -40,8 +40,8 @@ class WindowRestorationTests: XCTestCase {
         XCTAssertNil(WindowRestoration.openSessionsElement(for: []))
     }
 
-    func testLegacyAuxiliaryWindowEntriesAreIgnoredOnRestore() {
-        let xml = XML.parse("""
+    func testLegacyAuxiliaryWindowEntriesAreIgnoredOnRestore() throws {
+        let xml = try XML.parse("""
         <OPEN_SESSIONS>
             <WINDOW TYPE="worldPicker" />
             <WINDOW TYPE="eventsWindow" />
