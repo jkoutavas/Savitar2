@@ -195,7 +195,6 @@ class TriggerTests: XCTestCase {
         XCTAssertTrue(t.reactionTo(line: &line))
         XCTAssertEqual(line,
                        "a \(esc)[;1;3;4;5;38:2;255;255;255;48:2;0;0;0msuper combo\(esc)[;21;23;24;25;39;49m match")
-        // swiftlint:enable line_length
     }
 
     func testTrigFaceFrom() {
@@ -327,7 +326,6 @@ class TriggerTests: XCTestCase {
         let xmlOutString = try t1.toXMLElement().xmlString.prettyXMLFormat()
 
         // v2 XML
-        // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
         <TRIGGER NAME="russ" TYPE="output" FLAGS="matchWholeLine+matchAtStart" FACE="foreColor" FGCOLOR="#26C9EE" SOUND="Click" AUDIO="speakEvent" VOICE="Ralph">
@@ -336,7 +334,6 @@ class TriggerTests: XCTestCase {
             <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
         </TRIGGER>
         """
-        // swiftlint:enable line_length
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }
@@ -374,7 +371,6 @@ class TriggerTests: XCTestCase {
         // v2 XML
         // Here we're expecting that "FLAG"="foreColor" does not get generated. That's because there's a "useFore"
         // in the v1 text XML
-        // swiftlint:disable line_length
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
         <TRIGGER NAME="russ" TYPE="output" FLAGS="matchWholeLine+matchAtStart" FGCOLOR="#26C9EE" SOUND="Click" AUDIO="speakEvent" VOICE="Ralph">
@@ -383,7 +379,6 @@ class TriggerTests: XCTestCase {
             <SUBSTITUTION>oh boy, oh boy</SUBSTITUTION>
         </TRIGGER>
         """
-        // swiftlint:enable line_length
 
         XCTAssertEqual(xmlOutString, expectedOutput)
     }

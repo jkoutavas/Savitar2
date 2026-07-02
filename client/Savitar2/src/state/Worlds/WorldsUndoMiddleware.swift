@@ -48,9 +48,7 @@ func undoWorldsStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
     }
-    let undoMiddleware: Middleware<WorldsState> = { dispatch, getState in {
-        next in {
-            action in
+    let undoMiddleware: Middleware<WorldsState> = { dispatch, getState in { next in { action in
 
             // Pass already undone actions through
             if let undoneAction = action as? NotUndoable {

@@ -37,16 +37,16 @@ extension UndoCommand {
     }
 }
 
-func undoAppPreferencesStateMiddleware(undoManagerProvider: @escaping () -> UndoManager?) -> Middleware<AppPreferencesState> {
+func undoAppPreferencesStateMiddleware(
+    undoManagerProvider: @escaping () -> UndoManager?
+) -> Middleware<AppPreferencesState> {
     func undoAction(action: AppPreferencesUndoableAction, state: AppPreferencesState,
                     dispatch: @escaping DispatchFunction) -> UndoCommand? {
         let context = UndoableAppPreferencesStateAdapter(prefsState: state)
 
         return UndoCommand(appAction: action, context: context, dispatch: dispatch)
     }
-    let undoMiddleware: Middleware<AppPreferencesState> = { dispatch, getState in {
-        next in {
-            action in
+    let undoMiddleware: Middleware<AppPreferencesState> = { dispatch, getState in { next in { action in
 
             // Pass already undone actions through
             if let undoneAction = action as? NotUndoable {

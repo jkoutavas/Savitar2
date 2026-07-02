@@ -26,7 +26,8 @@ class SavitarObject: NSObject, SavitarXMLProtocol {
         return XMLElement()
     }
 
-    static func == (lhs: SavitarObject, rhs: SavitarObject) -> Bool {
-        return lhs.objectID == rhs.objectID && lhs.name == rhs.name
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? SavitarObject else { return false }
+        return objectID == other.objectID && name == other.name
     }
 }

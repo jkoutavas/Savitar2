@@ -278,11 +278,9 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func processMacros(with event: NSEvent, macros: [Macro]) -> Bool {
-        for macro in macros {
-            if macro.isHotKey(forEvent: event) {
-                sendString(string: macro.value)
-                return true
-            }
+        for macro in macros where macro.isHotKey(forEvent: event) {
+            sendString(string: macro.value)
+            return true
         }
         return false
     }
@@ -340,7 +338,7 @@ class Session: NSObject, StreamDelegate {
             while stream.hasBytesAvailable {
                 let read = stream.read(&buffer, maxLength: maxReadLength)
                 if read > 0 {
-                    let debugStr = String(decoding: buffer[0 ... read - 1], as: UTF8.self)
+                    let debugStr = String(bytes: buffer[0 ..< read], encoding: .utf8) ?? ""
 //                    self?.logger.info(
 //                      "\(read) bytes read (\(debugStr.endsWithNewline() ? "true" : "false")) \(debugStr)")
                     if let url = self?.captureURL {
@@ -356,7 +354,8 @@ class Session: NSObject, StreamDelegate {
                 }
             }
             if data.count > 0 {
-                self?.processAcceptedText(text: String(decoding: data, as: UTF8.self), excludedTriggerType: .input)
+                self?.processAcceptedText(text: String(bytes: data, encoding: .utf8) ?? "",
+                                          excludedTriggerType: .input)
                 if let didStartupCmd = self?.didStartupCmd, !didStartupCmd {
                     self?.didStartupCmd = true
                     if let logonCmd = self?.world.logonCmd, logonCmd.count > 0 {

@@ -101,8 +101,10 @@ class Ansi2HtmlParserTests: XCTestCase {
 
     func testScrewy() {
         var it = Ansi2HtmlParser()
-        XCTAssertEqual(it.parse(ansi: escape("^[2;37;40mOld Reverse^[0;37;40m (SCREWY!)")),
-                       "<span class='lighter white bg-black '>Old Reverse</span><span class='white bg-black '> (SCREWY!)</span>")
+        XCTAssertEqual(
+            it.parse(ansi: escape("^[2;37;40mOld Reverse^[0;37;40m (SCREWY!)")),
+            "<span class='lighter white bg-black '>Old Reverse</span><span class='white bg-black '> (SCREWY!)</span>"
+        )
     }
 
     func testSplit() {

@@ -78,7 +78,8 @@ struct TrigFlags: OptionSet {
     static let toEndOfWord = TrigFlags(rawValue: 1 << 1)
     static let wholeLine = TrigFlags(rawValue: 1 << 2)
     static let disabled = TrigFlags(rawValue: 1 << 3)
-    //  static let useFore = TrigFlags(rawValue: 1 << 4) // this v1.x flag is replaced by the "foreColor" style flag in v2
+    // static let useFore = TrigFlags(rawValue: 1 << 4)
+    // v1.x flag replaced by the "foreColor" style flag in v2
     static let gag = TrigFlags(rawValue: 1 << 5)
     static let startsWith = TrigFlags(rawValue: 1 << 6)
     static let echoReply = TrigFlags(rawValue: 1 << 7)
@@ -471,7 +472,11 @@ class Trigger: SavitarObject, NSCopying {
                     continue
                 }
 
-                guard let range = line.range(of: literal, options: options, range: position ..< searchRange.upperBound) else {
+                guard let range = line.range(
+                    of: literal,
+                    options: options,
+                    range: position ..< searchRange.upperBound
+                ) else {
                     return nil
                 }
                 if matchStart == nil {

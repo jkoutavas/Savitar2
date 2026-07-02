@@ -11,10 +11,6 @@ import ReSwift
 struct SelectMacroAction: ReactionAction {
     let selection: SelectionState
 
-    init(selection: SelectionState) {
-        self.selection = selection
-    }
-
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
         result.macroList.selection = selection
@@ -24,10 +20,6 @@ struct SelectMacroAction: ReactionAction {
 
 struct SetMacrosAction: ReactionAction {
     let macros: [Macro]
-
-    init(macros: [Macro]) {
-        self.macros = macros
-    }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState

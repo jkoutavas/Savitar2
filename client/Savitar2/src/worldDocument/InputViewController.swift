@@ -100,7 +100,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             return true
         }
 
-        // swiftlint:disable force_cast
+        // swiftlint:disable:next force_cast
         guard let doc = locWindow.windowController?.document as! Document? else { return false }
 
         switch event.keyCode {

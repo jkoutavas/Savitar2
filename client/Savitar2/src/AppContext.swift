@@ -29,12 +29,11 @@ class AppContext {
     internal var universalEventsWindowController: NSWindowController?
     internal var worldPickerWindowController: NSWindowController?
 
-    // swiftlint:disable weak_delegate
+    // swiftlint:disable:this weak_delegate
     private var appPrefsWindowDelegate: SpeechPrefsWindowDelegate?
     private var speechPrefsWindowDelegate: SpeechPrefsWindowDelegate?
     private var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
     private var worldPickerWindowDelegate: WorldPickerWindowDelegate?
-    // swiftlint:enable weak_delegate
 
     // TODO: this is a good start. See Savitar 1.x's "CViewAppMac.cp" for references to Savitar's
     // "editing keys" (not support at this time) and the means used to add all menu command shortcut keys

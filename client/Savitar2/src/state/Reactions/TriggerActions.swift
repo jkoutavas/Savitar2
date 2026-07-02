@@ -12,10 +12,6 @@ import ReSwift
 struct SelectTriggerAction: ReactionAction {
     let selection: SelectionState
 
-    init(selection: SelectionState) {
-        self.selection = selection
-    }
-
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState
         result.triggerList.selection = selection
@@ -25,10 +21,6 @@ struct SelectTriggerAction: ReactionAction {
 
 struct SetTriggersAction: ReactionAction {
     let triggers: [Trigger]
-
-    init(triggers: [Trigger]) {
-        self.triggers = triggers
-    }
 
     func apply(oldState: ReactionsState) -> ReactionsState {
         var result = oldState

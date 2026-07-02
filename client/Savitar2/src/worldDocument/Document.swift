@@ -85,7 +85,8 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         if let data = xmlStr.data(using: String.Encoding.utf8) {
             return data
         } else {
-            throw NSError()
+            throw NSError(domain: "Savitar2", code: 2,
+                          userInfo: [NSLocalizedDescriptionKey: "Failed to encode document XML"])
         }
     }
 
@@ -163,7 +164,8 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
             switch attribute.key {
             case DocumentAttribIdentifier.type.rawValue:
                 if attribute.value != type {
-                    throw NSError()
+                    throw NSError(domain: "Savitar2", code: 3,
+                                  userInfo: [NSLocalizedDescriptionKey: "Unexpected document type"])
                 }
             case DocumentAttribIdentifier.version.rawValue:
                 if let v = Int(attribute.value) {

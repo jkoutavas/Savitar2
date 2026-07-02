@@ -30,10 +30,6 @@ extension WorldUndoableAction where Self: WorldAction {
 struct SetWorldsAction: WorldAction {
     let worlds: [World]
 
-    init(worlds: [World]) {
-        self.worlds = worlds
-    }
-
     func apply(oldState: WorldsState) -> WorldsState {
         var result = oldState
         result.worldList.items = worlds
@@ -43,10 +39,6 @@ struct SetWorldsAction: WorldAction {
 
 struct SelectWorldAction: WorldAction {
     let selection: SelectionState
-
-    init(selection: SelectionState) {
-        self.selection = selection
-    }
 
     func apply(oldState: WorldsState) -> WorldsState {
         var result = oldState

@@ -1,0 +1,3 @@
+# Test fixtures include long single-line XML snapshots from v1/v2 round-trip tests.
+disabled_rules:
+  - line_length
