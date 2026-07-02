@@ -94,8 +94,7 @@ enum CommandsEnum: UInt8 {
     case escIAC // data byte 255
 }
 
-enum StateEnum // a simple state machine
-{
+enum StateEnum { // a simple state machine
     case normalChar // interpret as character
     case gotIAC // received an IAC character
     case gotSB // in subnegotiation

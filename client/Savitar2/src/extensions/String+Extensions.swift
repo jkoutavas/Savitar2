@@ -67,7 +67,7 @@ extension String {
         if let str = String(data: data, encoding: .utf8) {
             return str
         } else {
-            throw NSError()
+            throw NSError(domain: "Savitar2", code: 1, userInfo: [NSLocalizedDescriptionKey: "XML formatting failed"])
         }
     }
 

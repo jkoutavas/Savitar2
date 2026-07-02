@@ -19,9 +19,8 @@ struct ItemListState<T: Equatable>: StateType {
     }
 
     func indexOf(objectID: SavitarObjectID) -> Int? {
-        // swiftlint:disable force_cast
+        // swiftlint:disable:next force_cast
         return items.firstIndex(where: { ($0 as! SavitarObject).objectID == objectID })
-        // swiftlint:enable force_cast
     }
 
     /// Always inserts `item` into the list:

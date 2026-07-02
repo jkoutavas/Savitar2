@@ -124,21 +124,19 @@ class SpeakerManAV: SpeakerMan {
 
     override func speak(text: String, voiceName: String) {
         let utterance = AVSpeechUtterance(string: text)
-        for voice in voices {
-            if voice.identifier.hasSuffix(voiceName) {
-                utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
-                // rate here is a percentage (0.0..1.0)
-                var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
-                    (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
-                if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
-                    adjustedRate = AVSpeechUtteranceMinimumSpeechRate
-                } else if adjustedRate > AVSpeechUtteranceMaximumSpeechRate {
-                    adjustedRate = AVSpeechUtteranceMaximumSpeechRate
-                }
-                utterance.rate = adjustedRate
-                speechSynth.speak(utterance)
-                break
+        for voice in voices where voice.identifier.hasSuffix(voiceName) {
+            utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
+            // rate here is a percentage (0.0..1.0)
+            var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
+                (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
+            if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
+                adjustedRate = AVSpeechUtteranceMinimumSpeechRate
+            } else if adjustedRate > AVSpeechUtteranceMaximumSpeechRate {
+                adjustedRate = AVSpeechUtteranceMaximumSpeechRate
             }
+            utterance.rate = adjustedRate
+            speechSynth.speak(utterance)
+            break
         }
     }
 

@@ -150,25 +150,21 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build,build`
 
 ```
-     160 text files.
-     145 unique files.
+     166 text files.
+     151 unique files.
       49 files ignored.
 
-     165 text files.
-     150 unique files.
-      49 files ignored.
-
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1820.5 files/s, 217542.3 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1973.8 files/s, 233703.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          121           1993           1306           9262
+Swift                          121           1985           1291           9237
 XML                             15              0             38           4082
-Markdown                         9            355              0            723
+Markdown                         9            355              0            722
 JSON                             1              0              0             68
-YAML                             2             11              0             61
+YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           150           2362           1352          14210
+SUM:                           151           2354           1338          14187
 ```

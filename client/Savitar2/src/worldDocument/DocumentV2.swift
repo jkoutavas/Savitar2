@@ -14,8 +14,4 @@ class DocumentV2: Document {
     override class var autosavesInPlace: Bool {
         return true
     }
-
-    override func read(from data: Data, ofType typeName: String) throws {
-        try super.read(from: data, ofType: typeName)
-    }
 }

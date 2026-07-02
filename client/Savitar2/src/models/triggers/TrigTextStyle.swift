@@ -69,10 +69,8 @@ struct TrigFace: OptionSet, Hashable {
 
     private func formANSICodes(dict: [TrigFace: Int]) -> String {
         var result = ""
-        for (key, value) in dict.sorted(by: { $0.1 < $1.1 }) {
-            if contains(key) {
-                result += ";\(value)"
-            }
+        for (key, value) in dict.sorted(by: { $0.1 < $1.1 }) where contains(key) {
+            result += ";\(value)"
         }
 
         return result
