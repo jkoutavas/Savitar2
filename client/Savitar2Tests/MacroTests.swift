@@ -6,6 +6,7 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
+import Cocoa
 import SwiftyXMLParser
 import XCTest
 
@@ -88,5 +89,28 @@ class MacroTests: XCTestCase {
         XCTAssertEqual(v1.value, "say Here is command one...\nsay ...and here is command two!")
 
         XCTAssertEqual(v1.keyLabel, "F5")
+    }
+
+    func testKeypadMacroRequiresUseKeypadPreference() {
+        let macro = Macro()
+        macro.keyLabel = "KP8"
+        macro.value = "north"
+
+        let event = NSEvent.keyEvent(with: .keyDown,
+                                     location: .zero,
+                                     modifierFlags: [],
+                                     timestamp: 0,
+                                     windowNumber: 0,
+                                     context: nil,
+                                     characters: "8",
+                                     charactersIgnoringModifiers: "8",
+                                     isARepeat: false,
+                                     keyCode: Keycode.keypad8)!
+
+        AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .useKeypad, enabled: false))
+        XCTAssertFalse(macro.isHotKey(forEvent: event))
+
+        AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .useKeypad, enabled: true))
+        XCTAssertTrue(macro.isHotKey(forEvent: event))
     }
 }

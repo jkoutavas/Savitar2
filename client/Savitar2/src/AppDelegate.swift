@@ -10,33 +10,22 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import Cocoa
+import ReSwift
 
 var isRunningTests: Bool {
     return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
 }
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     @objc dynamic var muteSound: Bool {
         get { AppContext.shared.prefs.flags.contains(.muteSound) }
-        set {
-            if newValue == false {
-                AppContext.shared.prefs.flags.remove(.muteSound)
-            } else {
-                AppContext.shared.prefs.flags.insert(.muteSound)
-            }
-        }
+        set { AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteSound, enabled: newValue)) }
     }
 
     @objc dynamic var muteSpeaking: Bool {
         get { AppContext.shared.prefs.flags.contains(.muteSpeaking) }
-        set {
-            if newValue == false {
-                AppContext.shared.prefs.flags.remove(.muteSpeaking)
-            } else {
-                AppContext.shared.prefs.flags.insert(.muteSpeaking)
-            }
-        }
+        set { AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteSpeaking, enabled: newValue)) }
     }
 
     override init() {
@@ -54,6 +43,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          ])
 
         AppContext.shared.restoreSavedWindows()
+
+        AppContext.shared.appPrefsStore.subscribe(self)
 
         if AppContext.shared.prefs.flags.contains(.startupPicker) {
             showWorldPickerAction(self)
@@ -84,8 +75,79 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppContext.shared.appIsTerminating()
     }
 
+    @IBAction func toggleMuteSoundAction(_ sender: NSMenuItem) {
+        muteSound = sender.state == .on
+    }
+
+    @IBAction func toggleMuteSpeakingAction(_ sender: NSMenuItem) {
+        muteSpeaking = sender.state == .on
+    }
+
     @IBAction func flushSpeachAction(_: Any) {
         AppContext.shared.speakerMan.flushSpeech()
+    }
+
+    @IBAction func speakSelectedTextAction(_: Any) {
+        speakSelectedText()
+    }
+
+    private func speakSelectedText() {
+        let window = NSApp.keyWindow
+        let voice = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
+        let speak: (String) -> Void = { text in
+            AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
+        }
+
+        if let output = outputView(for: window), isResponder(in: output) {
+            output.selectedPlainText { text in
+                guard let text else { return }
+                DispatchQueue.main.async { speak(text) }
+            }
+            return
+        }
+
+        if let text = selectedInputText(from: window) {
+            speak(text)
+            return
+        }
+
+        outputView(for: window)?.selectedPlainText { text in
+            guard let text else { return }
+            DispatchQueue.main.async { speak(text) }
+        }
+    }
+
+    private func canSpeakSelectedText() -> Bool {
+        let window = NSApp.keyWindow
+        if selectedInputText(from: window) != nil { return true }
+        if let output = outputView(for: window), isResponder(in: output) { return true }
+        return false
+    }
+
+    private func selectedInputText(from window: NSWindow?) -> String? {
+        guard let textView = window?.firstResponder as? NSTextView else { return nil }
+        let range = textView.selectedRange()
+        guard range.length > 0 else { return nil }
+        return (textView.string as NSString).substring(with: range)
+    }
+
+    private func sessionViewController(for window: NSWindow?) -> SessionViewController? {
+        guard let wc = window?.windowController as? WindowController else { return nil }
+        return wc.contentViewController as? SessionViewController
+    }
+
+    private func outputView(for window: NSWindow?) -> OutputView? {
+        sessionViewController(for: window)?.outputViewController?.outputView
+    }
+
+    private func isResponder(in view: NSView) -> Bool {
+        guard var responder = view.window?.firstResponder as? NSView else { return false }
+        while true {
+            if responder === view { return true }
+            guard let superview = responder.superview else { break }
+            responder = superview
+        }
+        return false
     }
 
     @IBAction func showAppPrefsAction(_: Any) {
@@ -102,5 +164,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func showWorldPickerAction(_: Any) {
         AppContext.shared.showWorldPicker()
+    }
+
+    func newState(state _: AppPreferencesState) {
+        willChangeValue(forKey: "muteSound")
+        didChangeValue(forKey: "muteSound")
+        willChangeValue(forKey: "muteSpeaking")
+        didChangeValue(forKey: "muteSpeaking")
+    }
+}
+
+extension AppDelegate: NSMenuItemValidation {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        switch menuItem.action {
+        case #selector(speakSelectedTextAction(_:)):
+            return canSpeakSelectedText()
+        case #selector(flushSpeachAction(_:)):
+            return AppContext.shared.speakerMan.isSpeaking()
+        case #selector(toggleMuteSoundAction(_:)), #selector(toggleMuteSpeakingAction(_:)):
+            return true
+        default:
+            return true
+        }
     }
 }

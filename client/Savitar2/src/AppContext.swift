@@ -9,7 +9,7 @@
 import Cocoa
 import ReSwift
 
-private var appUndoManager = UndoManager()
+private var appUndoManagerInstance = UndoManager()
 
 class AppContext {
     static let shared = AppContext()
@@ -20,18 +20,15 @@ class AppContext {
 
     internal var isTerminating: Bool
 
-    var appPrefsStore = appPreferencesStore(undoManagerProvider: { appUndoManager })
-    var universalReactionsStore = reactionsStore(undoManagerProvider: { appUndoManager })
-    var worldPickerStore = worldsStore(undoManagerProvider: { appUndoManager })
+    var appPrefsStore = appPreferencesStore(undoManagerProvider: { AppContext.shared.appUndoManager })
+    var universalReactionsStore = reactionsStore(undoManagerProvider: { appUndoManagerInstance })
+    var worldPickerStore = worldsStore(undoManagerProvider: { appUndoManagerInstance })
 
-    internal var appPrefsWindowController: NSWindowController?
-    internal var speechPrefsWindowController: NSWindowController?
+    internal var appPrefsWindowController: AppSettingsWindowController?
     internal var universalEventsWindowController: NSWindowController?
     internal var worldPickerWindowController: NSWindowController?
 
     // swiftlint:disable:this weak_delegate
-    private var appPrefsWindowDelegate: SpeechPrefsWindowDelegate?
-    private var speechPrefsWindowDelegate: SpeechPrefsWindowDelegate?
     private var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
     private var worldPickerWindowDelegate: WorldPickerWindowDelegate?
 
@@ -51,9 +48,14 @@ class AppContext {
         speakerMan = AppContext.hasContinuousSpeech() ? SpeakerManAV() : SpeakerManNS()
         worldMan = WorldMan()
 
-        speechPrefsWindowDelegate = SpeechPrefsWindowDelegate(self)
         universalEventsWindowDelegate = UniversalEventsWindowDelegate(self)
         worldPickerWindowDelegate = WorldPickerWindowDelegate(self)
+    }
+
+    var appUndoManager: UndoManager { appUndoManagerInstance }
+
+    func appPrefsWindowDidClose() {
+        appPrefsWindowController = nil
     }
 
     func load() {
@@ -84,46 +86,30 @@ class AppContext {
         WindowRestoration.restoreSavedSessions(sessions, in: self)
     }
 
-    func showAppPrefsWindow() {
-        if appPrefsWindowController != nil {
-            appPrefsWindowController?.window?.makeKeyAndOrderFront(self)
+    func showAppPrefsWindow(selecting pane: AppSettingsPane = .startup) {
+        if let windowController = appPrefsWindowController {
+            windowController.selectPane(pane)
+            windowController.window?.makeKeyAndOrderFront(self)
             return
         }
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "AppPrefs", bundle: bundle)
-        guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let window = windowController.window else { return }
+        guard let windowController = storyboard.instantiateInitialController() as? AppSettingsWindowController else { return }
 
         appPrefsWindowController = windowController
-        window.delegate = appPrefsWindowDelegate
+        windowController.initialPane = pane
 
-        if let contentController = window.contentViewController as? AppPrefsViewController {
-            contentController.store = AppContext.shared.appPrefsStore
-            windowController.windowFrameAutosaveName = "AppPrefsWindowFrame"
-            windowController.showWindow(self)
+        if let contentController = windowController.contentViewController as? AppPrefsViewController {
+            contentController.store = appPrefsStore
         }
+
+        windowController.showWindow(self)
+        windowController.selectPane(pane)
     }
 
     func showContinuousSpeechPrefsWindow() {
-        if speechPrefsWindowController != nil {
-            speechPrefsWindowController?.window?.makeKeyAndOrderFront(self)
-            return
-        }
-
-        let bundle = Bundle(for: Self.self)
-        let storyboard = NSStoryboard(name: "SpeechPrefs", bundle: bundle)
-        guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let window = windowController.window else { return }
-
-        speechPrefsWindowController = windowController
-        window.delegate = speechPrefsWindowDelegate
-
-        if let contentController = window.contentViewController as? SpeechPrefsViewController {
-            contentController.store = AppContext.shared.appPrefsStore
-            windowController.windowFrameAutosaveName = "SpeechPrefsWindowFrame"
-            windowController.showWindow(self)
-        }
+        showAppPrefsWindow(selecting: .speech)
     }
 
     func showUniversalEventsWindow() {
@@ -144,7 +130,7 @@ class AppContext {
             contentController.store = universalReactionsStore
             windowController.windowFrameAutosaveName = "EventsWindowFrame"
             windowController.showWindow(self)
-            appPrefsStore.dispatch(SetWorldPickerAtStartup(true))
+            appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(true))
             save()
         }
     }
@@ -171,36 +157,6 @@ class AppContext {
     }
 }
 
-class AppPrefsWindowDelegate: NSObject, NSWindowDelegate {
-    var ctx: AppContext
-    init(_ ctx: AppContext) {
-        self.ctx = ctx
-    }
-
-    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
-        return appUndoManager
-    }
-
-    func windowWillClose(_: Notification) {
-        ctx.appPrefsWindowController = nil
-    }
-}
-
-class SpeechPrefsWindowDelegate: NSObject, NSWindowDelegate {
-    var ctx: AppContext
-    init(_ ctx: AppContext) {
-        self.ctx = ctx
-    }
-
-    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
-        return appUndoManager
-    }
-
-    func windowWillClose(_: Notification) {
-        ctx.speechPrefsWindowController = nil
-    }
-}
-
 class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
     var ctx: AppContext
     init(_ ctx: AppContext) {
@@ -208,14 +164,14 @@ class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
     }
 
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
-        return appUndoManager
+        return appUndoManagerInstance
     }
 
     func windowWillClose(_: Notification) {
         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
         // on application termination too.)
         if !ctx.isTerminating {
-            ctx.appPrefsStore.dispatch(SetWorldPickerAtStartup(false))
+            ctx.appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(false))
             ctx.save()
         }
         ctx.universalEventsWindowController = nil
@@ -229,7 +185,7 @@ class WorldPickerWindowDelegate: NSObject, NSWindowDelegate {
     }
 
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
-        return appUndoManager
+        return appUndoManagerInstance
     }
 
     func windowWillClose(_: Notification) {

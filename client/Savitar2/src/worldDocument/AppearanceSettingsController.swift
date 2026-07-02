@@ -16,12 +16,16 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let monoOnly = AppContext.shared.prefs.flags.contains(.monoFontsOnly)
         for family in NSFontManager.shared.availableFontFamilies {
             let font = NSFont(name: family, size: 11)
-            let menuItem = NSMenuItem()
-            menuItem.title = family
-            fontPopup.menu?.addItem(menuItem)
-            if font!.isFixedPitch {
+            let isMono = font?.isFixedPitch ?? false
+            if !monoOnly || isMono {
+                let menuItem = NSMenuItem()
+                menuItem.title = family
+                fontPopup.menu?.addItem(menuItem)
+            }
+            if isMono {
                 let menuItem = NSMenuItem()
                 menuItem.title = family
                 monoFontPopup.menu?.addItem(menuItem)

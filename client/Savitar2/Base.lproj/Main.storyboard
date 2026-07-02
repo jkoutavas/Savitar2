@@ -23,7 +23,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                        <menuItem title="Settings…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
                                                 <action selector="showAppPrefsAction:" target="Voe-Tx-rLC" id="Teb-9a-IIk"/>
                                             </connections>
@@ -236,20 +236,15 @@ CA
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Speech" id="xrE-MZ-jX0">
+                                        <menuItem isSeparatorItem="YES" id="Spr-ed-sep"/>
+                                        <menuItem title="Speech" id="Spr-ed-mnu">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Speech" id="3rS-ZA-NoH">
+                                            <menu key="submenu" title="Speech" id="Spr-ed-sub">
                                                 <items>
-                                                    <menuItem title="Start Speaking" id="Ynk-f8-cLZ">
+                                                    <menuItem title="Speak Selected Text" id="Ynk-f8-cLZ">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
-                                                            <action selector="startSpeaking:" target="Ady-hI-5gd" id="654-Ng-kyl"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Stop Speaking" id="Oyz-dy-DGm">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="stopSpeaking:" target="Ady-hI-5gd" id="dX8-6p-jy9"/>
+                                                            <action selector="speakSelectedTextAction:" target="Voe-Tx-rLC" id="654-Ng-kyl"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
@@ -297,6 +292,7 @@ CA
                                         <menuItem title="Mute Sound Cues" id="pHX-PB-Fgj">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
+                                                <action selector="toggleMuteSoundAction:" target="Voe-Tx-rLC" id="mut-snd-act"/>
                                                 <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSound" id="tfd-jF-8VS">
                                                     <dictionary key="options">
                                                         <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -310,6 +306,7 @@ CA
                                         <menuItem title="Mute Speaking Cues" id="Bx9-Z6-5l7" userLabel="Mute Speaking Cues">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
+                                                <action selector="toggleMuteSpeakingAction:" target="Voe-Tx-rLC" id="mut-spk-act"/>
                                                 <binding destination="Voe-Tx-rLC" name="value" keyPath="muteSpeaking" id="VoK-Yb-cwN">
                                                     <dictionary key="options">
                                                         <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
@@ -319,13 +316,14 @@ CA
                                                 </binding>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Sp1-ch-Aud"/>
                                         <menuItem title="Flush Speech Buffer" keyEquivalent="l" id="2Rp-TG-xFE" userLabel="Flush Speech Buffer">
                                             <connections>
                                                 <action selector="flushSpeachAction:" target="Voe-Tx-rLC" id="OoL-Ld-zde"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Hf7-f0-W54"/>
-                                        <menuItem title="Speech Preferences…" id="5ue-kS-vmd">
+                                        <menuItem title="Speech Settings…" id="5ue-kS-vmd">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showContinuousSpeechPrefsAction:" target="Voe-Tx-rLC" id="nrC-4C-kPE"/>

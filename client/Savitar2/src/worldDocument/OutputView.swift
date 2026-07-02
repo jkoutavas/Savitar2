@@ -54,6 +54,14 @@ class OutputView: WKWebView {
         run(javaScript: js)
     }
 
+    func selectedPlainText(completion: @escaping (String?) -> Void) {
+        evaluateJavaScript("window.getSelection().toString()") { result, _ in
+            let text = (result as? String)?
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            completion(text?.isEmpty == false ? text : nil)
+        }
+    }
+
     func output(string: String,
                 makeAppend: Bool = false,
                 appending: Bool = false,
@@ -90,13 +98,15 @@ class OutputView: WKWebView {
             }
         }
 
-        if AppContext.hasContinuousSpeech(), AppContext.shared.prefs.continuousSpeechEnabled {
+        if AppContext.hasContinuousSpeech(),
+           AppContext.shared.prefs.continuousSpeechEnabled,
+           !AppContext.shared.prefs.flags.contains(.muteSpeaking) {
             if plainText == nil {
                 plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
             }
             if let text = plainText {
-                AppContext.shared.speakerMan.speak(text: text,
-                                                   voiceName: AppContext.shared.prefs.continuousSpeechVoice)
+                let voice = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
+                AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
             }
         }
     }

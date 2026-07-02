@@ -100,8 +100,23 @@ class Macro: SavitarObject {
 
     // stackoverflow.com/questions/6084266/check-modifierflags-of-nsevent-if-a-certain-modifier-was-pressed-but-no-other
     func isHotKey(forEvent event: NSEvent) -> Bool {
-        return enabled && hotKey.keyCode != 0 && hotKey.keyCode == event.keyCode &&
-            hotKey.modifierFlags.intersection(.deviceIndependentFlagsMask) ==
-            event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        guard enabled, hotKey.keyCode != 0 else { return false }
+        if !AppContext.shared.prefs.flags.contains(.useKeypad) {
+            if event.modifierFlags.contains(.numericPad) || hotKey.isKeypadHotKey {
+                return false
+            }
+        }
+        return hotKey.keyCode == event.keyCode &&
+            modifierFlagsMatch(hotKey: hotKey, event: event)
+    }
+
+    private func modifierFlagsMatch(hotKey: HotKey, event: NSEvent) -> Bool {
+        var eventFlags = HotKey.normalize(modifierFlags: event.modifierFlags)
+        var macroFlags = HotKey.normalize(modifierFlags: hotKey.modifierFlags)
+        if hotKey.isKeypadHotKey {
+            eventFlags.remove(.numericPad)
+            macroFlags.remove(.numericPad)
+        }
+        return macroFlags == eventFlags
     }
 }
