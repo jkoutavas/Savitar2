@@ -129,14 +129,14 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ## Story 4 — Speech pane polish
 
-**Goal:** Minor cleanup; speech settings now live in the Settings window **Speech** pane (HIG). The standalone Speech storyboard is embedded as a child view controller.
+**Goal:** Minor cleanup; speech settings now live in the Settings window **Speech** pane (HIG). `SpeechPrefsViewController` is built programmatically and embedded as a child view controller.
 
 ### Tasks
 
 - [x] **4.0** Fold Speech into app Settings window (Audio → Speech… opens Settings → Speech pane)
 - [x] **4.1** Confirm rate/voice/enabled persist and apply during continuous speech
 - [x] **4.2** Save speech prefs on change (match App Settings live-save pattern)
-- [x] **4.3** Rebuild Speech pane with Auto Layout (currently storyboard fixed frames)
+- [x] **4.3** Rebuild Speech pane with Auto Layout; removed `SpeechPrefs.storyboard`
 - [ ] **4.4** Document macOS 10.15+ requirement in Help or prefs footnote (already in UI)
 
 ### Acceptance

@@ -10,12 +10,12 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ## Documentation
 
-| Document | Audience | Contents |
-|----------|----------|----------|
-| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | Users | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech is documented first) |
-| [docs/Stories.md](docs/Stories.md) | Developers | Settings, prefs, and HIG backlog as user stories |
-| [docs/HIG.md](docs/HIG.md) | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …) |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes |
+| Document                                             | Audience   | Contents                                                                                                                                     |
+| ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech is documented first) |
+| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                             |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                        |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes                                                                                                          |
 
 ## Current state of the application
 
@@ -161,22 +161,22 @@ cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     169 text files.
-     153 unique files.
+     168 text files.
+     152 unique files.
       50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1872.2 files/s, 232745.6 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.06 s (2441.3 files/s, 302962.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          122           2099           1298           9937
-XML                             15              0             38           4080
-Markdown                        10            463              0            936
+XML                             14              0             36           3919
+Markdown                        10            461              0            944
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           153           2576           1345          15099
+SUM:                           152           2574           1343          14946
 -------------------------------------------------------------------------------
 ```
