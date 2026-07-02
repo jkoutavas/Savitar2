@@ -44,14 +44,6 @@ enum WindowRestoration {
             }
         }
 
-        if context.worldPickerWindowController != nil {
-            sessions.append(.worldPickerWindow)
-        }
-
-        if context.universalEventsWindowController != nil {
-            sessions.append(.eventsWindow)
-        }
-
         return sessions
     }
 
@@ -62,10 +54,9 @@ enum WindowRestoration {
                 restoreFileSession(url)
             case let .pickerWorld(objectID):
                 restorePickerSession(objectID, in: context)
-            case .worldPickerWindow:
-                context.showWorldPicker()
-            case .eventsWindow:
-                context.showUniversalEventsWindow()
+            case .worldPickerWindow, .eventsWindow:
+                // Auxiliary windows are controlled by startup prefs, not session restoration.
+                break
             }
         }
     }
