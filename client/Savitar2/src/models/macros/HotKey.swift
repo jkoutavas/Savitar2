@@ -190,4 +190,9 @@ struct HotKey: Equatable {
         return lhs.keyCode == rhs.keyCode &&
             normalize(modifierFlags: lhs.modifierFlags) == normalize(modifierFlags: rhs.modifierFlags)
     }
+
+    var isKeypadHotKey: Bool {
+        guard let label = KeyCodeLabelDict[keyCode] else { return false }
+        return label.hasPrefix("KP")
+    }
 }

@@ -63,4 +63,26 @@ class AppPreferencesTests: XCTestCase {
 
         XCTAssertEqual(xmlOutputStr, xmlInputStr)
     }
+
+    func testSetPrefsFlagAction() {
+        var state = AppPreferencesState()
+        state = SetPrefsFlagAction(flag: .muteBell, enabled: true).apply(oldState: state)
+        XCTAssertTrue(state.prefs.flags.contains(.muteBell))
+        state = SetPrefsFlagAction(flag: .muteBell, enabled: false).apply(oldState: state)
+        XCTAssertFalse(state.prefs.flags.contains(.muteBell))
+    }
+
+    func testSetShowEventsWindowAtStartupAction() {
+        var state = AppPreferencesState()
+        state = SetShowEventsWindowAtStartupAction(true).apply(oldState: state)
+        XCTAssertTrue(state.prefs.flags.contains(.startupEventsWindow))
+        state = SetShowEventsWindowAtStartupAction(false).apply(oldState: state)
+        XCTAssertFalse(state.prefs.flags.contains(.startupEventsWindow))
+    }
+
+    func testSetUpdatingEnabledAction() {
+        var state = AppPreferencesState()
+        state = SetUpdatingEnabledAction(false).apply(oldState: state)
+        XCTAssertFalse(state.prefs.updatingEnabled)
+    }
 }

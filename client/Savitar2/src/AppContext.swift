@@ -30,7 +30,7 @@ class AppContext {
     internal var worldPickerWindowController: NSWindowController?
 
     // swiftlint:disable:this weak_delegate
-    private var appPrefsWindowDelegate: SpeechPrefsWindowDelegate?
+    private var appPrefsWindowDelegate: AppPrefsWindowDelegate?
     private var speechPrefsWindowDelegate: SpeechPrefsWindowDelegate?
     private var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
     private var worldPickerWindowDelegate: WorldPickerWindowDelegate?
@@ -52,6 +52,7 @@ class AppContext {
         worldMan = WorldMan()
 
         speechPrefsWindowDelegate = SpeechPrefsWindowDelegate(self)
+        appPrefsWindowDelegate = AppPrefsWindowDelegate(self)
         universalEventsWindowDelegate = UniversalEventsWindowDelegate(self)
         worldPickerWindowDelegate = WorldPickerWindowDelegate(self)
     }
@@ -144,7 +145,7 @@ class AppContext {
             contentController.store = universalReactionsStore
             windowController.windowFrameAutosaveName = "EventsWindowFrame"
             windowController.showWindow(self)
-            appPrefsStore.dispatch(SetWorldPickerAtStartup(true))
+            appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(true))
             save()
         }
     }
@@ -215,7 +216,7 @@ class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
         // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
         // on application termination too.)
         if !ctx.isTerminating {
-            ctx.appPrefsStore.dispatch(SetWorldPickerAtStartup(false))
+            ctx.appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(false))
             ctx.save()
         }
         ctx.universalEventsWindowController = nil

@@ -6,52 +6,56 @@ Savitar 1 spread settings across three surfaces:
 
 | Surface | v1 location | v2 status |
 |---------|-------------|-----------|
-| **App Preferences** | `DoPreferences()` in `CViewAppMac.cp` | Stub — one checkbox today |
+| **App Preferences** | `DoPreferences()` in `CViewAppMac.cp` | Done — grouped prefs window (`AppPrefsViewController`) |
 | **Speech Preferences** | `DoSpeechPreferences()` | Mostly done (`SpeechPrefs.storyboard`) |
 | **ANSI Color Settings** | `EditColors()` | Data layer only (`ColorMan` in prefs XML) |
 
-The prefs **data model** already imports v1 flags and values. This epic is mostly **UI + wiring existing flags to behavior**.
+The prefs **data model** already imports v1 flags and values. **Story 1** (App Preferences UI) is complete; **Story 2** is partially complete (see below).
 
 ---
 
-## Story 1 — Expand App Preferences window
+## Story 1 — Expand App Preferences window ✅
 
 **Goal:** Replace the single-checkbox Preferences window with v1-parity startup, input, audio, and update settings.
 
-**Sketch:**
+**Status:** Complete (July 2026).
+
+**Sketch** (implemented in `AppPrefsViewController` — single column, no scrollbar):
 
 ```
 ┌─ Savitar Preferences ─────────────────────────────────────┐
 │  Startup                                                  │
-│  ☑ Show World Picker at startup          (done)           │
-│  ☐ Show Macro Clicker at startup         (blocked)        │
+│  ☑ Show World Picker at startup                           │
+│  ☐ Show Macro Clicker at startup         (grayed out)     │
 │  ☐ Show Events Window at startup                          │
 │                                                           │
 │  Input & Display                                          │
 │  ☐ Use keypad for macro entry                             │
 │  ☐ Mono fonts only (in font menus)                        │
-│  ☐ Default word wrap for new sessions                     │
+│  ☐ Default word wrap for new sessions    (grayed out)     │
 │                                                           │
 │  Audio (session cues)                                     │
 │  ☐ Mute sound cues                                        │
 │  ☐ Mute speaking cues                                     │
-│  ☐ Mute clicker sounds                   (blocked)        │
+│  ☐ Mute clicker sounds                   (grayed out)     │
 │  ☐ Mute terminal bell                                     │
 │                                                           │
 │  Updates                                                  │
-│  ☐ Check for updates automatically       (blocked)      │
+│  ☐ Check for updates automatically       (grayed out)     │
 └───────────────────────────────────────────────────────────┘
 ```
 
+Unsupported rows are disabled, grayed, and show a tooltip on hover.
+
 ### Tasks
 
-- [ ] **1.1** Grow `AppPrefs.storyboard` with grouped sections (Startup, Input & Display, Audio, Updates)
-- [ ] **1.2** Expose `showStartupPicker` (done) and add bindings for remaining `PrefsFlags` in `AppPrefsPresenter`
-- [ ] **1.3** Add `SetShowEventsWindowAtStartupAction` wired to `startupEventsWindow` (fix misnamed `SetWorldPickerAtStartup` while here)
-- [ ] **1.4** Add ReSwift actions for `useKeypad`, `monoFontsOnly`, `defaultWordWrap`, `muteClicker`, `muteBell`; save prefs on change
-- [ ] **1.5** Mirror mute sound / mute speaking checkboxes with existing Audio menu bindings in `AppDelegate`
-- [ ] **1.6** Disable (gray out) Macro Clicker and Check-for-updates rows until those features ship; show tooltips explaining why
-- [ ] **1.7** Add `updatingEnabled` checkbox; keep disabled until Sparkle/updater exists
+- [x] **1.1** Grow `AppPrefs.storyboard` with grouped sections (Startup, Input & Display, Audio, Updates)
+- [x] **1.2** Expose `showStartupPicker` (done) and add bindings for remaining `PrefsFlags` in `AppPrefsPresenter`
+- [x] **1.3** Add `SetShowEventsWindowAtStartupAction` wired to `startupEventsWindow` (fix misnamed `SetWorldPickerAtStartup` while here)
+- [x] **1.4** Add ReSwift actions for `useKeypad`, `monoFontsOnly`, `defaultWordWrap`, `muteClicker`, `muteBell`; save prefs on change
+- [x] **1.5** Mirror mute sound / mute speaking checkboxes with existing Audio menu bindings in `AppDelegate`
+- [x] **1.6** Disable (gray out) unsupported rows until those features ship; show tooltips (Macro Clicker, word wrap, Mute clicker, Check for updates)
+- [x] **1.7** Add `updatingEnabled` checkbox; keep disabled until Sparkle/updater exists
 
 ### Touchpoints
 
@@ -72,20 +76,26 @@ The prefs **data model** already imports v1 flags and values. This epic is mostl
 
 **Goal:** Flags that exist in XML but do nothing today actually affect the app.
 
+**Status:** Partially complete — keypad, mono fonts, and mute bell are wired; word wrap and clicker remain.
+
 ### Tasks
 
-- [ ] **2.1** **Use keypad** — honor `useKeypad` in macro hotkey / input handling (v1: keypad chord entry)
-- [ ] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
+- [x] **2.1** **Use keypad** — honor `useKeypad` in macro hotkey / input handling (v1: keypad chord entry)
+- [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
 - [ ] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes
-- [ ] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
+- [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
 - [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists
 - [ ] **2.6** **Events window sections** — wire `trigsClosed` / `varsClosed` to Events window UI state (stretch; not in main prefs window)
 
 ### Touchpoints
 
-- Input: `InputViewController.swift`, `Session.swift`, macro hotkey code
-- Fonts: world settings / font picker controllers
-- Bell: `TelnetParser.swift` or session output path
+| Flag | Wired in |
+|------|----------|
+| `useKeypad` | `Macro.swift`, `HotKey.swift` |
+| `monoFontsOnly` | `AppearanceSettingsController.swift` |
+| `muteBell` | `TerminalBell.swift`, `OutputView.swift` (see also input PR #47) |
+| `muteSound` / `muteSpeaking` | `Session.swift`, `AppDelegate.swift` (Audio menu + prefs) |
+| `defaultWordWrap` | *Not yet — needs `World` / session pane support* |
 
 ### Acceptance
 
@@ -143,20 +153,21 @@ The prefs **data model** already imports v1 flags and values. This epic is mostl
 
 ## Deferred (blocked on other epics)
 
-| Item | Blocked by | v1 reference |
-|------|------------|--------------|
-| Show Macro Clicker at startup | Macro Clicker window (README beta) | `TVPrefFlag_t_StartupClicker` |
-| Mute clicker sounds | Macro Clicker | `cmd_MuteClicker` |
-| Check for updates | Sparkle / updater (README alpha) | `CUpdateChecker`, `updatingEnabled` |
-| Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` |
-| Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` |
+| Item | Blocked by | v1 reference | Prefs UI |
+|------|------------|--------------|----------|
+| Show Macro Clicker at startup | Macro Clicker window (README beta) | `TVPrefFlag_t_StartupClicker` | Grayed out |
+| Default word wrap | `World` / session word-wrap flag (Story 2.3) | `TVPrefFlag_t_DefaultWordWrap` | Grayed out |
+| Mute clicker sounds | Macro Clicker | `cmd_MuteClicker` | Grayed out |
+| Check for updates | Sparkle / updater (README alpha) | `CUpdateChecker`, `updatingEnabled` | Grayed out |
+| Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
+| Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
 
 ---
 
 ## Implementation order (recommended)
 
-1. Story 1 — App Preferences UI (unblocks user-visible parity quickly)
-2. Story 2 — Wire flags (makes Story 1 meaningful)
+1. ~~Story 1 — App Preferences UI~~ ✅
+2. ~~Story 2 — Wire flags~~ — *in progress* (remaining: word wrap, clicker, Events window sections)
 3. Story 3 — ANSI Colors window (separate surface; README beta item)
 4. Story 4 — Speech polish if needed
 
@@ -164,12 +175,16 @@ The prefs **data model** already imports v1 flags and values. This epic is mostl
 
 ## Reference — v1 Preferences checkboxes (`DoPreferences`)
 
-| v1 control | `PrefsFlags` / field | v2 UI |
-|------------|---------------------|-------|
+| v1 control | `PrefsFlags` / field | v2 status |
+|------------|---------------------|-----------|
 | Show World Picker at startup | `startupPicker` | Done |
-| Show Macro Clicker at startup | `startupClicker` | Story 1 (disabled) |
-| Use keypad | `useKeypad` | Story 1 + 2 |
-| Mono fonts only | `monoFontsOnly` | Story 1 + 2 |
-| Default word wrap | `defaultWordWrap` | Story 1 + 2 |
+| Show Macro Clicker at startup | `startupClicker` | UI only (grayed out) |
+| Show Events Window at startup | `startupEventsWindow` | Done |
+| Use keypad | `useKeypad` | Done |
+| Mono fonts only | `monoFontsOnly` | Done |
+| Default word wrap | `defaultWordWrap` | UI only (grayed out); Story 2.3 |
+| Mute sound / Mute speaking | `muteSound`, `muteSpeaking` | Done (prefs + Audio menu) |
+| Mute terminal bell | `muteBell` | Done |
+| Mute clicker | `muteClicker` | UI only (grayed out) |
+| Check for updates | `updatingEnabled` | UI only (grayed out) |
 | Capture file editor | `logEditorName` | Deferred |
-| *(not in v1 prefs dialog)* | `startupEventsWindow` | Story 1 |

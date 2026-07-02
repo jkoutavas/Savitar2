@@ -27,8 +27,23 @@ extension AppPreferencesUndoableAction where Self: AppPreferencesAction {
     }
 }
 
-// TODO: promote this to an undoable action once the App Preferences window is implemented
-struct SetWorldPickerAtStartup: AppPreferencesAction {
+struct SetPrefsFlagAction: AppPreferencesAction {
+    let flag: PrefsFlags
+    let enabled: Bool
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        if enabled {
+            result.prefs.flags.insert(flag)
+        } else {
+            result.prefs.flags.remove(flag)
+        }
+        result.prefs.save()
+        return result
+    }
+}
+
+struct SetShowEventsWindowAtStartupAction: AppPreferencesAction {
     let enabled: Bool
 
     init(_ enabled: Bool) {
@@ -42,6 +57,21 @@ struct SetWorldPickerAtStartup: AppPreferencesAction {
         } else {
             result.prefs.flags.remove(.startupEventsWindow)
         }
+        result.prefs.save()
+        return result
+    }
+}
+
+struct SetUpdatingEnabledAction: AppPreferencesAction {
+    let enabled: Bool
+
+    init(_ enabled: Bool) {
+        self.enabled = enabled
+    }
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        result.prefs.updatingEnabled = enabled
         result.prefs.save()
         return result
     }
@@ -61,6 +91,7 @@ struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPrefer
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
         let result = oldState
         result.prefs.continuousSpeechEnabled = enabled
+        result.prefs.save()
         return result
     }
 
@@ -110,6 +141,7 @@ struct SetContinuousSpeechRateAction: AppPreferencesUndoableAction, AppPreferenc
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
         let result = oldState
         result.prefs.continuousSpeechRate = rate
+        result.prefs.save()
         return result
     }
 
@@ -130,6 +162,7 @@ struct SetContinuousSpeechVoiceAction: AppPreferencesUndoableAction, AppPreferen
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
         let result = oldState
         result.prefs.continuousSpeechVoice = voice
+        result.prefs.save()
         return result
     }
 

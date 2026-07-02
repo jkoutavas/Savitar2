@@ -10,33 +10,22 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import Cocoa
+import ReSwift
 
 var isRunningTests: Bool {
     return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
 }
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     @objc dynamic var muteSound: Bool {
         get { AppContext.shared.prefs.flags.contains(.muteSound) }
-        set {
-            if newValue == false {
-                AppContext.shared.prefs.flags.remove(.muteSound)
-            } else {
-                AppContext.shared.prefs.flags.insert(.muteSound)
-            }
-        }
+        set { AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteSound, enabled: newValue)) }
     }
 
     @objc dynamic var muteSpeaking: Bool {
         get { AppContext.shared.prefs.flags.contains(.muteSpeaking) }
-        set {
-            if newValue == false {
-                AppContext.shared.prefs.flags.remove(.muteSpeaking)
-            } else {
-                AppContext.shared.prefs.flags.insert(.muteSpeaking)
-            }
-        }
+        set { AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteSpeaking, enabled: newValue)) }
     }
 
     override init() {
@@ -54,6 +43,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          ])
 
         AppContext.shared.restoreSavedWindows()
+
+        AppContext.shared.appPrefsStore.subscribe(self)
 
         if AppContext.shared.prefs.flags.contains(.startupPicker) {
             showWorldPickerAction(self)
@@ -102,5 +93,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func showWorldPickerAction(_: Any) {
         AppContext.shared.showWorldPicker()
+    }
+
+    func newState(state _: AppPreferencesState) {
+        willChangeValue(forKey: "muteSound")
+        didChangeValue(forKey: "muteSound")
+        willChangeValue(forKey: "muteSpeaking")
+        didChangeValue(forKey: "muteSpeaking")
     }
 }

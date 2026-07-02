@@ -59,8 +59,9 @@ _ Implement remaining World settings tabs
 _ Implement remaining local commands
 √ Implement scroll locking
 _ Menubar finalized
-_ Expand App Preferences window (see [docs/Stories.md](docs/Stories.md))
-_ Wire app preference flags to behavior (keypad, mono fonts, word wrap, bell)
+√ Expand App Preferences window (see [docs/Stories.md](docs/Stories.md))
+√ Wire keypad, mono fonts, and mute-bell preference flags (see [docs/Stories.md](docs/Stories.md))
+_ Wire default word wrap for new sessions (see [docs/Stories.md](docs/Stories.md))
 √ Text Editing menu items finalized
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
@@ -147,24 +148,25 @@ There's already a `.swiftformat` config file that contains this:
 
 ## Tracking lines of code
 
-`cloc . --exclude-dir=Pods,.build,build`
+`cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'`
 
 ```
-     166 text files.
-     151 unique files.
+     165 text files.
+     150 unique files.
       49 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1973.8 files/s, 233703.1 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1950.2 files/s, 235962.4 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          121           1985           1291           9237
+Swift                          121           2031           1290           9503
 XML                             15              0             38           4082
-Markdown                         9            355              0            722
+Markdown                         8            339              0            697
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           151           2354           1338          14187
+SUM:                           150           2384           1337          14428
+-------------------------------------------------------------------------------
 ```
