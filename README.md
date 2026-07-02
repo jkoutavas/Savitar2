@@ -10,6 +10,8 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 Chronological [Software Design Notes](docs/Savitar2DevNotes.md) are available for viewing.
 
+Implementation stories for settings/preferences work: [docs/Stories.md](docs/Stories.md).
+
 ## Current state of the application
 
 With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha).
@@ -40,7 +42,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Implement Continuous Speech (using new AVSpeechSynthesizer)
 √ Implement the start of local commands, ##history
 √ Implement sticky commands
-_ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
+√ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
 √ Implement audio cue triggers
 √ Implement reply triggers
 √ Implement input triggers
@@ -57,6 +59,8 @@ _ Implement remaining World settings tabs
 _ Implement remaining local commands
 √ Implement scroll locking
 _ Menubar finalized
+_ Expand App Preferences window (see [docs/Stories.md](docs/Stories.md))
+_ Wire app preference flags to behavior (keypad, mono fonts, word wrap, bell)
 √ Text Editing menu items finalized
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
@@ -73,7 +77,7 @@ _ Find/Find Next supported
 √ Logging support
 _ Printing supported
 _ Enhanced analytics
-_ ANSI Color Settings window implemented
+_ ANSI Color Settings window implemented (see [docs/Stories.md](docs/Stories.md))
 _ Macro Clicker
 _ xch_cmd support
 _ MCP (? does anyone use this?)
@@ -146,22 +150,25 @@ There's already a `.swiftformat` config file that contains this:
 `cloc . --exclude-dir=Pods,.build,build`
 
 ```
-     157 text files.
-     142 unique files.
+     160 text files.
+     145 unique files.
       49 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1780.1 files/s, 215936.3 lines/s)
+     165 text files.
+     150 unique files.
+      49 files ignored.
+
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1820.5 files/s, 217542.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          115           1920           1269           8912
-XML                             15              0             38           4080
-Markdown                         7            286              0            555
+Swift                          121           1993           1306           9262
+XML                             15              0             38           4082
+Markdown                         9            355              0            723
 JSON                             1              0              0             68
 YAML                             2             11              0             61
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           142           2220           1315          13690
--------------------------------------------------------------------------------
+SUM:                           150           2362           1352          14210
 ```

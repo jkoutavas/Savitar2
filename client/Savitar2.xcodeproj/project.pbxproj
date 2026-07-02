@@ -10,6 +10,10 @@
 		69000EE22397CF09009976E0 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EE12397CF09009976E0 /* AppContext.swift */; };
 		69A45B012A7F100100CDDE09 /* WindowRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B002A7F100100CDDE09 /* WindowRestoration.swift */; };
 		69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */; };
+		69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A012A80100100CDDE09 /* InputEditingKeys.swift */; };
+		69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A022A80100100CDDE09 /* TerminalBell.swift */; };
+		69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */; };
+		69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A042A80100100CDDE09 /* TerminalBellTests.swift */; };
 		69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3823A52A7B001C58B1 /* TriggerManTests.swift */; };
 		69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */; };
 		69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */; };
@@ -170,6 +174,10 @@
 		69000EE12397CF09009976E0 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		69A45B002A7F100100CDDE09 /* WindowRestoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestoration.swift; sourceTree = "<group>"; };
 		69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestorationTests.swift; sourceTree = "<group>"; };
+		69B46A012A80100100CDDE09 /* InputEditingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeys.swift; sourceTree = "<group>"; };
+		69B46A022A80100100CDDE09 /* TerminalBell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBell.swift; sourceTree = "<group>"; };
+		69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeysTests.swift; sourceTree = "<group>"; };
+		69B46A042A80100100CDDE09 /* TerminalBellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBellTests.swift; sourceTree = "<group>"; };
 		69071B3823A52A7B001C58B1 /* TriggerManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManTests.swift; sourceTree = "<group>"; };
 		69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyXMLParserTests.swift; sourceTree = "<group>"; };
 		69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XMLElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -427,6 +435,8 @@
 				6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */,
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
+				69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */,
+				69B46A042A80100100CDDE09 /* TerminalBellTests.swift */,
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
 				6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */,
 				69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */,
@@ -508,6 +518,8 @@
 				695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */,
 				695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */,
 				695F5AA825899EFD00AB6BA6 /* InputViewController.swift */,
+				69B46A012A80100100CDDE09 /* InputEditingKeys.swift */,
+				69B46A022A80100100CDDE09 /* TerminalBell.swift */,
 				69652A9A26443E4B0044877A /* OutputSettingsController.swift */,
 				695F5AA925899EFD00AB6BA6 /* OutputViewController.swift */,
 				695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */,
@@ -1013,6 +1025,8 @@
 				69C1F0DC25A4A9F60048A739 /* SpeechPrefsViewController.swift in Sources */,
 				695F5AE525899FA400AB6BA6 /* MacroViewController.swift in Sources */,
 				695F5ABB25899EFD00AB6BA6 /* InputViewController.swift in Sources */,
+				69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */,
+				69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
@@ -1075,6 +1089,8 @@
 				6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */,
 				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */,
+				69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */,
+				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,
 				695F5A612588562E00AB6BA6 /* ReSwiftTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,

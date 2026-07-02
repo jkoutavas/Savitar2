@@ -89,6 +89,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
               NSApplication.shared.keyWindow === locWindow else { return false }
 
         guard let sess = session else { return false }
+        if handleEditingKey(with: event, session: sess) {
+            return true
+        }
+
         if sess.expandKeypress(with: event) { return true }
 
         if event.modifierFlags.contains(.control), event.keyCode == Keycode.s {
@@ -98,10 +102,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
         // swiftlint:disable force_cast
         guard let doc = locWindow.windowController?.document as! Document? else { return false }
-        doc.suppressChangeCount = true
 
         switch event.keyCode {
         case Keycode.returnKey:
+            doc.suppressChangeCount = true
             if event.modifierFlags.contains(.option) {
                 // the carriage return is part of the input
                 return false
@@ -141,6 +145,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             }
 
         case Keycode.upArrow:
+            doc.suppressChangeCount = true
             if cmdIndex > 1 {
                 if getTextLength() > 0 {
                     _ = saveCmd()
@@ -150,6 +155,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             }
 
         case Keycode.downArrow:
+            doc.suppressChangeCount = true
             if cmdIndex < cmdBuf.count {
                 if getTextLength() > 0 {
                     _ = saveCmd()
@@ -170,6 +176,28 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         }
 
         return true
+    }
+
+    private func handleEditingKey(with event: NSEvent, session: Session) -> Bool {
+        switch InputEditingKeys.action(for: event) {
+        case .moveLeft:
+            textView.moveLeft(nil)
+            return true
+        case .moveRight:
+            textView.moveRight(nil)
+            return true
+        case .beginningOfLine:
+            textView.moveToBeginningOfLine(nil)
+            return true
+        case .sendInterrupt:
+            session.sendString(string: InputEditingKeys.interruptCharacter)
+            return true
+        case .sendBell:
+            session.sendString(string: InputEditingKeys.bellCharacter)
+            return true
+        case .none:
+            return false
+        }
     }
 
     private func toggleScrollLock() {

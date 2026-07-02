@@ -59,8 +59,11 @@ class OutputView: WKWebView {
                 appending: Bool = false,
                 appendID: Int = 0,
                 attributes _: [NSAttributedString.Key: Any]? = nil) {
+        let mutedBell = AppContext.shared.prefs.flags.contains(.muteBell)
+        let displayString = TerminalBell.process(string, muted: mutedBell)
+
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
-        var cleanString = string
+        var cleanString = displayString
         if !useHTML {
             cleanString = cleanString
                 .replacingOccurrences(of: "<", with: "&lt;")
@@ -81,7 +84,7 @@ class OutputView: WKWebView {
 
         var plainText: String?
         if let fh = loggingFileHandle {
-            plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
+            plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
             if let text = plainText, let data = text.data(using: String.Encoding.utf8) {
                 fh.write(data)
             }
@@ -89,7 +92,7 @@ class OutputView: WKWebView {
 
         if AppContext.hasContinuousSpeech(), AppContext.shared.prefs.continuousSpeechEnabled {
             if plainText == nil {
-                plainText = ansiToHtml.parse(ansi: string, hideANSI: true)
+                plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
             }
             if let text = plainText {
                 AppContext.shared.speakerMan.speak(text: text,
