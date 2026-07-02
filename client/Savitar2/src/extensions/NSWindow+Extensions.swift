@@ -13,4 +13,21 @@ extension NSWindow {
         let contentHeight = contentRect(forFrameRect: frame).height
         return frame.height - contentHeight
     }
+
+    /// Applies standard macOS Settings window chrome (modeless, close-only, non-resizable).
+    func configureAsSettingsWindow(delegate: NSWindowDelegate?) {
+        styleMask = [.titled, .closable]
+        self.delegate = delegate
+        isReleasedWhenClosed = false
+    }
+
+    /// Sizes the window to a content area and optionally centers on first display.
+    func fitContentSize(_ contentSize: NSSize, centerIfNeeded: Bool) {
+        setContentSize(contentSize)
+        contentMinSize = contentSize
+        contentMaxSize = contentSize
+        if centerIfNeeded {
+            center()
+        }
+    }
 }

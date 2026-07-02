@@ -10,13 +10,25 @@ import Cocoa
 import ReSwift
 
 class AppPrefsViewController: NSViewController, StoreSubscriber {
-    var store: AppPreferencesStore?
+    var store: AppPreferencesStore? {
+        didSet {
+            speechPrefsViewController?.store = store
+            speechPrefsViewController?.activateIfNeeded()
+        }
+    }
+    weak var settingsWindowController: AppSettingsWindowController?
 
+    private static let contentMargin: CGFloat = 20
+
+    private let paneContainer = NSView()
+    private var paneViews: [AppSettingsPane: NSView] = [:]
+    private var visiblePane: AppSettingsPane = .startup
+    private var speechPrefsViewController: SpeechPrefsViewController?
     private var checkboxBindings: [(button: NSButton, keyPath: String, supported: Bool)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildPreferencesUI()
+        buildSettingsPanes()
     }
 
     override func viewWillAppear() {
@@ -35,71 +47,108 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         bindCheckboxes()
     }
 
-    private func buildPreferencesUI() {
-        view.subviews.forEach { $0.removeFromSuperview() }
-
-        let stack = NSStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.orientation = .vertical
-        stack.alignment = .leading
-        stack.spacing = 12
-
-        stack.addArrangedSubview(section(
-            title: "Startup",
-            items: [
-                .enabled("showStartupPicker", title: "Show World Picker at startup"),
-                .disabled("showStartupClicker", title: "Show Macro Clicker at startup",
-                           toolTip: "Available when the Macro Clicker window ships."),
-                .enabled("showEventsWindowAtStartup", title: "Show Events Window at startup")
-            ]
-        ))
-
-        stack.addArrangedSubview(section(
-            title: "Input & Display",
-            items: [
-                .enabled("useKeypad", title: "Use keypad for macro entry"),
-                .enabled("monoFontsOnly", title: "Mono fonts only (in font menus)"),
-                .disabled("defaultWordWrap", title: "Default word wrap for new sessions",
-                          toolTip: "Word wrap for new sessions is not yet implemented.")
-            ]
-        ))
-
-        stack.addArrangedSubview(section(
-            title: "Audio (session cues)",
-            items: [
-                .enabled("muteSound", title: "Mute sound cues"),
-                .enabled("muteSpeaking", title: "Mute speaking cues"),
-                .disabled("muteClicker", title: "Mute clicker sounds",
-                          toolTip: "Available when the Macro Clicker ships."),
-                .enabled("muteBell", title: "Mute terminal bell")
-            ]
-        ))
-
-        stack.addArrangedSubview(section(
-            title: "Updates",
-            items: [
-                .disabled("updatingEnabled", title: "Check for updates automatically",
-                          toolTip: "Available when in-app update checking ships.")
-            ]
-        ))
-
-        view.addSubview(stack)
-
-        NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20),
-            stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
-        ])
+    func showPane(_ pane: AppSettingsPane) {
+        visiblePane = pane
+        for (paneKey, paneView) in paneViews {
+            paneView.isHidden = paneKey != pane
+        }
+        if pane == .speech {
+            speechPrefsViewController?.activateIfNeeded()
+        }
     }
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        guard let window = view.window else { return }
-        view.layoutSubtreeIfNeeded()
-        let fittingSize = view.fittingSize
-        window.setContentSize(NSSize(width: max(420, fittingSize.width + 40),
-                                     height: fittingSize.height + 40))
+    func fittingSizeForVisiblePane() -> NSSize {
+        guard let paneView = paneViews[visiblePane] else {
+            return view.fittingSize
+        }
+        paneView.layoutSubtreeIfNeeded()
+        let margin = Self.contentMargin * 2
+        return NSSize(width: paneView.fittingSize.width + margin, height: paneView.fittingSize.height + margin)
+    }
+
+    func maximumPaneContentSize() -> NSSize {
+        let margin = Self.contentMargin * 2
+        var maxWidth: CGFloat = 0
+        var maxHeight: CGFloat = 0
+        for paneView in paneViews.values {
+            paneView.layoutSubtreeIfNeeded()
+            let size = paneView.fittingSize
+            maxWidth = max(maxWidth, size.width + margin)
+            maxHeight = max(maxHeight, size.height + margin)
+        }
+        return NSSize(width: maxWidth, height: maxHeight)
+    }
+
+    private func buildSettingsPanes() {
+        view.subviews.forEach { $0.removeFromSuperview() }
+        checkboxBindings.removeAll()
+        paneViews.removeAll()
+        speechPrefsViewController = nil
+
+        paneContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(paneContainer)
+
+        let margin = Self.contentMargin
+        NSLayoutConstraint.activate([
+            paneContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            paneContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            paneContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
+            paneContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin)
+        ])
+
+        paneViews[.startup] = paneView(items: [
+            .enabled("showStartupPicker", title: "Show World Picker at startup"),
+            .disabled("showStartupClicker", title: "Show Macro Clicker at startup",
+                      toolTip: "Available when the Macro Clicker window ships."),
+            .enabled("showEventsWindowAtStartup", title: "Show Events Window at startup")
+        ])
+
+        paneViews[.inputDisplay] = paneView(items: [
+            .enabled("useKeypad", title: "Use keypad for macro entry"),
+            .enabled("monoFontsOnly", title: "Mono fonts only (in font menus)"),
+            .disabled("defaultWordWrap", title: "Default word wrap for new sessions",
+                      toolTip: "Word wrap for new sessions is not yet implemented.")
+        ])
+
+        paneViews[.audio] = paneView(items: [
+            .enabled("muteSound", title: "Mute sound cues"),
+            .enabled("muteSpeaking", title: "Mute speaking cues"),
+            .disabled("muteClicker", title: "Mute clicker sounds",
+                      toolTip: "Available when the Macro Clicker ships."),
+            .enabled("muteBell", title: "Mute terminal bell")
+        ])
+
+        paneViews[.updates] = paneView(items: [
+            .disabled("updatingEnabled", title: "Check for updates automatically",
+                      toolTip: "Available when in-app update checking ships.")
+        ])
+
+        paneViews[.speech] = speechPaneView()
+
+        for paneView in paneViews.values {
+            paneView.translatesAutoresizingMaskIntoConstraints = false
+            paneContainer.addSubview(paneView)
+            NSLayoutConstraint.activate([
+                paneView.leadingAnchor.constraint(equalTo: paneContainer.leadingAnchor),
+                paneView.trailingAnchor.constraint(equalTo: paneContainer.trailingAnchor),
+                paneView.topAnchor.constraint(equalTo: paneContainer.topAnchor),
+                paneView.bottomAnchor.constraint(equalTo: paneContainer.bottomAnchor)
+            ])
+        }
+
+        let initialPane = settingsWindowController?.selectedPane ?? .startup
+        showPane(initialPane)
+        settingsWindowController?.resizeToFitCurrentPane()
+    }
+
+    private func speechPaneView() -> NSView {
+        let speechViewController = SpeechPrefsViewController()
+        speechViewController.store = store
+        addChild(speechViewController)
+        speechPrefsViewController = speechViewController
+        _ = speechViewController.view
+        speechViewController.activateIfNeeded()
+        return speechViewController.view
     }
 
     private enum CheckboxItem {
@@ -107,16 +156,12 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         case disabled(String, title: String, toolTip: String)
     }
 
-    private func section(title: String, items: [CheckboxItem]) -> NSView {
-        let box = NSBox()
-        box.title = title
-        box.boxType = .primary
-        box.translatesAutoresizingMaskIntoConstraints = false
-
+    private func paneView(items: [CheckboxItem]) -> NSView {
+        let paneView = NSView()
         let stack = NSStackView()
         stack.orientation = .vertical
         stack.alignment = .leading
-        stack.spacing = 6
+        stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
 
         for item in items {
@@ -134,15 +179,14 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
             stack.addArrangedSubview(checkbox)
         }
 
-        box.addSubview(stack)
+        paneView.addSubview(stack)
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: 12),
-            stack.trailingAnchor.constraint(equalTo: box.trailingAnchor, constant: -12),
-            stack.topAnchor.constraint(equalTo: box.topAnchor, constant: 18),
-            stack.bottomAnchor.constraint(equalTo: box.bottomAnchor, constant: -12)
+            stack.leadingAnchor.constraint(equalTo: paneView.leadingAnchor),
+            stack.trailingAnchor.constraint(lessThanOrEqualTo: paneView.trailingAnchor),
+            stack.topAnchor.constraint(equalTo: paneView.topAnchor),
+            stack.bottomAnchor.constraint(lessThanOrEqualTo: paneView.bottomAnchor)
         ])
-
-        return box
+        return paneView
     }
 
     private func checkboxTitle(_ item: CheckboxItem) -> String {

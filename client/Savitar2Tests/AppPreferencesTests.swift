@@ -85,4 +85,26 @@ class AppPreferencesTests: XCTestCase {
         state = SetUpdatingEnabledAction(false).apply(oldState: state)
         XCTAssertFalse(state.prefs.updatingEnabled)
     }
+
+    func testSetContinuousSpeechEnabledAction() {
+        var state = AppPreferencesState()
+        state = SetContinuousSpeechEnabledAction(true).apply(oldState: state)
+        XCTAssertTrue(state.prefs.continuousSpeechEnabled)
+        state = SetContinuousSpeechEnabledAction(false).apply(oldState: state)
+        XCTAssertFalse(state.prefs.continuousSpeechEnabled)
+    }
+
+    func testSpeakerManListsEnglishVoices() {
+        let names = AppContext.shared.speakerMan.voiceNames()
+        XCTAssertFalse(names.isEmpty, "Expected at least one English system voice")
+        XCTAssertFalse(names[0].isEmpty)
+    }
+
+    func testResolvedContinuousSpeechVoiceFallsBackToFirstVoice() {
+        let names = AppContext.shared.speakerMan.voiceNames()
+        XCTAssertFalse(names.isEmpty)
+        let resolved = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
+        XCTAssertFalse(resolved.isEmpty)
+        XCTAssertTrue(names.contains(resolved))
+    }
 }

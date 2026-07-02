@@ -27,7 +27,7 @@
         <!--Speech Prefs View Controller-->
         <scene sceneID="eyb-S2-q37">
             <objects>
-                <viewController id="6Xd-xb-Jmr" customClass="SpeechPrefsViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeechPrefs" id="6Xd-xb-Jmr" customClass="SpeechPrefsViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4UY-bb-Rze">
                         <rect key="frame" x="0.0" y="0.0" width="290" height="187"/>
                         <autoresizingMask key="autoresizingMask"/>

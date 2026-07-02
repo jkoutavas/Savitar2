@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last Updated July 2nd, 2026_
+_README last updated July 2nd, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
 
@@ -8,19 +8,22 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
 
-Chronological [Software Design Notes](docs/Savitar2DevNotes.md) are available for viewing.
+## Documentation
 
-Implementation stories for settings/preferences work: [docs/Stories.md](docs/Stories.md).
+| Document | Audience | Contents |
+|----------|----------|----------|
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | Users | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech is documented first) |
+| [docs/Stories.md](docs/Stories.md) | Developers | Settings, prefs, and HIG backlog as user stories |
+| [docs/HIG.md](docs/HIG.md) | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …) |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes |
 
 ## Current state of the application
 
-With the release of macOS 10.15, Catalina, Apple has dropped support for 32-bit applications, thus finally making the 23 year old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release of Savitar is to gain 64-bit support and continue to support the application moving forward. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), which is built atop 32-bit Carbon API calls. Savitar v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). So, v2.0 becomes a complete rewrite of the features of Savitar v1.6.3 with a daring twist to the story: Savitar 2.0 is using [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview) for its output pane, converting incoming ANSI escape sequences to HTML using a hacked version of [Aha](https://github.com/theZiz/aha).
+With the release of macOS 10.15, Catalina, Apple dropped support for 32-bit applications, finally making the 23-year-old Savitar v1.x app unrunnable on Catalina. The top goal for this first v2.0 release is 64-bit support and continued maintenance. Savitar v1.6.3's heart is its [WASTE text engine](https://en.wikipedia.org/wiki/WASTE_text_engine), built atop 32-bit Carbon API calls. v1.6.3 was also implemented in MetroWerks' [PowerPlant application framework](https://en.wikipedia.org/wiki/PowerPlant). v2.0 is a complete rewrite toward v1.6.3 feature parity, with one major architectural change: the output pane uses [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview), converting incoming ANSI escape sequences to HTML with a hacked version of [Aha](https://github.com/theZiz/aha).
 
-Although the first release of Savitar 2.0 is aimed at feature parity with current production Savitar, v1.6.3, future releases of Savitar 2 will start taking advantages with all the goodies of having an HTML engine for output.
+Although the first release targets feature parity with production Savitar v1.6.3, future 2.x releases can take advantage of an HTML output engine. To expedite the 64-bit migration, v2.0 imports existing v1.6.3 world documents and settings and keeps basically the same user interface. I have consciously avoided newer (for Savitar 1's era) Apple technologies such as Core Data and SwiftUI until after the first v2.0 ship; those may signal a 3.0 effort.
 
-To expediate the migration to 64-bit, the initial release of Savitar 2.0 will import existing Savitar v1.6.3 world documents and settings, and will have basically the same user interface too. If interest in the application continues/grows, subsequent 2.x versions of the app will see a redesign of the user interface of Savitar. I have also conciously avoided moving to new (to Savitar 1's timeframe) Apple technologies such as Core Data and SwiftUI. Those technologies can arrive after the first release of v2.0, and in fact, may even signal a 3.0 effort.
-
-Here is the current state of getting to Savitar v1.6.3 feature parity, broken into two delivery parts:
+Progress toward v1.6.3 feature parity:
 
 ### start of alpha
 
@@ -28,7 +31,7 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Started a private github repo
 √ App is 64bit only, runs on macOS 10.12 and later, including Catalina
 √ App is integrated with AppCenter, handles crash reporting and basic analytics
-√ Reading Sav 1.x world settings, opening sessions
+√ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
 √ Rewrite Aha (ANSI to HTML parser)
 √ World settings Appearance tab is operational
@@ -39,7 +42,9 @@ Here is the current state of getting to Savitar v1.6.3 feature parity, broken in
 √ Transition over to using ReSwift (break-out extensions of classes/structs as needed)
 √ Implement input pane command recall
 √ New world onboarding
-√ Implement Continuous Speech (using new AVSpeechSynthesizer)
+√ Continuous speech (AVSpeechSynthesizer on macOS 10.15+; NSSpeechSynthesizer fallback)
+√ Speech settings in app Settings → Speech pane (voice, rate, enable; v1 prefs import)
+√ Speech menus — Edit → Speech → Speak Selected Text (input + output); Audio → Flush Speech Buffer (⌘L), Speech Settings…
 √ Implement the start of local commands, ##history
 √ Implement sticky commands
 √ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
@@ -58,14 +63,14 @@ _ Implement next gen startup commands (trigger based)
 _ Implement remaining World settings tabs
 _ Implement remaining local commands
 √ Implement scroll locking
-_ Menubar finalized
-√ Expand App Preferences window (see [docs/Stories.md](docs/Stories.md))
-√ Wire keypad, mono fonts, and mute-bell preference flags (see [docs/Stories.md](docs/Stories.md))
-_ Wire default word wrap for new sessions (see [docs/Stories.md](docs/Stories.md))
-√ Text Editing menu items finalized
+_ Menubar finalized (Audio + Edit → Speech in place; see docs/HIG.md)
+√ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech (Story 1)
+√ Wire keypad, mono fonts, and mute-bell preference flags (Story 2; see docs/Stories.md)
+_ Wire default word wrap for new sessions (Story 2.3)
+√ Core Edit menu (undo, cut/copy/paste, clear output, find, spelling)
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
-_ Release alpha to select testers, start geting feedback
+_ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
 ```
 
@@ -78,12 +83,13 @@ _ Find/Find Next supported
 √ Logging support
 _ Printing supported
 _ Enhanced analytics
-_ ANSI Color Settings window implemented (see [docs/Stories.md](docs/Stories.md))
+_ ANSI Color Settings pane in app Settings (Story 5)
 _ Macro Clicker
 _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
 _ Divider status bar support
+_ User guide — remaining chapters (Story 9; speech done)
 _ Polish, address beta test issues
 ```
 
@@ -133,7 +139,7 @@ Install the formatter:
 $ brew install swiftformat
 ```
 
-Then issue this at the command at the root of the clone:
+Then issue this command at the root of the clone:
 
 ```bash
 $ swiftformat .
@@ -148,25 +154,29 @@ There's already a `.swiftformat` config file that contains this:
 
 ## Tracking lines of code
 
-`cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'`
+Re-run from the repo root (approximate; excludes `Pods`, `.build`, `build`):
+
+```bash
+cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
+```
 
 ```
-     165 text files.
-     150 unique files.
-      49 files ignored.
+     169 text files.
+     153 unique files.
+      50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1950.2 files/s, 235962.4 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1872.2 files/s, 232745.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          121           2031           1290           9503
-XML                             15              0             38           4082
-Markdown                         8            339              0            697
+Swift                          122           2099           1298           9937
+XML                             15              0             38           4080
+Markdown                        10            463              0            936
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           150           2384           1337          14428
+SUM:                           153           2576           1345          15099
 -------------------------------------------------------------------------------
 ```

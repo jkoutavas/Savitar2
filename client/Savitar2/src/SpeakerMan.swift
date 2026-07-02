@@ -49,12 +49,25 @@ class SpeakerMan {
         return []
     }
 
+    func resolvedContinuousSpeechVoiceName() -> String {
+        let names = voiceNames()
+        let saved = AppContext.shared.prefs.continuousSpeechVoice
+        if !saved.isEmpty, names.contains(saved) {
+            return saved
+        }
+        return names.first ?? ""
+    }
+
     func speak(text _: String, voiceName _: String) {
         // Override this
     }
 
     func flushSpeech() {
         // Override this
+    }
+
+    func isSpeaking() -> Bool {
+        false
     }
 }
 
@@ -92,16 +105,23 @@ class SpeakerManNS: SpeakerMan {
     }
 
     override func speak(text: String, voiceName: String) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+
         speechSynth.stopSpeaking()
-        speechSynth.setVoice(identifierForVoiceName(voiceName))
-        // rate here is words per minute and it varies by voice
-        speechSynth.rate *= (Float)(AppContext.shared.prefs.continuousSpeechRate) / 10.0
-        speechSynth.startSpeaking(text)
+        let resolvedName = voiceName.isEmpty ? resolvedContinuousSpeechVoiceName() : voiceName
+        speechSynth.setVoice(identifierForVoiceName(resolvedName))
+        speechSynth.rate = 200.0 * Float(AppContext.shared.prefs.continuousSpeechRate) / 10.0
+        speechSynth.startSpeaking(trimmed)
     }
 
     override func flushSpeech() {
         speechSynth.stopSpeaking()
         speechSynth = NSSpeechSynthesizer()
+    }
+
+    override func isSpeaking() -> Bool {
+        speechSynth.isSpeaking
     }
 }
 
@@ -112,36 +132,35 @@ class SpeakerManAV: SpeakerMan {
     }
 
     override func voiceNames() -> [String] {
-        var names: [String] = []
-        for voice in voices {
-            let parts = voice.identifier.components(separatedBy: ".")
-            if let name = parts.last {
-                names.append(name)
-            }
-        }
-        return names
+        voices.map(\.name)
     }
 
     override func speak(text: String, voiceName: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        for voice in voices where voice.identifier.hasSuffix(voiceName) {
-            utterance.voice = AVSpeechSynthesisVoice(identifier: voice.identifier)
-            // rate here is a percentage (0.0..1.0)
-            var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
-                (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
-            if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
-                adjustedRate = AVSpeechUtteranceMinimumSpeechRate
-            } else if adjustedRate > AVSpeechUtteranceMaximumSpeechRate {
-                adjustedRate = AVSpeechUtteranceMaximumSpeechRate
-            }
-            utterance.rate = adjustedRate
-            speechSynth.speak(utterance)
-            break
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+
+        let resolvedName = voiceName.isEmpty ? resolvedContinuousSpeechVoiceName() : voiceName
+        guard let voice = voices.first(where: { $0.name == resolvedName }) ?? voices.first else { return }
+
+        let utterance = AVSpeechUtterance(string: trimmed)
+        utterance.voice = voice
+        var adjustedRate = AVSpeechUtteranceDefaultSpeechRate *
+            (Float(AppContext.shared.prefs.continuousSpeechRate - 5) / 10.0)
+        if adjustedRate < AVSpeechUtteranceMinimumSpeechRate {
+            adjustedRate = AVSpeechUtteranceMinimumSpeechRate
+        } else if adjustedRate > AVSpeechUtteranceMaximumSpeechRate {
+            adjustedRate = AVSpeechUtteranceMaximumSpeechRate
         }
+        utterance.rate = adjustedRate
+        speechSynth.speak(utterance)
     }
 
     override func flushSpeech() {
         speechSynth.stopSpeaking(at: .word)
         speechSynth = AVSpeechSynthesizer()
+    }
+
+    override func isSpeaking() -> Bool {
+        speechSynth.isSpeaking
     }
 }

@@ -9,8 +9,8 @@
         <!--Window Controller-->
         <scene sceneID="5se-PY-sIq">
             <objects>
-                <windowController id="h3d-z1-wlU" sceneMemberID="viewController">
-                    <window key="window" title="Savitar Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="DFR-0C-cvo">
+                <windowController id="h3d-z1-wlU" customClass="AppSettingsWindowController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Startup" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="DFR-0C-cvo">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="686" y="756" width="290" height="168"/>

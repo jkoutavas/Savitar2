@@ -1,0 +1,30 @@
+---
+description: macOS Human Interface Guidelines for Savitar 2 UI work
+globs: client/Savitar2/**/*.{swift,storyboard}
+alwaysApply: false
+---
+
+# macOS HIG — Savitar 2
+
+Full reference: [docs/HIG.md](../../docs/HIG.md). Follow Apple [Settings HIG](https://developer.apple.com/design/human-interface-guidelines/settings) for app-level settings.
+
+## Settings window checklist
+
+- One modeless **Settings** window; **Settings…** in app menu (**⌘,**)
+- **No** Save / Cancel / Apply — changes apply and persist immediately
+- Close button only; fixed size unless pane has scrollable content
+- Multiple groups → `NSToolbar` with `.preference` style (macOS 11+); title = active pane name
+- Dismiss with **Escape** or **⌘+.**
+- Use `NSWindow.configureAsSettingsWindow()` and `fitContentSize(_:centerIfNeeded:)`
+
+## Controls
+
+- Gray out unsupported options with a tooltip (do not hide)
+- Use "Settings" terminology on macOS 13+, not "Preferences"
+- World-specific options → World Settings sheet, not app Settings
+
+## When adding UI
+
+1. Check [docs/HIG.md](../../docs/HIG.md) and [docs/Stories.md](../../docs/Stories.md)
+2. Match existing AppKit patterns in `client/Savitar2/src/views/`
+3. Prefer system controls, Auto Layout, and standard shortcuts
