@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last Updated June 29th, 2026_
+_README last Updated July 2nd, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
 
@@ -145,23 +145,23 @@ There's already a `.swiftformat` config file that contains this:
 
 `cloc . --exclude-dir=Pods,.build,build`
 
-``` 
+```
      157 text files.
-     142 unique files.                                          
+     142 unique files.
       49 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.06 s (2325.3 files/s, 275075.5 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1780.1 files/s, 215936.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          115           1844           1269           8563
+Swift                          115           1920           1269           8912
 XML                             15              0             38           4080
-Markdown                         7            286              0            553
+Markdown                         7            286              0            555
 JSON                             1              0              0             68
 YAML                             2             11              0             61
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           142           2144           1315          13339
+SUM:                           142           2220           1315          13690
 -------------------------------------------------------------------------------
 ```
