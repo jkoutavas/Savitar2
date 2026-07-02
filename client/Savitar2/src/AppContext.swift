@@ -65,9 +65,24 @@ class AppContext {
         prefs.save()
     }
 
-    func appIsTerminating() {
+    func prepareForTermination() {
         isTerminating = true
+        prefs.openSessions = WindowRestoration.captureOpenSessions(from: self)
         save()
+    }
+
+    func appIsTerminating() {
+        if !isTerminating {
+            prepareForTermination()
+        } else {
+            save()
+        }
+    }
+
+    func restoreSavedWindows() {
+        let sessions = prefs.openSessions
+        guard !sessions.isEmpty else { return }
+        WindowRestoration.restoreSavedSessions(sessions, in: self)
     }
 
     func showAppPrefsWindow() {

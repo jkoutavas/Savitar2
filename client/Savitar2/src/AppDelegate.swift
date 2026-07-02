@@ -53,6 +53,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Analytics.self, Crashes.self
          ])
 
+        AppContext.shared.restoreSavedWindows()
+
         if AppContext.shared.prefs.flags.contains(.startupPicker) {
             showWorldPickerAction(self)
         }
@@ -60,6 +62,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
             showEventsWindowAction(self)
         }
+    }
+
+    func applicationShouldTerminate(_: NSApplication) -> NSApplication.TerminateReply {
+        if isRunningTests {
+            return .terminateNow
+        }
+
+        AppContext.shared.prepareForTermination()
+        return .terminateNow
     }
 
     func applicationOpenUntitledFile(_: NSApplication) -> Bool {
