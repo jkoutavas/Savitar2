@@ -49,6 +49,8 @@ class AppPreferences: SavitarXMLProtocol {
     // TODO: this is deprecating
     var colorMan = ColorMan()
 
+    var openSessions: [SavedOpenSession] = []
+
     init() {
         version = latestPrefsVersion
     }
@@ -191,6 +193,7 @@ class AppPreferences: SavitarXMLProtocol {
         AppContext.shared.universalReactionsStore.dispatch(SetMacrosAction(macros: macroMan.get()))
 
         try prefs.colorMan.parse(xml: xml)
+        prefs.openSessions = WindowRestoration.parseOpenSessions(xml: xml)
     }
 
     func toXMLElement() throws -> XMLElement {
@@ -248,6 +251,10 @@ class AppPreferences: SavitarXMLProtocol {
         let colorsElem = try colorMan.toXMLElement()
         if colorsElem.childCount > 0 {
             prefsElem.addChild(colorsElem)
+        }
+
+        if let openSessionsElem = WindowRestoration.openSessionsElement(for: openSessions) {
+            prefsElem.addChild(openSessionsElem)
         }
 
         return prefsElem

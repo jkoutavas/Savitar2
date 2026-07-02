@@ -304,6 +304,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
     internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {
+            if window == self.window {
+                (document as? Document)?.session?.close()
+            }
             return true
         }
 

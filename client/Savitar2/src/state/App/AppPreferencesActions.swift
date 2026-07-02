@@ -84,7 +84,12 @@ struct SetShowStartupPickerAction: AppPreferencesUndoableAction, AppPreferencesA
             result.prefs.flags.insert(.startupPicker)
         } else {
             result.prefs.flags.remove(.startupPicker)
+            result.prefs.openSessions.removeAll {
+                if case .worldPickerWindow = $0 { return true }
+                return false
+            }
         }
+        result.prefs.save()
         return result
     }
 
