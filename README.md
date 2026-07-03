@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 2nd, 2026_
+_README last updated July 3rd, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -10,13 +10,13 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ## Documentation
 
-| Document                                             | Audience   | Contents                                                                                                                                      |
-| ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
-| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech and menus documented) |
-| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                         |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
+| Document                                             | Audience   | Contents                                                                                                                                                       |
+| ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                                           |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech, menus, events, and macros documented) |
+| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                                               |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                                          |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                                       |
 
 ## Current state of the application
 
@@ -24,9 +24,9 @@ With the release of macOS 10.15, Catalina, Apple dropped support for 32-bit appl
 
 Although the first release targets feature parity with production Savitar v1.6.3, future 2.x releases can take advantage of an HTML output engine. To expedite the 64-bit migration, v2.0 imports existing v1.6.3 world documents and settings and keeps basically the same user interface. I have consciously avoided newer (for Savitar 1's era) Apple technologies such as Core Data and SwiftUI until after the first v2.0 ship; those may signal a 3.0 effort.
 
-Progress toward v1.6.3 feature parity:
-
 ### start of alpha
+
+#### Progress toward v1.6.3 feature parity
 
 ```
 √ Started a private github repo
@@ -53,7 +53,6 @@ Progress toward v1.6.3 feature parity:
 √ Implement reply triggers
 √ Implement input triggers
 √ Implement input trigger variables
-_ Implement next gen startup commands (trigger based)
 √ Implement Trigger Matching tab view
 √ Implement Trigger Appearance tab view
 √ Implement Trigger Audio Cue tab view
@@ -73,6 +72,13 @@ _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
+```
+
+#### New 2.0 features
+
+```
+_ Implement next gen startup commands (trigger based)
+_ Alias support (Story 10)
 ```
 
 ### start of beta
@@ -165,18 +171,18 @@ cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
      154 unique files.
       50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1700.0 files/s, 215530.1 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1715.0 files/s, 219450.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          123           2162           1305          10317
 XML                             14              0             36           3920
-Markdown                        11            529              0           1086
+Markdown                        11            588              0           1209
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           154           2705           1350          15469
+SUM:                           154           2764           1350          15592
 -------------------------------------------------------------------------------
 ```

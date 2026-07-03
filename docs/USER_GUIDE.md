@@ -1,6 +1,6 @@
 # Savitar 2 User Guide
 
-_Last updated July 2, 2026._
+_Last updated July 3, 2026._
 
 This guide explains how to use Savitar 2. It is being written incrementally; see [Stories.md](Stories.md) **Story 9** for the plan to complete the full guide.
 
@@ -245,6 +245,81 @@ Full detail is in the [Speech](#speech) chapter.
 
 ---
 
+## Events
+
+In Savitar, an **event** is anything the client does **automatically** on your behalf during a session—beyond simply showing server text and forwarding what you type. Events are how Savitar **reacts** to the game and **extends** your keyboard.
+
+Most players think of two kinds:
+
+| Kind | You define it to… | Typical example |
+|------|-------------------|-----------------|
+| **Trigger** | Run when matching **text** appears in output (or input) | Play a chime when “You feel hungry” arrives; gag a spammy line; send a reply when the MUD prompts you |
+| **Macro** | Run when you press a **hotkey** | Send `cast heal` on F5 instead of typing it |
+
+Triggers are **reactive**—they fire when something happens in the session. Macros are **initiated by you**—but both are edited in the same place and stored the same way, so Savitar groups them under one name: **events**.
+
+### The Events window
+
+You manage events in an **Events** window:
+
+- **Per-world** — **World → Show World Events…** (or the events button in the world window title bar). Triggers and macros here are saved in that world’s `.world` document.
+- **App-wide** — **Window → Show App-wide Events Window** (⇧⌘E). Triggers and macros here apply to **every** world—useful for universal gags, sounds, or shortcuts you always want. Imported from Savitar 1 preferences.
+
+Each Events window has two tabs: **Triggers** and **Macros**. Select an item in the list to edit it in the detail pane (matching rules, colors, audio cues, replies, hotkeys, and so on).
+
+When an Events window is frontmost, **Edit → New Trigger** or **New Macro** (⇧⌘N) adds an item to the active tab.
+
+### Why “event”?
+
+The word predates Savitar 2—it is Savitar 1’s name for this whole family of behaviors. It is **not** a generic programming term in the UI; you will not configure “events” separately from triggers and macros. If you see **Events** in a menu or window title, read it as **triggers and macros for this world (or for the whole app)**.
+
+See [Macros](#macros) below for hotkey commands. A full **Triggers** chapter (matching, gags, audio, replies, variables) is planned in [Story 9](Stories.md).
+
+---
+
+## Macros
+
+A **macro** in Savitar is not like a spreadsheet macro. It is a **keyboard shortcut that sends a command** to the game—one keypress instead of typing the same line over and over.
+
+### Example
+
+Suppose you play **Alter Aeon** and often type `cast heal`. You can create a macro whose **value** is `cast heal` and assign a **hotkey** such as **F5**. Press F5 while connected and Savitar sends that line to the world as if you had typed it and pressed Return.
+
+The same idea works for common MUD commands:
+
+| You might macro… | Value (command sent) |
+|------------------|----------------------|
+| Heal | `cast heal` |
+| Look around | `look` |
+| Go north | `n` |
+| Rest | `rest` |
+| A custom emote | `wave` |
+
+Macros are for the repetitive stuff—the commands you use dozens of times per session.
+
+### Where macros live
+
+- **Per-world macros** — stored in the `.world` document. Open **World → Show World Events…** and select the **Macros** tab.
+- **App-wide macros** — shared across all worlds (imported from Savitar 1 preferences). Open **Window → Show App-wide Events Window** and use the **Macros** tab there.
+
+Each macro has a **name** (for your reference in the list), a **value** (the text sent to the game), and an optional **hotkey**. You can enable or disable macros without deleting them.
+
+To add one quickly: bring an Events window forward and choose **Edit → New Macro** (⇧⌘N when the Macros tab is active).
+
+### Macros vs other Savitar features
+
+See [Events](#events) for the big picture. In short:
+
+| Feature | What it does |
+|---------|----------------|
+| **Macro** | Hotkey sends a fixed command you define |
+| **Trigger** | Watches **output** (or input) and reacts when text matches a pattern |
+| **Trigger variable** | Scratch space triggers write into (for captured text), not a hotkey command |
+
+Savitar 1’s **Macro Clicker** used **aliases**—on-screen buttons that pointed at macros. That clicker window is not in Savitar 2 yet; macros themselves work via hotkeys.
+
+---
+
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) tracks the remaining user-guide sections: worlds and sessions, input and macros, triggers and events, ANSI colors, appearance, and window management.
+Story 9 in [Stories.md](Stories.md) tracks the remaining user-guide sections: worlds and sessions, command recall and local commands, triggers in depth, ANSI colors, appearance, and window management.

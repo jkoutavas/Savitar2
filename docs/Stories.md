@@ -70,7 +70,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 - [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
 - [ ] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
-- [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists
+- [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists (Story 11)
 - [ ] **2.6** **Events window sections** — wire `trigsClosed` / `varsClosed` to Events window UI state (stretch; not in main prefs window)
 
 ### Touchpoints
@@ -267,16 +267,20 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 **Goal:** Ship a complete end-user guide covering all Savitar 2 features at v1 parity, written for players and world builders—not developers.
 
-**Status:** Started — speech and menus chapters in [USER_GUIDE.md](USER_GUIDE.md).
+**Status:** Started — speech, menus, events overview, and macros intro in [USER_GUIDE.md](USER_GUIDE.md).
 
 ### Tasks
 
 - [x] **9.0** Create `docs/USER_GUIDE.md` and document **Speech** (continuous, triggers, Audio menu, settings; v1 parity)
 - [x] **9.0b** Document **Menus** (all menu-bar items; File, Edit, World, Audio, Window, Help)
+- [x] **9.2a** Document **Macros** (what they are, example, Events window; aliases/clicker noted as future)
+- [x] **9.4a** Document **Events** (general term; Events window; triggers vs macros overview)
 - [ ] **9.1** Worlds & sessions — connecting, world picker, world settings, appearance
-- [ ] **9.2** Input & commands — macros, hotkeys, command recall, sticky commands, local commands
+- [ ] **9.2** Input & commands — command recall, sticky commands, local commands (macros intro done; see 9.2a)
+- [ ] **9.2b** Document **Aliases** — typed command aliases vs macros vs input triggers (Story 10)
+- [ ] **9.2c** Document **Macro Clicker** — button palette vs typed aliases (Story 11)
 - [ ] **9.3** Output — ANSI colors, scrolling, logging, word wrap (when shipped)
-- [ ] **9.4** Events — triggers, variables, audio cues, gags/substitutions
+- [ ] **9.4** Events — triggers in depth (matching, gags, audio, replies, variables; events intro done; see 9.4a)
 - [ ] **9.5** Preferences overview — map Settings panes and menu items to v1 behavior
 - [ ] **9.6** Publish path — link from README and in-app Help (when Help ships)
 
@@ -293,13 +297,106 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ---
 
+## Story 10 — Command aliases
+
+**Goal:** Ship **command aliases** — typed abbreviations expanded to full commands before send (classical MUD client behavior).
+
+**Context:** Savitar 2 has **macros** (hotkey → command) and **input triggers** (pattern match on outgoing text with gag/substitution/reply effects). Neither is a classical alias: macros are keyboard shortcuts, not expansion of what you type; input triggers are reactive pattern hooks, not a lookup table of abbreviations. **Macro Clicker** (v1 button palette) is a separate epic — [Story 11](#story-11--macro-clicker).
+
+**Sketch** (Events window, new **Aliases** tab — mirrors Macros):
+
+```
+┌─ Events ──────────────────────────────────────────────────┐
+│  [Triggers] [Macros] [Aliases] [Variables]                │
+│───────────────────────────────────────────────────────────│
+│  Name    Abbreviation    Expansion              Enabled   │
+│  heal    h               cast heal              ✓         │
+│  look    l               look                   ✓         │
+└───────────────────────────────────────────────────────────┘
+```
+
+**Processing order** (on Return in input pane):
+
+```
+typed line → alias expansion → variable expansion (%%) → input triggers → send
+```
+
+### Tasks
+
+- [ ] **10.1** **`CommandAlias` model** — `abbreviation`, `expansion`, `enabled`; optional `wholeWord`, `caseSensitive` (defaults: whole-word on, case-insensitive). XML element `CMDALIAS` under group `ALIASES` in world document and app prefs (universal aliases). Use `CMDALIAS` to avoid collision with v1 clicker `ALIAS` XML ([Story 11](#story-11--macro-clicker)).
+- [ ] **10.2** **`AliasMan`** — `ModelManager<CommandAlias>`; parse/serialize like `MacroMan` / `TriggerMan`; wire into `World` and universal prefs import/export.
+- [ ] **10.3** **Expansion in send path** — in `Session.submitServerCmd` (or `InputViewController` before `determineEffects`): longest-match or first-match expansion of abbreviation tokens in the typed line; honor `enabled`; support semicolon-separated command chains if v1/classical parity requires (stretch: **10.3b**).
+- [ ] **10.4** **Do not conflate with input triggers** — aliases expand text and send the result; input triggers remain pattern hooks (gag, reply, audio). Document distinction in code comments and user guide.
+- [ ] **10.5** **Events UI** — **Aliases** tab in universal and per-world Events windows; list + detail editor (abbreviation, expansion, enabled, matching options); **Edit → New Alias** (⇧⌘A or similar, when Aliases tab active).
+- [ ] **10.6** **Reactions store** — undo/redo for alias add/edit/delete/reorder (follow `MacroReducer` / `TriggerReducer` patterns).
+- [ ] **10.7** **Tests** — `AliasManTests`, expansion unit tests (whole-word, case, multiple aliases, no match passthrough).
+- [ ] **10.8** **User guide** — Story 9 task **9.2b**: Aliases chapter (vs macros, vs input triggers); cross-link from [Macros](USER_GUIDE.md#macros).
+
+### Touchpoints
+
+- New: `client/Savitar2/src/models/aliases/CommandAlias.swift`, `AliasMan.swift`
+- `client/Savitar2/src/models/worlds/World.swift`
+- `client/Savitar2/src/worldDocument/Session.swift`, `InputViewController.swift`
+- `client/Savitar2/Base.lproj/EventsWindow.storyboard`
+- `client/Savitar2/src/state/Reactions/` (reducer, undo)
+- `docs/USER_GUIDE.md`
+
+### Acceptance
+
+- User types `h` + Return with alias `h` → `cast heal`; server receives expanded line (after variable expansion and input triggers).
+- Aliases persist in `.world` XML and universal prefs; round-trip import/export.
+- Events window edits aliases with undo; behavior is documented and distinct from macros and input triggers.
+
+---
+
+## Story 11 — Macro Clicker
+
+**Goal:** Restore v1 **Macro Clicker** window — floating button palette; each slot is a v1-style `ALIAS` (name → macro reference); click sends macro value to frontmost session.
+
+**Context:** Savitar 1 called these entries **aliases** (`ALIAS` XML, `CAliasMan`, `CClickerW`), but they are not classical typed command aliases — see [Story 10](#story-10--command-aliases). README beta item.
+
+**Sketch:**
+
+```
+┌─ Macro Clicker ───────────────────────────────────────────┐
+│  [↑] [↗] [→] [↘] [↓] [↙] [←] [↖]   (direction icons)     │
+│  [1] [2] [3] [4] [5] ...                                  │
+│  ─────────────────────────────────────────────────────    │
+│  cast heal                          (hover caption)       │
+└───────────────────────────────────────────────────────────┘
+```
+
+### Tasks
+
+- [ ] **11.1** **`ClickerSlot` model** — v1 `ALIAS` XML: `NAME` attribute maps to macro name; import from Savitar 1 prefs `ALIAS` list (`CAliasMan`, `CTVAlias`). Separate from `CommandAlias` / `CMDALIAS` in Story 10.
+- [ ] **11.2** **`ClickerMan`** — fixed slot list (direction + number buttons per v1 `TVAlias_t_*`); parse/serialize v1 `ALIAS` elements from prefs.
+- [ ] **11.3** **Macro Clicker window** — modeless utility window; button grid; click → `Session.sendString(macro.value)` on key session; ⌘-click to bind slot to macro (v1: `DoEditButton`).
+- [ ] **11.4** **Menu & prefs** — **Window → Macro Clicker** (or Savitar2 menu); enable **Show Macro Clicker at startup** and **Mute clicker sounds** (Story **2.5**); frame autosave (`mClickerPos` / v1 `GetClickerPos`).
+- [ ] **11.5** **Assets** — direction / number button icons (v1 cicn resources or SF Symbols).
+- [ ] **11.6** **User guide** — Story 9 task **9.2c**: update Macros chapter; distinguish clicker button slots from typed command aliases.
+
+### Touchpoints
+
+- New: `client/Savitar2/src/views/ClickerWindow/` (or similar)
+- `client/Savitar2/src/AppContext.swift`, `AppDelegate.swift`
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (un-gray 2.5 / startup clicker)
+- v1 reference: `CClickerW.cp`, `CAliasMan.h`, `CTVAlias.cp`
+
+### Acceptance
+
+- Macro Clicker opens from menu and optional startup pref; buttons send bound macro commands to active world session.
+- Click sound respects **Mute clicker** pref.
+- v1 `ALIAS` entries in imported prefs load into clicker slots.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
 |------|------------|--------------|----------|
-| Show Macro Clicker at startup | Macro Clicker window (README beta) | `TVPrefFlag_t_StartupClicker` | Grayed out |
+| Show Macro Clicker at startup | Story 11 | `TVPrefFlag_t_StartupClicker` | Grayed out |
 | Default word wrap | `World` / session word-wrap flag (Story 2.3) | `TVPrefFlag_t_DefaultWordWrap` | Grayed out |
-| Mute clicker sounds | Macro Clicker | `cmd_MuteClicker` | Grayed out |
+| Mute clicker sounds | Story 11 | `cmd_MuteClicker` | Grayed out |
 | Check for updates | Sparkle / updater (README alpha) | `CUpdateChecker`, `updatingEnabled` | Grayed out |
 | Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
 | Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
@@ -316,6 +413,10 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 6. Story 7 — World Picker HIG
 7. Story 8 — SwiftUI Settings spike (optional, post-beta)
 8. Story 9 — User guide (ongoing; speech chapter first)
+9. Story 10 — Command aliases (typed abbreviation expansion)
+10. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+
+Stories 10 and 11 are independent tracks; either can ship first.
 
 Story 3 is retained for reference only; implement Story 5 instead.
 
