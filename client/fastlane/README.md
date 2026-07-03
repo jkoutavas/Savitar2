@@ -70,7 +70,7 @@ bundle exec fastlane release
 The release zip is written to:
 
 ```text
-client/fastlane/release/Savitar2.zip
+client/fastlane/release/Savitar.zip
 ```
 
 ## Notes

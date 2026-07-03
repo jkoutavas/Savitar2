@@ -42,7 +42,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         addWindowController(windowController)
         windowController.updateViews(world)
 
-        output(result: .success("Welcome to Savitar 2.0!\n\n"))
+        output(result: .success("Welcome to Savitar!\n\n"))
         session = Session(world: world, sessionHandler: self)
         sessionViewController = windowController.contentViewController as? SessionViewController
         sessionViewController?.session = session

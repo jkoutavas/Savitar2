@@ -54,10 +54,10 @@ jobs:
 
       - name: Package unsigned app
         working-directory: client/build/Build/Products/Debug
-        run: zip -r Savitar2-debug.zip Savitar2.app
+        run: zip -r Savitar-debug.zip Savitar.app
 
       - name: Upload unsigned app artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Savitar2-debug-unsigned
-          path: client/build/Build/Products/Debug/Savitar2-debug.zip
+          name: Savitar-debug-unsigned
+          path: client/build/Build/Products/Debug/Savitar-debug.zip
