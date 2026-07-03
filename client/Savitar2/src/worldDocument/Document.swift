@@ -22,6 +22,32 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     var suppressChangeCount: Bool = false
 
+    /// Base name (no extension) for Save As and print-to-PDF defaults.
+    var preferredFilenameBase: String {
+        if let name = world?.name.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
+            return Self.sanitizedFilename(name)
+        }
+        if let url = fileURL {
+            return url.deletingPathExtension().lastPathComponent
+        }
+        return "Untitled"
+    }
+
+    private static func sanitizedFilename(_ name: String) -> String {
+        var result = name
+        for invalid in ["/", ":", "\0"] {
+            result = result.replacingOccurrences(of: invalid, with: "-")
+        }
+        let trimmed = result.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Untitled" : trimmed
+    }
+
+    override func prepareSavePanel(_ savePanel: NSSavePanel) -> Bool {
+        let prepared = super.prepareSavePanel(savePanel)
+        savePanel.nameFieldStringValue = preferredFilenameBase
+        return prepared
+    }
+
     lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
@@ -145,6 +171,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         guard let svc = sessionViewController else { return [] }
         guard let inputVC = svc.inputViewController else { return [] }
         return inputVC.commandHistory()
+    }
+
+    override func printDocument(_: Any?) {
+        sessionViewController?.outputViewController?
+            .printOutput(suggestedFilename: preferredFilenameBase)
     }
 
     // ***************************

@@ -267,11 +267,12 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 **Goal:** Ship a complete end-user guide covering all Savitar 2 features at v1 parity, written for players and world builders—not developers.
 
-**Status:** Started — speech chapter drafted in [USER_GUIDE.md](USER_GUIDE.md).
+**Status:** Started — speech and menus chapters in [USER_GUIDE.md](USER_GUIDE.md).
 
 ### Tasks
 
 - [x] **9.0** Create `docs/USER_GUIDE.md` and document **Speech** (continuous, triggers, Audio menu, settings; v1 parity)
+- [x] **9.0b** Document **Menus** (all menu-bar items; File, Edit, World, Audio, Window, Help)
 - [ ] **9.1** Worlds & sessions — connecting, world picker, world settings, appearance
 - [ ] **9.2** Input & commands — macros, hotkeys, command recall, sticky commands, local commands
 - [ ] **9.3** Output — ANSI colors, scrolling, logging, word wrap (when shipped)

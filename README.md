@@ -2,7 +2,7 @@
 
 _README last updated July 2nd, 2026_
 
-Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/)
+Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
@@ -10,12 +10,13 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ## Documentation
 
-| Document                                             | Audience   | Contents                                                                                                                                     |
-| ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech is documented first) |
-| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                             |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                        |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes                                                                                                          |
+| Document                                             | Audience   | Contents                                                                                                                                      |
+| ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech and menus documented) |
+| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                         |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
 
 ## Current state of the application
 
@@ -63,11 +64,11 @@ _ Implement next gen startup commands (trigger based)
 _ Implement remaining World settings tabs
 _ Implement remaining local commands
 √ Implement scroll locking
-_ Menubar finalized (Audio + Edit → Speech in place; see docs/HIG.md)
+√ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech (Story 1)
 √ Wire keypad, mono fonts, and mute-bell preference flags (Story 2; see docs/Stories.md)
 _ Wire default word wrap for new sessions (Story 2.3)
-√ Core Edit menu (undo, cut/copy/paste, clear output, find, spelling)
+√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 _ Add check for updates support (Sparkle?)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
@@ -79,9 +80,8 @@ _ Address key things found in alpha test
 ```
 √ Move github repo to public
 _ Start promoting the beta test
-_ Find/Find Next supported
-√ Logging support
-_ Printing supported
+√ Find/Find Next supported (input + output panes)
+√ Printing supported (session output)
 _ Enhanced analytics
 _ ANSI Color Settings pane in app Settings (Story 5)
 _ Macro Clicker
@@ -89,7 +89,7 @@ _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
 _ Divider status bar support
-_ User guide — remaining chapters (Story 9; speech done)
+_ User guide — remaining chapters (Story 9; speech and menus documented)
 _ Polish, address beta test issues
 ```
 
@@ -161,22 +161,22 @@ cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     168 text files.
-     152 unique files.
+     170 text files.
+     154 unique files.
       50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.06 s (2441.3 files/s, 302962.6 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1700.0 files/s, 215530.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          122           2099           1298           9937
-XML                             14              0             36           3919
-Markdown                        10            461              0            944
+Swift                          123           2162           1305          10317
+XML                             14              0             36           3920
+Markdown                        11            529              0           1086
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           152           2574           1343          14946
+SUM:                           154           2705           1350          15469
 -------------------------------------------------------------------------------
 ```

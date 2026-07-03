@@ -6,6 +6,7 @@
 //  Copyright © 2019 Heynow Software. All rights reserved.
 //
 
+import Cocoa
 import WebKit
 
 class OutputView: WKWebView {
@@ -15,6 +16,30 @@ class OutputView: WKWebView {
     private(set) var isScrollLocked = false
 
     private var loggingFileHandle: FileHandle?
+    private(set) var layoutFontName = "Monaco"
+    private(set) var layoutFontSize: CGFloat = 9
+
+    override var acceptsFirstResponder: Bool { true }
+
+    override func mouseDown(with event: NSEvent) {
+        window?.makeFirstResponder(self)
+        super.mouseDown(with: event)
+    }
+
+    func find(string: String, forward: Bool) {
+        guard !string.isEmpty else { return }
+        let pasteboard = NSPasteboard(name: .find)
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(string, forType: .string)
+
+        let escaped = string
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "'", with: "\\'")
+            .replacingOccurrences(of: "\r", with: "")
+            .replacingOccurrences(of: "\n", with: "\\n")
+        let backwards = forward ? "false" : "true"
+        run(javaScript: "window.find('\(escaped)', false, \(backwards), true, false, true, false);")
+    }
 
     func setScrollLocked(_ locked: Bool) {
         isScrollLocked = locked
@@ -151,6 +176,8 @@ class OutputView: WKWebView {
     func setStyle(world: World) {
         useANSI = world.flags.contains(.ansi)
         useHTML = world.flags.contains(.html)
+        layoutFontName = world.monoFontName
+        layoutFontSize = world.monoFontSize
 
         let backColor = world.backColor.toHex!
         let foreColor = world.foreColor.toHex!
@@ -300,5 +327,11 @@ class OutputView: WKWebView {
                            completionHandler: { (html: Any?, _: Error?) in
                                print(html!)
                            })
+    }
+
+    func extractPlainText(completion: @escaping (String) -> Void) {
+        evaluateJavaScript("document.body.innerText || '';") { result, _ in
+            completion((result as? String) ?? "")
+        }
     }
 }
