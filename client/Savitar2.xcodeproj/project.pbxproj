@@ -67,6 +67,7 @@
 		695F5AC225899EFD00AB6BA6 /* InputSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */; };
 		695F5AC325899EFD00AB6BA6 /* WorldSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AB025899EFD00AB6BA6 /* WorldSettingsController.swift */; };
 		695F5AC425899EFD00AB6BA6 /* DocumentV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */; };
+		695F5AC525899EFD00AB6BA6 /* PlainTextDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AB625899EFD00AB6BA6 /* PlainTextDocument.swift */; };
 		695F5AE125899FA400AB6BA6 /* TriggerMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AC725899FA400AB6BA6 /* TriggerMatchingViewController.swift */; };
 		695F5AE325899FA400AB6BA6 /* MacrosTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AC925899FA400AB6BA6 /* MacrosTabController.swift */; };
 		695F5AE425899FA400AB6BA6 /* MacroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ACA25899FA400AB6BA6 /* MacroViewModel.swift */; };
@@ -234,6 +235,7 @@
 		695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputSettingsController.swift; sourceTree = "<group>"; };
 		695F5AB025899EFD00AB6BA6 /* WorldSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsController.swift; sourceTree = "<group>"; };
 		695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentV2.swift; sourceTree = "<group>"; };
+		695F5AB625899EFD00AB6BA6 /* PlainTextDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainTextDocument.swift; sourceTree = "<group>"; };
 		695F5AC725899FA400AB6BA6 /* TriggerMatchingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerMatchingViewController.swift; sourceTree = "<group>"; };
 		695F5AC925899FA400AB6BA6 /* MacrosTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacrosTabController.swift; sourceTree = "<group>"; };
 		695F5ACA25899FA400AB6BA6 /* MacroViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroViewModel.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				695F5AAB25899EFD00AB6BA6 /* Document.swift */,
 				695F5AAC25899EFD00AB6BA6 /* DocumentV1.swift */,
 				695F5AB125899EFD00AB6BA6 /* DocumentV2.swift */,
+				695F5AB625899EFD00AB6BA6 /* PlainTextDocument.swift */,
 				695F5AAF25899EFD00AB6BA6 /* InputSettingsController.swift */,
 				695F5AA825899EFD00AB6BA6 /* InputViewController.swift */,
 				69B46A012A80100100CDDE09 /* InputEditingKeys.swift */,
@@ -1049,6 +1052,7 @@
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,
 				695F5AEB25899FA400AB6BA6 /* TriggersTabController.swift in Sources */,
 				695F5AC425899EFD00AB6BA6 /* DocumentV2.swift in Sources */,
+				695F5AC525899EFD00AB6BA6 /* PlainTextDocument.swift in Sources */,
 				69C1F0D225A3E5480048A739 /* AppPreferencesStore.swift in Sources */,
 				695F5B3E258EE49C00AB6BA6 /* ReactionsStore.swift in Sources */,
 				695F5AE325899FA400AB6BA6 /* MacrosTabController.swift in Sources */,

@@ -76,6 +76,27 @@ Savitar-specific audio commands (not standard Edit → Speech):
 | Flush Speech Buffer | Clear Savitar TTS queue (⌘L) |
 | Speech Settings… | Opens Settings → Speech pane |
 
+## Edit → Find
+
+| Item | Shortcut | Behavior |
+|------|----------|----------|
+| **Find…** | ⌘F | Input pane: system find panel. Output pane: find bar above output |
+| **Find Next** | ⌘G | Continue search in the focused pane |
+| **Find Previous** | ⌘⇧G | Search backward |
+| **Use Selection for Find** | ⌘E | Seed find string from selection |
+
+When the **input** field is focused, find uses the standard `NSTextView` panel. Otherwise find operates on the **output** pane (WebKit `window.find`).
+
+## File → Print
+
+**Print…** (⌘P) uses the standard `printDocument:` responder chain. **World** documents override printing to send session **output as plain text** using the world's monospace font, without re-wrapping lines, so ASCII art keeps its on-screen shape. **Plain-text** documents use the system default (editor contents). ANSI colors are not included in world print/PDF. Save as PDF defaults to the world's name (e.g. `Alter Aeon.pdf`). The in-world `@printsource` command remains a separate debug/logging action.
+
+**Save** on a world document defaults the filename to the world's name when the save sheet appears.
+
+## File → text documents
+
+Savitar 1 supported standalone text windows (`.txt`, `.text`, `.log`). Savitar 2 restores this via `PlainTextDocument` and **File → New Text Document** (⇧⌘T). **Open…** routes plain-text files to the text editor; `.world` files open as sessions.
+
 ---
 
 ## Future HIG work

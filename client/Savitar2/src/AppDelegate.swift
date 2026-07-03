@@ -166,6 +166,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.showWorldPicker()
     }
 
+    @IBAction func newTextDocumentAction(_: Any) {
+        do {
+            let document = try NSDocumentController.shared.makeUntitledDocument(
+                ofType: PlainTextDocument.fileType
+            )
+            NSDocumentController.shared.addDocument(document)
+            document.makeWindowControllers()
+        } catch {
+            NSApp.presentError(error)
+        }
+    }
+
+    @IBAction func performFindAction(_ sender: Any) {
+        guard let menuItem = sender as? NSMenuItem else { return }
+        let window = NSApp.keyWindow
+
+        if let textView = window?.firstResponder as? NSTextView,
+           let inputView = sessionViewController(for: window)?.inputViewController?.textView,
+           textView === inputView {
+            textView.performFindPanelAction(sender)
+            return
+        }
+
+        guard let outputVC = sessionViewController(for: window)?.outputViewController else { return }
+        outputVC.performFindPanelAction(menuItem)
+    }
+
     func newState(state _: AppPreferencesState) {
         willChangeValue(forKey: "muteSound")
         didChangeValue(forKey: "muteSound")
@@ -183,8 +210,17 @@ extension AppDelegate: NSMenuItemValidation {
             return AppContext.shared.speakerMan.isSpeaking()
         case #selector(toggleMuteSoundAction(_:)), #selector(toggleMuteSpeakingAction(_:)):
             return true
+        case #selector(performFindAction(_:)):
+            return canPerformFind(in: NSApp.keyWindow)
         default:
             return true
         }
+    }
+
+    private func canPerformFind(in window: NSWindow?) -> Bool {
+        guard window != nil else { return false }
+        if sessionViewController(for: window) != nil { return true }
+        if window?.firstResponder is NSTextView { return true }
+        return false
     }
 }

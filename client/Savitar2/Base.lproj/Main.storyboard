@@ -66,7 +66,13 @@
                                     <items>
                                         <menuItem title="New World Document…" keyEquivalent="n" id="Was-JA-tGl">
                                             <connections>
-                                                <action selector="showWorldPickerAction:" target="Ady-hI-5gd" id="B81-ch-Qxo"/>
+                                                <action selector="showWorldPickerAction:" target="Voe-Tx-rLC" id="B81-ch-Qxo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="New Text Document" keyEquivalent="t" id="NwT-xt-Doc">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="newTextDocumentAction:" target="Voe-Tx-rLC" id="NwT-xt-act"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
@@ -117,7 +123,7 @@
                                         </menuItem>
                                         <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                             <connections>
-                                                <action selector="print:" target="Ady-hI-5gd" id="qaZ-4w-aoO"/>
+                                                <action selector="printDocument:" target="Ady-hI-5gd" id="qaZ-4w-aoO"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -143,7 +149,7 @@
                                                 <action selector="clearOutputAction:" target="Ady-hI-5gd" id="gJo-zv-Qzz"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="New item" keyEquivalent="N" id="8md-l4-jHi">
+                                        <menuItem title="New Trigger" keyEquivalent="N" id="8md-l4-jHi">
                                             <connections>
                                                 <action selector="newItem:" target="Ady-hI-5gd" id="bJO-PZ-2sd"/>
                                             </connections>
@@ -185,52 +191,27 @@ CA
                                                 <items>
                                                     <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="cD7-Qs-BN4"/>
+                                                            <action selector="performFindAction:" target="Voe-Tx-rLC" id="cD7-Qs-BN4"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find Next" tag="2" keyEquivalent="g" id="q09-fT-Sye">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="NDo-RZ-v9R"/>
+                                                            <action selector="performFindAction:" target="Voe-Tx-rLC" id="NDo-RZ-v9R"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="OwM-mh-QMV">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="HOh-sY-3ay"/>
+                                                            <action selector="performFindAction:" target="Voe-Tx-rLC" id="HOh-sY-3ay"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="buJ-ug-pKt">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="U76-nv-p5D"/>
+                                                            <action selector="performFindAction:" target="Voe-Tx-rLC" id="U76-nv-p5D"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Jump to Selection" keyEquivalent="j" id="S0p-oC-mLd">
                                                         <connections>
                                                             <action selector="centerSelectionInVisibleArea:" target="Ady-hI-5gd" id="IOG-6D-g5B"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </menuItem>
-                                        <menuItem title="Spelling and Grammar" id="Dv1-io-Yv7">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Spelling" id="3IN-sU-3Bg">
-                                                <items>
-                                                    <menuItem title="Check Spelling While Typing" id="rbD-Rh-wIN">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="toggleContinuousSpellChecking:" target="Ady-hI-5gd" id="7w6-Qz-0kB"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Check Grammar With Spelling" id="mK6-2p-4JG">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="toggleGrammarChecking:" target="Ady-hI-5gd" id="muD-Qn-j4w"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Correct Spelling Automatically" id="78Y-hA-62v">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="toggleAutomaticSpellingCorrection:" target="Ady-hI-5gd" id="2lM-Qi-WAP"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>

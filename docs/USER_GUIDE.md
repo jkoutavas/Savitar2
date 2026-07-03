@@ -108,6 +108,143 @@ Voice and rate changes take effect on the next spoken utterance; you do not need
 
 ---
 
+## Menus
+
+Savitar’s menu bar follows standard macOS conventions. A few items are Savitar-specific; others are provided by the system because Savitar is a document-based app. On recent macOS versions, **File** may show additional items (such as **Duplicate**, **Rename…**, and **Move To…**) that replace or supplement older template entries—the behavior described here matches what you see at runtime.
+
+World document windows, the **World Picker**, and the **Events** windows each enable the commands that apply to the frontmost window.
+
+### Savitar menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **About Savitar** | — | Shows the standard About box with version information. |
+| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, Audio, Updates, Speech). Changes apply immediately; there is no Save button. |
+| **Services** | — | Standard macOS Services submenu for the current selection (when a supporting service is installed). |
+| **Hide Savitar** | ⌘H | Hides all Savitar windows. |
+| **Hide Others** | ⌥⌘H | Hides every app except Savitar. |
+| **Show All** | — | Un-hides other applications. |
+| **Quit Savitar** | ⌘Q | Quits the app. Open world documents are closed according to each window’s save state. |
+
+See [Speech settings reference](#speech-settings-reference) for the **Speech** pane. Other Settings panes are documented in upcoming guide chapters.
+
+### File menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **New World Document…** | ⌘N | Opens the **World Picker** so you can choose a world to connect to. Double-clicking a world opens a new session in an untitled document window. |
+| **New Text Document** | ⇧⌘T | Opens a new plain-text editor window for notes, logs, or other `.txt` / `.text` / `.log` files (Savitar 1 text-document parity). |
+| **Open…** | ⌘O | Opens a saved `.world` document or a plain-text file (`.txt`, `.text`, `.log`). Savitar reads both Savitar 2 and legacy Savitar 1 world files. |
+| **Open Recent** | — | Lists recently opened world documents. Choose **Clear Menu** at the bottom to reset the list. |
+| **Close** | ⌘W | Closes the frontmost window (World Picker, world document, or Events window). If a world document has unsaved changes, macOS prompts you to save. |
+| **Save** | ⌘S | Saves the active world document. For an untitled document, opens the save sheet first. The default filename is the **world’s name** (for example, `Alter Aeon.world`). |
+| **Duplicate** | ⇧⌘S | *(System menu item.)* Creates a new untitled copy of the current world document with the same settings, triggers, and macros. The copy is not saved until you choose **Save**. |
+| **Rename…** | — | *(System menu item.)* Renames the saved file for the current world document in place. |
+| **Move To…** | — | *(System menu item.)* Moves the saved world file to another folder. |
+| **Revert To** | — | *(System submenu.)* Discards unsaved changes and restores the document to a previously saved version on disk. |
+| **Share** | — | *(System menu item.)* Opens the standard macOS share sheet for the saved world file. |
+| **Page Setup…** | ⇧⌘P | Sets paper size, orientation, and margins for printing. |
+| **Print…** | ⌘P | Prints the frontmost document. For a **world** window, prints session **output** as plain text (see [Printing](#printing) below). For a **text document**, prints the editor contents using the standard macOS print dialog. |
+
+**Tips**
+
+- The window title shows the document’s filename (without extension). A **— Edited** suffix means there are unsaved changes.
+- Legacy Savitar 1 worlds open as **read-only**; save them as a Savitar 2 `.world` file to edit triggers, macros, and settings.
+- **Duplicate** plus **Save** is the usual way to branch a world into two files. **Rename…** and **Move To…** adjust an existing saved file without creating a copy.
+
+#### Text documents
+
+Plain-text windows are separate from world sessions. Use them to view or edit log files, notes, or other text outside a live connection.
+
+- **New Text Document** (⇧⌘T) opens an empty editor with a fixed-pitch font.
+- **Open…** accepts `.txt`, `.text`, and `.log` files in addition to `.world` documents.
+- Standard **Save**, **Duplicate**, **Print**, and **Edit** commands apply. Find uses the system find panel.
+- Window position and size are remembered between launches (shared across all text document windows).
+- Automatic session logging (configured in **World Settings → Output**) is separate: it writes world output to a file in the background without opening a text window.
+
+#### Printing
+
+**Print…** sends the **output pane** to the system print dialog—not the input line, and not styled ANSI colors.
+
+- Text is printed in the world’s monospace font, one line per row, so ASCII art and MUD maps keep their shape.
+- Colors from the session are not included; print and PDF output is black on white.
+- Choose **PDF → Save as PDF** in the print dialog to save a PDF. The default filename is the **world’s name** (for example, `Alter Aeon.pdf`).
+
+The in-game `@printsource` command is separate: it is a debug/logging action, not the same as **File → Print…**.
+
+### Edit menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **Undo** | ⌘Z | Undoes the last edit in the focused text field or Events editor. World settings changes made in **World Settings** are also undoable. |
+| **Redo** | ⇧⌘Z | Re-applies the last undone edit. |
+| **Clear Output** | ⌘K | Clears all text in the **output** pane of the frontmost **world** document. Disabled for plain-text document windows. |
+| **New Trigger** / **New Macro** | ⇧⌘N | When an **Events** window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key. |
+| **Cut** | ⌘X | Cuts the selection in the focused text field (typically the input line or an Events editor field). |
+| **Copy** | ⌘C | Copies the selection. Works in the input line, Events editors, and the output pane (when text is selected). |
+| **Paste** | ⌘V | Pastes into the focused text field. |
+| **Delete** | ⌫ | Deletes the selection in the focused text field. |
+| **Select All** | ⌘A | Selects all text in the focused text field. |
+| **Find…** | ⌘F | Opens find for the active pane (see [Find](#find) below). |
+| **Find Next** | ⌘G | Jumps to the next match. |
+| **Find Previous** | ⇧⌘G | Jumps to the previous match. |
+| **Use Selection for Find** | ⌘E | Copies the current selection into the find string. |
+| **Jump to Selection** | ⌘J | Scrolls the focused text view so the selection is visible. |
+| **Speech → Speak Selected Text** | — | Speaks the selected text in the input or output pane. See the [Speech](#speech) chapter. |
+
+#### Find
+
+Find behavior depends on which pane is active in a world document:
+
+| Active pane | Find UI | Notes |
+|-------------|---------|-------|
+| **Input** | Standard macOS find panel | Full keyboard navigation (⌘F, ⌘G, ⌘⇧G). |
+| **Output** | Find bar above the output pane | Same menu commands; search runs in the session output (HTML content is searched as plain text). |
+
+Find is available when a world document window is frontmost, or when any text view in the app has focus.
+
+### World menu
+
+Available when a **world document** window is frontmost.
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **Enter Full Screen** | ⌃⌘F | Toggles full-screen mode for the world window. |
+| **Show World Events…** | — | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name. |
+| **Show World Settings…** | ⇧⌘J | Opens the **World Settings** sheet for this world: connection, appearance, fonts, colors, logging, and related options. Click **OK** to apply or **Cancel** to discard. |
+| **Scroll Lock** | ⌃S | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
+
+The same **World Settings** and **Events** commands are available from buttons in the world window’s title bar.
+
+### Audio menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **Mute Sound Cues** | — | Toggles trigger **sound** effects on or off (checkmark when muted). Mirrors **Settings → Audio**. |
+| **Mute Speaking Cues** | — | Toggles all **spoken** output—trigger speech and continuous speech (checkmark when muted). Mirrors **Settings → Audio**. |
+| **Flush Speech Buffer** | ⌘L | Stops speech immediately and discards queued utterances. Enabled only while Savitar is speaking. |
+| **Speech Settings…** | — | Opens **Settings → Speech** (continuous speech, voice, and rate). |
+
+Full detail is in the [Speech](#speech) chapter.
+
+### Window menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **Minimize** | ⌘M | Minimizes the frontmost window to the Dock. |
+| **Zoom** | — | Toggles the window between its user size and a larger size that fits content. |
+| **Bring All to Front** | — | Brings all Savitar windows above windows from other apps. |
+| *(document list)* | — | Lists open Savitar windows; select one to bring it forward. |
+| **Show App-wide Events Window** | ⇧⌘E | Opens the **app-wide Events** window for universal triggers and macros (imported from Savitar 1 preferences). Separate from per-world **Show World Events…**. |
+
+### Help menu
+
+| Menu item | Shortcut | What it does |
+|-----------|----------|--------------|
+| **Savitar Help** | ⌘? | Opens in-app help when a help book is installed. Until Help ships, this may have limited content; use this user guide and [docs/USER_GUIDE.md](USER_GUIDE.md) in the repository. |
+
+---
+
 ## More chapters (planned)
 
 Story 9 in [Stories.md](Stories.md) tracks the remaining user-guide sections: worlds and sessions, input and macros, triggers and events, ANSI colors, appearance, and window management.
