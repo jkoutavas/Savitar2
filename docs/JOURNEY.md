@@ -6,7 +6,7 @@ _Last updated July 2, 2026._
 
 Late in a Cursor session—menubar and print finished, plain-text documents debugged, a user-guide chapter drafted—Jay pointed the agent at [Savitar2DevNotes.md](Savitar2DevNotes.md) and asked for something reflective, not technical. The work was headed for [PR #51](https://github.com/jkoutavas/Savitar2/pull/51). The prompt was:
 
-> Okay! This is going to be a swell PR. Just for grins, read @Savitar2/docs/Savitar2DevNotes.md and **give me your impressions of the journey as it started from there. It's hard to imagine I use to do all this work with the aid of agentic LLMs.**
+> Okay! This is going to be a swell PR. Just for grins, read @Savitar2/docs/Savitar2DevNotes.md and **give me your impressions of the journey as it started from there. It's hard to imagine I use to do all this work without the aid of agentic LLMs.**
 
 **Auto** (the Cursor coding agent in that chat) read the dev notes and answered in the conversation. Jay said the reply was exactly what he wanted—“awww”—and asked that it be captured here, without rewriting it into a formal project history. What follows is that assessment, lightly edited only for markdown.
 
