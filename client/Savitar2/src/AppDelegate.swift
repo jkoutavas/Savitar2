@@ -158,6 +158,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.showContinuousSpeechPrefsWindow()
     }
 
+    @IBAction func showANSIColorsAction(_: Any) {
+        AppContext.shared.showAppPrefsWindow(selecting: .colors)
+    }
+
     @IBAction func showEventsWindowAction(_: Any) {
         AppContext.shared.showUniversalEventsWindow()
     }

@@ -89,7 +89,7 @@ _ Start promoting the beta test
 √ Find/Find Next supported (input + output panes)
 √ Printing supported (session output)
 _ Enhanced analytics
-_ ANSI Color Settings pane in app Settings (Story 5)
+√ ANSI Color Settings pane in app Settings (Story 5)
 _ Macro Clicker
 _ xch_cmd support
 _ MCP (? does anyone use this?)

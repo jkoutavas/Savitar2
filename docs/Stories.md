@@ -146,44 +146,53 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ---
 
-## Story 5 — ANSI Colors Settings pane (HIG)
+## Story 5 — ANSI Colors Settings pane (HIG) ✅
 
 **Goal:** v1 `EditColors()` parity as a **Colors** toolbar pane in the app Settings window ([HIG.md](HIG.md)). Replaces the separate-window approach in Story 3.
 
-**Sketch:**
+**Status:** Complete (July 2026). **Colors** pane in the app Settings window edits all 24 ANSI colors; the output renderer sources its palette from `colorMan`.
+
+**Sketch (as built):**
 
 ```
 ┌─ Colors ──────────────────────────────────────────────────┐
-│  [Startup] … [Colors] … [Speech]                          │
+│  [Startup] [Input & Display] [Colors] [Audio] … [Speech]   │
 │───────────────────────────────────────────────────────────│
-│  Standard (0–7)          Bright (8–15)                    │
-│  [swatches...]            [swatches...]                   │
-│  [ Restore Defaults ]                                     │
+│              Normal     Dim      Intense                   │
+│  Black        [ ]       [ ]       [ ]                      │
+│  Red          [ ]       [ ]       [ ]                      │
+│  …            …         …         …                        │
+│  White        [ ]       [ ]       [ ]                      │
+│  [ Restore Defaults ]                                      │
 └───────────────────────────────────────────────────────────┘
 ```
 
 ### Tasks
 
-- [ ] **5.1** Add **Colors** pane to `AppSettingsPane` + toolbar item (`paintpalette` symbol)
-- [ ] **5.2** Build `ColorsSettingsViewController` — 24 swatches in two columns (standard / bright)
-- [ ] **5.3** Bind swatches to `AppContext.shared.prefs.colorMan`; live-save on change
-- [ ] **5.4** **Restore Defaults** → `ColorMan` factory defaults (v1: `CreateColorPreferences`)
-- [ ] **5.5** Confirm `Ansi2HtmlParser` / output rendering uses `colorMan` (wire if not already)
-- [ ] **5.6** Add menu path to open Settings → Colors (e.g. **Edit → ANSI Colors…** or Savitar2 menu); remove any separate-window entry from Story 3
-- [ ] **5.7** Resize Settings window to fit Colors pane; allow zoom if swatch grid needs scroll on small displays
+- [x] **5.1** Add **Colors** pane to `AppSettingsPane` + toolbar item (`paintpalette` symbol)
+- [x] **5.2** Build `ColorsSettingsViewController` — 24 color wells in an 8×3 grid (hue × Normal/Dim/Intense), matching Savitar 1's three shades per hue
+- [x] **5.3** Bind wells to `AppContext.shared.prefs.colorMan`; live-save on change
+- [x] **5.4** **Restore Defaults** → `ColorMan` factory defaults (v1: `CreateColorPreferences`), via `AnsiPalette.defaultHex`
+- [x] **5.5** Wire output rendering to `colorMan` — `OutputView.setStyle` generates the ANSI CSS from the palette (dim → `.lighter.<hue>`, intense → `.bold`/`.highlighted.<hue>`); no `Ansi2HtmlParser` change needed. Open sessions restyle live via `.savitarColorsChanged`.
+- [x] **5.6** Add menu path — **Edit → ANSI Colors…** opens Settings → Colors
+- [x] **5.7** Settings window auto-fits the Colors pane (`resizeToFitCurrentPane`)
 
 ### Touchpoints
 
-- `client/Savitar2/src/views/AppPreferences/AppSettingsWindowController.swift`
-- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift`
-- `client/Savitar2/src/models/colors/ColorMan.swift`
-- `client/Savitar2/src/worldDocument/Ansi2HtmlParser.swift`
+- `client/Savitar2/src/models/colors/AnsiPalette.swift` (new — palette names, shades, defaults)
+- `client/Savitar2/src/models/colors/ColorMan.swift` (lookup, `setColor`, `installDefaultsIfNeeded`, `restoreDefaults`)
+- `client/Savitar2/src/views/AppPreferences/ColorsSettingsViewController.swift` (new)
+- `client/Savitar2/src/views/AppPreferences/AppSettingsWindowController.swift` (`.colors` pane)
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (embed pane)
+- `client/Savitar2/src/worldDocument/OutputView.swift` (palette-driven CSS)
+- `client/Savitar2/src/worldDocument/WindowController.swift` (live restyle on change)
+- `client/Savitar2/src/AppDelegate.swift` + `Base.lproj/Main.storyboard` (menu item)
 
 ### Acceptance
 
-- User edits all 24 ANSI colors in Settings → Colors and sees them affect session output immediately
-- Colors round-trip through prefs XML like v1
-- No standalone ANSI Colors window remains
+- User edits all 24 ANSI colors in Settings → Colors and sees them affect session output immediately ✅
+- Colors round-trip through prefs XML like v1 ✅
+- No standalone ANSI Colors window remains ✅
 
 ---
 
@@ -408,7 +417,7 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 1. ~~Story 1 — App Settings UI~~ ✅
 2. ~~Story 2 — Wire flags~~ — *in progress* (remaining: 2.3 word wrap, 2.5 clicker, 2.6 Events sections)
 3. Story 4 — Speech pane polish (Auto Layout, live-save)
-4. Story 5 — ANSI Colors Settings pane (README beta item)
+4. ~~Story 5 — ANSI Colors Settings pane~~ ✅
 5. Story 6 — Events Window HIG
 6. Story 7 — World Picker HIG
 7. Story 8 — SwiftUI Settings spike (optional, post-beta)

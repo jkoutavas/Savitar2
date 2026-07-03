@@ -49,6 +49,8 @@
 		695F5A9825899EBC00AB6BA6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A8F25899EBC00AB6BA6 /* World.swift */; };
 		695F5A9C25899EE200AB6BA6 /* ColorMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A9A25899EE200AB6BA6 /* ColorMan.swift */; };
 		695F5A9D25899EE200AB6BA6 /* SavColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A9B25899EE200AB6BA6 /* SavColor.swift */; };
+		AAAA0001000000000000BBB1 /* AnsiPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0001000000000000AAA1 /* AnsiPalette.swift */; };
+		AAAA0002000000000000BBB2 /* ColorsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0002000000000000AAA2 /* ColorsSettingsViewController.swift */; };
 		695F5AB225899EFD00AB6BA6 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A9F25899EFD00AB6BA6 /* ConnectionStatusViewController.swift */; };
 		695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */; };
 		695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA125899EFD00AB6BA6 /* OutputView.swift */; };
@@ -217,6 +219,8 @@
 		695F5A8F25899EBC00AB6BA6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		695F5A9A25899EE200AB6BA6 /* ColorMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMan.swift; sourceTree = "<group>"; };
 		695F5A9B25899EE200AB6BA6 /* SavColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavColor.swift; sourceTree = "<group>"; };
+		AAAA0001000000000000AAA1 /* AnsiPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsiPalette.swift; sourceTree = "<group>"; };
+		AAAA0002000000000000AAA2 /* ColorsSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsSettingsViewController.swift; sourceTree = "<group>"; };
 		695F5A9F25899EFD00AB6BA6 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
 		695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
 		695F5AA125899EFD00AB6BA6 /* OutputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
@@ -503,6 +507,7 @@
 			children = (
 				695F5A9A25899EE200AB6BA6 /* ColorMan.swift */,
 				695F5A9B25899EE200AB6BA6 /* SavColor.swift */,
+				AAAA0001000000000000AAA1 /* AnsiPalette.swift */,
 			);
 			path = colors;
 			sourceTree = "<group>";
@@ -692,6 +697,7 @@
 				69E1A1022A535A900736894 /* AppSettingsWindowController.swift */,
 				699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */,
 				69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */,
+				AAAA0002000000000000AAA2 /* ColorsSettingsViewController.swift */,
 			);
 			path = AppPreferences;
 			sourceTree = "<group>";
@@ -1003,6 +1009,8 @@
 				695F5B46258EE73800AB6BA6 /* WorldsState.swift in Sources */,
 				695F5AB825899EFD00AB6BA6 /* TelnetParser.swift in Sources */,
 				695F5A9C25899EE200AB6BA6 /* ColorMan.swift in Sources */,
+				AAAA0001000000000000BBB1 /* AnsiPalette.swift in Sources */,
+				AAAA0002000000000000BBB2 /* ColorsSettingsViewController.swift in Sources */,
 				695F5ABE25899EFD00AB6BA6 /* Document.swift in Sources */,
 				695F5A9025899EBC00AB6BA6 /* Macro.swift in Sources */,
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,

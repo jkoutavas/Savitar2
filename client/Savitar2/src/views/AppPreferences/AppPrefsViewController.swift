@@ -24,6 +24,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
     private var paneViews: [AppSettingsPane: NSView] = [:]
     private var visiblePane: AppSettingsPane = .startup
     private var speechPrefsViewController: SpeechPrefsViewController?
+    private var colorsSettingsViewController: ColorsSettingsViewController?
     private var checkboxBindings: [(button: NSButton, keyPath: String, supported: Bool)] = []
 
     override func viewDidLoad() {
@@ -84,6 +85,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         checkboxBindings.removeAll()
         paneViews.removeAll()
         speechPrefsViewController = nil
+        colorsSettingsViewController = nil
 
         paneContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(paneContainer)
@@ -123,6 +125,8 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
                       toolTip: "Available when in-app update checking ships.")
         ])
 
+        paneViews[.colors] = colorsPaneView()
+
         paneViews[.speech] = speechPaneView()
 
         for paneView in paneViews.values {
@@ -149,6 +153,13 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         _ = speechViewController.view
         speechViewController.activateIfNeeded()
         return speechViewController.view
+    }
+
+    private func colorsPaneView() -> NSView {
+        let colorsViewController = ColorsSettingsViewController()
+        addChild(colorsViewController)
+        colorsSettingsViewController = colorsViewController
+        return colorsViewController.view
     }
 
     private enum CheckboxItem {

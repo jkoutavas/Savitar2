@@ -125,4 +125,46 @@ class ColorManTests: XCTestCase {
 
         XCTAssertEqual(cm.get()[23].color, NSColor(hex: "#FFFFFF"))
     }
+
+    func testPaletteNaming() {
+        XCTAssertEqual(AnsiPalette.name(for: .red, shade: .normal), "red")
+        XCTAssertEqual(AnsiPalette.name(for: .red, shade: .dim), "redd")
+        XCTAssertEqual(AnsiPalette.name(for: .red, shade: .intense), "redi")
+        XCTAssertEqual(AnsiPalette.allNames.count, 24)
+    }
+
+    func testColorLookupFallsBackToDefault() {
+        let colorMan = ColorMan()
+        // No colors loaded yet: lookup returns the Savitar 1 factory default.
+        XCTAssertEqual(colorMan.color(named: "red"), NSColor(hex: "#B00707"))
+        XCTAssertEqual(colorMan.color(named: "cyani"), NSColor(hex: "#02ABEB"))
+    }
+
+    func testInstallDefaultsPopulatesFullPalette() {
+        let colorMan = ColorMan()
+        colorMan.installDefaultsIfNeeded()
+        XCTAssertEqual(colorMan.get().count, 24)
+        XCTAssertEqual(colorMan.color(named: "white"), NSColor(hex: "#FFFFFF"))
+
+        // Installing again is a no-op when colors already exist.
+        colorMan.installDefaultsIfNeeded()
+        XCTAssertEqual(colorMan.get().count, 24)
+    }
+
+    func testSetColorUpdatesInPlace() {
+        let colorMan = ColorMan()
+        colorMan.installDefaultsIfNeeded()
+        colorMan.setColor(NSColor(hex: "#123456")!, named: "green")
+        XCTAssertEqual(colorMan.get().count, 24)
+        XCTAssertEqual(colorMan.color(named: "green"), NSColor(hex: "#123456"))
+    }
+
+    func testRestoreDefaultsResetsColors() {
+        let colorMan = ColorMan()
+        colorMan.installDefaultsIfNeeded()
+        colorMan.setColor(NSColor(hex: "#123456")!, named: "green")
+        colorMan.restoreDefaults()
+        XCTAssertEqual(colorMan.color(named: "green"), NSColor(hex: "#00A51D"))
+        XCTAssertEqual(colorMan.get().count, 24)
+    }
 }

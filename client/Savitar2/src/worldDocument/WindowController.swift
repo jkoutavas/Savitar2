@@ -30,6 +30,20 @@ class WindowController: NSWindowController, NSWindowDelegate {
             configureTitlebarButtons(in: titlebarController.view)
             window?.addTitlebarAccessoryViewController(titlebarController)
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(colorsDidChange),
+                                               name: .savitarColorsChanged, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // Re-apply the output stylesheet when the global ANSI palette changes.
+    @objc private func colorsDidChange() {
+        guard let doc = document as? Document, let world = doc.world else { return }
+        let splitViewController = contentViewController as? SessionViewController
+        splitViewController?.outputViewController?.setStyle(world: world)
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {

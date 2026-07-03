@@ -183,23 +183,31 @@ class OutputView: WKWebView {
         let foreColor = world.foreColor.toHex!
         let linkColor = world.linkColor.toHex!
 
-        let black = contrast(color: NSColor.black, withHex: backColor)
-        let red = contrast(color: NSColor.red, withHex: backColor)
-        let green = contrast(color: NSColor.green, withHex: backColor)
-        let yellow = contrast(color: NSColor.yellow, withHex: backColor)
-        let blue = contrast(color: NSColor.blue, withHex: backColor)
-        let magenta = contrast(color: NSColor.magenta, withHex: backColor)
-        let cyan = contrast(color: NSColor.cyan, withHex: backColor)
-        let white = contrast(color: NSColor.white, withHex: backColor)
+        let colorMan = AppContext.shared.prefs.colorMan
+        colorMan.installDefaultsIfNeeded()
 
-        let bgblack = contrast(color: NSColor.black, withHex: foreColor)
-        let bgred = contrast(color: NSColor.red, withHex: foreColor)
-        let bggreen = contrast(color: NSColor.green, withHex: foreColor)
-        let bgyellow = contrast(color: NSColor.yellow, withHex: foreColor)
-        let bgblue = contrast(color: NSColor.blue, withHex: foreColor)
-        let bgmagenta = contrast(color: NSColor.magenta, withHex: foreColor)
-        let bgcyan = contrast(color: NSColor.cyan, withHex: foreColor)
-        let bgwhite = contrast(color: NSColor.white, withHex: foreColor)
+        func fgHex(_ hue: AnsiColorName, _ shade: AnsiColorShade) -> String {
+            let name = AnsiPalette.name(for: hue, shade: shade)
+            return contrast(color: colorMan.color(named: name), withHex: backColor)
+        }
+
+        // Foreground ANSI classes sourced from the user's palette. Dim (SGR 2 -> .lighter) and
+        // intense (SGR 1 / bright -> .bold / .highlighted) variants override the base hue via CSS
+        // specificity, so the ANSI parser needs no changes.
+        let fgColorCSS = AnsiColorName.allCases.map { hue -> String in
+            let name = hue.rawValue
+            return """
+            .\(name) {color: #\(fgHex(hue, .normal));}
+            .lighter.\(name) {color: #\(fgHex(hue, .dim));}
+            .bold.\(name), .highlighted.\(name) {color: #\(fgHex(hue, .intense));}
+            """
+        }.joined(separator: "\n")
+
+        let bgColorCSS = AnsiColorName.allCases.map { hue -> String in
+            let name = AnsiPalette.name(for: hue, shade: .normal)
+            let hex = contrast(color: colorMan.color(named: name), withHex: foreColor)
+            return ".bg-\(hue.rawValue) {background-color: #\(hex);}"
+        }.joined(separator: "\n")
 
         let ss = """
         <style id='head-style'>
@@ -221,22 +229,8 @@ class OutputView: WKWebView {
         .bg-reset    {background-color: #\(backColor);}
         .inverted    {color: #\(backColor);}
         .bg-inverted {background-color: #\(foreColor);}
-        .black       {color: #\(black);}
-        .red         {color: #\(red);}
-        .green       {color: #\(green);}
-        .yellow      {color: #\(yellow);}
-        .blue        {color: #\(blue);}
-        .magenta     {color: #\(magenta);}
-        .cyan        {color: #\(cyan);}
-        .white       {color: #\(white);}
-        .bg-black    {background-color: #\(bgblack);}
-        .bg-red      {background-color: #\(bgred);}
-        .bg-green    {background-color: #\(bggreen);}
-        .bg-yellow   {background-color: #\(bgyellow);}
-        .bg-blue     {background-color: #\(bgblue);}
-        .bg-magenta  {background-color: #\(bgmagenta);}
-        .bg-cyan     {background-color: #\(bgcyan);}
-        .bg-white    {background-color: #\(bgwhite);}
+        \(fgColorCSS)
+        \(bgColorCSS)
         .underline   {text-decoration: underline;}
         .bold        {font-weight: bold;}
         .lighter     {font-weight: lighter;}
