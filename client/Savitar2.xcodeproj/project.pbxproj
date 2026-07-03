@@ -190,7 +190,7 @@
 		6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyTests.swift; sourceTree = "<group>"; };
 		695204C724B1F29E004BDBE2 /* Savitar2UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Savitar2UITests.swift; sourceTree = "<group>"; };
 		695204C824B1F29E004BDBE2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6954849C1FC4E6E400A6983F /* Savitar2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6954849C1FC4E6E400A6983F /* Savitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		695484A51FC4E6E400A6983F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695484A81FC4E6E400A6983F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		695484AA1FC4E6E400A6983F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -401,7 +401,7 @@
 		6954849D1FC4E6E400A6983F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6954849C1FC4E6E400A6983F /* Savitar2.app */,
+				6954849C1FC4E6E400A6983F /* Savitar.app */,
 				695484B01FC4E6E400A6983F /* Savitar2Tests.xctest */,
 				695484BB1FC4E6E400A6983F /* Savitar2UITests.xctest */,
 			);
@@ -741,7 +741,7 @@
 				69241E4C2874677000CDDE09 /* AppCenterCrashes */,
 			);
 			productName = Savitar2;
-			productReference = 6954849C1FC4E6E400A6983F /* Savitar2.app */;
+			productReference = 6954849C1FC4E6E400A6983F /* Savitar.app */;
 			productType = "com.apple.product-type.application";
 		};
 		695484AF1FC4E6E400A6983F /* Savitar2Tests */ = {
@@ -1307,7 +1307,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Savitar2;
+				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET DEBUG_WKWEBKIT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
@@ -1334,7 +1335,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Savitar2;
+				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1361,7 +1363,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar.app/Contents/MacOS/Savitar";
 			};
 			name = Debug;
 		};
@@ -1385,7 +1387,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar2.app/Contents/MacOS/Savitar2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Savitar.app/Contents/MacOS/Savitar";
 			};
 			name = Release;
 		};

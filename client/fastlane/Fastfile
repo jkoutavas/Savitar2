@@ -8,8 +8,8 @@ SCHEME = "Savitar2"
 BUILD_DIR = "build/fastlane"
 RELEASE_DIR = "fastlane/release"
 ARCHIVE_PATH = "#{BUILD_DIR}/Savitar2.xcarchive"
-APP_PATH = "#{ARCHIVE_PATH}/Products/Applications/Savitar2.app"
-ZIP_PATH = "#{RELEASE_DIR}/Savitar2.zip"
+APP_PATH = "#{ARCHIVE_PATH}/Products/Applications/Savitar.app"
+ZIP_PATH = "#{RELEASE_DIR}/Savitar.zip"
 
 def require_env!(name)
   value = ENV[name]
