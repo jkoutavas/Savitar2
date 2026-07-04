@@ -74,7 +74,7 @@ _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
 _ Divider status bar support
-√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)_ Add check for updates support (Sparkle?)
+_ Sparkle auto-updates (Story 12 in docs/Stories.md)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test

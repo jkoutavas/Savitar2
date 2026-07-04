@@ -399,66 +399,110 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 
 ---
 
-## Story 12 — "What's New" release-notes pane
+## Story 12 — Sparkle 2 auto-updates
 
-**Goal:** Show users what changed after they update, by surfacing the project
-`CHANGELOG.md` release notes inside the app.
+**Goal:** Ship automatic updates via [Sparkle 2](https://sparkle-project.org/), fed
+from the existing signed-release pipeline and `CHANGELOG.md`.
 
-**Context:** The changelog now follows [Keep a Changelog](https://keepachangelog.com/)
-with a stamped section per release, and the release pipeline already derives
-GitHub Release notes from it (see `client/fastlane/README.md` → "Release notes").
-This story reuses that same source of truth in-app. Bundling `CHANGELOG.md` as a
-resource keeps the app and the GitHub Release perfectly in sync with zero extra
-authoring. Pairs naturally with the Sparkle updater (README alpha) — Sparkle can
-also render these notes — but this story stands alone and needs no updater.
+**Context:** Savitar 1 used a custom `CUpdateChecker`. Sparkle 2 is the
+industry-standard choice for Developer ID–signed, direct-distribution macOS apps.
+It integrates via SPM (no CocoaPods), displays release notes in the update sheet
+before install, and verifies EdDSA signatures plus code-signing identity on every
+download. Release notes come from the same changelog section that already feeds
+GitHub Releases — at release time, extract the stamped version into a `.md` file
+beside the zip; `generate_appcast` wires it as `releaseNotesLink` automatically.
 
-**Sketch:**
+Sparkle owns **update-time** release notes. A separate in-app "What's new"
+welcome pane is intentionally **not** planned (see Story 13 for optional on-demand
+access).
+
+**Prerequisite:** Verify at least one successful signed + notarized build through
+the `release` workflow (PR #56 / #57) before integrating Sparkle. The updater
+must download binaries signed with the same Developer ID identity as the running
+app.
+
+**Sketch (Sparkle standard update sheet):**
 
 ```
-┌─ What's New in Savitar 2.0.16 ────────────────────────────┐
-│                                                           │
-│  Added                                                     │
-│   • ANSI Colors settings pane                             │
-│   • Find and Find Next in the input and output panes      │
-│   • Printing of session output                            │
-│   ...                                                      │
-│                                                           │
-│  [ Full changelog ↗ ]                        [  OK  ]     │
+┌─ A new version of Savitar is available! ──────────────────┐
+│  Savitar 2.0.16 is now available — you have 2.0.15.       │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │ ### Added                                           │  │
+│  │ • ANSI Colors settings pane                         │  │
+│  │ • Find and Find Next in input and output panes      │  │
+│  │ ...                                                 │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                        [ Install Update ]  [ Skip ]       │
 └───────────────────────────────────────────────────────────┘
 ```
 
 ### Tasks
 
-- [ ] **12.1** Bundle `CHANGELOG.md` as an app resource (copy at build time so the
-      single root file stays canonical; avoid a committed duplicate).
-- [ ] **12.2** `ChangelogParser` — parse Keep a Changelog Markdown into
-      `[ReleaseNotes]` (version, date, grouped `Added`/`Changed`/`Fixed` bullets);
-      unit-tested against the bundled file.
-- [ ] **12.3** "What's New" window/view — render the notes for a given version
-      (rich text or a lightweight Markdown → `NSAttributedString`); "Full
-      changelog" button opens the GitHub releases page.
-- [ ] **12.4** Show-once-after-update logic — compare `CFBundleShortVersionString`
-      against a `lastSeenWhatsNewVersion` in `UserDefaults`; auto-present once per
-      new version, and never on first launch of a fresh install (opt-out via a
-      "Show what's new after updates" pref, Story 1/2 audio-adjacent).
-- [ ] **12.5** **Help → What's New in Savitar** menu item for on-demand access.
-- [ ] **12.6** User guide (Story 9): note the What's New pane and where release
+- [ ] **12.1** Add Sparkle 2 via SPM (`https://github.com/sparkle-project/Sparkle`).
+- [ ] **12.2** Initialize `SPUStandardUpdaterController` in `AppDelegate`; add
+      **Check for Updates…** to the Savitar menu (wired to
+      `updaterController.checkForUpdates()`).
+- [ ] **12.3** Un-gray and wire **Check for updates automatically** to Sparkle's
+      `automaticallyChecksForUpdates` / `automaticallyDownloadsUpdates` (map to
+      existing `updatingEnabled` pref).
+- [ ] **12.4** Generate EdDSA signing keys (`generate_keys`); add `SUPublicEDKey`
+      to `Info.plist`; provide feed URL via `SPUUpdaterDelegate` (not only
+      `Info.plist`, per Sparkle 2 best practice).
+- [ ] **12.5** Host `appcast.xml` (e.g. committed under `client/fastlane/release/`
+      or GitHub Pages); set `SUFeedURL` / delegate feed URL to its HTTPS location.
+- [ ] **12.6** Extend the release workflow: after notarization, extract the
+      changelog section for the tag into `Savitar-<version>.md` beside the zip,
+      run `generate_appcast`, sign the appcast, and publish appcast + deltas.
+- [ ] **12.7** End-to-end test: install build N, publish build N+1 via tag, confirm
+      Sparkle offers the update, release notes render, install succeeds, and
+      `CFBundleShortVersionString` / `CFBundleVersion` compare correctly.
+- [ ] **12.8** User guide (Story 9): document how updates work and where release
       notes come from.
 
 ### Touchpoints
 
-- New: `client/Savitar2/src/views/WhatsNew/` (window controller + parser)
-- `CHANGELOG.md` (repo root; add a copy-resource build phase)
-- `client/Savitar2/Base.lproj/Main.storyboard` (Help menu item)
-- `client/Savitar2/src/AppDelegate.swift` (present after update; menu action)
-- `client/fastlane/README.md` — release-notes source shared with GitHub Releases
+- `client/Savitar2.xcodeproj` (SPM package)
+- `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/Info.plist` (`SUPublicEDKey`, version keys)
+- `client/Savitar2/Base.lproj/Main.storyboard` (Check for Updates menu item)
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (enable
+  `updatingEnabled` checkbox)
+- `.github/workflows/release.yml`, `client/fastlane/Fastfile`
+- `CHANGELOG.md` → per-release `.md` for `generate_appcast`
 
 ### Acceptance
 
-- After updating to a new version, the pane appears once, showing that version's
-  notes parsed from the bundled `CHANGELOG.md`.
-- Re-launching the same version does not re-show it; Help → What's New always opens it.
-- Notes shown in-app match the corresponding GitHub Release notes.
+- Check for Updates finds a newer signed build and shows changelog-derived release
+  notes in Sparkle's update sheet.
+- Automatic update checking respects the `updatingEnabled` pref.
+- Downloaded updates pass Sparkle's signature and code-signing verification.
+- Release workflow publishes an updated `appcast.xml` on every tagged release.
+
+---
+
+## Story 13 — Help → Release Notes (optional)
+
+**Goal:** On-demand access to version history without running Check for Updates.
+
+**Context:** Sparkle (Story 12) already displays release notes in the update
+sheet before install, and offers a Version History path when the user is already
+current. This story is **optional polish** — a lightweight escape hatch for
+"what changed in past releases?" that does not duplicate Sparkle's update UI or
+require a custom changelog parser.
+
+### Tasks
+
+- [ ] **13.1** **Help → Release Notes…** menu item opens the GitHub Releases page
+      (`https://github.com/jkoutavas/Savitar2/releases`) in the default browser.
+
+### Touchpoints
+
+- `client/Savitar2/Base.lproj/Main.storyboard` (Help menu)
+- `client/Savitar2/src/AppDelegate.swift` (menu action)
+
+### Acceptance
+
+- Help → Release Notes opens the releases page; no custom window or parser required.
 
 ---
 
@@ -469,7 +513,7 @@ also render these notes — but this story stands alone and needs no updater.
 | Show Macro Clicker at startup | Story 11 | `TVPrefFlag_t_StartupClicker` | Grayed out |
 | Default word wrap | `World` / session word-wrap flag (Story 2.3) | `TVPrefFlag_t_DefaultWordWrap` | Grayed out |
 | Mute clicker sounds | Story 11 | `cmd_MuteClicker` | Grayed out |
-| Check for updates | Sparkle / updater (README alpha) | `CUpdateChecker`, `updatingEnabled` | Grayed out |
+| Check for updates | Story 12 (Sparkle) | `CUpdateChecker`, `updatingEnabled` | Grayed out |
 | Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
 | Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
 
@@ -487,9 +531,11 @@ also render these notes — but this story stands alone and needs no updater.
 8. Story 9 — User guide (ongoing; speech chapter first)
 9. Story 10 — Command aliases (typed abbreviation expansion)
 10. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-11. Story 12 — "What's New" pane (independent; changelog automation already in place)
+11. Story 12 — Sparkle 2 auto-updates (after first successful signed release)
+12. Story 13 — Help → Release Notes (optional polish; no parser)
 
 Stories 10 and 11 are independent tracks; either can ship first.
+Story 13 is optional and can ship any time after Story 12.
 
 Story 3 is retained for reference only; implement Story 5 instead.
 
@@ -508,5 +554,5 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Mute sound / Mute speaking | `muteSound`, `muteSpeaking` | Done (prefs + Audio menu) |
 | Mute terminal bell | `muteBell` | Done |
 | Mute clicker | `muteClicker` | UI only (grayed out) |
-| Check for updates | `updatingEnabled` | UI only (grayed out) |
+| Check for updates | `updatingEnabled` | UI only (grayed out); Story 12 |
 | Capture file editor | `logEditorName` | Deferred |
