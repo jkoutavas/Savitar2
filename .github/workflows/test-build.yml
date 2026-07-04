@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install SwiftLint (pinned)
         run: |
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Show tool versions
         run: |
@@ -93,7 +93,7 @@ jobs:
         run: zip -r Savitar-debug.zip Savitar.app
 
       - name: Upload unsigned app artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Savitar-debug-unsigned
           path: client/build/Build/Products/Debug/Savitar-debug.zip
