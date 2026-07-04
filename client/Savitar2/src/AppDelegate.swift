@@ -6,9 +6,6 @@
 //  Copyright © 2017 Heynow Software. All rights reserved.
 //
 
-import AppCenter
-import AppCenterAnalytics
-import AppCenterCrashes
 import Cocoa
 import ReSwift
 
@@ -37,10 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         if isRunningTests {
             return
         }
-
-         AppCenter.start(withAppSecret: "773fa530-0ff3-4a5a-984f-32fdf7b29baa", services: [
-            Analytics.self, Crashes.self
-         ])
 
         AppContext.shared.restoreSavedWindows()
 
