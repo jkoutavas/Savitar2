@@ -83,14 +83,11 @@ jobs:
       - name: Run tests
         working-directory: client
         run: |
-          # testXMLOutput is a brittle exact-XML golden-file comparison that fails across
-          # toolchains; skipped pending a follow-up to make it order-independent.
           xcodebuild test-without-building \
             -workspace Savitar2.xcworkspace \
             -scheme Savitar2 \
             -destination 'platform=macOS' \
             -derivedDataPath build \
-            -skip-testing:Savitar2Tests/AppPreferencesTests/testXMLOutput \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
