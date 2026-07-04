@@ -6,7 +6,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/eab29aae-547c-410b-a125-2ac600f31778/branches/master/badge)](https://appcenter.ms)
+[![Test Build](https://github.com/jkoutavas/Savitar2/actions/workflows/test-build.yml/badge.svg?branch=master)](https://github.com/jkoutavas/Savitar2/actions/workflows/test-build.yml)
 
 ## Documentation
 
@@ -171,18 +171,18 @@ cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
      156 unique files.
       50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1704.6 files/s, 219155.7 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1680.0 files/s, 216666.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          125           2214           1343          10561
+Swift                          125           2215           1345          10573
 XML                             14              0             36           3927
 Markdown                        11            589              0           1217
+YAML                             3             18              3            103
 JSON                             1              0              0             68
-YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           156           2817           1388          15851
+SUM:                           156           2825           1392          15902
 -------------------------------------------------------------------------------
 ```

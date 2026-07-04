@@ -95,7 +95,8 @@ class AppContext {
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "AppPrefs", bundle: bundle)
-        guard let windowController = storyboard.instantiateInitialController() as? AppSettingsWindowController else { return }
+        guard let windowController = storyboard.instantiateInitialController()
+            as? AppSettingsWindowController else { return }
 
         appPrefsWindowController = windowController
         windowController.initialPane = pane

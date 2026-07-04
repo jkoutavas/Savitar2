@@ -1,10 +1,17 @@
 disabled_rules:
-  - variable_name
+  - identifier_name
   - function_body_length
   - type_body_length
   - cyclomatic_complexity
   - file_length
-  
+  # TODO/FIXME notes are intentional in-progress reminders, not lint defects.
+  - todo
+
+included: # only lint first-party sources, regardless of the caller's working directory
+  - Savitar2
+  - Savitar2Tests
+  - Savitar2UITests
+
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - build

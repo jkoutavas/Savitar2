@@ -61,7 +61,16 @@ class AppPreferencesTests: XCTestCase {
         let xmlOutputStr = try startingPrefs.toXMLElement().xmlString.prettyXMLFormat()
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
-        XCTAssertEqual(xmlOutputStr, xmlInputStr)
+        // Compare line-by-line so a mismatch points at the exact line instead of
+        // dumping two multi-kilobyte blobs into the failure message.
+        let outputLines = xmlOutputStr.components(separatedBy: "\n")
+        let inputLines = xmlInputStr.components(separatedBy: "\n")
+        for (index, (output, expected)) in zip(outputLines, inputLines).enumerated() where output != expected {
+            XCTFail("XML round-trip mismatch at line \(index + 1):\n  output:   \(output)\n  expected: \(expected)")
+            return
+        }
+        XCTAssertEqual(outputLines.count, inputLines.count,
+                       "XML round-trip line count differs: output \(outputLines.count), expected \(inputLines.count)")
     }
 
     func testSetPrefsFlagAction() {
