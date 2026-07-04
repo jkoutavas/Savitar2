@@ -122,7 +122,8 @@ class SpeechPrefsViewController: NSViewController, StoreSubscriber {
         let speakerImage = NSImage(speakerSymbolName: "speaker.wave.2.fill",
                                    accessibilityDescription: "Play sample voice")
             ?? NSImage(named: NSImage.touchBarAudioOutputVolumeHighTemplateName)
-        let speaker = NSButton(image: speakerImage ?? NSImage(), target: self, action: #selector(speakerButtonAction(_:)))
+        let speaker = NSButton(image: speakerImage ?? NSImage(), target: self,
+                               action: #selector(speakerButtonAction(_:)))
         speaker.bezelStyle = .regularSquare
         speaker.isBordered = false
         speakerButton = speaker

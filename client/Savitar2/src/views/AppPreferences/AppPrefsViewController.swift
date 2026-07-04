@@ -9,6 +9,12 @@
 import Cocoa
 import ReSwift
 
+private struct CheckboxBinding {
+    let button: NSButton
+    let keyPath: String
+    let supported: Bool
+}
+
 class AppPrefsViewController: NSViewController, StoreSubscriber {
     var store: AppPreferencesStore? {
         didSet {
@@ -25,7 +31,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
     private var visiblePane: AppSettingsPane = .startup
     private var speechPrefsViewController: SpeechPrefsViewController?
     private var colorsSettingsViewController: ColorsSettingsViewController?
-    private var checkboxBindings: [(button: NSButton, keyPath: String, supported: Bool)] = []
+    private var checkboxBindings: [CheckboxBinding] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,11 +187,11 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
             switch item {
             case let .enabled(keyPath, _):
                 checkbox.identifier = NSUserInterfaceItemIdentifier(keyPath)
-                checkboxBindings.append((checkbox, keyPath, true))
+                checkboxBindings.append(CheckboxBinding(button: checkbox, keyPath: keyPath, supported: true))
             case let .disabled(keyPath, _, toolTip):
                 checkbox.identifier = NSUserInterfaceItemIdentifier(keyPath)
                 styleUnsupportedCheckbox(checkbox, toolTip: toolTip)
-                checkboxBindings.append((checkbox, keyPath, false))
+                checkboxBindings.append(CheckboxBinding(button: checkbox, keyPath: keyPath, supported: false))
             }
             stack.addArrangedSubview(checkbox)
         }
@@ -231,10 +237,8 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
     }
 
     private func unbindCheckboxes() {
-        for entry in checkboxBindings {
-            if entry.supported {
-                entry.button.unbind(.value)
-            }
+        for entry in checkboxBindings where entry.supported {
+            entry.button.unbind(.value)
         }
     }
 }
