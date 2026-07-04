@@ -29,6 +29,7 @@ SPARKLE_BIN=build/sparkle-tools/SourcePackages/artifacts/sparkle/Sparkle/bin
 "$SPARKLE_BIN/generate_keys"
 
 # Export the private seed for CI (store in GitHub `release` environment secrets).
+mkdir -p ~/.private
 "$SPARKLE_BIN/generate_keys" -x ~/.private/savitar-sparkle-ed25519.key
 ```
 
