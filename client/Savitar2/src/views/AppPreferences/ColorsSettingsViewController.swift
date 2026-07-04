@@ -110,14 +110,39 @@ class ColorsSettingsViewController: NSViewController {
 
     @objc private func colorWellChanged(_ sender: NSColorWell) {
         guard let entry = wells.first(where: { $0.well === sender }) else { return }
-        colorMan.setColor(sender.color, named: entry.name)
-        persistAndBroadcast()
+        guard sender.color != colorMan.color(named: entry.name) else { return }
+        apply([entry.name: sender.color], actionName: "Change Color")
     }
 
     @objc private func restoreDefaultsAction(_: Any) {
-        colorMan.restoreDefaults()
+        let defaults = Dictionary(uniqueKeysWithValues: AnsiPalette.allNames.map {
+            ($0, AnsiPalette.defaultColor(named: $0))
+        })
+        apply(defaults, actionName: "Restore Default Colors")
+    }
+
+    // Apply a set of color changes, registering the inverse with the window's undo manager so the
+    // change can be undone and redone. `colorMan` isn't part of the ReSwift store, so undo is
+    // handled directly here.
+    private func apply(_ colors: [String: NSColor], actionName: String) {
+        let inverse = snapshot(of: Array(colors.keys))
+        for (name, color) in colors {
+            colorMan.setColor(color, named: name)
+        }
         syncWellsFromColorMan()
+
+        if let undoManager = view.window?.undoManager {
+            undoManager.registerUndo(withTarget: self) { target in
+                target.apply(inverse, actionName: actionName)
+            }
+            undoManager.setActionName(actionName)
+        }
+
         persistAndBroadcast()
+    }
+
+    private func snapshot(of names: [String]) -> [String: NSColor] {
+        Dictionary(uniqueKeysWithValues: names.map { ($0, colorMan.color(named: $0)) })
     }
 
     private func persistAndBroadcast() {
