@@ -438,19 +438,19 @@ app.
 
 ### Tasks
 
-- [ ] **12.1** Add Sparkle 2 via SPM (`https://github.com/sparkle-project/Sparkle`).
-- [ ] **12.2** Initialize `SPUStandardUpdaterController` in `AppDelegate`; add
+- [x] **12.1** Add Sparkle 2 via SPM (`https://github.com/sparkle-project/Sparkle`).
+- [x] **12.2** Initialize `SPUStandardUpdaterController` in `AppDelegate`; add
       **Check for Updates…** to the Savitar menu (wired to
       `updaterController.checkForUpdates()`).
-- [ ] **12.3** Un-gray and wire **Check for updates automatically** to Sparkle's
+- [x] **12.3** Un-gray and wire **Check for updates automatically** to Sparkle's
       `automaticallyChecksForUpdates` / `automaticallyDownloadsUpdates` (map to
       existing `updatingEnabled` pref).
-- [ ] **12.4** Generate EdDSA signing keys (`generate_keys`); add `SUPublicEDKey`
+- [x] **12.4** Generate EdDSA signing keys (`generate_keys`); add `SUPublicEDKey`
       to `Info.plist`; provide feed URL via `SPUUpdaterDelegate` (not only
       `Info.plist`, per Sparkle 2 best practice).
-- [ ] **12.5** Host `appcast.xml` (e.g. committed under `client/fastlane/release/`
+- [x] **12.5** Host `appcast.xml` (e.g. committed under `client/fastlane/release/`
       or GitHub Pages); set `SUFeedURL` / delegate feed URL to its HTTPS location.
-- [ ] **12.6** Extend the release workflow: after notarization, extract the
+- [x] **12.6** Extend the release workflow: after notarization, extract the
       changelog section for the tag into `Savitar-<version>.md` beside the zip,
       run `generate_appcast`, sign the appcast, and publish appcast + deltas.
 - [ ] **12.7** End-to-end test: install build N, publish build N+1 via tag, confirm
@@ -492,7 +492,7 @@ require a custom changelog parser.
 
 ### Tasks
 
-- [ ] **13.1** **Help → Release Notes…** menu item opens the GitHub Releases page
+- [x] **13.1** **Help → Release Notes…** menu item opens the GitHub Releases page
       (`https://github.com/jkoutavas/Savitar2/releases`) in the default browser.
 
 ### Touchpoints
@@ -513,7 +513,7 @@ require a custom changelog parser.
 | Show Macro Clicker at startup | Story 11 | `TVPrefFlag_t_StartupClicker` | Grayed out |
 | Default word wrap | `World` / session word-wrap flag (Story 2.3) | `TVPrefFlag_t_DefaultWordWrap` | Grayed out |
 | Mute clicker sounds | Story 11 | `cmd_MuteClicker` | Grayed out |
-| Check for updates | Story 12 (Sparkle) | `CUpdateChecker`, `updatingEnabled` | Grayed out |
+| Check for updates | Story 12 (Sparkle) ✅ | `CUpdateChecker`, `updatingEnabled` | Enabled |
 | Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
 | Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
 
@@ -554,5 +554,5 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Mute sound / Mute speaking | `muteSound`, `muteSpeaking` | Done (prefs + Audio menu) |
 | Mute terminal bell | `muteBell` | Done |
 | Mute clicker | `muteClicker` | UI only (grayed out) |
-| Check for updates | `updatingEnabled` | UI only (grayed out); Story 12 |
+| Check for updates | `updatingEnabled` | Done — Story 12 |
 | Capture file editor | `logEditorName` | Deferred |

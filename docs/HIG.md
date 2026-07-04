@@ -29,7 +29,7 @@ Savitar 2 uses one **modeless Settings window** (`AppSettingsWindowController`) 
 | Startup | `play.circle` | World Picker, Events, Macro Clicker (when shipped) |
 | Input & Display | `keyboard` | Keypad, mono fonts, word wrap (when shipped) |
 | Audio | `speaker.wave.2` | Mute cues / bell / clicker |
-| Updates | `arrow.down.circle` | Sparkle (when shipped) |
+| Updates | `arrow.down.circle` | Sparkle 2 (Story 12) |
 | Speech | `waveform` | Continuous speech controls |
 
 ### Code touchpoints

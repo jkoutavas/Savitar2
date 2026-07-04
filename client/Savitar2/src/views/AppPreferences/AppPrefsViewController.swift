@@ -127,8 +127,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         ])
 
         paneViews[.updates] = paneView(items: [
-            .disabled("updatingEnabled", title: "Check for updates automatically",
-                      toolTip: "Available when in-app update checking ships.")
+            .enabled("updatingEnabled", title: "Check for updates automatically")
         ])
 
         paneViews[.colors] = colorsPaneView()

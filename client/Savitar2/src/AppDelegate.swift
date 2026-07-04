@@ -10,7 +10,7 @@ import Cocoa
 import ReSwift
 
 var isRunningTests: Bool {
-    return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
 }
 
 @NSApplicationMain
@@ -38,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.restoreSavedWindows()
 
         AppContext.shared.appPrefsStore.subscribe(self)
+        SavitarUpdater.shared.startIfNeeded()
 
         if AppContext.shared.prefs.flags.contains(.startupPicker) {
             showWorldPickerAction(self)
@@ -147,6 +148,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.showAppPrefsWindow()
     }
 
+    @IBAction func checkForUpdatesAction(_: Any) {
+        SavitarUpdater.shared.checkForUpdates()
+    }
+
+    @IBAction func showReleaseNotesAction(_: Any) {
+        guard let url = URL(string: "https://github.com/jkoutavas/Savitar2/releases") else { return }
+        NSWorkspace.shared.open(url)
+    }
+
     @IBAction func showContinuousSpeechPrefsAction(_: Any) {
         AppContext.shared.showContinuousSpeechPrefsWindow()
     }
@@ -190,11 +200,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         outputVC.performFindPanelAction(menuItem)
     }
 
-    func newState(state _: AppPreferencesState) {
+    func newState(state: AppPreferencesState) {
         willChangeValue(forKey: "muteSound")
         didChangeValue(forKey: "muteSound")
         willChangeValue(forKey: "muteSpeaking")
         didChangeValue(forKey: "muteSpeaking")
+        SavitarUpdater.shared.applyAutomaticUpdatePreference(state.prefs.updatingEnabled)
     }
 }
 
