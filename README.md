@@ -31,7 +31,6 @@ Although the first release targets feature parity with production Savitar v1.6.3
 ```
 √ Started a private github repo
 √ App is 64bit only, runs on macOS 10.12 and later, including Catalina
-_ Crash reporting + analytics (App Center was integrated, then removed once the service was retired; revisit with Sentry?)
 √ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
 √ Rewrite Aha (ANSI to HTML parser)
@@ -67,8 +66,15 @@ _ Implement remaining local commands
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech (Story 1)
 √ Wire keypad, mono fonts, and mute-bell preference flags (Story 2; see docs/Stories.md)
 _ Wire default word wrap for new sessions (Story 2.3)
-√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
-_ Add check for updates support (Sparkle?)
+√ Find/Find Next supported (input + output panes)
+√ Printing supported (session output)
+√ ANSI Color Settings pane in app Settings (Story 5)
+_ Macro Clicker
+_ xch_cmd support
+_ MCP (? does anyone use this?)
+_ File upload
+_ Divider status bar support
+√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)_ Add check for updates support (Sparkle?)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
@@ -85,16 +91,8 @@ _ Alias support (Story 10)
 
 ```
 √ Move github repo to public
+_ Crash reporting + analytics (App Center was integrated, then removed once the service was retired; revisit with Sentry?)
 _ Start promoting the beta test
-√ Find/Find Next supported (input + output panes)
-√ Printing supported (session output)
-_ Enhanced analytics
-√ ANSI Color Settings pane in app Settings (Story 5)
-_ Macro Clicker
-_ xch_cmd support
-_ MCP (? does anyone use this?)
-_ File upload
-_ Divider status bar support
 _ User guide — remaining chapters (Story 9; speech and menus documented)
 _ Polish, address beta test issues
 ```
@@ -184,18 +182,18 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
      156 unique files.
       46 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.07 s (2388.1 files/s, 309039.3 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1734.4 files/s, 225620.8 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          125           2214           1345          10567
-XML                             13              9             36           3918
-Markdown                        11            587              0           1189
+XML                             13              9             36           3916
+Markdown                        11            609              0           1274
 YAML                             4             32             15            183
 JSON                             1              0              0             68
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           156           2845           1404          15939
+SUM:                           156           2867           1404          16022
 -------------------------------------------------------------------------------
 ```
