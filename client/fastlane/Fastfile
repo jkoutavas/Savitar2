@@ -13,6 +13,11 @@ ARCHIVE_PATH = "#{BUILD_DIR}/Savitar2.xcarchive"
 APP_PATH = "#{ARCHIVE_PATH}/Products/Applications/Savitar.app"
 ZIP_PATH = "#{RELEASE_DIR}/Savitar.zip"
 
+# CHANGELOG.md lives at the repository root (the parent of client/).
+REPO_ROOT = File.expand_path("../..", __dir__)
+CHANGELOG_PATH = File.join(REPO_ROOT, "CHANGELOG.md")
+CHANGELOG_REPO_URL = "https://github.com/jkoutavas/Savitar2"
+
 def require_env!(name)
   value = ENV[name]
   UI.user_error!("Missing required environment variable: #{name}") if value.to_s.empty?
@@ -127,5 +132,37 @@ platform :mac do
   lane :release do
     release_archive
     notarize
+  end
+
+  desc "Stamp the changelog's [Unreleased] section as a dated release. " \
+       "Usage: bundle exec fastlane prepare_release version:2.0.16"
+  lane :prepare_release do |options|
+    version = options[:version].to_s.strip.sub(/\Av/, "")
+    UI.user_error!("Provide a version, e.g. `bundle exec fastlane prepare_release version:2.0.16`") if version.empty?
+
+    text = File.read(CHANGELOG_PATH)
+    UI.user_error!("No '## [Unreleased]' heading found in CHANGELOG.md.") unless text.include?("## [Unreleased]")
+    if text =~ /^## \[#{Regexp.escape(version)}\]/
+      UI.user_error!("CHANGELOG.md already has a section for #{version}.")
+    end
+
+    date = Time.now.strftime("%Y-%m-%d")
+
+    # Insert a dated version heading directly below [Unreleased]; the accumulated
+    # notes move under the new version, leaving [Unreleased] empty for next time.
+    text = text.sub(/^## \[Unreleased\][^\n]*\n/, "## [Unreleased]\n\n## [#{version}] - #{date}\n")
+
+    # Point the compare link at the new tag and add a release link for the version.
+    unreleased_link = "[Unreleased]: #{CHANGELOG_REPO_URL}/compare/v#{version}...HEAD"
+    version_link = "[#{version}]: #{CHANGELOG_REPO_URL}/releases/tag/v#{version}"
+    if text =~ /^\[Unreleased\]:.*$/
+      text = text.sub(/^\[Unreleased\]:.*$/, "#{unreleased_link}\n#{version_link}")
+    else
+      text = "#{text.rstrip}\n\n#{unreleased_link}\n#{version_link}\n"
+    end
+
+    File.write(CHANGELOG_PATH, text)
+    UI.success("Stamped CHANGELOG.md: [Unreleased] → #{version} (#{date}).")
+    UI.message("Next: commit CHANGELOG.md via a PR, then tag v#{version} to release.")
   end
 end

@@ -399,6 +399,69 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 
 ---
 
+## Story 12 — "What's New" release-notes pane
+
+**Goal:** Show users what changed after they update, by surfacing the project
+`CHANGELOG.md` release notes inside the app.
+
+**Context:** The changelog now follows [Keep a Changelog](https://keepachangelog.com/)
+with a stamped section per release, and the release pipeline already derives
+GitHub Release notes from it (see `client/fastlane/README.md` → "Release notes").
+This story reuses that same source of truth in-app. Bundling `CHANGELOG.md` as a
+resource keeps the app and the GitHub Release perfectly in sync with zero extra
+authoring. Pairs naturally with the Sparkle updater (README alpha) — Sparkle can
+also render these notes — but this story stands alone and needs no updater.
+
+**Sketch:**
+
+```
+┌─ What's New in Savitar 2.0.16 ────────────────────────────┐
+│                                                           │
+│  Added                                                     │
+│   • ANSI Colors settings pane                             │
+│   • Find and Find Next in the input and output panes      │
+│   • Printing of session output                            │
+│   ...                                                      │
+│                                                           │
+│  [ Full changelog ↗ ]                        [  OK  ]     │
+└───────────────────────────────────────────────────────────┘
+```
+
+### Tasks
+
+- [ ] **12.1** Bundle `CHANGELOG.md` as an app resource (copy at build time so the
+      single root file stays canonical; avoid a committed duplicate).
+- [ ] **12.2** `ChangelogParser` — parse Keep a Changelog Markdown into
+      `[ReleaseNotes]` (version, date, grouped `Added`/`Changed`/`Fixed` bullets);
+      unit-tested against the bundled file.
+- [ ] **12.3** "What's New" window/view — render the notes for a given version
+      (rich text or a lightweight Markdown → `NSAttributedString`); "Full
+      changelog" button opens the GitHub releases page.
+- [ ] **12.4** Show-once-after-update logic — compare `CFBundleShortVersionString`
+      against a `lastSeenWhatsNewVersion` in `UserDefaults`; auto-present once per
+      new version, and never on first launch of a fresh install (opt-out via a
+      "Show what's new after updates" pref, Story 1/2 audio-adjacent).
+- [ ] **12.5** **Help → What's New in Savitar** menu item for on-demand access.
+- [ ] **12.6** User guide (Story 9): note the What's New pane and where release
+      notes come from.
+
+### Touchpoints
+
+- New: `client/Savitar2/src/views/WhatsNew/` (window controller + parser)
+- `CHANGELOG.md` (repo root; add a copy-resource build phase)
+- `client/Savitar2/Base.lproj/Main.storyboard` (Help menu item)
+- `client/Savitar2/src/AppDelegate.swift` (present after update; menu action)
+- `client/fastlane/README.md` — release-notes source shared with GitHub Releases
+
+### Acceptance
+
+- After updating to a new version, the pane appears once, showing that version's
+  notes parsed from the bundled `CHANGELOG.md`.
+- Re-launching the same version does not re-show it; Help → What's New always opens it.
+- Notes shown in-app match the corresponding GitHub Release notes.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -424,6 +487,7 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 8. Story 9 — User guide (ongoing; speech chapter first)
 9. Story 10 — Command aliases (typed abbreviation expansion)
 10. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+11. Story 12 — "What's New" pane (independent; changelog automation already in place)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 

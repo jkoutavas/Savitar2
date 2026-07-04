@@ -96,16 +96,45 @@ jobs:
           path: client/fastlane/release/Savitar.zip
           if-no-files-found: error
 
+      - name: Extract release notes from CHANGELOG
+        if: startsWith(github.ref, 'refs/tags/')
+        id: notes
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          notes_file="$RUNNER_TEMP/release-notes.md"
+          # Pull the section for this version: everything between "## [x.y.z]" and
+          # the next "## [" heading, then strip leading blank lines.
+          awk -v ver="$version" '
+            $0 ~ "^## \\[" ver "\\]" { capture = 1; next }
+            capture && /^## \[/ { exit }
+            capture { print }
+          ' CHANGELOG.md | awk 'NF { seen = 1 } seen' > "$notes_file"
+          if [ -s "$notes_file" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Release notes for $version sourced from CHANGELOG.md:"
+            cat "$notes_file"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No '## [$version]' section in CHANGELOG.md; will auto-generate notes."
+          fi
+          echo "file=$notes_file" >> "$GITHUB_OUTPUT"
+
       - name: Attach signed build to the GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          if [ "${{ steps.notes.outputs.found }}" = "true" ]; then
+            notes_args=(--notes-file "${{ steps.notes.outputs.file }}")
+          else
+            notes_args=(--generate-notes)
+          fi
           gh release create "$GITHUB_REF_NAME" \
             client/fastlane/release/Savitar.zip \
             --title "$GITHUB_REF_NAME" \
-            --generate-notes \
+            "${notes_args[@]}" \
           || gh release upload "$GITHUB_REF_NAME" \
                client/fastlane/release/Savitar.zip --clobber
 
