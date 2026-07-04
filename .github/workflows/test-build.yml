@@ -53,17 +53,12 @@ jobs:
       - name: Show tool versions
         run: |
           xcodebuild -version
-          pod --version
-
-      - name: Generate CocoaPods support files
-        working-directory: client
-        run: pod install
 
       - name: Resolve Swift packages
         working-directory: client
         run: |
           xcodebuild -resolvePackageDependencies \
-            -workspace Savitar2.xcworkspace \
+            -project Savitar2.xcodeproj \
             -scheme Savitar2 \
             -derivedDataPath build
 
@@ -71,7 +66,7 @@ jobs:
         working-directory: client
         run: |
           xcodebuild build-for-testing \
-            -workspace Savitar2.xcworkspace \
+            -project Savitar2.xcodeproj \
             -scheme Savitar2 \
             -destination 'platform=macOS' \
             -derivedDataPath build \
@@ -84,7 +79,7 @@ jobs:
         working-directory: client
         run: |
           xcodebuild test-without-building \
-            -workspace Savitar2.xcworkspace \
+            -project Savitar2.xcodeproj \
             -scheme Savitar2 \
             -destination 'platform=macOS' \
             -derivedDataPath build \

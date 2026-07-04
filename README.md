@@ -114,7 +114,7 @@ _ ???
 
 ## How to setup development
 
-In the `client` directory you'll find `Savitar2.xcworkspace`.
+In the `client` directory you'll find `Savitar2.xcodeproj`. Open it directly in Xcode; dependencies are managed by Swift Package Manager and resolve automatically. (Savitar no longer uses CocoaPods, so there is no `.xcworkspace` or `Podfile`.)
 
 You'll want to `brew install swiftlint` to ensure coding style correctness.
 
