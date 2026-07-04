@@ -128,14 +128,40 @@ signed build:
 
 ### Cutting a release
 
+The tag name is the marketing version, and only the repository owner can create
+`v*` tags (enforced by a tag ruleset):
+
 ```bash
-git tag v2.0.0
-git push origin v2.0.0
+git tag v2.0.16
+git push origin v2.0.16
 ```
 
 Then approve the pending `release` deployment in the Actions tab. The workflow
-signs, notarizes, staples, and uploads `Savitar.zip` to the `v2.0.0` GitHub
-Release.
+builds `2.0.16 (<commit count>)`, signs, notarizes, staples, and uploads
+`Savitar.zip` to the `v2.0.16` GitHub Release.
+
+## Versioning
+
+Two independent numbers, both resolved at build time so **no version is ever
+committed to project files for a release** (the working tree stays clean):
+
+- **Marketing version** (`CFBundleShortVersionString`) is **tag-driven**. The
+  git tag you push to cut a release is the single source of truth: pushing
+  `v2.0.16` builds marketing version `2.0.16`. The `release_archive` lane reads
+  it from `RELEASE_VERSION` (set by CI from the tag), falling back to the tag
+  pointing at `HEAD`. For local/dev builds with no tag, the project's
+  `MARKETING_VERSION` is used as a plain fallback.
+- **Build number** (`CFBundleVersion`) is the **git commit count**
+  (`git rev-list --count HEAD`), injected as `CURRENT_PROJECT_VERSION`. It is
+  monotonic, reproducible, and read-only.
+
+Both overrides are passed to `xcodebuild` on the command line, so nothing on
+disk changes. Because the build number needs full history, CI checks out with
+`fetch-depth: 0` (a shallow clone would report `1`).
+
+The macOS About panel shows `Version <marketing> (<build>)`, e.g.
+`Version 2.0.16 (592)`. You never hand-edit a version number — you just name the
+tag when you release.
 
 ## Notes
 

@@ -19,6 +19,31 @@ def require_env!(name)
   value
 end
 
+# Monotonic build number derived from the git history depth. Read-only, so it
+# never dirties the working tree. Requires full history (CI must checkout with
+# fetch-depth: 0; a shallow clone would report 1).
+def git_build_number
+  count = `git -C #{PROJECT_ROOT.shellescape} rev-list --count HEAD`.strip
+  if count.empty? || count == "0"
+    UI.user_error!("Could not determine a build number from git history. Ensure this is a full clone (fetch-depth: 0).")
+  end
+  count
+end
+
+# Marketing version (CFBundleShortVersionString) for a release. The release tag
+# is the single source of truth: pushing tag `v2.0.16` yields marketing version
+# `2.0.16` with no committed file edits. Prefers the RELEASE_VERSION env (set by
+# CI from the tag), then the tag pointing at HEAD, and otherwise returns nil so
+# the project's MARKETING_VERSION (a local/dev fallback) is used as-is.
+def release_marketing_version
+  version = ENV["RELEASE_VERSION"].to_s.strip
+  if version.empty?
+    version = `git -C #{PROJECT_ROOT.shellescape} describe --exact-match --tags HEAD 2>/dev/null`.strip
+  end
+  version = version.sub(/\Av/, "")
+  version.empty? ? nil : version
+end
+
 platform :mac do
   # Keep our hand-written fastlane/README.md; don't let fastlane overwrite it
   # with its auto-generated lane index on every run.
@@ -47,6 +72,11 @@ platform :mac do
   lane :release_archive do
     team_id = require_env!("APPLE_TEAM_ID")
     signing_identity = require_env!("DEVELOPER_ID_APPLICATION")
+    build_number = git_build_number
+    marketing_version = release_marketing_version
+
+    version_overrides = +"CURRENT_PROJECT_VERSION=#{build_number.shellescape} "
+    version_overrides << "MARKETING_VERSION=#{marketing_version.shellescape} " if marketing_version
 
     Dir.chdir(PROJECT_ROOT) do
       sh("rm -rf #{ARCHIVE_PATH.shellescape} #{ZIP_PATH.shellescape}")
@@ -59,6 +89,7 @@ platform :mac do
         "-configuration Release " \
         "-archivePath #{ARCHIVE_PATH.shellescape} " \
         "-destination 'generic/platform=macOS' " \
+        "#{version_overrides}" \
         "CODE_SIGN_STYLE=Manual " \
         "DEVELOPMENT_TEAM=#{team_id.shellescape} " \
         "CODE_SIGN_IDENTITY=#{signing_identity.shellescape}"
@@ -66,7 +97,7 @@ platform :mac do
 
       sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
     end
-    UI.success("Created #{ZIP_PATH}")
+    UI.success("Created #{ZIP_PATH} — version #{marketing_version || "(project default)"} (build #{build_number})")
   end
 
   desc "Submit the release zip to Apple notarization and staple the accepted ticket."
