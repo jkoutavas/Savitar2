@@ -74,6 +74,7 @@ _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
 _ Divider status bar support
+√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 _ Sparkle auto-updates (Story 12 in docs/Stories.md)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
@@ -178,22 +179,22 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     170 text files.
+     171 text files.
      156 unique files.
-      47 files ignored.
+      48 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1691.6 files/s, 222166.5 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1651.4 files/s, 217382.1 lines/s)
 -------------------------------------------------------------------------------
-Language                     files          blank        comment           code
+Language                     files          blank        comment    code
 -------------------------------------------------------------------------------
-Swift                          125           2214           1345          10567
-XML                             13              6             36           3914
-Markdown                        11            648              0           1400
-YAML                             4             33             20            212
-JSON                             1              0              0             68
-Text                             1              0              0             11
-C/C++ Header                     1              3              8              3
+Swift                          125           2214           1345   10567
+XML                             13              6             36    3914
+Markdown                        11            660              0    1435
+YAML                             4             33             20     212
+JSON                             1              0              0      68
+Text                             1              0              0      11
+C/C++ Header                     1              3              8       3
 -------------------------------------------------------------------------------
-SUM:                           156           2904           1409          16175
+SUM:                           156           2916           1409   16210
 -------------------------------------------------------------------------------
 ```
