@@ -178,22 +178,22 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     169 text files.
+     170 text files.
      156 unique files.
-      46 files ignored.
+      47 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1734.4 files/s, 225620.8 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1691.6 files/s, 222166.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          125           2214           1345          10567
-XML                             13              9             36           3916
-Markdown                        11            609              0           1274
-YAML                             4             32             15            183
+XML                             13              6             36           3914
+Markdown                        11            648              0           1400
+YAML                             4             33             20            212
 JSON                             1              0              0             68
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           156           2867           1404          16022
+SUM:                           156           2904           1409          16175
 -------------------------------------------------------------------------------
 ```
