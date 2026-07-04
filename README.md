@@ -89,7 +89,7 @@ _ Start promoting the beta test
 √ Find/Find Next supported (input + output panes)
 √ Printing supported (session output)
 _ Enhanced analytics
-_ ANSI Color Settings pane in app Settings (Story 5)
+√ ANSI Color Settings pane in app Settings (Story 5)
 _ Macro Clicker
 _ xch_cmd support
 _ MCP (? does anyone use this?)
@@ -167,22 +167,22 @@ cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     170 text files.
-     154 unique files.
+     172 text files.
+     156 unique files.
       50 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1715.0 files/s, 219450.5 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1704.6 files/s, 219155.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          123           2162           1305          10317
-XML                             14              0             36           3920
-Markdown                        11            588              0           1209
+Swift                          125           2214           1343          10561
+XML                             14              0             36           3927
+Markdown                        11            589              0           1217
 JSON                             1              0              0             68
 YAML                             3             11              1             64
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           154           2764           1350          15592
+SUM:                           156           2817           1388          15851
 -------------------------------------------------------------------------------
 ```

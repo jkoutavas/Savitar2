@@ -231,6 +231,13 @@ CA
                                                 </items>
                                             </menu>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="col-ed-sep"/>
+                                        <menuItem title="ANSI Colors…" id="col-ed-mnu">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showANSIColorsAction:" target="Voe-Tx-rLC" id="col-ed-act"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

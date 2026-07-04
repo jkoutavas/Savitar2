@@ -10,6 +10,7 @@ import Cocoa
 enum AppSettingsPane: Int, CaseIterable {
     case startup
     case inputDisplay
+    case colors
     case audio
     case updates
     case speech
@@ -18,6 +19,7 @@ enum AppSettingsPane: Int, CaseIterable {
         switch self {
         case .startup: return "Startup"
         case .inputDisplay: return "Input & Display"
+        case .colors: return "Colors"
         case .audio: return "Audio"
         case .updates: return "Updates"
         case .speech: return "Speech"
@@ -36,6 +38,7 @@ enum AppSettingsPane: Int, CaseIterable {
         switch self {
         case .startup: return "play.circle"
         case .inputDisplay: return "keyboard"
+        case .colors: return "paintpalette"
         case .audio: return "speaker.wave.2"
         case .updates: return "arrow.down.circle"
         case .speech: return "person.wave.2"
