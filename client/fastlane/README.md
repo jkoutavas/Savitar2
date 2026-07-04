@@ -1,86 +1,56 @@
-# Local Fastlane Release Builds
+fastlane documentation
+----
 
-This Fastlane setup is intentionally local-first. It does not require GitHub
-Actions secrets and does not commit certificates, passwords, API keys, release
-archives, or notarized artifacts.
+# Installation
 
-## One-Time Setup
+Make sure you have the latest version of the Xcode command line tools installed:
 
-Install Bundler if needed:
-
-```bash
-gem install bundler
+```sh
+xcode-select --install
 ```
 
-Install the local Ruby tools:
+For _fastlane_ installation instructions, see [Installing _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 
-```bash
-cd client
-bundle install
+# Available Actions
+
+## Mac
+
+### mac test_build
+
+```sh
+[bundle exec] fastlane mac test_build
 ```
 
-Install your Developer ID Application certificate in your local macOS Keychain.
-The certificate must include its private key.
+Build the app locally without signing, matching the pull request test build.
 
-## Environment Variables
+### mac release_archive
 
-Set these locally before running a release lane:
-
-```bash
-export APPLE_TEAM_ID="RFE485QN84"
-export DEVELOPER_ID_APPLICATION="Developer ID Application: Your Name (RFE485QN84)"
-export APP_STORE_CONNECT_KEY_ID="ABC123DEFG"
-export APP_STORE_CONNECT_ISSUER_ID="00000000-0000-0000-0000-000000000000"
-export APP_STORE_CONNECT_KEY_PATH="$HOME/.private/AuthKey_ABC123DEFG.p8"
+```sh
+[bundle exec] fastlane mac release_archive
 ```
 
-You can put those in a local shell profile, a password manager shell snippet, or
-an untracked `.env` file that you source manually. Do not commit real values.
+Create a Developer ID signed release archive and zip it for notarization.
 
-## Lanes
+### mac notarize
 
-Run the unsigned local test build:
-
-```bash
-cd client
-bundle exec fastlane test_build
+```sh
+[bundle exec] fastlane mac notarize
 ```
 
-Create a signed Developer ID archive and zip:
+Submit the release zip to Apple notarization and staple the accepted ticket.
 
-```bash
-cd client
-bundle exec fastlane release_archive
+### mac release
+
+```sh
+[bundle exec] fastlane mac release
 ```
 
-Submit the zip to Apple notarization and staple the accepted ticket:
+Build, notarize, staple, and package a local release zip.
 
-```bash
-cd client
-bundle exec fastlane notarize
-```
+----
 
-Run the full local release flow:
+This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
 
-```bash
-cd client
-bundle exec fastlane release
-```
+More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
 
-The release zip is written to:
-
-```text
-client/fastlane/release/Savitar.zip
-```
-
-## Notes
-
-- The release lanes assume signing happens on your Mac using your local
-  Keychain.
-- `pod install` is run automatically because the CocoaPods support files are
-  ignored by git but required by the Xcode workspace.
-- The app target already enables hardened runtime, which is required for
-  notarization.
-- Before shipping a notarized release, verify the release entitlements. In
-  particular, `com.apple.security.get-task-allow` should normally be disabled
-  for distribution builds.
+The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
