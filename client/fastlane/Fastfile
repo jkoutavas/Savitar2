@@ -20,6 +20,12 @@ def require_env!(name)
 end
 
 platform :mac do
+  # Keep our hand-written fastlane/README.md; don't let fastlane overwrite it
+  # with its auto-generated lane index on every run.
+  before_all do
+    skip_docs
+  end
+
   desc "Build the app locally without signing, matching the pull request test build."
   lane :test_build do
     Dir.chdir(PROJECT_ROOT) do
