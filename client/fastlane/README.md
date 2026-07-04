@@ -196,9 +196,9 @@ that version's section from `CHANGELOG.md` and uses it verbatim as the GitHub
 Release body. If no matching section exists, it falls back to GitHub's
 auto-generated notes.
 
-The same `CHANGELOG.md` is intended to also feed a future in-app "What's new"
-pane (Story 12 in `docs/Stories.md`), keeping the app and the GitHub Release in
-sync from one source.
+The same `CHANGELOG.md` section also feeds Sparkle release notes at update time
+(Story 12): the release workflow extracts it into a `.md` file beside the zip for
+`generate_appcast`.
 
 ## Notes
 

@@ -1,0 +1,36 @@
+---
+description: How to correctly refresh the cloc line-count stats in README.md
+globs: README.md
+alwaysApply: false
+---
+
+# Updating the README cloc stats
+
+The root [README.md](../../README.md) has a "## Tracking lines of code" section
+with a `cloc` snapshot. When refreshing it (on notable code/doc changes, or when
+asked), replace the **entire** fenced block — **including the preamble**, not
+just the language table.
+
+## Steps
+
+1. Run the exact command the README documents, from the repo root:
+
+```bash
+cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
+```
+
+2. Update all three parts of the fenced block:
+   - **Preamble** — `N text files.`, `N unique files.`, `N files ignored.`
+   - The `github.com/AlDanial/cloc ... T=...` timing line
+   - The full language table and the `SUM:` row
+
+## Critical: use real numbers, not sandboxed ones
+
+The agent's sandbox **suppresses the `N text files.` preamble** and can
+**miscount files** (typically one fewer than the working tree, since an ignored
+file is missed). Never carry over or guess the old preamble numbers.
+
+- Run cloc **outside the sandbox** (`required_permissions: ["all"]`), or
+- Ask the user to paste their local `cloc` output and copy the numbers verbatim.
+
+The user's local run is the source of truth for the preamble and file counts.
