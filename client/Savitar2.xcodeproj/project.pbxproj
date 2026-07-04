@@ -948,7 +948,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\nif ! command -v swiftlint >/dev/null; then\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\n  exit 0\nfi\nREQUIRED=\"0.65.0\"\nINSTALLED=\"$(swiftlint version)\"\nLOWEST=\"$(echo \"$REQUIRED\n$INSTALLED\" | sort -V | head -n1)\"\nif [ \"$LOWEST\" != \"$REQUIRED\" ]; then\n  echo \"warning: SwiftLint $INSTALLED is older than the pinned $REQUIRED; run: brew upgrade swiftlint\"\nfi\ncd \"$SRCROOT\" || { echo \"warning: SwiftLint skipped (SRCROOT unavailable)\"; exit 0; }\nswiftlint\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\nif [ \"$CI\" = \"true\" ]; then\n  echo \"note: SwiftLint runs as a dedicated CI job; skipping build-phase lint\"\n  exit 0\nfi\nif ! command -v swiftlint >/dev/null; then\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\n  exit 0\nfi\n# Keep REQUIRED in sync with .github/workflows/test-build.yml\nREQUIRED=\"0.65.0\"\nINSTALLED=\"$(swiftlint version)\"\nLOWEST=\"$(echo \"$REQUIRED\n$INSTALLED\" | sort -V | head -n1)\"\nif [ \"$LOWEST\" != \"$REQUIRED\" ]; then\n  echo \"warning: SwiftLint $INSTALLED is older than the pinned $REQUIRED; run: brew upgrade swiftlint\"\nfi\ncd \"$SRCROOT\" || { echo \"warning: SwiftLint skipped (SRCROOT unavailable)\"; exit 0; }\nswiftlint\n";
 		};
 		A76815878A295BAB70720650 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
