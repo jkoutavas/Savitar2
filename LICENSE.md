@@ -1,4 +1,4 @@
-Copyright (c) 1996-2022, Heynow Software
+Copyright (c) 1996-2026, Heynow Software
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
