@@ -1,0 +1,9 @@
+# Code owners for Savitar2.
+#
+# The repository owner reviews and approves all changes. With a ruleset that
+# requires review from Code Owners on the default branch, every pull request
+# needs @jkoutavas's approval before it can be merged.
+#
+# Docs: https://docs.github.com/articles/about-code-owners
+
+* @jkoutavas

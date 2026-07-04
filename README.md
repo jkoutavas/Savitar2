@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 3rd, 2026_
+_README last updated July 4th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -31,7 +31,6 @@ Although the first release targets feature parity with production Savitar v1.6.3
 ```
 √ Started a private github repo
 √ App is 64bit only, runs on macOS 10.12 and later, including Catalina
-√ App is integrated with AppCenter, handles crash reporting and basic analytics
 √ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
 √ Rewrite Aha (ANSI to HTML parser)
@@ -67,8 +66,15 @@ _ Implement remaining local commands
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech (Story 1)
 √ Wire keypad, mono fonts, and mute-bell preference flags (Story 2; see docs/Stories.md)
 _ Wire default word wrap for new sessions (Story 2.3)
-√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
-_ Add check for updates support (Sparkle?)
+√ Find/Find Next supported (input + output panes)
+√ Printing supported (session output)
+√ ANSI Color Settings pane in app Settings (Story 5)
+_ Macro Clicker
+_ xch_cmd support
+_ MCP (? does anyone use this?)
+_ File upload
+_ Divider status bar support
+√ Core Edit menu (undo, cut/copy/paste, clear output, find, print)_ Add check for updates support (Sparkle?)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
@@ -85,16 +91,8 @@ _ Alias support (Story 10)
 
 ```
 √ Move github repo to public
+_ Crash reporting + analytics (App Center was integrated, then removed once the service was retired; revisit with Sentry?)
 _ Start promoting the beta test
-√ Find/Find Next supported (input + output panes)
-√ Printing supported (session output)
-_ Enhanced analytics
-√ ANSI Color Settings pane in app Settings (Story 5)
-_ Macro Clicker
-_ xch_cmd support
-_ MCP (? does anyone use this?)
-_ File upload
-_ Divider status bar support
 _ User guide — remaining chapters (Story 9; speech and menus documented)
 _ Polish, address beta test issues
 ```
@@ -137,6 +135,19 @@ $ cd server/echoserver
 $ swift package generate-xcodeproj
 ```
 
+## Releases
+
+Official Savitar builds are Developer ID–signed and notarized by the maintainer, then attached to the project's [GitHub Releases](https://github.com/jkoutavas/Savitar2/releases). Savitar is open source, so anyone can build the app for their own use — but only the maintainer can publish a signed, notarized binary: the signing secrets live in a protected GitHub Actions environment gated behind owner approval, and the release workflow ([`.github/workflows/release.yml`](.github/workflows/release.yml)) runs only on version tags.
+
+To produce an unsigned local build (the same one CI runs on every pull request):
+
+```bash
+$ cd client
+$ bundle exec fastlane test_build
+```
+
+See [`client/fastlane/README.md`](client/fastlane/README.md) for the full release process — local and CI lanes, the required secrets, and how to cut a release.
+
 ## Formatting code
 
 Install the formatter:
@@ -160,29 +171,29 @@ There's already a `.swiftformat` config file that contains this:
 
 ## Tracking lines of code
 
-Re-run from the repo root (approximate; excludes `Pods`, `.build`, `build`):
+Re-run from the repo root (approximate; excludes `.build`, `build`):
 
 ```bash
-cloc . --exclude-dir=Pods,.build,build --not-match-f='PR_DESCRIPTION\.md'
+cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     167 text files.
-     154 unique files.
+     169 text files.
+     156 unique files.
       46 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1667.3 files/s, 217498.0 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1734.4 files/s, 225620.8 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          125           2214           1345          10567
-XML                             12              0             36           3909
-Markdown                        11            589              0           1217
-YAML                             3             17              3             99
+XML                             13              9             36           3916
+Markdown                        11            609              0           1274
+YAML                             4             32             15            183
 JSON                             1              0              0             68
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           154           2823           1392          15874
+SUM:                           156           2867           1404          16022
 -------------------------------------------------------------------------------
 ```

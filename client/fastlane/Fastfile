@@ -2,8 +2,10 @@ require "shellwords"
 
 default_platform(:mac)
 
+# Anchor all shell commands to the client/ directory (the parent of fastlane/),
+# so relative paths resolve regardless of fastlane's working directory.
 PROJECT_ROOT = File.expand_path("..", __dir__)
-WORKSPACE = "Savitar2.xcworkspace"
+PROJECT = "Savitar2.xcodeproj"
 SCHEME = "Savitar2"
 BUILD_DIR = "build/fastlane"
 RELEASE_DIR = "fastlane/release"
@@ -17,28 +19,28 @@ def require_env!(name)
   value
 end
 
-def run_pod_install
-  Dir.chdir(PROJECT_ROOT) do
-    sh("bundle exec pod install")
-  end
-end
-
 platform :mac do
+  # Keep our hand-written fastlane/README.md; don't let fastlane overwrite it
+  # with its auto-generated lane index on every run.
+  before_all do
+    skip_docs
+  end
+
   desc "Build the app locally without signing, matching the pull request test build."
   lane :test_build do
-    run_pod_install
-
-    sh(
-      "xcodebuild build-for-testing " \
-      "-workspace #{WORKSPACE.shellescape} " \
-      "-scheme #{SCHEME.shellescape} " \
-      "-destination 'platform=macOS' " \
-      "-derivedDataPath #{BUILD_DIR.shellescape} " \
-      "CODE_SIGNING_ALLOWED=NO " \
-      "CODE_SIGNING_REQUIRED=NO " \
-      "CODE_SIGN_IDENTITY='' " \
-      "ONLY_ACTIVE_ARCH=YES"
-    )
+    Dir.chdir(PROJECT_ROOT) do
+      sh(
+        "xcodebuild build-for-testing " \
+        "-project #{PROJECT.shellescape} " \
+        "-scheme #{SCHEME.shellescape} " \
+        "-destination 'platform=macOS' " \
+        "-derivedDataPath #{BUILD_DIR.shellescape} " \
+        "CODE_SIGNING_ALLOWED=NO " \
+        "CODE_SIGNING_REQUIRED=NO " \
+        "CODE_SIGN_IDENTITY='' " \
+        "ONLY_ACTIVE_ARCH=YES"
+      )
+    end
   end
 
   desc "Create a Developer ID signed release archive and zip it for notarization."
@@ -46,23 +48,24 @@ platform :mac do
     team_id = require_env!("APPLE_TEAM_ID")
     signing_identity = require_env!("DEVELOPER_ID_APPLICATION")
 
-    run_pod_install
-    sh("rm -rf #{ARCHIVE_PATH.shellescape} #{ZIP_PATH.shellescape}")
-    sh("mkdir -p #{RELEASE_DIR.shellescape}")
+    Dir.chdir(PROJECT_ROOT) do
+      sh("rm -rf #{ARCHIVE_PATH.shellescape} #{ZIP_PATH.shellescape}")
+      sh("mkdir -p #{RELEASE_DIR.shellescape}")
 
-    sh(
-      "xcodebuild archive " \
-      "-workspace #{WORKSPACE.shellescape} " \
-      "-scheme #{SCHEME.shellescape} " \
-      "-configuration Release " \
-      "-archivePath #{ARCHIVE_PATH.shellescape} " \
-      "-destination 'generic/platform=macOS' " \
-      "CODE_SIGN_STYLE=Manual " \
-      "DEVELOPMENT_TEAM=#{team_id.shellescape} " \
-      "CODE_SIGN_IDENTITY=#{signing_identity.shellescape}"
-    )
+      sh(
+        "xcodebuild archive " \
+        "-project #{PROJECT.shellescape} " \
+        "-scheme #{SCHEME.shellescape} " \
+        "-configuration Release " \
+        "-archivePath #{ARCHIVE_PATH.shellescape} " \
+        "-destination 'generic/platform=macOS' " \
+        "CODE_SIGN_STYLE=Manual " \
+        "DEVELOPMENT_TEAM=#{team_id.shellescape} " \
+        "CODE_SIGN_IDENTITY=#{signing_identity.shellescape}"
+      )
 
-    sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+      sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+    end
     UI.success("Created #{ZIP_PATH}")
   end
 
@@ -72,18 +75,20 @@ platform :mac do
     issuer_id = require_env!("APP_STORE_CONNECT_ISSUER_ID")
     key_path = require_env!("APP_STORE_CONNECT_KEY_PATH")
 
-    UI.user_error!("Missing release zip. Run `bundle exec fastlane release_archive` first.") unless File.exist?(ZIP_PATH)
+    Dir.chdir(PROJECT_ROOT) do
+      UI.user_error!("Missing release zip. Run `bundle exec fastlane release_archive` first.") unless File.exist?(ZIP_PATH)
 
-    sh(
-      "xcrun notarytool submit #{ZIP_PATH.shellescape} " \
-      "--key #{key_path.shellescape} " \
-      "--key-id #{key_id.shellescape} " \
-      "--issuer #{issuer_id.shellescape} " \
-      "--wait"
-    )
+      sh(
+        "xcrun notarytool submit #{ZIP_PATH.shellescape} " \
+        "--key #{key_path.shellescape} " \
+        "--key-id #{key_id.shellescape} " \
+        "--issuer #{issuer_id.shellescape} " \
+        "--wait"
+      )
 
-    sh("xcrun stapler staple #{APP_PATH.shellescape}")
-    sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+      sh("xcrun stapler staple #{APP_PATH.shellescape}")
+      sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
+    end
     UI.success("Notarized, stapled, and repackaged #{ZIP_PATH}")
   end
 
