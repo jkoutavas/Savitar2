@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -111,7 +111,6 @@
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
 		6968381A2558FCC900F0BC20 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 696838192558FCC900F0BC20 /* Logging */; };
-		69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */; };
 		6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */; };
 		696F77482390D256005E45EB /* Appearance.txt in Resources */ = {isa = PBXBuildFile; fileRef = 696F77472390D256005E45EB /* Appearance.txt */; };
 		697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D14A5239D828900BBF33C /* TriggerTests.swift */; };
@@ -140,9 +139,10 @@
 		69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD923B4078400E9F087 /* SavColorTests.swift */; };
 		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
 		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
-		69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 69E7SPK124B203CB00058D01 /* Sparkle */; };
 		69D6E5EF24B203CB00058D70 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 69D6E5EE24B203CB00058D70 /* SwiftyXMLParser */; };
 		69E1A1012A535A900736894 /* AppSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1A1022A535A900736894 /* AppSettingsWindowController.swift */; };
+		69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 69E7SPK124B203CB00058D01 /* Sparkle */; };
+		69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
 		69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E0204B872400301A8D /* CGFloat+Extensions.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
@@ -276,7 +276,6 @@
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarUpdater.swift; sourceTree = "<group>"; };
 		69662B302043A6E100E7CC7B /* Savitar2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Savitar2.entitlements; sourceTree = "<group>"; };
 		6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ansi2HtmlParserTests.swift; sourceTree = "<group>"; };
 		696F773F2390CF46005E45EB /* Savitar2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savitar2-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -307,6 +306,7 @@
 		69CEEDD923B4078400E9F087 /* SavColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColorTests.swift; sourceTree = "<group>"; };
 		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		69E1A1022A535A900736894 /* AppSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsWindowController.swift; sourceTree = "<group>"; };
+		69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarUpdater.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
@@ -1211,11 +1211,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.0.15;
-				SPARKLE_PUBLIC_ED_KEY = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_MODULE_NAME = Savitar2;
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET DEBUG_WKWEBKIT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1240,11 +1240,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.0.15;
-				SPARKLE_PUBLIC_ED_KEY = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_MODULE_NAME = Savitar2;
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
