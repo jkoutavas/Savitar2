@@ -70,6 +70,7 @@ fastlane/test_output
 fastlane/release
 appcast/updates/*.zip
 appcast/updates/*.delta
+appcast/updates/*.md
 appcast/updates/old_updates/
 .env
 .env.*

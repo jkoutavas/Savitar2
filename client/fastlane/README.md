@@ -67,7 +67,7 @@ Submit the zip to Apple notarization and staple the accepted ticket:
 
 ```bash
 cd client
-bundle exec fastlane notarize
+bundle exec fastlane notarize_release
 ```
 
 Run the full local release flow:
@@ -198,9 +198,10 @@ Release body. If no matching section exists, it falls back to GitHub's
 auto-generated notes.
 
 The same `CHANGELOG.md` section also feeds Sparkle release notes at update time
-(Story 12): the release workflow extracts it into a `.md` file beside the zip for
-`generate_appcast`, then commits an updated `client/appcast/appcast.xml` to
-`master`. See [Sparkle appcast setup](../appcast/README.md).
+(Story 12): the release workflow extracts it into a per-version `Savitar.md` file
+(commit beside `appcast.xml`), sets `sparkle:fullReleaseNotesLink` to the full
+changelog on GitHub for **Version History**, and runs `generate_appcast` to update
+`client/appcast/appcast.xml` on `master`. See [Sparkle appcast setup](../appcast/README.md).
 
 ## Sparkle auto-updates
 
@@ -215,12 +216,14 @@ reads the feed from:
 https://raw.githubusercontent.com/jkoutavas/Savitar2/master/client/appcast/appcast.xml
 ```
 
-Local appcast refresh (after a signed build):
+Local appcast refresh (download the release zip to `fastlane/release/Savitar.zip`
+first, or run `release` locally):
 
 ```bash
 cd client
 export SPARKLE_EDDSA_PRIVATE_KEY="$(cat ~/.private/savitar-sparkle-ed25519.key)"
 bundle exec fastlane sparkle_appcast version:2.0.16
+git add appcast/appcast.xml appcast/*.md
 ```
 
 ## Notes

@@ -7,11 +7,15 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 ![](client/Savitar2/Assets.xcassets/AppIcon.appiconset/icon_256x256.png)
 
 [![Test Build](https://github.com/jkoutavas/Savitar2/actions/workflows/test-build.yml/badge.svg?branch=master)](https://github.com/jkoutavas/Savitar2/actions/workflows/test-build.yml)
+[![Release](https://github.com/jkoutavas/Savitar2/actions/workflows/release.yml/badge.svg)](https://github.com/jkoutavas/Savitar2/actions/workflows/release.yml)
+
+**Quick links:** [Releases](https://github.com/jkoutavas/Savitar2/releases) · [Changelog](CHANGELOG.md) · [User Guide](docs/USER_GUIDE.md) · [Release process](client/fastlane/README.md) · [Sparkle appcast](client/appcast/README.md)
 
 ## Documentation
 
 | Document                                             | Audience   | Contents                                                                                                                                                       |
 | ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)                              |
 | [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                                           |
 | [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech, menus, events, and macros documented) |
 | [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                                               |
