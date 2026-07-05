@@ -5,6 +5,7 @@ This directory holds the Sparkle update feed for Savitar.
 | File | Purpose |
 | --- | --- |
 | `appcast.xml` | Committed feed read by the app (`SavitarUpdater`) and updated on each tagged release |
+| `Savitar.md` | Release notes for the current feed item (relative `releaseNotesLink` target; commit beside `appcast.xml`) |
 | `updates/` | Staging folder for `generate_appcast` (release zips are gitignored) |
 
 Feed URL (also set in `SavitarUpdater.swift`):
@@ -61,7 +62,8 @@ awk -v ver="$VERSION" '
   appcast/updates
 
 mv appcast/updates/appcast.xml appcast/appcast.xml
-git add appcast/appcast.xml
+cp appcast/updates/*.md appcast/
+git add appcast/appcast.xml appcast/*.md
 git commit -m "Bootstrap Sparkle appcast for ${TAG}"
 git push
 ```

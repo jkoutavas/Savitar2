@@ -171,10 +171,11 @@ jobs:
             appcast/updates
           rm -f "$key_file"
           mv appcast/updates/appcast.xml appcast/appcast.xml
+          cp appcast/updates/*.md appcast/ 2>/dev/null || true
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add client/appcast/appcast.xml
+          git add client/appcast/appcast.xml client/appcast/*.md
           if git diff --staged --quiet; then
             echo "Appcast unchanged."
             exit 0

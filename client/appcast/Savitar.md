@@ -1,0 +1,1 @@
+- Added Sparkle updater support

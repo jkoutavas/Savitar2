@@ -292,7 +292,10 @@ platform :mac do
         File.delete(key_file) if File.exist?(key_file)
       end
       sh("mv #{File.join(APPCAST_UPDATES_DIR, 'appcast.xml').shellescape} #{APPCAST_XML.shellescape}")
+      Dir.glob(File.join(APPCAST_UPDATES_DIR, "*.md")).each do |md|
+        sh("cp #{md.shellescape} #{APPCAST_DIR.shellescape}/")
+      end
     end
-    UI.success("Updated #{APPCAST_XML} for #{tag}. Commit and push to master.")
+    UI.success("Updated #{APPCAST_XML} for #{tag}. Commit appcast.xml and *.md, then push to master.")
   end
 end
