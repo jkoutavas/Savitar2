@@ -126,6 +126,7 @@ signed build:
    | `APP_STORE_CONNECT_KEY_ID` | App Store Connect API key ID |
    | `APP_STORE_CONNECT_ISSUER_ID` | App Store Connect issuer ID |
    | `APP_STORE_CONNECT_KEY_P8_BASE64` | Base64 of the App Store Connect API key file (`.p8`) |
+   | `SPARKLE_EDDSA_PRIVATE_KEY` | Contents of the Sparkle EdDSA private key file (from `generate_keys -x`; see [`appcast/README.md`](../appcast/README.md)) |
 
    Generate the base64 blobs with:
 
@@ -198,7 +199,29 @@ auto-generated notes.
 
 The same `CHANGELOG.md` section also feeds Sparkle release notes at update time
 (Story 12): the release workflow extracts it into a `.md` file beside the zip for
-`generate_appcast`.
+`generate_appcast`, then commits an updated `client/appcast/appcast.xml` to
+`master`. See [Sparkle appcast setup](../appcast/README.md).
+
+## Sparkle auto-updates
+
+Savitar uses [Sparkle 2](https://sparkle-project.org/) for in-app updates. One-time
+owner setup (EdDSA keys + GitHub secret) is documented in
+[`client/appcast/README.md`](../appcast/README.md).
+
+After each tagged release, CI publishes a signed `appcast.xml` on `master`. The app
+reads the feed from:
+
+```text
+https://raw.githubusercontent.com/jkoutavas/Savitar2/master/client/appcast/appcast.xml
+```
+
+Local appcast refresh (after a signed build):
+
+```bash
+cd client
+export SPARKLE_EDDSA_PRIVATE_KEY="$(cat ~/.private/savitar-sparkle-ed25519.key)"
+bundle exec fastlane sparkle_appcast version:2.0.16
+```
 
 ## Notes
 

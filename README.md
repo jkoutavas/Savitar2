@@ -75,7 +75,7 @@ _ MCP (? does anyone use this?)
 _ File upload
 _ Divider status bar support
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
-_ Sparkle auto-updates (Story 12 in docs/Stories.md)
+√ Sparkle auto-updates (Story 12)
 _ Add bug reporting support
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
@@ -179,22 +179,22 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     171 text files.
-     156 unique files.
-      48 files ignored.
+     174 text files.
+     159 unique files.
+      49 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1651.4 files/s, 217382.1 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.10 s (1662.1 files/s, 216930.7 lines/s)
 -------------------------------------------------------------------------------
-Language                     files          blank        comment    code
+Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          125           2214           1345   10567
-XML                             13              6             36    3914
-Markdown                        11            660              0    1435
-YAML                             4             33             20     212
-JSON                             1              0              0      68
-Text                             1              0              0      11
-C/C++ Header                     1              3              8       3
+Swift                          126           2225           1353          10606
+XML                             14              6             36           3937
+Markdown                        12            685              0           1506
+YAML                             4             34             20            251
+JSON                             1              0              0             68
+Text                             1              0              0             11
+C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           156           2916           1409   16210
+SUM:                           159           2953           1417          16382
 -------------------------------------------------------------------------------
 ```

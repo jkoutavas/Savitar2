@@ -138,6 +138,46 @@ jobs:
           || gh release upload "$GITHUB_REF_NAME" \
                client/fastlane/release/Savitar.zip --clobber
 
+      - name: Generate and publish Sparkle appcast
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          SPARKLE_EDDSA_PRIVATE_KEY: ${{ secrets.SPARKLE_EDDSA_PRIVATE_KEY }}
+        run: |
+          if [ -z "${SPARKLE_EDDSA_PRIVATE_KEY:-}" ]; then
+            echo "::warning::SPARKLE_EDDSA_PRIVATE_KEY not set; skipping appcast update."
+            exit 0
+          fi
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          tag="$GITHUB_REF_NAME"
+          updates_dir="client/appcast/updates"
+          mkdir -p "$updates_dir"
+          cp client/fastlane/release/Savitar.zip "$updates_dir/Savitar.zip"
+          awk -v ver="$version" '
+            $0 ~ "^## \\[" ver "\\]" { capture = 1; next }
+            capture && /^## \[/ { exit }
+            capture { print }
+          ' CHANGELOG.md | awk 'NF { seen = 1 } seen' > "$updates_dir/Savitar.md"
+          cd client
+          xcodebuild -resolvePackageDependencies \
+            -project Savitar2.xcodeproj -scheme Savitar2 \
+            -derivedDataPath build/sparkle-tools -quiet
+          generate_appcast="build/sparkle-tools/SourcePackages/artifacts/sparkle/Sparkle/bin/generate_appcast"
+          "$generate_appcast" \
+            --download-url-prefix "https://github.com/jkoutavas/Savitar2/releases/download/${tag}/" \
+            appcast/updates
+          mv appcast/updates/appcast.xml appcast/appcast.xml
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add client/appcast/appcast.xml
+          if git diff --staged --quiet; then
+            echo "Appcast unchanged."
+            exit 0
+          fi
+          git commit -m "Update Sparkle appcast for ${tag}"
+          git push origin HEAD:master
+
       - name: Clean up signing keychain
         if: always()
         run: |

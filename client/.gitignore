@@ -68,6 +68,9 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/release
+appcast/updates/*.zip
+appcast/updates/*.delta
+appcast/updates/old_updates/
 .env
 .env.*
 !.env.example

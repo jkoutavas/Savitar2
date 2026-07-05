@@ -17,6 +17,42 @@ ZIP_PATH = "#{RELEASE_DIR}/Savitar.zip"
 REPO_ROOT = File.expand_path("../..", __dir__)
 CHANGELOG_PATH = File.join(REPO_ROOT, "CHANGELOG.md")
 CHANGELOG_REPO_URL = "https://github.com/jkoutavas/Savitar2"
+APPCAST_DIR = File.join(PROJECT_ROOT, "appcast")
+APPCAST_UPDATES_DIR = File.join(APPCAST_DIR, "updates")
+APPCAST_XML = File.join(APPCAST_DIR, "appcast.xml")
+SPARKLE_DERIVED_DATA = File.join(PROJECT_ROOT, "build/sparkle-tools")
+
+def sparkle_tool(name)
+  path = File.join(SPARKLE_DERIVED_DATA, "SourcePackages/artifacts/sparkle/Sparkle/bin/#{name}")
+  unless File.exist?(path)
+    UI.message("Resolving Swift packages for Sparkle tools…")
+    Dir.chdir(PROJECT_ROOT) do
+      sh(
+        "xcodebuild -resolvePackageDependencies " \
+        "-project #{PROJECT.shellescape} " \
+        "-scheme #{SCHEME.shellescape} " \
+        "-derivedDataPath #{SPARKLE_DERIVED_DATA.shellescape}"
+      )
+    end
+  end
+  UI.user_error!("Sparkle tool not found: #{name}") unless File.exist?(path)
+  path
+end
+
+def changelog_section(version)
+  section = +""
+  capture = false
+  File.foreach(CHANGELOG_PATH) do |line|
+    if line =~ /^## \[#{Regexp.escape(version)}\]/
+      capture = true
+      next
+    end
+    break if capture && line =~ /^## \[/ 
+
+    section << line if capture
+  end
+  section.strip
+end
 
 def require_env!(name)
   value = ENV[name]
@@ -164,5 +200,34 @@ platform :mac do
     File.write(CHANGELOG_PATH, text)
     UI.success("Stamped CHANGELOG.md: [Unreleased] → #{version} (#{date}).")
     UI.message("Next: commit CHANGELOG.md via a PR, then tag v#{version} to release.")
+  end
+
+  desc "Update client/appcast/appcast.xml from the release zip and CHANGELOG. " \
+       "Usage: bundle exec fastlane sparkle_appcast version:2.0.16"
+  lane :sparkle_appcast do |options|
+    version = options[:version].to_s.strip.sub(/\Av/, "")
+    version = release_marketing_version if version.empty?
+    UI.user_error!("Provide version:, e.g. sparkle_appcast version:2.0.16") if version.to_s.empty?
+
+    require_env!("SPARKLE_EDDSA_PRIVATE_KEY")
+    tag = "v#{version}"
+    generate_appcast = sparkle_tool("generate_appcast")
+
+    Dir.chdir(PROJECT_ROOT) do
+      UI.user_error!("Missing release zip at #{ZIP_PATH}") unless File.exist?(ZIP_PATH)
+
+      sh("mkdir -p #{APPCAST_UPDATES_DIR.shellescape}")
+      sh("cp #{ZIP_PATH.shellescape} #{File.join(APPCAST_UPDATES_DIR, 'Savitar.zip').shellescape}")
+
+      notes = changelog_section(version)
+      unless notes.empty?
+        File.write(File.join(APPCAST_UPDATES_DIR, "Savitar.md"), notes)
+      end
+
+      prefix = "#{CHANGELOG_REPO_URL}/releases/download/#{tag}/"
+      sh("#{generate_appcast.shellescape} --download-url-prefix #{prefix.shellescape} #{APPCAST_UPDATES_DIR.shellescape}")
+      sh("mv #{File.join(APPCAST_UPDATES_DIR, 'appcast.xml').shellescape} #{APPCAST_XML.shellescape}")
+    end
+    UI.success("Updated #{APPCAST_XML} for #{tag}. Commit and push to master.")
   end
 end
