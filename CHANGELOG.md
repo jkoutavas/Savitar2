@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.17] - 2026-07-04
+
 - Added Sparkle updater support
 
 ## [2.0.16] - 2026-07-04
@@ -57,7 +59,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.16...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.17...HEAD
+[2.0.17]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.17
 [2.0.16]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.16
 [2.0.15]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.15
 [2.0.14]: https://github.com/jkoutavas/Savitar2/pull/30
