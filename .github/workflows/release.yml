@@ -172,6 +172,21 @@ jobs:
           rm -f "$key_file"
           mv appcast/updates/appcast.xml appcast/appcast.xml
           cp appcast/updates/*.md appcast/ 2>/dev/null || true
+          ruby <<'RUBY'
+          appcast = "appcast/appcast.xml"
+          url = "https://github.com/jkoutavas/Savitar2/blob/master/CHANGELOG.md"
+          text = File.read(appcast)
+          link = "            <sparkle:fullReleaseNotesLink>#{url}</sparkle:fullReleaseNotesLink>"
+          text = if text.include?("fullReleaseNotesLink")
+            text.gsub(/<sparkle:fullReleaseNotesLink>[^<]*<\/sparkle:fullReleaseNotesLink>/, link.strip)
+          else
+            text.gsub(
+              /(<sparkle:releaseNotesLink>[^<]*<\/sparkle:releaseNotesLink>)/,
+              "\\1\n#{link}"
+            )
+          end
+          File.write(appcast, text)
+          RUBY
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

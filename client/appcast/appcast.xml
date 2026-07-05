@@ -9,6 +9,7 @@
             <sparkle:shortVersionString>2.0.17</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
             <sparkle:releaseNotesLink>Savitar.md</sparkle:releaseNotesLink>
+            <sparkle:fullReleaseNotesLink>https://github.com/jkoutavas/Savitar2/blob/master/CHANGELOG.md</sparkle:fullReleaseNotesLink>
             <enclosure url="https://github.com/jkoutavas/Savitar2/releases/download/v2.0.17/Savitar.zip" length="10200562" type="application/octet-stream" sparkle:edSignature="dxdyTSdk6MaoodCYYnqdOn+Bk14gvItjjmOt1XNrMVVGpOpLmMFXsICyToE6eXbT3SnWNyco0Ue/e9AciMXoBg=="/>
         </item>
     </channel>

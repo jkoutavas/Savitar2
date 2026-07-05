@@ -129,6 +129,23 @@ def notarytool_credentials(key_path, key_id, issuer_id)
   "--key #{key_path.shellescape} --key-id #{key_id.shellescape} --issuer #{issuer_id.shellescape}"
 end
 
+# Sparkle uses fullReleaseNotesLink for the "Version History" action when the
+# user is already up to date; releaseNotesLink stays per-version for updates.
+def ensure_full_release_notes_link(appcast_path = APPCAST_XML)
+  url = "#{CHANGELOG_REPO_URL}/blob/master/CHANGELOG.md"
+  text = File.read(appcast_path)
+  link = "            <sparkle:fullReleaseNotesLink>#{url}</sparkle:fullReleaseNotesLink>"
+  text = if text.include?("fullReleaseNotesLink")
+    text.gsub(/<sparkle:fullReleaseNotesLink>[^<]*<\/sparkle:fullReleaseNotesLink>/, link.strip)
+  else
+    text.gsub(
+      /(<sparkle:releaseNotesLink>[^<]*<\/sparkle:releaseNotesLink>)/,
+      "\\1\n#{link}"
+    )
+  end
+  File.write(appcast_path, text)
+end
+
 platform :mac do
   # Keep our hand-written fastlane/README.md; don't let fastlane overwrite it
   # with its auto-generated lane index on every run.
@@ -292,6 +309,7 @@ platform :mac do
         File.delete(key_file) if File.exist?(key_file)
       end
       sh("mv #{File.join(APPCAST_UPDATES_DIR, 'appcast.xml').shellescape} #{APPCAST_XML.shellescape}")
+      ensure_full_release_notes_link
       Dir.glob(File.join(APPCAST_UPDATES_DIR, "*.md")).each do |md|
         sh("cp #{md.shellescape} #{APPCAST_DIR.shellescape}/")
       end

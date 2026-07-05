@@ -8,6 +8,10 @@ This directory holds the Sparkle update feed for Savitar.
 | `Savitar.md` | Release notes for the current feed item (relative `releaseNotesLink` target; commit beside `appcast.xml`) |
 | `updates/` | Staging folder for `generate_appcast` (release zips are gitignored) |
 
+**Version History:** each appcast item includes `sparkle:fullReleaseNotesLink` pointing at the repo
+[`CHANGELOG.md`](https://github.com/jkoutavas/Savitar2/blob/master/CHANGELOG.md). Per-version
+`Savitar.md` files are still used when prompting to install an update.
+
 Feed URL (also set in `SavitarUpdater.swift`):
 
 ```text
