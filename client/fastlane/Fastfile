@@ -1,3 +1,4 @@
+require "json"
 require "shellwords"
 
 default_platform(:mac)
@@ -12,6 +13,7 @@ RELEASE_DIR = "fastlane/release"
 ARCHIVE_PATH = "#{BUILD_DIR}/Savitar2.xcarchive"
 APP_PATH = "#{ARCHIVE_PATH}/Products/Applications/Savitar.app"
 ZIP_PATH = "#{RELEASE_DIR}/Savitar.zip"
+ENTITLEMENTS_PATH = File.join(PROJECT_ROOT, "Savitar2/Savitar2.entitlements")
 
 # CHANGELOG.md lives at the repository root (the parent of client/).
 REPO_ROOT = File.expand_path("../..", __dir__)
@@ -85,6 +87,48 @@ def release_marketing_version
   version.empty? ? nil : version
 end
 
+def codesign_release(path, signing_identity, extra_flags: "")
+  sh(
+    "codesign --force --options runtime --timestamp #{extra_flags} " \
+    "--sign #{signing_identity.shellescape} #{path.shellescape}"
+  )
+end
+
+# Xcode manual signing in CI often leaves Sparkle's nested helpers (Autoupdate,
+# Updater.app, XPC services) without a valid Developer ID signature. Apple then
+# rejects notarization as Invalid. Sign inside-out, then re-sign the app bundle.
+def sign_sparkle_framework(app_path, signing_identity)
+  framework = File.join(app_path, "Contents/Frameworks/Sparkle.framework")
+  unless File.directory?(framework)
+    UI.message("Sparkle.framework not embedded — skipping Sparkle re-sign.")
+    return
+  end
+
+  version_dir = Dir[File.join(framework, "Versions/*")].find { |d| File.exist?(File.join(d, "Sparkle")) }
+  UI.user_error!("Could not find Sparkle.framework version directory") unless version_dir
+
+  [
+    [File.join(version_dir, "XPCServices/Installer.xpc"), ""],
+    [File.join(version_dir, "XPCServices/Downloader.xpc"), "--preserve-metadata=entitlements"],
+    [File.join(version_dir, "Autoupdate"), ""],
+    [File.join(version_dir, "Updater.app"), ""],
+    [framework, ""],
+  ].each do |path, flags|
+    next unless File.exist?(path)
+
+    UI.message("Signing #{path}")
+    codesign_release(path, signing_identity, extra_flags: flags)
+  end
+
+  entitlements_flag = File.exist?(ENTITLEMENTS_PATH) ? "--entitlements #{ENTITLEMENTS_PATH.shellescape}" : ""
+  UI.message("Re-signing app bundle after Sparkle signing")
+  codesign_release(app_path, signing_identity, extra_flags: entitlements_flag)
+end
+
+def notarytool_credentials(key_path, key_id, issuer_id)
+  "--key #{key_path.shellescape} --key-id #{key_id.shellescape} --issuer #{issuer_id.shellescape}"
+end
+
 platform :mac do
   # Keep our hand-written fastlane/README.md; don't let fastlane overwrite it
   # with its auto-generated lane index on every run.
@@ -136,27 +180,39 @@ platform :mac do
         "CODE_SIGN_IDENTITY=#{signing_identity.shellescape}"
       )
 
+      sign_sparkle_framework(APP_PATH, signing_identity)
+
       sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
     end
     UI.success("Created #{ZIP_PATH} — version #{marketing_version || "(project default)"} (build #{build_number})")
   end
 
   desc "Submit the release zip to Apple notarization and staple the accepted ticket."
-  lane :notarize do
+  lane :notarize_release do
     key_id = require_env!("APP_STORE_CONNECT_KEY_ID")
     issuer_id = require_env!("APP_STORE_CONNECT_ISSUER_ID")
     key_path = require_env!("APP_STORE_CONNECT_KEY_PATH")
+    credentials = notarytool_credentials(key_path, key_id, issuer_id)
 
     Dir.chdir(PROJECT_ROOT) do
       UI.user_error!("Missing release zip. Run `bundle exec fastlane release_archive` first.") unless File.exist?(ZIP_PATH)
 
-      sh(
-        "xcrun notarytool submit #{ZIP_PATH.shellescape} " \
-        "--key #{key_path.shellescape} " \
-        "--key-id #{key_id.shellescape} " \
-        "--issuer #{issuer_id.shellescape} " \
-        "--wait"
-      )
+      json_output = sh(
+        "xcrun notarytool submit #{ZIP_PATH.shellescape} #{credentials} --wait --output-format json",
+        log: false
+      ).strip
+      result = JSON.parse(json_output)
+      status = result["status"]
+      submission_id = result["id"]
+
+      unless status == "Accepted"
+        UI.error("Apple notarization status: #{status}")
+        if submission_id && !submission_id.empty?
+          UI.header("Notarization log (#{submission_id})")
+          sh("xcrun notarytool log #{submission_id.shellescape} #{credentials}")
+        end
+        UI.user_error!("Notarization rejected (status: #{status}). Fix signing issues above and retry.")
+      end
 
       sh("xcrun stapler staple #{APP_PATH.shellescape}")
       sh("ditto -c -k --keepParent #{APP_PATH.shellescape} #{ZIP_PATH.shellescape}")
@@ -167,7 +223,7 @@ platform :mac do
   desc "Build, notarize, staple, and package a local release zip."
   lane :release do
     release_archive
-    notarize
+    notarize_release
   end
 
   desc "Stamp the changelog's [Unreleased] section as a dated release. " \
