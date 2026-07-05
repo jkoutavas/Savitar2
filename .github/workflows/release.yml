@@ -151,6 +151,7 @@ jobs:
           version="${GITHUB_REF_NAME#v}"
           tag="$GITHUB_REF_NAME"
           updates_dir="client/appcast/updates"
+          key_file="$RUNNER_TEMP/sparkle-ed25519.key"
           mkdir -p "$updates_dir"
           cp client/fastlane/release/Savitar.zip "$updates_dir/Savitar.zip"
           awk -v ver="$version" '
@@ -158,14 +159,17 @@ jobs:
             capture && /^## \[/ { exit }
             capture { print }
           ' CHANGELOG.md | awk 'NF { seen = 1 } seen' > "$updates_dir/Savitar.md"
+          printf '%s' "$SPARKLE_EDDSA_PRIVATE_KEY" > "$key_file"
           cd client
           xcodebuild -resolvePackageDependencies \
             -project Savitar2.xcodeproj -scheme Savitar2 \
             -derivedDataPath build/sparkle-tools -quiet
           generate_appcast="build/sparkle-tools/SourcePackages/artifacts/sparkle/Sparkle/bin/generate_appcast"
           "$generate_appcast" \
+            --ed-key-file "$key_file" \
             --download-url-prefix "https://github.com/jkoutavas/Savitar2/releases/download/${tag}/" \
             appcast/updates
+          rm -f "$key_file"
           mv appcast/updates/appcast.xml appcast/appcast.xml
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"

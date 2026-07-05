@@ -281,7 +281,16 @@ platform :mac do
       end
 
       prefix = "#{CHANGELOG_REPO_URL}/releases/download/#{tag}/"
-      sh("#{generate_appcast.shellescape} --download-url-prefix #{prefix.shellescape} #{APPCAST_UPDATES_DIR.shellescape}")
+      key_file = File.join(RELEASE_DIR, "sparkle-ed25519.key")
+      File.write(key_file, ENV.fetch("SPARKLE_EDDSA_PRIVATE_KEY"))
+      begin
+        sh(
+          "#{generate_appcast.shellescape} --ed-key-file #{key_file.shellescape} " \
+          "--download-url-prefix #{prefix.shellescape} #{APPCAST_UPDATES_DIR.shellescape}"
+        )
+      ensure
+        File.delete(key_file) if File.exist?(key_file)
+      end
       sh("mv #{File.join(APPCAST_UPDATES_DIR, 'appcast.xml').shellescape} #{APPCAST_XML.shellescape}")
     end
     UI.success("Updated #{APPCAST_XML} for #{tag}. Commit and push to master.")
