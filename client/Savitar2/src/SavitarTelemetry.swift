@@ -50,7 +50,7 @@ enum SavitarTelemetry {
             "appVersion": appVersion,
             "buildNumber": buildNumber,
             "macOSVersion": macOSVersion,
-            "isReleaseBuild": isReleaseBuild ? "true" : "false",
+            "isReleaseBuild": isReleaseBuild ? "true" : "false"
         ]
     }
 }
