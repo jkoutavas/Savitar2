@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- TelemetryDeck install and usage analytics for official release builds (Story 14)
+
 ## [2.0.17] - 2026-07-04
 
 - Added Sparkle updater support

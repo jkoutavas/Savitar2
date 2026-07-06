@@ -179,6 +179,8 @@ platform :mac do
 
     version_overrides = +"CURRENT_PROJECT_VERSION=#{build_number.shellescape} "
     version_overrides << "MARKETING_VERSION=#{marketing_version.shellescape} " if marketing_version
+    telemetry_app_id = ENV["TELEMETRYDECK_APP_ID"].to_s.strip
+    version_overrides << "TELEMETRYDECK_APP_ID=#{telemetry_app_id.shellescape} " unless telemetry_app_id.empty?
 
     Dir.chdir(PROJECT_ROOT) do
       sh("rm -rf #{ARCHIVE_PATH.shellescape} #{ZIP_PATH.shellescape}")

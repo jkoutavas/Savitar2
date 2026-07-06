@@ -143,6 +143,8 @@
 		69E1A1012A535A900736894 /* AppSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1A1022A535A900736894 /* AppSettingsWindowController.swift */; };
 		69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 69E7SPK124B203CB00058D01 /* Sparkle */; };
 		69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */; };
+		69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */; };
+		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
 		69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E0204B872400301A8D /* CGFloat+Extensions.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
@@ -307,6 +309,7 @@
 		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		69E1A1022A535A900736894 /* AppSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsWindowController.swift; sourceTree = "<group>"; };
 		69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarUpdater.swift; sourceTree = "<group>"; };
+		69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarTelemetry.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
@@ -323,6 +326,7 @@
 				6968381A2558FCC900F0BC20 /* Logging in Frameworks */,
 				69D6E5EF24B203CB00058D70 /* SwiftyXMLParser in Frameworks */,
 				69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */,
+				69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +637,7 @@
 				69A45B002A7F100100CDDE09 /* WindowRestoration.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */,
+				69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
@@ -707,6 +712,7 @@
 				69D6E5EE24B203CB00058D70 /* SwiftyXMLParser */,
 				696838192558FCC900F0BC20 /* Logging */,
 				69E7SPK124B203CB00058D01 /* Sparkle */,
+				69TDSPK124B203CB00058D01 /* TelemetryDeck */,
 			);
 			productName = Savitar2;
 			productReference = 6954849C1FC4E6E400A6983F /* Savitar.app */;
@@ -794,6 +800,7 @@
 				69D6E5ED24B203CB00058D70 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 				696838182558FCC900F0BC20 /* XCRemoteSwiftPackageReference "swift-log" */,
 				69E7SPKL24B203CB00058D0 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				69TDSPKL24B203CB00058D0 /* XCRemoteSwiftPackageReference "SwiftSDK" */,
 			);
 			productRefGroup = 6954849D1FC4E6E400A6983F /* Products */;
 			projectDirPath = "";
@@ -908,6 +915,7 @@
 				690B462323AA4CB0000445E4 /* AppPreferences.swift in Sources */,
 				69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */,
 				69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */,
+				69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
 				695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */,
@@ -1216,6 +1224,7 @@
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
+				TELEMETRYDECK_APP_ID = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET DEBUG_WKWEBKIT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1245,6 +1254,7 @@
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
+				TELEMETRYDECK_APP_ID = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1410,6 +1420,14 @@
 				minimumVersion = 2.6.0;
 			};
 		};
+		69TDSPKL24B203CB00058D0 /* XCRemoteSwiftPackageReference "SwiftSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelemetryDeck/SwiftSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1432,6 +1450,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 69E7SPKL24B203CB00058D0 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		69TDSPK124B203CB00058D01 /* TelemetryDeck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69TDSPKL24B203CB00058D0 /* XCRemoteSwiftPackageReference "SwiftSDK" */;
+			productName = TelemetryDeck;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

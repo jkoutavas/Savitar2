@@ -320,6 +320,16 @@ Savitar 1’s **Macro Clicker** used **aliases**—on-screen buttons that pointe
 
 ---
 
+## Privacy & usage statistics
+
+Official Savitar builds from Heynow Software send **anonymous usage statistics** to help measure active installations and version adoption. We use [TelemetryDeck](https://telemetrydeck.com/), a privacy-first analytics service: signals include app version, build number, and macOS version only — **no account names, world names, session text, or other personal data**.
+
+Each installation uses a hashed identifier; TelemetryDeck does not receive your name, email, or IP address in a form that identifies you. You can read more in [TelemetryDeck's privacy policy](https://telemetrydeck.com/privacy/).
+
+Local development builds, unit tests, and builds you compile from source **do not** send analytics unless you configure a TelemetryDeck App ID yourself.
+
+---
+
 ## More chapters (planned)
 
 Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Worlds & connection** (9.6), then **Triggers in depth** (9.4).

@@ -680,13 +680,13 @@ require a custom changelog parser.
 ### Tasks
 
 - [ ] **14.1** **TelemetryDeck account & app** — create org at telemetrydeck.com; create app **Savitar** (macOS); copy App ID for CI.
-- [ ] **14.2** **Swift Package** — add `https://github.com/TelemetryDeck/SwiftSDK` to `Savitar2.xcodeproj` (Up to Next Major); link **TelemetryDeck** product to Savitar target only (not test target).
-- [ ] **14.3** **`SavitarTelemetry` wrapper** — `initializeIfConfigured()` reads App ID from `Info.plist` key `TelemetryDeckAppID` (empty in Debug/local → no-op); skip when `isRunningTests`; call from `AppDelegate.applicationDidFinishLaunching` after prefs load.
-- [ ] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
-- [ ] **14.5** **CI injection** — add `TELEMETRYDECK_APP_ID` to GitHub **`release`** environment secrets; release workflow passes it into the Xcode build as `INFOPLIST_KEY_TelemetryDeckAppID` (or generated `Secrets.xcconfig` gitignored locally). Local/dev builds without the secret send nothing.
-- [ ] **14.6** **Test mode** — `#if DEBUG` use TelemetryDeck test mode (or omit App ID) so developer sessions do not pollute production dashboards ([Swift setup guide](https://telemetrydeck.com/docs/guides/swift-setup/)).
-- [ ] **14.7** **Privacy** — one paragraph in `USER_GUIDE.md` (Getting started or Install chapter) and on heynow.com/savitar when published: anonymous usage stats, no account data, link to TelemetryDeck privacy policy.
-- [ ] **14.8** **Docs** — add `TELEMETRYDECK_APP_ID` row to `client/fastlane/README.md` CI secrets table; note in README beta checklist when shipped.
+- [x] **14.2** **Swift Package** — add `https://github.com/TelemetryDeck/SwiftSDK` to `Savitar2.xcodeproj` (Up to Next Major); link **TelemetryDeck** product to Savitar target only (not test target).
+- [x] **14.3** **`SavitarTelemetry` wrapper** — `initializeIfConfigured()` reads App ID from `Info.plist` key `TelemetryDeckAppID` (empty in Debug/local → no-op); skip when `isRunningTests`; call from `AppDelegate.applicationDidFinishLaunching` after prefs load.
+- [x] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
+- [x] **14.5** **CI injection** — add `TELEMETRYDECK_APP_ID` to GitHub **`release`** environment secrets; release workflow passes it into the Xcode build as `TELEMETRYDECK_APP_ID` (via `Info.plist`). Local/dev builds without the secret send nothing.
+- [x] **14.6** **Test mode** — `#if DEBUG` use TelemetryDeck test mode (or omit App ID) so developer sessions do not pollute production dashboards ([Swift setup guide](https://telemetrydeck.com/docs/guides/swift-setup/)).
+- [x] **14.7** **Privacy** — one paragraph in `USER_GUIDE.md` (Getting started or Install chapter) and on heynow.com/savitar when published: anonymous usage stats, no account data, link to TelemetryDeck privacy policy.
+- [x] **14.8** **Docs** — add `TELEMETRYDECK_APP_ID` row to `client/fastlane/README.md` CI secrets table; note in README beta checklist when shipped.
 
 ### Touchpoints
 

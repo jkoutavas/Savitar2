@@ -96,7 +96,8 @@ _ Alias support (Story 10)
 
 ```
 √ Move github repo to public
-_ Crash reporting + analytics (App Center was integrated, then removed once the service was retired; revisit with Sentry?)
+√ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
+_ Crash reporting (Sentry — separate from TelemetryDeck analytics)
 _ Start promoting the beta test
 _ User guide — remaining chapters (Story 9; speech and menus documented)
 _ Polish, address beta test issues
