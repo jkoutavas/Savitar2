@@ -322,4 +322,4 @@ Savitar 1’s **Macro Clicker** used **aliases**—on-screen buttons that pointe
 
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) tracks the remaining user-guide sections: worlds and sessions, command recall and local commands, triggers in depth, ANSI colors, appearance, and window management.
+Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Worlds & connection** (9.6), then **Triggers in depth** (9.4).
