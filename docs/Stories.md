@@ -659,6 +659,76 @@ require a custom changelog parser.
 
 ---
 
+## Story 14 — TelemetryDeck install & usage analytics
+
+**Goal:** Track **active installations** and version adoption with [TelemetryDeck](https://telemetrydeck.com/) — privacy-first, GDPR-friendly analytics on the free **Sparrow** tier (up to 100,000 signals/month).
+
+**Context:** GitHub Release **download counts** measure ZIP pulls, not installs or daily use. TelemetryDeck closes that gap with hashed per-install identifiers and session signals, without collecting personal data. Crash reporting (Sentry) remains a separate future story.
+
+**Not in scope:** Session replay, ad tracking, per-user profiling, or shipping the TelemetryDeck App ID in plaintext for official builds only — inject via CI (see **14.5**).
+
+### Metrics (dashboard)
+
+| Signal | When | Purpose |
+|--------|------|---------|
+| `TelemetryDeck.Session.started` | Automatic on SDK init | Active users / sessions |
+| `Savitar.launched` | `applicationDidFinishLaunching` | App opens with version metadata |
+| `Savitar.firstLaunch` | Once per install (UserDefaults flag) | New install proxy |
+
+**Payload parameters (no PII):** `appVersion`, `buildNumber`, `macOSVersion`, `isReleaseBuild` (true when App ID present).
+
+### Tasks
+
+- [ ] **14.1** **TelemetryDeck account & app** — create org at telemetrydeck.com; create app **Savitar** (macOS); copy App ID for CI.
+- [ ] **14.2** **Swift Package** — add `https://github.com/TelemetryDeck/SwiftSDK` to `Savitar2.xcodeproj` (Up to Next Major); link **TelemetryDeck** product to Savitar target only (not test target).
+- [ ] **14.3** **`SavitarTelemetry` wrapper** — `initializeIfConfigured()` reads App ID from `Info.plist` key `TelemetryDeckAppID` (empty in Debug/local → no-op); skip when `isRunningTests`; call from `AppDelegate.applicationDidFinishLaunching` after prefs load.
+- [ ] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
+- [ ] **14.5** **CI injection** — add `TELEMETRYDECK_APP_ID` to GitHub **`release`** environment secrets; release workflow passes it into the Xcode build as `INFOPLIST_KEY_TelemetryDeckAppID` (or generated `Secrets.xcconfig` gitignored locally). Local/dev builds without the secret send nothing.
+- [ ] **14.6** **Test mode** — `#if DEBUG` use TelemetryDeck test mode (or omit App ID) so developer sessions do not pollute production dashboards ([Swift setup guide](https://telemetrydeck.com/docs/guides/swift-setup/)).
+- [ ] **14.7** **Privacy** — one paragraph in `USER_GUIDE.md` (Getting started or Install chapter) and on heynow.com/savitar when published: anonymous usage stats, no account data, link to TelemetryDeck privacy policy.
+- [ ] **14.8** **Docs** — add `TELEMETRYDECK_APP_ID` row to `client/fastlane/README.md` CI secrets table; note in README beta checklist when shipped.
+
+### Touchpoints
+
+- New: `client/Savitar2/src/SavitarTelemetry.swift`
+- `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/Info.plist` (or build setting for `TelemetryDeckAppID`)
+- `client/Savitar2.xcodeproj/project.pbxproj`
+- `.github/workflows/release.yml`
+- `client/fastlane/README.md`
+- `docs/USER_GUIDE.md` (privacy blurb)
+
+### Acceptance
+
+- Official signed release builds send `Savitar.launched` and session signals; TelemetryDeck dashboard shows active users and version breakdown within minutes of a test install.
+- Local Xcode runs and unit tests send **no** production signals.
+- App functions normally when App ID is absent (open-source clones, contributor builds).
+- No TelemetryDeck App ID or auth material committed to the public repository.
+
+### Monitoring GitHub ZIP downloads (supplementary)
+
+Download counts are a **ceiling** on installs (re-downloads and CI count too). Useful for trend checks alongside TelemetryDeck.
+
+**Web:** [github.com/jkoutavas/Savitar2/releases](https://github.com/jkoutavas/Savitar2/releases) — each release shows per-asset download counts.
+
+**CLI (latest release):**
+
+```bash
+gh api repos/jkoutavas/Savitar2/releases/latest \
+  --jq '{tag: .tag_name, zip: [.assets[] | select(.name == "Savitar.zip") | .download_count][0]}'
+```
+
+**CLI (all releases with `Savitar.zip`):**
+
+```bash
+gh api repos/jkoutavas/Savitar2/releases --paginate \
+  --jq '.[] | select(.assets | length > 0) | .tag_name as $t | .assets[] | select(.name=="Savitar.zip") | {tag: $t, downloads: .download_count}'
+```
+
+**REST (no `gh`):** `GET https://api.github.com/repos/jkoutavas/Savitar2/releases` — each asset has `download_count` (unauthenticated limit 60 req/hr; use a token for heavier polling).
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -686,9 +756,11 @@ require a custom changelog parser.
 10. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
 11. Story 12 — Sparkle 2 auto-updates (after first successful signed release)
 12. Story 13 — Help → Release Notes (optional polish; no parser)
+13. Story 14 — TelemetryDeck install & usage analytics (beta; pairs with README crash-reporting item)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 Story 13 is optional and can ship any time after Story 12.
+Story 14 can ship during beta once a TelemetryDeck app is configured.
 
 Story 3 is retained for reference only; implement Story 5 instead.
 
