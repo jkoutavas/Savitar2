@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- TelemetryDeck install and usage analytics for official release builds (Story 14)
+- Anonymous install and usage analytics via [TelemetryDeck](https://telemetrydeck.com/) on official signed release builds — app version, build number, and macOS version only; no session text, world names, or account data
+- User Guide section on privacy and usage statistics
 
 ## [2.0.17] - 2026-07-04
 

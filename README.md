@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 4th, 2026_
+_README last updated July 6th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -15,7 +15,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 | Document                                             | Audience   | Contents                                                                                                                                                       |
 | ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)                              |
+| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)                               |
 | [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                                           |
 | [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech, menus, events, and macros documented) |
 | [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                                               |
@@ -184,22 +184,22 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     174 text files.
-     159 unique files.
-      49 files ignored.
+     178 text files.
+     163 unique files.
+      51 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.10 s (1662.1 files/s, 216930.7 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.09 s (1725.4 files/s, 223634.8 lines/s)
 -------------------------------------------------------------------------------
-Language                     files          blank        comment           code
+Language                     files          blank        comment    code
 -------------------------------------------------------------------------------
-Swift                          126           2225           1353          10606
-XML                             14              6             36           3937
-Markdown                        12            685              0           1506
-YAML                             4             34             20            251
-JSON                             1              0              0             68
-Text                             1              0              0             11
-C/C++ Header                     1              3              8              3
+Swift                          127           2235           1360   10646
+XML                             14             18             36    3954
+Markdown                        15            749              0    1710
+YAML                             4             34             20     272
+JSON                             1              0              0      68
+Text                             1              0              0      11
+C/C++ Header                     1              3              8       3
 -------------------------------------------------------------------------------
-SUM:                           159           2953           1417          16382
+SUM:                           163           3039           1424   16664
 -------------------------------------------------------------------------------
 ```
