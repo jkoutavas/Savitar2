@@ -2,8 +2,13 @@
 # Generate Sparkle appcast files and open a PR on master (branch protection safe).
 set -euo pipefail
 
-tag="${1:?Usage: publish-sparkle-appcast.sh TAG (e.g. v2.0.18)}"
-version="${tag#v}"
+input="${1:?Usage: publish-sparkle-appcast.sh TAG (e.g. v2.0.18 or 2.0.18)}"
+version="${input#v}"
+tag="v${version}"
+if [[ ! "$version" =~ ^[0-9]+(\.[0-9]+)*([A-Za-z0-9._-]+)?$ ]]; then
+  echo "::error::Invalid release tag '${input}'. Expected v2.0.18 or 2.0.18."
+  exit 1
+fi
 repo_root="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$repo_root"
 
