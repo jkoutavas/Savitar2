@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.18] - 2026-07-07
+
 ### Added
 
 - Anonymous install and usage analytics via [TelemetryDeck](https://telemetrydeck.com/) on official signed release builds — app version, build number, and macOS version only; no session text, world names, or account data
@@ -66,7 +68,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.17...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.18...HEAD
+[2.0.18]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.18
 [2.0.17]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.17
 [2.0.16]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.16
 [2.0.15]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.15

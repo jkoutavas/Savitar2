@@ -201,8 +201,8 @@ At release time, `fastlane prepare_release version:X.Y.Z` stamps `[Unreleased]`
 into a dated `## [X.Y.Z]` section and refreshes the reference links. Once that
 change is merged and the `vX.Y.Z` tag is pushed, the release workflow extracts
 that version's section from `CHANGELOG.md` and uses it verbatim as the GitHub
-Release body. If no matching section exists, it falls back to GitHub's
-auto-generated notes.
+Release body. If no matching section exists, the release workflow fails so the
+changelog is fixed before publishing release notes.
 
 The same `CHANGELOG.md` section also feeds Sparkle release notes at update time
 (Story 12): the release workflow extracts it into a per-version `Savitar.md` file
