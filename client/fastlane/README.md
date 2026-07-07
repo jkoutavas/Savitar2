@@ -162,6 +162,12 @@ signed build:
    the `v2.0.16` GitHub Release, and sets the release notes from the matching
    `CHANGELOG.md` section (see [Release notes](#release-notes)).
 
+4. **Merge the appcast PR.** CI opens a pull request updating `client/appcast/appcast.xml`
+   (branch protection blocks a direct push to `master`). Merge it so Sparkle can offer the update.
+
+   If the release succeeded but the appcast step failed, run **Actions → Publish Sparkle appcast**
+   with the tag (e.g. `v2.0.18`) to regenerate and open the PR.
+
 ## Versioning
 
 Two independent numbers, both resolved at build time so **no version is ever
@@ -210,8 +216,8 @@ Savitar uses [Sparkle 2](https://sparkle-project.org/) for in-app updates. One-t
 owner setup (EdDSA keys + GitHub secret) is documented in
 [`client/appcast/README.md`](../appcast/README.md).
 
-After each tagged release, CI publishes a signed `appcast.xml` on `master`. The app
-reads the feed from:
+After each tagged release, CI opens a pull request with an updated `appcast.xml` on `master`
+(merge required — branch protection blocks direct pushes). The app reads the feed from:
 
 ```text
 https://raw.githubusercontent.com/jkoutavas/Savitar2/master/client/appcast/appcast.xml

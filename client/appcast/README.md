@@ -72,4 +72,5 @@ git commit -m "Bootstrap Sparkle appcast for ${TAG}"
 git push
 ```
 
-On every future tagged release, CI runs the same `generate_appcast` step automatically.
+On every future tagged release, CI opens a pull request with the updated appcast (direct
+pushes to `master` are blocked by branch protection). Merge that PR to publish the feed.
