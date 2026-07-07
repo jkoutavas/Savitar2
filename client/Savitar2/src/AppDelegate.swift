@@ -38,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.restoreSavedWindows()
 
         AppContext.shared.appPrefsStore.subscribe(self)
+        SavitarTelemetry.initializeIfConfigured()
         SavitarUpdater.shared.startIfNeeded()
 
         if AppContext.shared.prefs.flags.contains(.startupPicker) {

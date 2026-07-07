@@ -86,6 +86,7 @@ jobs:
           # The tag drives the marketing version (e.g. refs/tags/v2.0.16 -> 2.0.16).
           # Empty on manual dispatch, where the lane falls back to the tag at HEAD.
           RELEASE_VERSION: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+          TELEMETRYDECK_APP_ID: ${{ secrets.TELEMETRYDECK_APP_ID }}
           # APP_STORE_CONNECT_KEY_PATH is exported by the previous step.
         run: bundle exec fastlane release
 

@@ -127,6 +127,7 @@ signed build:
    | `APP_STORE_CONNECT_ISSUER_ID` | App Store Connect issuer ID |
    | `APP_STORE_CONNECT_KEY_P8_BASE64` | Base64 of the App Store Connect API key file (`.p8`) |
    | `SPARKLE_EDDSA_PRIVATE_KEY` | Contents of the Sparkle EdDSA private key file (from `generate_keys -x`; see [`appcast/README.md`](../appcast/README.md)) |
+   | `TELEMETRYDECK_APP_ID` | TelemetryDeck app identifier for anonymous install/usage analytics (Story 14); omitted from local and contributor builds |
 
    Generate the base64 blobs with:
 
