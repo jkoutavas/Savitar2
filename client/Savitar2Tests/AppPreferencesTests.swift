@@ -105,7 +105,9 @@ class AppPreferencesTests: XCTestCase {
 
     func testPreferenceActionsDoNotWriteDuringTests() throws {
         let prefsPath = NSString(string: AppPreferences().v2PrefsPath).expandingTildeInPath
-        let before = try String(contentsOfFile: prefsPath, encoding: .utf8)
+        let fileManager = FileManager.default
+        let fileExisted = fileManager.fileExists(atPath: prefsPath)
+        let beforeContents = fileExisted ? try String(contentsOfFile: prefsPath, encoding: .utf8) : nil
 
         var state = AppPreferencesState()
         state.prefs.openSessions = [.file(URL(fileURLWithPath: "/tmp/should-not-persist.world"))]
@@ -113,8 +115,12 @@ class AppPreferencesTests: XCTestCase {
         _ = SetShowEventsWindowAtStartupAction(true).apply(oldState: state)
         _ = SetPrefsFlagAction(flag: .muteBell, enabled: true).apply(oldState: state)
 
-        let after = try String(contentsOfFile: prefsPath, encoding: .utf8)
-        XCTAssertEqual(before, after)
+        if fileExisted {
+            let afterContents = try String(contentsOfFile: prefsPath, encoding: .utf8)
+            XCTAssertEqual(beforeContents, afterContents)
+        } else {
+            XCTAssertFalse(fileManager.fileExists(atPath: prefsPath))
+        }
     }
 
     func testSpeakerManListsEnglishVoices() {
