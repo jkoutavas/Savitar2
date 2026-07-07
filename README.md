@@ -13,14 +13,14 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ## Documentation
 
-| Document                                             | Audience   | Contents                                                                                                                                                       |
-| ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)                               |
-| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                                           |
+| Document                                             | Audience   | Contents                                                                                                                                      |
+| ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)              |
+| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
 | [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation); bundled in-app as **Savitar Help**, Stories 16–17) |
-| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                                               |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                                          |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                                       |
+| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                         |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
 
 ## Current state of the application
 
@@ -194,13 +194,13 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
      173 unique files.
       52 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.10 s (1723.5 files/s, 231502.6 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.11 s (1604.2 files/s, 215784.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Swift                          130           2327           1396          11223
 XML                             15             18             36           3996
-Markdown                        16            910              0           2025
+Markdown                        16            920              0           2048
 HTML                             1              0              0            465
 YAML                             5             39             21            247
 Python                           1             41             73            195
@@ -210,6 +210,6 @@ CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           173           3354           1535          18349
+SUM:                           173           3364           1535          18372
 -------------------------------------------------------------------------------
 ```
