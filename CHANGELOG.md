@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Help → Savitar Help** (⌘?) opens the bundled user guide offline in a Savitar window
+- **Help → Savitar Guide on the Web…** opens the latest guide draft on GitHub
+- **Help → About Privacy…** opens the Privacy & usage statistics chapter in Savitar Help
+- Contextual **?** help on major windows — World Picker, world session window, Events, Settings (per pane), and World Settings (per tab)
+- User Guide chapters for ANSI colors, Input & Display, Audio, Updates, and World Settings (Starting and Appearance tabs)
+
+### Changed
+
+- User Guide expanded with contextual-help callout, Help menu reference, and Getting help section updates
+
 ## [2.0.18] - 2026-07-07
 
 ### Added
