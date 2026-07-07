@@ -116,6 +116,8 @@ class AppPreferences: SavitarXMLProtocol {
     }
 
     func save() {
+        guard !isRunningTests else { return }
+
         do {
             let xmlOutputStr = try toXMLElement().xmlString.prettyXMLFormat()
 
