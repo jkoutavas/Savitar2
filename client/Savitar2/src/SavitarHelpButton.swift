@@ -148,7 +148,7 @@ enum SavitarHelpButton {
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             button.widthAnchor.constraint(equalToConstant: 22),
-            button.heightAnchor.constraint(equalToConstant: 22),
+            button.heightAnchor.constraint(equalToConstant: 22)
         ])
         configure(button, for: surface)
         return button
@@ -169,7 +169,7 @@ enum SavitarHelpButton {
         NSLayoutConstraint.activate([
             button.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             button.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
-            button.leadingAnchor.constraint(greaterThanOrEqualTo: container.leadingAnchor),
+            button.leadingAnchor.constraint(greaterThanOrEqualTo: container.leadingAnchor)
         ])
 
         let accessory = NSTitlebarAccessoryViewController()
@@ -193,7 +193,7 @@ enum SavitarHelpButton {
         view.addSubview(button)
         NSLayoutConstraint.activate([
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 8)
         ])
     }
 

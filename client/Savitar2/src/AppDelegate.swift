@@ -162,7 +162,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     }
 
     @IBAction func showGuideOnWebAction(_: Any) {
-        guard let url = URL(string: "https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md") else { return }
+        let guideURL = "https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md"
+        guard let url = URL(string: guideURL) else { return }
         NSWorkspace.shared.open(url)
     }
 
