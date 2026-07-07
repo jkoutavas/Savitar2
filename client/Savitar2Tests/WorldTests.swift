@@ -203,6 +203,57 @@ class WorldTests: XCTestCase {
         let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
         XCTAssertTrue(xmlOutString.contains("FLAGS=\"ansi+html+stickyCmds\""))
     }
+
+    func testCROnlyFlagRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            FLAGS="html+ansi+CROnly"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertTrue(world.flags.contains(.crOnly))
+        XCTAssertEqual(world.commandLinePostfix, "\r")
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("FLAGS=\"ansi+html+CROnly\""))
+    }
+
+    func testCommandLinePostfixDefaultsToCRLF() {
+        let world = World()
+        XCTAssertEqual(world.commandLinePostfix, "\r\n")
+    }
+
+    func testMarkerRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            FLAGS="html+ansi"
+            CMDMARKER="@@"
+            VARMARKER="&&"
+            WILDMARKER="??"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertEqual(world.cmdMarker, "@@")
+        XCTAssertEqual(world.varMarker, "&&")
+        XCTAssertEqual(world.wildMarker, "??")
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"@@\""))
+        XCTAssertTrue(xmlOutString.contains("VARMARKER=\"&&\""))
+        XCTAssertTrue(xmlOutString.contains("WILDMARKER=\"??\""))
+    }
 }
 
 private class MockSessionHandler: SessionHandlerProtocol {

@@ -133,8 +133,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
                     }
                 }
             } else {
-                // just send the carriage return
-                sess.sendString(string: "\r")
+                sess.sendString(string: sess.world.commandLinePostfix)
             }
 
             if !stickyCmd {

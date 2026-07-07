@@ -145,11 +145,12 @@ class Session: NSObject, StreamDelegate {
             return
         }
 
-        let str = "\(expandedCmd.cmdStr)\n"
+        let postfix = cmd.flags.contains(.dontPostFix) ? "" : world.commandLinePostfix
+        let str = "\(expandedCmd.cmdStr)\(postfix)"
         if world.flags.contains(.echoCmds) {
             acceptedText(text: str)
         } else if world.flags.contains(.echoCR) {
-            acceptedText(text: "\n")
+            acceptedText(text: postfix == "\r" ? "\n" : "\r\n")
         }
         sendString(string: str)
     }
