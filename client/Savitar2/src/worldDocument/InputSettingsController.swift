@@ -9,15 +9,20 @@
 import Cocoa
 
 class InputSettingsController: NSViewController {
+    @IBOutlet var echoBox: NSBox!
     @IBOutlet var noEchoRadio: NSButton!
     @IBOutlet var echoCROnlyRadio: NSButton!
     @IBOutlet var echoAllRadio: NSButton!
+    @IBOutlet var cmdMarkerLabel: NSTextField!
+    @IBOutlet var cmdMarkerField: NSTextField!
     @IBOutlet var stickyCommandsButton: NSButton!
 
     private var crOnlyRadio: NSButton!
     private var crLfRadio: NSButton!
     private var varMarkerField: NSTextField!
     private var wildMarkerField: NSTextField!
+    private var lineEndingBox: NSBox!
+    private var didInstallLayout = false
 
     @objc dynamic var stickyCommands: Bool {
         get {
@@ -69,9 +74,7 @@ class InputSettingsController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        installMarkerFields()
-        installLineEndingControls()
+        installLayout()
         syncEchoRadios()
         syncLineEndingRadios()
     }
@@ -121,56 +124,81 @@ class InputSettingsController: NSViewController {
         crLfRadio.state = world.flags.contains(.crOnly) ? .off : .on
     }
 
-    private func installMarkerFields() {
-        let varLabel = labelField(title: "Variable marker:")
-        let wildLabel = labelField(title: "Wildcard marker:")
+    private func installLayout() {
+        guard !didInstallLayout else { return }
+        didInstallLayout = true
+
+        let layoutViews: [NSView] = [
+            echoBox,
+            cmdMarkerLabel,
+            cmdMarkerField,
+            stickyCommandsButton
+        ]
+        layoutViews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+
         varMarkerField = markerField(bindingKeyPath: "self.varMarker")
         wildMarkerField = markerField(bindingKeyPath: "self.wildMarker")
 
-        let stack = NSStackView(views: [
+        let varLabel = labelField(title: "Variable marker:")
+        let wildLabel = labelField(title: "Wildcard marker:")
+        let markerStack = NSStackView(views: [
             markerRow(label: varLabel, field: varMarkerField),
             markerRow(label: wildLabel, field: wildMarkerField)
         ])
-        stack.orientation = .vertical
-        stack.alignment = .leading
-        stack.spacing = 6
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+        markerStack.orientation = .vertical
+        markerStack.alignment = .leading
+        markerStack.spacing = 8
+        markerStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(markerStack)
 
-        NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20),
-            stack.topAnchor.constraint(equalTo: stickyCommandsButton.bottomAnchor, constant: 12)
-        ])
-    }
-
-    private func installLineEndingControls() {
-        let box = NSBox()
-        box.title = "Line ending"
-        box.boxType = .primary
-        box.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(box)
+        lineEndingBox = NSBox()
+        lineEndingBox.title = "Line ending"
+        lineEndingBox.boxType = .primary
+        lineEndingBox.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(lineEndingBox)
 
         crOnlyRadio = lineEndingRadio(title: "Carriage return only (CR)", tag: 1)
         crLfRadio = lineEndingRadio(title: "Carriage return + line feed (CR/LF)", tag: 2)
 
-        let content = NSStackView(views: [crOnlyRadio, crLfRadio])
-        content.orientation = .vertical
-        content.alignment = .leading
-        content.spacing = 6
-        content.translatesAutoresizingMaskIntoConstraints = false
-        box.contentView = NSView()
-        box.contentView?.addSubview(content)
+        let lineEndingContent = NSStackView(views: [crOnlyRadio, crLfRadio])
+        lineEndingContent.orientation = .vertical
+        lineEndingContent.alignment = .leading
+        lineEndingContent.spacing = 6
+        lineEndingContent.translatesAutoresizingMaskIntoConstraints = false
+        lineEndingBox.contentView = NSView()
+        lineEndingBox.contentView?.addSubview(lineEndingContent)
+
+        let margin: CGFloat = 20
+        let spacing: CGFloat = 12
 
         NSLayoutConstraint.activate([
-            box.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            box.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            box.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            echoBox.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
+            echoBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            echoBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
 
-            content.leadingAnchor.constraint(equalTo: box.contentView!.leadingAnchor, constant: 16),
-            content.trailingAnchor.constraint(equalTo: box.contentView!.trailingAnchor, constant: -16),
-            content.topAnchor.constraint(equalTo: box.contentView!.topAnchor, constant: 14),
-            content.bottomAnchor.constraint(equalTo: box.contentView!.bottomAnchor, constant: -14)
+            cmdMarkerLabel.topAnchor.constraint(equalTo: echoBox.bottomAnchor, constant: spacing),
+            cmdMarkerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+
+            cmdMarkerField.centerYAnchor.constraint(equalTo: cmdMarkerLabel.centerYAnchor),
+            cmdMarkerField.leadingAnchor.constraint(equalTo: cmdMarkerLabel.trailingAnchor, constant: 8),
+            cmdMarkerField.widthAnchor.constraint(equalToConstant: 64),
+
+            stickyCommandsButton.topAnchor.constraint(equalTo: cmdMarkerLabel.bottomAnchor, constant: spacing),
+            stickyCommandsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+
+            markerStack.topAnchor.constraint(equalTo: stickyCommandsButton.bottomAnchor, constant: spacing),
+            markerStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            markerStack.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -margin),
+
+            lineEndingBox.topAnchor.constraint(equalTo: markerStack.bottomAnchor, constant: spacing),
+            lineEndingBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            lineEndingBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            lineEndingBox.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -margin),
+
+            lineEndingContent.leadingAnchor.constraint(equalTo: lineEndingBox.contentView!.leadingAnchor, constant: 16),
+            lineEndingContent.trailingAnchor.constraint(equalTo: lineEndingBox.contentView!.trailingAnchor, constant: -16),
+            lineEndingContent.topAnchor.constraint(equalTo: lineEndingBox.contentView!.topAnchor, constant: 14),
+            lineEndingContent.bottomAnchor.constraint(equalTo: lineEndingBox.contentView!.bottomAnchor, constant: -14)
         ])
     }
 
