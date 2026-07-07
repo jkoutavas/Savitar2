@@ -369,11 +369,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - Word wrap — when Story 2.3 ships
   - *Acceptance:* User can fix "gibberish ANSI" and "invisible white-on-white text"
 
-- [ ] **9.3b** **ANSI colors** — v1 §5 "ANSI Color Settings"
-  - Settings → Colors pane; live preview in session; Restore Defaults
-  - Background shift when text matches background color (v1 behavior—verify in code)
-  - Cross-link from **9.3**; don't repeat full 24-swatch table
-  - *Acceptance:* Matches Story 5 shipped UI
+- [x] **9.3b** **ANSI colors** — v1 §5 "ANSI Color Settings" — in [USER_GUIDE.md](USER_GUIDE.md#ansi-colors); Settings → Colors, grid, Restore Defaults, vs World Settings Appearance
 
 - [ ] **9.4** **Triggers in depth** — v1 §4 "Triggers"
   - Processing order (universal → per-world; top to bottom)
@@ -411,17 +407,12 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - MUD, MOO, MUSH, MUVE, ANSI, trigger, macro, event, gag, wildcard, local command, …
   - *Acceptance:* Every jargon term used in the guide is defined here
 
-- [ ] **9.9** **Help & feedback** — v1 §9 (implementation: **Stories 15–16**)
-  - In-app **Savitar Help** opens the user guide (Story 16); encourage reading before feedback
-  - **Send Feedback…** via email — bugs *and* feature requests (Story 15); no GitHub account required
-  - Help → Release Notes (Story 13 ✅); legacy v1 conference/forums note where still relevant
-  - GitHub Issues: **maintainers/contributors only** — not the player-facing path
-  - *Acceptance:* A non-developer can learn the app from Help and send feedback without creating accounts
+- [ ] **9.9** **Help & feedback** — v1 §9 (partial: **Savitar Help**, **Getting help** chapter, **About Privacy** — Stories 16–18 ✅; **Send Feedback…** — Story 15)
 
-- [ ] **9.10** **Publish path**
-  - Link from README ✅; in-app Help book (Story 16); web publish tracked in [heynow_websites `docs/STORIES.md`](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md) Story **W4** (`heynow.com/savitar/guide/`)
-  - *Acceptance:* Help menu opens useful content, not an empty stub; guide has a stable public URL when phase 1+ ships
-  - Contextual **?** help on key UI surfaces is **Story 17** (after Story 16 anchors exist)
+- [x] **9.10** **Publish path** (partial)
+  - Link from README ✅; in-app Help book ✅ (Story 16); contextual **?** ✅ (Story 17)
+  - Web publish at `heynow.com/savitar/guide/` — [heynow_websites W4](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md); interim **Savitar Guide on the Web…** → GitHub
+  - *Acceptance:* Help menu opens useful content ✅; stable public URL when W4 ships
 
 #### Deferred guide sections (blocked on features)
 
@@ -688,7 +679,7 @@ require a custom changelog parser.
 - [x] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
 - [x] **14.5** **CI injection** — add `TELEMETRYDECK_APP_ID` to GitHub **`release`** environment secrets; release workflow passes it into the Xcode build as `TELEMETRYDECK_APP_ID` (via `Info.plist`). Local/dev builds without the secret send nothing.
 - [x] **14.6** **Test mode** — `#if DEBUG` use TelemetryDeck test mode (or omit App ID) so developer sessions do not pollute production dashboards ([Swift setup guide](https://telemetrydeck.com/docs/guides/swift-setup/)).
-- [x] **14.7** **Privacy** — one paragraph in `USER_GUIDE.md` (Getting started or Install chapter) and on heynow.com/savitar when published: anonymous usage stats, no account data, link to TelemetryDeck privacy policy.
+- [x] **14.7** **Privacy** — in-app: `USER_GUIDE.md` **Privacy & usage statistics** + **Help → About Privacy…** (Story 18). **Website:** dedicated page — Savitar2 **Story 19** / heynow_websites **W9** (not yet published).
 - [x] **14.8** **Docs** — add `TELEMETRYDECK_APP_ID` row to `client/fastlane/README.md` CI secrets table; note in README beta checklist when shipped.
 
 ### Touchpoints
@@ -808,13 +799,13 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ### Tasks
 
-- [ ] **16.1** **Guide structure** — define anchor map in `docs/USER_GUIDE.md` (HTML `id` per H2) matching Story 9 chapters; document in story or `docs/HIG.md`.
-- [ ] **16.2** **Help bundle** — `client/Savitar2/Resources/Savitar.help/` (or `Guide/`) with `index.html`, chapter pages, minimal CSS readable in Help Viewer.
-- [ ] **16.3** **Build integration** — script in Xcode build phase or `client/scripts/` to refresh HTML from `USER_GUIDE.md` (manual run acceptable for MVP with README note).
-- [ ] **16.4** **Info.plist** — `CFBundleHelpBookFolder`, `CFBundleHelpBookName`; verify **Help → Savitar Help** (⌘?) opens to guide home.
-- [ ] **16.5** **Minimum shippable content** — at least: front matter, quick start, session window, triggers overview, speech, menus cross-link, getting help (9.9 / Story 15). Stub chapters link to “coming soon” or GitHub guide URL until Story 9 fills them.
-- [ ] **16.6** **Story 9.10** — optional menu item **Savitar Guide on the Web…** → `heynow.com/savitar/guide/` when W4 ships; until then GitHub `docs/USER_GUIDE.md` raw or pages URL as interim.
-- [ ] **16.7** **README** — check off user-guide Help integration when MVP ships.
+- [x] **16.1** **Guide structure** — anchor map in `docs/USER_GUIDE.md` (H2/H3/H4 `id`s) + `ANCHOR_BY_TITLE` in `build_help_book.py`; mirrored in `SavitarHelp.Anchor`.
+- [x] **16.2** **Help bundle** — `client/Savitar2/resources/Savitar.help/` with `index.html`, CSS, `Savitar.helpindex`.
+- [x] **16.3** **Build integration** — `client/scripts/build_help_book.py` (+ `client/scripts/README.md`); run after guide edits.
+- [x] **16.4** **Info.plist** — `CFBundleHelpBookFolder`, `CFBundleHelpBookName`; **Help → Savitar Help** (⌘?) via `HelpGuideWindowController` (not Help Viewer).
+- [x] **16.5** **Minimum shippable content** — getting started, speech, menus, events, macros, world settings (all tabs), settings panes (colors, input & display, audio, updates), privacy, getting help.
+- [x] **16.6** **Story 9.10** — **Savitar Guide on the Web…** → GitHub `USER_GUIDE.md` interim; heynow.com mirror tracked in W4.
+- [x] **16.7** **README** — in-app help checked off in progress list.
 
 ### Touchpoints
 
@@ -853,19 +844,19 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 │  [Triggers] [Macros] …                               │
 ```
 
-`?` opens Help Viewer to `help:anchor/triggers` (or equivalent `NSHelpManager` API).
+`?` opens the in-app guide (`HelpGuideWindowController`) at the matching `#anchor` (not macOS Help Viewer).
 
 ### Tasks
 
-- [ ] **17.1** **Anchor registry** — map UI surface → guide anchor ID (table in code or plist): Events → `triggers`, App Settings → Speech → `speech`, World Settings → Appearance → `output-appearance`, etc.
-- [ ] **17.2** **`SavitarHelp` API** — `showGuide(anchor:)` wrapping `NSHelpManager.shared.openHelpAnchor(_:inBook:)` (or WKWebView fragment navigation for MVP fallback).
-- [ ] **17.3** **Reusable control** — small **?** `NSButton` or toolbar item (HIG: help button style); hook into storyboards for first wave: **Events window**, **App Settings**, **World Settings**, **World Picker**.
-- [ ] **17.4** **VoiceOver** — “Help for Events window” (or specific pane); keyboard access where possible.
-- [ ] **17.5** **User guide** — note contextual help in Getting started; each chapter’s top can say “You can also open this from …”.
+- [x] **17.1** **Anchor registry** — `SavitarHelp.ContextualSurface` in `SavitarHelpButton.swift`: Events → `events`; App Settings panes → `speech-speech-settings-reference`, `audio`, `getting-started`, `input-display`, `ansi-colors`, `updates`; World Settings tabs → `world-settings-*-tab`; World Picker → `getting-started`; world session → `menus-world-menu`.
+- [x] **17.2** **`SavitarHelp` API** — `SavitarHelp.show(anchor:)` + `ContextualSurface.show()` via WKWebView fragment navigation.
+- [x] **17.3** **Reusable control** — `SavitarHelpButton.installInTitleBar(of:for:)` and `installInTopTrailingCorner(of:for:)` (World Settings sheet); wired on **Events**, **App Settings** (per pane), **World Settings** (per tab), **World Picker**, **world session window**.
+- [x] **17.4** **VoiceOver** — per-surface `accessibilityLabel` (e.g. “Help for Events window”, “Help for Speech settings”).
+- [x] **17.5** **User guide** — contextual help noted in Getting started (chapter-top “open from …” copy optional follow-up).
 
 ### Touchpoints
 
-- New: `client/Savitar2/src/SavitarHelp.swift`
+- New: `client/Savitar2/src/SavitarHelp.swift`, `SavitarHelpButton.swift`
 - `client/Savitar2/Base.lproj/EventsWindow.storyboard`, `AppPrefs.storyboard`, World Settings storyboards, World Picker
 - `docs/HIG.md` (contextual help pattern)
 - `docs/USER_GUIDE.md` (anchor IDs from Story 16.1)
@@ -878,7 +869,67 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ### Dependency
 
-- **Blocked on Story 16** (Help Book + anchors). Optional polish for beta; high value before wide promotion.
+- **Story 16** (Help book + anchors) — shipped in this epic.
+
+---
+
+## Story 18 — Help → About Privacy
+
+**Goal:** Add **Help → About Privacy…** so users can read analytics and privacy information in-app without hunting the full guide.
+
+**Context:** Story 14 added TelemetryDeck usage statistics; Story 16 put the disclosure in **Privacy & usage statistics** (`#privacy`). A dedicated menu item makes that chapter discoverable for privacy-conscious users and App Store–style transparency expectations. Pairs with Story 14.7.
+
+### Tasks
+
+- [x] **18.1** **Menu item** — **Help → About Privacy…** in `Main.storyboard`; action opens Savitar Help at anchor `privacy`.
+- [x] **18.2** **`SavitarHelp.show(anchor:)`** — reuse existing API; no new window type.
+- [x] **18.3** **User guide** — document item in Help menu table and Getting help list; privacy chapter already exists (Story 14.7 / guide `#privacy`).
+
+### Touchpoints
+
+- `client/Savitar2/Base.lproj/Main.storyboard`
+- `client/Savitar2/src/AppDelegate.swift`
+- `docs/USER_GUIDE.md`
+
+### Acceptance
+
+- **Help → About Privacy…** opens Savitar Help scrolled to **Privacy & usage statistics**.
+- Works offline (bundled help book).
+- Menu order: Savitar Help, Guide on the Web, separator, About Privacy, Release Notes.
+
+### Dependency
+
+- **Story 16** (in-app help + `#privacy` anchor). **Story 14** (content accuracy).
+
+---
+
+## Story 19 — Savitar privacy page on heynow.com (cross-repo)
+
+**Goal:** Publish a **dedicated privacy page** on the Savitar website (`heynow.com/savitar/…`) that mirrors in-app disclosure (Story 18 / guide `#privacy`) for users who prefer the web, App Store review, or search.
+
+**Context:** Story **14.7** noted a web privacy blurb “when published”; Story **18** added **Help → About Privacy…** offline. A stable public URL completes the triangle: in-app help, user guide repo, and marketing site. **Implementation is in [heynow_websites](https://github.com/jkoutavas/heynow_websites)** — Story **W9**; this story tracks **content** and **cross-links** from Savitar2.
+
+### Tasks
+
+- [ ] **19.1** **Content source** — keep `docs/USER_GUIDE.md` **Privacy & usage statistics** as canonical prose, or split to `docs/PRIVACY.md` included in guide + web build (avoid two divergent policies).
+- [ ] **19.2** **Coordinate W9** — agree target URL (e.g. `heynow.com/savitar/privacy.html`), page title, and footer/nav placement on the W1 landing page.
+- [ ] **19.3** **In-app link (optional)** — when W9 ships, add “Privacy on the web” link in guide `#privacy` and/or **About Privacy…** sheet footer (secondary to offline text).
+- [ ] **19.4** **Story 14.7 closure** — mark website portion of 14.7 done when W9 is live.
+
+### Touchpoints
+
+- `docs/USER_GUIDE.md` (`#privacy`)
+- [heynow_websites `docs/STORIES.md` — Story W9](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md)
+- `client/Savitar2/Info.plist` / marketing URLs (only if we add explicit privacy URL later)
+
+### Acceptance
+
+- Public privacy page live at agreed path; content matches in-app **Privacy & usage statistics** (TelemetryDeck, no session text, dev builds).
+- Savitar landing page or footer links to it; no contradictory copy elsewhere on `/savitar/`.
+
+### Dependency
+
+- **Story 14** (TelemetryDeck shipped; policy text accurate). **Story 18** (in-app entry point). **heynow_websites W9** (publish). **W1** landing (link target).
 
 ---
 
@@ -910,14 +961,16 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 11. Story 12 — Sparkle 2 auto-updates (after first successful signed release)
 12. Story 13 — Help → Release Notes (optional polish; no parser)
 13. Story 14 — TelemetryDeck install & usage analytics (beta; pairs with README crash-reporting item)
-14. **Story 16 — In-app user guide (Help menu)** — before wide beta promotion; MVP chapters
-15. **Story 15 — Send Feedback (email)** — ship with or immediately after 16 MVP
-16. Story 17 — Contextual ? help buttons (after Story 16 anchors)
+14. ~~**Story 16 — In-app user guide (Help menu)**~~ ✅
+15. **Story 15 — Send Feedback (email)** — ship next; guide + contextual help are live
+16. ~~Story 17 — Contextual ? help buttons~~ ✅
+17. ~~Story 18 — Help → About Privacy~~ ✅
+18. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**; content in Savitar2, publish in heynow_websites)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 Story 13 is optional and can ship any time after Story 12.
 Story 14 can ship during beta once a TelemetryDeck app is configured.
-**Stories 15 + 16** satisfy README *Add bug reporting support* and user-guide Help integration; prioritize **16 → 15 → 17** so “read Help first” is real.
+**Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending) and user-guide Help integration (16 ✅). **Story 15** is next so “read Help first, then Send Feedback” is complete.
 Story 9 content writing continues in parallel with Story 16 delivery.
 
 Story 3 is retained for reference only; implement Story 5 instead.

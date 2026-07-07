@@ -13,14 +13,14 @@ Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar
 
 ## Documentation
 
-| Document                                             | Audience   | Contents                                                                                                                                                       |
-| ---------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)                               |
-| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                                           |
-| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation) tracks the full guide; speech, menus, events, and macros documented) |
-| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                                               |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                                          |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                                       |
+| Document                                             | Audience   | Contents                                                                                                                                      |
+| ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)              |
+| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation); bundled in-app as **Savitar Help**, Stories 16–17) |
+| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements (Settings window, Edit → Speech, Audio menu, …)                                                                         |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
 
 ## Current state of the application
 
@@ -84,6 +84,9 @@ _ Divider status bar support
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 √ Sparkle auto-updates (Story 12)
 _ Add bug reporting support
+√ In-app Savitar Help — bundled user guide (Story 16)
+√ Contextual ? help on major windows (Story 17)
+√ Help → About Privacy… (Story 18)
 _ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
 ```
@@ -102,7 +105,7 @@ _ Alias support (Story 10)
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
 _ Crash reporting (Sentry — separate from TelemetryDeck analytics)
 _ Start promoting the beta test
-_ User guide — remaining chapters (Story 9; speech and menus documented)
+_ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
 _ Polish, address beta test issues
 ```
 
@@ -187,22 +190,26 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-      178 text files.
-     163 unique files.
-      51 files ignored.
+     188 text files.
+     173 unique files.
+      52 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.08 s (1994.9 files/s, 262394.1 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.11 s (1579.3 files/s, 212551.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          127           2273           1359          10843
-XML                             14             18             36           3953
-Markdown                        15            776              0           1763
-YAML                             4             34             20            272
+Swift                          130           2327           1396          11224
+XML                             15             18             36           3996
+Markdown                        16            924              0           2056
+HTML                             1              0              0            465
+YAML                             5             39             21            247
+Python                           1             41             73            195
+Bourne Shell                     1             16              1             94
 JSON                             1              0              0             68
+CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           163           3104           1423          16913
+SUM:                           173           3368           1535          18381
 -------------------------------------------------------------------------------
 ```

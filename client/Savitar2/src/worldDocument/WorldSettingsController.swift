@@ -32,6 +32,7 @@ class WorldSettingsController: NSViewController {
 
     private var _editedWorld: World?
     private var _tabViewController: NSTabViewController?
+    private var tabIndexObservation: NSKeyValueObservation?
 
     override func prepare(for segue: NSStoryboardSegue, sender _: Any?) {
         // grab a reference to the tabViewController, we'll use it in the
@@ -41,11 +42,35 @@ class WorldSettingsController: NSViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let tvc = _tabViewController {
+            tabIndexObservation = tvc.observe(\.selectedTabViewItemIndex) { [weak self] _, _ in
+                self?.updateContextualHelpForSelectedTab()
+            }
+        }
+        updateContextualHelpForSelectedTab()
+    }
+
+    deinit {
+        tabIndexObservation?.invalidate()
+    }
+
     @IBAction func applyWorldSetting(_: Any) {
         completionHandler?(true, _editedWorld)
     }
 
     @IBAction func cancelWorldSetting(_: Any) {
         completionHandler?(false, nil)
+    }
+
+    private func updateContextualHelpForSelectedTab() {
+        let tab = selectedWorldSettingsTab ?? .starting
+        SavitarHelpButton.installInTopTrailingCorner(of: view, for: .worldSettings(tab))
+    }
+
+    private var selectedWorldSettingsTab: SavitarHelp.WorldSettingsTab? {
+        guard let index = _tabViewController?.selectedTabViewItemIndex else { return nil }
+        return SavitarHelp.WorldSettingsTab(rawValue: index)
     }
 }

@@ -33,4 +33,11 @@ class EventsSplitViewController: NSSplitViewController {
             self.detailViewController = detailViewController
         }
     }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        if let window = view.window {
+            SavitarHelpButton.installInTitleBar(of: window, for: .eventsWindow)
+        }
+    }
 }

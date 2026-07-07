@@ -363,7 +363,20 @@ CA
                                     <items>
                                         <menuItem title="Savitar Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                                <action selector="showSavitarHelpAction:" target="Voe-Tx-rLC" id="y7X-2Q-9no"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Savitar Guide on the Web…" id="Hlp-Gde-Web">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showGuideOnWebAction:" target="Voe-Tx-rLC" id="Hlp-Gde-Act"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Hlp-Sep-1"/>
+                                        <menuItem title="About Privacy…" id="Hlp-Prv-Not">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showAboutPrivacyAction:" target="Voe-Tx-rLC" id="Hlp-Prv-Act"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Release Notes…" id="Hlp-Rls-Not">

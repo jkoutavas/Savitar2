@@ -67,6 +67,7 @@ final class AppSettingsWindowController: NSWindowController, NSToolbarDelegate {
         installEscapeKeyMonitor()
         settingsViewController?.settingsWindowController = self
         selectPane(initialPane)
+        SavitarHelpButton.installInTitleBar(of: window, for: .appSettings(initialPane))
     }
 
     deinit {
@@ -87,6 +88,9 @@ final class AppSettingsWindowController: NSWindowController, NSToolbarDelegate {
         selectedPane = pane
         settingsViewController?.showPane(pane)
         window?.title = pane.title
+        if let window {
+            SavitarHelpButton.installInTitleBar(of: window, for: .appSettings(pane))
+        }
         if #available(macOS 11.0, *) {
             window?.toolbar?.selectedItemIdentifier = pane.toolbarItemIdentifier
         }
