@@ -34,12 +34,16 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         set {
             textView.textColor = newValue
             textView.insertionPointColor = newValue
+            setDefaultTextStyle()
         }
     }
 
     public var font: NSFont {
         get { textView.font ?? NSFont.systemFont(ofSize: 9) }
-        set { textView.font = newValue }
+        set {
+            textView.font = newValue
+            setDefaultTextStyle()
+        }
     }
 
     func rowHeight() -> CGFloat {
@@ -51,8 +55,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
         // Not setting the checkmark in the interface builder doesn't seem to work since OS X 10.9 Mavericks.
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
+        textView.isRichText = false
         textView.isAutomaticQuoteSubstitutionEnabled = false
         textView.isAutomaticDashSubstitutionEnabled = false
+        setDefaultTextStyle()
 
         newCmd()
     }
@@ -253,7 +259,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     }
 
     func setDefaultTextStyle() {
-        // TODO:
+        textView.typingAttributes = [
+            .font: font,
+            .foregroundColor: foreColor
+        ]
     }
 
     func textToCmd() -> Command? {

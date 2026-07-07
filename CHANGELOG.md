@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - User Guide expanded with contextual-help callout, Help menu reference, and Getting help section updates
 
+### Fixed
+
+- Pasting into the input pane no longer retains font or color styling from the clipboard source
+
 ## [2.0.18] - 2026-07-07
 
 ### Added
