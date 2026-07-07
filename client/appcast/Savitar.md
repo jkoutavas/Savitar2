@@ -1,6 +1,7 @@
-## What's Changed
-* TelemetryDeck install & usage analytics (Story 14) by @jkoutavas in https://github.com/jkoutavas/Savitar2/pull/63
-* World settings Input tab: CR/LF postfix and markers by @jkoutavas in https://github.com/jkoutavas/Savitar2/pull/64
+### Added
 
+- Anonymous install and usage analytics via [TelemetryDeck](https://telemetrydeck.com/) on official signed release builds — app version, build number, and macOS version only; no session text, world names, or account data
+- User Guide section on privacy and usage statistics
+- World Settings **Input** tab: configure variable (`%%`) and wildcard (`$$`) markers, and choose carriage-return-only vs CR/LF line endings when sending commands (v1 `CROnly` worlds import with the correct setting)
+- User Guide chapter on **World Settings**, including the Input tab
 
-**Full Changelog**: https://github.com/jkoutavas/Savitar2/compare/v2.0.17...v2.0.18
