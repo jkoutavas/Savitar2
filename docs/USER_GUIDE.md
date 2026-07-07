@@ -1,6 +1,6 @@
 # Savitar 2 User Guide
 
-_Last updated July 3, 2026._
+_Last updated July 7, 2026._
 
 This guide explains how to use Savitar 2. It is being written incrementally; see [Stories.md](Stories.md) **Story 9** for the plan to complete the full guide.
 
@@ -211,7 +211,7 @@ Available when a **world document** window is frontmost.
 |-----------|----------|--------------|
 | **Enter Full Screen** | ⌃⌘F | Toggles full-screen mode for the world window. |
 | **Show World Events…** | — | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name. |
-| **Show World Settings…** | ⇧⌘J | Opens the **World Settings** sheet for this world: connection, appearance, fonts, colors, logging, and related options. Click **OK** to apply or **Cancel** to discard. |
+| **Show World Settings…** | ⇧⌘J | Opens the **World Settings** sheet for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard. |
 | **Scroll Lock** | ⌃S | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
 
 The same **World Settings** and **Events** commands are available from buttons in the world window’s title bar.
@@ -320,6 +320,80 @@ Savitar 1’s **Macro Clicker** used **aliases**—on-screen buttons that pointe
 
 ---
 
+## World Settings
+
+**World Settings** holds options for the **active world document**—connection details, fonts and colors, input behavior, and logging. Open it with **World → Show World Settings…** (⇧⌘J) or the settings button in the world window title bar.
+
+Changes are staged in the sheet until you click **OK** (or **Cancel** to discard). World settings edits are **undoable** (⌘Z) like other document changes.
+
+### Tabs
+
+| Tab | Purpose |
+|-----|---------|
+| **Starting** | Host, port, retry/keepalive, startup commands |
+| **Appearance** | Colors, body/code fonts, ANSI and HTML interpretation |
+| **Input** | Echo, sticky commands, markers, line ending |
+| **Output** | Session logging to a file |
+
+Other v1 tabs (**MCP**, **Closing**) are not in Savitar 2 yet; see the [README](../README.md) parity checklist.
+
+### Input tab
+
+Controls how Savitar handles what you type and how commands are sent to the server.
+
+#### Input echoing
+
+Choose whether typed input is copied into the **output** pane:
+
+| Option | Behavior |
+|--------|----------|
+| **No echo** | Input is sent to the server only; nothing is shown locally |
+| **Echo carriage return only** | Only a line break appears in output when you press Return |
+| **Echo all input** | The full command line is shown in output before it is sent |
+
+This matches Savitar 1’s echo settings.
+
+#### Sticky commands
+
+When **Sticky commands** is checked, pressing Return after a command **leaves the text selected** in the input line instead of clearing it. Type over the selection or press ↑/↓ to recall history as usual. Useful when you send the same command repeatedly with small edits.
+
+#### Markers
+
+Markers are short strings Savitar recognizes in commands, triggers, and macros. Defaults match Savitar 1:
+
+| Marker | Default | Used for |
+|--------|---------|----------|
+| **Command** | `##` | [Local commands](http://heynow.com/savitar/manual140/_mancontent6.html) (handled by Savitar, not sent to the server) |
+| **Variable** | `%%` | Expanding scratch values (for example `say %%name`) and trigger-set variables |
+| **Wildcard** | `$$` | Wildcard patterns in trigger names (for example `tell $$target`) |
+
+You can change any marker per world. Use a string that will not appear in normal game text. Empty markers disable that feature.
+
+#### Line ending
+
+Choose what Savitar appends when a command is sent (including an empty Return):
+
+| Option | Sent bytes | Typical use |
+|--------|------------|-------------|
+| **Carriage return only (CR)** | `\r` | Many MUDs and older telnet hosts |
+| **Carriage return + line feed (CR/LF)** | `\r\n` | Default; common on Windows-oriented servers |
+
+Savitar 1 called this **CROnly** in world files (`FLAGS="…+CROnly"`). Worlds imported from v1 keep their line-ending preference.
+
+**Tip:** If commands seem ignored or the host reports “unknown command” with extra characters, try switching line ending—wrong CR/LF is a common connection troubleshooting step (see [Story 9.6](Stories.md)).
+
+### Output tab
+
+| Control | Description |
+|---------|-------------|
+| **Logging Enabled** | When on, Savitar writes session output to a log file in the background |
+| **Append / Overwrite** | Whether each session adds to the file or replaces it |
+| **Log file path** | Where the log is stored; use **Set now** to pick a location |
+
+Session logging is separate from **text document** windows and from **File → Print…**. See [Text documents](#text-documents) under the File menu.
+
+---
+
 ## Privacy & usage statistics
 
 Official Savitar builds from Heynow Software send **anonymous usage statistics** to help measure active installations and version adoption. We use [TelemetryDeck](https://telemetrydeck.com/), a privacy-first analytics service: signals include app version, build number, and macOS version only — **no account names, world names, session text, or other personal data**.
@@ -332,4 +406,4 @@ Local development builds, unit tests, and builds you compile from source **do no
 
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Worlds & connection** (9.6), then **Triggers in depth** (9.4).
+Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Triggers in depth** (9.4), then **Worlds & connection** (9.6). World Settings **Starting** and **Appearance** tabs are covered briefly in [World Settings](#world-settings); fuller reference is **9.5**.
