@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 6th, 2026_
+_README last updated July 7th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://heynow.com/savitar/). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -187,22 +187,22 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     178 text files.
+      178 text files.
      163 unique files.
       51 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.09 s (1725.4 files/s, 223634.8 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.08 s (1994.9 files/s, 262394.1 lines/s)
 -------------------------------------------------------------------------------
-Language                     files          blank        comment    code
+Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          127           2235           1360   10646
-XML                             14             18             36    3954
-Markdown                        15            749              0    1710
-YAML                             4             34             20     272
-JSON                             1              0              0      68
-Text                             1              0              0      11
-C/C++ Header                     1              3              8       3
+Swift                          127           2273           1359          10843
+XML                             14             18             36           3953
+Markdown                        15            776              0           1763
+YAML                             4             34             20            272
+JSON                             1              0              0             68
+Text                             1              0              0             11
+C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           163           3039           1424   16664
+SUM:                           163           3104           1423          16913
 -------------------------------------------------------------------------------
 ```
