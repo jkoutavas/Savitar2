@@ -8,6 +8,17 @@ Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behav
 
 ---
 
+## Getting started
+
+1. **Launch Savitar** and open the **World Picker** (or use **File → Open World…**).
+2. **Double-click a world** (for example Alter Aeon) to open a session window.
+3. Type a command in the **input** pane at the bottom and press **Return**.
+4. Open the **Events** window (**World → Events Window**) to add triggers or macros.
+
+**Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline.
+
+---
+
 ## Speech
 
 Savitar can speak text in three ways:
@@ -401,6 +412,17 @@ Official Savitar builds from Heynow Software send **anonymous usage statistics**
 Each installation uses a hashed identifier; TelemetryDeck does not receive your name, email, or IP address in a form that identifies you. You can read more in [TelemetryDeck's privacy policy](https://telemetrydeck.com/privacy/).
 
 Local development builds, unit tests, and builds you compile from source **do not** send analytics unless you configure a TelemetryDeck App ID yourself.
+
+---
+
+## Getting help
+
+1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline).
+2. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
+3. **Send Feedback** — *(coming in a future update)* email the Savitar team with problems or feature ideas. You will not need a GitHub account.
+4. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
+
+Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). Include your Savitar version and macOS version when you contact support.
 
 ---
 

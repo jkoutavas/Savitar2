@@ -1,0 +1,21 @@
+body {
+  font: -apple-system-body;
+  line-height: 1.45;
+  margin: 1.25rem 2rem;
+  color: #111;
+}
+h1 { font-size: 1.6rem; margin-top: 0; }
+h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.25rem;
+}
+h3 { font-size: 1.05rem; margin-top: 1.25rem; }
+a { color: #0645ad; }
+table { border-collapse: collapse; margin: 0.75rem 0; }
+th, td { border: 1px solid #ccc; padding: 0.35rem 0.6rem; vertical-align: top; }
+th { background: #f4f4f4; }
+code { font-family: Menlo, monospace; font-size: 0.92em; }
+ul, ol { padding-left: 1.4rem; }
+.toc { background: #f8f8f8; border: 1px solid #ddd; padding: 0.75rem 1rem; margin: 1rem 0; }

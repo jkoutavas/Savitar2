@@ -153,6 +153,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         SavitarUpdater.shared.checkForUpdates()
     }
 
+    @IBAction func showSavitarHelpAction(_: Any) {
+        SavitarHelp.show()
+    }
+
+    @IBAction func showGuideOnWebAction(_: Any) {
+        guard let url = URL(string: "https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md") else { return }
+        NSWorkspace.shared.open(url)
+    }
+
     @IBAction func showReleaseNotesAction(_: Any) {
         guard let url = URL(string: "https://github.com/jkoutavas/Savitar2/releases") else { return }
         NSWorkspace.shared.open(url)
