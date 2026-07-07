@@ -236,7 +236,7 @@ class WorldTests: XCTestCase {
             URL="telnet://dentinmud.org:3000"
             FLAGS="html+ansi"
             CMDMARKER="@@"
-            VARMARKER="&&"
+            VARMARKER="nm"
             WILDMARKER="??"
         />
         """
@@ -246,12 +246,12 @@ class WorldTests: XCTestCase {
         try world.parse(xml: xml[WorldElemIdentifier])
 
         XCTAssertEqual(world.cmdMarker, "@@")
-        XCTAssertEqual(world.varMarker, "&&")
+        XCTAssertEqual(world.varMarker, "nm")
         XCTAssertEqual(world.wildMarker, "??")
 
         let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
         XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"@@\""))
-        XCTAssertTrue(xmlOutString.contains("VARMARKER=\"&&\""))
+        XCTAssertTrue(xmlOutString.contains("VARMARKER=\"nm\""))
         XCTAssertTrue(xmlOutString.contains("WILDMARKER=\"??\""))
     }
 }

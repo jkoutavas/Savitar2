@@ -195,10 +195,14 @@ class InputSettingsController: NSViewController {
             lineEndingBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             lineEndingBox.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -margin),
 
-            lineEndingContent.leadingAnchor.constraint(equalTo: lineEndingBox.contentView!.leadingAnchor, constant: 16),
-            lineEndingContent.trailingAnchor.constraint(equalTo: lineEndingBox.contentView!.trailingAnchor, constant: -16),
-            lineEndingContent.topAnchor.constraint(equalTo: lineEndingBox.contentView!.topAnchor, constant: 14),
-            lineEndingContent.bottomAnchor.constraint(equalTo: lineEndingBox.contentView!.bottomAnchor, constant: -14)
+            lineEndingContent.leadingAnchor.constraint(
+                equalTo: lineEndingBox.contentView!.leadingAnchor, constant: 16),
+            lineEndingContent.trailingAnchor.constraint(
+                equalTo: lineEndingBox.contentView!.trailingAnchor, constant: -16),
+            lineEndingContent.topAnchor.constraint(
+                equalTo: lineEndingBox.contentView!.topAnchor, constant: 14),
+            lineEndingContent.bottomAnchor.constraint(
+                equalTo: lineEndingBox.contentView!.bottomAnchor, constant: -14)
         ])
     }
 
@@ -226,7 +230,10 @@ class InputSettingsController: NSViewController {
     }
 
     private func lineEndingRadio(title: String, tag: Int) -> NSButton {
-        let button = NSButton(radioButtonWithTitle: title, target: self, action: #selector(lineEndingRadioButtonChanged(_:)))
+        let button = NSButton(
+            radioButtonWithTitle: title,
+            target: self,
+            action: #selector(lineEndingRadioButtonChanged(_:)))
         button.tag = tag
         return button
     }
