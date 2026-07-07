@@ -754,7 +754,7 @@ Gw
             <objects>
                 <viewController title="Input" id="qY0-Es-dDb" customClass="InputSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="O93-n9-JOi">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Input Echoing" translatesAutoresizingMaskIntoConstraints="NO" id="gHN-R6-fEk">
@@ -855,16 +855,15 @@ Gw
                                         </connections>
                                     </button>
 	                        </subviews>
-	                        <constraints>
-	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="leading" secondItem="O93-n9-JOi" secondAttribute="leading" constant="20" symbolic="YES" id="JL1-gq-Usm"/>
-		                            <constraint firstAttribute="trailing" secondItem="gHN-R6-fEk" secondAttribute="trailing" constant="20" symbolic="YES" id="iNa-3u-gRc"/>
-	                            <constraint firstItem="gHN-R6-fEk" firstAttribute="top" secondItem="O93-n9-JOi" secondAttribute="top" constant="20" symbolic="YES" id="mBj-gc-ben"/>
-	                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="cmdMarkerField" destination="yui-BG-0lR" id="cMd-Fd-lTk"/>
+                        <outlet property="cmdMarkerLabel" destination="iqH-sS-92T" id="cMd-Lb-lTk"/>
+                        <outlet property="echoBox" destination="gHN-R6-fEk" id="ecH-Bx-lTk"/>
                         <outlet property="echoAllRadio" destination="3dR-YY-jYP" id="MGV-qZ-tyx"/>
                         <outlet property="echoCROnlyRadio" destination="hzS-Ik-R70" id="ZSQ-i0-uUV"/>
                         <outlet property="noEchoRadio" destination="22c-p1-evv" id="157-gv-ICl"/>
+                        <outlet property="stickyCommandsButton" destination="9hd-go-wtt" id="sTk-cm-dBt"/>
                     </connections>
                 </viewController>
                 <customObject id="nAz-Dp-AEK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

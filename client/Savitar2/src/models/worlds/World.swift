@@ -19,6 +19,7 @@ struct WorldFlags: OptionSet, Hashable {
     static let echoCR = WorldFlags(rawValue: 1 << 2)
     static let html = WorldFlags(rawValue: 1 << 3)
     static let stickyCmds = WorldFlags(rawValue: 1 << 4)
+    static let crOnly = WorldFlags(rawValue: 1 << 5)
 }
 
 extension WorldFlags: StrOptionSet {
@@ -28,14 +29,16 @@ extension WorldFlags: StrOptionSet {
         (.echoCmds, "echoCmds"),
         (.echoCR, "echoCR"),
         (.html, "html"),
-        (.stickyCmds, "stickyCmds")
+        (.stickyCmds, "stickyCmds"),
+        (.crOnly, "CROnly")
     ] }
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
         "echoCmds": .echoCmds,
         "echoCR": .echoCR,
         "html": .html,
-        "stickyCmds": .stickyCmds
+        "stickyCmds": .stickyCmds,
+        "CROnly": .crOnly
     ] }
 }
 
@@ -139,6 +142,11 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var cmdMarker = "##"
     @objc dynamic var varMarker = "%%"
     @objc dynamic var wildMarker = "$$"
+
+    var commandLinePostfix: String {
+        flags.contains(.crOnly) ? "\r" : "\r\n"
+    }
+
     @objc dynamic var backColor = NSColor(hex: "#666699")!
     @objc dynamic var foreColor = NSColor.white
     @objc dynamic var linkColor = NSColor.blue
