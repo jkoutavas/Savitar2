@@ -113,12 +113,11 @@ jobs:
             capture { print }
           ' CHANGELOG.md | awk 'NF { seen = 1 } seen' > "$notes_file"
           if [ -s "$notes_file" ]; then
-            echo "found=true" >> "$GITHUB_OUTPUT"
             echo "Release notes for $version sourced from CHANGELOG.md:"
             cat "$notes_file"
           else
-            echo "found=false" >> "$GITHUB_OUTPUT"
-            echo "No '## [$version]' section in CHANGELOG.md; will auto-generate notes."
+            echo "::error::No '## [$version]' section in CHANGELOG.md. Run 'bundle exec fastlane prepare_release version:$version' and merge the changelog before tagging."
+            exit 1
           fi
           echo "file=$notes_file" >> "$GITHUB_OUTPUT"
 
@@ -128,15 +127,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if [ "${{ steps.notes.outputs.found }}" = "true" ]; then
-            notes_args=(--notes-file "${{ steps.notes.outputs.file }}")
-          else
-            notes_args=(--generate-notes)
-          fi
           gh release create "$GITHUB_REF_NAME" \
             client/fastlane/release/Savitar.zip \
             --title "$GITHUB_REF_NAME" \
-            "${notes_args[@]}" \
+            --notes-file "${{ steps.notes.outputs.file }}" \
           || gh release upload "$GITHUB_REF_NAME" \
                client/fastlane/release/Savitar.zip --clobber
 
