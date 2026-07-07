@@ -17,6 +17,8 @@ Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behav
 
 **Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline.
 
+**Contextual help:** Major windows show a **?** that opens this guide to the relevant section — **World Picker**, **world session window**, **Events**, **Settings** (per toolbar pane), and **World Settings** (per tab, top-right of the sheet).
+
 ---
 
 ## Speech
@@ -119,6 +121,89 @@ Voice and rate changes take effect on the next spoken utterance; you do not need
 
 ---
 
+## ANSI colors
+
+MUDs and telnet hosts send **ANSI escape codes** to color and style text in the **output** pane. Savitar maps those codes to colors using a **global palette** of 24 swatches—the same approach Savitar 1 used with **ANSI Color Settings**.
+
+### Opening the Colors pane
+
+1. Open **Settings…** (⌘,) and select the **Colors** toolbar tab, or
+2. Choose **Edit → ANSI Colors…**
+
+Changes apply immediately to every open world window; you do not need to reconnect.
+
+### The color grid
+
+The pane shows **eight hues** (black through white) across **three shades** each:
+
+| Shade | Role |
+|-------|------|
+| **Normal** | Standard foreground/background for that hue |
+| **Dim** | Lighter or muted variant (ANSI “dim” / faint) |
+| **Intense** | Bold or highlighted variant (ANSI bold or bright) |
+
+Click any swatch to pick a new color. Use **Restore Defaults** to reset all 24 colors to Savitar’s built-in palette (matching Savitar 1 defaults).
+
+Color edits in Settings are **undoable** (⌘Z) like other preference changes. Your palette is saved in app preferences and survives relaunch; importing Savitar 1 preferences brings across your v1 ANSI colors.
+
+### Colors vs World Settings → Appearance
+
+| | **Settings → Colors** | **World Settings → Appearance** |
+|--|------------------------|----------------------------------|
+| Scope | **App-wide** — all worlds share the same ANSI palette | **Per world** — fonts, default fore/back colors, HTML/ANSI interpretation for that document |
+| Use when | ANSI colors look wrong everywhere, or you want a custom theme | One world needs different fonts or base colors |
+
+Speech and printing strip or ignore ANSI styling: continuous speech reads plain text, and **File → Print…** outputs black on white. See [Speech](#speech) and [Printing](#printing) under the File menu.
+
+---
+
+## Input & Display
+
+Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. These options apply **app-wide** and save immediately.
+
+| Option | What it does |
+|--------|----------------|
+| **Use keypad for macro entry** | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s **Use keypad** preference. |
+| **Mono fonts only (in font menus)** | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned. |
+| **Default word wrap for new sessions** | *(Not yet available.)* Will set whether new world sessions start with word wrap on. Grayed out until that feature ships. |
+
+Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
+
+---
+
+## Audio
+
+Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute flags apply **app-wide** and save immediately. The same two cue toggles are available from the menu bar **Audio** menu while a session is open—Settings and the menu stay in sync.
+
+| Option | What it does |
+|--------|----------------|
+| **Mute sound cues** | Suppresses **trigger sound** effects (chimes and custom sounds configured in the Events window). Trigger **speech** is not affected. |
+| **Mute speaking cues** | Suppresses all **spoken** output—trigger speech and **continuous speech**. If nothing is being read aloud, check this first. |
+| **Mute clicker sounds** | *(Not yet available.)* Will mute Macro Clicker button sounds when that feature ships. |
+| **Mute terminal bell** | Suppresses the system beep when the server sends a telnet **bell** character (ASCII BEL). The character is still removed from output text; only the sound is skipped. |
+
+**Speech** voice and rate live on the separate **Speech** settings pane—see [Speech settings reference](#speech-speech-settings-reference). To stop speech that is already playing, use **Audio → Flush Speech Buffer** (⌘L) from the menu bar.
+
+---
+
+## Updates
+
+Official Savitar builds check for newer versions using [Sparkle](https://sparkle-project.org/). Open **Settings…** (⌘,) and select the **Updates** toolbar tab.
+
+| Option | What it does |
+|--------|----------------|
+| **Check for updates automatically** | When on, Savitar periodically looks for a newer signed release in the background and can notify you when one is available. When off, you can still check manually. |
+
+To check on demand, choose **Savitar → Check for Updates…** from the menu bar. If an update is available, Sparkle shows release notes (from the project changelog) and walks you through download and install.
+
+**Help → Release Notes…** opens a web page with version history without running an update check—useful when you want to see what changed in past releases.
+
+Automatic updates apply to **official signed builds** distributed by Heynow Software. Builds you compile from source in Xcode typically do not receive Sparkle updates through this channel.
+
+Your automatic-update preference is saved in app preferences and survives relaunch.
+
+---
+
 ## Menus
 
 Savitar’s menu bar follows standard macOS conventions. A few items are Savitar-specific; others are provided by the system because Savitar is a document-based app. On recent macOS versions, **File** may show additional items (such as **Duplicate**, **Rename…**, and **Move To…**) that replace or supplement older template entries—the behavior described here matches what you see at runtime.
@@ -130,14 +215,15 @@ World document windows, the **World Picker**, and the **Events** windows each en
 | Menu item | Shortcut | What it does |
 |-----------|----------|--------------|
 | **About Savitar** | — | Shows the standard About box with version information. |
-| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, Audio, Updates, Speech). Changes apply immediately; there is no Save button. |
+| **Check for Updates…** | — | Looks for a newer Savitar release (Sparkle). See [Updates](#updates). |
+| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech). Changes apply immediately; there is no Save button. |
 | **Services** | — | Standard macOS Services submenu for the current selection (when a supporting service is installed). |
 | **Hide Savitar** | ⌘H | Hides all Savitar windows. |
 | **Hide Others** | ⌥⌘H | Hides every app except Savitar. |
 | **Show All** | — | Un-hides other applications. |
 | **Quit Savitar** | ⌘Q | Quits the app. Open world documents are closed according to each window’s save state. |
 
-See [Speech settings reference](#speech-settings-reference) for the **Speech** pane. Other Settings panes are documented in upcoming guide chapters.
+See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), and [Updates](#updates) for the other Settings toolbar panes.
 
 ### File menu
 
@@ -252,7 +338,10 @@ Full detail is in the [Speech](#speech) chapter.
 
 | Menu item | Shortcut | What it does |
 |-----------|----------|--------------|
-| **Savitar Help** | ⌘? | Opens in-app help when a help book is installed. Until Help ships, this may have limited content; use this user guide and [docs/USER_GUIDE.md](USER_GUIDE.md) in the repository. |
+| **Savitar Help** | ⌘? | Opens this user guide in a Savitar window (works offline). |
+| **Savitar Guide on the Web…** | — | Opens the latest draft of this guide on GitHub. |
+| **About Privacy…** | — | Opens the [Privacy & usage statistics](#privacy) chapter in Savitar Help (TelemetryDeck analytics; no session text). |
+| **Release Notes…** | — | Opens the GitHub releases page with version history. |
 
 ---
 
@@ -348,6 +437,37 @@ Changes are staged in the sheet until you click **OK** (or **Cancel** to discard
 
 Other v1 tabs (**MCP**, **Closing**) are not in Savitar 2 yet; see the [README](../README.md) parity checklist.
 
+### Starting tab
+
+Connection and identity for **this world document**:
+
+| Field | What it does |
+|-------|----------------|
+| **World Name** | Display name for the world (shown in the window title and lists). |
+| **Host Name** | Server hostname or IP address to connect to. |
+| **Host Port** | TCP port (for example `3000` for many MUDs). |
+| **Retry Seconds** | How long to wait between connection retries after a failed connect (`0` = use Savitar’s default). |
+| **Keepalive Minutes** | Interval for keepalive traffic on idle connections (`0` = off). Helps some hosts drop stale sessions less aggressively. |
+| **Startup commands** | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`. |
+
+Changes apply when you click **Apply** and take effect on the **next** connection to that world.
+
+### Appearance tab
+
+How **this world** renders text in the session window:
+
+| Control | What it does |
+|---------|----------------|
+| **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane. |
+| **Body font** and **size** | Proportional font for normal output text. |
+| **Interpret ANSI codes** | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
+| **Interpret HTML tags** | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions. |
+| **Code font** and **size** | Monospace font for HTML code blocks (only when HTML interpretation is on). |
+
+The preview pane at the bottom shows sample styled text as you change options. Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
+
+ANSI **palette** colors are app-wide—see [ANSI colors](#ansi-colors). This tab sets base fore/back/link and fonts for the world.
+
 ### Input tab
 
 Controls how Savitar handles what you type and how commands are sent to the server.
@@ -418,9 +538,10 @@ Local development builds, unit tests, and builds you compile from source **do no
 ## Getting help
 
 1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline).
-2. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
-3. **Send Feedback** — *(coming in a future update)* email the Savitar team with problems or feature ideas. You will not need a GitHub account.
-4. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
+2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
+3. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
+4. **Send Feedback** — *(coming in a future update)* email the Savitar team with problems or feature ideas. You will not need a GitHub account.
+5. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
 
 Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). Include your Savitar version and macOS version when you contact support.
 
@@ -428,4 +549,4 @@ Before reporting a problem, check the relevant chapter here (triggers, speech, w
 
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Triggers in depth** (9.4), then **Worlds & connection** (9.6). World Settings **Starting** and **Appearance** tabs are covered briefly in [World Settings](#world-settings); fuller reference is **9.5**.
+Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Triggers in depth** (9.4), then **Worlds & connection** (9.6).

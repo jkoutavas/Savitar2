@@ -8,7 +8,7 @@
 import Cocoa
 import WebKit
 
-/// Fallback when Apple Help Viewer cannot open the bundled book (Story 16 MVP).
+/// Presents the bundled user guide in a Savitar window (Story 16).
 final class HelpGuideWindowController: NSWindowController {
     static let shared = HelpGuideWindowController()
 
@@ -70,7 +70,13 @@ final class HelpGuideWindowController: NSWindowController {
     private func presentMissingGuideAlert() {
         let alert = NSAlert()
         alert.messageText = "Savitar Help is not available"
-        alert.informativeText = "The help book was not found in this build. If you built from source, run:\npython3 client/scripts/build_help_book.py"
+        alert.informativeText = """
+        The help book was not found in this build. If you built from source, run:
+
+        python3 client/scripts/build_help_book.py
+
+        Then rebuild Savitar in Xcode.
+        """
         alert.alertStyle = .warning
         alert.addButton(withTitle: "OK")
         alert.runModal()

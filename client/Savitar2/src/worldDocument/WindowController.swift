@@ -31,6 +31,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
             window?.addTitlebarAccessoryViewController(titlebarController)
         }
 
+        if let window {
+            SavitarHelpButton.installInTitleBar(of: window, for: .worldSession)
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(colorsDidChange),
                                                name: .savitarColorsChanged, object: nil)
     }

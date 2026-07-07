@@ -54,6 +54,13 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         view.window?.makeFirstResponder(tableView)
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        if let window = view.window {
+            SavitarHelpButton.installInTitleBar(of: window, for: .worldPicker)
+        }
+    }
+
     override func viewWillDisappear() {
         super.viewWillDisappear()
 

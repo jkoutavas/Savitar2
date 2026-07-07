@@ -373,6 +373,12 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Hlp-Sep-1"/>
+                                        <menuItem title="About Privacy…" id="Hlp-Prv-Not">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showAboutPrivacyAction:" target="Voe-Tx-rLC" id="Hlp-Prv-Act"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Release Notes…" id="Hlp-Rls-Not">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>

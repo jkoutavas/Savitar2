@@ -29,6 +29,10 @@ ANCHOR_BY_TITLE = {
     "World Settings": "world-settings",
     "Privacy & usage statistics": "privacy",
     "Getting help": "getting-help",
+    "ANSI colors": "ansi-colors",
+    "Input & Display": "input-display",
+    "Audio": "audio",
+    "Updates": "updates",
     "More chapters (planned)": "planned",
 }
 
@@ -47,6 +51,7 @@ h2 {
   padding-bottom: 0.25rem;
 }
 h3 { font-size: 1.05rem; margin-top: 1.25rem; }
+h4 { font-size: 0.98rem; margin-top: 1rem; font-weight: 600; }
 a { color: #0645ad; }
 table { border-collapse: collapse; margin: 0.75rem 0; }
 th, td { border: 1px solid #ccc; padding: 0.35rem 0.6rem; vertical-align: top; }
@@ -104,6 +109,8 @@ def markdown_to_body(md: str) -> tuple[str, list[tuple[str, str]]]:
     i = 0
     in_ul = False
     in_ol = False
+    current_section_anchor = ""
+    current_subsection_anchor = ""
 
     def close_lists() -> None:
         nonlocal in_ul, in_ol
@@ -123,6 +130,11 @@ def markdown_to_body(md: str) -> tuple[str, list[tuple[str, str]]]:
             i += 1
             continue
 
+        # Online-only metadata; keep in USER_GUIDE.md for GitHub but omit from the app bundle.
+        if re.match(r"^_Last updated\b.*_$", stripped, re.IGNORECASE):
+            i += 1
+            continue
+
         if stripped == "---":
             close_lists()
             out.append("<hr/>")
@@ -136,12 +148,24 @@ def markdown_to_body(md: str) -> tuple[str, list[tuple[str, str]]]:
                 out.append(table_html)
             continue
 
-        m = re.match(r"^(#{1,3})\s+(.+)$", stripped)
+        m = re.match(r"^(#{1,4})\s+(.+)$", stripped)
         if m:
             close_lists()
             level = len(m.group(1))
             title = m.group(2).strip()
-            anchor = anchor_for_title(title)
+            if level == 2:
+                anchor = anchor_for_title(title)
+                current_section_anchor = anchor
+                current_subsection_anchor = ""
+            elif level == 3 and current_section_anchor:
+                anchor = f"{current_section_anchor}-{slugify(title)}"
+                current_subsection_anchor = anchor
+            elif level == 4 and current_subsection_anchor:
+                anchor = f"{current_subsection_anchor}-{slugify(title)}"
+            elif level == 4 and current_section_anchor:
+                anchor = f"{current_section_anchor}-{slugify(title)}"
+            else:
+                anchor = anchor_for_title(title)
             tag = f"h{level}"
             if level == 2:
                 toc.append((anchor, title))

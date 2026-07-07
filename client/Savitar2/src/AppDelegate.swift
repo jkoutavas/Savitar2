@@ -157,6 +157,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         SavitarHelp.show()
     }
 
+    @IBAction func showAboutPrivacyAction(_: Any) {
+        SavitarHelp.show(anchor: SavitarHelp.Anchor.privacy)
+    }
+
     @IBAction func showGuideOnWebAction(_: Any) {
         guard let url = URL(string: "https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md") else { return }
         NSWorkspace.shared.open(url)
