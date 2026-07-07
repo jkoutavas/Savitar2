@@ -292,7 +292,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 | **6. Local Commands** | Local commands reference | Not started | **9.2d** |
 | **7. Useful Tips** | Tips, diagnostics, performance | Not started | **9.7** |
 | **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Not started | **9.8** |
-| **9. In Closing** | Bug reporting, links | Not started | **9.9** |
+| **9. In Closing** | Bug reporting, links | Not started | **9.9** (Stories 15–16) |
 
 ### Writing principles (v1 manual → v2 guide)
 
@@ -411,14 +411,17 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - MUD, MOO, MUSH, MUVE, ANSI, trigger, macro, event, gag, wildcard, local command, …
   - *Acceptance:* Every jargon term used in the guide is defined here
 
-- [ ] **9.9** **Help & feedback** — v1 §9
-  - Bug reports (GitHub issues); forums legacy note; Help → Release Notes
-  - In-app Help book when it ships (**9.10**)
-  - *Acceptance:* Clear path to report bugs and read changelog
+- [ ] **9.9** **Help & feedback** — v1 §9 (implementation: **Stories 15–16**)
+  - In-app **Savitar Help** opens the user guide (Story 16); encourage reading before feedback
+  - **Send Feedback…** via email — bugs *and* feature requests (Story 15); no GitHub account required
+  - Help → Release Notes (Story 13 ✅); legacy v1 conference/forums note where still relevant
+  - GitHub Issues: **maintainers/contributors only** — not the player-facing path
+  - *Acceptance:* A non-developer can learn the app from Help and send feedback without creating accounts
 
 - [ ] **9.10** **Publish path**
-  - Link from README ✅; in-app Help book; web publish tracked in [heynow_websites `docs/STORIES.md`](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md) Story **W4** (`heynow.com/savitar/guide/`)
+  - Link from README ✅; in-app Help book (Story 16); web publish tracked in [heynow_websites `docs/STORIES.md`](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md) Story **W4** (`heynow.com/savitar/guide/`)
   - *Acceptance:* Help menu opens useful content, not an empty stub; guide has a stable public URL when phase 1+ ships
+  - Contextual **?** help on key UI surfaces is **Story 17** (after Story 16 anchors exist)
 
 #### Deferred guide sections (blocked on features)
 
@@ -729,6 +732,156 @@ gh api repos/jkoutavas/Savitar2/releases --paginate \
 
 ---
 
+## Story 15 — Send Feedback (email)
+
+**Goal:** Give **non-developer** players a frictionless way to report problems and suggest improvements — without a GitHub account.
+
+**Context:** Savitar’s audience is MUD players and v1 migrants, not repo contributors. Savitar 1 directed users to **email Jay** and the heynow.com conference; that model still fits. GitHub Issues remain the **maintainer’s** triage backlog (you file issues from email when appropriate). This story satisfies the README alpha item *Add bug reporting support*.
+
+**Relationship to Story 16:** Help menu order should encourage **Savitar Help** (user guide) before **Send Feedback…** so users can self-serve common questions first.
+
+### Sketch (Help menu)
+
+```
+Help
+  Savitar Help              ⌘?
+  ─────────────────
+  Send Feedback…
+  Release Notes…
+```
+
+### Tasks
+
+- [ ] **15.1** **`SavitarFeedback` helper** — build `mailto:` URL with UTF-8–safe subject/body; read destination address from `Info.plist` key `SavitarFeedbackEmail` (default `jay@heynow.com` or project-chosen support address).
+- [ ] **15.2** **Pre-filled diagnostics** — body includes Savitar version (`CFBundleShortVersionString`), build (`CFBundleVersion`), macOS version (`ProcessInfo`), and labeled sections the user fills in:
+  - *What I was trying to do*
+  - *What happened*
+  - *Bug or feature request?*
+- [ ] **15.3** **Help → Send Feedback…** — menu item + `AppDelegate` action; open default mail client via `NSWorkspace.shared.open(url)`. If no mail client is configured, show alert with support email and “copy diagnostics to clipboard” fallback.
+- [ ] **15.4** **VoiceOver / accessibility** — menu title and alert strings are plain language (“Send Feedback”, not “File GitHub Issue”).
+- [ ] **15.5** **User guide (Story 9.9)** — short “Getting help” section: try Savitar Help first; then Send Feedback; what to include; response expectations; GitHub not required.
+- [ ] **15.6** **Maintainer workflow** — document in `CONTRIBUTING.md` (or internal note): email → reproduce → optional GitHub issue; no expectation that reporters use Issues.
+
+### Touchpoints
+
+- New: `client/Savitar2/src/SavitarFeedback.swift` (or extension on `AppDelegate`)
+- `client/Savitar2/Base.lproj/Main.storyboard` (Help menu)
+- `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/Info.plist` (`SavitarFeedbackEmail`)
+- `docs/USER_GUIDE.md` (Story 9.9)
+- `README.md` (check off bug reporting when shipped)
+
+### Acceptance
+
+- Help → Send Feedback opens Mail with pre-filled version info and structured prompts.
+- Works for **bug reports and feature requests** in one flow (user labels which in the body).
+- No GitHub login required.
+- If Mail is unavailable, user still gets support address + copyable diagnostics.
+- Menu appears **below** Savitar Help, separated from Release Notes.
+
+### Out of scope
+
+- In-app bug tracker, screenshot attachment automation, or automatic log upload (consider later with explicit consent).
+- GitHub Issues as the in-app destination.
+- Sentry crash reporting (README beta item — separate story).
+
+---
+
+## Story 16 — In-app user guide (Help menu)
+
+**Goal:** Wire **[USER_GUIDE.md](USER_GUIDE.md)** into **Help → Savitar Help** (⌘?) so players can learn the app **before** sending feedback (Story 15).
+
+**Context:** Today `showHelp:` is wired in the storyboard but there is no Help Book in the bundle (`Info.plist` lacks `CFBundleHelpBookFolder`). Players only see the guide if they find it on GitHub. Story 9 content work continues in parallel; this story is the **delivery mechanism** — bundle, index, and menu integration.
+
+**v1 parity:** Savitar 1 shipped an online manual at heynow.com; v2 should work **offline in-app** with optional web mirror (Story 9.10 / heynow_websites W4).
+
+### Approach (recommended)
+
+Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`:
+
+1. Convert Markdown → HTML (build phase script or checked-in HTML updated when guide changes).
+2. Run `hiutil` / Help Indexer to produce `SavitarHelp.helpindex`.
+3. Set `CFBundleHelpBookFolder` + `CFBundleHelpBookName` in `Info.plist`.
+4. Keep **stable anchor IDs** per chapter (`getting-started`, `triggers`, `speech`, …) for Story 17.
+
+**MVP fallback** (if Help Book indexing slips): open bundled HTML in Help Viewer or a simple `NSWindow` + `WKWebView` loading `Guide/index.html` — still satisfies “Savitar Help works”; upgrade to full Help Book in a follow-up task within this story.
+
+### Tasks
+
+- [ ] **16.1** **Guide structure** — define anchor map in `docs/USER_GUIDE.md` (HTML `id` per H2) matching Story 9 chapters; document in story or `docs/HIG.md`.
+- [ ] **16.2** **Help bundle** — `client/Savitar2/Resources/Savitar.help/` (or `Guide/`) with `index.html`, chapter pages, minimal CSS readable in Help Viewer.
+- [ ] **16.3** **Build integration** — script in Xcode build phase or `client/scripts/` to refresh HTML from `USER_GUIDE.md` (manual run acceptable for MVP with README note).
+- [ ] **16.4** **Info.plist** — `CFBundleHelpBookFolder`, `CFBundleHelpBookName`; verify **Help → Savitar Help** (⌘?) opens to guide home.
+- [ ] **16.5** **Minimum shippable content** — at least: front matter, quick start, session window, triggers overview, speech, menus cross-link, getting help (9.9 / Story 15). Stub chapters link to “coming soon” or GitHub guide URL until Story 9 fills them.
+- [ ] **16.6** **Story 9.10** — optional menu item **Savitar Guide on the Web…** → `heynow.com/savitar/guide/` when W4 ships; until then GitHub `docs/USER_GUIDE.md` raw or pages URL as interim.
+- [ ] **16.7** **README** — check off user-guide Help integration when MVP ships.
+
+### Touchpoints
+
+- `docs/USER_GUIDE.md` (anchor IDs)
+- `client/Savitar2/Info.plist`
+- `client/Savitar2/Base.lproj/Main.storyboard` (Savitar Help — verify `showHelp:`)
+- New: `client/Savitar2/Resources/Savitar.help/**`
+- New: build script (e.g. `client/scripts/build-help-book.sh`)
+- `docs/HIG.md` (Help menu requirements)
+- [heynow_websites STORIES W4](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md) (web mirror — coordination only)
+
+### Acceptance
+
+- ⌘? / Help → Savitar Help opens the bundled guide at a sensible home page.
+- Guide works **offline** without GitHub.
+- At least the **beta-critical** chapters are readable (connect, session, triggers, speech, feedback).
+- Anchor IDs are stable enough for Story 17 to link into sections.
+
+### Dependency
+
+- **Story 15** should ship after or with **16.5** minimum content so “read Help first” is honest.
+- **Story 9** continues to expand content; Story 16 does not block on every 9.x task being done.
+
+---
+
+## Story 17 — Contextual help (? buttons)
+
+**Goal:** Add **?** help affordances on major UI surfaces that jump to the relevant **user guide anchor** (Story 16).
+
+**Context:** When the guide is tightly integrated (Help Book + stable anchors), users should get **just-in-time** help from the window they’re in — Events, World Settings, Speech prefs, World Picker — without hunting the full manual. Defer until Story 16 anchor map exists.
+
+### Sketch
+
+```
+┌─ Events ──────────────────────────────────────── [?] ─┐
+│  [Triggers] [Macros] …                               │
+```
+
+`?` opens Help Viewer to `help:anchor/triggers` (or equivalent `NSHelpManager` API).
+
+### Tasks
+
+- [ ] **17.1** **Anchor registry** — map UI surface → guide anchor ID (table in code or plist): Events → `triggers`, App Settings → Speech → `speech`, World Settings → Appearance → `output-appearance`, etc.
+- [ ] **17.2** **`SavitarHelp` API** — `showGuide(anchor:)` wrapping `NSHelpManager.shared.openHelpAnchor(_:inBook:)` (or WKWebView fragment navigation for MVP fallback).
+- [ ] **17.3** **Reusable control** — small **?** `NSButton` or toolbar item (HIG: help button style); hook into storyboards for first wave: **Events window**, **App Settings**, **World Settings**, **World Picker**.
+- [ ] **17.4** **VoiceOver** — “Help for Events window” (or specific pane); keyboard access where possible.
+- [ ] **17.5** **User guide** — note contextual help in Getting started; each chapter’s top can say “You can also open this from …”.
+
+### Touchpoints
+
+- New: `client/Savitar2/src/SavitarHelp.swift`
+- `client/Savitar2/Base.lproj/EventsWindow.storyboard`, `AppPrefs.storyboard`, World Settings storyboards, World Picker
+- `docs/HIG.md` (contextual help pattern)
+- `docs/USER_GUIDE.md` (anchor IDs from Story 16.1)
+
+### Acceptance
+
+- `?` on Events opens the triggers (or events overview) guide section.
+- At least **four** major surfaces wired in v1 of this story.
+- No dead links — every `?` resolves to an existing anchor or guide home with a sensible fallback.
+
+### Dependency
+
+- **Blocked on Story 16** (Help Book + anchors). Optional polish for beta; high value before wide promotion.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -757,10 +910,15 @@ gh api repos/jkoutavas/Savitar2/releases --paginate \
 11. Story 12 — Sparkle 2 auto-updates (after first successful signed release)
 12. Story 13 — Help → Release Notes (optional polish; no parser)
 13. Story 14 — TelemetryDeck install & usage analytics (beta; pairs with README crash-reporting item)
+14. **Story 16 — In-app user guide (Help menu)** — before wide beta promotion; MVP chapters
+15. **Story 15 — Send Feedback (email)** — ship with or immediately after 16 MVP
+16. Story 17 — Contextual ? help buttons (after Story 16 anchors)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 Story 13 is optional and can ship any time after Story 12.
 Story 14 can ship during beta once a TelemetryDeck app is configured.
+**Stories 15 + 16** satisfy README *Add bug reporting support* and user-guide Help integration; prioritize **16 → 15 → 17** so “read Help first” is real.
+Story 9 content writing continues in parallel with Story 16 delivery.
 
 Story 3 is retained for reference only; implement Story 5 instead.
 
