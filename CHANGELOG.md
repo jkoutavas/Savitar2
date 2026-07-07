@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Pasting into the input pane no longer retains font or color styling from the clipboard source
+- Unit tests no longer overwrite the live `Savitar2 Prefs` file when preference actions are exercised
+- World Settings **Output** tab labels no longer truncate (“Logging Enabled”, logging mode radio buttons)
 
 ## [2.0.18] - 2026-07-07
 

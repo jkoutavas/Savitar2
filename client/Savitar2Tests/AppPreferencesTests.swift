@@ -103,6 +103,20 @@ class AppPreferencesTests: XCTestCase {
         XCTAssertFalse(state.prefs.continuousSpeechEnabled)
     }
 
+    func testPreferenceActionsDoNotWriteDuringTests() throws {
+        let prefsPath = NSString(string: AppPreferences().v2PrefsPath).expandingTildeInPath
+        let before = try String(contentsOfFile: prefsPath, encoding: .utf8)
+
+        var state = AppPreferencesState()
+        state.prefs.openSessions = [.file(URL(fileURLWithPath: "/tmp/should-not-persist.world"))]
+        _ = SetShowStartupPickerAction(false).apply(oldState: state)
+        _ = SetShowEventsWindowAtStartupAction(true).apply(oldState: state)
+        _ = SetPrefsFlagAction(flag: .muteBell, enabled: true).apply(oldState: state)
+
+        let after = try String(contentsOfFile: prefsPath, encoding: .utf8)
+        XCTAssertEqual(before, after)
+    }
+
     func testSpeakerManListsEnglishVoices() {
         let names = AppContext.shared.speakerMan.voiceNames()
         XCTAssertFalse(names.isEmpty, "Expected at least one English system voice")
