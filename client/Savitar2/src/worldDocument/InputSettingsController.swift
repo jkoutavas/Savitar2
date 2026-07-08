@@ -215,8 +215,10 @@ class InputSettingsController: NSViewController {
             inputRowsBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             inputRowsBox.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -margin),
 
-            inputRowsContent.leadingAnchor.constraint(equalTo: inputRowsBox.contentView!.leadingAnchor, constant: 16),
-            inputRowsContent.trailingAnchor.constraint(equalTo: inputRowsBox.contentView!.trailingAnchor, constant: -16),
+            inputRowsContent.leadingAnchor.constraint(
+                equalTo: inputRowsBox.contentView!.leadingAnchor, constant: 16),
+            inputRowsContent.trailingAnchor.constraint(
+                equalTo: inputRowsBox.contentView!.trailingAnchor, constant: -16),
             inputRowsContent.topAnchor.constraint(equalTo: inputRowsBox.contentView!.topAnchor, constant: 14),
             inputRowsContent.bottomAnchor.constraint(equalTo: inputRowsBox.contentView!.bottomAnchor, constant: -14)
         ])
