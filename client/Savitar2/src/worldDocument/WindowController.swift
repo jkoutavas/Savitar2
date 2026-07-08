@@ -17,6 +17,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private var eventsWindowController: NSWindowController?
     private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
+    private let resolutionOverlay = ResolutionOverlay()
+    private weak var observedSplitView: NSSplitView?
+    private var isApplyingPaneLayout = false
+    private var needsPaneLayout = false
+    private var isUserResizingSplit = false
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -47,6 +52,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     @objc private func colorsDidChange() {
         guard let doc = document as? Document, let world = doc.world else { return }
         let splitViewController = contentViewController as? SessionViewController
+        splitViewController?.outputViewController?.setWordWrap(doc.session?.wordWrapEnabled ?? false)
         splitViewController?.outputViewController?.setStyle(world: world)
     }
 
@@ -124,6 +130,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
         window?.beginSheet(wc.window!)
     }
 
+    override func showWindow(_ sender: Any?) {
+        super.showWindow(sender)
+        applyPendingPaneLayoutIfNeeded()
+    }
+
     private func worldDidChange(from fromWorld: World) {
         guard let doc = document as? Document else { return }
         doc.undoManager?.registerUndo(withTarget: self, handler: { [oldWorld = doc.world] _ in
@@ -133,10 +144,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
         doc.worldDidChange(fromWorld: fromWorld)
-        updateViews(fromWorld)
+        let wordWrap = doc.session?.wordWrapEnabled ?? false
+        updateViews(fromWorld, wordWrap: wordWrap, applyPaneLayout: true)
     }
 
-    func updateViews(_ newValue: World?) {
+    func updateViews(_ newValue: World?, wordWrap: Bool = false, applyPaneLayout: Bool = false) {
         guard let window = self.window else { return }
 
         let autosaveName = window.representedFilename
@@ -154,7 +166,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         inputVC.foreColor = w.foreColor
         inputVC.backColor = w.backColor
+        inputVC.setWordWrap(wordWrap)
         outputVC.view.layer?.backgroundColor = w.backColor.cgColor
+        outputVC.setWordWrap(wordWrap)
         outputVC.setStyle(world: w)
 
         if let font = NSFont(name: w.fontName, size: w.fontSize) {
@@ -165,23 +179,122 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         guard let doc = document as? Document else { return }
 
+        if applyPaneLayout {
+            needsPaneLayout = true
+            applyPendingPaneLayoutIfNeeded()
+        }
+
         if doc.version == 1 {
-            window.setContentSize(w.windowSize)
             if let screenSize = NSScreen.main?.frame.size {
                 window.setFrameTopLeftPoint(NSPoint(x: w.position.x,
                                                     y: screenSize.height - w.position.y + window.titlebarHeight))
             }
-
-            let dividerHeight: CGFloat = svc.splitView.dividerThickness
-            let rowHeight = inputVC.rowHeight
-            let split: CGFloat = w.windowSize.height - dividerHeight - rowHeight() * CGFloat(w.inputRows + 1)
-            svc.splitView.setPosition(split, ofDividerAt: 0)
-
             window.setIsZoomed(w.zoomed)
         }
 
-        splitViewController?.splitView.autosaveName = "splitViewAutoSave" // enables splitview position autosaving
+        installSplitViewObservationIfNeeded(svc.splitView)
+        svc.splitView.autosaveName = "splitViewAutoSave"
         updateScrollLockControl(locked: svc.isScrollLocked)
+    }
+
+    private func installSplitViewObservationIfNeeded(_ splitView: NSSplitView) {
+        guard observedSplitView !== splitView else { return }
+        observedSplitView = splitView
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(splitViewDidResizeSubviews(_:)),
+            name: NSSplitView.didResizeSubviewsNotification,
+            object: splitView
+        )
+    }
+
+    private func applyPendingPaneLayoutIfNeeded() {
+        guard needsPaneLayout,
+              let window, window.isVisible,
+              let world = (document as? Document)?.world,
+              let session = contentViewController as? SessionViewController,
+              session.splitView.subviews.count >= 2 else { return }
+
+        needsPaneLayout = false
+        applyPaneDimensions(world: world,
+                            session: session,
+                            font: sessionFont(for: world),
+                            fromResolution: true)
+    }
+
+    private func sessionFont(for world: World) -> NSFont {
+        NSFont(name: world.fontName, size: world.fontSize)
+            ?? NSFont.userFixedPitchFont(ofSize: world.fontSize)
+            ?? NSFont.systemFont(ofSize: world.fontSize)
+    }
+
+    private func applyPaneDimensions(world: World,
+                                     session: SessionViewController,
+                                     font: NSFont,
+                                     fromResolution: Bool) {
+        guard let window, session.splitView.subviews.count >= 2 else { return }
+
+        isApplyingPaneLayout = true
+        defer { isApplyingPaneLayout = false }
+
+        if fromResolution {
+            world.windowSize = .zero
+        }
+
+        PaneDimensions.apply(world: world, to: window, splitView: session.splitView, font: font)
+
+        if fromResolution {
+            world.windowSize = window.contentRect(forFrameRect: window.frame).size
+        }
+    }
+
+    private func showResolutionOverlay(outputRows: Int, columns: Int) {
+        guard let window else { return }
+        let text = PaneDimensions.resolutionLabel(columns: columns,
+                                                  outputRows: outputRows,
+                                                  inputRows: 0)
+        let point = NSEvent.mouseLocation
+        resolutionOverlay.show(text: text, near: point, in: window.screen)
+    }
+
+    @objc private func splitViewDidResizeSubviews(_ notification: Notification) {
+        guard !isApplyingPaneLayout,
+              notification.object as? NSSplitView === observedSplitView,
+              let doc = document as? Document,
+              let world = doc.world,
+              let session = contentViewController as? SessionViewController,
+              let window else { return }
+
+        let font = sessionFont(for: world)
+        session.splitView.layoutSubtreeIfNeeded()
+        var measured = world
+        PaneDimensions.measure(world: &measured, window: window, splitView: session.splitView, font: font)
+
+        if NSEvent.pressedMouseButtons != 0 {
+            isUserResizingSplit = true
+            showResolutionOverlay(outputRows: measured.outputRows, columns: measured.columns)
+        } else if isUserResizingSplit {
+            isUserResizingSplit = false
+            resolutionOverlay.hide()
+            doc.world = measured
+            doc.updateChangeCount(.changeDone)
+        }
+    }
+
+    private func persistMeasuredPaneDimensions() {
+        guard let doc = document as? Document,
+              let world = doc.world,
+              let session = contentViewController as? SessionViewController,
+              let window else { return }
+
+        session.splitView.layoutSubtreeIfNeeded()
+        var measured = world
+        PaneDimensions.measure(world: &measured,
+                               window: window,
+                               splitView: session.splitView,
+                               font: sessionFont(for: world))
+        doc.world = measured
+        doc.updateChangeCount(.changeDone)
     }
 
     private func configureTitlebarButtons(in titlebarView: NSView) {
@@ -314,6 +427,27 @@ class WindowController: NSWindowController, NSWindowDelegate {
     // MARK: - NSWindowDelegate
 
     // ***************************
+
+    func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+        guard let world = (document as? Document)?.world,
+              let session = contentViewController as? SessionViewController else {
+            return frameSize
+        }
+
+        let font = sessionFont(for: world)
+        let contentSize = sender.contentRect(forFrameRect: NSRect(origin: .zero, size: frameSize)).size
+        let charW = max(PaneDimensions.charWidth(for: font), 1)
+        let lineH = max(PaneDimensions.lineHeight(for: font), 1)
+        let columns = max(1, Int(floor(contentSize.width / charW)))
+        let outputRows = max(1, Int(floor(contentSize.height / lineH)) - world.inputRows - 1)
+        showResolutionOverlay(outputRows: outputRows, columns: columns)
+        return frameSize
+    }
+
+    func windowDidEndLiveResize(_: Notification) {
+        resolutionOverlay.hide()
+        persistMeasuredPaneDimensions()
+    }
 
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
         guard let doc = document as? Document else { return nil }

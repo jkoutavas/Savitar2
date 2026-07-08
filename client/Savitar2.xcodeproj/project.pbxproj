@@ -126,6 +126,11 @@
 		69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A022A80100100CDDE09 /* TerminalBell.swift */; };
 		69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */; };
 		69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A042A80100100CDDE09 /* TerminalBellTests.swift */; };
+		69C2A0022F03000100AB6BA6 /* WordWrapFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */; };
+		69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */; };
+		69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */; };
+		69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */; };
+		69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
 		69C1F0D225A3E5480048A739 /* AppPreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */; };
@@ -299,6 +304,11 @@
 		69B46A022A80100100CDDE09 /* TerminalBell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBell.swift; sourceTree = "<group>"; };
 		69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeysTests.swift; sourceTree = "<group>"; };
 		69B46A042A80100100CDDE09 /* TerminalBellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBellTests.swift; sourceTree = "<group>"; };
+		69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormatting.swift; sourceTree = "<group>"; };
+		69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormattingTests.swift; sourceTree = "<group>"; };
+		69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensions.swift; sourceTree = "<group>"; };
+		69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionOverlay.swift; sourceTree = "<group>"; };
+		69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensionsTests.swift; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
 		69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesStore.swift; sourceTree = "<group>"; };
@@ -421,6 +431,8 @@
 				695484B61FC4E6E400A6983F /* Info.plist */,
 				6968381B255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift */,
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
+				69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */,
+				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
 				69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */,
 				69B46A042A80100100CDDE09 /* TerminalBellTests.swift */,
@@ -518,6 +530,9 @@
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
 				695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */,
 				695F5AA625899EFD00AB6BA6 /* WindowController.swift */,
+				69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */,
+				69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */,
+				69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */,
 				695F5AB025899EFD00AB6BA6 /* WorldSettingsController.swift */,
 			);
 			path = worldDocument;
@@ -954,6 +969,9 @@
 				695F5ABB25899EFD00AB6BA6 /* InputViewController.swift in Sources */,
 				69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */,
 				69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */,
+				69C2A0022F03000100AB6BA6 /* WordWrapFormatting.swift in Sources */,
+				69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */,
+				69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
@@ -1020,6 +1038,8 @@
 				69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */,
 				69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */,
 				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,
+				69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */,
+				69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */,
 				695F5A612588562E00AB6BA6 /* ReSwiftTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,

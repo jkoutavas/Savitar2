@@ -234,6 +234,7 @@ class World: SavitarObject, NSCopying {
         MCPFontName = world.MCPFontName
         MCPFontSize = world.MCPFontSize
         inputRows = world.inputRows
+        outputRows = world.outputRows
         columns = world.columns
         position = world.position
         windowSize = world.windowSize
@@ -409,9 +410,15 @@ class World: SavitarObject, NSCopying {
                     guard let n0 = Int(parts[0]) else { break }
                     guard let n1 = Int(parts[1]) else { break }
                     guard let n2 = Int(parts[2]) else { break }
-                    outputRows = n0
-                    columns = n1
+                    // v1 RESOLUTION format: columns × outputRows × inputRows (CTVWorld.cp)
+                    columns = n0
+                    outputRows = n1
                     inputRows = n2
+                } else if parts.count == 2 {
+                    guard let n0 = Int(parts[0]) else { break }
+                    guard let n1 = Int(parts[1]) else { break }
+                    columns = n0
+                    outputRows = n1
                 }
 
             case WorldAttribIdentifier.position.rawValue:
@@ -539,7 +546,7 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.MCPFontSize.rawValue, stringValue: "\(Int(monoFontSize))")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.resolution.rawValue,
-                               stringValue: "\(outputRows)x\(columns)x\(inputRows)")
+                               stringValue: "\(columns)x\(outputRows)x\(inputRows)")
 
         worldElem.addAttribute(name: WorldAttribIdentifier.position.rawValue,
                                stringValue: "\(Int(position.x)),\(Int(position.y))")

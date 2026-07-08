@@ -46,9 +46,13 @@ class Session: NSObject, StreamDelegate {
 
     var didStartupCmd = false
 
+    /// Initial wrap state for this session (from app Settings → Input & Display at connect time).
+    let wordWrapEnabled: Bool
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
+        wordWrapEnabled = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
         logger = Logger(label: "savitar2")
         logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         logger[metadataKey: "m"] = "Session" // "m" is for "module"

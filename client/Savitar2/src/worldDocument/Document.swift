@@ -66,7 +66,6 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         self.windowController = windowController
 
         addWindowController(windowController)
-        windowController.updateViews(world)
 
         output(result: .success("Welcome to Savitar!\n\n"))
         session = Session(world: world, sessionHandler: self)
@@ -74,6 +73,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         sessionViewController?.session = session
         guard let inputVC = sessionViewController?.inputViewController else { return }
         inputVC.session = session
+        windowController.updateViews(world, wordWrap: session?.wordWrapEnabled ?? false, applyPaneLayout: true)
         session?.connectAndRun()
     }
 

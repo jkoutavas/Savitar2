@@ -81,6 +81,14 @@ class AppPreferencesTests: XCTestCase {
         XCTAssertFalse(state.prefs.flags.contains(.muteBell))
     }
 
+    func testSetDefaultWordWrapPrefFlag() {
+        var state = AppPreferencesState()
+        state = SetPrefsFlagAction(flag: .defaultWordWrap, enabled: true).apply(oldState: state)
+        XCTAssertTrue(state.prefs.flags.contains(.defaultWordWrap))
+        state = SetPrefsFlagAction(flag: .defaultWordWrap, enabled: false).apply(oldState: state)
+        XCTAssertFalse(state.prefs.flags.contains(.defaultWordWrap))
+    }
+
     func testSetShowEventsWindowAtStartupAction() {
         var state = AppPreferencesState()
         state = SetShowEventsWindowAtStartupAction(true).apply(oldState: state)

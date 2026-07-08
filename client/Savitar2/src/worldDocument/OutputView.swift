@@ -18,6 +18,7 @@ class OutputView: WKWebView {
     private var loggingFileHandle: FileHandle?
     private(set) var layoutFontName = "Monaco"
     private(set) var layoutFontSize: CGFloat = 9
+    private(set) var wordWrapEnabled = false
 
     override var acceptsFirstResponder: Bool { true }
 
@@ -173,6 +174,10 @@ class OutputView: WKWebView {
         return colorHex
     }
 
+    func setWordWrap(_ enabled: Bool) {
+        wordWrapEnabled = enabled
+    }
+
     func setStyle(world: World) {
         useANSI = world.flags.contains(.ansi)
         useHTML = world.flags.contains(.html)
@@ -215,16 +220,7 @@ class OutputView: WKWebView {
         body * {font: \(world.fontSize)px \(world.fontName)}
         code {font: \(world.monoFontSize)px \(world.monoFontName);}
         a { color: #\(linkColor); }
-        pre {
-            overflow-x: auto;
-            white-space: pre-wrap;
-            white-space: -moz-pre-wrap;
-            white-space: -pre-wrap;
-            white-space: -o-pre-wrap;
-            word-wrap: break-word;
-            display: inline;
-            margin: 0;
-        }
+        \(WordWrapFormatting.outputPreCSS(wordWrapEnabled: wordWrapEnabled))
         .reset       {color: #\(foreColor);}
         .bg-reset    {background-color: #\(backColor);}
         .inverted    {color: #\(backColor);}

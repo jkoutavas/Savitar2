@@ -1,6 +1,6 @@
 # Savitar 2 User Guide
 
-_Last updated July 7, 2026._
+_Last updated July 8, 2026._
 
 This guide explains how to use Savitar 2. It is being written incrementally; see [Stories.md](Stories.md) **Story 9** for the plan to complete the full guide.
 
@@ -14,6 +14,8 @@ Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behav
 2. **Double-click a world** (for example Alter Aeon) to open a session window.
 3. Type a command in the **input** pane at the bottom and press **Return**.
 4. Open the **Events** window (**World → Events Window**) to add triggers or macros.
+
+The session window has separate **output** (top) and **input** (bottom) panes. You can resize them by dragging the window corner or the split divider—see [Session window](#session-window).
 
 **Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline.
 
@@ -165,7 +167,7 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 |--------|----------------|
 | **Use keypad for macro entry** | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s **Use keypad** preference. |
 | **Mono fonts only (in font menus)** | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned. |
-| **Default word wrap for new sessions** | *(Not yet available.)* Will set whether new world sessions start with word wrap on. Grayed out until that feature ships. |
+| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. Matches Savitar 1’s default for new text windows, applied here to session panes. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -345,6 +347,35 @@ Full detail is in the [Speech](#speech) chapter.
 
 ---
 
+## Session window
+
+A **world document** window is your live connection to a MUD or telnet host. It has two panes:
+
+| Pane | Purpose |
+|------|---------|
+| **Output** (top) | Server text, ANSI colors, and (optionally) echoed commands |
+| **Input** (bottom) | The command line where you type; press **Return** to send |
+
+Both panes are measured in monospace **columns** (width) and **rows** (height). The default for a new world is **80 columns × 24 output rows × 2 input rows**—the same layout Savitar 1 used.
+
+### Resizing panes
+
+You can change pane size in three ways:
+
+1. **Drag the window** — Use the resize control at the lower-right corner of the window. While you drag, a small yellow label shows the current output size as **rows×columns** (for example `24×80`).
+2. **Drag the split divider** — Drag the bar between the output and input panes up or down to give more rows to one pane and fewer to the other. The yellow label appears here too.
+3. **World Settings** — Enter exact values on **World Settings → Output** (columns and output rows) and **Input** (input rows), then click **OK**. See [World Settings](#world-settings).
+
+Savitar saves the size in your `.world` document (`RESOLUTION` in the XML). The next time you open that world, the window restores to the saved dimensions.
+
+**Tips**
+
+- Sizes are most accurate with a **monospace** font (see **World Settings → Appearance**). Proportional fonts make row/column counts approximate.
+- **Default word wrap** (Settings → Input & Display) affects how long lines behave inside the pane width; it does not change the column count.
+- **Scroll lock** (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the [World menu](#world-menu) table.
+
+---
+
 ## Events
 
 In Savitar, an **event** is anything the client does **automatically** on your behalf during a session—beyond simply showing server text and forwarding what you type. Events are how Savitar **reacts** to the game and **extends** your keyboard.
@@ -513,10 +544,20 @@ Savitar 1 called this **CROnly** in world files (`FLAGS="…+CROnly"`). Worlds i
 
 **Tip:** If commands seem ignored or the host reports “unknown command” with extra characters, try switching line ending—wrong CR/LF is a common connection troubleshooting step (see [Story 9.6](Stories.md)).
 
+#### Input pane size
+
+| Control | Description |
+|---------|-------------|
+| **Input rows** | Height of the command-entry pane in text rows (default **2**). Changing this resizes the split between output and input when you click **OK**. |
+
+See also [Session window](#session-window) for resizing by dragging the window or split divider.
+
 ### Output tab
 
 | Control | Description |
 |---------|-------------|
+| **Columns** | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
+| **Output rows** | Height of the output pane in text rows (default **24**). |
 | **Logging Enabled** | When on, Savitar writes session output to a log file in the background |
 | **Append / Overwrite** | Whether each session adds to the file or replaces it |
 | **Log file path** | Where the log is stored; use **Set now** to pick a location |
@@ -549,4 +590,6 @@ Before reporting a problem, check the relevant chapter here (triggers, speech, w
 
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Triggers in depth** (9.4), then **Worlds & connection** (9.6).
+Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. **Shipped:** quick start, speech, menus, **session window** (pane sizing), events, macros, ANSI colors, app Settings panes (Input & Display, Audio, Updates), World Settings (Starting, Appearance, Input, Output), privacy, and getting help.
+
+**Suggested next writes:** **Triggers in depth** (9.4), **Getting started** front matter (9.1), then **Worlds & connection** (9.6) and **Settings reference** consolidation (9.5).

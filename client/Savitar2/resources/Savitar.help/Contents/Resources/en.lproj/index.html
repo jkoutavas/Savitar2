@@ -12,7 +12,7 @@
   <a id="top" name="top"></a>
   <h1>Savitar Help</h1>
   <p>User guide for Savitar 2. Works offline in the app. For the latest draft chapters, see the project user guide on the web.</p>
-  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#menus">Menus</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
+  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
   <h1 id="savitar-2-user-guide">Savitar 2 User Guide</h1>
 <p>This guide explains how to use Savitar 2. It is being written incrementally; see <a href="Stories.md">Stories.md</a> <strong>Story 9</strong> for the plan to complete the full guide.</p>
 <p>Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behavior matches v1, this guide describes that parity explicitly.</p>
@@ -24,6 +24,7 @@
 <li>Type a command in the <strong>input</strong> pane at the bottom and press <strong>Return</strong>.</li>
 <li>Open the <strong>Events</strong> window (<strong>World → Events Window</strong>) to add triggers or macros.</li>
 </ol>
+<p>The session window has separate <strong>output</strong> (top) and <strong>input</strong> (bottom) panes. You can resize them by dragging the window corner or the split divider—see <a href="#session-window">Session window</a>.</p>
 <p><strong>Tip:</strong> Open <strong>Help → Savitar Help</strong> (⌘?) anytime to return to this guide offline.</p>
 <p><strong>Contextual help:</strong> Major windows show a <strong>?</strong> that opens this guide to the relevant section — <strong>World Picker</strong>, <strong>world session window</strong>, <strong>Events</strong>, <strong>Settings</strong> (per toolbar pane), and <strong>World Settings</strong> (per tab, top-right of the sheet).</p>
 <hr/>
@@ -150,7 +151,7 @@
 <tbody>
 <tr><td><strong>Use keypad for macro entry</strong></td><td>When on, the numeric <strong>keypad</strong> can be used when assigning or firing <strong>macro</strong> hotkeys (for example <code>KP8</code>). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s <strong>Use keypad</strong> preference.</td></tr>
 <tr><td><strong>Mono fonts only (in font menus)</strong></td><td>When on, font pop-up menus in <strong>World Settings → Appearance</strong> list <strong>monospace</strong> faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.</td></tr>
-<tr><td><strong>Default word wrap for new sessions</strong></td><td>*(Not yet available.)* Will set whether new world sessions start with word wrap on. Grayed out until that feature ships.</td></tr>
+<tr><td><strong>Default word wrap for new sessions</strong></td><td>When on, new world sessions start with word wrap in the <strong>input</strong> and <strong>output</strong> panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. Matches Savitar 1’s default for new text windows, applied here to session panes.</td></tr>
 </tbody></table>
 <p>Macro hotkeys are edited in the <strong>Events</strong> window; see <a href="#macros">Macros</a>. Per-world fonts and colors are in <a href="#world-settings">World Settings</a>.</p>
 <hr/>
@@ -306,6 +307,30 @@
 <tr><td><strong>Release Notes…</strong></td><td>—</td><td>Opens the GitHub releases page with version history.</td></tr>
 </tbody></table>
 <hr/>
+<h2 id="session-window">Session window</h2>
+<p>A <strong>world document</strong> window is your live connection to a MUD or telnet host. It has two panes:</p>
+<table>
+<thead><tr><th>Pane</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><strong>Output</strong> (top)</td><td>Server text, ANSI colors, and (optionally) echoed commands</td></tr>
+<tr><td><strong>Input</strong> (bottom)</td><td>The command line where you type; press <strong>Return</strong> to send</td></tr>
+</tbody></table>
+<p>Both panes are measured in monospace <strong>columns</strong> (width) and <strong>rows</strong> (height). The default for a new world is <strong>80 columns × 24 output rows × 2 input rows</strong>—the same layout Savitar 1 used.</p>
+<h3 id="session-window-resizing-panes">Resizing panes</h3>
+<p>You can change pane size in three ways:</p>
+<ol>
+<li><strong>Drag the window</strong> — Use the resize control at the lower-right corner of the window. While you drag, a small yellow label shows the current output size as <strong>rows×columns</strong> (for example <code>24×80</code>).</li>
+<li><strong>Drag the split divider</strong> — Drag the bar between the output and input panes up or down to give more rows to one pane and fewer to the other. The yellow label appears here too.</li>
+<li><strong>World Settings</strong> — Enter exact values on <strong>World Settings → Output</strong> (columns and output rows) and <strong>Input</strong> (input rows), then click <strong>OK</strong>. See <a href="#world-settings">World Settings</a>.</li>
+</ol>
+<p>Savitar saves the size in your <code>.world</code> document (<code>RESOLUTION</code> in the XML). The next time you open that world, the window restores to the saved dimensions.</p>
+<p><strong>Tips</strong></p>
+<ul>
+<li>Sizes are most accurate with a <strong>monospace</strong> font (see <strong>World Settings → Appearance</strong>). Proportional fonts make row/column counts approximate.</li>
+<li><strong>Default word wrap</strong> (Settings → Input &amp; Display) affects how long lines behave inside the pane width; it does not change the column count.</li>
+<li><strong>Scroll lock</strong> (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the <a href="#world-menu">World menu</a> table.</li>
+</ul>
+<hr/>
 <h2 id="events">Events</h2>
 <p>In Savitar, an <strong>event</strong> is anything the client does <strong>automatically</strong> on your behalf during a session—beyond simply showing server text and forwarding what you type. Events are how Savitar <strong>reacts</strong> to the game and <strong>extends</strong> your keyboard.</p>
 <p>Most players think of two kinds:</p>
@@ -434,10 +459,19 @@
 </tbody></table>
 <p>Savitar 1 called this <strong>CROnly</strong> in world files (<code>FLAGS="…+CROnly"</code>). Worlds imported from v1 keep their line-ending preference.</p>
 <p><strong>Tip:</strong> If commands seem ignored or the host reports “unknown command” with extra characters, try switching line ending—wrong CR/LF is a common connection troubleshooting step (see <a href="Stories.md">Story 9.6</a>).</p>
+<h4 id="world-settings-input-tab-input-pane-size">Input pane size</h4>
+<table>
+<thead><tr><th>Control</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><strong>Input rows</strong></td><td>Height of the command-entry pane in text rows (default <strong>2</strong>). Changing this resizes the split between output and input when you click <strong>OK</strong>.</td></tr>
+</tbody></table>
+<p>See also <a href="#session-window">Session window</a> for resizing by dragging the window or split divider.</p>
 <h3 id="world-settings-output-tab">Output tab</h3>
 <table>
 <thead><tr><th>Control</th><th>Description</th></tr></thead>
 <tbody>
+<tr><td><strong>Columns</strong></td><td>Width of the output and input panes in monospace character columns (default <strong>80</strong>). Changing this resizes the session window when you click <strong>OK</strong>.</td></tr>
+<tr><td><strong>Output rows</strong></td><td>Height of the output pane in text rows (default <strong>24</strong>).</td></tr>
 <tr><td><strong>Logging Enabled</strong></td><td>When on, Savitar writes session output to a log file in the background</td></tr>
 <tr><td><strong>Append / Overwrite</strong></td><td>Whether each session adds to the file or replaces it</td></tr>
 <tr><td><strong>Log file path</strong></td><td>Where the log is stored; use <strong>Set now</strong> to pick a location</td></tr>
@@ -460,6 +494,7 @@
 <p>Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). Include your Savitar version and macOS version when you contact support.</p>
 <hr/>
 <h2 id="planned">More chapters (planned)</h2>
-<p>Story 9 in <a href="Stories.md">Stories.md</a> maps the <a href="http://heynow.com/savitar/manual140.html">Savitar 1.4 User's Manual</a> to remaining guide chapters. Suggested next writes: <strong>Getting started</strong> (9.1), <strong>Session window</strong> (9.2), <strong>Triggers in depth</strong> (9.4), then <strong>Worlds &amp; connection</strong> (9.6).</p>
+<p>Story 9 in <a href="Stories.md">Stories.md</a> maps the <a href="http://heynow.com/savitar/manual140.html">Savitar 1.4 User's Manual</a> to remaining guide chapters. <strong>Shipped:</strong> quick start, speech, menus, <strong>session window</strong> (pane sizing), events, macros, ANSI colors, app Settings panes (Input &amp; Display, Audio, Updates), World Settings (Starting, Appearance, Input, Output), privacy, and getting help.</p>
+<p><strong>Suggested next writes:</strong> <strong>Triggers in depth</strong> (9.4), <strong>Getting started</strong> front matter (9.1), then <strong>Worlds &amp; connection</strong> (9.6) and <strong>Settings reference</strong> consolidation (9.5).</p>
 </body>
 </html>
