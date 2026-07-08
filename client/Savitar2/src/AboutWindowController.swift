@@ -219,7 +219,7 @@ private enum AboutCredits {
         [
             .font: NSFont.systemFont(ofSize: 11),
             .foregroundColor: bodyColor,
-            .paragraphStyle: center,
+            .paragraphStyle: center
         ]
     }
 
@@ -237,7 +237,7 @@ private enum AboutCredits {
             "Joshua \"Rozzin\" Rosen",
             "Nick Walker",
             "Russell \"dood\" Zornes",
-            "23 (fnord)",
+            "23 (fnord)"
         ]
         return NSAttributedString(string: names.joined(separator: "\n\n") + "\n\n", attributes: bodyAttributes)
     }
@@ -248,7 +248,7 @@ private enum AboutCredits {
             "SwiftyXMLParser",
             "swift-log",
             "Sparkle",
-            "TelemetryDeck",
+            "TelemetryDeck"
         ]
         return NSAttributedString(string: modern.joined(separator: "\n\n") + "\n\n", attributes: bodyAttributes)
     }
@@ -474,7 +474,7 @@ private final class CreditsBodyView: NSView {
         fadeMask.colors = [
             NSColor.clear.cgColor,
             NSColor.black.cgColor,
-            NSColor.black.cgColor,
+            NSColor.black.cgColor
         ]
         fadeMask.locations = [0, 0.18, 1]
         fadeMask.startPoint = CGPoint(x: 0.5, y: 0)
