@@ -429,7 +429,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
     // ***************************
 
     func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-        guard let world = (document as? Document)?.world,
+        // Programmatic layout (restore, RESOLUTION apply) also calls through here; only show
+        // the yellow box for a live user drag so it does not stick at the cursor on launch.
+        guard !isApplyingPaneLayout,
+              sender.inLiveResize,
+              let world = (document as? Document)?.world,
               let session = contentViewController as? SessionViewController else {
             return frameSize
         }

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **About Savitar** — custom About box with the classic medallion and scrolling “Special Heynows” credits (Savitar 1 parity)
 
+### Fixed
+
+- **Resolution overlay on launch** — yellow rows×columns box no longer appears (and sticks) when restored windows resize programmatically at startup
+
 ## [2.0.19] - 2026-07-08
 
 ### Added
