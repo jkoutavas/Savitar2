@@ -114,8 +114,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         paneViews[.inputDisplay] = paneView(items: [
             .enabled("useKeypad", title: "Use keypad for macro entry"),
             .enabled("monoFontsOnly", title: "Mono fonts only (in font menus)"),
-            .disabled("defaultWordWrap", title: "Default word wrap for new sessions",
-                      toolTip: "Word wrap for new sessions is not yet implemented.")
+            .enabled("defaultWordWrap", title: "Default word wrap for new sessions")
         ])
 
         paneViews[.audio] = paneView(items: [

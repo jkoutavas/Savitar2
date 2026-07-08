@@ -7,10 +7,10 @@ Savitar 1 spread settings across three surfaces:
 | Surface | v1 location | v2 status |
 |---------|-------------|-----------|
 | **App Settings** | `DoPreferences()` in `CViewAppMac.cp` | Done — HIG toolbar panes (`AppSettingsWindowController`) |
-| **Speech** | `DoSpeechPreferences()` | Embedded in Settings → Speech pane; polish remains (Story 4) |
-| **ANSI Color Settings** | `EditColors()` | Data layer only (`ColorMan` in prefs XML); Story 5 |
+| **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
+| **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Story 1** is complete; **Story 2** is partially complete (see below). **Stories 4–8** track HIG and UI backlog from [HIG.md](HIG.md).
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links.
 
 ---
 
@@ -62,13 +62,13 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 **Goal:** Flags that exist in XML but do nothing today actually affect the app.
 
-**Status:** Partially complete — keypad, mono fonts, and mute bell are wired; word wrap and clicker remain.
+**Status:** Partially complete — keypad, mono fonts, mute bell, and default word wrap are wired; clicker remains.
 
 ### Tasks
 
 - [x] **2.1** **Use keypad** — honor `useKeypad` in macro hotkey / input handling (v1: keypad chord entry)
 - [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
-- [ ] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes
+- [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`)
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
 - [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists (Story 11)
 - [ ] **2.6** **Events window sections** — wire `trigsClosed` / `varsClosed` to Events window UI state (stretch; not in main prefs window)
@@ -81,7 +81,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 | `monoFontsOnly` | `AppearanceSettingsController.swift` |
 | `muteBell` | `TerminalBell.swift`, `OutputView.swift` (see also input PR #47) |
 | `muteSound` / `muteSpeaking` | `Session.swift`, `AppDelegate.swift` (Audio menu + prefs) |
-| `defaultWordWrap` | *Not yet — needs `World` / session pane support* |
+| `defaultWordWrap` | `Session.wordWrapEnabled`, `InputViewController`, `OutputView` (CSS via `WordWrapFormatting`) |
 
 ### Acceptance
 
@@ -127,9 +127,11 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ---
 
-## Story 4 — Speech pane polish
+## Story 4 — Speech pane polish ✅
 
 **Goal:** Minor cleanup; speech settings now live in the Settings window **Speech** pane (HIG). `SpeechPrefsViewController` is built programmatically and embedded as a child view controller.
+
+**Status:** Complete (July 2026).
 
 ### Tasks
 
@@ -137,7 +139,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 - [x] **4.1** Confirm rate/voice/enabled persist and apply during continuous speech
 - [x] **4.2** Save speech prefs on change (match App Settings live-save pattern)
 - [x] **4.3** Rebuild Speech pane with Auto Layout; removed `SpeechPrefs.storyboard`
-- [ ] **4.4** Document macOS 10.15+ requirement in Help or prefs footnote (already in UI)
+- [x] **4.4** Document macOS 10.15+ requirement in Help or prefs footnote (UI footnote + [USER_GUIDE.md](USER_GUIDE.md#speech) Speech chapter)
 
 ### Acceptance
 
@@ -204,7 +206,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ### Tasks
 
-- [ ] **6.1** Document intended HIG role (utility / auxiliary window vs. document window) in `HIG.md`
+- [x] **6.1** Document intended HIG role (utility / auxiliary window vs. document window) in `HIG.md`
 - [ ] **6.2** **Window chrome** — decide minimize/zoom: enable resize with sensible min size, or close-only like Settings; remove contradictory min=max if staying fixed-size
 - [ ] **6.3** **First open** — center on screen; evaluate whether frame autosave (`EventsWindowFrame`) should stay or only restore position
 - [ ] **6.4** **Window menu** — ensure Events appears in **Window** menu when open (bring to front when buried)
@@ -276,7 +278,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 **Goal:** Ship a complete end-user guide covering all Savitar 2 features at v1 parity, written for players and world builders—not developers.
 
-**Status:** Started — speech, menus, events overview, and macros intro in [USER_GUIDE.md](USER_GUIDE.md).
+**Status:** In progress (July 2026) — beta-critical chapters are in [USER_GUIDE.md](USER_GUIDE.md) and bundled in-app (Stories 16–17). Remaining work: session window depth, triggers in depth, local commands, glossary, full Getting started front matter, and settings consolidation (9.5).
 
 **Source:** The [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) (last updated 2009) is the content blueprint. Savitar 2's guide should cover the same *topics* with updated menu paths, HIG Settings layout, and honest notes where features are deferred (MCP, file upload, Macro Clicker, status bar, xch_cmd).
 
@@ -284,15 +286,15 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 | v1 manual chapter | v2 guide chapter | Status | Story task |
 |-------------------|------------------|--------|------------|
-| **1. General Information** | *Front matter* — what Savitar is, who it's for, system requirements, v1→v2 migration blurb | Not started | **9.1** |
-| **2. Installing** | *Install & update* — download, first launch, Sparkle updates, prefs import | Not started | **9.1b** |
-| **3. Quick Start** | *Quick start* — connect to a world in five steps | Not started | **9.1c** |
-| **4. Understanding Savitar** | Split across session, input, output, triggers, macros chapters | Partial | **9.2–9.4** |
-| **5. Settings** | Settings + world settings reference | Partial (speech done) | **9.5** |
+| **1. General Information** | *Front matter* — what Savitar is, who it's for, system requirements, v1→v2 migration blurb | Partial | **9.1** (quick start ✅ **9.1c**; intro/migration TBD) |
+| **2. Installing** | *Install & update* — download, first launch, Sparkle updates, prefs import | Partial | **9.1b** (Updates/Sparkle ✅; download/install TBD) |
+| **3. Quick Start** | *Quick start* — connect to a world in five steps | Done | **9.1c** |
+| **4. Understanding Savitar** | Split across session, input, output, triggers, macros chapters | Partial | **9.2–9.4** (menus, macros, events, World Settings Input; session/triggers depth TBD) |
+| **5. Settings** | Settings + world settings reference | Partial | **9.5** (per-pane chapters ✅; Startup pane + v1 mapping tables TBD) |
 | **6. Local Commands** | Local commands reference | Not started | **9.2d** |
 | **7. Useful Tips** | Tips, diagnostics, performance | Not started | **9.7** |
 | **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Not started | **9.8** |
-| **9. In Closing** | Bug reporting, links | Not started | **9.9** (Stories 15–16) |
+| **9. In Closing** | Bug reporting, links | Partial | **9.9** (Help/Privacy ✅ Stories 16–18; Send Feedback — Story 15) |
 
 ### Writing principles (v1 manual → v2 guide)
 
@@ -307,22 +309,28 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 #### Done
 
 - [x] **9.0** Create `docs/USER_GUIDE.md` and document **Speech** (continuous, triggers, Audio menu, settings; v1 parity)
-- [x] **9.0b** Document **Menus** (all menu-bar items; File, Edit, World, Audio, Window, Help)
+- [x] **9.0b** Document **Menus** (all menu-bar items; File, Edit, World, Audio, Window, Help — includes Find, Print, scroll lock)
+- [x] **9.1c** **Quick start** — five-step connect flow in [Getting started](USER_GUIDE.md#getting-started); contextual **?** callout
 - [x] **9.2a** Document **Macros** (what they are, example, Events window; aliases/clicker noted as future)
+- [x] **9.3b** **ANSI colors** — Settings → Colors pane; grid, Restore Defaults, vs World Settings Appearance
+- [x] **9.3c** App Settings panes — [Input & Display](USER_GUIDE.md#input-display), [Audio](USER_GUIDE.md#audio), [Updates](USER_GUIDE.md#updates) (Sparkle + automatic updates pref)
 - [x] **9.4a** Document **Events** (general term; Events window; triggers vs macros overview)
+- [x] **9.5a** **World Settings** chapter — Starting, Appearance, Input, Output tabs ([USER_GUIDE.md#world-settings](USER_GUIDE.md#world-settings))
+- [x] **9.5b** Per-pane App Settings chapters — Speech, Colors, Input & Display, Audio, Updates (Startup pane chapter still TBD)
+- [x] **9.9a** **Getting help** + **Privacy & usage statistics**; Help menu table (Send Feedback deferred to Story 15)
+- [x] **9.10** **Publish path** — README link; in-app Help book (Story 16); contextual **?** (Story 17); interim **Savitar Guide on the Web…** → GitHub
 
 #### Chapter stories (from v1 manual)
 
-- [ ] **9.1** **Getting started** — v1 §1 + §3
+- [ ] **9.1** **Getting started** — v1 §1 + §3 *(partial: **9.1c** quick start shipped)*
   - What Savitar is (MUD/MUSH/MOO telnet client); link to [JOURNEY.md](JOURNEY.md) for the rewrite story, not the whole history
   - System requirements (macOS 10.12+, 64-bit; v1 Catalina cutoff)
   - Migrating from Savitar 1: prefs import, read-only v1 worlds, save-as-v2
-  - **Quick start:** World Picker → double-click world → type a command → open Events
   - *Acceptance:* A new user can connect without reading anything else
 
-- [ ] **9.1b** **Install & updates** — v1 §2 + Story 12
+- [ ] **9.1b** **Install & updates** — v1 §2 + Story 12 *(partial: [Updates](USER_GUIDE.md#updates) chapter shipped)*
   - Download from GitHub Releases; drag to Applications
-  - Sparkle **Check for Updates…**, automatic updates pref, release notes source
+  - ~~Sparkle **Check for Updates…**, automatic updates pref, release notes source~~ ✅ in Updates chapter
   - Uninstall = quit and trash (no Classic installer)
   - *Acceptance:* Matches actual distribution; links to [fastlane README](../client/fastlane/README.md) only in a developer footnote if at all
 
@@ -333,7 +341,7 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - Status bar — **deferred** until README item ships; stub one sentence + link to future **9.2d** `set status`
   - *Acceptance:* Matches `WindowController` / world window as shipped
 
-- [ ] **9.2b** **Entering commands** — v1 §4 "Entering Commands"
+- [ ] **9.2b** **Entering commands** — v1 §4 "Entering Commands" *(partial: echo, sticky, markers, CR/LF in World Settings Input; scroll lock in Menus)*
   - Return sends; Option-Return for multiple lines in macros/triggers/startup scripts
   - Command recall (↑/↓, 32-line buffer); sticky commands (World Settings → Input)
   - Input editing keys (⌃A/E, ⌃U clear, word navigation)
@@ -361,15 +369,13 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - Button palette, keypad mapping, startup pref
   - *Blocked on Story 11 implementation*
 
-- [ ] **9.3** **Output & appearance** — v1 §4 output + §5 Appearance/Output tabs
+- [ ] **9.3** **Output & appearance** — v1 §4 output + §5 Appearance/Output tabs *(partial: Appearance tab + session logging in World Settings)*
   - ANSI interpretation, intense/bold/blink handling (World Settings → Appearance)
   - HTML tags, `<xch_cmd>` — document or mark **not yet** per README
   - Buffer size, flush period, pane dimensions (World Settings → Output)
   - Session logging vs text documents (cross-link Menus → Text documents)
-  - Word wrap — when Story 2.3 ships
+  - Word wrap — default for new sessions via Settings → Input & Display (Story 2.3); per-session toggle deferred
   - *Acceptance:* User can fix "gibberish ANSI" and "invisible white-on-white text"
-
-- [x] **9.3b** **ANSI colors** — v1 §5 "ANSI Color Settings" — in [USER_GUIDE.md](USER_GUIDE.md#ansi-colors); Settings → Colors, grid, Restore Defaults, vs World Settings Appearance
 
 - [ ] **9.4** **Triggers in depth** — v1 §4 "Triggers"
   - Processing order (universal → per-world; top to bottom)
@@ -385,13 +391,14 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - Per-world vs app-wide Events windows
   - *Acceptance:* Covers Events window UX without a screenshot tour
 
-- [ ] **9.5** **Settings reference** — v1 §5
+- [ ] **9.5** **Settings reference** — v1 §5 *(partial: per-pane chapters shipped; consolidation tables TBD)*
   - **App Settings** toolbar panes → v1 `DoPreferences()` mapping table (Startup, Input & Display, Colors, Audio, Updates, Speech)
   - **World Settings** sheet tabs → v1 Starting, Appearance, Input, Output, MCP, Closing
-  - Grayed-out prefs explained (Macro Clicker startup, word wrap, mute clicker)
+  - Grayed-out prefs explained (Macro Clicker startup, word wrap, mute clicker) — partially covered in Input & Display / Audio chapters
+  - Dedicated **Startup** settings pane chapter (World Picker / Events / Macro Clicker at launch)
   - *Acceptance:* One table per settings surface; v1 menu path in a "was" column
 
-- [ ] **9.6** **Worlds & connection** — v1 §4 "Switching Worlds" + §5 Starting tab
+- [ ] **9.6** **Worlds & connection** — v1 §4 "Switching Worlds" + §5 Starting tab *(partial: Starting tab + World Picker via Menus/quick start)*
   - World Picker: add/edit/remove worlds, wizard
   - Connect/disconnect, autologin commands, keepalive, auto-reconnect
   - Multi-session: one document per world; Window menu switching
@@ -407,12 +414,9 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
   - MUD, MOO, MUSH, MUVE, ANSI, trigger, macro, event, gag, wildcard, local command, …
   - *Acceptance:* Every jargon term used in the guide is defined here
 
-- [ ] **9.9** **Help & feedback** — v1 §9 (partial: **Savitar Help**, **Getting help** chapter, **About Privacy** — Stories 16–18 ✅; **Send Feedback…** — Story 15)
-
-- [x] **9.10** **Publish path** (partial)
-  - Link from README ✅; in-app Help book ✅ (Story 16); contextual **?** ✅ (Story 17)
-  - Web publish at `heynow.com/savitar/guide/` — [heynow_websites W4](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md); interim **Savitar Guide on the Web…** → GitHub
-  - *Acceptance:* Help menu opens useful content ✅; stable public URL when W4 ships
+- [ ] **9.9** **Help & feedback** — v1 §9 *(partial: **9.9a** shipped; **Send Feedback…** — Story 15)*
+  - Update Getting help when Story 15 ships
+  - *Acceptance:* Matches Help menu; honest about feedback path
 
 #### Deferred guide sections (blocked on features)
 
@@ -428,15 +432,17 @@ The prefs **data model** already imports v1 flags and values. **Story 1** is com
 
 ### Suggested writing order
 
-1. **9.1 + 9.1c** — front matter + quick start (gives the guide a proper opening)
-2. **9.6 + 9.2** — worlds and session window (the core daily workflow)
-3. **9.2b + 9.2c** — input, recall, variables (extends macros chapter)
-4. **9.4 + 9.4b** — triggers depth (biggest v1 manual chapter)
-5. **9.3 + 9.3b** — output and colors
-6. **9.5** — settings reference (consolidation chapter—write after feature chapters exist)
+1. ~~**9.1c** quick start~~ ✅ — expand **9.1** front matter (what Savitar is, requirements, v1 migration)
+2. **9.2 + 9.4 + 9.4b** — session window and triggers depth (biggest remaining gap for power users)
+3. **9.2b + 9.2c** — command entry, recall, variables (extends macros chapter)
+4. **9.6** — World Picker wizard, multi-session, connection troubleshooting
+5. **9.5** — settings consolidation tables + Startup pane chapter
+6. **9.3** — output depth (buffer/flush/dimensions; HTML/xch_cmd stubs)
 7. **9.2d** — local commands (grows as commands ship)
-8. **9.1b, 9.7, 9.8, 9.9** — install, tips, glossary, closing (finish line)
-9. **9.2e, 9.2f** — when Stories 10–11 land
+8. **9.1b** — download/install (Updates chapter done; add first-run install)
+9. **9.7, 9.8** — tips, glossary
+10. **9.9** — finish when Story 15 ships Send Feedback
+11. **9.2e, 9.2f** — when Stories 10–11 land
 
 ### Touchpoints
 
@@ -551,6 +557,8 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 **Goal:** Ship automatic updates via [Sparkle 2](https://sparkle-project.org/), fed
 from the existing signed-release pipeline and `CHANGELOG.md`.
 
+**Status:** Shipped (July 2026, v2.0.17+). End-to-end update install test (**12.7**) remains.
+
 **Context:** Savitar 1 used a custom `CUpdateChecker`. Sparkle 2 is the
 industry-standard choice for Developer ID–signed, direct-distribution macOS apps.
 It integrates via SPM (no CocoaPods), displays release notes in the update sheet
@@ -603,8 +611,8 @@ app.
 - [ ] **12.7** End-to-end test: install build N, publish build N+1 via tag, confirm
       Sparkle offers the update, release notes render, install succeeds, and
       `CFBundleShortVersionString` / `CFBundleVersion` compare correctly.
-- [ ] **12.8** User guide (Story 9): document how updates work and where release
-      notes come from.
+- [x] **12.8** User guide (Story 9): document how updates work and where release
+      notes come from — [Updates](USER_GUIDE.md#updates) chapter.
 
 ### Touchpoints
 
@@ -657,6 +665,8 @@ require a custom changelog parser.
 
 **Goal:** Track **active installations** and version adoption with [TelemetryDeck](https://telemetrydeck.com/) — privacy-first, GDPR-friendly analytics on the free **Sparrow** tier (up to 100,000 signals/month).
 
+**Status:** Shipped (July 2026, v2.0.18). Website privacy page remains Story 19 / heynow_websites W9.
+
 **Context:** GitHub Release **download counts** measure ZIP pulls, not installs or daily use. TelemetryDeck closes that gap with hashed per-install identifiers and session signals, without collecting personal data. Crash reporting (Sentry) remains a separate future story.
 
 **Not in scope:** Session replay, ad tracking, per-user profiling, or shipping the TelemetryDeck App ID in plaintext for official builds only — inject via CI (see **14.5**).
@@ -673,7 +683,7 @@ require a custom changelog parser.
 
 ### Tasks
 
-- [ ] **14.1** **TelemetryDeck account & app** — create org at telemetrydeck.com; create app **Savitar** (macOS); copy App ID for CI.
+- [x] **14.1** **TelemetryDeck account & app** — create org at telemetrydeck.com; create app **Savitar** (macOS); copy App ID for CI.
 - [x] **14.2** **Swift Package** — add `https://github.com/TelemetryDeck/SwiftSDK` to `Savitar2.xcodeproj` (Up to Next Major); link **TelemetryDeck** product to Savitar target only (not test target).
 - [x] **14.3** **`SavitarTelemetry` wrapper** — `initializeIfConfigured()` reads App ID from `Info.plist` key `TelemetryDeckAppID` (empty in Debug/local → no-op); skip when `isRunningTests`; call from `AppDelegate.applicationDidFinishLaunching` after prefs load.
 - [x] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
@@ -938,7 +948,7 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 | Item | Blocked by | v1 reference | Prefs UI |
 |------|------------|--------------|----------|
 | Show Macro Clicker at startup | Story 11 | `TVPrefFlag_t_StartupClicker` | Grayed out |
-| Default word wrap | `World` / session word-wrap flag (Story 2.3) | `TVPrefFlag_t_DefaultWordWrap` | Grayed out |
+| Default word wrap | Story 2.3 ✅ | `TVPrefFlag_t_DefaultWordWrap` | Enabled |
 | Mute clicker sounds | Story 11 | `cmd_MuteClicker` | Grayed out |
 | Check for updates | Story 12 (Sparkle) ✅ | `CUpdateChecker`, `updatingEnabled` | Enabled |
 | Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
@@ -949,29 +959,27 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 ## Implementation order (recommended)
 
 1. ~~Story 1 — App Settings UI~~ ✅
-2. ~~Story 2 — Wire flags~~ — *in progress* (remaining: 2.3 word wrap, 2.5 clicker, 2.6 Events sections)
-3. Story 4 — Speech pane polish (Auto Layout, live-save)
-4. ~~Story 5 — ANSI Colors Settings pane~~ ✅
-5. Story 6 — Events Window HIG
-6. Story 7 — World Picker HIG
-7. Story 8 — SwiftUI Settings spike (optional, post-beta)
-8. Story 9 — User guide (ongoing; speech chapter first)
-9. Story 10 — Command aliases (typed abbreviation expansion)
-10. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-11. Story 12 — Sparkle 2 auto-updates (after first successful signed release)
-12. Story 13 — Help → Release Notes (optional polish; no parser)
-13. Story 14 — TelemetryDeck install & usage analytics (beta; pairs with README crash-reporting item)
-14. ~~**Story 16 — In-app user guide (Help menu)**~~ ✅
-15. **Story 15 — Send Feedback (email)** — ship next; guide + contextual help are live
-16. ~~Story 17 — Contextual ? help buttons~~ ✅
-17. ~~Story 18 — Help → About Privacy~~ ✅
-18. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**; content in Savitar2, publish in heynow_websites)
+2. ~~Story 4 — Speech pane polish~~ ✅
+3. ~~Story 5 — ANSI Colors Settings pane~~ ✅
+4. ~~Story 12 — Sparkle 2 auto-updates~~ ✅ (*12.7* E2E install test remains)
+5. ~~Story 13 — Help → Release Notes~~ ✅
+6. ~~Story 14 — TelemetryDeck analytics~~ ✅ (*website* privacy page: Story 19 / W9)
+7. ~~Story 16 — In-app user guide (Help menu)~~ ✅
+8. ~~Story 17 — Contextual ? help buttons~~ ✅
+9. ~~Story 18 — Help → About Privacy~~ ✅
+10. **Story 15 — Send Feedback (email)** — next; completes “read Help first, then Send Feedback”
+11. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
+12. **Story 9 — User guide** — ongoing (session window, triggers depth, local commands, glossary, 9.1 front matter, 9.5 consolidation)
+13. Story 6 — Events Window HIG
+14. Story 7 — World Picker HIG
+15. Story 10 — Command aliases
+16. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+17. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
+18. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
-Story 13 is optional and can ship any time after Story 12.
-Story 14 can ship during beta once a TelemetryDeck app is configured.
-**Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending) and user-guide Help integration (16 ✅). **Story 15** is next so “read Help first, then Send Feedback” is complete.
-Story 9 content writing continues in parallel with Story 16 delivery.
+**Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending; 16 ✅).
+Story 9 content writing continues in parallel with feature work.
 
 Story 3 is retained for reference only; implement Story 5 instead.
 
@@ -986,7 +994,7 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Show Events Window at startup | `startupEventsWindow` | Done |
 | Use keypad | `useKeypad` | Done |
 | Mono fonts only | `monoFontsOnly` | Done |
-| Default word wrap | `defaultWordWrap` | UI only (grayed out); Story 2.3 |
+| Default word wrap | `defaultWordWrap` | Done — Story 2.3 |
 | Mute sound / Mute speaking | `muteSound`, `muteSpeaking` | Done (prefs + Audio menu) |
 | Mute terminal bell | `muteBell` | Done |
 | Mute clicker | `muteClicker` | UI only (grayed out) |

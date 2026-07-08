@@ -46,6 +46,10 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         }
     }
 
+    func setWordWrap(_ enabled: Bool) {
+        WordWrapFormatting.apply(to: textView, enabled: enabled)
+    }
+
     func rowHeight() -> CGFloat {
         textView.layoutManager?.defaultLineHeight(for: font) ?? 0
     }

@@ -6,25 +6,28 @@ alwaysApply: false
 
 # macOS HIG — Savitar 2
 
-Full reference: [docs/HIG.md](../../docs/HIG.md). Follow Apple [Settings HIG](https://developer.apple.com/design/human-interface-guidelines/settings) for app-level settings.
+Full reference: [docs/HIG.md](../../docs/HIG.md) (UI requirements). Implementation backlog: [docs/Stories.md](../../docs/Stories.md).
 
 ## Settings window checklist
 
 - One modeless **Settings** window; **Settings…** in app menu (**⌘,**)
+- Toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech
 - **No** Save / Cancel / Apply — changes apply and persist immediately
-- Close button only; fixed size unless pane has scrollable content
-- Multiple groups → `NSToolbar` with `.preference` style (macOS 11+); title = active pane name
+- Close button only; `fitContentSize` per pane (Colors/Speech may grow the window)
+- `NSToolbar` with `.preference` style; window title = active pane name
 - Dismiss with **Escape** or **⌘+.**
+- **Edit → ANSI Colors…** and **Audio → Speech Settings…** deep-link to panes
 - Use `NSWindow.configureAsSettingsWindow()` and `fitContentSize(_:centerIfNeeded:)`
 
-## Controls
+## Other surfaces
 
+- **World Settings** → modal sheet on world document (OK/Cancel); not app Settings
+- **Events** / **World Picker** → modeless utility windows; see HIG.md for open chrome items (Stories 6–7)
 - Gray out unsupported options with a tooltip (do not hide)
-- Use "Settings" terminology on macOS 13+, not "Preferences"
-- World-specific options → World Settings sheet, not app Settings
 
 ## When adding UI
 
-1. Check [docs/HIG.md](../../docs/HIG.md) and [docs/Stories.md](../../docs/Stories.md)
-2. Match existing AppKit patterns in `client/Savitar2/src/views/`
-3. Prefer system controls, Auto Layout, and standard shortcuts
+1. Check [docs/HIG.md](../../docs/HIG.md) for requirements
+2. Check [docs/Stories.md](../../docs/Stories.md) if tracking new work
+3. Match existing AppKit patterns in `client/Savitar2/src/views/`
+4. Prefer system controls, Auto Layout, and standard shortcuts

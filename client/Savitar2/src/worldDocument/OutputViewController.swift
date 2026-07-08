@@ -83,6 +83,10 @@ class OutputViewController: OutputViewNavigationDelegate {
         return outputView.toggleScrollLock()
     }
 
+    func setWordWrap(_ enabled: Bool) {
+        outputView.setWordWrap(enabled)
+    }
+
     func setStyle(world: World) {
         outputView.setStyle(world: world)
     }

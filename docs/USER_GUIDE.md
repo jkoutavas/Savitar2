@@ -165,7 +165,7 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 |--------|----------------|
 | **Use keypad for macro entry** | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s **Use keypad** preference. |
 | **Mono fonts only (in font menus)** | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned. |
-| **Default word wrap for new sessions** | *(Not yet available.)* Will set whether new world sessions start with word wrap on. Grayed out until that feature ships. |
+| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. Matches Savitar 1’s default for new text windows, applied here to session panes. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -549,4 +549,6 @@ Before reporting a problem, check the relevant chapter here (triggers, speech, w
 
 ## More chapters (planned)
 
-Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. Suggested next writes: **Getting started** (9.1), **Session window** (9.2), **Triggers in depth** (9.4), then **Worlds & connection** (9.6).
+Story 9 in [Stories.md](Stories.md) maps the [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) to remaining guide chapters. **Shipped:** quick start, speech, menus, events, macros, ANSI colors, app Settings panes (Input & Display, Audio, Updates), World Settings (Starting, Appearance, Input, Output), privacy, and getting help.
+
+**Suggested next writes:** **Session window** (9.2), **Triggers in depth** (9.4), **Getting started** front matter (9.1), then **Worlds & connection** (9.6) and **Settings reference** consolidation (9.5).

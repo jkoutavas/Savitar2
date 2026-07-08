@@ -47,6 +47,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     @objc private func colorsDidChange() {
         guard let doc = document as? Document, let world = doc.world else { return }
         let splitViewController = contentViewController as? SessionViewController
+        splitViewController?.outputViewController?.setWordWrap(doc.session?.wordWrapEnabled ?? false)
         splitViewController?.outputViewController?.setStyle(world: world)
     }
 
@@ -133,10 +134,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
         doc.worldDidChange(fromWorld: fromWorld)
-        updateViews(fromWorld)
+        let wordWrap = doc.session?.wordWrapEnabled ?? false
+        updateViews(fromWorld, wordWrap: wordWrap)
     }
 
-    func updateViews(_ newValue: World?) {
+    func updateViews(_ newValue: World?, wordWrap: Bool = false) {
         guard let window = self.window else { return }
 
         let autosaveName = window.representedFilename
@@ -154,7 +156,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         inputVC.foreColor = w.foreColor
         inputVC.backColor = w.backColor
+        inputVC.setWordWrap(wordWrap)
         outputVC.view.layer?.backgroundColor = w.backColor.cgColor
+        outputVC.setWordWrap(wordWrap)
         outputVC.setStyle(world: w)
 
         if let font = NSFont(name: w.fontName, size: w.fontSize) {
