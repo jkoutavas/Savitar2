@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 7th, 2026_
+_README last updated July 8th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -190,25 +190,27 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     193 text files.
-     178 unique files.
-      52 files ignored.
+     196 text files.
+     181 unique files.
+      53 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.11 s (1598.0 files/s, 218276.9 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.11 s (1578.3 files/s, 217132.7 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          135           2443           1438          11825
-XML                             15              9             36           3990
-Markdown                        16            999              0           2231
+Swift                          136           2520           1463          12255
+XML                             15              6             36           3988
+Markdown                        16           1014              0           2259
 HTML                             1              0              0            500
 YAML                             5             39             21            247
 Python                           1             41             73            195
 Bourne Shell                     1             16              1             94
-JSON                             1              0              0             68
+JSON                             3              0              0             86
 CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           178           3550           1577          19186
+SUM:                           181           3639           1602          19660
+-------------------------------------------------------------------------------
+
 ```
