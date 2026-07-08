@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **`RESOLUTION` XML attribute order** — parse and serialize as `columns×outputRows×inputRows` to match Savitar 1 (`CTVWorld.cp`)
+- **Harper's Tale startup world** — connect to `moo.harpers-tale.com:7007` (was `harpers-tale.com`, which does not accept MOO connections)
 - Pasting into the input pane no longer retains font or color styling from the clipboard source
 - Unit tests no longer overwrite the live `Savitar2 Prefs` file when preference actions are exercised
 - World Settings **Output** tab labels no longer truncate (“Logging Enabled”, logging mode radio buttons)
