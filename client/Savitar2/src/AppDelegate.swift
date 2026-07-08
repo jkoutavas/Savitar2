@@ -153,6 +153,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         SavitarUpdater.shared.checkForUpdates()
     }
 
+    @IBAction func showAboutAction(_: Any) {
+        AboutWindowController.shared.showAbout()
+    }
+
     @IBAction func showSavitarHelpAction(_: Any) {
         SavitarHelp.show()
     }

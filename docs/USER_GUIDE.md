@@ -216,7 +216,7 @@ World document windows, the **World Picker**, and the **Events** windows each en
 
 | Menu item | Shortcut | What it does |
 |-----------|----------|--------------|
-| **About Savitar** | — | Shows the standard About box with version information. |
+| **About Savitar** | — | Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss. |
 | **Check for Updates…** | — | Looks for a newer Savitar release (Sparkle). See [Updates](#updates). |
 | **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech). Changes apply immediately; there is no Save button. |
 | **Services** | — | Standard macOS Services submenu for the current selection (when a supporting service is installed). |

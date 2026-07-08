@@ -151,6 +151,7 @@
 		69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */; };
 		69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP012043A6E100E7CC7C /* SavitarHelp.swift */; };
 		69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */; };
+		69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABT022043A6E100E7CC7C /* AboutWindowController.swift */; };
 		69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */; };
 		69HLP062043A6E100E7CC7C /* Savitar.help in Resources */ = {isa = PBXBuildFile; fileRef = 69HLP032043A6E100E7CC7C /* Savitar.help */; };
 		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
@@ -327,6 +328,7 @@
 		69HLP012043A6E100E7CC7C /* SavitarHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelp.swift; sourceTree = "<group>"; };
 		69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelpButton.swift; sourceTree = "<group>"; };
 		69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGuideWindowController.swift; sourceTree = "<group>"; };
+		69ABT022043A6E100E7CC7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		69HLP032043A6E100E7CC7C /* Savitar.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Savitar.help; path = Savitar.help; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 				69HLP012043A6E100E7CC7C /* SavitarHelp.swift */,
 				69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */,
 				69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */,
+				69ABT022043A6E100E7CC7C /* AboutWindowController.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
@@ -947,6 +950,7 @@
 				69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */,
 				69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */,
 				69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */,
+				69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
 				695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */,

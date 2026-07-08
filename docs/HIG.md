@@ -186,6 +186,20 @@ Savitar-specific audio (not standard Edit → Speech):
 
 **Send Feedback…** — planned ([Story 15](Stories.md#story-15--send-feedback-email)); place below Savitar Help when shipped.
 
+### Savitar → About Savitar
+
+Custom About box (`AboutWindowController`) — not the system About panel.
+
+| Requirement | Implementation |
+|-------------|----------------|
+| **Savitar → About Savitar** | `AppDelegate.showAboutAction` / `Main.storyboard` |
+| Medallion artwork | Asset catalog `AboutMedallion` (from Savitar 1 PICT) |
+| Scrolling credits | “Special Heynows” roll in a band below the medallion (soft edge fade) |
+| Version + copyright | `CFBundleShortVersionString` / `CFBundleVersion` / `NSHumanReadableCopyright` |
+| Close-only chrome; click or Escape dismisses | titled/closable window; `cancelOperation` |
+
+Touchpoint: `client/Savitar2/src/AboutWindowController.swift`.
+
 ---
 
 ## Contextual help (? buttons)

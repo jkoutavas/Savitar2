@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -1055,6 +1055,27 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 
 ---
 
+## Story 21 — About box with scrolling credits ✅
+
+**Goal:** Restore Savitar 1’s mirthful About experience — medallion artwork and scrolling “Special Heynows” credits — as a custom AppKit window instead of the system About panel.
+
+**v1 reference:** `CTVAboutDialog` / PPob 1902, `LScrollingText` (TEXT/styl 1000), PICT 129 “Medallion”.
+
+### Tasks
+
+- [x] **21.1** **Menu** — **Savitar → About Savitar** → `showAboutAction:` (`AboutWindowController`)
+- [x] **21.2** **Medallion** — ship classic art in `Assets.xcassets/AboutMedallion`
+- [x] **21.3** **Credits roll** — “Special Heynows” names + Savitar 2 open-source acknowledgments; delay, fade-in, soft edge fade, loop
+- [x] **21.4** **Chrome** — version/build, byline, copyright, heynow.com link; click or Escape dismisses
+- [x] **21.5** **Docs** — USER_GUIDE, help book, HIG
+
+### Acceptance
+
+- About is modeless, close-only, shows marketing version + build.
+- Credits scroll in a band below the medallion; content includes the classic Heynows and a short modern acknowledgments section.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -1080,15 +1101,16 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 8. ~~Story 17 — Contextual ? help buttons~~ ✅
 9. ~~Story 18 — Help → About Privacy~~ ✅
 10. **Story 15 — Send Feedback (email)** — next; completes “read Help first, then Send Feedback”
-11. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
-12. **Story 9 — User guide** — ongoing (session window, triggers depth, local commands, glossary, 9.1 front matter, 9.5 consolidation)
-13. Story 6 — Events Window HIG
-14. Story 7 — World Picker HIG
-15. Story 10 — Command aliases
-16. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-17. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
-18. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
-19. Story 8 — SwiftUI Settings spike (optional, post-beta)
+11. ~~**Story 21 — About box with scrolling credits**~~ ✅
+12. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
+13. **Story 9 — User guide** — ongoing (session window, triggers depth, local commands, glossary, 9.1 front matter, 9.5 consolidation)
+14. Story 6 — Events Window HIG
+15. Story 7 — World Picker HIG
+16. Story 10 — Command aliases
+17. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+18. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
+19. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
+20. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending; 16 ✅).
