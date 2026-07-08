@@ -73,7 +73,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         sessionViewController?.session = session
         guard let inputVC = sessionViewController?.inputViewController else { return }
         inputVC.session = session
-        windowController.updateViews(world, wordWrap: session?.wordWrapEnabled ?? false)
+        windowController.updateViews(world, wordWrap: session?.wordWrapEnabled ?? false, applyPaneLayout: true)
         session?.connectAndRun()
     }
 

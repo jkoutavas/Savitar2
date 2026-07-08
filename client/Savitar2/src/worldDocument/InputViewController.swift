@@ -311,4 +311,9 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         // No contextual menu for our input view please
         return nil
     }
+
+    func textDidChange(_: Notification) {
+        guard !wordWrapEnabled else { return }
+        WordWrapFormatting.synchronizeHorizontalSize(of: textView)
+    }
 }

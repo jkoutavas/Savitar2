@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity.
 
 ---
 
@@ -68,7 +68,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 
 - [x] **2.1** **Use keypad** — honor `useKeypad` in macro hotkey / input handling (v1: keypad chord entry)
 - [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
-- [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`)
+- [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`). *v2.0 scope: v1 pref parity only; per-session toggle and live updates → [Story 20](#story-20--session-word-wrap-v21)*
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
 - [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists (Story 11)
 - [ ] **2.6** **Events window sections** — wire `trigsClosed` / `varsClosed` to Events window UI state (stretch; not in main prefs window)
@@ -372,9 +372,10 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 - [ ] **9.3** **Output & appearance** — v1 §4 output + §5 Appearance/Output tabs *(partial: Appearance tab + session logging in World Settings)*
   - ANSI interpretation, intense/bold/blink handling (World Settings → Appearance)
   - HTML tags, `<xch_cmd>` — document or mark **not yet** per README
-  - Buffer size, flush period, pane dimensions (World Settings → Output)
+  - Buffer size, flush period (World Settings → Output)
+  - Pane dimensions — **shipped:** columns, output rows, input rows; grow-box/divider resize overlay
   - Session logging vs text documents (cross-link Menus → Text documents)
-  - Word wrap — default for new sessions via Settings → Input & Display (Story 2.3); per-session toggle deferred
+  - Word wrap — default for new sessions via Settings → Input & Display (Story 2.3); per-session toggle and per-world default → Story 20
   - *Acceptance:* User can fix "gibberish ANSI" and "invisible white-on-white text"
 
 - [ ] **9.4** **Triggers in depth** — v1 §4 "Triggers"
@@ -943,6 +944,117 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ---
 
+## Story 20 — Session word wrap (v2.1)
+
+**Goal:** Make word wrap practical for daily use — toggle it live per session, optionally remember a per-world default, without requiring close/reopen. Keeps Story **2.3** as v1 **`TVPrefFlag_t_DefaultWordWrap`** parity for 2.0.
+
+**Target release:** Savitar **2.1** (post–feature-matching beta). Not a 2.0 blocker.
+
+**Context — what 2.0 ships today**
+
+Story 2.3 wires the app-wide **Default word wrap for new sessions** checkbox to `Session.wordWrapEnabled` at connect time. That value is fixed for the life of the session; changing the pref or wanting different wrap per world means closing and reopening the window. Users notice both problems in practice.
+
+**v1 behavior (reference)**
+
+| Surface | v1 behavior |
+|---------|-------------|
+| App pref | “Automatically enable word wrapping for new **text windows**” — initial state only |
+| Text document windows | Per-window toggle via bottom-right **blue arrow**; immediate; does not change the app pref |
+| Session panes | `CTextPane::SetWordWrapping` / `WordWrap` flag (same text-pane class as text windows); runtime toggle existed in code |
+
+Savitar 2.0 applied the app pref to **session** panes at open (reasonable v2 interpretation) but omitted the runtime toggle and per-world memory.
+
+**Design (recommended)**
+
+Three layers, outer → inner:
+
+```
+App Settings (default for new sessions)
+        ↓ overridden by
+World Settings → Output (optional per-world default)
+        ↓ overridden by
+Per-session toggle (live; input + output panes together)
+```
+
+| Layer | Behavior |
+|-------|----------|
+| **App pref** (`defaultWordWrap`) | Unchanged checkbox meaning: default for **new** sessions when the world has no override. Toggling it does **not** force-wrap open sessions (matches v1 text-window model). Optional stretch: brief note in Settings that open sessions are unaffected. |
+| **Per-world default** | World Settings → **Output** tab: **Word wrap** control — `Use app default` / `On` / `Off`. Persisted in world XML. Used when the session connects (and on reconnect). |
+| **Per-session toggle** | Immediate effect on **both** input (`NSTextView`) and output (`WKWebView` CSS via `WordWrapFormatting`). Does **not** write back to app pref or world file unless the user edits World Settings. Lost on reconnect unless world default covers it (acceptable). |
+
+**UI (pick one primary + one secondary)**
+
+| Control | Notes |
+|---------|--------|
+| **View → Word Wrap** (checkmark) | Standard macOS pattern; works when a world or text document window is key. |
+| **Session title-bar control** | SF Symbol toggle (e.g. `text.append` wrapped vs `arrow.left.and.right`) or modernized v1 blue-arrow affordance in the input pane corner; tooltip “Word Wrap”. |
+| **World Settings → Output** | Pop-up or segmented control for per-world default (see above). |
+
+Input and output wrap stay **linked** in a session (one toggle) — v1 session UX and simpler mental model.
+
+**Sketch (session window, wrap on)**
+
+```
+┌─ Alter Aeon ─────────────────────────────────── [?][🔒][⚡][⚙] ─┐
+│  …output…                                                          │
+├────────────────────────────────────────────────────────────────────┤
+│  typed command wraps here                              [↩ wrap]   │
+└────────────────────────────────────────────────────────────────────┘
+  View → Word Wrap ✓
+```
+
+**Sketch (World Settings → Output tab)**
+
+```
+┌─ World Settings — Output ─────────────────────────────────────────┐
+│  Buffer size …    Flush period …                                  │
+│  Word wrap:  (•) Use app default   ( ) On   ( ) Off               │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+### Tasks
+
+- [ ] **20.1** **`Session.wordWrapEnabled` mutable** — replace `let` with `var`; add `setWordWrap(_:)` that updates input + output via `WindowController` / `WordWrapFormatting` without reconnect.
+- [ ] **20.2** **Resolve initial wrap** — on session connect: `world.wordWrapDefault ?? app.defaultWordWrap` (exact API TBD in **20.4**).
+- [ ] **20.3** **View menu** — **View → Word Wrap** checkmark bound to frontmost world session; enable only for world document windows. Optional shortcut (e.g. ⌃⌘W if unused).
+- [ ] **20.4** **Per-world default** — new field on `World` / Output settings model; World Settings → Output UI; parse/serialize in `.world` XML; “Use app default” omits or sentinel value for v1 import compatibility.
+- [ ] **20.5** **Session chrome toggle** — title-bar button or input-pane control; VoiceOver label; sync with View menu state.
+- [ ] **20.6** **Output live update** — when toggling off→on or on→off, re-inject `WordWrapFormatting.outputPreCSS` (or equivalent) so existing buffer reflows without clearing.
+- [ ] **20.7** **Text document parity (stretch)** — `PlainTextDocument` gets the same toggle + app-pref default as v1 text windows (blue-arrow behavior); can ship as **20.7** follow-up if session work lands first.
+- [ ] **20.8** **Docs** — update `USER_GUIDE.md` (Input & Display + World Settings Output + session window); `HIG.md` session-window section; Story **9.3** output chapter.
+- [ ] **20.9** **Tests** — toggle updates `Session` and both panes; world default overrides app pref at connect; app pref change does not alter open session.
+
+### Touchpoints
+
+- `client/Savitar2/src/worldDocument/Session.swift`
+- `client/Savitar2/src/worldDocument/WindowController.swift`
+- `client/Savitar2/src/worldDocument/InputViewController.swift`
+- `client/Savitar2/src/worldDocument/OutputView.swift`, `OutputViewController.swift`
+- `client/Savitar2/src/worldDocument/WordWrapFormatting.swift`
+- `client/Savitar2/src/models/worlds/World.swift` (+ Output settings / XML)
+- `client/Savitar2/Base.lproj/Main.storyboard` (View menu)
+- World Settings storyboard (Output tab)
+- `docs/USER_GUIDE.md`, `docs/HIG.md`
+
+### Acceptance
+
+- User toggles **View → Word Wrap** on an open session; long lines in input and output reflow (or un-wrap) **immediately** without closing the window.
+- World A can stay wrap-off while World B is wrap-on across simultaneous sessions.
+- World with **Word wrap: Off** opens wrapped-off even when app pref is on; **Use app default** follows app pref.
+- Changing app **Default word wrap** does not change wrap on sessions already open.
+- Behavior is documented; Story 2.3 remains the 2.0 v1-pref checkbox.
+
+### Dependency
+
+- **Story 2.3** ✅ (formatting helpers and app pref wiring).
+
+### Non-goals (2.1)
+
+- Separate wrap toggles for input vs output panes.
+- Persisting per-session wrap across quit/relaunch (world default + app pref are enough).
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -974,8 +1086,9 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 14. Story 7 — World Picker HIG
 15. Story 10 — Command aliases
 16. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-17. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
-18. Story 8 — SwiftUI Settings spike (optional, post-beta)
+17. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
+18. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
+19. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending; 16 ✅).

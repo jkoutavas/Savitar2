@@ -61,17 +61,37 @@ enum WordWrapFormatting {
             }
         } else {
             textView.isHorizontallyResizable = true
-            textView.autoresizingMask = [.width, .height]
+            // Do not pin width to the scroll view; that forces soft line breaks.
+            textView.autoresizingMask = []
             textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
             textView.minSize = NSSize(width: 0, height: 0)
 
             textContainer.widthTracksTextView = false
-            textContainer.lineBreakMode = .byClipping
+            textContainer.lineBreakMode = .byWordWrapping
             textContainer.containerSize = NSSize(
                 width: CGFloat.greatestFiniteMagnitude,
                 height: CGFloat.greatestFiniteMagnitude
             )
+
+            synchronizeHorizontalSize(of: textView, in: scrollView)
         }
         textView.needsLayout = true
+    }
+
+    /// Grow the text view frame so long unbroken lines scroll horizontally instead of wrapping.
+    static func synchronizeHorizontalSize(of textView: NSTextView, in scrollView: NSScrollView? = nil) {
+        let scrollView = scrollView ?? textView.enclosingScrollView
+        guard let textContainer = textView.textContainer,
+              let layoutManager = textView.layoutManager else { return }
+
+        layoutManager.ensureLayout(for: textContainer)
+        let usedWidth = ceil(layoutManager.usedRect(for: textContainer).width)
+        let clipWidth = scrollView?.contentView.bounds.width ?? textView.bounds.width
+        let targetWidth = max(usedWidth, clipWidth)
+
+        var frame = textView.frame
+        guard abs(frame.size.width - targetWidth) > 0.5 else { return }
+        frame.size.width = targetWidth
+        textView.setFrameSize(frame.size)
     }
 }

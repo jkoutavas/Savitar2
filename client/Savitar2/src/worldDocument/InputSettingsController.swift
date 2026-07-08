@@ -24,6 +24,11 @@ class InputSettingsController: NSViewController {
     private var lineEndingBox: NSBox!
     private var didInstallLayout = false
 
+    @objc dynamic var inputRows: Int {
+        get { (representedObject as? World)?.inputRows ?? 2 }
+        set { (representedObject as? World)?.inputRows = max(1, newValue) }
+    }
+
     @objc dynamic var stickyCommands: Bool {
         get {
             guard let world = representedObject as? World else { return false }
@@ -171,6 +176,8 @@ class InputSettingsController: NSViewController {
         let margin: CGFloat = 20
         let spacing: CGFloat = 12
 
+        _ = inputRowsContent
+
         NSLayoutConstraint.activate([
             echoBox.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
             echoBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
@@ -193,7 +200,6 @@ class InputSettingsController: NSViewController {
             lineEndingBox.topAnchor.constraint(equalTo: markerStack.bottomAnchor, constant: spacing),
             lineEndingBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             lineEndingBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
-            lineEndingBox.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -margin),
 
             lineEndingContent.leadingAnchor.constraint(
                 equalTo: lineEndingBox.contentView!.leadingAnchor, constant: 16),
@@ -202,9 +208,55 @@ class InputSettingsController: NSViewController {
             lineEndingContent.topAnchor.constraint(
                 equalTo: lineEndingBox.contentView!.topAnchor, constant: 14),
             lineEndingContent.bottomAnchor.constraint(
-                equalTo: lineEndingBox.contentView!.bottomAnchor, constant: -14)
+                equalTo: lineEndingBox.contentView!.bottomAnchor, constant: -14),
+
+            inputRowsBox.topAnchor.constraint(equalTo: lineEndingBox.bottomAnchor, constant: spacing),
+            inputRowsBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            inputRowsBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+            inputRowsBox.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -margin),
+
+            inputRowsContent.leadingAnchor.constraint(equalTo: inputRowsBox.contentView!.leadingAnchor, constant: 16),
+            inputRowsContent.trailingAnchor.constraint(equalTo: inputRowsBox.contentView!.trailingAnchor, constant: -16),
+            inputRowsContent.topAnchor.constraint(equalTo: inputRowsBox.contentView!.topAnchor, constant: 14),
+            inputRowsContent.bottomAnchor.constraint(equalTo: inputRowsBox.contentView!.bottomAnchor, constant: -14)
         ])
     }
+
+    private lazy var inputRowsBox: NSBox = {
+        let box = NSBox()
+        box.title = "Input Pane"
+        box.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(box)
+        return box
+    }()
+
+    private lazy var inputRowsContent: NSStackView = {
+        let help = NSTextField(wrappingLabelWithString:
+            "Height of the command-entry pane in text rows.")
+        help.font = NSFont.systemFont(ofSize: 11)
+        help.textColor = .secondaryLabelColor
+
+        let field = NSTextField()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        field.alignment = .right
+        field.formatter = PaneDimensionFormatter.shared
+        field.bind(.value, to: self, withKeyPath: "inputRows", options: [
+            .continuouslyUpdatesValue: true
+        ])
+
+        let row = NSStackView(views: [NSTextField(labelWithString: "Input rows:"), field])
+        row.orientation = .horizontal
+        row.spacing = 8
+
+        let stack = NSStackView(views: [help, row])
+        stack.orientation = .vertical
+        stack.alignment = .leading
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        inputRowsBox.contentView?.addSubview(stack)
+        return stack
+    }()
 
     private func labelField(title: String) -> NSTextField {
         let label = NSTextField(labelWithString: title)

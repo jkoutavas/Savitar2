@@ -63,9 +63,9 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Implement Macro editor
 √ Implement World settings Starting tab
 √ Connect/disconnect session handling
-√ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers
-√ World settings Output tab (partial) — session logging (path, append/overwrite)
-_ World settings Output tab — buffer size, flush period, pane dimensions
+√ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
+√ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
+_ World settings Output tab — buffer size, flush period
 _ World settings Closing tab — logoff/disconnect command on close
 _ Implement remaining local commands
 √ Implement scroll locking
@@ -114,6 +114,7 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 
 ```
 - macOS 11 and beyond capabilities
+_ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
 _ Dark Mode support
 _ Text to emoji support
