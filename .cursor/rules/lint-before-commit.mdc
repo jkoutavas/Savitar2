@@ -1,0 +1,29 @@
+---
+description: Run SwiftLint before every git commit (match CI)
+alwaysApply: true
+---
+
+# Lint before commit
+
+Before creating any git commit that touches Swift sources (or the Xcode project / bridging header), **run SwiftLint and fix all violations**. Do not commit, push, or open a PR until lint is clean.
+
+## Required command
+
+From the repo, match CI (`.github/workflows/test-build.yml`):
+
+```bash
+cd client && swiftlint --strict
+```
+
+- Config lives at `client/.swiftlint.yml` (`included`: `Savitar2`, `Savitar2Tests`, `Savitar2UITests`).
+- Exit code must be **0**. Fix every reported issue (e.g. `trailing_comma` — this project **disallows** trailing commas in collection literals).
+- If only non-Swift files changed (docs, changelog, YAML with no Swift), lint is optional; if unsure, run it anyway.
+
+## Workflow
+
+1. Stage intended files.
+2. Run `cd client && swiftlint --strict`.
+3. Fix violations; re-run until clean.
+4. Then `git commit` (and only then push / PR).
+
+Do **not** skip with `--no-verify` or by committing knowing lint is red.
