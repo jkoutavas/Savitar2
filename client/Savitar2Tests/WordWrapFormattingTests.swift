@@ -12,7 +12,8 @@ class WordWrapFormattingTests: XCTestCase {
     func testOutputPreCSSEnabledIncludesPreWrap() {
         let css = WordWrapFormatting.outputPreCSS(wordWrapEnabled: true)
         XCTAssertTrue(css.contains("pre-wrap"))
-        XCTAssertTrue(css.contains("word-wrap: break-word"))
+        XCTAssertTrue(css.contains("display: block"))
+        XCTAssertTrue(css.contains("overflow-wrap: anywhere"))
     }
 
     func testOutputPreCSSDisabledPreservesLineLength() {
@@ -29,6 +30,8 @@ class WordWrapFormattingTests: XCTestCase {
         WordWrapFormatting.apply(to: textView, enabled: true)
         XCTAssertFalse(scrollView.hasHorizontalScroller)
         XCTAssertTrue(textView.textContainer?.widthTracksTextView ?? false)
+        XCTAssertEqual(textView.textContainer?.lineBreakMode, .byCharWrapping)
+        XCTAssertEqual(textView.textContainer?.containerSize.width ?? 0, 200, accuracy: 0.5)
 
         WordWrapFormatting.apply(to: textView, enabled: false)
         XCTAssertTrue(scrollView.hasHorizontalScroller)

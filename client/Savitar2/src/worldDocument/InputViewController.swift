@@ -22,6 +22,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
 
     internal var eventMonitor: Any?
 
+    private var wordWrapEnabled = false
+
     @IBOutlet var textView: NSTextView!
 
     public var backColor: NSColor {
@@ -47,7 +49,18 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     }
 
     func setWordWrap(_ enabled: Bool) {
-        WordWrapFormatting.apply(to: textView, enabled: enabled)
+        wordWrapEnabled = enabled
+        applyWordWrapIfNeeded()
+    }
+
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        applyWordWrapIfNeeded()
+    }
+
+    private func applyWordWrapIfNeeded() {
+        guard isViewLoaded else { return }
+        WordWrapFormatting.apply(to: textView, enabled: wordWrapEnabled)
     }
 
     func rowHeight() -> CGFloat {
