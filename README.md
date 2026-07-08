@@ -19,7 +19,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutav
 | [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
 | [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation); bundled in-app as **Savitar Help**, Stories 16–17) |
 | [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE |
+| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE                                                             |
 | [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
 
 ## Current state of the application
@@ -190,18 +190,18 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     188 text files.
-     173 unique files.
+     193 text files.
+     178 unique files.
       52 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.10 s (1670.6 files/s, 225139.4 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.11 s (1598.0 files/s, 218276.9 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          130           2331           1395          11246
-XML                             15             18             36           3996
-Markdown                        16            926              0           2060
-HTML                             1              0              0            465
+Swift                          135           2443           1438          11825
+XML                             15              9             36           3990
+Markdown                        16            999              0           2231
+HTML                             1              0              0            500
 YAML                             5             39             21            247
 Python                           1             41             73            195
 Bourne Shell                     1             16              1             94
@@ -210,5 +210,5 @@ CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           173           3374           1534          18407
+SUM:                           178           3550           1577          19186
 ```
