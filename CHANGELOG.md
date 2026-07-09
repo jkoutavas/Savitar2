@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **World Settings → Closing** — configure a logoff command (for example `quit` or `@quit`) sent to the world when you close a connected session window; v1 `LOGOFFCMD` parity
+
+### Changed
+
+- **World Settings** — tab picker appears in the sheet toolbar (Starting, Appearance, Input, Output, Closing)
+- **User guide** — Closing tab chapter; settings reference and session close behavior updated
+
 ## [2.0.20] - 2026-07-09
 
 ### Added

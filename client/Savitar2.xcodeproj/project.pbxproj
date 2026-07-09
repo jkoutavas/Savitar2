@@ -107,6 +107,8 @@
 		695F5B502592E64E00AB6BA6 /* WorldWizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5B4E2592E64E00AB6BA6 /* WorldWizard.storyboard */; };
 		695F5B532592E71000AB6BA6 /* WorldWizardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B522592E71000AB6BA6 /* WorldWizardController.swift */; };
 		69652A9B26443E4B0044877A /* OutputSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69652A9A26443E4B0044877A /* OutputSettingsController.swift */; };
+		69C250022F08000100AB6BA6 /* ClosingSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */; };
+		69C250042F08000200AB6BA6 /* WorldSettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -287,6 +289,8 @@
 		695F5B4F2592E64E00AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldWizard.storyboard; sourceTree = "<group>"; };
 		695F5B522592E71000AB6BA6 /* WorldWizardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldWizardController.swift; sourceTree = "<group>"; };
 		69652A9A26443E4B0044877A /* OutputSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSettingsController.swift; sourceTree = "<group>"; };
+		69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingSettingsController.swift; sourceTree = "<group>"; };
+		69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsTabViewController.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -529,6 +533,8 @@
 				69B46A012A80100100CDDE09 /* InputEditingKeys.swift */,
 				69B46A022A80100100CDDE09 /* TerminalBell.swift */,
 				69652A9A26443E4B0044877A /* OutputSettingsController.swift */,
+				69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */,
+				69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */,
 				695F5AA925899EFD00AB6BA6 /* OutputViewController.swift */,
 				695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */,
 				695F5AA125899EFD00AB6BA6 /* OutputView.swift */,
@@ -931,6 +937,8 @@
 				695F5B2A258E8EB100AB6BA6 /* MacroReducer.swift in Sources */,
 				695F5A9725899EBC00AB6BA6 /* WorldMan.swift in Sources */,
 				69652A9B26443E4B0044877A /* OutputSettingsController.swift in Sources */,
+				69C250022F08000100AB6BA6 /* ClosingSettingsController.swift in Sources */,
+				69C250042F08000200AB6BA6 /* WorldSettingsTabViewController.swift in Sources */,
 				695F5B38258EE35000AB6BA6 /* ReactionsActions.swift in Sources */,
 				695F5AF225899FA400AB6BA6 /* EventsSplitViewController.swift in Sources */,
 				695F5B532592E71000AB6BA6 /* WorldWizardController.swift in Sources */,

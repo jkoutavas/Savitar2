@@ -72,7 +72,7 @@ Per-world options belong in **World Settings** (sheet on the world document wind
 |-------------|----------------|
 | **World → Show World Settings…** (⇧⌘J) or title-bar control | `WindowController` + `WorldSettings.storyboard` |
 | Modal sheet; **OK** / **Cancel** | `beginSheet`; changes staged until OK |
-| Tabs: Starting, Appearance, Input, Output | `NSTabView`; MCP / Closing deferred |
+| Tabs: Starting, Appearance, Input, Output, Closing | `NSTabView` + toolbar; MCP deferred |
 | Contextual **?** per tab | `SavitarHelpButton.installInTopTrailingCorner` |
 
 ---

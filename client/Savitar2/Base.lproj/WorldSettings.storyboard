@@ -79,12 +79,13 @@ Gw
         <!--Tab View Controller-->
         <scene sceneID="tD6-3p-okK">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="gRY-gz-u2r" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" id="gRY-gz-u2r" customClass="WorldSettingsTabViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem identifier="" id="XlS-6G-She"/>
                         <tabViewItem identifier="" id="1r2-Xe-hzm"/>
                         <tabViewItem id="zuS-O6-t75"/>
                         <tabViewItem id="dUn-gf-y9d"/>
+                        <tabViewItem id="cLs-9f-Tb1"/>
                     </tabViewItems>
                     <tabView key="tabView" misplaced="YES" type="noTabsNoBorder" id="Rdw-IL-vev">
                         <rect key="frame" x="0.0" y="0.0" width="454" height="472"/>
@@ -100,6 +101,7 @@ Gw
                         <segue destination="lgo-as-i7Z" kind="relationship" relationship="tabItems" id="bJu-LR-sWv"/>
                         <segue destination="qY0-Es-dDb" kind="relationship" relationship="tabItems" id="STX-Dc-coT"/>
                         <segue destination="LSE-x8-mPF" kind="relationship" relationship="tabItems" id="Hh7-AF-1GG"/>
+                        <segue destination="cLs-VC-4nR" kind="relationship" relationship="tabItems" id="cLs-sg-4nR"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mp8-W6-xPH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -975,6 +977,19 @@ Gw
                 <userDefaultsController id="B9m-h7-1Da"/>
             </objects>
             <point key="canvasLocation" x="-784" y="-10158"/>
+        </scene>
+        <!--Closing-->
+        <scene sceneID="cLs-Sc-4nR">
+            <objects>
+                <viewController title="Closing" id="cLs-VC-4nR" customClass="ClosingSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="cLs-Vw-4nR">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="cLs-Rs-4nR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-784" y="-9780"/>
         </scene>
     </scenes>
 </document>

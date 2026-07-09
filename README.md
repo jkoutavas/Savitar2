@@ -66,7 +66,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
 _ World settings Output tab — buffer size, flush period
-_ World settings Closing tab — logoff/disconnect command on close
+√ World settings Closing tab — logoff/disconnect command on close
 _ Implement remaining local commands
 √ Implement scroll locking
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)

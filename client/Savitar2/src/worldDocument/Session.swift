@@ -60,11 +60,32 @@ class Session: NSObject, StreamDelegate {
         queue.maxConcurrentOperationCount = 1
     }
 
-    func close() {
+    func close(sendLogoff: Bool = false) {
+        if sendLogoff {
+            sendLogoffCommandsIfNeeded()
+        }
+        performClose()
+    }
+
+    /// Lines that would be sent when closing with logoff enabled (for tests).
+    func logoffLinesToSend() -> [String] {
+        let trimmed = world.logoffCmd.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return [] }
+        return trimmed.split(separator: "\n", omittingEmptySubsequences: true).map(String.init)
+    }
+
+    private func sendLogoffCommandsIfNeeded() {
+        guard status == .ConnectComplete else { return }
+        for line in logoffLinesToSend() {
+            submitServerCmd(cmd: Command(text: line))
+        }
+    }
+
+    private func performClose() {
         status = .Disconnecting
         AppContext.shared.universalReactionsStore.unsubscribe(self)
-        inputStream.close()
-        outputStream.close()
+        inputStream?.close()
+        outputStream?.close()
         logger.info("closed connection")
         status = .DisconnectComplete
 

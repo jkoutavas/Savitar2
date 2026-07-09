@@ -390,6 +390,23 @@ class StickyCommandInputTests: XCTestCase {
     }
 }
 
+class SessionLogoffTests: XCTestCase {
+    func testLogoffLinesToSendSplitsMultipleLines() {
+        let world = World()
+        world.logoffCmd = "quit\n@quit\n"
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+
+        XCTAssertEqual(session.logoffLinesToSend(), ["quit", "@quit"])
+    }
+
+    func testLogoffLinesToSendEmptyWhenUnset() {
+        let world = World()
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+
+        XCTAssertEqual(session.logoffLinesToSend(), [])
+    }
+}
+
 class OutputViewScrollLockTests: XCTestCase {
     func testScrollLockSuppressesAutoScrollJavaScript() {
         let outputView = OutputView(frame: .zero, configuration: WKWebViewConfiguration())
