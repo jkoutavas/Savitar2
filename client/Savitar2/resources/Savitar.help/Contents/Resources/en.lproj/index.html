@@ -11,22 +11,77 @@
 <body>
   <a id="top" name="top"></a>
   <h1>Savitar Help</h1>
-  <p>User guide for Savitar 2. Works offline in the app. For the latest draft chapters, see the project user guide on the web.</p>
-  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
+  <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
+  <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
+  <p><em>May you have many exciting stories to share, adventurer!</em></p>
+  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#install-updates">Install &amp; updates</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#startup">Startup</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#entering-commands">Entering commands</a></li><li><a href="#variables-expansion">Variables &amp; expansion</a></li><li><a href="#local-commands">Local commands</a></li><li><a href="#triggers">Triggers</a></li><li><a href="#output-appearance">Output &amp; appearance</a></li><li><a href="#worlds-connection">Worlds &amp; connection</a></li><li><a href="#settings-reference">Settings reference</a></li><li><a href="#tips-troubleshooting">Tips &amp; troubleshooting</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
   <h1 id="savitar-2-user-guide">Savitar 2 User Guide</h1>
-<p>This guide explains how to use Savitar 2. It is being written incrementally; see <a href="Stories.md">Stories.md</a> <strong>Story 9</strong> for the plan to complete the full guide.</p>
-<p>Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behavior matches v1, this guide describes that parity explicitly.</p>
+<p>This guide explains how to use Savitar 2. It is written for <strong>players and world builders</strong>, not developers. See <a href="Stories.md">Stories.md</a> <strong>Story 9</strong> for chapters still in progress.</p>
+<p>Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behavior matches v1, this guide says so explicitly.</p>
+<p><strong>A note from Savitar's author, Jay "Ktown" Koutavas.</strong></p>
+<p>*Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you're stuck—then tell me what still doesn't feel like Savitar. Help → Send Feedback… is the fastest way.*</p>
+<p>*May you have many exciting stories to share, adventurer!*</p>
 <hr/>
 <h2 id="getting-started">Getting started</h2>
+<h3 id="getting-started-what-is-savitar">What is Savitar?</h3>
+<p><strong>Savitar</strong> is a <strong>Macintosh client for MUDs, MUSHes, MOOs, and other telnet text worlds</strong>—the kind of games and communities you connect to over the internet and play by typing commands.</p>
+<p>Savitar helps you:</p>
+<ul>
+<li><strong>Connect</strong> to one or more worlds at once</li>
+<li><strong>Automate</strong> repetitive play with triggers (react to server text) and macros (hotkey commands)</li>
+<li><strong>Read and hear</strong> session output—with ANSI colors, optional HTML, and speech</li>
+</ul>
+<p>Savitar 2 is a <strong>64-bit rewrite</strong> of Savitar 1.6.x for modern macOS. Your triggers, macros, worlds, and preferences can migrate from v1; see <a href="#migrating-from-savitar-1">Migrating from Savitar 1</a> below.</p>
+<p>For the story behind the rewrite, see <a href="JOURNEY.md">JOURNEY.md</a> in the repository—not required reading to play.</p>
+<h3 id="getting-started-system-requirements">System requirements</h3>
+<table>
+<thead><tr><th>Requirement</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td><strong>macOS</strong></td><td><strong>10.12 (Sierra)</strong> or later for Savitar 2</td></tr>
+<tr><td><strong>Savitar 1</strong></td><td>Runs only on <strong>32-bit</strong> macOS through <strong>10.14 Mojave</strong>. It does <strong>not</strong> run on <strong>Catalina (10.15)</strong> or later—that is why Savitar 2 exists</td></tr>
+<tr><td><strong>Network</strong></td><td>TCP connection to your world's host and port (typical MUD ports: 3000, 4000, 23)</td></tr>
+<tr><td><strong>Speech</strong></td><td>Optional; continuous speech requires <strong>macOS 10.15+</strong> and an English voice installed</td></tr>
+</tbody></table>
+<p>Official builds are <strong>free downloads</strong> from <a href="https://github.com/jkoutavas/Savitar2/releases">GitHub Releases</a>. Savitar is open source; you may also build from source for your own use.</p>
+<h3 id="getting-started-quick-start">Quick start</h3>
 <ol>
 <li><strong>Launch Savitar</strong> and open the <strong>World Picker</strong> (or use <strong>File → Open World…</strong>).</li>
-<li><strong>Double-click a world</strong> (for example Alter Aeon) to open a session window.</li>
+<li><strong>Double-click a world</strong> (for example Alter Aeon) to open a session window and connect.</li>
 <li>Type a command in the <strong>input</strong> pane at the bottom and press <strong>Return</strong>.</li>
-<li>Open the <strong>Events</strong> window (<strong>World → Events Window</strong>) to add triggers or macros.</li>
+<li>Open the <strong>Events</strong> window (<strong>World → Show World Events…</strong>) to add triggers or macros.</li>
 </ol>
-<p>The session window has separate <strong>output</strong> (top) and <strong>input</strong> (bottom) panes. You can resize them by dragging the window corner or the split divider—see <a href="#session-window">Session window</a>.</p>
+<p>The session window has separate <strong>output</strong> (top) and <strong>input</strong> (bottom) panes. Resize them by dragging the window corner or the split divider—see <a href="#session-window">Session window</a>.</p>
 <p><strong>Tip:</strong> Open <strong>Help → Savitar Help</strong> (⌘?) anytime to return to this guide offline.</p>
 <p><strong>Contextual help:</strong> Major windows show a <strong>?</strong> that opens this guide to the relevant section — <strong>World Picker</strong>, <strong>world session window</strong>, <strong>Events</strong>, <strong>Settings</strong> (per toolbar pane), and <strong>World Settings</strong> (per tab, top-right of the sheet).</p>
+<h3 id="getting-started-migrating-from-savitar-1">Migrating from Savitar 1</h3>
+<p>If you used Savitar 1 on an older Mac:</p>
+<table>
+<thead><tr><th>Topic</th><th>Savitar 2 behavior</th></tr></thead>
+<tbody>
+<tr><td><strong>Preferences</strong></td><td>On first launch, Savitar 2 imports your v1 <strong>preferences XML</strong> (triggers, macros, colors, flags) when it finds a Savitar 1 prefs file</td></tr>
+<tr><td><strong>World files</strong></td><td>Open legacy <code>.world</code> documents; they are <strong>read-only</strong> until you <strong>Save</strong> as a Savitar 2 world</td></tr>
+<tr><td><strong>Universal events</strong></td><td>v1 "universal" triggers and macros appear in <strong>Window → Show App-wide Events Window</strong> (⇧⌘E)</td></tr>
+<tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
+<tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
+</tbody></table>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned or deferred): command <strong>aliases</strong>, <strong>Macro Clicker</strong>, MCP SimpleEdit, file upload, status bar divider, <code>xch_cmd</code> links. The guide marks these where relevant.</p>
+<hr/>
+<h2 id="install-updates">Install &amp; updates</h2>
+<h3 id="install-updates-download-and-install">Download and install</h3>
+<ol>
+<li>Open <a href="https://github.com/jkoutavas/Savitar2/releases">Savitar 2 Releases</a> and download <strong>Savitar.zip</strong> from the latest release.</li>
+<li>Unzip and drag <strong>Savitar.app</strong> to <strong>Applications</strong> (or another folder you use for apps).</li>
+<li>On first open, macOS may ask you to confirm the app is from an identified developer—official builds are Developer ID signed and notarized.</li>
+</ol>
+<p>There is no Classic Mac OS installer. <strong>Uninstall</strong> = quit Savitar and move <strong>Savitar.app</strong> to the Trash. Your worlds and preferences remain in your home folder.</p>
+<h3 id="install-updates-first-launch">First launch</h3>
+<ul>
+<li>If <strong>Show World Picker at startup</strong> is on (default), the World Picker opens automatically—see <a href="#startup">Startup</a>.</li>
+<li>Savitar 2 may show a <strong>one-time welcome</strong> during alpha testing explaining feedback and what to expect.</li>
+<li>Importing v1 preferences happens automatically when a v1 prefs file is present; you do not need a separate import step.</li>
+</ul>
+<h3 id="install-updates-updates">Updates</h3>
+<p>Savitar checks for updates with <strong>Sparkle</strong>. See the <a href="#updates">Updates</a> chapter for automatic vs manual checks and <strong>Help → Release Notes…</strong>.</p>
 <hr/>
 <h2 id="speech">Speech</h2>
 <p>Savitar can speak text in three ways:</p>
@@ -178,6 +233,17 @@
 <p><strong>Help → Release Notes…</strong> opens a web page with version history without running an update check—useful when you want to see what changed in past releases.</p>
 <p>Automatic updates apply to <strong>official signed builds</strong> distributed by Heynow Software. Builds you compile from source in Xcode typically do not receive Sparkle updates through this channel.</p>
 <p>Your automatic-update preference is saved in app preferences and survives relaunch.</p>
+<hr/>
+<h2 id="startup">Startup</h2>
+<p>Open <strong>Settings…</strong> (⌘,) and select the <strong>Startup</strong> toolbar tab. These options control what Savitar opens when you launch the app.</p>
+<table>
+<thead><tr><th>Option</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><strong>Show World Picker at startup</strong></td><td>Opens the World Picker window when Savitar launches (default <strong>on</strong>). Turn off if you prefer to open worlds only via <strong>File → Open…</strong> or recent documents.</td></tr>
+<tr><td><strong>Show Events Window at startup</strong></td><td>Opens the <strong>app-wide Events</strong> window (⇧⌘E) automatically. Useful if you live in universal triggers and macros.</td></tr>
+<tr><td><strong>Show Macro Clicker at startup</strong></td><td>*(Grayed out — not yet available.)* Will open the Macro Clicker palette when Story 11 ships.</td></tr>
+</tbody></table>
+<p>Startup flags save immediately like other app Settings. They do not affect worlds already open from a previous session—only the next launch.</p>
 <hr/>
 <h2 id="menus">Menus</h2>
 <p>Savitar’s menu bar follows standard macOS conventions. A few items are Savitar-specific; others are provided by the system because Savitar is a document-based app. On recent macOS versions, <strong>File</strong> may show additional items (such as <strong>Duplicate</strong>, <strong>Rename…</strong>, and <strong>Move To…</strong>) that replace or supplement older template entries—the behavior described here matches what you see at runtime.</p>
@@ -331,6 +397,21 @@
 <li><strong>Default word wrap</strong> (Settings → Input &amp; Display) affects how long lines behave inside the pane width; it does not change the column count.</li>
 <li><strong>Scroll lock</strong> (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the <a href="#world-menu">World menu</a> table.</li>
 </ul>
+<h3 id="session-window-navigating-output">Navigating output</h3>
+<p>The <strong>output</strong> pane is a web view showing styled session text. You can:</p>
+<table>
+<thead><tr><th>Action</th><th>How</th></tr></thead>
+<tbody>
+<tr><td><strong>Scroll</strong></td><td>Trackpad, mouse wheel, or scrollbar</td></tr>
+<tr><td><strong>Scroll lock</strong></td><td><strong>World → Scroll Lock</strong> (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom</td></tr>
+<tr><td><strong>Select &amp; copy</strong></td><td>Drag to select; <strong>Edit → Copy</strong> (⌘C)</td></tr>
+<tr><td><strong>Clear</strong></td><td><strong>Edit → Clear Output</strong> (⌘K)</td></tr>
+<tr><td><strong>Find</strong></td><td><strong>Edit → Find…</strong> (⌘F) when the output pane is active—see <a href="#find">Find</a> under Edit menu</td></tr>
+<tr><td><strong>Speak selection</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong></td></tr>
+</tbody></table>
+<p><strong>Status bar</strong> (divider row showing cursor position) is <strong>not in Savitar 2 yet</strong>; pane size is shown in the yellow resize overlay while dragging.</p>
+<h3 id="session-window-connection-indicator">Connection indicator</h3>
+<p>The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to <strong>World Settings → Starting → Retry Seconds</strong>. Closing the window disconnects and removes the live session.</p>
 <hr/>
 <h2 id="events">Events</h2>
 <p>In Savitar, an <strong>event</strong> is anything the client does <strong>automatically</strong> on your behalf during a session—beyond simply showing server text and forwarding what you type. Events are how Savitar <strong>reacts</strong> to the game and <strong>extends</strong> your keyboard.</p>
@@ -352,7 +433,19 @@
 <p>When an Events window is frontmost, <strong>Edit → New Trigger</strong> or <strong>New Macro</strong> (⇧⌘N) adds an item to the active tab.</p>
 <h3 id="events-why-event">Why “event”?</h3>
 <p>The word predates Savitar 2—it is Savitar 1’s name for this whole family of behaviors. It is <strong>not</strong> a generic programming term in the UI; you will not configure “events” separately from triggers and macros. If you see <strong>Events</strong> in a menu or window title, read it as <strong>triggers and macros for this world (or for the whole app)</strong>.</p>
-<p>See <a href="#macros">Macros</a> below for hotkey commands. A full <strong>Triggers</strong> chapter (matching, gags, audio, replies, variables) is planned in <a href="Stories.md">Story 9</a>.</p>
+<p>See <a href="#macros">Macros</a> below for hotkey commands. Full trigger detail is in <a href="#triggers">Triggers</a> below.</p>
+<h3 id="events-editing-events">Editing events</h3>
+<p>The Events window is where you create and maintain triggers and macros:</p>
+<table>
+<thead><tr><th>Action</th><th>How</th></tr></thead>
+<tbody>
+<tr><td><strong>New item</strong></td><td><strong>Edit → New Trigger</strong> or <strong>New Macro</strong> (⇧⌘N) when an Events window is frontmost—the label matches the active tab</td></tr>
+<tr><td><strong>Rename</strong></td><td>Click the name in the list and type (in-place editing)</td></tr>
+<tr><td><strong>Reorder</strong></td><td>Drag items in the list to change processing order (<strong>triggers</strong>—order matters; see <a href="#triggers">Triggers</a>)</td></tr>
+<tr><td><strong>Enable / disable</strong></td><td>Checkbox in the list</td></tr>
+<tr><td><strong>Undo</strong></td><td>⌘Z after edits in detail fields</td></tr>
+</tbody></table>
+<p><strong>Per-world</strong> vs <strong>app-wide</strong> windows are separate lists—see <a href="#the-events-window">The Events window</a> above. Changes to a world document's events are saved with <strong>File → Save</strong> (⌘S).</p>
 <hr/>
 <h2 id="macros">Macros</h2>
 <p>A <strong>macro</strong> in Savitar is not like a spreadsheet macro. It is a <strong>keyboard shortcut that sends a command</strong> to the game—one keypress instead of typing the same line over and over.</p>
@@ -385,7 +478,270 @@
 <tr><td><strong>Trigger</strong></td><td>Watches <strong>output</strong> (or input) and reacts when text matches a pattern</td></tr>
 <tr><td><strong>Trigger variable</strong></td><td>Scratch space triggers write into (for captured text), not a hotkey command</td></tr>
 </tbody></table>
-<p>Savitar 1’s <strong>Macro Clicker</strong> used <strong>aliases</strong>—on-screen buttons that pointed at macros. That clicker window is not in Savitar 2 yet; macros themselves work via hotkeys.</p>
+<p>Savitar 1’s <strong>Macro Clicker</strong> used <strong>aliases</strong>—on-screen buttons that pointed at macros. That clicker window is not in Savitar 2 yet; macros themselves work via hotkeys. <strong>Command aliases</strong> (typed abbreviations like <code>n</code> → <code>go north</code>) are planned after Savitar 2.0 reaches Savitar 1 feature parity—see <a href="#glossary">Glossary</a>.</p>
+<hr/>
+<h2 id="entering-commands">Entering commands</h2>
+<p>The <strong>input</strong> pane is a single-line (or few-row) command editor. What you type is sent to the server when you press <strong>Return</strong>—unless Savitar intercepts it as a <strong>local command</strong> or an <strong>input trigger</strong>.</p>
+<h3 id="entering-commands-sending-lines">Sending lines</h3>
+<table>
+<thead><tr><th>Key / action</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><strong>Return</strong></td><td>Send the current line (with world line-ending postfix—see <a href="#input-tab">World Settings → Input</a>)</td></tr>
+<tr><td><strong>Return</strong> on empty line</td><td>Sends only the line ending (useful for worlds that treat a blank line specially)</td></tr>
+<tr><td><strong>⌥Return</strong> (Option-Return)</td><td>Insert a newline <strong>in the input field</strong> without sending—useful when composing multi-line macros or startup scripts</td></tr>
+</tbody></table>
+<h3 id="entering-commands-command-recall">Command recall</h3>
+<p>Savitar remembers up to <strong>100</strong> recent commands per session window (v1 used a smaller buffer).</p>
+<table>
+<thead><tr><th>Key</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><strong>↑</strong></td><td>Recall older commands</td></tr>
+<tr><td><strong>↓</strong></td><td>Recall newer commands; at the bottom, clears to a fresh empty line</td></tr>
+</tbody></table>
+<p>Recall walks the history for <strong>this session window</strong> only.</p>
+<h3 id="entering-commands-input-editing-keys">Input editing keys</h3>
+<p>These keys work in the input pane during a live session:</p>
+<table>
+<thead><tr><th>Key</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><strong>← / →</strong></td><td>Move cursor</td></tr>
+<tr><td><strong>⌃A</strong></td><td>Beginning of line</td></tr>
+<tr><td><strong>⌃C</strong></td><td>Send telnet <strong>interrupt</strong> (ASCII ETX)—some servers treat this as break/cancel</td></tr>
+<tr><td><strong>⌃G</strong></td><td>Send telnet <strong>bell</strong> (ASCII BEL)</td></tr>
+<tr><td><strong>⌃S</strong></td><td>Toggle <strong>scroll lock</strong> on output (not input editing)</td></tr>
+</tbody></table>
+<p><strong>Not yet in Savitar 2:</strong> v1 keys such as <strong>⌃E</strong> (end of line), <strong>⌃U</strong> (clear line), and <strong>⌃W</strong> (delete word) may return in a future update.</p>
+<h3 id="entering-commands-sticky-commands">Sticky commands</h3>
+<p>When <strong>World Settings → Input → Sticky commands</strong> is on, pressing Return <strong>leaves your command selected</strong> in the input line instead of clearing it—handy for repeating the same command with small edits. Press ↑/↓ to pull history as usual.</p>
+<hr/>
+<h2 id="variables-expansion">Variables &amp; expansion</h2>
+<p>Savitar can substitute <strong>scratch variables</strong> into commands, trigger replies, and macros before they are sent or executed.</p>
+<h3 id="variables-expansion-syntax">Syntax</h3>
+<p>Use your world's <strong>variable marker</strong> (default <code>%%</code>) followed by a name:</p>
+<p>```text</p>
+<p>say Hello, %%name!</p>
+<p>```</p>
+<p>When the command is processed, <code>%%name</code> is replaced with the current value stored for <code>name</code>. If no value exists, the marker may remain unchanged.</p>
+<h3 id="variables-expansion-where-values-come-from">Where values come from</h3>
+<table>
+<thead><tr><th>Source</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><strong>Trigger wildcards</strong></td><td>A trigger pattern <code>tell $$target hello</code> captures <code>target</code> when it matches</td></tr>
+<tr><td><strong>Trigger sets</strong></td><td>Triggers can write captured text into named variables for later replies</td></tr>
+<tr><td><strong>Manual use</strong></td><td>You type <code>%%var</code> in macros, startup commands, or replies</td></tr>
+</tbody></table>
+<p>Variable markers are configured per world on <strong>World Settings → Input → Markers</strong>. The default <code>%%</code> matches Savitar 1.</p>
+<h3 id="variables-expansion-macros-vs-variables">Macros vs variables</h3>
+<table>
+<thead><tr><th></th><th><strong>Macro</strong></th><th><strong>Variable (<code>%%name</code>)</strong></th></tr></thead>
+<tbody>
+<tr><td>Fires when</td><td>You press a <strong>hotkey</strong></td><td>Expanded whenever the text runs</td></tr>
+<tr><td>Typical use</td><td><code>F5</code> sends <code>cast heal</code></td><td><code>say %%target</code> uses last captured name</td></tr>
+</tbody></table>
+<p>See <a href="#triggers">Triggers</a> for wildcards (<code>$$</code>) and regex captures.</p>
+<hr/>
+<h2 id="local-commands">Local commands</h2>
+<p><strong>Local commands</strong> are handled by Savitar—they are <strong>not</strong> sent to the game server. By default they start with the <strong>command marker</strong> <code>##</code> (configurable per world on <strong>World Settings → Input</strong>).</p>
+<h3 id="local-commands-implemented-commands">Implemented commands</h3>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##history</code></td><td>Prints numbered list of recent commands for this session in the output pane</td></tr>
+<tr><td><code>##dump</code></td><td>Prints the output pane's HTML source to the <strong>Xcode/console log</strong> (developer debugging—not for everyday play)</td></tr>
+</tbody></table>
+<p>Example:</p>
+<p>```text</p>
+<p>##history</p>
+<p>```</p>
+<p>Might show:</p>
+<p>```text</p>
+<p>[SAVITAR] Command history:</p>
+<p>1  look</p>
+<p>2  n</p>
+<p>3  cast heal</p>
+<p>```</p>
+<h3 id="local-commands-v1-commands-not-yet-in-savitar-2">v1 commands not yet in Savitar 2</h3>
+<p>Savitar 1 supported many <code>##</code> commands. The table below is honest about status—check <a href="Stories.md">Stories.md</a> as more ship.</p>
+<table>
+<thead><tr><th>v1 command</th><th>Status in Savitar 2</th></tr></thead>
+<tbody>
+<tr><td><code>##history</code></td><td>✅ Shipped</td></tr>
+<tr><td><code>##dump</code> / <code>@printsource</code></td><td>✅ <code>##dump</code> (console); <code>@printsource</code> related</td></tr>
+<tr><td><code>##add macro</code>, <code>##add trigger</code></td><td>Planned</td></tr>
+<tr><td><code>##upload</code>, <code>##capture</code></td><td>Not planned for 2.0 (file upload deferred)</td></tr>
+<tr><td><code>##regex</code></td><td>Planned with trigger regex work</td></tr>
+<tr><td><code>##wait</code></td><td>Planned (delay in reply chains)</td></tr>
+<tr><td><code>##tell application</code></td><td>Not planned (AppleScript era)</td></tr>
+</tbody></table>
+<p>If the command marker is <strong>empty</strong>, local commands are disabled—all input goes to the server.</p>
+<hr/>
+<h2 id="triggers">Triggers</h2>
+<p>A <strong>trigger</strong> watches session text and <strong>reacts</strong> when a pattern matches. Triggers are the heart of Savitar automation—gags, highlights, sounds, auto-replies, and variable capture.</p>
+<h3 id="triggers-trigger-types">Trigger types</h3>
+<table>
+<thead><tr><th>Type</th><th>Watches</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td><strong>Output</strong></td><td>Text arriving from the server</td><td>Gag spam, play a sound on "You feel hungry", highlight guild chat</td></tr>
+<tr><td><strong>Input</strong></td><td>Text you type before it is sent</td><td>Shortcuts that never reach the server, input-side patterns</td></tr>
+</tbody></table>
+<p>Configure type in the Events window detail pane.</p>
+<h3 id="triggers-processing-order">Processing order</h3>
+<p>When a line of text is processed:</p>
+<ol>
+<li><strong>App-wide triggers</strong> run first (from <strong>Window → Show App-wide Events Window</strong>), top to bottom in the list</li>
+<li><strong>Per-world triggers</strong> run next (from <strong>World → Show World Events…</strong>), top to bottom</li>
+<li>Within each list, <strong>gags</strong> run first, then <strong>substitution</strong> triggers, then remaining matches</li>
+</ol>
+<p><strong>Tip:</strong> Put specific gags above broad patterns. If two triggers could match, order and trigger kind matter.</p>
+<h3 id="triggers-matching-modes">Matching modes</h3>
+<p>In the trigger editor <strong>Matching</strong> tab:</p>
+<table>
+<thead><tr><th>Mode</th><th>Matches when</th></tr></thead>
+<tbody>
+<tr><td><strong>Contains</strong></td><td>The line includes the pattern text</td></tr>
+<tr><td><strong>Starts with</strong></td><td>The line begins with the pattern</td></tr>
+<tr><td><strong>Regular expression</strong></td><td>Pattern is a regex (power users)</td></tr>
+</tbody></table>
+<p>Additional flags (<strong>exact</strong>, <strong>whole line</strong>, <strong>whole word</strong>) refine matching—same concepts as Savitar 1.</p>
+<h3 id="triggers-wildcards">Wildcards (<code>$$</code>)</h3>
+<p>In trigger <strong>names</strong> (patterns), <code>$$</code> marks a <strong>wildcard</strong> that captures text into a variable. With default markers, <code>tell $$player hello</code> can capture <code>player</code> when the line matches.</p>
+<p>Use captured values in replies with <code>%%player</code> (or your variable marker).</p>
+<h3 id="triggers-appearance-gags-color">Appearance (gags &amp; color)</h3>
+<table>
+<thead><tr><th>Appearance</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><strong>Gag</strong></td><td>Matching text is removed from output (or input processing)</td></tr>
+<tr><td><strong>Change appearance</strong></td><td>Recolor matching text using trigger style settings</td></tr>
+<tr><td><strong>Don't use style</strong></td><td>Match only—used with audio or reply</td></tr>
+</tbody></table>
+<h3 id="triggers-audio-reply">Audio &amp; reply</h3>
+<table>
+<thead><tr><th>Tab</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><strong>Audio Cue</strong></td><td>Play a sound, speak the matched line, or speak fixed text</td></tr>
+<tr><td><strong>Reply</strong></td><td>Automatically send a command to the server when matched (can include <code>%%variables</code>)</td></tr>
+</tbody></table>
+<p>Replies run through the same expansion and local-command handling as typed input. Audio respects <strong>Audio</strong> menu mute flags—see <a href="#speech">Speech</a>.</p>
+<h3 id="triggers-continuous-speech-interaction">Continuous speech interaction</h3>
+<p>When <strong>continuous speech</strong> is on, trigger speech and continuous speech share the speech queue. Use <strong>Audio → Flush Speech Buffer</strong> (⌘L) to skip ahead. See <a href="#speech">Speech</a>.</p>
+<h3 id="triggers-import-storage">Import &amp; storage</h3>
+<ul>
+<li><strong>Per-world triggers</strong> live in the <code>.world</code> document—<strong>File → Save</strong> persists them.</li>
+<li><strong>Universal triggers</strong> live in app preferences (imported from Savitar 1).</li>
+<li>Opening a v1 world <strong>read-only</strong> still lets you view events; save as v2 to edit.</li>
+</ul>
+<hr/>
+<h2 id="output-appearance">Output &amp; appearance</h2>
+<p>This section supplements <a href="#appearance-tab">World Settings → Appearance</a> and <a href="#ansi-colors">ANSI colors</a>.</p>
+<h3 id="output-appearance-ansi-output">ANSI output</h3>
+<p>Most MUDs send <strong>ANSI escape codes</strong> for color. Savitar converts them to HTML in the output pane using your global palette (<strong>Settings → Colors</strong>). If colors look wrong:</p>
+<ol>
+<li>Confirm <strong>World Settings → Appearance → Interpret ANSI codes</strong> is on</li>
+<li>Tune palette colors in <strong>Settings → Colors</strong></li>
+<li>Check fore/back defaults on the Appearance tab for invisible combinations (white on white)</li>
+</ol>
+<h3 id="output-appearance-html-in-output">HTML in output</h3>
+<p>When <strong>Interpret HTML tags</strong> is on, simple HTML in server text is rendered; <strong>Code font</strong> applies to <code>&lt;code&gt;</code> regions. Savitar 1's richer HTML and <strong><code>xch_cmd</code></strong> custom links are <strong>not in Savitar 2 yet</strong>—hosts that depend on them may show raw tags until supported.</p>
+<h3 id="output-appearance-word-wrap">Word wrap</h3>
+<p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).</p>
+<h3 id="output-appearance-session-logging">Session logging</h3>
+<p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong> and from <strong>New Text Document</strong> windows. See <a href="#output-tab">Output tab</a>.</p>
+<h3 id="output-appearance-buffer-flush-advanced">Buffer &amp; flush (advanced)</h3>
+<p>Savitar 1 exposed output <strong>buffer size</strong> and <strong>flush period</strong> in World Settings. These values exist in world XML (<code>FLUSHTICKS</code>, etc.) for imported worlds, but <strong>Savitar 2 does not yet expose them in the World Settings UI</strong>. If output feels laggy on very fast spam, note it in <strong>Help → Send Feedback…</strong>—tuning may return in a later release.</p>
+<hr/>
+<h2 id="worlds-connection">Worlds &amp; connection</h2>
+<h3 id="worlds-connection-world-picker">World Picker</h3>
+<p>The <strong>World Picker</strong> lists worlds from your app preferences (imported from Savitar 1 or created in Savitar 2).</p>
+<table>
+<thead><tr><th>Action</th><th>How</th></tr></thead>
+<tbody>
+<tr><td><strong>Connect</strong></td><td>Double-click a world, or select and click <strong>Connect</strong></td></tr>
+<tr><td><strong>Add</strong></td><td><strong>+</strong> button opens the <strong>World Wizard</strong> (name, host, port)</td></tr>
+<tr><td><strong>Remove</strong></td><td>Select a world and click <strong>−</strong> or press Delete</td></tr>
+<tr><td><strong>Edit connection</strong></td><td>Open a session, then <strong>World → Show World Settings…</strong> (⇧⌘J)</td></tr>
+</tbody></table>
+<p>Each <strong>connection</strong> opens a <strong>world document window</strong>—you can have multiple worlds open at once. Use the <strong>Window</strong> menu to switch.</p>
+<h3 id="worlds-connection-world-documents">World documents</h3>
+<p>A <code>.world</code> file stores connection settings, triggers, macros, and layout. <strong>File → Save</strong> writes changes. <strong>File → Duplicate</strong> (⇧⌘S) branches a copy.</p>
+<p>Legacy <strong>Savitar 1 worlds</strong> open read-only; use <strong>Save</strong> to write a Savitar 2 document.</p>
+<h3 id="worlds-connection-connecting">Connecting</h3>
+<p>On connect, Savitar:</p>
+<ol>
+<li>Opens a TCP socket to <strong>Host</strong> / <strong>Port</strong> from <strong>World Settings → Starting</strong></li>
+<li>Runs <strong>startup commands</strong> (one per line) after a successful connect</li>
+<li>Applies <strong>Retry Seconds</strong> and <strong>Keepalive Minutes</strong> from the Starting tab</li>
+</ol>
+<h3 id="worlds-connection-troubleshooting-connections">Troubleshooting connections</h3>
+<table>
+<thead><tr><th>Symptom</th><th>Things to try</th></tr></thead>
+<tbody>
+<tr><td>Commands ignored or doubled</td><td>Wrong <strong>line ending</strong>—toggle <strong>CR</strong> vs <strong>CR/LF</strong> on <strong>World Settings → Input</strong></td></tr>
+<tr><td>Immediate disconnect</td><td>Verify host/port; check firewall; try from another client</td></tr>
+<tr><td>Idle timeout</td><td>Increase <strong>Keepalive Minutes</strong> on Starting tab</td></tr>
+<tr><td>Garbled text</td><td>ANSI/HTML interpretation flags on Appearance tab</td></tr>
+</tbody></table>
+<hr/>
+<h2 id="settings-reference">Settings reference</h2>
+<p>Quick map from <strong>Savitar 1 preferences</strong> dialogs to <strong>Savitar 2</strong> surfaces.</p>
+<h3 id="settings-reference-app-settings">App Settings (⌘,)</h3>
+<table>
+<thead><tr><th>Savitar 2 pane</th><th>v1 equivalent (approx.)</th></tr></thead>
+<tbody>
+<tr><td><a href="#startup">Startup</a></td><td>World Picker / Events / Clicker at launch</td></tr>
+<tr><td><a href="#input-display">Input &amp; Display</a></td><td>Keypad, mono fonts, default word wrap</td></tr>
+<tr><td><a href="#ansi-colors">Colors</a></td><td>ANSI Color Settings</td></tr>
+<tr><td><a href="#audio">Audio</a></td><td>Mute sound / speaking / bell / clicker</td></tr>
+<tr><td><a href="#updates">Updates</a></td><td>Check for updates</td></tr>
+<tr><td><a href="#speech-speech-settings-reference">Speech</a></td><td>Continuous speech, voice, rate</td></tr>
+</tbody></table>
+<h3 id="settings-reference-world-settings-sheet-j">World Settings sheet (⇧⌘J)</h3>
+<table>
+<thead><tr><th>Savitar 2 tab</th><th>v1 equivalent</th></tr></thead>
+<tbody>
+<tr><td><a href="#starting-tab">Starting</a></td><td>Starting tab</td></tr>
+<tr><td><a href="#appearance-tab">Appearance</a></td><td>Appearance tab</td></tr>
+<tr><td><a href="#input-tab">Input</a></td><td>Input tab</td></tr>
+<tr><td><a href="#output-tab">Output</a></td><td>Output tab</td></tr>
+<tr><td>*(missing)*</td><td>MCP, Closing (quit command) — not in v2 yet</td></tr>
+</tbody></table>
+<p>Grayed-out app prefs (<strong>Macro Clicker</strong>, <strong>Mute clicker</strong>) will activate when those features ship.</p>
+<hr/>
+<h2 id="tips-troubleshooting">Tips &amp; troubleshooting</h2>
+<table>
+<thead><tr><th>Problem</th><th>Things to check</th></tr></thead>
+<tbody>
+<tr><td><strong>No speech</strong></td><td><a href="#speech">Speech</a>—continuous enabled? <strong>Mute Speaking Cues</strong> off? macOS 10.15+?</td></tr>
+<tr><td><strong>Trigger never fires</strong></td><td>List order; trigger enabled; correct <strong>output vs input</strong> type; pattern spelling</td></tr>
+<tr><td><strong>Trigger fires too much</strong></td><td>Narrow match (whole line / regex); move gag above loose patterns</td></tr>
+<tr><td><strong>Wrong colors</strong></td><td><a href="#ansi-colors">ANSI colors</a>; Appearance fore/back; ANSI interpretation on</td></tr>
+<tr><td><strong>Can't connect</strong></td><td><a href="#worlds--connection">Worlds &amp; connection</a>—host, port, line ending</td></tr>
+<tr><td><strong>MUX/MUSH marker conflicts</strong></td><td>Some worlds use `<code> </code> `<code> for commands; Savitar default is </code>##`—change command marker in Input tab if local commands collide</td></tr>
+<tr><td><strong>Laggy output on spam</strong></td><td>Buffer/flush UI not exposed yet—feedback welcome</td></tr>
+</tbody></table>
+<p>When in doubt: <strong>Help → Savitar Help</strong> (⌘?) for the chapter, then <strong>Help → Send Feedback…</strong> with version info included.</p>
+<hr/>
+<h2 id="glossary">Glossary</h2>
+<table>
+<thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><strong>ANSI</strong></td><td>Terminal color/style escape codes in server text</td></tr>
+<tr><td><strong>App-wide events</strong></td><td>Triggers/macros stored in preferences and applied to every world</td></tr>
+<tr><td><strong>Alias</strong></td><td>*(Planned.)* Typed abbreviation expanding to a command before send—distinct from macros</td></tr>
+<tr><td><strong>Event</strong></td><td>Savitar's umbrella term for <strong>triggers</strong> and <strong>macros</strong> (see <a href="#events">Events</a>)</td></tr>
+<tr><td><strong>Gag</strong></td><td>Trigger appearance that hides matching text</td></tr>
+<tr><td><strong>Local command</strong></td><td><code>##command</code> handled by Savitar, not sent to the server</td></tr>
+<tr><td><strong>Macro</strong></td><td>Hotkey that sends a predefined command string</td></tr>
+<tr><td><strong>MUD</strong></td><td>Multi-User Dungeon—a text multiplayer game accessed via telnet-like protocols</td></tr>
+<tr><td><strong>MOO / MUSH</strong></td><td>Related text-world genres; Savitar connects to their servers like any telnet host</td></tr>
+<tr><td><strong>MUVE</strong></td><td>Multi-User Virtual Environment—umbrella term (see heynow.com MUVE pages)</td></tr>
+<tr><td><strong>Output pane</strong></td><td>Top pane showing server text</td></tr>
+<tr><td><strong>Input pane</strong></td><td>Bottom pane where you type commands</td></tr>
+<tr><td><strong>Trigger</strong></td><td>Pattern-driven automation on session text</td></tr>
+<tr><td><strong>Variable (<code>%%</code>)</strong></td><td>Named scratch value expanded into commands and replies</td></tr>
+<tr><td><strong>Wildcard (<code>$$</code>)</strong></td><td>Pattern placeholder in trigger names that captures text</td></tr>
+<tr><td><strong>World</strong></td><td>A saved connection profile (host, port, events, settings)</td></tr>
+<tr><td><strong>World document</strong></td><td>Open window representing one world session or saved <code>.world</code> file</td></tr>
+</tbody></table>
 <hr/>
 <h2 id="world-settings">World Settings</h2>
 <p><strong>World Settings</strong> holds options for the <strong>active world document</strong>—connection details, fonts and colors, input behavior, and logging. Open it with <strong>World → Show World Settings…</strong> (⇧⌘J) or the settings button in the world window title bar.</p>
@@ -498,7 +854,16 @@
 <p>Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). <strong>Help → Send Feedback…</strong> already includes your Savitar version and macOS version in the message body.</p>
 <hr/>
 <h2 id="planned">More chapters (planned)</h2>
-<p>Story 9 in <a href="Stories.md">Stories.md</a> maps the <a href="http://heynow.com/savitar/manual140.html">Savitar 1.4 User's Manual</a> to remaining guide chapters. <strong>Shipped:</strong> quick start, speech, menus, <strong>session window</strong> (pane sizing), events, macros, ANSI colors, app Settings panes (Input &amp; Display, Audio, Updates), World Settings (Starting, Appearance, Input, Output), privacy, and getting help.</p>
-<p><strong>Suggested next writes:</strong> <strong>Triggers in depth</strong> (9.4), <strong>Getting started</strong> front matter (9.1), then <strong>Worlds &amp; connection</strong> (9.6) and <strong>Settings reference</strong> consolidation (9.5).</p>
+<p>Most beta-critical material is now in this guide. Remaining Story 9 work:</p>
+<table>
+<thead><tr><th>Topic</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Getting started, install, worlds, session, commands, triggers, glossary</td><td>✅ This guide (July 2026)</td></tr>
+<tr><td><strong>Aliases</strong> (Story 10)</td><td>Blocked on implementation</td></tr>
+<tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Blocked on implementation</td></tr>
+<tr><td>MCP, Closing tab, file upload, <code>xch_cmd</code>, status bar</td><td>Deferred—stubs in tables above</td></tr>
+<tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0 feature parity</td></tr>
+</tbody></table>
+<p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map.</p>
 </body>
 </html>

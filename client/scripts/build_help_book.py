@@ -22,17 +22,29 @@ LOCALE_DIR = HELP_ROOT / "Contents" / "Resources" / "en.lproj"
 
 ANCHOR_BY_TITLE = {
     "Getting started": "getting-started",
+    "Install & updates": "install-updates",
     "Speech": "speech",
-    "Menus": "menus",
-    "Events": "events",
-    "Macros": "macros",
-    "World Settings": "world-settings",
-    "Privacy & usage statistics": "privacy",
-    "Getting help": "getting-help",
     "ANSI colors": "ansi-colors",
     "Input & Display": "input-display",
     "Audio": "audio",
     "Updates": "updates",
+    "Startup": "startup",
+    "Menus": "menus",
+    "Session window": "session-window",
+    "Events": "events",
+    "Macros": "macros",
+    "Entering commands": "entering-commands",
+    "Variables & expansion": "variables-expansion",
+    "Local commands": "local-commands",
+    "Triggers": "triggers",
+    "Output & appearance": "output-appearance",
+    "Worlds & connection": "worlds-connection",
+    "Settings reference": "settings-reference",
+    "Tips & troubleshooting": "tips-troubleshooting",
+    "Glossary": "glossary",
+    "World Settings": "world-settings",
+    "Privacy & usage statistics": "privacy",
+    "Getting help": "getting-help",
     "More chapters (planned)": "planned",
 }
 
@@ -221,7 +233,9 @@ def build_index_html(body: str, toc: list[tuple[str, str]]) -> str:
 <body>
   <a id="top" name="top"></a>
   <h1>Savitar Help</h1>
-  <p>User guide for Savitar 2. Works offline in the app. For the latest draft chapters, see the project user guide on the web.</p>
+  <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
+  <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
+  <p><em>May you have many exciting stories to share, adventurer!</em></p>
   {toc_block}
   {body}
 </body>
