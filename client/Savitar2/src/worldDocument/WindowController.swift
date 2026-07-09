@@ -17,8 +17,6 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private var eventsWindowController: NSWindowController?
     private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
-    private var savedTitleWhileSettingsSheetOpen: String?
-    private var settingsSheetTabTitle: String?
     private let resolutionOverlay = ResolutionOverlay()
     private weak var observedSplitView: NSSplitView?
     private var isApplyingPaneLayout = false
@@ -59,9 +57,6 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
-        if let tabTitle = settingsSheetTabTitle {
-            return tabTitle
-        }
         let components = displayName.components(separatedBy: ".")
 
         // display just the world's file name, with no extension. And, if the
@@ -121,35 +116,25 @@ class WindowController: NSWindowController, NSWindowDelegate {
         let bundle = Bundle(for: Self.self)
         let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
 
-        // Wire callbacks before loading the sheet window so viewDidLoad can publish the tab title.
+        // Modal settings window (beginSheet); wire handlers before loadWindow().
         guard let settingsWC = settingsStoryboard.instantiateInitialController()
             as? WorldSettingsWindowController else { return }
         guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
 
-        savedTitleWhileSettingsSheetOpen = window?.title
+        settingsWC.parentDocumentTitle = window?.title ?? windowTitle
         settingsWC.settingsController = vc
         vc.sheetWindowController = settingsWC
-        vc.onSheetTitleChange = { [weak self] title in
-            self?.settingsSheetTabTitle = title
-            self?.window?.title = title
-        }
         vc.completionHandler = { [weak self] apply, editedWorld in
             guard let self else { return }
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
             }
-            self.settingsSheetTabTitle = nil
-            if let saved = self.savedTitleWhileSettingsSheetOpen {
-                self.window?.title = saved
-            }
-            self.savedTitleWhileSettingsSheetOpen = nil
             self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
         }
 
         settingsWC.loadWindow()
         vc.world = doc.world
-        vc.publishSheetTitleToParent()
         window?.beginSheet(settingsWC.window!)
     }
 

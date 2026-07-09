@@ -7,10 +7,11 @@
 
 import Cocoa
 
-/// Sheet chrome for per-world settings ([HIG.md](../../../docs/HIG.md) — World Settings sheet).
-/// The sheet shares the parent document window's title bar; tab titles are applied via `onSheetTitleChange`.
+/// Modal World Settings window (`beginSheet` on the document window).
+/// The settings window has its own title bar — keep the document title on the parent.
 final class WorldSettingsWindowController: NSWindowController {
     weak var settingsController: WorldSettingsController?
+    var parentDocumentTitle = ""
 
     private var escapeKeyMonitor: Any?
 
@@ -19,7 +20,7 @@ final class WorldSettingsWindowController: NSWindowController {
         guard let window else { return }
 
         window.styleMask = [.titled, .closable, .resizable]
-        window.title = SavitarHelp.WorldSettingsTab.starting.title
+        window.title = title(for: .starting)
         if #available(macOS 11.0, *) {
             window.toolbarStyle = .preference
         }
@@ -38,7 +39,7 @@ final class WorldSettingsWindowController: NSWindowController {
     }
 
     func updateForTab(_ tab: SavitarHelp.WorldSettingsTab, animated: Bool) {
-        window?.title = tab.title
+        window?.title = title(for: tab)
         guard let window, let settingsController else { return }
 
         let contentSize = settingsController.fittingContentSize(for: tab)
@@ -75,5 +76,11 @@ final class WorldSettingsWindowController: NSWindowController {
             width += iconWidth + labelWidth + itemPadding
         }
         return ceil(width)
+    }
+
+    private func title(for tab: SavitarHelp.WorldSettingsTab) -> String {
+        let tabTitle = tab.title
+        guard !parentDocumentTitle.isEmpty else { return tabTitle }
+        return "\(parentDocumentTitle) — \(tabTitle)"
     }
 }

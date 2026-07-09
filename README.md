@@ -67,7 +67,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
 _ World settings Output tab — buffer size, flush period
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
-√ World settings sheet — HIG polish (OK/Cancel, tab title in window bar, per-tab resize, Appearance preview wrap)
+√ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
 _ Implement remaining local commands
 √ Implement scroll locking
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)

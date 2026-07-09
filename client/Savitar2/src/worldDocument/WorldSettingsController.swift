@@ -12,8 +12,6 @@ class WorldSettingsController: NSViewController {
     var completionHandler: ((Bool, World?) -> Void)?
 
     weak var sheetWindowController: WorldSettingsWindowController?
-    /// Sheet windows share the parent document title bar; update it when the tab changes.
-    var onSheetTitleChange: ((String) -> Void)?
 
     var world: World? {
         get {
@@ -67,7 +65,6 @@ class WorldSettingsController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         polishChromeForHIGIfNeeded()
-        publishSheetTitleToParent()
     }
 
     deinit {
@@ -94,16 +91,10 @@ class WorldSettingsController: NSViewController {
         return NSSize(width: width, height: tab.preferredSheetHeight + footerHeight)
     }
 
-    func publishSheetTitleToParent() {
-        let tab = selectedWorldSettingsTab ?? .starting
-        onSheetTitleChange?(tab.title)
-    }
-
     private func tabSelectionDidChange() {
         polishChromeForHIGIfNeeded()
         updateContextualHelpForSelectedTab()
         let tab = selectedWorldSettingsTab ?? .starting
-        publishSheetTitleToParent()
         sheetWindowController?.updateForTab(tab, animated: view.window?.isVisible == true)
     }
 
