@@ -116,13 +116,15 @@ class WindowController: NSWindowController, NSWindowDelegate {
         let bundle = Bundle(for: Self.self)
         let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
 
-        // Modal settings window (beginSheet); wire handlers before loadWindow().
+        // Modal child window — beginSheet hides the settings window title bar on modern macOS.
+        guard let parentWindow = window else { return }
         guard let settingsWC = settingsStoryboard.instantiateInitialController()
             as? WorldSettingsWindowController else { return }
         guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
 
-        settingsWC.parentDocumentTitle = window?.title ?? windowTitle
+        settingsWC.parentWindow = parentWindow
+        settingsWC.parentDocumentTitle = parentWindow.title
         settingsWC.settingsController = vc
         vc.sheetWindowController = settingsWC
         vc.completionHandler = { [weak self] apply, editedWorld in
@@ -130,12 +132,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
             }
-            self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
+            settingsWC.dismissModal()
         }
 
         settingsWC.loadWindow()
         vc.world = doc.world
-        window?.beginSheet(settingsWC.window!)
+        settingsWC.presentModally()
     }
 
     override func showWindow(_ sender: Any?) {

@@ -7,10 +7,11 @@
 
 import Cocoa
 
-/// Modal World Settings window (`beginSheet` on the document window).
-/// The settings window has its own title bar — keep the document title on the parent.
-final class WorldSettingsWindowController: NSWindowController {
+/// Modal World Settings window (child of the document window, `runModal`).
+/// Uses a full title bar — `beginSheet` hides sheet title chrome on modern macOS.
+final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate {
     weak var settingsController: WorldSettingsController?
+    weak var parentWindow: NSWindow?
     var parentDocumentTitle = ""
 
     private var escapeKeyMonitor: Any?
@@ -21,6 +22,8 @@ final class WorldSettingsWindowController: NSWindowController {
 
         window.styleMask = [.titled, .closable, .resizable]
         window.title = title(for: .starting)
+        window.delegate = self
+        window.isReleasedWhenClosed = false
         if #available(macOS 11.0, *) {
             window.toolbarStyle = .preference
         }
@@ -36,6 +39,28 @@ final class WorldSettingsWindowController: NSWindowController {
 
     override func cancelOperation(_ sender: Any?) {
         settingsController?.cancelWorldSetting(sender as Any)
+    }
+
+    func dismissModal() {
+        guard let window else { return }
+        parentWindow?.removeChildWindow(window)
+        window.orderOut(self)
+        if NSApp.modalWindow === window {
+            NSApp.stopModal()
+        }
+    }
+
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        settingsController?.cancelWorldSetting(sender)
+        return false
+    }
+
+    func presentModally() {
+        guard let window, let parentWindow else { return }
+        parentWindow.addChildWindow(window, ordered: .above)
+        window.centerRelative(to: parentWindow)
+        showWindow(self)
+        _ = NSApp.runModal(for: window)
     }
 
     func updateForTab(_ tab: SavitarHelp.WorldSettingsTab, animated: Bool) {

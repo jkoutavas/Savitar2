@@ -18,7 +18,7 @@ When changing UI, check this doc, [.cursor/rules/macos-hig.mdc](../.cursor/rules
 
 1. **System controls and terminology** — "Settings" not "Preferences" on macOS 13+.
 2. **Modeless by default** — app Settings, Events, World Picker, and Macro Clicker (when shipped) must not block document interaction.
-3. **Immediate feedback** — app Settings toggles apply at once and persist to prefs XML; World Settings use **OK** / **Cancel** on the sheet.
+3. **Immediate feedback** — app Settings toggles apply at once and persist to prefs XML; World Settings use **OK** / **Cancel** on the modal dialog.
 4. **Disable, don't hide** — unavailable features stay visible, grayed, with a tooltip.
 5. **Keyboard shortcuts** — respect standard shortcuts (⌘,, ⌘W, ⌘Q, arrow keys in text, etc.).
 6. **Window chrome** — only add minimize/zoom when content needs it; fixed-size utility windows and Settings panes stay close-only and non-resizable unless a pane scrolls.
@@ -64,17 +64,17 @@ Panes with larger content (Colors, Speech) may grow the window; `resizeToFitCurr
 
 ---
 
-## World Settings sheet
+## World Settings dialog
 
-Per-world options belong in **World Settings** (sheet on the world document window), **not** app Settings.
+Per-world options belong in **World Settings** (modal dialog on the world document window), **not** app Settings.
 
 | Requirement | Implementation |
 |-------------|----------------|
 | **World → Show World Settings…** (⇧⌘J) or title-bar control | `WindowController` + `WorldSettings.storyboard` |
-| Modal sheet; **OK** / **Cancel** | `beginSheet`; changes staged until OK; **Escape** cancels |
+| Modal; blocks parent until dismissed; **OK** / **Cancel** | Child window + `runModal`; changes staged until OK; **Escape** cancels |
 | Settings window title = document name + tab | e.g. `Alter Aeon — Starting`; document window title unchanged |
 | Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)` |
-| Toolbar tab style (macOS 11+) | `WorldSettingsTabViewController`; `toolbarStyle = .preference` on sheet window |
+| Toolbar tab style (macOS 11+) | `WorldSettingsTabViewController`; `toolbarStyle = .preference` on settings window |
 | Tabs: Starting, Appearance, Input, Output, Closing | `NSTabView` + toolbar; MCP deferred |
 | Contextual **?** per tab | `SavitarHelpButton.installInTopTrailingCorner` |
 
@@ -215,7 +215,7 @@ Major surfaces expose **?** → matching guide anchor via `SavitarHelp.show(anch
 | Surface | Placement |
 |---------|-----------|
 | World Picker, world session, Events, App Settings | Title bar trailing (`SavitarHelpButton.installInTitleBar`) |
-| World Settings sheet | Top-trailing of sheet content |
+| World Settings dialog | Top-trailing of dialog content |
 
 App Settings updates the anchor when the toolbar pane changes; World Settings on tab change.
 
