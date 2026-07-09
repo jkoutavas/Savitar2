@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **World Settings → Closing** — configure a logoff command (for example `quit` or `@quit`) sent to the world when you close a connected session window; v1 `LOGOFFCMD` parity
+- **World Settings → Closing** — configure logoff command on close and auto-close (skip offline/reconnect prompt); v1 `LOGOFFCMD` and `autoClose` parity
 
 ### Changed
 

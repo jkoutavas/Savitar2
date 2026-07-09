@@ -224,6 +224,29 @@ class WorldTests: XCTestCase {
         XCTAssertTrue(xmlOutString.contains("FLAGS=\"ansi+html+CROnly\""))
     }
 
+    func testAutoCloseFlagRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://example.com:3000"
+            FLAGS="html+ansi+autoClose"
+            CMDMARKER="##"
+            VARMARKER="%%"
+            WILDMARKER="$$"
+            RESOLUTION="80x24x2"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertTrue(world.flags.contains(.autoClose))
+
+        let xmlOutString = try world.toXMLElement().xmlString
+        XCTAssertTrue(xmlOutString.contains("autoClose"))
+    }
+
     func testCommandLinePostfixDefaultsToCRLF() {
         let world = World()
         XCTAssertEqual(world.commandLinePostfix, "\r\n")

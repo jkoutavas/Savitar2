@@ -1018,13 +1018,12 @@ Session logging is separate from **text document** windows and from **File → P
 
 When you close a **connected** session window (or quit Savitar while worlds are connected), Savitar can send a **logoff command** to the game before disconnecting—so the server records a clean quit instead of a dropped connection.
 
-| Field | What it does |
-|-------|----------------|
+| Control | What it does |
+|---------|----------------|
 | **Logoff command** | Command sent to the world on close (for example `quit`, `@quit`, or `QUIT`). Leave blank to disconnect without sending anything. |
+| **Close window automatically** | When on, the window closes right after disconnect. When off (default), Savitar shows the **offline** panel first—you close again to dismiss the document (v1 reconnect prompt). |
 
-Imported Savitar 1 worlds keep their `LOGOFFCMD` value from world XML. Changes apply when you click **Apply** and take effect the next time you close a connected session.
-
-**Note:** Savitar 1 also offered **auto-close** (skip the reconnect prompt). That behavior is not in Savitar 2 yet; closing a connected window disconnects and shows the offline panel, then you close again to dismiss the document.
+Imported Savitar 1 worlds keep their `LOGOFFCMD` and `autoClose` flag from world XML (`FLAGS="…+autoClose"`). Changes apply when you click **Apply** and take effect the next time you close a connected session.
 
 ---
 

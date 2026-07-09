@@ -15,6 +15,11 @@ class ClosingSettingsController: NSViewController {
         set { (representedObject as? World)?.logoffCmd = newValue }
     }
 
+    @objc dynamic var autoClose: Bool {
+        get { (representedObject as? World)?.flags.contains(.autoClose) ?? false }
+        set { setAutoClose(enabled: newValue) }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         installLayoutIfNeeded()
@@ -33,6 +38,19 @@ class ClosingSettingsController: NSViewController {
             "Leave blank to disconnect without sending a command.")
         help.font = NSFont.systemFont(ofSize: 11)
         help.textColor = .secondaryLabelColor
+
+        let autoCloseButton = NSButton(checkboxWithTitle:
+            "Close window automatically (do not show reconnect prompt)", target: nil, action: nil)
+        autoCloseButton.translatesAutoresizingMaskIntoConstraints = false
+        autoCloseButton.bind(.value, to: self, withKeyPath: "autoClose", options: [
+            .continuouslyUpdatesValue: true
+        ])
+
+        let autoCloseHelp = NSTextField(wrappingLabelWithString:
+            "When off, closing a connected window disconnects and shows the offline panel—you close " +
+            "again to dismiss the document. When on, the window closes immediately after disconnect.")
+        autoCloseHelp.font = NSFont.systemFont(ofSize: 11)
+        autoCloseHelp.textColor = .secondaryLabelColor
 
         let box = NSBox()
         box.title = "Logoff command"
@@ -62,6 +80,19 @@ class ClosingSettingsController: NSViewController {
 
         view.addSubview(box)
 
+        let autoCloseBox = NSBox()
+        autoCloseBox.title = "Close behavior"
+        autoCloseBox.translatesAutoresizingMaskIntoConstraints = false
+
+        let autoCloseContent = NSStackView(views: [autoCloseButton, autoCloseHelp])
+        autoCloseContent.orientation = .vertical
+        autoCloseContent.alignment = .leading
+        autoCloseContent.spacing = 8
+        autoCloseContent.translatesAutoresizingMaskIntoConstraints = false
+        autoCloseBox.contentView?.addSubview(autoCloseContent)
+
+        view.addSubview(autoCloseBox)
+
         NSLayoutConstraint.activate([
             box.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
             box.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
@@ -72,7 +103,27 @@ class ClosingSettingsController: NSViewController {
             boxContent.topAnchor.constraint(equalTo: box.contentView!.topAnchor, constant: 14),
             boxContent.bottomAnchor.constraint(equalTo: box.contentView!.bottomAnchor, constant: -14),
 
-            field.widthAnchor.constraint(greaterThanOrEqualToConstant: 240)
+            field.widthAnchor.constraint(greaterThanOrEqualToConstant: 240),
+
+            autoCloseBox.topAnchor.constraint(equalTo: box.bottomAnchor, constant: spacing),
+            autoCloseBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            autoCloseBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+
+            autoCloseContent.leadingAnchor.constraint(
+                equalTo: autoCloseBox.contentView!.leadingAnchor, constant: 16),
+            autoCloseContent.trailingAnchor.constraint(
+                equalTo: autoCloseBox.contentView!.trailingAnchor, constant: -16),
+            autoCloseContent.topAnchor.constraint(equalTo: autoCloseBox.contentView!.topAnchor, constant: 14),
+            autoCloseContent.bottomAnchor.constraint(equalTo: autoCloseBox.contentView!.bottomAnchor, constant: -14)
         ])
+    }
+
+    private func setAutoClose(enabled: Bool) {
+        guard let world = representedObject as? World else { return }
+        if enabled {
+            world.flags.insert(.autoClose)
+        } else {
+            world.flags.remove(.autoClose)
+        }
     }
 }

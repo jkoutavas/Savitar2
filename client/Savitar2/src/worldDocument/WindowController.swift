@@ -461,7 +461,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
     internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {
             if window == self.window {
-                (document as? Document)?.session?.close(sendLogoff: true)
+                if let session = (document as? Document)?.session,
+                   session.status == .ConnectComplete {
+                    session.close(sendLogoff: true)
+                }
             }
             return true
         }
@@ -471,6 +474,9 @@ class WindowController: NSWindowController, NSWindowDelegate {
             guard let session = doc.session else { return true }
             if session.status == .ConnectComplete {
                 session.close(sendLogoff: true)
+                if doc.world?.flags.contains(.autoClose) == true {
+                    reallyClose()
+                }
                 return false
             }
             return true
