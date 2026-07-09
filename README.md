@@ -82,7 +82,7 @@ _ File upload
 _ Divider status bar support
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 √ Sparkle auto-updates (Story 12)
-_ Add bug reporting support
+√ Add bug reporting support (Story 15 — Help → Send Feedback…)
 √ In-app Savitar Help — bundled user guide (Story 16)
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)

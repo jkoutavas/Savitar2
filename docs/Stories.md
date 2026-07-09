@@ -294,7 +294,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 | **6. Local Commands** | Local commands reference | Not started | **9.2d** |
 | **7. Useful Tips** | Tips, diagnostics, performance | Not started | **9.7** |
 | **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Not started | **9.8** |
-| **9. In Closing** | Bug reporting, links | Partial | **9.9** (Help/Privacy ✅ Stories 16–18; Send Feedback — Story 15) |
+| **9. In Closing** | Bug reporting, links | Partial | **9.9** (Help/Privacy ✅ Stories 16–18; Send Feedback ✅ Story 15) |
 
 ### Writing principles (v1 manual → v2 guide)
 
@@ -317,7 +317,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 - [x] **9.4a** Document **Events** (general term; Events window; triggers vs macros overview)
 - [x] **9.5a** **World Settings** chapter — Starting, Appearance, Input, Output tabs ([USER_GUIDE.md#world-settings](USER_GUIDE.md#world-settings))
 - [x] **9.5b** Per-pane App Settings chapters — Speech, Colors, Input & Display, Audio, Updates (Startup pane chapter still TBD)
-- [x] **9.9a** **Getting help** + **Privacy & usage statistics**; Help menu table (Send Feedback deferred to Story 15)
+- [x] **9.9a** **Getting help** + **Privacy & usage statistics**; Help menu table (Send Feedback ✅ Story 15)
 - [x] **9.10** **Publish path** — README link; in-app Help book (Story 16); contextual **?** (Story 17); interim **Savitar Guide on the Web…** → GitHub
 
 #### Chapter stories (from v1 manual)
@@ -415,9 +415,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
   - MUD, MOO, MUSH, MUVE, ANSI, trigger, macro, event, gag, wildcard, local command, …
   - *Acceptance:* Every jargon term used in the guide is defined here
 
-- [ ] **9.9** **Help & feedback** — v1 §9 *(partial: **9.9a** shipped; **Send Feedback…** — Story 15)*
-  - Update Getting help when Story 15 ships
-  - *Acceptance:* Matches Help menu; honest about feedback path
+- [x] **9.9** **Help & feedback** — v1 §9 *(**9.9a** + **Send Feedback…** ✅ Story 15)*
 
 #### Deferred guide sections (blocked on features)
 
@@ -442,7 +440,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 7. **9.2d** — local commands (grows as commands ship)
 8. **9.1b** — download/install (Updates chapter done; add first-run install)
 9. **9.7, 9.8** — tips, glossary
-10. **9.9** — finish when Story 15 ships Send Feedback
+10. ~~**9.9** — Send Feedback~~ ✅
 11. **9.2e, 9.2f** — when Stories 10–11 land
 
 ### Touchpoints
@@ -734,7 +732,7 @@ gh api repos/jkoutavas/Savitar2/releases --paginate \
 
 ---
 
-## Story 15 — Send Feedback (email)
+## Story 15 — Send Feedback (email) ✅
 
 **Goal:** Give **non-developer** players a frictionless way to report problems and suggest improvements — without a GitHub account.
 
@@ -754,24 +752,23 @@ Help
 
 ### Tasks
 
-- [ ] **15.1** **`SavitarFeedback` helper** — build `mailto:` URL with UTF-8–safe subject/body; read destination address from `Info.plist` key `SavitarFeedbackEmail` (default `jay@heynow.com` or project-chosen support address).
-- [ ] **15.2** **Pre-filled diagnostics** — body includes Savitar version (`CFBundleShortVersionString`), build (`CFBundleVersion`), macOS version (`ProcessInfo`), and labeled sections the user fills in:
-  - *What I was trying to do*
-  - *What happened*
-  - *Bug or feature request?*
-- [ ] **15.3** **Help → Send Feedback…** — menu item + `AppDelegate` action; open default mail client via `NSWorkspace.shared.open(url)`. If no mail client is configured, show alert with support email and “copy diagnostics to clipboard” fallback.
-- [ ] **15.4** **VoiceOver / accessibility** — menu title and alert strings are plain language (“Send Feedback”, not “File GitHub Issue”).
-- [ ] **15.5** **User guide (Story 9.9)** — short “Getting help” section: try Savitar Help first; then Send Feedback; what to include; response expectations; GitHub not required.
-- [ ] **15.6** **Maintainer workflow** — document in `CONTRIBUTING.md` (or internal note): email → reproduce → optional GitHub issue; no expectation that reporters use Issues.
+- [x] **15.1** **`SavitarFeedback` helper** — `mailto:` URL with UTF-8–safe subject/body; destination from `Info.plist` key `SavitarFeedbackEmail` (default `jay@heynow.com`).
+- [x] **15.2** **Pre-filled diagnostics** — body includes Savitar version, build, macOS version, and labeled sections: *What I was trying to do*, *What happened*, *Bug or feature request?*
+- [x] **15.3** **Help → Send Feedback…** — menu item + `AppDelegate` action; `NSWorkspace.shared.open(url)`; alert with support email + “Copy Diagnostics to Clipboard” fallback when Mail is unavailable.
+- [x] **15.4** **VoiceOver / accessibility** — plain-language menu title “Send Feedback…” and alert strings.
+- [x] **15.5** **User guide (Story 9.9)** — **Getting help** and Help menu table updated; try Savitar Help first, then Send Feedback.
+- [x] **15.6** **Maintainer workflow** — `CONTRIBUTING.md` notes email → reproduce → optional GitHub issue.
+- [x] **15.7** **Alpha announcement** — one-time modal on first launch after upgrade explains alpha testing, Savitar 1 feature-complete milestone, aliases after 2.0, and **Send Feedback…** / **Savitar Help** entry points.
 
 ### Touchpoints
 
-- New: `client/Savitar2/src/SavitarFeedback.swift` (or extension on `AppDelegate`)
+- `client/Savitar2/src/SavitarFeedback.swift`
 - `client/Savitar2/Base.lproj/Main.storyboard` (Help menu)
 - `client/Savitar2/src/AppDelegate.swift`
 - `client/Savitar2/Info.plist` (`SavitarFeedbackEmail`)
 - `docs/USER_GUIDE.md` (Story 9.9)
 - `README.md` (check off bug reporting when shipped)
+- **Local testing:** reset alpha dialog — [client/fastlane/README.md § Local testing tips](../client/fastlane/README.md#local-testing-tips) (`defaults delete com.heynow.savitar2 SavitarHasSeenAlphaFeedbackAnnouncement`)
 
 ### Acceptance
 
@@ -1076,6 +1073,61 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 
 ---
 
+## Story 22 — Alpha news banner on heynow.com/savitar (cross-repo) ✅
+
+**Goal:** Add a visible **News** banner on the Savitar 2 landing page (`heynow.com/savitar/`) that tells visitors we are in **alpha testing** — matching the in-app welcome (Story 15) for people who discover Savitar on the web before they download.
+
+**Context:** Story **15** introduces alpha testing and **Send Feedback…** inside the app. Many players will land on `/savitar/` first (search, bookmarks, v1 archive banners). A site banner closes the loop: same message, same era of the release, without requiring an install. **Implementation is in [heynow_websites](https://github.com/jkoutavas/heynow_websites)** — propose **Story W10**; this story tracks **content**, **coordination**, and **Savitar2 cross-links** if needed.
+
+**Relationship to W1 / W2:** W1 is the Savitar 2 landing (`savitar-www/` Eleventy build). W2 adds a small v1 archive strip on legacy pages. This banner is **on the v2 landing only** — a forward-looking status line, not a migration nudge.
+
+### Sketch (landing page)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ News · Savitar 2 is in alpha testing — we're close to       │
+│ Savitar 1 feature complete. Try the build and send feedback │
+│ (no GitHub account needed). [Download] [Community forum]    │
+└─────────────────────────────────────────────────────────────┘
+│ (existing W1 hero, features, migration, …)                  │
+```
+
+Copy should align with the in-app alpha announcement: define alpha briefly, mention aliases after 2.0 feature parity, point to download + feedback path (email via app; forum for discussion).
+
+### Tasks
+
+- [x] **22.1** **Content** — banner prose aligned with `SavitarFeedback` alpha announcement; defines alpha, feature-complete milestone, aliases after parity.
+- [x] **22.2** **Coordinate W10** — above hero on W1 landing; always-on via `site.json` until beta (`newsBanner.enabled`).
+- [x] **22.3** **heynow_websites build** — `savitar-www/src/_includes/news-banner.njk`, `site.json`, styles in `site.css`.
+- [x] **22.4** **Links** — Download (GitHub Releases), Community forum, `mailto:` feedback; learn card updated from GitHub Issues.
+- [ ] **22.5** **Deploy** — ship via `deploy-savitar.sh` / W5 when ready; local preview: `cd savitar-www && npm run dev`.
+- [x] **22.6** **Savitar2 docs** — USER_GUIDE **Getting help** mentions site alpha news.
+
+### Touchpoints
+
+- [heynow_websites `savitar-www/`](https://github.com/jkoutavas/heynow_websites/tree/main/savitar-www) — Eleventy landing source
+- [heynow_websites `docs/STORIES.md` — Story W10](https://github.com/jkoutavas/heynow_websites/blob/main/docs/STORIES.md)
+- `client/Savitar2/src/SavitarFeedback.swift` — in-app announcement copy (reference)
+- `docs/USER_GUIDE.md` — **Getting help** (optional web mention)
+
+### Acceptance
+
+- `heynow.com/savitar/` shows a clear **alpha testing** news banner without breaking W1 layout.
+- Message is honest: pre–feature-complete software, feedback welcome, aliases called out as post-parity.
+- Banner can be removed or swapped to “beta” copy without redeploying Savitar2 (site-only change).
+- No contradiction with privacy page (W9) or v1 archive banners (W2).
+
+### Dependency
+
+- **Story 15** (in-app feedback + announcement shipped). **W1** landing (banner host). **W5** deploy path. **W8** forum link (optional CTA).
+
+### Out of scope
+
+- In-app “check website for news” polling or Sparkle release notes duplication.
+- Per-visitor dismiss cookie (consider only if banner feels intrusive; default is always-on until beta).
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -1100,7 +1152,7 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 7. ~~Story 16 — In-app user guide (Help menu)~~ ✅
 8. ~~Story 17 — Contextual ? help buttons~~ ✅
 9. ~~Story 18 — Help → About Privacy~~ ✅
-10. **Story 15 — Send Feedback (email)** — next; completes “read Help first, then Send Feedback”
+10. ~~Story 15 — Send Feedback (email)~~ ✅
 11. ~~**Story 21 — About box with scrolling credits**~~ ✅
 12. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
 13. **Story 9 — User guide** — ongoing (session window, triggers depth, local commands, glossary, 9.1 front matter, 9.5 consolidation)
@@ -1110,10 +1162,11 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 17. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
 18. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
 19. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
-20. Story 8 — SwiftUI Settings spike (optional, post-beta)
+20. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
+21. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
-**Stories 15 + 16** satisfy README *Add bug reporting support* (15 pending; 16 ✅).
+**Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).
 Story 9 content writing continues in parallel with feature work.
 
 Story 3 is retained for reference only; implement Story 5 instead.

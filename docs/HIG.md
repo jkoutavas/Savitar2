@@ -179,12 +179,15 @@ Savitar-specific audio (not standard Edit → Speech):
 |------|----------|----------|
 | **Savitar Help** | ⌘? | Bundled guide in `HelpGuideWindowController` + `WKWebView` (offline) |
 | **Savitar Guide on the Web…** | — | GitHub `USER_GUIDE.md` (interim) |
+| **Send Feedback…** | — | `mailto:` to support address with pre-filled version info and prompts; clipboard fallback if Mail is unavailable |
 | **About Privacy…** | — | Savitar Help at `#privacy`; web copy at [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) |
 | **Release Notes…** | — | GitHub Releases |
 
 **Do not** route primary help through macOS Help Viewer (`NSHelpManager` / `helpd`) — unreliable for Xcode and non–`/Applications` builds. The `.help` bundle remains for indexing and possible future `registerBooks` integration.
 
-**Send Feedback…** — planned ([Story 15](Stories.md#story-15--send-feedback-email)); place below Savitar Help when shipped.
+**Alpha announcement** — one-time modal on first launch after Story 15 (`SavitarFeedback.presentAlphaAnnouncementIfNeeded`) explains the alpha test and points users to **Send Feedback…** and **Savitar Help**.
+
+Touchpoint: `client/Savitar2/src/SavitarFeedback.swift`.
 
 ### Savitar → About Savitar
 

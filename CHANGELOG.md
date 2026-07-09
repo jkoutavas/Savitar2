@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **About Savitar** — custom About box with the classic medallion and scrolling “Special Heynows” credits (Savitar 1 parity)
+- **Help → Send Feedback…** — pre-filled email to the Savitar team with version diagnostics; clipboard fallback when Mail is unavailable (Story 15)
+- **Alpha welcome** — one-time announcement explaining the Savitar 2 alpha test and how to send feedback
 
 ### Changed
 
