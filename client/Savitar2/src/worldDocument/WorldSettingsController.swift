@@ -128,6 +128,10 @@ class WorldSettingsController: NSViewController {
         guard let index = _tabViewController?.selectedTabViewItemIndex else { return nil }
         return SavitarHelp.WorldSettingsTab(rawValue: index)
     }
+
+    var currentWorldSettingsTab: SavitarHelp.WorldSettingsTab {
+        selectedWorldSettingsTab ?? .starting
+    }
 }
 
 private extension SavitarHelp.WorldSettingsTab {

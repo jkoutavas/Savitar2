@@ -21,14 +21,15 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
         guard let window else { return }
 
         window.styleMask = [.titled, .closable, .resizable]
-        window.title = title(for: .starting)
         window.delegate = self
         window.isReleasedWhenClosed = false
         if #available(macOS 11.0, *) {
             window.toolbarStyle = .preference
         }
         installEscapeKeyMonitor()
-        updateForTab(.starting, animated: false)
+        if !parentDocumentTitle.isEmpty {
+            updateForTab(.starting, animated: false)
+        }
     }
 
     deinit {
@@ -57,6 +58,8 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
 
     func presentModally() {
         guard let window, let parentWindow else { return }
+        let tab = settingsController?.currentWorldSettingsTab ?? .starting
+        updateForTab(tab, animated: false)
         parentWindow.addChildWindow(window, ordered: .above)
         window.centerRelative(to: parentWindow)
         showWindow(self)

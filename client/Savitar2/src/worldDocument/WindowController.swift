@@ -120,11 +120,13 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let parentWindow = window else { return }
         guard let settingsWC = settingsStoryboard.instantiateInitialController()
             as? WorldSettingsWindowController else { return }
-        guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
 
         settingsWC.parentWindow = parentWindow
-        settingsWC.parentDocumentTitle = parentWindow.title
+        let documentTitle = parentWindow.title.isEmpty ? windowTitle : parentWindow.title
+        settingsWC.parentDocumentTitle = documentTitle
+
+        guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         settingsWC.settingsController = vc
         vc.sheetWindowController = settingsWC
         vc.completionHandler = { [weak self] apply, editedWorld in
