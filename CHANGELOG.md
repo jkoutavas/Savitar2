@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.20] - 2026-07-09
+
 ### Added
 
 - **About Savitar** — custom About box with the classic medallion and scrolling “Special Heynows” credits (Savitar 1 parity)
@@ -108,7 +110,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.19...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.20...HEAD
+[2.0.20]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.20
 [2.0.19]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.19
 [2.0.18]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.18
 [2.0.17]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.17
