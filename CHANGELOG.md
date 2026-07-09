@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **User guide** — Getting started, install, session depth, triggers, local commands, glossary, settings reference, Startup pane, tips (Story 9)
 - **Privacy on the web** — user guide and in-app help link to [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) (Story 19 / heynow_websites W9)
 
 ### Fixed

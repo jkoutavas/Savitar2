@@ -278,7 +278,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 
 **Goal:** Ship a complete end-user guide covering all Savitar 2 features at v1 parity, written for players and world builders—not developers.
 
-**Status:** In progress (July 2026) — beta-critical chapters are in [USER_GUIDE.md](USER_GUIDE.md) and bundled in-app (Stories 16–17). Remaining work: session window depth, triggers in depth, local commands, glossary, full Getting started front matter, and settings consolidation (9.5).
+**Status:** In progress (July 2026) — beta-critical chapters are in [USER_GUIDE.md](USER_GUIDE.md) and bundled in-app (Stories 16–17). **Getting started**, install, session depth, triggers, local commands, glossary, and settings reference shipped July 2026; aliases/clicker chapters blocked on Stories 10–11.
 
 **Source:** The [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) (last updated 2009) is the content blueprint. Savitar 2's guide should cover the same *topics* with updated menu paths, HIG Settings layout, and honest notes where features are deferred (MCP, file upload, Macro Clicker, status bar, xch_cmd).
 
@@ -286,14 +286,14 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 
 | v1 manual chapter | v2 guide chapter | Status | Story task |
 |-------------------|------------------|--------|------------|
-| **1. General Information** | *Front matter* — what Savitar is, who it's for, system requirements, v1→v2 migration blurb | Partial | **9.1** (quick start ✅ **9.1c**; intro/migration TBD) |
-| **2. Installing** | *Install & update* — download, first launch, Sparkle updates, prefs import | Partial | **9.1b** (Updates/Sparkle ✅; download/install TBD) |
+| **1. General Information** | *Front matter* — what Savitar is, who it's for, system requirements, v1→v2 migration blurb | Done | **9.1** |
+| **2. Installing** | *Install & update* — download, first launch, Sparkle updates, prefs import | Done | **9.1b** |
 | **3. Quick Start** | *Quick start* — connect to a world in five steps | Done | **9.1c** |
-| **4. Understanding Savitar** | Split across session, input, output, triggers, macros chapters | Partial | **9.2–9.4** (menus, macros, events, World Settings Input; session/triggers depth TBD) |
-| **5. Settings** | Settings + world settings reference | Partial | **9.5** (per-pane chapters ✅; Startup pane + v1 mapping tables TBD) |
-| **6. Local Commands** | Local commands reference | Not started | **9.2d** |
-| **7. Useful Tips** | Tips, diagnostics, performance | Not started | **9.7** |
-| **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Not started | **9.8** |
+| **4. Understanding Savitar** | Split across session, input, output, triggers, macros chapters | Partial | **9.2–9.4** (session, commands, triggers ✅; MCP/upload stubs) |
+| **5. Settings** | Settings + world settings reference | Partial | **9.5** (panes + Startup + reference table ✅; MCP/Closing deferred) |
+| **6. Local Commands** | Local commands reference | Partial | **9.2d** (`##history`, `##dump`; v1 table for rest) |
+| **7. Useful Tips** | Tips, diagnostics, performance | Done | **9.7** |
+| **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Done | **9.8** |
 | **9. In Closing** | Bug reporting, links | Partial | **9.9** (Help/Privacy ✅ Stories 16–18; Send Feedback ✅ Story 15) |
 
 ### Writing principles (v1 manual → v2 guide)
@@ -316,50 +316,18 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 - [x] **9.3c** App Settings panes — [Input & Display](USER_GUIDE.md#input-display), [Audio](USER_GUIDE.md#audio), [Updates](USER_GUIDE.md#updates) (Sparkle + automatic updates pref)
 - [x] **9.4a** Document **Events** (general term; Events window; triggers vs macros overview)
 - [x] **9.5a** **World Settings** chapter — Starting, Appearance, Input, Output tabs ([USER_GUIDE.md#world-settings](USER_GUIDE.md#world-settings))
-- [x] **9.5b** Per-pane App Settings chapters — Speech, Colors, Input & Display, Audio, Updates (Startup pane chapter still TBD)
+- [x] **9.5b** Per-pane App Settings chapters — Speech, Colors, Input & Display, Audio, Updates, **Startup**
 - [x] **9.9a** **Getting help** + **Privacy & usage statistics**; Help menu table (Send Feedback ✅ Story 15)
 - [x] **9.10** **Publish path** — README link; in-app Help book (Story 16); contextual **?** (Story 17); interim **Savitar Guide on the Web…** → GitHub
 
 #### Chapter stories (from v1 manual)
 
-- [ ] **9.1** **Getting started** — v1 §1 + §3 *(partial: **9.1c** quick start shipped)*
-  - What Savitar is (MUD/MUSH/MOO telnet client); link to [JOURNEY.md](JOURNEY.md) for the rewrite story, not the whole history
-  - System requirements (macOS 10.12+, 64-bit; v1 Catalina cutoff)
-  - Migrating from Savitar 1: prefs import, read-only v1 worlds, save-as-v2
-  - *Acceptance:* A new user can connect without reading anything else
-
-- [ ] **9.1b** **Install & updates** — v1 §2 + Story 12 *(partial: [Updates](USER_GUIDE.md#updates) chapter shipped)*
-  - Download from GitHub Releases; drag to Applications
-  - ~~Sparkle **Check for Updates…**, automatic updates pref, release notes source~~ ✅ in Updates chapter
-  - Uninstall = quit and trash (no Classic installer)
-  - *Acceptance:* Matches actual distribution; links to [fastlane README](../client/fastlane/README.md) only in a developer footnote if at all
-
-- [ ] **9.2** **The session window** — v1 §4 "Session Window"
-  - Output pane vs input pane; resizing (grow box, divider bar when shipped)
-  - Scroll lock (⌃S, title-bar button) — cross-link Menus
-  - Output navigation keys (Home, End, Page Up/Down, ⌘K clear)
-  - Status bar — **deferred** until README item ships; stub one sentence + link to future **9.2d** `set status`
-  - *Acceptance:* Matches `WindowController` / world window as shipped
-
-- [ ] **9.2b** **Entering commands** — v1 §4 "Entering Commands" *(partial: echo, sticky, markers, CR/LF in World Settings Input; scroll lock in Menus)*
-  - Return sends; Option-Return for multiple lines in macros/triggers/startup scripts
-  - Command recall (↑/↓, 32-line buffer); sticky commands (World Settings → Input)
-  - Input editing keys (⌃A/E, ⌃U clear, word navigation)
-  - Echo input setting; CR vs CR/LF postfix (World Settings → Input)
-  - `##wait` in startup/reply chains (v1 local command; document syntax)
-  - *Acceptance:* Parity table for v1 editing keys that still work in v2
-
-- [ ] **9.2c** **Variables & macro expansion** — v1 §4 "Macros" (expansion half)
-  - `%%name` markers; nesting; trigger-set variables vs macro values
-  - Wildcard markers (`$$`) — defer detail to **9.4** triggers chapter
-  - Distinct from hotkey macros (already in **9.2a**); cross-link
-  - *Acceptance:* User understands `say %%news` vs pressing F5
-
-- [ ] **9.2d** **Local commands** — v1 §6
-  - Command marker (`##` default); per-world override in World Settings
-  - **Shipped:** `##history` reference with example output
-  - **Remaining v1 commands:** table with Implemented / Planned / Not planned columns (`add macro`, `upload`, `tell application`, `regex`, …)
-  - *Acceptance:* Every implemented local command documented; deferred ones listed honestly
+- [x] **9.1** **Getting started** — v1 §1 + §3 — what Savitar is, requirements, migration, quick start
+- [x] **9.1b** **Install & updates** — v1 §2 + Story 12 — download, first launch, uninstall; Updates chapter for Sparkle
+- [x] **9.2** **The session window** — v1 §4 "Session Window" — panes, resize, scroll lock, navigation, connection note; status bar deferred
+- [x] **9.2b** **Entering commands** — recall (100 lines), sticky, ⌥Return, editing keys (honest v1 parity gaps)
+- [x] **9.2c** **Variables & macro expansion** — `%%` markers, wildcard cross-link
+- [x] **9.2d** **Local commands** — `##history`, `##dump`; v1 command status table
 
 - [ ] **9.2e** **Aliases** — typed abbreviations (Story 10; not in v1 manual as such)
   - Classical MUD aliases vs v1 "Macro Clicker aliases" vs macros vs input triggers
@@ -369,51 +337,13 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
   - Button palette, keypad mapping, startup pref
   - *Blocked on Story 11 implementation*
 
-- [ ] **9.3** **Output & appearance** — v1 §4 output + §5 Appearance/Output tabs *(partial: Appearance tab + session logging in World Settings)*
-  - ANSI interpretation, intense/bold/blink handling (World Settings → Appearance)
-  - HTML tags, `<xch_cmd>` — document or mark **not yet** per README
-  - Buffer size, flush period (World Settings → Output)
-  - Pane dimensions — **shipped:** columns, output rows, input rows; grow-box/divider resize overlay
-  - Session logging vs text documents (cross-link Menus → Text documents)
-  - Word wrap — default for new sessions via Settings → Input & Display (Story 2.3); per-session toggle and per-world default → Story 20
-  - *Acceptance:* User can fix "gibberish ANSI" and "invisible white-on-white text"
-
-- [ ] **9.4** **Triggers in depth** — v1 §4 "Triggers"
-  - Processing order (universal → per-world; top to bottom)
-  - Types: output / input / both; match modes: contains, starts with, regex
-  - Tabs: Matching, Appearance (gag/color), Audio Cue, Reply
-  - Wildcards (`$$`) and regex captures (`%%0`…); `##regex` test command
-  - Drag text from panes to create triggers; reorder; import/export via XML/world file
-  - Continuous speech dedupes trigger speech (cross-link Speech)
-  - *Acceptance:* A v1 power user can recreate a gag + sound + reply trigger from the manual's examples
-
-- [ ] **9.4b** **Editing events** — v1 §4 "Editing Items"
-  - In-place rename, double-click editor, ⇧⌘N new item, undo
-  - Per-world vs app-wide Events windows
-  - *Acceptance:* Covers Events window UX without a screenshot tour
-
-- [ ] **9.5** **Settings reference** — v1 §5 *(partial: per-pane chapters shipped; consolidation tables TBD)*
-  - **App Settings** toolbar panes → v1 `DoPreferences()` mapping table (Startup, Input & Display, Colors, Audio, Updates, Speech)
-  - **World Settings** sheet tabs → v1 Starting, Appearance, Input, Output, MCP, Closing
-  - Grayed-out prefs explained (Macro Clicker startup, word wrap, mute clicker) — partially covered in Input & Display / Audio chapters
-  - Dedicated **Startup** settings pane chapter (World Picker / Events / Macro Clicker at launch)
-  - *Acceptance:* One table per settings surface; v1 menu path in a "was" column
-
-- [ ] **9.6** **Worlds & connection** — v1 §4 "Switching Worlds" + §5 Starting tab *(partial: Starting tab + World Picker via Menus/quick start)*
-  - World Picker: add/edit/remove worlds, wizard
-  - Connect/disconnect, autologin commands, keepalive, auto-reconnect
-  - Multi-session: one document per world; Window menu switching
-  - Quit command on Closing tab
-  - *Acceptance:* Covers connection troubleshooting (wrong CR/LF, idle disconnect)
-
-- [ ] **9.7** **Tips & troubleshooting** — v1 §7
-  - Diagnostics mindset: lag + flush period, trigger order, marker conflicts on MUX/MUSH (`##` vs `` ` ``)
-  - Performance: buffer size, WKWebView output (brief—no architecture essay)
-  - *Acceptance:* Short chapter; links into detailed sections above
-
-- [ ] **9.8** **Glossary** — v1 §8
-  - MUD, MOO, MUSH, MUVE, ANSI, trigger, macro, event, gag, wildcard, local command, …
-  - *Acceptance:* Every jargon term used in the guide is defined here
+- [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; buffer/flush noted as XML-only until UI ships
+- [x] **9.4** **Triggers in depth** — order, types, matching, wildcards, appearance, audio, reply
+- [x] **9.4b** **Editing events** — new/rename/reorder/undo; per-world vs app-wide
+- [x] **9.5** **Settings reference** — v1 → v2 mapping tables; Startup pane; MCP/Closing deferred
+- [x] **9.6** **Worlds & connection** — World Picker, wizard, multi-session, troubleshooting
+- [x] **9.7** **Tips & troubleshooting** — short chapter with cross-links
+- [x] **9.8** **Glossary** — jargon used in the guide
 
 - [x] **9.9** **Help & feedback** — v1 §9 *(**9.9a** + **Send Feedback…** ✅ Story 15)*
 
@@ -431,15 +361,15 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 
 ### Suggested writing order
 
-1. ~~**9.1c** quick start~~ ✅ — expand **9.1** front matter (what Savitar is, requirements, v1 migration)
-2. **9.2 + 9.4 + 9.4b** — session window and triggers depth (biggest remaining gap for power users)
-3. **9.2b + 9.2c** — command entry, recall, variables (extends macros chapter)
-4. **9.6** — World Picker wizard, multi-session, connection troubleshooting
-5. **9.5** — settings consolidation tables + Startup pane chapter
-6. **9.3** — output depth (buffer/flush/dimensions; HTML/xch_cmd stubs)
-7. **9.2d** — local commands (grows as commands ship)
-8. **9.1b** — download/install (Updates chapter done; add first-run install)
-9. **9.7, 9.8** — tips, glossary
+1. ~~**9.1c** quick start~~ ✅ — ~~expand **9.1** front matter~~ ✅
+2. ~~**9.2 + 9.4 + 9.4b**~~ ✅
+3. ~~**9.2b + 9.2c**~~ ✅
+4. ~~**9.6**~~ ✅
+5. ~~**9.5**~~ ✅ (Startup + reference tables)
+6. ~~**9.3**~~ ✅ (buffer/flush UI deferred noted)
+7. ~~**9.2d**~~ ✅ (grows as commands ship)
+8. ~~**9.1b**~~ ✅
+9. ~~**9.7, 9.8**~~ ✅
 10. ~~**9.9** — Send Feedback~~ ✅
 11. **9.2e, 9.2f** — when Stories 10–11 land
 
@@ -1155,7 +1085,7 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 10. ~~Story 15 — Send Feedback (email)~~ ✅
 11. ~~**Story 21 — About box with scrolling credits**~~ ✅
 12. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
-13. **Story 9 — User guide** — ongoing (session window, triggers depth, local commands, glossary, 9.1 front matter, 9.5 consolidation)
+13. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
 14. Story 6 — Events Window HIG
 15. Story 7 — World Picker HIG
 16. Story 10 — Command aliases
