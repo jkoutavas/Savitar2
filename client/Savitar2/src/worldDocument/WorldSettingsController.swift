@@ -22,14 +22,17 @@ class WorldSettingsController: NSViewController {
         set {
             // copy the world. We'll manipulate it in settings, and if the
             // user hits 'apply' we'll copy the changes back.
-            _editedWorld = newValue?.copy() as? World
+            guard let world = newValue?.copy() as? World else { return }
+            _editedWorld = world
 
             // we set the tab controllers' world here in the world setter
             // instead of prepare(for segue:) because prepare(for segue:)
             // gets called at storyboard instantiation, before we have
             // the chance to set the world value
-            for viewItem in (_tabViewController?.tabViewItems)! {
-                viewItem.viewController?.representedObject = _editedWorld!
+            if let tvc = _tabViewController {
+                for viewItem in tvc.tabViewItems {
+                    viewItem.viewController?.representedObject = _editedWorld!
+                }
             }
         }
     }
@@ -64,6 +67,7 @@ class WorldSettingsController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         polishChromeForHIGIfNeeded()
+        publishSheetTitleToParent()
     }
 
     deinit {
@@ -90,11 +94,16 @@ class WorldSettingsController: NSViewController {
         return NSSize(width: width, height: tab.preferredSheetHeight + footerHeight)
     }
 
+    func publishSheetTitleToParent() {
+        let tab = selectedWorldSettingsTab ?? .starting
+        onSheetTitleChange?(tab.title)
+    }
+
     private func tabSelectionDidChange() {
         polishChromeForHIGIfNeeded()
         updateContextualHelpForSelectedTab()
         let tab = selectedWorldSettingsTab ?? .starting
-        onSheetTitleChange?(tab.title)
+        publishSheetTitleToParent()
         sheetWindowController?.updateForTab(tab, animated: view.window?.isVisible == true)
     }
 
