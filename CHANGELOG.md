@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **About Savitar** — custom About box with the classic medallion and scrolling “Special Heynows” credits (Savitar 1 parity)
 
+### Changed
+
+- **Privacy on the web** — user guide and in-app help link to [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) (Story 19 / heynow_websites W9)
+
 ### Fixed
 
 - **Resolution overlay on launch** — yellow rows×columns box no longer appears (and sticks) when restored windows resize programmatically at startup

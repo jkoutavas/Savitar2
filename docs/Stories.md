@@ -666,7 +666,7 @@ require a custom changelog parser.
 
 **Goal:** Track **active installations** and version adoption with [TelemetryDeck](https://telemetrydeck.com/) — privacy-first, GDPR-friendly analytics on the free **Sparrow** tier (up to 100,000 signals/month).
 
-**Status:** Shipped (July 2026, v2.0.18). Website privacy page remains Story 19 / heynow_websites W9.
+**Status:** Shipped (July 2026, v2.0.18). Website privacy page shipped with Story 19 / heynow_websites W9 (`heynow.com/savitar/privacy.html`).
 
 **Context:** GitHub Release **download counts** measure ZIP pulls, not installs or daily use. TelemetryDeck closes that gap with hashed per-install identifiers and session signals, without collecting personal data. Crash reporting (Sentry) remains a separate future story.
 
@@ -690,7 +690,7 @@ require a custom changelog parser.
 - [x] **14.4** **Signals** — send `Savitar.launched` with version params; set `Savitar.firstLaunch` once using `UserDefaults` key `SavitarHasLaunchedBefore`.
 - [x] **14.5** **CI injection** — add `TELEMETRYDECK_APP_ID` to GitHub **`release`** environment secrets; release workflow passes it into the Xcode build as `TELEMETRYDECK_APP_ID` (via `Info.plist`). Local/dev builds without the secret send nothing.
 - [x] **14.6** **Test mode** — `#if DEBUG` use TelemetryDeck test mode (or omit App ID) so developer sessions do not pollute production dashboards ([Swift setup guide](https://telemetrydeck.com/docs/guides/swift-setup/)).
-- [x] **14.7** **Privacy** — in-app: `USER_GUIDE.md` **Privacy & usage statistics** + **Help → About Privacy…** (Story 18). **Website:** dedicated page — Savitar2 **Story 19** / heynow_websites **W9** (not yet published).
+- [x] **14.7** **Privacy** — in-app: `USER_GUIDE.md` **Privacy & usage statistics** + **Help → About Privacy…** (Story 18). **Website:** [heynow.com/savitar/privacy.html](https://www.heynow.com/savitar/privacy.html) (Story 19 / heynow_websites W9).
 - [x] **14.8** **Docs** — add `TELEMETRYDECK_APP_ID` row to `client/fastlane/README.md` CI secrets table; note in README beta checklist when shipped.
 
 ### Touchpoints
@@ -914,7 +914,7 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ---
 
-## Story 19 — Savitar privacy page on heynow.com (cross-repo)
+## Story 19 — Savitar privacy page on heynow.com (cross-repo) ✅
 
 **Goal:** Publish a **dedicated privacy page** on the Savitar website (`heynow.com/savitar/…`) that mirrors in-app disclosure (Story 18 / guide `#privacy`) for users who prefer the web, App Store review, or search.
 
@@ -922,10 +922,10 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ### Tasks
 
-- [ ] **19.1** **Content source** — keep `docs/USER_GUIDE.md` **Privacy & usage statistics** as canonical prose, or split to `docs/PRIVACY.md` included in guide + web build (avoid two divergent policies).
-- [ ] **19.2** **Coordinate W9** — agree target URL (e.g. `heynow.com/savitar/privacy.html`), page title, and footer/nav placement on the W1 landing page.
-- [ ] **19.3** **In-app link (optional)** — when W9 ships, add “Privacy on the web” link in guide `#privacy` and/or **About Privacy…** sheet footer (secondary to offline text).
-- [ ] **19.4** **Story 14.7 closure** — mark website portion of 14.7 done when W9 is live.
+- [x] **19.1** **Content source** — `docs/USER_GUIDE.md` **Privacy & usage statistics** is canonical prose; heynow_websites W9 renders matching web copy (no separate `PRIVACY.md`).
+- [x] **19.2** **Coordinate W9** — live at `https://www.heynow.com/savitar/privacy.html`; footer link on Savitar 2 landing page.
+- [x] **19.3** **In-app link** — “Privacy on the web” in guide `#privacy` and **Getting help**; links to `heynow.com/savitar/privacy.html`.
+- [x] **19.4** **Story 14.7 closure** — website portion of 14.7 marked done (July 2026).
 
 ### Touchpoints
 
@@ -1096,7 +1096,7 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 3. ~~Story 5 — ANSI Colors Settings pane~~ ✅
 4. ~~Story 12 — Sparkle 2 auto-updates~~ ✅ (*12.7* E2E install test remains)
 5. ~~Story 13 — Help → Release Notes~~ ✅
-6. ~~Story 14 — TelemetryDeck analytics~~ ✅ (*website* privacy page: Story 19 / W9)
+6. ~~Story 14 — TelemetryDeck analytics~~ ✅
 7. ~~Story 16 — In-app user guide (Help menu)~~ ✅
 8. ~~Story 17 — Contextual ? help buttons~~ ✅
 9. ~~Story 18 — Help → About Privacy~~ ✅
@@ -1109,7 +1109,7 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 16. Story 10 — Command aliases
 17. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
 18. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
-19. Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)
+19. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
 20. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.

@@ -342,7 +342,7 @@ Full detail is in the [Speech](#speech) chapter.
 |-----------|----------|--------------|
 | **Savitar Help** | ⌘? | Opens this user guide in a Savitar window (works offline). |
 | **Savitar Guide on the Web…** | — | Opens the latest draft of this guide on GitHub. |
-| **About Privacy…** | — | Opens the [Privacy & usage statistics](#privacy) chapter in Savitar Help (TelemetryDeck analytics; no session text). |
+| **About Privacy…** | — | Opens the [Privacy & usage statistics](#privacy) chapter in Savitar Help (TelemetryDeck analytics; no session text). See also [Privacy on the web](https://www.heynow.com/savitar/privacy.html). |
 | **Release Notes…** | — | Opens the GitHub releases page with version history. |
 
 ---
@@ -574,15 +574,18 @@ Each installation uses a hashed identifier; TelemetryDeck does not receive your 
 
 Local development builds, unit tests, and builds you compile from source **do not** send analytics unless you configure a TelemetryDeck App ID yourself.
 
+The same policy is published on the web at [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) for App Store review, search, and users who prefer a browser.
+
 ---
 
 ## Getting help
 
 1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline).
 2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
-3. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
-4. **Send Feedback** — *(coming in a future update)* email the Savitar team with problems or feature ideas. You will not need a GitHub account.
-5. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
+3. **Privacy on the web** — [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) mirrors the in-app disclosure.
+4. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
+5. **Send Feedback** — *(coming in a future update)* email the Savitar team with problems or feature ideas. You will not need a GitHub account.
+6. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
 
 Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). Include your Savitar version and macOS version when you contact support.
 

@@ -179,7 +179,7 @@ Savitar-specific audio (not standard Edit → Speech):
 |------|----------|----------|
 | **Savitar Help** | ⌘? | Bundled guide in `HelpGuideWindowController` + `WKWebView` (offline) |
 | **Savitar Guide on the Web…** | — | GitHub `USER_GUIDE.md` (interim) |
-| **About Privacy…** | — | Savitar Help at `#privacy` |
+| **About Privacy…** | — | Savitar Help at `#privacy`; web copy at [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) |
 | **Release Notes…** | — | GitHub Releases |
 
 **Do not** route primary help through macOS Help Viewer (`NSHelpManager` / `helpd`) — unreliable for Xcode and non–`/Applications` builds. The `.help` bundle remains for indexing and possible future `registerBooks` integration.
