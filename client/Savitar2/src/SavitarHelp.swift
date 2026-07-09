@@ -47,6 +47,7 @@ enum SavitarHelp {
         static let worldSettingsAppearance = "world-settings-appearance-tab"
         static let worldSettingsInput = "world-settings-input-tab"
         static let worldSettingsOutput = "world-settings-output-tab"
+        static let worldSettingsClosing = "world-settings-closing-tab"
         static let privacy = "privacy"
         static let gettingHelp = "getting-help"
         static let planned = "planned"
@@ -64,6 +65,7 @@ enum SavitarHelp {
         case appearance = 1
         case input = 2
         case output = 3
+        case closing = 4
 
         var title: String {
             switch self {
@@ -71,6 +73,7 @@ enum SavitarHelp {
             case .appearance: return "Appearance"
             case .input: return "Input"
             case .output: return "Output"
+            case .closing: return "Closing"
             }
         }
 
@@ -80,6 +83,7 @@ enum SavitarHelp {
             case .appearance: return Anchor.worldSettingsAppearance
             case .input: return Anchor.worldSettingsInput
             case .output: return Anchor.worldSettingsOutput
+            case .closing: return Anchor.worldSettingsClosing
             }
         }
 
@@ -93,6 +97,8 @@ enum SavitarHelp {
                 return "Open help for echo, markers, and line endings"
             case .output:
                 return "Open help for session logging"
+            case .closing:
+                return "Open help for logoff command on close"
             }
         }
     }

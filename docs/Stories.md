@@ -290,7 +290,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 | **2. Installing** | *Install & update* — download, first launch, Sparkle updates, prefs import | Done | **9.1b** |
 | **3. Quick Start** | *Quick start* — connect to a world in five steps | Done | **9.1c** |
 | **4. Understanding Savitar** | Split across session, input, output, triggers, macros chapters | Partial | **9.2–9.4** (session, commands, triggers ✅; MCP/upload stubs) |
-| **5. Settings** | Settings + world settings reference | Partial | **9.5** (panes + Startup + reference table ✅; MCP/Closing deferred) |
+| **5. Settings** | Settings + world settings reference | Partial | **9.5** (panes + Startup + reference table ✅; MCP deferred; Closing ✅) |
 | **6. Local Commands** | Local commands reference | Partial | **9.2d** (`##history`, `##dump`; v1 table for rest) |
 | **7. Useful Tips** | Tips, diagnostics, performance | Done | **9.7** |
 | **8. Glossary** | Glossary (MUD, trigger, macro, ANSI, …) | Done | **9.8** |
@@ -315,7 +315,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 - [x] **9.3b** **ANSI colors** — Settings → Colors pane; grid, Restore Defaults, vs World Settings Appearance
 - [x] **9.3c** App Settings panes — [Input & Display](USER_GUIDE.md#input-display), [Audio](USER_GUIDE.md#audio), [Updates](USER_GUIDE.md#updates) (Sparkle + automatic updates pref)
 - [x] **9.4a** Document **Events** (general term; Events window; triggers vs macros overview)
-- [x] **9.5a** **World Settings** chapter — Starting, Appearance, Input, Output tabs ([USER_GUIDE.md#world-settings](USER_GUIDE.md#world-settings))
+- [x] **9.5a** **World Settings** chapter — Starting, Appearance, Input, Output, Closing tabs ([USER_GUIDE.md#world-settings](USER_GUIDE.md#world-settings))
 - [x] **9.5b** Per-pane App Settings chapters — Speech, Colors, Input & Display, Audio, Updates, **Startup**
 - [x] **9.9a** **Getting help** + **Privacy & usage statistics**; Help menu table (Send Feedback ✅ Story 15)
 - [x] **9.10** **Publish path** — README link; in-app Help book (Story 16); contextual **?** (Story 17); interim **Savitar Guide on the Web…** → GitHub
@@ -340,7 +340,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 - [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; buffer/flush noted as XML-only until UI ships
 - [x] **9.4** **Triggers in depth** — order, types, matching, wildcards, appearance, audio, reply
 - [x] **9.4b** **Editing events** — new/rename/reorder/undo; per-world vs app-wide
-- [x] **9.5** **Settings reference** — v1 → v2 mapping tables; Startup pane; MCP/Closing deferred
+- [x] **9.5** **Settings reference** — v1 → v2 mapping tables; Startup pane; MCP deferred; Closing tab shipped
 - [x] **9.6** **Worlds & connection** — World Picker, wizard, multi-session, troubleshooting
 - [x] **9.7** **Tips & troubleshooting** — short chapter with cross-links
 - [x] **9.8** **Glossary** — jargon used in the guide

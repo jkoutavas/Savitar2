@@ -116,18 +116,30 @@ class WindowController: NSWindowController, NSWindowDelegate {
         let bundle = Bundle(for: Self.self)
         let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
 
-        // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
-        guard let wc = settingsStoryboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
+        // Modal child window — beginSheet hides the settings window title bar on modern macOS.
+        guard let parentWindow = window else { return }
+        guard let settingsWC = settingsStoryboard.instantiateInitialController()
+            as? WorldSettingsWindowController else { return }
         guard let doc = document as? Document else { return }
-        vc.world = doc.world
-        vc.completionHandler = { apply, editedWorld in
+
+        settingsWC.parentWindow = parentWindow
+        let documentTitle = parentWindow.title.isEmpty ? windowTitle : parentWindow.title
+        settingsWC.parentDocumentTitle = documentTitle
+
+        guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
+        settingsWC.settingsController = vc
+        vc.sheetWindowController = settingsWC
+        vc.completionHandler = { [weak self] apply, editedWorld in
+            guard let self else { return }
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
             }
-            self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
+            settingsWC.dismissModal()
         }
-        window?.beginSheet(wc.window!)
+
+        settingsWC.loadWindow()
+        vc.world = doc.world
+        settingsWC.presentModally()
     }
 
     override func showWindow(_ sender: Any?) {
@@ -461,7 +473,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
     internal func windowShouldClose(_ window: NSWindow) -> Bool {
         if AppContext.shared.isTerminating || reallyClosing {
             if window == self.window {
-                (document as? Document)?.session?.close()
+                if let session = (document as? Document)?.session,
+                   session.status == .ConnectComplete {
+                    session.close(sendLogoff: true)
+                }
             }
             return true
         }
@@ -470,7 +485,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
             guard let doc = document as? Document else { return true }
             guard let session = doc.session else { return true }
             if session.status == .ConnectComplete {
-                session.close()
+                session.close(sendLogoff: true)
+                if doc.world?.flags.contains(.autoClose) == true {
+                    reallyClose()
+                }
                 return false
             }
             return true

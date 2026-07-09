@@ -66,7 +66,8 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
 _ World settings Output tab — buffer size, flush period
-_ World settings Closing tab — logoff/disconnect command on close
+√ World settings Closing tab — logoff/disconnect command on close; auto-close
+√ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
 _ Implement remaining local commands
 √ Implement scroll locking
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
@@ -179,36 +180,4 @@ There's already a `.swiftformat` config file that contains this:
 ```
 --swiftversion 5
 --disable wrapMultilineStatementBraces, trailingCommas
-```
-
-## Tracking lines of code
-
-Re-run from the repo root (approximate; excludes `.build`, `build`):
-
-```bash
-cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
-```
-
-```
-     199 text files.
-     183 unique files.
-      54 files ignored.
-
-github.com/AlDanial/cloc v 2.04  T=0.12 s (1563.9 files/s, 222131.0 lines/s)
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-Swift                          138           2558           1478          12413
-XML                             15              6             36           3996
-Markdown                        16           1190              0           2575
-HTML                             1              0              0            866
-YAML                             5             39             21            247
-Python                           1             41             75            207
-Bourne Shell                     1             16              1             94
-JSON                             3              0              0             86
-CSS                              1              0              0             22
-Text                             1              0              0             11
-C/C++ Header                     1              3              8              3
--------------------------------------------------------------------------------
-SUM:                           183           3853           1619          20520
 ```

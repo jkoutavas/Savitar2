@@ -411,7 +411,7 @@
 </tbody></table>
 <p><strong>Status bar</strong> (divider row showing cursor position) is <strong>not in Savitar 2 yet</strong>; pane size is shown in the yellow resize overlay while dragging.</p>
 <h3 id="session-window-connection-indicator">Connection indicator</h3>
-<p>The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to <strong>World Settings → Starting → Retry Seconds</strong>. Closing the window disconnects and removes the live session.</p>
+<p>The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to <strong>World Settings → Starting → Retry Seconds</strong>. Closing the window disconnects the session; if <strong>World Settings → Closing</strong> has a logoff command configured, Savitar sends it to the world first.</p>
 <hr/>
 <h2 id="events">Events</h2>
 <p>In Savitar, an <strong>event</strong> is anything the client does <strong>automatically</strong> on your behalf during a session—beyond simply showing server text and forwarding what you type. Events are how Savitar <strong>reacts</strong> to the game and <strong>extends</strong> your keyboard.</p>
@@ -702,7 +702,8 @@
 <tr><td><a href="#appearance-tab">Appearance</a></td><td>Appearance tab</td></tr>
 <tr><td><a href="#input-tab">Input</a></td><td>Input tab</td></tr>
 <tr><td><a href="#output-tab">Output</a></td><td>Output tab</td></tr>
-<tr><td>*(missing)*</td><td>MCP, Closing (quit command) — not in v2 yet</td></tr>
+<tr><td><a href="#closing-tab">Closing</a></td><td>Closing tab (logoff command)</td></tr>
+<tr><td>*(missing)*</td><td>MCP — not in v2 yet</td></tr>
 </tbody></table>
 <p>Grayed-out app prefs (<strong>Macro Clicker</strong>, <strong>Mute clicker</strong>) will activate when those features ship.</p>
 <hr/>
@@ -754,8 +755,9 @@
 <tr><td><strong>Appearance</strong></td><td>Colors, body/code fonts, ANSI and HTML interpretation</td></tr>
 <tr><td><strong>Input</strong></td><td>Echo, sticky commands, markers, line ending</td></tr>
 <tr><td><strong>Output</strong></td><td>Session logging to a file</td></tr>
+<tr><td><strong>Closing</strong></td><td>Logoff command sent when closing a connected session</td></tr>
 </tbody></table>
-<p>Other v1 tabs (<strong>MCP</strong>, <strong>Closing</strong>) are not in Savitar 2 yet; see the <a href="../README.md">README</a> parity checklist.</p>
+<p>The <strong>MCP</strong> tab from Savitar 1 is not in Savitar 2 yet; see the <a href="../README.md">README</a> parity checklist.</p>
 <h3 id="world-settings-starting-tab">Starting tab</h3>
 <p>Connection and identity for <strong>this world document</strong>:</p>
 <table>
@@ -834,6 +836,15 @@
 <tr><td><strong>Log file path</strong></td><td>Where the log is stored; use <strong>Set now</strong> to pick a location</td></tr>
 </tbody></table>
 <p>Session logging is separate from <strong>text document</strong> windows and from <strong>File → Print…</strong>. See <a href="#text-documents">Text documents</a> under the File menu.</p>
+<h3 id="world-settings-closing-tab">Closing tab</h3>
+<p>When you close a <strong>connected</strong> session window (or quit Savitar while worlds are connected), Savitar can send a <strong>logoff command</strong> to the game before disconnecting—so the server records a clean quit instead of a dropped connection.</p>
+<table>
+<thead><tr><th>Control</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><strong>Logoff command</strong></td><td>Command sent to the world on close (for example <code>quit</code>, <code>@quit</code>, or <code>QUIT</code>). Leave blank to disconnect without sending anything.</td></tr>
+<tr><td><strong>Close window automatically</strong></td><td>When on, the window closes right after disconnect. When off (default), Savitar shows the <strong>offline</strong> panel first—you close again to dismiss the document (v1 reconnect prompt).</td></tr>
+</tbody></table>
+<p>Imported Savitar 1 worlds keep their <code>LOGOFFCMD</code> and <code>autoClose</code> flag from world XML (<code>FLAGS="…+autoClose"</code>). Changes apply when you click <strong>Apply</strong> and take effect the next time you close a connected session.</p>
 <hr/>
 <h2 id="privacy">Privacy &amp; usage statistics</h2>
 <p>Official Savitar builds from Heynow Software send <strong>anonymous usage statistics</strong> to help measure active installations and version adoption. We use <a href="https://telemetrydeck.com/">TelemetryDeck</a>, a privacy-first analytics service: signals include app version, build number, and macOS version only — <strong>no account names, world names, session text, or other personal data</strong>.</p>
@@ -861,7 +872,7 @@
 <tr><td>Getting started, install, worlds, session, commands, triggers, glossary</td><td>✅ This guide (July 2026)</td></tr>
 <tr><td><strong>Aliases</strong> (Story 10)</td><td>Blocked on implementation</td></tr>
 <tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Blocked on implementation</td></tr>
-<tr><td>MCP, Closing tab, file upload, <code>xch_cmd</code>, status bar</td><td>Deferred—stubs in tables above</td></tr>
+<tr><td>MCP, file upload, <code>xch_cmd</code>, status bar</td><td>Deferred—stubs in tables above</td></tr>
 <tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0 feature parity</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map.</p>

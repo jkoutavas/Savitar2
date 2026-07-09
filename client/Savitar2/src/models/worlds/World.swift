@@ -20,6 +20,7 @@ struct WorldFlags: OptionSet, Hashable {
     static let html = WorldFlags(rawValue: 1 << 3)
     static let stickyCmds = WorldFlags(rawValue: 1 << 4)
     static let crOnly = WorldFlags(rawValue: 1 << 5)
+    static let autoClose = WorldFlags(rawValue: 1 << 6)
 }
 
 extension WorldFlags: StrOptionSet {
@@ -30,7 +31,8 @@ extension WorldFlags: StrOptionSet {
         (.echoCR, "echoCR"),
         (.html, "html"),
         (.stickyCmds, "stickyCmds"),
-        (.crOnly, "CROnly")
+        (.crOnly, "CROnly"),
+        (.autoClose, "autoClose")
     ] }
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
@@ -38,7 +40,8 @@ extension WorldFlags: StrOptionSet {
         "echoCR": .echoCR,
         "html": .html,
         "stickyCmds": .stickyCmds,
-        "CROnly": .crOnly
+        "CROnly": .crOnly,
+        "autoClose": .autoClose
     ] }
 }
 

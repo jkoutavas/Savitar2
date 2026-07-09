@@ -30,4 +30,13 @@ extension NSWindow {
             center()
         }
     }
+
+    /// Centers this window over `parent` (child modal dialogs).
+    func centerRelative(to parent: NSWindow) {
+        let parentFrame = parent.frame
+        var frame = self.frame
+        frame.origin.x = parentFrame.midX - frame.width / 2
+        frame.origin.y = parentFrame.midY - frame.height / 2
+        setFrame(frame, display: true)
+    }
 }

@@ -475,7 +475,7 @@ The **output** pane is a web view showing styled session text. You can:
 
 ### Connection indicator
 
-The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to **World Settings → Starting → Retry Seconds**. Closing the window disconnects and removes the live session.
+The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to **World Settings → Starting → Retry Seconds**. Closing the window disconnects the session; if **World Settings → Closing** has a logoff command configured, Savitar sends it to the world first.
 
 ---
 
@@ -853,7 +853,8 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Appearance](#appearance-tab) | Appearance tab |
 | [Input](#input-tab) | Input tab |
 | [Output](#output-tab) | Output tab |
-| *(missing)* | MCP, Closing (quit command) — not in v2 yet |
+| [Closing](#closing-tab) | Closing tab (logoff command) |
+| *(missing)* | MCP — not in v2 yet |
 
 Grayed-out app prefs (**Macro Clicker**, **Mute clicker**) will activate when those features ship.
 
@@ -913,8 +914,9 @@ Changes are staged in the sheet until you click **OK** (or **Cancel** to discard
 | **Appearance** | Colors, body/code fonts, ANSI and HTML interpretation |
 | **Input** | Echo, sticky commands, markers, line ending |
 | **Output** | Session logging to a file |
+| **Closing** | Logoff command sent when closing a connected session |
 
-Other v1 tabs (**MCP**, **Closing**) are not in Savitar 2 yet; see the [README](../README.md) parity checklist.
+The **MCP** tab from Savitar 1 is not in Savitar 2 yet; see the [README](../README.md) parity checklist.
 
 ### Starting tab
 
@@ -929,7 +931,7 @@ Connection and identity for **this world document**:
 | **Keepalive Minutes** | Interval for keepalive traffic on idle connections (`0` = off). Helps some hosts drop stale sessions less aggressively. |
 | **Startup commands** | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`. |
 
-Changes apply when you click **Apply** and take effect on the **next** connection to that world.
+Changes apply when you click **OK** and take effect on the **next** connection to that world.
 
 ### Appearance tab
 
@@ -943,7 +945,7 @@ How **this world** renders text in the session window:
 | **Interpret HTML tags** | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions. |
 | **Code font** and **size** | Monospace font for HTML code blocks (only when HTML interpretation is on). |
 
-The preview pane at the bottom shows sample styled text as you change options. Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
+The preview pane at the top shows sample styled text as you change options; long lines wrap within the pane (no horizontal scrollbar). Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
 
 ANSI **palette** colors are app-wide—see [ANSI colors](#ansi-colors). This tab sets base fore/back/link and fonts for the world.
 
@@ -1012,6 +1014,17 @@ See also [Session window](#session-window) for resizing by dragging the window o
 
 Session logging is separate from **text document** windows and from **File → Print…**. See [Text documents](#text-documents) under the File menu.
 
+### Closing tab
+
+When you close a **connected** session window (or quit Savitar while worlds are connected), Savitar can send a **logoff command** to the game before disconnecting—so the server records a clean quit instead of a dropped connection.
+
+| Control | What it does |
+|---------|----------------|
+| **Logoff command** | Command sent to the world on close (for example `quit`, `@quit`, or `QUIT`). Leave blank to disconnect without sending anything. |
+| **Close window automatically** | When on, the window closes right after disconnect. When off (default), Savitar shows the **offline** panel first—you close again to dismiss the document (v1 reconnect prompt). |
+
+Imported Savitar 1 worlds keep their `LOGOFFCMD` and `autoClose` flag from world XML (`FLAGS="…+autoClose"`). Changes apply when you click **OK** and take effect the next time you close a connected session.
+
 ---
 
 ## Privacy & usage statistics
@@ -1049,7 +1062,7 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
 | **Aliases** (Story 10) | Blocked on implementation |
 | **Macro Clicker** (Story 11) | Blocked on implementation |
-| MCP, Closing tab, file upload, `xch_cmd`, status bar | Deferred—stubs in tables above |
+| MCP, file upload, `xch_cmd`, status bar | Deferred—stubs in tables above |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 feature parity |
 
 See [Stories.md](Stories.md) for the full v1 manual map.
