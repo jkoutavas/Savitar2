@@ -3,14 +3,14 @@
     <channel>
         <title>Savitar</title>
         <item>
-            <title>2.0.19</title>
-            <pubDate>Wed, 08 Jul 2026 11:44:32 +0000</pubDate>
-            <sparkle:version>617</sparkle:version>
-            <sparkle:shortVersionString>2.0.19</sparkle:shortVersionString>
+            <title>2.0.20</title>
+            <pubDate>Thu, 09 Jul 2026 13:08:58 +0000</pubDate>
+            <sparkle:version>624</sparkle:version>
+            <sparkle:shortVersionString>2.0.20</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
             <sparkle:releaseNotesLink>Savitar.md</sparkle:releaseNotesLink>
             <sparkle:fullReleaseNotesLink>https://github.com/jkoutavas/Savitar2/blob/master/CHANGELOG.md</sparkle:fullReleaseNotesLink>
-            <enclosure url="https://github.com/jkoutavas/Savitar2/releases/download/v2.0.19/Savitar.zip" length="12640096" type="application/octet-stream" sparkle:edSignature="14ZysYmMsAXYUJKo9zVsV46X6Q/T3ZjCWKBkAooT74mKIs2McK2pybsugOvqYWzNuVM9vzXKbCkxFwqQz1ILDw=="/>
+            <enclosure url="https://github.com/jkoutavas/Savitar2/releases/download/v2.0.20/Savitar.zip" length="12737643" type="application/octet-stream" sparkle:edSignature="bj7XB4K3330fWgr1gaKRPuEDNFx/pSy6rcckRaE2bzUaYebMh909J65ZWosqbuay+WXHaquqoxDfBBuJi9UtDA=="/>
         </item>
     </channel>
 </rss>
