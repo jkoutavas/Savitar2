@@ -34,7 +34,7 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O6u-4a-63f">
                                 <rect key="frame" x="374" y="13" width="69" height="32"/>
-                                <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eP5-Qv-t7F">
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eP5-Qv-t7F">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <connections>
@@ -546,9 +546,9 @@ Gw
                                 </constraints>
                             </customView>
                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-pH-UT2" customClass="OutputView" customModule="Savitar2" customModuleProvider="target">
-                                <rect key="frame" x="20" y="209" width="410" height="171"/>
+                                <rect key="frame" x="20" y="209" width="410" height="220"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="171" id="ySf-Hh-Nxl"/>
+                                    <constraint firstAttribute="height" constant="220" id="ySf-Hh-Nxl"/>
                                 </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -708,7 +708,7 @@ Gw
                             <constraint firstAttribute="bottom" secondItem="fBQ-NO-Uf7" secondAttribute="bottom" constant="20" symbolic="YES" id="iOe-7f-SpM"/>
                             <constraint firstItem="G7g-Fd-8dh" firstAttribute="top" secondItem="kfa-Gh-tlm" secondAttribute="top" id="mR6-XI-hJi"/>
                             <constraint firstItem="c0B-zC-x85" firstAttribute="leading" secondItem="buf-EB-x6o" secondAttribute="trailing" constant="8" symbolic="YES" id="nIG-BX-pbW"/>
-                            <constraint firstItem="fBQ-NO-Uf7" firstAttribute="top" secondItem="4u5-EN-L1Z" secondAttribute="top" constant="309" id="oRB-M0-UdG"/>
+                            <constraint firstItem="fBQ-NO-Uf7" firstAttribute="top" secondItem="4u5-EN-L1Z" secondAttribute="top" constant="358" id="oRB-M0-UdG"/>
                             <constraint firstItem="buf-EB-x6o" firstAttribute="top" secondItem="v2b-pH-UT2" secondAttribute="bottom" constant="11" id="taD-gn-QnP"/>
                             <constraint firstItem="G7g-Fd-8dh" firstAttribute="leading" secondItem="02L-28-VcR" secondAttribute="trailing" constant="8" symbolic="YES" id="uP6-NG-xcd"/>
                             <constraint firstAttribute="trailing" secondItem="v2b-pH-UT2" secondAttribute="trailing" constant="20" symbolic="YES" id="vWh-PI-PMo"/>
@@ -732,13 +732,12 @@ Gw
         <!--Window Controller-->
         <scene sceneID="HEC-hR-9hS">
             <objects>
-                <windowController storyboardIdentifier="World Settings Window Controller" id="ijf-De-pS1" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6be-xC-ZPg">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                <windowController storyboardIdentifier="World Settings Window Controller" id="ijf-De-pS1" customClass="WorldSettingsWindowController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Starting" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6be-xC-ZPg">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="294" y="363" width="454" height="554"/>
+                        <rect key="contentRect" x="294" y="363" width="480" height="480"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
-                        <value key="minSize" type="size" width="454" height="554"/>
                         <connections>
                             <outlet property="delegate" destination="ijf-De-pS1" id="nUa-LI-Er0"/>
                         </connections>

@@ -66,7 +66,8 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
 _ World settings Output tab — buffer size, flush period
-√ World settings Closing tab — logoff/disconnect command on close
+√ World settings Closing tab — logoff/disconnect command on close; auto-close
+√ World settings sheet — HIG polish (OK/Cancel, tab title in window bar, per-tab resize, Appearance preview wrap)
 _ Implement remaining local commands
 √ Implement scroll locking
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
@@ -190,17 +191,17 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     202 text files.
-     186 unique files.
+     203 text files.
+     187 unique files.
       54 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.12 s (1549.7 files/s, 218924.7 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.12 s (1497.1 files/s, 211664.6 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          140           2595           1492          12586
-XML                             15              6             37           4010
-Markdown                        16           1202              0           2593
+Swift                          141           2615           1501          12720
+XML                             15              6             37           4009
+Markdown                        16           1202              0           2594
 HTML                             1              0              0            880
 YAML                             6             39             21            248
 Python                           1             41             75            207
@@ -210,6 +211,6 @@ CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           186           3902           1634          20740
+SUM:                           187           3922           1643          20874
 -------------------------------------------------------------------------------
 ```

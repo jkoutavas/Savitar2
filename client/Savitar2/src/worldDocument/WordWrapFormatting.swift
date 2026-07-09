@@ -12,10 +12,11 @@ enum WordWrapFormatting {
     static func outputPreCSS(wordWrapEnabled: Bool) -> String {
         if wordWrapEnabled {
             return """
+            body { overflow-x: hidden; }
             .reset.bg-reset {
                 max-width: 100%;
             }
-            pre {
+            pre, code {
                 display: block;
                 white-space: pre-wrap;
                 overflow-wrap: anywhere;

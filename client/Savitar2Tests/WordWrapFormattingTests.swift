@@ -14,6 +14,8 @@ class WordWrapFormattingTests: XCTestCase {
         XCTAssertTrue(css.contains("pre-wrap"))
         XCTAssertTrue(css.contains("display: block"))
         XCTAssertTrue(css.contains("overflow-wrap: anywhere"))
+        XCTAssertTrue(css.contains("pre, code"))
+        XCTAssertTrue(css.contains("overflow-x: hidden"))
     }
 
     func testOutputPreCSSDisabledPreservesLineLength() {

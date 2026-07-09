@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **World Settings** — tab picker appears in the sheet toolbar (Starting, Appearance, Input, Output, Closing)
+- **World Settings sheet (HIG)** — OK/Cancel (was Apply); Escape dismisses; title bar shows active tab name; sheet resizes per tab; Appearance preview word-wraps with taller preview pane; sample text copyright/URL updated
 - **User guide** — Closing tab chapter; settings reference and session close behavior updated
 
 ## [2.0.20] - 2026-07-09

@@ -16,6 +16,7 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        outputView.setWordWrap(true)
         let monoOnly = AppContext.shared.prefs.flags.contains(.monoFontsOnly)
         for family in NSFontManager.shared.availableFontFamilies {
             let font = NSFont(name: family, size: 11)

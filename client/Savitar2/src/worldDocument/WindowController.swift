@@ -17,6 +17,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private var eventsWindowController: NSWindowController?
     private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
+    private var savedTitleWhileSettingsSheetOpen: String?
     private let resolutionOverlay = ResolutionOverlay()
     private weak var observedSplitView: NSSplitView?
     private var isApplyingPaneLayout = false
@@ -117,17 +118,29 @@ class WindowController: NSWindowController, NSWindowDelegate {
         let settingsStoryboard = NSStoryboard(name: "WorldSettings", bundle: bundle)
 
         // we contain the WorldSettingsController into a NSWindowController so we can set a minimum resize on the sheet
-        guard let wc = settingsStoryboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let vc = wc.window?.contentViewController as? WorldSettingsController else { return }
+        guard let settingsWC = settingsStoryboard.instantiateInitialController()
+            as? WorldSettingsWindowController else { return }
+        guard let vc = settingsWC.window?.contentViewController as? WorldSettingsController else { return }
         guard let doc = document as? Document else { return }
         vc.world = doc.world
-        vc.completionHandler = { apply, editedWorld in
+        settingsWC.settingsController = vc
+        vc.sheetWindowController = settingsWC
+        savedTitleWhileSettingsSheetOpen = window?.title
+        vc.onSheetTitleChange = { [weak self] title in
+            self?.window?.title = title
+        }
+        vc.completionHandler = { [weak self] apply, editedWorld in
+            guard let self else { return }
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
             }
+            if let saved = self.savedTitleWhileSettingsSheetOpen {
+                self.window?.title = saved
+            }
+            self.savedTitleWhileSettingsSheetOpen = nil
             self.window?.endSheet(vc.view.window!, returnCode: NSApplication.ModalResponse.OK)
         }
-        window?.beginSheet(wc.window!)
+        window?.beginSheet(settingsWC.window!)
     }
 
     override func showWindow(_ sender: Any?) {

@@ -931,7 +931,7 @@ Connection and identity for **this world document**:
 | **Keepalive Minutes** | Interval for keepalive traffic on idle connections (`0` = off). Helps some hosts drop stale sessions less aggressively. |
 | **Startup commands** | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`. |
 
-Changes apply when you click **Apply** and take effect on the **next** connection to that world.
+Changes apply when you click **OK** and take effect on the **next** connection to that world.
 
 ### Appearance tab
 
@@ -945,7 +945,7 @@ How **this world** renders text in the session window:
 | **Interpret HTML tags** | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions. |
 | **Code font** and **size** | Monospace font for HTML code blocks (only when HTML interpretation is on). |
 
-The preview pane at the bottom shows sample styled text as you change options. Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
+The preview pane at the top shows sample styled text as you change options; long lines wrap within the pane (no horizontal scrollbar). Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
 
 ANSI **palette** colors are app-wide—see [ANSI colors](#ansi-colors). This tab sets base fore/back/link and fonts for the world.
 
@@ -1023,7 +1023,7 @@ When you close a **connected** session window (or quit Savitar while worlds are 
 | **Logoff command** | Command sent to the world on close (for example `quit`, `@quit`, or `QUIT`). Leave blank to disconnect without sending anything. |
 | **Close window automatically** | When on, the window closes right after disconnect. When off (default), Savitar shows the **offline** panel first—you close again to dismiss the document (v1 reconnect prompt). |
 
-Imported Savitar 1 worlds keep their `LOGOFFCMD` and `autoClose` flag from world XML (`FLAGS="…+autoClose"`). Changes apply when you click **Apply** and take effect the next time you close a connected session.
+Imported Savitar 1 worlds keep their `LOGOFFCMD` and `autoClose` flag from world XML (`FLAGS="…+autoClose"`). Changes apply when you click **OK** and take effect the next time you close a connected session.
 
 ---
 

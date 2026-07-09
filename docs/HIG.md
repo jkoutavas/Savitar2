@@ -71,7 +71,10 @@ Per-world options belong in **World Settings** (sheet on the world document wind
 | Requirement | Implementation |
 |-------------|----------------|
 | **World → Show World Settings…** (⇧⌘J) or title-bar control | `WindowController` + `WorldSettings.storyboard` |
-| Modal sheet; **OK** / **Cancel** | `beginSheet`; changes staged until OK |
+| Modal sheet; **OK** / **Cancel** | `beginSheet`; changes staged until OK; **Escape** cancels |
+| Window title = active tab name | Parent document title swapped while sheet is open (`onSheetTitleChange`) |
+| Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)` |
+| Toolbar tab style (macOS 11+) | `WorldSettingsTabViewController`; `toolbarStyle = .preference` on sheet window |
 | Tabs: Starting, Appearance, Input, Output, Closing | `NSTabView` + toolbar; MCP deferred |
 | Contextual **?** per tab | `SavitarHelpButton.installInTopTrailingCorner` |
 
