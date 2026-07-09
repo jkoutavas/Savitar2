@@ -233,7 +233,9 @@ def build_index_html(body: str, toc: list[tuple[str, str]]) -> str:
 <body>
   <a id="top" name="top"></a>
   <h1>Savitar Help</h1>
-  <p>User guide for Savitar 2. Works offline in the app. For the latest draft chapters, see the project user guide on the web.</p>
+  <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
+  <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
+  <p><em>May you have many exciting stories to share, adventurer!</em></p>
   {toc_block}
   {body}
 </body>

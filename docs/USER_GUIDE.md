@@ -6,6 +6,12 @@ This guide explains how to use Savitar 2. It is written for **players and world 
 
 Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behavior matches v1, this guide says so explicitly.
 
+**A note from Savitar's author, Jay "Ktown" Koutavas.**
+
+*Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you're stuck—then tell me what still doesn't feel like Savitar. Help → Send Feedback… is the fastest way.*
+
+*May you have many exciting stories to share, adventurer!*
+
 ---
 
 ## Getting started

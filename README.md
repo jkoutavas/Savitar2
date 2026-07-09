@@ -194,22 +194,21 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
      183 unique files.
       54 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.12 s (1570.4 files/s, 216457.2 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.12 s (1563.9 files/s, 222131.0 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          138           2558           1478          12401
+Swift                          138           2558           1478          12413
 XML                             15              6             36           3996
-Markdown                        16           1052              0           2333
-HTML                             1              0              0            504
+Markdown                        16           1190              0           2575
+HTML                             1              0              0            866
 YAML                             5             39             21            247
-Python                           1             41             73            195
+Python                           1             41             75            207
 Bourne Shell                     1             16              1             94
 JSON                             3              0              0             86
 CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           183           3715           1617          19892
--------------------------------------------------------------------------------
+SUM:                           183           3853           1619          20520
 ```
