@@ -40,7 +40,7 @@ class WorldSettingsController: NSViewController {
     private var tabIndexObservation: NSKeyValueObservation?
     private var didPolishChrome = false
 
-    private let footerHeight: CGFloat = 64
+    private let footerHeight: CGFloat = 72
 
     override func prepare(for segue: NSStoryboardSegue, sender _: Any?) {
         // grab a reference to the tabViewController, we'll use it in the
@@ -81,14 +81,21 @@ class WorldSettingsController: NSViewController {
 
     func fittingContentSize(for tab: SavitarHelp.WorldSettingsTab) -> NSSize {
         let width: CGFloat = 480
+        let preferredTabHeight = tab.preferredSheetHeight
+        var tabHeight = preferredTabHeight
         if let tabView = _tabViewController?.tabViewItems[tab.rawValue].view {
             tabView.layoutSubtreeIfNeeded()
             let fitted = tabView.fittingSize
             if fitted.height > 1 {
-                return NSSize(width: max(width, fitted.width), height: fitted.height + footerHeight)
+                tabHeight = max(fitted.height, preferredTabHeight)
             }
         }
-        return NSSize(width: width, height: tab.preferredSheetHeight + footerHeight)
+        return NSSize(width: max(width, tabViewWidth(for: tab)), height: tabHeight + footerHeight)
+    }
+
+    private func tabViewWidth(for tab: SavitarHelp.WorldSettingsTab) -> CGFloat {
+        guard let tabView = _tabViewController?.tabViewItems[tab.rawValue].view else { return 0 }
+        return tabView.fittingSize.width
     }
 
     private func tabSelectionDidChange() {
@@ -141,7 +148,7 @@ private extension SavitarHelp.WorldSettingsTab {
         case .appearance: return 480
         case .input: return 480
         case .output: return 300
-        case .closing: return 240
+        case .closing: return 380
         }
     }
 }

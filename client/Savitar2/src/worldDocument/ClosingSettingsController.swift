@@ -38,6 +38,7 @@ class ClosingSettingsController: NSViewController {
             "Leave blank to disconnect without sending a command.")
         help.font = NSFont.systemFont(ofSize: 11)
         help.textColor = .secondaryLabelColor
+        help.preferredMaxLayoutWidth = 380
 
         let autoCloseButton = NSButton(checkboxWithTitle:
             "Close window automatically (do not show reconnect prompt)", target: nil, action: nil)
@@ -51,6 +52,7 @@ class ClosingSettingsController: NSViewController {
             "again to dismiss the document. When on, the window closes immediately after disconnect.")
         autoCloseHelp.font = NSFont.systemFont(ofSize: 11)
         autoCloseHelp.textColor = .secondaryLabelColor
+        autoCloseHelp.preferredMaxLayoutWidth = 380
 
         let box = NSBox()
         box.title = "Logoff command"
@@ -114,7 +116,9 @@ class ClosingSettingsController: NSViewController {
             autoCloseContent.trailingAnchor.constraint(
                 equalTo: autoCloseBox.contentView!.trailingAnchor, constant: -16),
             autoCloseContent.topAnchor.constraint(equalTo: autoCloseBox.contentView!.topAnchor, constant: 14),
-            autoCloseContent.bottomAnchor.constraint(equalTo: autoCloseBox.contentView!.bottomAnchor, constant: -14)
+            autoCloseContent.bottomAnchor.constraint(equalTo: autoCloseBox.contentView!.bottomAnchor, constant: -14),
+
+            autoCloseBox.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin)
         ])
     }
 

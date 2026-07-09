@@ -72,7 +72,7 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
 
         let contentSize = settingsController.fittingContentSize(for: tab)
         let width = max(contentSize.width, estimatedToolbarWidth(), 480)
-        let height = max(contentSize.height, 260)
+        let height = max(contentSize.height, 320)
 
         let size = NSSize(width: width, height: height)
         if animated {
@@ -83,7 +83,7 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
         } else {
             window.setContentSize(size)
         }
-        window.contentMinSize = NSSize(width: 480, height: 220)
+        window.contentMinSize = NSSize(width: 480, height: 280)
     }
 
     private func installEscapeKeyMonitor() {
