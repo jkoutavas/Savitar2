@@ -40,6 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.appPrefsStore.subscribe(self)
         SavitarTelemetry.initializeIfConfigured()
         SavitarUpdater.shared.startIfNeeded()
+        SavitarFeedback.presentAlphaAnnouncementIfNeeded()
 
         if AppContext.shared.prefs.flags.contains(.startupPicker) {
             showWorldPickerAction(self)
@@ -163,6 +164,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
 
     @IBAction func showAboutPrivacyAction(_: Any) {
         SavitarHelp.show(anchor: SavitarHelp.Anchor.privacy)
+    }
+
+    @IBAction func showSendFeedbackAction(_: Any) {
+        SavitarFeedback.sendFeedback()
     }
 
     @IBAction func showGuideOnWebAction(_: Any) {

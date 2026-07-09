@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 8th, 2026_
+_README last updated July 9th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -82,7 +82,7 @@ _ File upload
 _ Divider status bar support
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 √ Sparkle auto-updates (Story 12)
-_ Add bug reporting support
+√ Add bug reporting support (Story 15 — Help → Send Feedback…)
 √ In-app Savitar Help — bundled user guide (Story 16)
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
@@ -190,18 +190,18 @@ cloc . --exclude-dir=.build,build --not-match-f='PR_DESCRIPTION\.md'
 ```
 
 ```
-     197 text files.
-     181 unique files.
+     199 text files.
+     183 unique files.
       54 files ignored.
 
-github.com/AlDanial/cloc v 2.04  T=0.11 s (1604.4 files/s, 221019.7 lines/s)
+github.com/AlDanial/cloc v 2.04  T=0.12 s (1570.4 files/s, 216457.2 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Swift                          136           2520           1465          12257
-XML                             15              6             36           3988
-Markdown                        16           1023              0           2278
-HTML                             1              0              0            502
+Swift                          138           2558           1478          12401
+XML                             15              6             36           3996
+Markdown                        16           1052              0           2333
+HTML                             1              0              0            504
 YAML                             5             39             21            247
 Python                           1             41             73            195
 Bourne Shell                     1             16              1             94
@@ -210,6 +210,6 @@ CSS                              1              0              0             22
 Text                             1              0              0             11
 C/C++ Header                     1              3              8              3
 -------------------------------------------------------------------------------
-SUM:                           181           3648           1604          19683
+SUM:                           183           3715           1617          19892
 -------------------------------------------------------------------------------
 ```

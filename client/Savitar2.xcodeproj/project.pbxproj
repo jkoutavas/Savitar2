@@ -152,6 +152,8 @@
 		69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP012043A6E100E7CC7C /* SavitarHelp.swift */; };
 		69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */; };
 		69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABT022043A6E100E7CC7C /* AboutWindowController.swift */; };
+		69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */; };
+		69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */; };
 		69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */; };
 		69HLP062043A6E100E7CC7C /* Savitar.help in Resources */ = {isa = PBXBuildFile; fileRef = 69HLP032043A6E100E7CC7C /* Savitar.help */; };
 		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
@@ -329,6 +331,8 @@
 		69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelpButton.swift; sourceTree = "<group>"; };
 		69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGuideWindowController.swift; sourceTree = "<group>"; };
 		69ABT022043A6E100E7CC7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
+		69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedback.swift; sourceTree = "<group>"; };
+		69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedbackTests.swift; sourceTree = "<group>"; };
 		69HLP032043A6E100E7CC7C /* Savitar.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Savitar.help; path = Savitar.help; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
@@ -435,6 +439,7 @@
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */,
 				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
+				69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
 				69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */,
 				69B46A042A80100100CDDE09 /* TerminalBellTests.swift */,
@@ -667,6 +672,7 @@
 				69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */,
 				69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */,
 				69ABT022043A6E100E7CC7C /* AboutWindowController.swift */,
+				69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
@@ -951,6 +957,7 @@
 				69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */,
 				69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */,
 				69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */,
+				69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
 				695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */,
@@ -1044,6 +1051,7 @@
 				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,
 				69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */,
 				69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */,
+				69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */,
 				695F5A612588562E00AB6BA6 /* ReSwiftTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,

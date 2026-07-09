@@ -233,6 +233,28 @@ bundle exec fastlane sparkle_appcast version:2.0.16
 git add appcast/appcast.xml appcast/*.md
 ```
 
+## Local testing tips
+
+### Reset the alpha welcome dialog
+
+Story 15 shows a **one-time** modal on first launch (`SavitarFeedback.presentAlphaAnnouncementIfNeeded`). It stores a flag in `UserDefaults` under key `SavitarHasSeenAlphaFeedbackAnnouncement` (see `SavitarFeedback.hasSeenAnnouncementKey` in `SavitarFeedback.swift`).
+
+**Quit Savitar**, then run:
+
+```bash
+defaults delete com.heynow.savitar2 SavitarHasSeenAlphaFeedbackAnnouncement
+```
+
+Relaunch from Xcode or Finder — the welcome dialog appears again.
+
+To clear **all** Savitar preferences (nuclear option):
+
+```bash
+defaults delete com.heynow.savitar2
+```
+
+**Tip:** If you dismissed the dialog during a debug session and want to re-test without the shell, delete the app’s container prefs in Xcode (**Debug → Reset User Defaults** does not always clear `UserDefaults`; the `defaults delete` command above is reliable).
+
 ## Notes
 
 - Local release lanes sign with your login Keychain; CI imports the certificate

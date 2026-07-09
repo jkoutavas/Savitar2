@@ -2,7 +2,9 @@
 
 #### **Did you find a bug?**
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/jkoutavas/Savitar2/issues).
+* **Players and alpha testers:** use **Help → Send Feedback…** in Savitar (no GitHub account required). The message includes version info; describe what you were doing and what went wrong.
+
+* **Developers:** search [Issues](https://github.com/jkoutavas/Savitar2/issues) first. Maintainers triage player email into Issues when appropriate — reporters are not expected to use GitHub.
 
 * If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/jkoutavas/Savitar2/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible.
 
