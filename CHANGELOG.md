@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Savitar Help** contextual links — `#settings-advanced` ships in the bundled help book; World Picker **?** opens the World Picker chapter (`#worlds-connection-world-picker`); WKWebView scrolls to the target section after load
+- World Picker **?** opens the World Picker chapter (`#worlds-connection-world-picker`); WKWebView scrolls to the target section after load
 
 ## [2.0.20] - 2026-07-09
 
