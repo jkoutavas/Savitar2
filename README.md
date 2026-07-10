@@ -97,7 +97,7 @@ _ Address key things found in alpha test
 
 ```
 _ Implement next gen startup commands (trigger based)
-_ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
+√ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 ```
 
 ### start of beta

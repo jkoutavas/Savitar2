@@ -49,6 +49,7 @@ class AppPreferences: SavitarXMLProtocol {
     var flags: PrefsFlags = [.startupPicker, .useKeypad]
     var lastUpdateSecs = 0
     var updatingEnabled = true
+    var appearanceMode: AppAppearanceMode = .system
 
     // TODO: this is deprecating
     var colorMan = ColorMan()
@@ -148,6 +149,7 @@ class AppPreferences: SavitarXMLProtocol {
         case continuousSpeechEnabled = "CONTINUOUS_SPEECH_ENABLED"
         case continuousSpeechRate = "CONTINUOUS_SPEECH_RATE"
         case continuousSpeechVoice = "CONTINUOUS_SPEECH_VOICE"
+        case appAppearance = "APPAPPEARANCE"
     }
 
     func parse(xml: XML.Accessor) throws {
@@ -180,6 +182,10 @@ class AppPreferences: SavitarXMLProtocol {
                 prefs.continuousSpeechVoice = attribute.value
             case PrefsAttribIdentifier.updatingEnabled.rawValue:
                 prefs.updatingEnabled = attribute.value == "TRUE"
+            case PrefsAttribIdentifier.appAppearance.rawValue:
+                if let mode = AppAppearanceMode.from(xmlValue: attribute.value) {
+                    prefs.appearanceMode = mode
+                }
             default:
                 print("skipping prefs attribute \(attribute.key)")
             }
@@ -228,6 +234,11 @@ class AppPreferences: SavitarXMLProtocol {
 
         prefsElem.addAttribute(name: PrefsAttribIdentifier.updatingEnabled.rawValue,
                                stringValue: updatingEnabled ? "TRUE" : "FALSE")
+
+        if appearanceMode != .system {
+            prefsElem.addAttribute(name: PrefsAttribIdentifier.appAppearance.rawValue,
+                                   stringValue: appearanceMode.xmlValue)
+        }
 
         if let worlds = AppContext.shared.worldPickerStore.state?.worldList.items {
             let worldMan = WorldMan(worlds)

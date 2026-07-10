@@ -60,6 +60,21 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         pickerContentView.connectButton.action = #selector(connectAction(_:))
 
         subscriber = WorldsSubscriber<ItemListState<World>>(self)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appearanceDidChange),
+            name: .savitarAppearanceChanged,
+            object: nil
+        )
+    }
+
+    @objc private func appearanceDidChange() {
+        pickerContentView?.refreshAppearanceDependentColors()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear() {

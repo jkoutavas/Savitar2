@@ -45,7 +45,7 @@
 <p>Official builds are <strong>free downloads</strong> from <a href="https://github.com/jkoutavas/Savitar2/releases">GitHub Releases</a>. Savitar is open source; you may also build from source for your own use.</p>
 <h3 id="getting-started-quick-start">Quick start</h3>
 <ol>
-<li><strong>Launch Savitar</strong> and open the <strong>World Picker</strong> (or use <strong>File → Open World…</strong>).</li>
+<li><strong>Launch Savitar</strong> and open the <strong>World Picker</strong> (at startup by default, or <strong>File → New World Document…</strong>).</li>
 <li><strong>Double-click a world</strong> (for example Alter Aeon) to open a session window and connect.</li>
 <li>Type a command in the <strong>input</strong> pane at the bottom and press <strong>Return</strong>.</li>
 <li>Open the <strong>Events</strong> window (<strong>World → Show World Events…</strong>) to add triggers or macros.</li>
@@ -201,9 +201,19 @@
 <hr/>
 <h2 id="input-display">Input &amp; Display</h2>
 <p>Open <strong>Settings…</strong> (⌘,) and select the <strong>Input &amp; Display</strong> toolbar tab. These options apply <strong>app-wide</strong> and save immediately.</p>
+<h3 id="input-display-app-appearance-vs-world-appearance">App appearance vs world appearance</h3>
+<table>
+<thead><tr><th></th><th><strong>Settings → Input &amp; Display</strong></th><th><strong>World Settings → Appearance</strong></th></tr></thead>
+<tbody>
+<tr><td><strong>Scope</strong></td><td>App windows and dialogs (World Picker, Settings, Events, menus)</td><td>One connected world’s session output</td></tr>
+<tr><td><strong>Controls</strong></td><td><strong>System</strong> / <strong>Light</strong> / <strong>Dark</strong> popup</td><td>Fore/back colors, fonts, ANSI interpretation</td></tr>
+<tr><td><strong>ANSI palette</strong></td><td>Unchanged — see <a href="#ansi-colors">ANSI colors</a></td><td>Unchanged</td></tr>
+</tbody></table>
+<p><strong>App appearance</strong> is a Savitar 2-only preference (no Savitar 1 import). <strong>System</strong> follows macOS light/dark, including Auto sunrise/sunset. <strong>Savitar Help</strong> (⌘?) uses the same appearance for its content; world session output colors are unchanged.</p>
 <table>
 <thead><tr><th>Option</th><th>What it does</th></tr></thead>
 <tbody>
+<tr><td><strong>App appearance</strong></td><td><strong>System</strong> follows macOS; <strong>Light</strong> or <strong>Dark</strong> forces app chrome regardless of system setting. Does not change MUD session colors in world windows.</td></tr>
 <tr><td><strong>Use keypad for macro entry</strong></td><td>When on, the numeric <strong>keypad</strong> can be used when assigning or firing <strong>macro</strong> hotkeys (for example <code>KP8</code>). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s <strong>Use keypad</strong> preference.</td></tr>
 <tr><td><strong>Mono fonts only (in font menus)</strong></td><td>When on, font pop-up menus in <strong>World Settings → Appearance</strong> list <strong>monospace</strong> faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.</td></tr>
 <tr><td><strong>Default word wrap for new sessions</strong></td><td>When on, new world sessions start with word wrap in the <strong>input</strong> and <strong>output</strong> panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. Matches Savitar 1’s default for new text windows, applied here to session panes.</td></tr>
@@ -705,7 +715,7 @@
 <thead><tr><th>Savitar 2 pane</th><th>v1 equivalent (approx.)</th></tr></thead>
 <tbody>
 <tr><td><a href="#startup">Startup</a></td><td>World Picker / Events / Clicker at launch</td></tr>
-<tr><td><a href="#input-display">Input &amp; Display</a></td><td>Keypad, mono fonts, default word wrap</td></tr>
+<tr><td><a href="#input-display">Input &amp; Display</a></td><td>App appearance (System / Light / Dark), keypad, mono fonts, default word wrap</td></tr>
 <tr><td><a href="#ansi-colors">Colors</a></td><td>ANSI Color Settings</td></tr>
 <tr><td><a href="#audio">Audio</a></td><td>Mute sound / speaking / bell / clicker</td></tr>
 <tr><td><a href="#updates">Updates</a></td><td>Check for updates</td></tr>

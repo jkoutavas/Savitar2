@@ -27,7 +27,24 @@ final class HelpGuideWindowController: NSWindowController, WKNavigationDelegate 
         window.center()
         super.init(window: window)
         window.contentView = webView
+        webView.appearance = nil
         webView.navigationDelegate = self
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appearanceDidChange),
+            name: .savitarAppearanceChanged,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func appearanceDidChange() {
+        guard window?.isVisible == true, webView.url != nil else { return }
+        webView.reload()
     }
 
     @available(*, unavailable)

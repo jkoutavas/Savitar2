@@ -62,6 +62,7 @@ class AppContext {
 
     func load() {
         prefs.load()
+        AppAppearance.apply(prefs.appearanceMode)
     }
 
     func save() {
@@ -71,6 +72,7 @@ class AppContext {
     func restoreFactoryDefaults() {
         appPrefsStore.dispatch(RestoreFactoryDefaultsAction())
         closeUtilityWindowsAfterFactoryReset()
+        AppAppearance.apply(prefs.appearanceMode)
         NotificationCenter.default.post(name: .savitarColorsChanged, object: nil)
     }
 

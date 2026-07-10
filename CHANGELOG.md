@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **App-wide appearance** — **Settings → Input & Display** popup: **System**, **Light**, or **Dark** for app chrome (Story 26; v2-only pref)
+- **Savitar Help** — help book CSS supports light and dark appearance (`prefers-color-scheme`)
+
+### Fixed
+
+- **World Picker** — layer-backed colors refresh when macOS Auto light/dark changes or appearance pref changes
+
 ## [2.0.21] - 2026-07-10
 
 ### Added

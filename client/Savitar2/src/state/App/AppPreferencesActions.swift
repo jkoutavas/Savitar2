@@ -92,6 +92,18 @@ struct SetUpdatingEnabledAction: AppPreferencesAction {
     }
 }
 
+struct SetAppAppearanceModeAction: AppPreferencesAction {
+    let mode: AppAppearanceMode
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        result.prefs.appearanceMode = mode
+        result.prefs.save()
+        AppAppearance.apply(mode)
+        return result
+    }
+}
+
 // MARK: Undoable
 
 struct SetContinuousSpeechEnabledAction: AppPreferencesUndoableAction, AppPreferencesAction {
