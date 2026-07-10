@@ -65,6 +65,8 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     override func viewWillAppear() {
         super.viewWillAppear()
 
+        pickerContentView.refreshAppearanceDependentColors()
+
         store?.subscribe(subscriber!) {
             $0.select { $0.worldList }
         }

@@ -31,6 +31,8 @@ final class WorldPickerContentView: NSView {
     private let headerSeparator = NSBox()
     private var tableHeightConstraint: NSLayoutConstraint?
 
+    override var wantsUpdateLayer: Bool { true }
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         configureChrome()
@@ -69,9 +71,18 @@ final class WorldPickerContentView: NSView {
         return 76 + 1 + tableHeight + 12 + 52 + 12 + 44 + 24
     }
 
+    override func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        refreshAppearanceDependentColors()
+    }
+
+    override func updateLayer() {
+        super.updateLayer()
+        refreshAppearanceDependentColors()
+    }
+
     private func configureChrome() {
         wantsLayer = true
-        layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
 
         titleLabel.font = NSFont.systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = .labelColor
@@ -99,8 +110,7 @@ final class WorldPickerContentView: NSView {
         detailCard.wantsLayer = true
         detailCard.layer?.cornerRadius = 8
         detailCard.layer?.borderWidth = 1
-        detailCard.layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.55).cgColor
-        detailCard.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
+        refreshAppearanceDependentColors()
 
         detailLabel.font = NSFont.userFixedPitchFont(ofSize: NSFont.smallSystemFontSize)
             ?? NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
@@ -140,6 +150,13 @@ final class WorldPickerContentView: NSView {
             connectButton.contentTintColor = .controlAccentColor
         }
         connectButton.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .semibold)
+    }
+
+    /// Layer-backed fills must be re-resolved when the system appearance changes (e.g. Auto dark → light).
+    func refreshAppearanceDependentColors() {
+        layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        detailCard.layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.55).cgColor
+        detailCard.layer?.backgroundColor = NSColor.controlBackgroundColor.cgColor
     }
 
     private func installSubviews() {
