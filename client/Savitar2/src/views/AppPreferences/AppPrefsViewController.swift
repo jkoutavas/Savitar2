@@ -133,6 +133,8 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
 
         paneViews[.speech] = speechPaneView()
 
+        paneViews[.advanced] = advancedPaneView()
+
         for paneView in paneViews.values {
             paneView.translatesAutoresizingMaskIntoConstraints = false
             paneContainer.addSubview(paneView)
@@ -164,6 +166,13 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         addChild(colorsViewController)
         colorsSettingsViewController = colorsViewController
         return colorsViewController.view
+    }
+
+    private func advancedPaneView() -> NSView {
+        let advancedViewController = AdvancedSettingsViewController()
+        addChild(advancedViewController)
+        _ = advancedViewController.view
+        return advancedViewController.view
     }
 
     private enum CheckboxItem {

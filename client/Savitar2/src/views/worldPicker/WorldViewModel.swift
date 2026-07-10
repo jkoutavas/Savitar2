@@ -9,8 +9,18 @@
 import Foundation
 
 class WorldViewModel: TitledItemViewModel {
+    let hostSummary: String
+
     init(world: World) {
+        hostSummary = WorldViewModel.hostSummary(for: world)
         super.init(itemID: world.objectID.identifier, title: world.name)
+    }
+
+    private static func hostSummary(for world: World) -> String {
+        if world.host.isEmpty {
+            return "No address configured"
+        }
+        return "\(world.host):\(world.port)"
     }
 
     required init(from _: Decoder) throws {

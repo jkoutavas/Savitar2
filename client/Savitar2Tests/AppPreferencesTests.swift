@@ -45,6 +45,18 @@ class AppPreferencesTests: XCTestCase {
         XCTAssertEqual(AppContext.shared.worldPickerStore.state.worldList.items.count, 11)
     }
 
+    func testRestoreFactoryDefaultsReloadsBundledWorlds() {
+        AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteBell, enabled: true))
+        XCTAssertTrue(AppContext.shared.prefs.flags.contains(.muteBell))
+
+        AppContext.shared.restoreFactoryDefaults()
+
+        XCTAssertEqual(AppContext.shared.worldPickerStore.state.worldList.items.count, 11)
+        XCTAssertFalse(AppContext.shared.prefs.flags.contains(.muteBell))
+        XCTAssertTrue(AppContext.shared.prefs.flags.contains(.startupPicker))
+        XCTAssertTrue(AppContext.shared.prefs.flags.contains(.useKeypad))
+    }
+
     func testTriggerMan() {
         XCTAssertEqual(AppContext.shared.universalReactionsStore.state.triggerList.items.count, 2)
     }

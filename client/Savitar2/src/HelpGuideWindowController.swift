@@ -9,10 +9,11 @@ import Cocoa
 import WebKit
 
 /// Presents the bundled user guide in a Savitar window (Story 16).
-final class HelpGuideWindowController: NSWindowController {
+final class HelpGuideWindowController: NSWindowController, WKNavigationDelegate {
     static let shared = HelpGuideWindowController()
 
     private let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+    private var pendingAnchor: String?
 
     private init() {
         let window = NSWindow(
@@ -26,6 +27,7 @@ final class HelpGuideWindowController: NSWindowController {
         window.center()
         super.init(window: window)
         window.contentView = webView
+        webView.navigationDelegate = self
     }
 
     @available(*, unavailable)
@@ -39,10 +41,12 @@ final class HelpGuideWindowController: NSWindowController {
             return
         }
 
+        pendingAnchor = anchor == SavitarHelp.Anchor.home ? nil : anchor
+
         var url = indexURL
-        if anchor != SavitarHelp.Anchor.home {
+        if let pendingAnchor {
             var components = URLComponents(url: indexURL, resolvingAgainstBaseURL: false)
-            components?.fragment = anchor
+            components?.fragment = pendingAnchor
             if let anchored = components?.url {
                 url = anchored
             }
@@ -52,6 +56,17 @@ final class HelpGuideWindowController: NSWindowController {
         showWindow(nil)
         window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
+        scrollToPendingAnchor(in: webView)
+    }
+
+    private func scrollToPendingAnchor(in webView: WKWebView) {
+        guard let anchor = pendingAnchor else { return }
+        pendingAnchor = nil
+        let script = "document.getElementById('\(anchor.jsStringLiteral)')?.scrollIntoView()"
+        webView.evaluateJavaScript(script, completionHandler: nil)
     }
 
     private static func guideURLs() -> (index: URL, readAccess: URL)? {
@@ -80,5 +95,13 @@ final class HelpGuideWindowController: NSWindowController {
         alert.alertStyle = .warning
         alert.addButton(withTitle: "OK")
         alert.runModal()
+    }
+}
+
+private extension String {
+    /// Escape for safe embedding in a JavaScript single-quoted string literal.
+    var jsStringLiteral: String {
+        replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "'", with: "\\'")
     }
 }

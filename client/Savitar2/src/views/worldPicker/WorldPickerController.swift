@@ -20,17 +20,28 @@ extension Document {
 
 class WorldPickerController: NSViewController, WorldsStoreSetter {
     var store: WorldsStore?
+    weak var pickerWindowController: WorldPickerWindowController?
     private var dataSource = WorldTableDataSource()
     private var subscriber: WorldsSubscriber<ItemListState<World>>?
     private var selectionIsChanging = false
+    private var pickerContentView: WorldPickerContentView!
 
-    @IBOutlet var tableView: NSTableView!
+    private var tableView: NSTableView { pickerContentView.tableView }
 
-    @objc dynamic var world: World?
+    @objc dynamic var world: World? {
+        didSet { pickerContentView?.updateDetail(for: world) }
+    }
+
     @objc dynamic var worldIsSelected = false
 
     func setStore(_ store: WorldsStore?) {
         dataSource.setStore(store)
+    }
+
+    override func loadView() {
+        let content = WorldPickerContentView()
+        pickerContentView = content
+        view = content
     }
 
     override func viewDidLoad() {
@@ -40,6 +51,13 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
         tableView.delegate = self
         tableView.target = self
         tableView.doubleAction = #selector(tableViewDoubleAction)
+
+        pickerContentView.addButton.target = self
+        pickerContentView.addButton.action = #selector(addAction(_:))
+        pickerContentView.removeButton.target = self
+        pickerContentView.removeButton.action = #selector(removeAction(_:))
+        pickerContentView.connectButton.target = self
+        pickerContentView.connectButton.action = #selector(connectAction(_:))
 
         subscriber = WorldsSubscriber<ItemListState<World>>(self)
     }
@@ -104,6 +122,14 @@ class WorldPickerController: NSViewController, WorldsStoreSetter {
     @IBAction func connectAction(_ sender: AnyObject) {
         tableViewDoubleAction(sender: sender)
     }
+
+    func fittingContentSize() -> NSSize {
+        let rowCount = dataSource.listModel?.itemCount ?? 0
+        return NSSize(
+            width: WorldPickerContentView.contentWidth,
+            height: pickerContentView.fittingHeight(rowCount: rowCount)
+        )
+    }
 }
 
 // TODO: candidate for base class (just pass in the remove action)
@@ -147,6 +173,7 @@ extension WorldPickerController: NSTableViewDelegate {
 extension WorldPickerController {
     func displayList(listModel: WorldListViewModel) {
         updateTableDataSource(listModel: listModel)
+        pickerContentView.updateTableHeight(rowCount: listModel.itemCount)
 
         selectionIsChanging = true
         displaySelection(listModel: listModel)
@@ -191,5 +218,6 @@ class WorldsSubscriber<T>: StoreSubscriber {
         }
 
         tableController?.displayList(listModel: listModel)
+        tableController?.pickerWindowController?.resizeToFitWorldList()
     }
 }

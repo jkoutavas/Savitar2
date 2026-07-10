@@ -52,6 +52,7 @@ One **modeless Settings window** (`AppSettingsWindowController`) with toolbar pa
 | Audio | `speaker.wave.2` | Mute sound / speaking / bell / clicker (clicker when shipped) |
 | Updates | `arrow.down.circle` | Sparkle automatic update checking |
 | Speech | `person.wave.2` | Continuous speech voice, rate, enable; macOS 10.15+ footnote when needed |
+| Advanced | `gearshape.2` | **Restore Factory Defaults…** (app prefs, world list, universal events, colors, utility window positions) |
 
 Panes with larger content (Colors, Speech) may grow the window; `resizeToFitCurrentPane` keeps chrome tight.
 
@@ -60,7 +61,10 @@ Panes with larger content (Colors, Speech) may grow the window; `resizeToFitCurr
 - `client/Savitar2/src/views/AppPreferences/AppSettingsWindowController.swift`
 - `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift`
 - `client/Savitar2/src/views/AppPreferences/ColorsSettingsViewController.swift`
+- `client/Savitar2/src/views/AppPreferences/AdvancedSettingsViewController.swift`
 - `client/Savitar2/src/extensions/NSWindow+Extensions.swift`
+
+Shipped panes use programmatic Auto Layout where storyboard panes are insufficient (Speech, Colors, Advanced). **Restore Factory Defaults** reloads `StartupPreferences.xml`, saves prefs, and clears utility-window positions — see [Story 24](Stories.md#story-24--settings-advanced-maintenance).
 
 ---
 
@@ -108,12 +112,17 @@ Startup / **File → New World Document…** entry point for choosing a world.
 |-------------|---------|--------|
 | Modeless; close-only chrome | ✅ | — |
 | Contextual **?** in title bar | ✅ | — |
-| Frame autosave | `WorldPickerFrame` | Revisit position-only vs fixed size ([Story 7](Stories.md#story-7--world-picker-hig-audit)) |
-| Center on first open (no saved frame) | TBD | [Story 7](Stories.md#story-7--world-picker-hig-audit) |
-| **Escape** / **⌘W** when key | TBD | [Story 7](Stories.md#story-7--world-picker-hig-audit) |
-| **Window** menu listing when open | TBD | [Story 7](Stories.md#story-7--world-picker-hig-audit) |
+| Window title **World Picker** | ✅ | — |
+| Center on first open (no saved origin) | ✅ | `WorldPickerWindowController` |
+| **Escape** / **⌘W** when key | ✅ | `WorldPickerWindowController` |
+| Position-only frame restore | ✅ | `WorldPickerFrameOrigin` in UserDefaults |
+| Resize to fit world list | ✅ | `fittingContentSize()` |
+| Welcome header + two-line world rows | ✅ | `WorldPickerContentView` |
+| Connection detail card + primary Connect | ✅ | `WorldPickerContentView` |
+| Frame autosave | `WorldPickerFrame` (removed) | Position-only origin ([Story 7](Stories.md#story-7--world-picker-hig-audit)) |
+| **Window** menu listing when open | ✅ | Standard window list (not excluded) |
 
-Touchpoints: `WorldPicker.storyboard`, `AppContext.showWorldPicker`.
+Touchpoints: `WorldPicker.storyboard`, `WorldPickerContentView.swift`, `AppContext.showWorldPicker`.
 
 ### Macro Clicker (when shipped)
 
@@ -231,11 +240,13 @@ Remaining UI/HIG work is tracked as user stories — do not duplicate task lists
 
 | Area | Story |
 |------|-------|
-| Events Window chrome, Window menu, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit) |
-| World Picker centering, keyboard, Window menu | [Story 7](Stories.md#story-7--world-picker-hig-audit) |
+| App Settings toolbar, Advanced pane, factory reset | [Story 23](Stories.md#story-23--app-settings-hig-audit) ✅; maintenance backlog [Story 24](Stories.md#story-24--settings-advanced-maintenance) |
+| Events Window chrome, Window menu, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit); **Window menu** → [Story 25](Stories.md#story-25--window-menu-hig-audit) |
+| World Picker layout, keyboard, positioning | [Story 7](Stories.md#story-7--world-picker-hig-audit) ✅ |
+| Window menu — tab bar, Show World Picker, listing | [Story 25](Stories.md#story-25--window-menu-hig-audit) |
 | SwiftUI `Settings` scene evaluation (exploratory) | [Story 8](Stories.md#story-8--swiftui-settings-migration-exploratory) |
 
-Stories 1, 4, and 5 (app Settings, Speech pane, ANSI Colors pane) are **shipped** — requirements live in the sections above.
+Stories 1, 4, 5, 23 (app Settings HIG), and 7 (World Picker HIG) are **shipped** — requirements live in the sections above.
 
 ---
 

@@ -11,6 +11,10 @@ import SwiftyXMLParser
 
 let PreferencesElemIdentifier = "PREFERENCES"
 
+enum AppPreferencesError: Error {
+    case missingStartupPreferences
+}
+
 struct PrefsFlags: OptionSet {
     let rawValue: Int
 
@@ -101,18 +105,17 @@ class AppPreferences: SavitarXMLProtocol {
             return
         }
 
-        // Load our v2.0 startup prefs
-        if let filepath = Bundle.main.path(forResource: "StartupPreferences", ofType: "xml") {
-            do {
-                let xmlStr = try String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
-                let xml = try XML.parse(xmlStr)
-                try parse(xml: xml[PreferencesElemIdentifier])
-                loaded = true
-            } catch {
-                // Oh boy, this is unexpected.
-                // TODO: generate some kind of "Things got icky" alert
-            }
+        try? loadFactoryDefaults()
+    }
+
+    /// Reloads bundled `StartupPreferences.xml` — used for first launch and factory reset.
+    func loadFactoryDefaults() throws {
+        guard let filepath = Bundle.main.path(forResource: "StartupPreferences", ofType: "xml") else {
+            throw AppPreferencesError.missingStartupPreferences
         }
+        let xmlStr = try String(contentsOfFile: filepath).trimmingCharacters(in: .whitespacesAndNewlines)
+        let xml = try XML.parse(xmlStr)
+        try parse(xml: xml[PreferencesElemIdentifier])
     }
 
     func save() {

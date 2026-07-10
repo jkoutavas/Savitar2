@@ -43,7 +43,7 @@ Official builds are **free downloads** from [GitHub Releases](https://github.com
 
 ### Quick start
 
-1. **Launch Savitar** and open the **World Picker** (or use **File → Open World…**).
+1. **Launch Savitar** and open the **World Picker** (at startup by default, or **File → New World Document…**).
 2. **Double-click a world** (for example Alter Aeon) to open a session window and connect.
 3. Type a command in the **input** pane at the bottom and press **Return**.
 4. Open the **Events** window (**World → Show World Events…**) to add triggers or macros.
@@ -289,6 +289,28 @@ Startup flags save immediately like other app Settings. They do not affect world
 
 ---
 
+## Advanced
+
+Open **Settings…** (⌘,) and select the **Advanced** toolbar tab for rare maintenance actions.
+
+### Restore Factory Defaults
+
+**Restore Factory Defaults…** replaces all app settings with the configuration Savitar shipped with:
+
+- Startup, input, audio, updates, and speech preferences
+- World Picker world list and connection addresses
+- App-wide triggers and macros
+- ANSI color palette
+- Saved positions for utility windows (World Picker, Events)
+
+Your saved **`.world` documents on disk are not deleted**. Savitar asks for confirmation before restoring.
+
+Use this when prefs feel corrupted, you want the bundled world list back, or you need a clean slate without reinstalling.
+
+**Planned for Advanced** (not shipped yet): import/export preferences, re-import Savitar 1 preferences — see [Stories.md](Stories.md#story-24--settings-advanced-maintenance).
+
+---
+
 ## Menus
 
 Savitar’s menu bar follows standard macOS conventions. A few items are Savitar-specific; others are provided by the system because Savitar is a document-based app. On recent macOS versions, **File** may show additional items (such as **Duplicate**, **Rename…**, and **Move To…**) that replace or supplement older template entries—the behavior described here matches what you see at runtime.
@@ -301,14 +323,14 @@ World document windows, the **World Picker**, and the **Events** windows each en
 |-----------|----------|--------------|
 | **About Savitar** | — | Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss. |
 | **Check for Updates…** | — | Looks for a newer Savitar release (Sparkle). See [Updates](#updates). |
-| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech). Changes apply immediately; there is no Save button. |
+| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech, **Advanced**). Changes apply immediately; there is no Save button. |
 | **Services** | — | Standard macOS Services submenu for the current selection (when a supporting service is installed). |
 | **Hide Savitar** | ⌘H | Hides all Savitar windows. |
 | **Hide Others** | ⌥⌘H | Hides every app except Savitar. |
 | **Show All** | — | Un-hides other applications. |
 | **Quit Savitar** | ⌘Q | Quits the app. Open world documents are closed according to each window’s save state. |
 
-See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), and [Updates](#updates) for the other Settings toolbar panes.
+See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), [Updates](#updates), and [Advanced](#advanced) for the other Settings toolbar panes.
 
 ### File menu
 
@@ -794,14 +816,18 @@ Savitar 1 exposed output **buffer size** and **flush period** in World Settings.
 
 ### World Picker
 
-The **World Picker** lists worlds from your app preferences (imported from Savitar 1 or created in Savitar 2).
+The **World Picker** is Savitar’s front door — a modeless utility window listing worlds from your app preferences (bundled defaults, Savitar 1 import, or worlds you added).
 
 | Action | How |
 |--------|-----|
-| **Connect** | Double-click a world, or select and click **Connect** |
-| **Add** | **+** button opens the **World Wizard** (name, host, port) |
-| **Remove** | Select a world and click **−** or press Delete |
+| **Connect** | Double-click a world, select one and press **Connect** or Return, or use the **Connect** button |
+| **Add** | **Add…** opens the **World Wizard** (name, host, port) |
+| **Remove** | Select a world and click **Remove** or press Delete |
 | **Edit connection** | Open a session, then **World → Show World Settings…** (⇧⌘J) |
+
+Each row shows the world name and `host:port`. The connection card below the list shows the full `telnet://` address for the selected world.
+
+**Settings → Advanced → Restore Factory Defaults** resets the World Picker world list to Savitar’s bundled defaults without deleting your saved `.world` files.
 
 Each **connection** opens a **world document window**—you can have multiple worlds open at once. Use the **Window** menu to switch.
 
@@ -844,6 +870,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Audio](#audio) | Mute sound / speaking / bell / clicker |
 | [Updates](#updates) | Check for updates |
 | [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate |
+| [Advanced](#advanced) | Restore factory defaults; import/export (planned) |
 
 ### World Settings sheet (⇧⌘J)
 
