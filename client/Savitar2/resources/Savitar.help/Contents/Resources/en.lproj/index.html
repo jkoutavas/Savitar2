@@ -14,7 +14,7 @@
   <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
   <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
   <p><em>May you have many exciting stories to share, adventurer!</em></p>
-  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#install-updates">Install &amp; updates</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#startup">Startup</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#entering-commands">Entering commands</a></li><li><a href="#variables-expansion">Variables &amp; expansion</a></li><li><a href="#local-commands">Local commands</a></li><li><a href="#triggers">Triggers</a></li><li><a href="#output-appearance">Output &amp; appearance</a></li><li><a href="#worlds-connection">Worlds &amp; connection</a></li><li><a href="#settings-reference">Settings reference</a></li><li><a href="#tips-troubleshooting">Tips &amp; troubleshooting</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
+  <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#install-updates">Install &amp; updates</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#startup">Startup</a></li><li><a href="#settings-advanced">Advanced</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#entering-commands">Entering commands</a></li><li><a href="#variables-expansion">Variables &amp; expansion</a></li><li><a href="#local-commands">Local commands</a></li><li><a href="#triggers">Triggers</a></li><li><a href="#output-appearance">Output &amp; appearance</a></li><li><a href="#worlds-connection">Worlds &amp; connection</a></li><li><a href="#settings-reference">Settings reference</a></li><li><a href="#tips-troubleshooting">Tips &amp; troubleshooting</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
   <h1 id="savitar-2-user-guide">Savitar 2 User Guide</h1>
 <p>This guide explains how to use Savitar 2. It is written for <strong>players and world builders</strong>, not developers. See <a href="Stories.md">Stories.md</a> <strong>Story 9</strong> for chapters still in progress.</p>
 <p>Savitar 2 is intended to behave like Savitar 1.x for day-to-day use. Where behavior matches v1, this guide says so explicitly.</p>
@@ -245,6 +245,21 @@
 </tbody></table>
 <p>Startup flags save immediately like other app Settings. They do not affect worlds already open from a previous session—only the next launch.</p>
 <hr/>
+<h2 id="settings-advanced">Advanced</h2>
+<p>Open <strong>Settings…</strong> (⌘,) and select the <strong>Advanced</strong> toolbar tab for rare maintenance actions.</p>
+<h3 id="settings-advanced-restore-factory-defaults">Restore Factory Defaults</h3>
+<p><strong>Restore Factory Defaults…</strong> replaces all app settings with the configuration Savitar shipped with:</p>
+<ul>
+<li>Startup, input, audio, updates, and speech preferences</li>
+<li>World Picker world list and connection addresses</li>
+<li>App-wide triggers and macros</li>
+<li>ANSI color palette</li>
+<li>Saved positions for utility windows (World Picker, Events)</li>
+</ul>
+<p>Your saved <strong><code>.world</code> documents on disk are not deleted</strong>. Savitar asks for confirmation before restoring.</p>
+<p>Use this when prefs feel corrupted, you want the bundled world list back, or you need a clean slate without reinstalling.</p>
+<p><strong>Planned for Advanced</strong> (not shipped yet): import/export preferences, re-import Savitar 1 preferences — see <a href="Stories.md#story-24--settings-advanced-maintenance">Stories.md</a>.</p>
+<hr/>
 <h2 id="menus">Menus</h2>
 <p>Savitar’s menu bar follows standard macOS conventions. A few items are Savitar-specific; others are provided by the system because Savitar is a document-based app. On recent macOS versions, <strong>File</strong> may show additional items (such as <strong>Duplicate</strong>, <strong>Rename…</strong>, and <strong>Move To…</strong>) that replace or supplement older template entries—the behavior described here matches what you see at runtime.</p>
 <p>World document windows, the <strong>World Picker</strong>, and the <strong>Events</strong> windows each enable the commands that apply to the frontmost window.</p>
@@ -254,14 +269,14 @@
 <tbody>
 <tr><td><strong>About Savitar</strong></td><td>—</td><td>Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss.</td></tr>
 <tr><td><strong>Check for Updates…</strong></td><td>—</td><td>Looks for a newer Savitar release (Sparkle). See <a href="#updates">Updates</a>.</td></tr>
-<tr><td><strong>Settings…</strong></td><td>⌘,</td><td>Opens the app <strong>Settings</strong> window (toolbar panes: Startup, Input &amp; Display, <strong>Colors</strong>, Audio, Updates, Speech). Changes apply immediately; there is no Save button.</td></tr>
+<tr><td><strong>Settings…</strong></td><td>⌘,</td><td>Opens the app <strong>Settings</strong> window (toolbar panes: Startup, Input &amp; Display, <strong>Colors</strong>, Audio, Updates, Speech, <strong>Advanced</strong>). Changes apply immediately; there is no Save button.</td></tr>
 <tr><td><strong>Services</strong></td><td>—</td><td>Standard macOS Services submenu for the current selection (when a supporting service is installed).</td></tr>
 <tr><td><strong>Hide Savitar</strong></td><td>⌘H</td><td>Hides all Savitar windows.</td></tr>
 <tr><td><strong>Hide Others</strong></td><td>⌥⌘H</td><td>Hides every app except Savitar.</td></tr>
 <tr><td><strong>Show All</strong></td><td>—</td><td>Un-hides other applications.</td></tr>
 <tr><td><strong>Quit Savitar</strong></td><td>⌘Q</td><td>Quits the app. Open world documents are closed according to each window’s save state.</td></tr>
 </tbody></table>
-<p>See <a href="#speech-speech-settings-reference">Speech settings reference</a> for <strong>Speech</strong>, <a href="#ansi-colors">ANSI colors</a> for <strong>Colors</strong>, <a href="#input-display">Input &amp; Display</a>, <a href="#audio">Audio</a>, and <a href="#updates">Updates</a> for the other Settings toolbar panes.</p>
+<p>See <a href="#speech-speech-settings-reference">Speech settings reference</a> for <strong>Speech</strong>, <a href="#ansi-colors">ANSI colors</a> for <strong>Colors</strong>, <a href="#input-display">Input &amp; Display</a>, <a href="#audio">Audio</a>, <a href="#updates">Updates</a>, and <a href="#advanced">Advanced</a> for the other Settings toolbar panes.</p>
 <h3 id="menus-file-menu">File menu</h3>
 <table>
 <thead><tr><th>Menu item</th><th>Shortcut</th><th>What it does</th></tr></thead>
@@ -651,15 +666,17 @@
 <hr/>
 <h2 id="worlds-connection">Worlds &amp; connection</h2>
 <h3 id="worlds-connection-world-picker">World Picker</h3>
-<p>The <strong>World Picker</strong> lists worlds from your app preferences (imported from Savitar 1 or created in Savitar 2).</p>
+<p>The <strong>World Picker</strong> is Savitar’s front door — a modeless utility window listing worlds from your app preferences (bundled defaults, Savitar 1 import, or worlds you added).</p>
 <table>
 <thead><tr><th>Action</th><th>How</th></tr></thead>
 <tbody>
-<tr><td><strong>Connect</strong></td><td>Double-click a world, or select and click <strong>Connect</strong></td></tr>
-<tr><td><strong>Add</strong></td><td><strong>+</strong> button opens the <strong>World Wizard</strong> (name, host, port)</td></tr>
-<tr><td><strong>Remove</strong></td><td>Select a world and click <strong>−</strong> or press Delete</td></tr>
+<tr><td><strong>Connect</strong></td><td>Double-click a world, select one and press <strong>Connect</strong> or Return, or use the <strong>Connect</strong> button</td></tr>
+<tr><td><strong>Add</strong></td><td><strong>Add…</strong> opens the <strong>World Wizard</strong> (name, host, port)</td></tr>
+<tr><td><strong>Remove</strong></td><td>Select a world and click <strong>Remove</strong> or press Delete</td></tr>
 <tr><td><strong>Edit connection</strong></td><td>Open a session, then <strong>World → Show World Settings…</strong> (⇧⌘J)</td></tr>
 </tbody></table>
+<p>Each row shows the world name and <code>host:port</code>. The connection card below the list shows the full <code>telnet://</code> address for the selected world.</p>
+<p><strong>Settings → Advanced → Restore Factory Defaults</strong> resets the World Picker world list to Savitar’s bundled defaults without deleting your saved <code>.world</code> files.</p>
 <p>Each <strong>connection</strong> opens a <strong>world document window</strong>—you can have multiple worlds open at once. Use the <strong>Window</strong> menu to switch.</p>
 <h3 id="worlds-connection-world-documents">World documents</h3>
 <p>A <code>.world</code> file stores connection settings, triggers, macros, and layout. <strong>File → Save</strong> writes changes. <strong>File → Duplicate</strong> (⇧⌘S) branches a copy.</p>
@@ -693,6 +710,7 @@
 <tr><td><a href="#audio">Audio</a></td><td>Mute sound / speaking / bell / clicker</td></tr>
 <tr><td><a href="#updates">Updates</a></td><td>Check for updates</td></tr>
 <tr><td><a href="#speech-speech-settings-reference">Speech</a></td><td>Continuous speech, voice, rate</td></tr>
+<tr><td><a href="#advanced">Advanced</a></td><td>Restore factory defaults; import/export (planned)</td></tr>
 </tbody></table>
 <h3 id="settings-reference-world-settings-sheet-j">World Settings sheet (⇧⌘J)</h3>
 <table>
@@ -770,7 +788,7 @@
 <tr><td><strong>Keepalive Minutes</strong></td><td>Interval for keepalive traffic on idle connections (<code>0</code> = off). Helps some hosts drop stale sessions less aggressively.</td></tr>
 <tr><td><strong>Startup commands</strong></td><td>Commands sent automatically after a successful connect, one per line—often login name, password, or <code>look</code>.</td></tr>
 </tbody></table>
-<p>Changes apply when you click <strong>Apply</strong> and take effect on the <strong>next</strong> connection to that world.</p>
+<p>Changes apply when you click <strong>OK</strong> and take effect on the <strong>next</strong> connection to that world.</p>
 <h3 id="world-settings-appearance-tab">Appearance tab</h3>
 <p>How <strong>this world</strong> renders text in the session window:</p>
 <table>
@@ -782,7 +800,7 @@
 <tr><td><strong>Interpret HTML tags</strong></td><td>When on, simple HTML in output is rendered. Enables <strong>Code font</strong> and size for <code>&lt;code&gt;</code> regions.</td></tr>
 <tr><td><strong>Code font</strong> and <strong>size</strong></td><td>Monospace font for HTML code blocks (only when HTML interpretation is on).</td></tr>
 </tbody></table>
-<p>The preview pane at the bottom shows sample styled text as you change options. Per-world fonts respect <strong>Settings → Input &amp; Display → Mono fonts only</strong> when choosing monospace faces.</p>
+<p>The preview pane at the top shows sample styled text as you change options; long lines wrap within the pane (no horizontal scrollbar). Per-world fonts respect <strong>Settings → Input &amp; Display → Mono fonts only</strong> when choosing monospace faces.</p>
 <p>ANSI <strong>palette</strong> colors are app-wide—see <a href="#ansi-colors">ANSI colors</a>. This tab sets base fore/back/link and fonts for the world.</p>
 <h3 id="world-settings-input-tab">Input tab</h3>
 <p>Controls how Savitar handles what you type and how commands are sent to the server.</p>
@@ -844,7 +862,7 @@
 <tr><td><strong>Logoff command</strong></td><td>Command sent to the world on close (for example <code>quit</code>, <code>@quit</code>, or <code>QUIT</code>). Leave blank to disconnect without sending anything.</td></tr>
 <tr><td><strong>Close window automatically</strong></td><td>When on, the window closes right after disconnect. When off (default), Savitar shows the <strong>offline</strong> panel first—you close again to dismiss the document (v1 reconnect prompt).</td></tr>
 </tbody></table>
-<p>Imported Savitar 1 worlds keep their <code>LOGOFFCMD</code> and <code>autoClose</code> flag from world XML (<code>FLAGS="…+autoClose"</code>). Changes apply when you click <strong>Apply</strong> and take effect the next time you close a connected session.</p>
+<p>Imported Savitar 1 worlds keep their <code>LOGOFFCMD</code> and <code>autoClose</code> flag from world XML (<code>FLAGS="…+autoClose"</code>). Changes apply when you click <strong>OK</strong> and take effect the next time you close a connected session.</p>
 <hr/>
 <h2 id="privacy">Privacy &amp; usage statistics</h2>
 <p>Official Savitar builds from Heynow Software send <strong>anonymous usage statistics</strong> to help measure active installations and version adoption. We use <a href="https://telemetrydeck.com/">TelemetryDeck</a>, a privacy-first analytics service: signals include app version, build number, and macOS version only — <strong>no account names, world names, session text, or other personal data</strong>.</p>

@@ -153,4 +153,13 @@ enum WindowRestoration {
             }
         } catch {}
     }
+
+    /// Clears saved frames and origins for utility windows after factory reset.
+    static func clearUtilityWindowState() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "WorldPickerFrameOrigin")
+        for key in defaults.dictionaryRepresentation().keys where key.hasPrefix("NSWindow Frame EventsWindowFrame") {
+            defaults.removeObject(forKey: key)
+        }
+    }
 }

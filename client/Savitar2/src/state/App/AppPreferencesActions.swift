@@ -62,6 +62,21 @@ struct SetShowEventsWindowAtStartupAction: AppPreferencesAction {
     }
 }
 
+struct RestoreFactoryDefaultsAction: AppPreferencesAction {
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        var result = AppPreferencesState()
+        do {
+            try result.prefs.loadFactoryDefaults()
+        } catch {
+            return oldState
+        }
+        result.prefs.openSessions = []
+        WindowRestoration.clearUtilityWindowState()
+        result.prefs.save()
+        return result
+    }
+}
+
 struct SetUpdatingEnabledAction: AppPreferencesAction {
     let enabled: Bool
 

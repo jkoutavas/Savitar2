@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, and 5** are complete; **Story 2** is partially complete (see below). **Stories 6–8** track HIG and UI backlog from [HIG.md](HIG.md). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -228,31 +228,140 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, an
 
 ---
 
-## Story 7 — World Picker HIG audit
+## Story 7 — World Picker HIG audit ✅
 
 **Goal:** Align the **Savitar World Picker** with [HIG.md](HIG.md) for a small, modeless startup/utility window.
 
-**Context:** World Picker opens at startup (optional pref), from **File → New World Document…**, and hosts world list + wizard entry. Currently uses frame autosave; close-only chrome is already correct.
+**Context:** World Picker opens at startup (optional pref), from **File → New World Document…**, and hosts world list + wizard entry.
+
+**Status:** Complete (July 2026). Programmatic welcome layout (`WorldPickerContentView`), position-only restore, keyboard dismissal.
 
 ### Tasks
 
-- [ ] **7.1** **First open** — center on screen when no saved frame exists
-- [ ] **7.2** **Frame autosave** — evaluate `WorldPickerFrame`: keep position-only vs. drop autosave for fixed-size picker
-- [ ] **7.3** **Window title** — confirm title matches menu/command expectations (`Savitar World Picker` or shorten to `World Picker`)
-- [ ] **7.4** **Window menu** — list in **Window** menu when open
-- [ ] **7.5** **Keyboard** — Escape closes picker when it is key; **⌘W** closes if appropriate for utility window
-- [ ] **7.6** **Layout** — Auto Layout audit; window fits content without excess empty space
+- [x] **7.1** **First open** — center on screen when no saved frame exists
+- [x] **7.2** **Frame autosave** — position-only origin (`WorldPickerFrameOrigin`); dropped full frame autosave
+- [x] **7.3** **Window title** — **World Picker** (matches utility window role)
+- [x] **7.4** **Window menu** — list in **Window** menu when open
+- [x] **7.5** **Keyboard** — **Escape** and **⌘W** close when key
+- [x] **7.6** **Layout** — Auto Layout welcome header, two-line world rows, connection detail card, primary **Connect**; window fits content
 
 ### Touchpoints
 
 - `client/Savitar2/Base.lproj/WorldPicker.storyboard`
+- `client/Savitar2/src/views/worldPicker/WorldPickerWindowController.swift`
+- `client/Savitar2/src/views/worldPicker/WorldPickerContentView.swift`
 - `client/Savitar2/src/AppContext.swift` (`showWorldPicker`)
-- `client/Savitar2/src/views/WorldPicker/` (controllers)
 
 ### Acceptance
 
-- Picker opens centered on first launch; size is tight to content
-- Window menu and keyboard dismissal match documented HIG behavior
+- Picker opens centered on first launch; size is tight to content ✅
+- Window menu and keyboard dismissal match documented HIG behavior ✅
+- First-run layout reads as a deliberate entry point, not a legacy table dialog ✅
+
+---
+
+## Story 23 — App Settings HIG audit ✅
+
+**Goal:** Consolidate and polish the **app Settings** window per [HIG.md](HIG.md) — toolbar panes, live save, close-only chrome, contextual help, and an **Advanced** maintenance pane.
+
+**Context:** Stories 1, 4, and 5 shipped individual panes; this story tracks cross-cutting HIG compliance and the **Advanced** tab added for factory reset.
+
+**Status:** Complete (July 2026).
+
+### Tasks
+
+- [x] **23.1** **Toolbar** — `NSToolbar` + `.preference` style; icon + label for every pane (Startup through Advanced)
+- [x] **23.2** **Chrome** — close-only, non-resizable; window title = active pane name
+- [x] **23.3** **Dismissal** — **Escape** and **⌘.** close Settings when key
+- [x] **23.4** **First open** — center after `fitContentSize` on first display
+- [x] **23.5** **Live save** — no Save/Cancel/Apply; checkbox and color changes persist immediately
+- [x] **23.6** **Deferred features** — grayed controls with tooltips (Macro Clicker, Mute clicker)
+- [x] **23.7** **Deep links** — **Audio → Speech Settings…** → Speech pane; **Edit → ANSI Colors…** → Colors pane
+- [x] **23.8** **Contextual ?** — per-pane help anchor updates on toolbar selection (Story 17)
+- [x] **23.9** **Advanced pane** — `gearshape.2` toolbar item; scope copy + **Restore Factory Defaults…** with confirmation ([Story 24.1](#story-24--settings-advanced-maintenance))
+- [x] **23.10** **Pane sizing** — `resizeToFitCurrentPane` accounts for widest toolbar label (including **Input & Display** and **Advanced**)
+
+### Touchpoints
+
+- `client/Savitar2/src/views/AppPreferences/AppSettingsWindowController.swift`
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift`
+- `client/Savitar2/src/views/AppPreferences/AdvancedSettingsViewController.swift`
+- `client/Savitar2/src/views/AppPreferences/ColorsSettingsViewController.swift`
+- `client/Savitar2/src/views/AppPreferences/SpeechPrefsViewController.swift`
+- `client/Savitar2/src/AppPreferences.swift` (`loadFactoryDefaults`)
+- `client/Savitar2/src/AppContext.swift` (`restoreFactoryDefaults`)
+- `docs/HIG.md` — App Settings section
+
+### Acceptance
+
+- Settings behaves as a modeless macOS Settings window across all seven panes ✅
+- Factory reset restores bundled defaults without deleting `.world` documents ✅
+- HIG requirements are documented; further Advanced actions tracked in Story 24 ✅
+
+---
+
+## Story 24 — Settings → Advanced maintenance
+
+**Goal:** Rare, app-wide maintenance actions live on **Settings → Advanced** — not scattered across other panes or the World Picker.
+
+**Context:** **Restore Factory Defaults** shipped with Story 23. Remaining items depend on their underlying features or are natural companions to import/export.
+
+**Not in scope for Advanced:** `SavitarHasSeenAlphaFeedbackAnnouncement` (first-run UX only), `debug` pref (no player-facing debug mode).
+
+### Tasks
+
+- [x] **24.1** **Restore Factory Defaults…** — reload `StartupPreferences.xml`; reset app prefs, World Picker world list, universal triggers/macros, ANSI colors; clear utility-window positions; confirmation alert
+- [ ] **24.2** **Import Savitar 1 Preferences…** — re-read `~/Library/Preferences/Savitar 2.0 Prefs` on demand (triggers, macros, colors, worlds); merge or replace with user choice — *no v1 install required if file still exists*
+- [ ] **24.3** **Export preferences…** — write current `Savitar2 Prefs` XML to a user-chosen file (backup / support)
+- [ ] **24.4** **Import preferences…** — load a previously exported Savitar 2 prefs file
+- [ ] **24.5** **Capture file editor** — `logEditorName` app pref UI when session logging / external editor ships (v1: `DoPreferences` capture editor field)
+- [ ] **24.6** **Events section defaults** — expose or wire `trigsClosed` / `varsClosed` when [Story 2.6](#story-2--wire-preference-flags-to-behavior) / [Story 6.6](#story-6--events-window-hig-audit) land (Events window UI, not a separate prefs dialog)
+
+### Touchpoints
+
+- `client/Savitar2/src/views/AppPreferences/AdvancedSettingsViewController.swift`
+- `client/Savitar2/src/AppPreferences.swift` (v1 + v2 load paths)
+- `docs/USER_GUIDE.md` — [Advanced](#advanced) chapter
+
+### Acceptance
+
+- Destructive maintenance is confirmable and documented; pane-local actions (e.g. Colors **Restore Defaults**) stay on their panes
+- Import/export round-trips prefs XML without corrupting open sessions (define behavior in 24.3/24.4 tasks when implemented)
+
+---
+
+## Story 25 — Window menu HIG audit
+
+**Goal:** Make the **Window** menu accurate for Savitar 2 — no spurious tab-bar commands, clear paths to reopen utility windows, and consistent listing of open documents and auxiliaries.
+
+**Context:** Savitar 1 opened the World Picker via **File → New** and optional startup pref only — no dedicated Window menu item. Savitar 2 matches that for **File → New World Document…** (⌘N) and **Show World Picker at startup**, but the redesigned World Picker is a **modeless utility window** (like Events). The system **Window** menu (`systemMenu="window"`) also injects **Show/Hide Tab Bar** and related tabbing items even though Savitar does not use tabbed world documents.
+
+**v1 parity note:** A **Window → Show World Picker** command is a **v2 UX improvement**, not v1 parity — document in USER_GUIDE when shipped.
+
+### Tasks
+
+- [ ] **25.1** **Disable window tabbing** — set `NSWindow.allowsAutomaticWindowTabbing = false` at launch so **Show Tab Bar**, **Hide Tab Bar**, **Merge All Windows**, etc. do not appear
+- [ ] **25.2** **Show World Picker** — add **Window → Show World Picker** (shortcut TBD; consider bringing existing picker forward if already open); mirror **Show App-wide Events Window** (⇧⌘E) pattern
+- [ ] **25.3** **⌘N behavior** — decide whether **File → New World Document…** always opens/focuses World Picker vs. implies “new untitled document” only; document choice in HIG + USER_GUIDE
+- [ ] **25.4** **Window list hygiene** — verify open windows appear with sensible titles: world documents (world name), **World Picker**, app-wide Events, per-world Events; bring-to-front works when selected
+- [ ] **25.5** **Minimize / Zoom** — audit per window type: world documents may keep minimize/zoom; close-only utility windows (World Picker, Settings) should not offer misleading zoom/minimize (coordinate with [Story 6](#story-6--events-window-hig-audit) for Events)
+- [ ] **25.6** **Fold Story 6.4** — complete Events Window menu listing as part of this pass or cross-link; avoid duplicate story work
+- [ ] **25.7** **Docs** — update [USER_GUIDE.md](USER_GUIDE.md) Window menu table (no tab bar; **Show World Picker**); [HIG.md](HIG.md) Window menu section
+
+### Touchpoints
+
+- `client/Savitar2/Base.lproj/Main.storyboard` (Window menu)
+- `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/src/AppContext.swift` (`showWorldPicker`, `showUniversalEventsWindow`)
+- `client/Savitar2/src/views/worldPicker/WorldPickerWindowController.swift`
+- `docs/HIG.md`, `docs/USER_GUIDE.md`
+
+### Acceptance
+
+- Window menu contains no tab-bar or merge-windows items
+- User can reopen a closed World Picker from **Window** menu without using **File → New World Document…**
+- Open window list matches frontmost windows; utility windows use stable titles
+- Behavior documented in HIG and user guide
 
 ---
 
@@ -786,7 +895,7 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ### Tasks
 
-- [x] **17.1** **Anchor registry** — `SavitarHelp.ContextualSurface` in `SavitarHelpButton.swift`: Events → `events`; App Settings panes → `speech-speech-settings-reference`, `audio`, `getting-started`, `input-display`, `ansi-colors`, `updates`; World Settings tabs → `world-settings-*-tab`; World Picker → `getting-started`; world session → `menus-world-menu`.
+- [x] **17.1** **Anchor registry** — `SavitarHelp.ContextualSurface` in `SavitarHelpButton.swift`: Events → `events`; App Settings panes → `speech-speech-settings-reference`, `audio`, `getting-started`, `input-display`, `ansi-colors`, `updates`, `settings-advanced`; World Settings tabs → `world-settings-*-tab`; World Picker → `worlds-connection-world-picker`; world session → `menus-world-menu`.
 - [x] **17.2** **`SavitarHelp` API** — `SavitarHelp.show(anchor:)` + `ContextualSurface.show()` via WKWebView fragment navigation.
 - [x] **17.3** **Reusable control** — `SavitarHelpButton.installInTitleBar(of:for:)` and `installInTopTrailingCorner(of:for:)` (World Settings sheet); wired on **Events**, **App Settings** (per pane), **World Settings** (per tab), **World Picker**, **world session window**.
 - [x] **17.4** **VoiceOver** — per-surface `accessibilityLabel` (e.g. “Help for Events window”, “Help for Speech settings”).
@@ -1076,24 +1185,27 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 1. ~~Story 1 — App Settings UI~~ ✅
 2. ~~Story 4 — Speech pane polish~~ ✅
 3. ~~Story 5 — ANSI Colors Settings pane~~ ✅
-4. ~~Story 12 — Sparkle 2 auto-updates~~ ✅ (*12.7* E2E install test remains)
-5. ~~Story 13 — Help → Release Notes~~ ✅
-6. ~~Story 14 — TelemetryDeck analytics~~ ✅
-7. ~~Story 16 — In-app user guide (Help menu)~~ ✅
-8. ~~Story 17 — Contextual ? help buttons~~ ✅
-9. ~~Story 18 — Help → About Privacy~~ ✅
-10. ~~Story 15 — Send Feedback (email)~~ ✅
-11. ~~**Story 21 — About box with scrolling credits**~~ ✅
-12. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
-13. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
-14. Story 6 — Events Window HIG
-15. Story 7 — World Picker HIG
-16. Story 10 — Command aliases
-17. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-18. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
-19. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
-20. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
-21. Story 8 — SwiftUI Settings spike (optional, post-beta)
+4. ~~Story 23 — App Settings HIG audit~~ ✅
+5. ~~Story 7 — World Picker HIG~~ ✅
+6. ~~Story 12 — Sparkle 2 auto-updates~~ ✅ (*12.7* E2E install test remains)
+7. ~~Story 13 — Help → Release Notes~~ ✅
+8. ~~Story 14 — TelemetryDeck analytics~~ ✅
+9. ~~Story 16 — In-app user guide (Help menu)~~ ✅
+10. ~~Story 17 — Contextual ? help buttons~~ ✅
+11. ~~Story 18 — Help → About Privacy~~ ✅
+12. ~~Story 15 — Send Feedback (email)~~ ✅
+13. ~~**Story 21 — About box with scrolling credits**~~ ✅
+14. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
+15. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
+16. Story 6 — Events Window HIG
+17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; import/export, v1 re-import, log editor deferred)
+18. **Story 25 — Window menu HIG audit** — tab bar removal, **Show World Picker**, window list hygiene
+19. Story 10 — Command aliases
+20. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+21. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
+22. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
+23. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
+24. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).
@@ -1117,4 +1229,4 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Mute terminal bell | `muteBell` | Done |
 | Mute clicker | `muteClicker` | UI only (grayed out) |
 | Check for updates | `updatingEnabled` | Done — Story 12 |
-| Capture file editor | `logEditorName` | Deferred |
+| Capture file editor | `logEditorName` | Deferred — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |

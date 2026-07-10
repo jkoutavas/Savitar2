@@ -25,7 +25,7 @@ extension SavitarHelp {
             case .worldSettings(let tab):
                 return tab.helpAnchor
             case .worldPicker:
-                return Anchor.gettingStarted
+                return Anchor.worldsConnectionWorldPicker
             case .worldSession:
                 return Anchor.worldMenu
             }
@@ -113,6 +113,8 @@ private extension AppSettingsPane {
             return SavitarHelp.Anchor.ansiColors
         case .updates:
             return SavitarHelp.Anchor.updates
+        case .advanced:
+            return SavitarHelp.Anchor.settingsAdvanced
         }
     }
 
@@ -130,6 +132,8 @@ private extension AppSettingsPane {
             return "Open help for the ANSI color palette"
         case .updates:
             return "Open help for automatic and manual updates"
+        case .advanced:
+            return "Open help for restoring factory defaults and maintenance"
         }
     }
 }

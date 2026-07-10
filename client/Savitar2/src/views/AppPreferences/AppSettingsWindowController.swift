@@ -14,6 +14,7 @@ enum AppSettingsPane: Int, CaseIterable {
     case audio
     case updates
     case speech
+    case advanced
 
     var title: String {
         switch self {
@@ -23,6 +24,7 @@ enum AppSettingsPane: Int, CaseIterable {
         case .audio: return "Audio"
         case .updates: return "Updates"
         case .speech: return "Speech"
+        case .advanced: return "Advanced"
         }
     }
 
@@ -42,6 +44,7 @@ enum AppSettingsPane: Int, CaseIterable {
         case .audio: return "speaker.wave.2"
         case .updates: return "arrow.down.circle"
         case .speech: return "person.wave.2"
+        case .advanced: return "gearshape.2"
         }
     }
 }
@@ -78,9 +81,16 @@ final class AppSettingsWindowController: NSWindowController, NSToolbarDelegate {
 
     private func installEscapeKeyMonitor() {
         escapeKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
-            guard let self, window?.isKeyWindow == true, event.keyCode == 53 else { return event }
-            cancelOperation(self)
-            return nil
+            guard let self, window?.isKeyWindow == true else { return event }
+            if event.keyCode == 53 {
+                cancelOperation(self)
+                return nil
+            }
+            if event.modifierFlags.contains(.command), event.charactersIgnoringModifiers == "." {
+                cancelOperation(self)
+                return nil
+            }
+            return event
         }
     }
 

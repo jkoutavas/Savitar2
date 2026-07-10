@@ -29,6 +29,7 @@ ANCHOR_BY_TITLE = {
     "Audio": "audio",
     "Updates": "updates",
     "Startup": "startup",
+    "Advanced": "settings-advanced",
     "Menus": "menus",
     "Session window": "session-window",
     "Events": "events",

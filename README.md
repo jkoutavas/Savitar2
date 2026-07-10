@@ -71,7 +71,9 @@ _ World settings Output tab — buffer size, flush period
 _ Implement remaining local commands
 √ Implement scroll locking
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
-√ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech (Story 1)
+√ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
+√ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
+√ World Picker HIG — welcome layout, keyboard dismiss, position-only restore (Story 7)
 √ Wire keypad, mono fonts, mute-bell, and default word-wrap preference flags (Story 2; see docs/Stories.md)
 √ Find/Find Next supported (input + output panes)
 √ Printing supported (session output)
