@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.21] - 2026-07-10
+
 ### Added
 
 - **World Picker** — redesigned first-run layout: welcome header, two-line world rows (`host:port`), connection detail card, primary **Connect** button (Story 7)
@@ -135,7 +137,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.20...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.21...HEAD
+[2.0.21]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.21
 [2.0.20]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.20
 [2.0.19]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.19
 [2.0.18]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.18
