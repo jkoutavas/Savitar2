@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 9th, 2026_
+_README last updated July 10th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -97,7 +97,7 @@ _ Address key things found in alpha test
 
 ```
 _ Implement next gen startup commands (trigger based)
-_ Alias support (Story 10)
+_ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 ```
 
 ### start of beta
@@ -117,12 +117,12 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 
 ```
 - macOS 11 and beyond capabilities
+_ Alias support (Story 10)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
-_ Dark Mode support
 _ Text to emoji support
 _ Javascript scripting?
-_ ???
+_ ??? requested new features ???
 ```
 
 ## How to setup development

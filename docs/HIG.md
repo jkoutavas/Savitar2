@@ -47,7 +47,7 @@ One **modeless Settings window** (`AppSettingsWindowController`) with toolbar pa
 | Pane | Toolbar symbol | Content |
 |------|----------------|---------|
 | Startup | `play.circle` | World Picker, Events, Macro Clicker (when shipped) at launch |
-| Input & Display | `keyboard` | Keypad, mono fonts, default word wrap for new sessions |
+| Input & Display | `keyboard` | App appearance (System / Light / Dark — [Story 26](Stories.md#story-26--app-wide-appearance-system--light--dark)); keypad, mono fonts, default word wrap for new sessions |
 | Colors | `paintpalette` | 24 ANSI palette wells + Restore Defaults |
 | Audio | `speaker.wave.2` | Mute sound / speaking / bell / clicker (clicker when shipped) |
 | Updates | `arrow.down.circle` | Sparkle automatic update checking |
@@ -244,6 +244,7 @@ Remaining UI/HIG work is tracked as user stories — do not duplicate task lists
 | Events Window chrome, Window menu, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit); **Window menu** → [Story 25](Stories.md#story-25--window-menu-hig-audit) |
 | World Picker layout, keyboard, positioning | [Story 7](Stories.md#story-7--world-picker-hig-audit) ✅ |
 | Window menu — tab bar, Show World Picker, listing | [Story 25](Stories.md#story-25--window-menu-hig-audit) |
+| App-wide appearance (System / Light / Dark) | [Story 26](Stories.md#story-26--app-wide-appearance-system--light--dark) — **Input & Display** pane |
 | SwiftUI `Settings` scene evaluation (exploratory) | [Story 8](Stories.md#story-8--swiftui-settings-migration-exploratory) |
 
 Stories 1, 4, 5, 23 (app Settings HIG), and 7 (World Picker HIG) are **shipped** — requirements live in the sections above.

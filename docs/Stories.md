@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance. **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -362,6 +362,75 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - User can reopen a closed World Picker from **Window** menu without using **File → New World Document…**
 - Open window list matches frontmost windows; utility windows use stable titles
 - Behavior documented in HIG and user guide
+
+---
+
+## Story 26 — App-wide appearance (System / Light / Dark)
+
+**Goal:** Let the player choose whether Savitar’s **app chrome** follows the system, stays light, or stays dark — independent of per-world session colors.
+
+**Context:** Savitar 1 had no app-wide appearance preference (`Savitar2DevNotes` lists dark mode as future work). Today Savitar 2 always follows macOS (`NSApp.appearance` unset). That is correct for **System**, but players who want a fixed light or dark shell — or who hit stale layer colors when **Auto** switches overnight — need an explicit control. This story is **app UI chrome only**; it does not change MUD output colors, ANSI palette, or **World Settings → Appearance**.
+
+**Pane decision — Settings → Input & Display (no 8th tab):**
+
+| Pane | Why not |
+|------|---------|
+| **Startup** | Launch behavior only (World Picker, Events at startup). |
+| **Colors** | Terminal **ANSI palette** (24 wells), not window chrome. |
+| **Advanced** | Rare maintenance (factory reset, import/export). |
+| **World Settings → Appearance** | **Per-world** fonts, fore/back, ANSI interpretation — document windows, not the app shell. |
+
+**Input & Display** already holds app-wide display prefs (`monoFontsOnly`, `defaultWordWrap`). Add an **Appearance** group at the top of that pane (popup: **System**, **Light**, **Dark**). Keep the toolbar tab name **Input & Display** — no rename required; contextual **?** can keep the existing `input-display` anchor.
+
+**v1 parity:** New v2-only pref (default **System**). No v1 XML to import.
+
+### Tasks
+
+- [ ] **26.1** **Model** — `AppAppearanceMode` enum (`system`, `light`, `dark`); persist as v2 prefs XML attribute (e.g. `APPAPPEARANCE` on `PREFERENCES`); default `system`; include in `save()` / load paths and factory reset ([Story 24.1](#story-24--settings-advanced-maintenance))
+- [ ] **26.2** **UI** — `NSPopUpButton` (or segmented control) on **Settings → Input & Display**; live save like other checkboxes; `resizeToFitCurrentPane` if pane grows
+- [ ] **26.3** **Apply** — set `NSApp.appearance` at launch (`AppDelegate`) and immediately on change (`nil` = System, `.aqua` = Light, `.darkAqua` = Dark); post notification or reuse existing color-change path if other subsystems need refresh
+- [ ] **26.4** **Layer-backed views** — audit custom `wantsLayer` / `layer?.backgroundColor` fills (World Picker ✅ partial fix; About box; any others) so **System** + Auto light/dark transitions and explicit pref changes re-resolve dynamic colors (`updateLayer`, `viewDidChangeEffectiveAppearance`)
+- [ ] **26.5** **Out of scope check** — confirm world session `WKWebView` output, ANSI Colors pane, and Sparkle/update UI are unaffected or behave acceptably under forced light/dark
+- [ ] **26.6** **Docs** — [USER_GUIDE.md](USER_GUIDE.md) **Input & Display** table + short “App appearance vs world appearance” note; [HIG.md](HIG.md) panes table; optional CHANGELOG on ship
+- [ ] **26.7** **Tests** — `AppPreferencesTests` round-trip save/load; default `system` after factory reset
+
+### Sketch (Input & Display pane)
+
+```
+┌─ Input & Display ─────────────────────────────────────────┐
+│  Appearance                                                │
+│    App appearance:  [ System ▾ ]                         │
+│    System follows macOS Auto light/dark.                   │
+│                                                            │
+│  Input                                                     │
+│    ☐ Use keypad for macro entry                            │
+│    ☐ Mono fonts only (in font menus)                       │
+│    ☐ Default word wrap for new sessions                     │
+└────────────────────────────────────────────────────────────┘
+```
+
+### Touchpoints
+
+- `client/Savitar2/src/AppPreferences.swift`
+- `client/Savitar2/src/state/App/AppPreferencesActions.swift`
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (Input & Display section)
+- `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/src/views/worldPicker/WorldPickerContentView.swift` (layer refresh pattern)
+- `docs/USER_GUIDE.md`, `docs/HIG.md`
+
+### Acceptance
+
+- **System** matches today’s behavior (follow macOS, including Auto sunrise/sunset)
+- **Light** / **Dark** force app chrome regardless of system setting; pref survives relaunch
+- Control lives on **Input & Display** — seventh toolbar tab unchanged, no eighth pane
+- **Colors**, **World Settings → Appearance**, and session output colors remain conceptually separate in docs
+- Forced appearance change updates open utility windows without restart; layer-backed custom views stay readable
+
+### Related
+
+- [Story 7](#story-7--world-picker-hig-audit) — World Picker layer appearance refresh (shipped fix for Auto transition bug)
+- [Story 24.1](#story-24--settings-advanced-maintenance) — factory reset restores **System**
+- [Story 2](#story-2--wire-preference-flags-to-behavior) — wiring pattern for app-wide prefs (this story adds a new pref, not a `PrefsFlags` bit)
 
 ---
 
@@ -1200,12 +1269,13 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 16. Story 6 — Events Window HIG
 17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; import/export, v1 re-import, log editor deferred)
 18. **Story 25 — Window menu HIG audit** — tab bar removal, **Show World Picker**, window list hygiene
-19. Story 10 — Command aliases
-20. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
-21. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
-22. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
-23. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
-24. Story 8 — SwiftUI Settings spike (optional, post-beta)
+19. **Story 26 — App-wide appearance** — System / Light / Dark on **Input & Display** pane
+20. Story 10 — Command aliases
+21. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+22. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
+23. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
+24. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
+25. Story 8 — SwiftUI Settings spike (optional, post-beta)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).
