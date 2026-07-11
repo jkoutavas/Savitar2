@@ -49,9 +49,13 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .session, keywords: ["help"], syntax: "help [<command>]",
                               detail: "Shows this help. Tap a command in the list for details."),
         LocalCommandHelpEntry(category: .session, keywords: ["upload"], syntax: "upload <file-path>",
-                              detail: nil),
+                              detail: "Sends a local text file to the connected world as raw bytes. "
+                                  + "Savitar does not parse or interpret the file contents. "
+                                  + "Use a POSIX path or ~; quote paths that contain spaces."),
         LocalCommandHelpEntry(category: .session, keywords: ["capture"], syntax: "capture",
-                              detail: nil),
+                              detail: "Toggles ad-hoc capture of session output to a plain-text file. "
+                                  + "Run again to stop. The file path is a link that opens the capture "
+                                  + "in a Savitar text window. Separate from World Settings → Output logging."),
 
         LocalCommandHelpEntry(category: .status, keywords: ["set status"], syntax: "set status output|input <message>",
                               detail: "Sets custom text on the output or input status bar."),
@@ -116,9 +120,10 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .windows, keywords: ["close window"], syntax: "close window \"<title>\"",
                               detail: "Closes a session window by title."),
         LocalCommandHelpEntry(category: .windows, keywords: ["open text window"], syntax: "open text window",
-                              detail: nil),
+                              detail: "Opens a new untitled Savitar plain-text window."),
         LocalCommandHelpEntry(category: .windows, keywords: ["send window"], syntax: "send window \"<title>\" <msg>",
-                              detail: nil),
+                              detail: "Appends text to a Savitar plain-text window whose title contains "
+                                  + "the quoted name."),
 
         LocalCommandHelpEntry(category: .automation, keywords: ["wait"], syntax: "wait <seconds> [<command>]",
                               detail: "Pauses, then optionally runs another local command."),

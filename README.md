@@ -69,8 +69,15 @@ Although the first release targets feature parity with production Savitar v1.6.3
 ~~ World settings Output tab — buffer size, flush period~~ (won't do — [OutputPerformance.md](docs/OutputPerformance.md))
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
-√ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, `##link`, … — see USER_GUIDE)
-_ Implement local commands `##upload` and `##capture`
+√ Implement remaining local commands (##history, ##dump, flags, triggers, windows, ##wait, ##link, ##help, … — [USER_GUIDE](docs/USER_GUIDE.md#local-commands))
+√ Local command ##upload
+√ Local command ##capture
+√ Local command ##open text window
+√ Local command ##send window
+_ Local command ##add world
+_ Local command ##dump connection
+_ Local command ##dump variables
+_ Local command ##play
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
 √ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
@@ -94,23 +101,9 @@ _ Address key things found in alpha test
 √ Move github repo to public
 ```
 
-#### Remaining v1 local commands
+#### Savitar 1 local commands not planned for 2.x
 
-Shipped commands are documented in [USER_GUIDE → Local commands](docs/USER_GUIDE.md#local-commands). Still to implement from the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.html):
-
-```
-_ ##upload
-_ ##capture
-_ ##add world
-_ ##dump aliases          (blocked on Story 10 — command aliases)
-_ ##dump connection
-_ ##dump variables
-_ ##play
-_ ##open text window
-_ ##send window
-```
-
-Not planned (v1 stubs, disabled, or out of scope for 2.x):
+From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.html) — v1 stubs, disabled, or out of scope:
 
 ```
 ~~ ##tell application     (AppleScript — not planned)
@@ -148,9 +141,10 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 ```
 - macOS 11 and beyond capabilities
 _ Alias support (Story 10)
+_ New `##dump` aliases local command (Story 10)
+_ New `##say` local command for voicing text
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
-_ New `##say` local command for voicing text
 _ SSL support
 _ Text to emoji support
 _ Javascript scripting?

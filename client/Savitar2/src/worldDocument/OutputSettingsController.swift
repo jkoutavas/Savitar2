@@ -59,16 +59,16 @@ class OutputSettingsController: NSViewController {
 
     @IBAction func fileSaveAction(_: AnyObject) {
         guard let world = representedObject as? World else { return }
+        guard let settingsWindow = view.window else { return }
         let savePanel = NSSavePanel()
         savePanel.allowedFileTypes = ["txt"]
         savePanel.canCreateDirectories = true
         savePanel.isExtensionHidden = false
-        savePanel.title = "Spet your log file's location"
+        savePanel.title = "Set your log file's location"
         savePanel.message = "Choose a folder and a name to store your log."
         savePanel.prompt = "Set now"
-        savePanel.begin { (result) in
-            if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
-                guard let fileUrl = savePanel.url else { return }
+        savePanel.beginSheetModal(for: settingsWindow) { result in
+            if result == .OK, let fileUrl = savePanel.url {
                 world.logfilePath = fileUrl.path
             }
         }

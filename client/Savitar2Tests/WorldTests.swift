@@ -292,10 +292,13 @@ private class MockSessionHandler: SessionHandlerProtocol {
     var refreshedDisplay = false
     var worldTriggerList: [Trigger] = []
     var worldMacroList: [Macro] = []
+    var capturing = false
+    var capturePath: String?
+    var htmlOutputs: [(html: String, skipCapture: Bool)] = []
 
     func connectionStatusChanged(status _: ConnectionStatus) {}
 
-    func output(result: OutputResult) {
+    func output(result: OutputResult, skipCapture _: Bool) {
         switch result {
         case let .success(output):
             outputs.append(output)
@@ -340,6 +343,25 @@ private class MockSessionHandler: SessionHandlerProtocol {
 
     func worldMacros() -> [Macro] {
         return worldMacroList
+    }
+
+    var isSessionCapturing: Bool {
+        return capturing
+    }
+
+    func beginSessionCapture() -> SessionCaptureBeginResult {
+        capturing = true
+        capturePath = "/tmp/test-capture.txt"
+        return .started(path: capturePath!)
+    }
+
+    func stopSessionCapture() -> String? {
+        capturing = false
+        return capturePath
+    }
+
+    func outputHTML(_ html: String, skipCapture: Bool) {
+        htmlOutputs.append((html: html, skipCapture: skipCapture))
     }
 }
 
@@ -436,6 +458,30 @@ class SessionLocalCommandTests: XCTestCase {
         session.submitServerCmd(cmd: Command(text: "##clear screen"))
 
         XCTAssertTrue(handler.clearedOutput)
+    }
+
+    func testCaptureCommandStartsAndStopsCapture() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##capture"))
+
+        XCTAssertTrue(handler.capturing)
+        XCTAssertEqual(handler.htmlOutputs.count, 1)
+        XCTAssertTrue(handler.htmlOutputs[0].skipCapture)
+        XCTAssertTrue(handler.htmlOutputs[0].html.contains("Capture started."))
+        XCTAssertTrue(handler.htmlOutputs[0].html.contains("Saving to"))
+        XCTAssertTrue(handler.htmlOutputs[0].html.contains("savitar-file://"))
+        XCTAssertTrue(handler.htmlOutputs[0].html.contains("/tmp/test-capture.txt"))
+        XCTAssertTrue(handler.outputs.isEmpty)
+
+        session.submitServerCmd(cmd: Command(text: "##capture"))
+
+        XCTAssertFalse(handler.capturing)
+        XCTAssertEqual(handler.htmlOutputs.count, 2)
+        XCTAssertTrue(handler.htmlOutputs[1].html.contains("Capture stopped."))
+        XCTAssertTrue(handler.htmlOutputs[1].html.contains("Saved to"))
     }
 
     func testRecallCommandRecallsHistoryEntry() {
@@ -564,6 +610,71 @@ class SessionLogoffTests: XCTestCase {
         let session = Session(world: world, sessionHandler: MockSessionHandler())
 
         XCTAssertEqual(session.logoffLinesToSend(), [])
+    }
+}
+
+class OutputViewCaptureTests: XCTestCase {
+    func testCaptureWritesPlainTextFromSessionOutput() throws {
+        let outputView = OutputView(frame: .zero, configuration: WKWebViewConfiguration())
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("Savitar2CaptureTest-\(UUID().uuidString).txt")
+
+        defer {
+            try? FileManager.default.removeItem(at: tempURL)
+        }
+
+        XCTAssertTrue(outputView.startCapture(at: tempURL.path))
+        XCTAssertTrue(outputView.isCapturing)
+
+        outputView.output(string: "Room desc\r\nYou see a \u{001B}[32mdragon\u{001B}[0m.\n")
+
+        XCTAssertTrue(outputView.stopCapture() == tempURL.path)
+        XCTAssertFalse(outputView.isCapturing)
+
+        let captured = try String(contentsOf: tempURL, encoding: .utf8)
+        XCTAssertTrue(captured.contains("Room desc"))
+        XCTAssertTrue(captured.contains("You see a dragon."))
+        XCTAssertFalse(captured.contains("\u{001B}"))
+    }
+
+    func testCaptureSkipsStatusMessages() throws {
+        let outputView = OutputView(frame: .zero, configuration: WKWebViewConfiguration())
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("Savitar2CaptureSkipTest-\(UUID().uuidString).txt")
+
+        defer {
+            try? FileManager.default.removeItem(at: tempURL)
+        }
+
+        XCTAssertTrue(outputView.startCapture(at: tempURL.path))
+        outputView.output(string: "[SAVITAR] Capture started.\nSaving to /tmp/foo.txt\n",
+                          skipCapture: true)
+        outputView.output(string: "Server response:\nfoobar\n")
+        _ = outputView.stopCapture()
+
+        let captured = try String(contentsOf: tempURL, encoding: .utf8)
+        XCTAssertFalse(captured.contains("Capture started"))
+        XCTAssertFalse(captured.contains("Saving to"))
+        XCTAssertTrue(captured.contains("Server response:"))
+        XCTAssertTrue(captured.contains("foobar"))
+    }
+
+    func testCaptureIncludesHTMLFragmentPlainText() throws {
+        let outputView = OutputView(frame: .zero, configuration: WKWebViewConfiguration())
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("Savitar2CaptureHTMLTest-\(UUID().uuidString).txt")
+
+        defer {
+            try? FileManager.default.removeItem(at: tempURL)
+        }
+
+        XCTAssertTrue(outputView.startCapture(at: tempURL.path))
+        outputView.outputHTMLFragment("<strong>Welcome</strong> to Savitar")
+        _ = outputView.stopCapture()
+
+        let captured = try String(contentsOf: tempURL, encoding: .utf8)
+        XCTAssertTrue(captured.contains("Welcome"))
+        XCTAssertTrue(captured.contains("Savitar"))
     }
 }
 

@@ -50,7 +50,7 @@ Official builds are **free downloads** from [GitHub Releases](https://github.com
 
 The session window has separate **output** (top) and **input** (bottom) panes. Resize them by dragging the window corner or the split divider—see [Session window](#session-window).
 
-**Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline.
+**Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline. Use **Edit → Find…** (⌘F) to search within the guide.
 
 **Contextual help:** Major windows show a **?** that opens this guide to the relevant section — **World Picker**, **world session window**, **Events**, **Settings** (per toolbar pane), and **World Settings** (per tab, top-right of the sheet).
 
@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), **`##upload` / `##capture`** local commands (next release), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
 
 ---
 
@@ -404,7 +404,6 @@ The in-game `@printsource` command is separate: it is a debug/logging action, no
 | **Find Next** | ⌘G | Jumps to the next match. |
 | **Find Previous** | ⇧⌘G | Jumps to the previous match. |
 | **Use Selection for Find** | ⌘E | Copies the current selection into the find string. |
-| **Jump to Selection** | ⌘J | Scrolls the focused text view so the selection is visible. |
 | **Speech → Speak Selected Text** | — | Speaks the selected text in the input or output pane. See the [Speech](#speech) chapter. |
 
 #### Find
@@ -415,8 +414,9 @@ Find behavior depends on which pane is active in a world document:
 |-------------|---------|-------|
 | **Input** | Standard macOS find panel | Full keyboard navigation (⌘F, ⌘G, ⌘⇧G). |
 | **Output** | Find bar above the output pane | Same menu commands; search runs in the session output (HTML content is searched as plain text). |
+| **Savitar Help** | Find bar above the guide | Same menu commands (⌘F, ⌘G, ⇧⌘G, ⌘E); search runs in the bundled user guide. |
 
-Find is available when a world document window is frontmost, or when any text view in the app has focus.
+Find is available when a world document window is frontmost, when **Savitar Help** is frontmost, or when any text view in the app has focus.
 
 ### World menu
 
@@ -736,6 +736,8 @@ Examples below use the default `##` marker; substitute your world's marker if yo
 | `##link <url> "label" #RRGGBB` | Inserts a clickable hyperlink in the **output** pane (v1 syntax: angle brackets around the URL) |
 | `##help` | HTML list of local commands by category; click a command for syntax and details |
 | `##help <command>` | Detail for one command — for example `##help upload` |
+| `##capture` | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window. |
+| `##upload <file-path>` | Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or `~`; quote paths with spaces. |
 
 `##help` works even when **Interpret HTML tags** is off. Commands in the list are clickable (Pueblo-style `xch_cmd` links) and run `##help <command>` for you.
 
@@ -744,6 +746,9 @@ If you omit `"label"` on `##link`, the URL is used as the link text. If you omit
 ```text
 ##help
 ##help upload
+##capture
+##upload ~/scripts/login.txt
+##upload "/Users/me/My Scripts/refresh.txt"
 ##link <https://www.heynow.com/savitar> "Savitar home"
 ##link <https://example.com> "Example" #FF6600
 ```
@@ -829,6 +834,8 @@ To copy a trigger or macro from one place to another, use `##dump triggers` or `
 | `##broadcast <command>` | Sends `<command>` to every **other** connected world session (not the one that ran the command) |
 | `##select window "<title>"` | Brings the session window whose title **contains** `<title>` to the front |
 | `##close window "<title>"` | Closes that window (same partial title match) |
+| `##open text window` | Opens a new untitled Savitar plain-text window |
+| `##send window "<title>" <msg>` | Appends `<msg>` to the plain-text window whose title **contains** `<title>` |
 
 Useful when you play several worlds at once and want one trigger reply to poke another session.
 
@@ -851,7 +858,6 @@ With no command, `##wait` alone does nothing visible—it is meant as part of a 
 
 | Command | Notes |
 |---------|--------|
-| `##upload`, `##capture` | Send a local file to the server and ad-hoc session capture—**next Savitar 2 release**, along with a logging shake-down |
 | `##tell application` | AppleScript-era integration—not planned |
 
 See [Stories.md](Stories.md) for the full v1 manual map and future work.
@@ -950,7 +956,11 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Session logging
 
-**World Settings → Output** can append or overwrite a log file on disk—separate from **File → Print…** and from **New Text Document** windows. See [Output tab](#output-tab).
+**World Settings → Output** can append or overwrite a log file on disk—separate from **File → Print…**, from **New Text Document** windows, and from ad-hoc **`##capture`**.
+
+**`##capture`** toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run **`##capture`** again to stop; Savitar confirms the file path in the output pane. Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.
+
+See [Local commands → Session and output](#session-and-output) for syntax.
 
 ### Output scrollback (differences from Savitar 1)
 
@@ -1214,7 +1224,7 @@ The same policy is published on the web at [heynow.com/savitar/privacy](https://
 
 ## Getting help
 
-1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline).
+1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline). **Edit → Find…** (⌘F), **Find Next** (⌘G), and **Find Previous** (⇧⌘G) search the guide while its window is frontmost.
 2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
 3. **Privacy on the web** — [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) mirrors the in-app disclosure.
 4. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
@@ -1237,9 +1247,10 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | **Macro Clicker** (Story 11) | Shipped |
 | MCP | Deferred |
 | **`xch_cmd` links** | Shipped — see [HTML in output](#html-in-output) |
-| **`##upload` / `##capture`** | Next release (with session logging QA) |
+| **`##upload`** | Shipped — see [Local commands](#local-commands) |
+| **`##capture`** | Shipped — see [Session logging](#session-logging) and [Local commands](#local-commands) |
 | **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
-| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands); upload/capture next |
+| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands) |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 |
 
 See [Stories.md](Stories.md) for the full v1 manual map.

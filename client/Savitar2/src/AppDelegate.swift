@@ -205,15 +205,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     }
 
     @IBAction func newTextDocumentAction(_: Any) {
-        do {
-            let document = try NSDocumentController.shared.makeUntitledDocument(
-                ofType: PlainTextDocument.fileType
-            )
-            NSDocumentController.shared.addDocument(document)
-            document.makeWindowControllers()
-        } catch {
-            NSApp.presentError(error)
-        }
+        PlainTextDocument.openNewUntitled()
     }
 
     @IBAction func performFindAction(_ sender: Any) {
@@ -224,6 +216,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
            let inputView = sessionViewController(for: window)?.inputViewController?.textView,
            textView === inputView {
             textView.performFindPanelAction(sender)
+            return
+        }
+
+        if HelpGuideWindowController.shared.isHelpWindow(window) {
+            HelpGuideWindowController.shared.performFindPanelAction(menuItem)
             return
         }
 
@@ -258,6 +255,7 @@ extension AppDelegate: NSMenuItemValidation {
 
     private func canPerformFind(in window: NSWindow?) -> Bool {
         guard window != nil else { return false }
+        if HelpGuideWindowController.shared.isHelpWindow(window) { return true }
         if sessionViewController(for: window) != nil { return true }
         if window?.firstResponder is NSTextView { return true }
         return false

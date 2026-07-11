@@ -16,6 +16,8 @@ class OutputView: WKWebView {
     private(set) var isScrollLocked = false
 
     private var loggingFileHandle: FileHandle?
+    private var captureFileHandle: FileHandle?
+    private(set) var captureFilePath: String?
     private(set) var layoutFontName = "Monaco"
     private(set) var layoutFontSize: CGFloat = 9
     private(set) var wordWrapEnabled = false
@@ -92,6 +94,7 @@ class OutputView: WKWebView {
                 makeAppend: Bool = false,
                 appending: Bool = false,
                 appendID: Int = 0,
+                skipCapture: Bool = false,
                 attributes _: [NSAttributedString.Key: Any]? = nil) {
         let mutedBell = AppContext.shared.prefs.flags.contains(.muteBell)
         let displayString = TerminalBell.process(string, muted: mutedBell)
@@ -120,10 +123,10 @@ class OutputView: WKWebView {
         }
 
         var plainText: String?
-        if let fh = loggingFileHandle {
-            plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
-            if let text = plainText, let data = text.data(using: String.Encoding.utf8) {
-                fh.write(data)
+        if loggingFileHandle != nil || (!skipCapture && captureFileHandle != nil) {
+            plainText = plainTextForLogging(displayString)
+            if let text = plainText {
+                appendPlainTextToOutputFiles(text, capture: !skipCapture)
             }
         }
 
@@ -140,7 +143,8 @@ class OutputView: WKWebView {
         }
     }
 
-    func outputHTMLFragment(_ html: String, makeAppend: Bool = false, appending: Bool = false, appendID: Int = 0) {
+    func outputHTMLFragment(_ html: String, makeAppend: Bool = false, appending: Bool = false,
+                            appendID: Int = 0, skipCapture: Bool = false) {
         var fragment = html
         if useHTML {
             fragment = XchCmdLinkProcessor.process(fragment)
@@ -165,6 +169,7 @@ class OutputView: WKWebView {
             """
             run(javaScript: js)
         }
+        appendHTMLFragmentToCaptureFile(fragment, capture: !skipCapture)
     }
 
     /// Escape HTML for embedding in a JavaScript double-quoted string passed to `innerHTML`.
@@ -404,26 +409,89 @@ class OutputView: WKWebView {
         #endif
     }
 
+    private func plainTextForLogging(_ displayString: String) -> String {
+        let normalized = displayString
+            .replacingOccurrences(of: "\r\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: "\n")
+        var text = ansiToHtml.parse(ansi: normalized, hideANSI: true)
+        if text.contains("<") {
+            let wrapped = "<!DOCTYPE html><html><body>\(text)</body></html>"
+            if let plain = wrapped.html2AttributedString {
+                text = plain
+            }
+        }
+        return text
+    }
+
+    private func appendPlainTextToOutputFiles(_ text: String, capture: Bool = true) {
+        guard let data = text.data(using: String.Encoding.utf8) else { return }
+        loggingFileHandle?.write(data)
+        if capture {
+            captureFileHandle?.write(data)
+        }
+    }
+
+    private func appendHTMLFragmentToCaptureFile(_ html: String, capture: Bool = true) {
+        guard capture, captureFileHandle != nil else { return }
+        let wrapped = "<!DOCTYPE html><html><body>\(html)</body></html>"
+        let text = wrapped.html2AttributedString ?? html
+        appendPlainTextToOutputFiles(text + "\n")
+    }
+
+    var isCapturing: Bool {
+        return captureFileHandle != nil
+    }
+
+    @discardableResult
+    func startCapture(at path: String) -> Bool {
+        stopCapture()
+
+        let fileManager = FileManager.default
+        let url = URL(fileURLWithPath: path)
+        try? fileManager.createDirectory(at: url.deletingLastPathComponent(),
+                                         withIntermediateDirectories: true)
+        guard fileManager.createFile(atPath: path, contents: nil) else { return false }
+
+        guard let fh = try? FileHandle(forWritingTo: url) else { return false }
+        captureFileHandle = fh
+        captureFilePath = path
+        return true
+    }
+
+    @discardableResult
+    func stopCapture() -> String? {
+        guard captureFileHandle != nil else { return nil }
+        captureFileHandle?.closeFile()
+        captureFileHandle = nil
+        let path = captureFilePath
+        captureFilePath = nil
+        return path
+    }
+
     func setLogging(world: World) {
         if loggingFileHandle != nil {
             loggingFileHandle!.closeFile()
             loggingFileHandle = nil
         }
-        if world.logfilePath.count > 0 && world.loggingEnabled.boolValue {
-            let url = URL(fileURLWithPath: world.logfilePath)
-            if FileManager.default.fileExists(atPath: url.path) {
-                if let fh = try? FileHandle(forWritingTo: url) {
-                    if world.loggingType == .append {
-                        fh.seekToEndOfFile()
-                        loggingFileHandle = fh
-                    } else {
-                        fh.truncateFile(atOffset: 0)
-                        fh.closeFile()
-                        loggingFileHandle = try? FileHandle(forWritingTo: url)
-                    }
-                }
-            }
+        guard world.logfilePath.count > 0, world.loggingEnabled.boolValue else { return }
+
+        let path = world.logfilePath
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: path) {
+            let url = URL(fileURLWithPath: path)
+            try? fileManager.createDirectory(at: url.deletingLastPathComponent(),
+                                              withIntermediateDirectories: true)
+            guard fileManager.createFile(atPath: path, contents: nil) else { return }
         }
+
+        let url = URL(fileURLWithPath: path)
+        guard let fh = try? FileHandle(forWritingTo: url) else { return }
+        if world.loggingType == .append {
+            fh.seekToEndOfFile()
+        } else {
+            fh.truncateFile(atOffset: 0)
+        }
+        loggingFileHandle = fh
     }
 
     func run(javaScript: String) {

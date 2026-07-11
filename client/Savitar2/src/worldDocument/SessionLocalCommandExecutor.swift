@@ -59,6 +59,14 @@ enum SessionLocalCommandExecutor {
             handler.outputLink(url: url, label: label, colorHex: colorHex)
         case let .help(topic):
             showHelp(topic: topic, session: session)
+        case .capture:
+            toggleCapture(session: session)
+        case let .upload(path):
+            uploadFile(at: path, session: session)
+        case .openTextWindow:
+            PlainTextDocument.openNewUntitled()
+        case let .sendWindow(title, message):
+            sendWindow(title: title, message: message, session: session)
         case let .unknown(body):
             info(session, "Unknown local command: \(body)\n")
         }
@@ -66,18 +74,64 @@ enum SessionLocalCommandExecutor {
 
     // MARK: - Output helpers
 
-    private static func info(_ session: Session, _ text: String) {
-        session.sessionHandler.output(result: .success(text))
+    private static func info(_ session: Session, _ text: String, skipCapture: Bool = false) {
+        session.sessionHandler.output(result: .success(text), skipCapture: skipCapture)
     }
 
-    private static func commandError(_ session: Session, _ text: String) {
-        session.sessionHandler.output(result: .success("[SAVITAR] \(text)\n"))
+    private static func commandError(_ session: Session, _ text: String, skipCapture: Bool = false) {
+        session.sessionHandler.output(result: .success("[SAVITAR] \(text)\n"), skipCapture: skipCapture)
     }
 
     private static func showHelp(topic: String?, session: Session) {
         let marker = session.world.cmdMarker
         let html = SessionLocalCommandHelp.html(marker: marker, topic: topic)
         session.sessionHandler.outputHTML(html)
+    }
+
+    private static func toggleCapture(session: Session) {
+        let handler = session.sessionHandler
+        if handler.isSessionCapturing {
+            guard let path = handler.stopSessionCapture() else { return }
+            reportCaptureStatus(session: session, heading: "Capture stopped.", verb: "Saved to", path: path)
+            return
+        }
+
+        switch handler.beginSessionCapture() {
+        case let .started(path):
+            reportCaptureStatus(session: session, heading: "Capture started.", verb: "Saving to", path: path)
+        case .cancelled:
+            break
+        case .failed:
+            commandError(session, "Could not start capture.", skipCapture: true)
+        }
+    }
+
+    private static func reportCaptureStatus(session: Session, heading: String, verb: String, path: String) {
+        let html = SavitarFileLinkProcessor.statusHTML(
+            heading: heading,
+            verb: verb,
+            path: path,
+            linkColorHex: session.world.linkColor.toHex
+        )
+        session.sessionHandler.outputHTML(html, skipCapture: true)
+    }
+
+    private static func uploadFile(at path: String, session: Session) {
+        switch SessionFileUpload.upload(path: path, session: session) {
+        case let .success(byteCount):
+            let resolved = SessionFileUpload.resolvePath(path)
+            info(session, "[SAVITAR] Uploaded \(byteCount) bytes from \(resolved).\n")
+        case .failure(.notConnected):
+            commandError(session, "Not connected.")
+        case .failure(.emptyPath):
+            commandError(session, "Upload requires a file path.")
+        case let .failure(.notAFile(resolved)):
+            commandError(session, "Not a file: \(resolved)")
+        case let .failure(.fileNotFound(resolved)):
+            commandError(session, "File not found: \(resolved)")
+        case let .failure(.unreadable(resolved)):
+            commandError(session, "Could not read file: \(resolved)")
+        }
     }
 
     private static func commandHistoryText(_ session: Session) -> String {
@@ -369,6 +423,14 @@ enum SessionLocalCommandExecutor {
         guard let window = window(matching: title) else { return false }
         window.makeKeyAndOrderFront(nil)
         return true
+    }
+
+    private static func sendWindow(title: String, message: String, session: Session) {
+        guard let document = PlainTextDocument.document(matchingTitle: title) else {
+            commandError(session, "Text window \"\(title)\" not found.")
+            return
+        }
+        document.appendText(message)
     }
 
     private static func window(matching title: String) -> NSWindow? {

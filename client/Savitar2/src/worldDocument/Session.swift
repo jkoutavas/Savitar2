@@ -225,25 +225,26 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func processAcceptedText(text: String, excludedTriggerType: TrigType) {
-        // logger.info( "acceptedText: \"\(text)\" (\(text.endsWithNewline()))")
+        guard !text.isEmpty else { return }
 
-        let lines = text.split(omittingEmptySubsequences: false) {
-            $0 == "\r" || $0 == "\n"
-        }
+        var index = text.startIndex
+        while index < text.endIndex {
+            let breakIndex = text[index...].firstIndex(where: { $0 == "\r" || $0 == "\n" })
+            let lineEnd = breakIndex ?? text.endIndex
+            var line = String(text[index ..< lineEnd])
 
-        for (index, thisLine) in lines.enumerated() {
-            var line = String(thisLine)
-
-            // re-insert line ending for every line except the last
-            if index < lines.count - 1 {
-                line += "\r"
+            if let breakIndex = breakIndex {
+                index = text.index(after: breakIndex)
+                if text[breakIndex] == "\r", index < text.endIndex, text[index] == "\n" {
+                    index = text.index(after: index)
+                }
+                line += "\n"
+            } else {
+                index = text.endIndex
             }
+
             let effects = determineEffects(line: &line, excludedType: excludedTriggerType)
-
-            // Processing is complete. Send the resulting line off to the output view
             acceptedText(text: line)
-
-            // if there are some effects, handle them now
             if effects.count > 0 {
                 handleEffects(effects)
             }

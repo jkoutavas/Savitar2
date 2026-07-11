@@ -51,6 +51,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
+        _ = stopSessionCapture()
         super.close()
         session?.close()
         AppContext.shared.syncOpenSessions()
@@ -130,11 +131,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     // ***************************
 
-    func output(result: OutputResult) {
+    func output(result: OutputResult, skipCapture: Bool) {
         func output(string: String) {
             guard let svc = sessionViewController else { return }
             guard let outputVC = svc.outputViewController else { return }
-            outputVC.output(string: string)
+            outputVC.output(string: string, skipCapture: skipCapture)
         }
 
         guard let world = self.world else { return }
@@ -181,9 +182,9 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         outputVC.outputLink(url: url, label: label, colorHex: resolvedColor)
     }
 
-    func outputHTML(_ html: String) {
+    func outputHTML(_ html: String, skipCapture: Bool = false) {
         guard let outputVC = sessionViewController?.outputViewController else { return }
-        outputVC.outputHTML(html)
+        outputVC.outputHTML(html, skipCapture: skipCapture)
     }
 
     func commandHistory() -> [String] {
@@ -265,6 +266,52 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
             return state.macroList.items
         }
         return world?.macroMan.get() ?? []
+    }
+
+    var isSessionCapturing: Bool {
+        return sessionViewController?.outputViewController?.isCapturing ?? false
+    }
+
+    func beginSessionCapture() -> SessionCaptureBeginResult {
+        guard let outputVC = sessionViewController?.outputViewController else { return .failed }
+        guard !outputVC.isCapturing else { return .failed }
+
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = ["txt", "log"]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.title = "Capture session output"
+        savePanel.message = "Choose a folder and name for the capture file."
+        savePanel.prompt = "Start capture"
+        savePanel.nameFieldStringValue = Self.suggestedCaptureFilename(for: world)
+
+        if let logPath = world?.logfilePath, !logPath.isEmpty {
+            savePanel.directoryURL = URL(fileURLWithPath: logPath).deletingLastPathComponent()
+        }
+
+        guard savePanel.runModal() == .OK, let url = savePanel.url else {
+            return .cancelled
+        }
+
+        return outputVC.startCapture(at: url.path) ? .started(path: url.path) : .failed
+    }
+
+    func stopSessionCapture() -> String? {
+        return sessionViewController?.outputViewController?.stopCapture()
+    }
+
+    private static func suggestedCaptureFilename(for world: World?) -> String {
+        let base: String
+        if let name = world?.name.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
+            base = sanitizedFilename(name)
+        } else {
+            base = "Untitled"
+        }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd HHmmss"
+        let stamp = formatter.string(from: Date())
+        return "\(base) capture \(stamp).txt"
     }
 
     override func printDocument(_: Any?) {

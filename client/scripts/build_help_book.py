@@ -60,6 +60,7 @@ CSS = """\
   --toc-bg: #f8f8f8;
   --toc-border: #ddd;
   --code-bg: transparent;
+  --pre-bg: #f4f4f4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,6 +73,7 @@ CSS = """\
     --toc-bg: #2c2c2e;
     --toc-border: #484848;
     --code-bg: #2c2c2e;
+    --pre-bg: #1c1c1e;
   }
 }
 
@@ -102,12 +104,33 @@ code {
   border-radius: 3px;
   padding: 0.05rem 0.2rem;
 }
+pre {
+  font-family: Menlo, monospace;
+  font-size: 0.92em;
+  background: var(--pre-bg);
+  border: 1px solid var(--table-border);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+pre code {
+  background: transparent;
+  padding: 0;
+}
 ul, ol { padding-left: 1.4rem; }
 .toc {
   background: var(--toc-bg);
   border: 1px solid var(--toc-border);
   padding: 0.75rem 1rem;
   margin: 1rem 0;
+}
+.help-find-tip {
+  background: var(--toc-bg);
+  border: 1px solid var(--toc-border);
+  padding: 0.6rem 0.85rem;
+  margin: 0.75rem 0 1rem;
 }
 """
 
@@ -189,6 +212,19 @@ def markdown_to_body(md: str) -> tuple[str, list[tuple[str, str]]]:
             close_lists()
             out.append("<hr/>")
             i += 1
+            continue
+
+        if stripped.startswith("```"):
+            close_lists()
+            i += 1
+            code_lines: list[str] = []
+            while i < len(lines) and lines[i].strip() != "```":
+                code_lines.append(lines[i])
+                i += 1
+            if i < len(lines):
+                i += 1
+            code_text = html.escape("\n".join(code_lines))
+            out.append(f"<pre><code>{code_text}</code></pre>")
             continue
 
         if stripped.startswith("|"):
@@ -274,6 +310,9 @@ def build_index_html(body: str, toc: list[tuple[str, str]]) -> str:
   <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
   <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
   <p><em>May you have many exciting stories to share, adventurer!</em></p>
+  <p class="help-find-tip"><strong>Search this guide:</strong> With this window frontmost, use \
+<strong>Edit &rarr; Find&hellip;</strong> (&#8984;F), <strong>Find Next</strong> (&#8984;G), \
+and <strong>Find Previous</strong> (&#8679;&#8984;G).</p>
   {toc_block}
   {body}
 </body>

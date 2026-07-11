@@ -38,9 +38,36 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("savitar-help-back"))
     }
 
-    func testTopicHelpForCommandWithoutDetail() {
+    func testTopicHelpForCaptureCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "capture")
+        XCTAssertTrue(html.contains("capture"))
+        XCTAssertTrue(html.contains("Toggles ad-hoc capture"))
+        XCTAssertTrue(html.contains("World Settings"))
+    }
+
+    func testTopicHelpForUploadCommand() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "upload")
         XCTAssertTrue(html.contains("upload"))
+        XCTAssertTrue(html.contains("Sends a local text file"))
+        XCTAssertTrue(html.contains("does not parse"))
+    }
+
+    func testTopicHelpForOpenTextWindowCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "open text window")
+        XCTAssertTrue(html.contains("open text window"))
+        XCTAssertTrue(html.contains("Opens a new untitled"))
+    }
+
+    func testTopicHelpForSendWindowCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "send window")
+        XCTAssertTrue(html.contains("send window"))
+        XCTAssertTrue(html.contains("Appends text"))
+        XCTAssertTrue(html.contains("plain-text window"))
+    }
+
+    func testTopicHelpForCommandWithoutDetail() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
+        XCTAssertTrue(html.contains("add world"))
         XCTAssertFalse(html.contains("savitar-help-detail-text"))
     }
 

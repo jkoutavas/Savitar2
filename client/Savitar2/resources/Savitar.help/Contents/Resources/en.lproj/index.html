@@ -14,6 +14,7 @@
   <p><strong>A note from Savitar&rsquo;s author, Jay &ldquo;Ktown&rdquo; Koutavas.</strong></p>
   <p><em>Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you&rsquo;re stuck&mdash;then tell me what still doesn&rsquo;t feel like Savitar. Help &rarr; Send Feedback&hellip; is the fastest way.</em></p>
   <p><em>May you have many exciting stories to share, adventurer!</em></p>
+  <p class="help-find-tip"><strong>Search this guide:</strong> With this window frontmost, use <strong>Edit &rarr; Find&hellip;</strong> (&#8984;F), <strong>Find Next</strong> (&#8984;G), and <strong>Find Previous</strong> (&#8679;&#8984;G).</p>
   <nav class="toc" aria-label="Table of contents"><strong>Contents</strong><ul><li><a href="#getting-started">Getting started</a></li><li><a href="#install-updates">Install &amp; updates</a></li><li><a href="#speech">Speech</a></li><li><a href="#ansi-colors">ANSI colors</a></li><li><a href="#input-display">Input &amp; Display</a></li><li><a href="#audio">Audio</a></li><li><a href="#updates">Updates</a></li><li><a href="#startup">Startup</a></li><li><a href="#settings-advanced">Advanced</a></li><li><a href="#menus">Menus</a></li><li><a href="#session-window">Session window</a></li><li><a href="#events">Events</a></li><li><a href="#macros">Macros</a></li><li><a href="#entering-commands">Entering commands</a></li><li><a href="#variables-expansion">Variables &amp; expansion</a></li><li><a href="#local-commands">Local commands</a></li><li><a href="#triggers">Triggers</a></li><li><a href="#output-appearance">Output &amp; appearance</a></li><li><a href="#worlds-connection">Worlds &amp; connection</a></li><li><a href="#settings-reference">Settings reference</a></li><li><a href="#tips-troubleshooting">Tips &amp; troubleshooting</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#world-settings">World Settings</a></li><li><a href="#privacy">Privacy &amp; usage statistics</a></li><li><a href="#getting-help">Getting help</a></li><li><a href="#planned">More chapters (planned)</a></li></ul></nav>
   <h1 id="savitar-2-user-guide">Savitar 2 User Guide</h1>
 <p>This guide explains how to use Savitar 2. It is written for <strong>players and world builders</strong>, not developers. See <a href="Stories.md">Stories.md</a> <strong>Story 9</strong> for chapters still in progress.</p>
@@ -51,7 +52,7 @@
 <li>Open the <strong>Events</strong> window (<strong>World → Show World Events…</strong>) to add triggers or macros.</li>
 </ol>
 <p>The session window has separate <strong>output</strong> (top) and <strong>input</strong> (bottom) panes. Resize them by dragging the window corner or the split divider—see <a href="#session-window">Session window</a>.</p>
-<p><strong>Tip:</strong> Open <strong>Help → Savitar Help</strong> (⌘?) anytime to return to this guide offline.</p>
+<p><strong>Tip:</strong> Open <strong>Help → Savitar Help</strong> (⌘?) anytime to return to this guide offline. Use <strong>Edit → Find…</strong> (⌘F) to search within the guide.</p>
 <p><strong>Contextual help:</strong> Major windows show a <strong>?</strong> that opens this guide to the relevant section — <strong>World Picker</strong>, <strong>world session window</strong>, <strong>Events</strong>, <strong>Settings</strong> (per toolbar pane), and <strong>World Settings</strong> (per tab, top-right of the sheet).</p>
 <h3 id="getting-started-migrating-from-savitar-1">Migrating from Savitar 1</h3>
 <p>If you used Savitar 1 on an older Mac:</p>
@@ -64,7 +65,7 @@
 <tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
 <tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
 </tbody></table>
-<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code> / <code>##capture</code></strong> local commands (next release), MCP SimpleEdit. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), MCP SimpleEdit. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
 <hr/>
 <h2 id="install-updates">Install &amp; updates</h2>
 <h3 id="install-updates-download-and-install">Download and install</h3>
@@ -345,7 +346,6 @@
 <tr><td><strong>Find Next</strong></td><td>⌘G</td><td>Jumps to the next match.</td></tr>
 <tr><td><strong>Find Previous</strong></td><td>⇧⌘G</td><td>Jumps to the previous match.</td></tr>
 <tr><td><strong>Use Selection for Find</strong></td><td>⌘E</td><td>Copies the current selection into the find string.</td></tr>
-<tr><td><strong>Jump to Selection</strong></td><td>⌘J</td><td>Scrolls the focused text view so the selection is visible.</td></tr>
 <tr><td><strong>Speech → Speak Selected Text</strong></td><td>—</td><td>Speaks the selected text in the input or output pane. See the <a href="#speech">Speech</a> chapter.</td></tr>
 </tbody></table>
 <h4 id="menus-edit-menu-find">Find</h4>
@@ -355,8 +355,9 @@
 <tbody>
 <tr><td><strong>Input</strong></td><td>Standard macOS find panel</td><td>Full keyboard navigation (⌘F, ⌘G, ⌘⇧G).</td></tr>
 <tr><td><strong>Output</strong></td><td>Find bar above the output pane</td><td>Same menu commands; search runs in the session output (HTML content is searched as plain text).</td></tr>
+<tr><td><strong>Savitar Help</strong></td><td>Find bar above the guide</td><td>Same menu commands (⌘F, ⌘G, ⇧⌘G, ⌘E); search runs in the bundled user guide.</td></tr>
 </tbody></table>
-<p>Find is available when a world document window is frontmost, or when any text view in the app has focus.</p>
+<p>Find is available when a world document window is frontmost, when <strong>Savitar Help</strong> is frontmost, or when any text view in the app has focus.</p>
 <h3 id="menus-world-menu">World menu</h3>
 <p>Available when a <strong>world document</strong> window is frontmost.</p>
 <table>
@@ -439,11 +440,9 @@
 </tbody></table>
 <h3 id="session-window-status-bars">Status bars</h3>
 <p>Each pane (output and input) can show a one-line <strong>status bar</strong> at its top—a strip of text you choose, set with <a href="#local-commands">local commands</a> or from a trigger reply:</p>
-<p>```text</p>
-<p>##set status output You are fighting: %%opponent</p>
-<p>##set status input HP: %%hitpoints</p>
-<p>##close stats</p>
-<p>```</p>
+<pre><code>##set status output You are fighting: %%opponent
+##set status input HP: %%hitpoints
+##close stats</code></pre>
 <p><code>##set status</code> opens the bar if needed and replaces its current text; variables (<code>%%</code>) expand in the message. <code>##close stats</code> hides both bars; <code>##close status output</code> or <code>##close status input</code> hides one pane only. See <a href="#local-commands">Local commands → Status bar commands</a>.</p>
 <p>Status bars render in <strong>inverse</strong> session colors—the strip uses the world's foreground color as its background, and the text uses the background color—so they stand out from the panes. Bars are per-session: they are not saved in the world document.</p>
 <p>Configurable status bar styling (match session colors, or custom colors) is planned for <strong>2.1</strong>.</p>
@@ -568,9 +567,7 @@
 <p>Savitar can substitute <strong>scratch variables</strong> into commands, trigger replies, and macros before they are sent or executed.</p>
 <h3 id="variables-expansion-syntax">Syntax</h3>
 <p>Use your world's <strong>variable marker</strong> (default <code>%%</code>) followed by a name:</p>
-<p>```text</p>
-<p>say Hello, %%name!</p>
-<p>```</p>
+<pre><code>say Hello, %%name!</code></pre>
 <p>When the command is processed, <code>%%name</code> is replaced with the current value stored for <code>name</code>. If no value exists, the marker may remain unchanged.</p>
 <h3 id="variables-expansion-where-values-come-from">Where values come from</h3>
 <table>
@@ -606,26 +603,25 @@
 <tr><td><code>##link &lt;url&gt; "label" #RRGGBB</code></td><td>Inserts a clickable hyperlink in the <strong>output</strong> pane (v1 syntax: angle brackets around the URL)</td></tr>
 <tr><td><code>##help</code></td><td>HTML list of local commands by category; click a command for syntax and details</td></tr>
 <tr><td><code>##help &lt;command&gt;</code></td><td>Detail for one command — for example <code>##help upload</code></td></tr>
+<tr><td><code>##capture</code></td><td>Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window.</td></tr>
+<tr><td><code>##upload &lt;file-path&gt;</code></td><td>Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or <code>~</code>; quote paths with spaces.</td></tr>
 </tbody></table>
 <p><code>##help</code> works even when <strong>Interpret HTML tags</strong> is off. Commands in the list are clickable (Pueblo-style <code>xch_cmd</code> links) and run <code>##help &lt;command&gt;</code> for you.</p>
 <p>If you omit <code>"label"</code> on <code>##link</code>, the URL is used as the link text. If you omit <code>#color</code>, the world's <strong>Link color</strong> (World Settings → Appearance) is used. Web links open in your browser when clicked.</p>
-<p>```text</p>
-<p>##help</p>
-<p>##help upload</p>
-<p>##link &lt;https://www.heynow.com/savitar&gt; "Savitar home"</p>
-<p>##link &lt;https://example.com&gt; "Example" #FF6600</p>
-<p>```</p>
+<pre><code>##help
+##help upload
+##capture
+##upload ~/scripts/login.txt
+##upload &quot;/Users/me/My Scripts/refresh.txt&quot;
+##link &lt;https://www.heynow.com/savitar&gt; &quot;Savitar home&quot;
+##link &lt;https://example.com&gt; &quot;Example&quot; #FF6600</code></pre>
 <p>Example (<code>##history</code>):</p>
-<p>```text</p>
-<p>##history</p>
-<p>```</p>
+<pre><code>##history</code></pre>
 <p>Might show:</p>
-<p>```text</p>
-<p>[SAVITAR] Command history:</p>
-<p>1  look</p>
-<p>2  n</p>
-<p>3  cast heal</p>
-<p>```</p>
+<pre><code>[SAVITAR] Command history:
+ 1  look
+ 2  n
+ 3  cast heal</code></pre>
 <p>Then <code>##recall 2</code> or <code>##!2</code> puts <code>n</code> in the input line.</p>
 <h3 id="local-commands-status-bar-commands">Status bar commands</h3>
 <table>
@@ -687,23 +683,20 @@
 <tr><td><code>##broadcast &lt;command&gt;</code></td><td>Sends <code>&lt;command&gt;</code> to every <strong>other</strong> connected world session (not the one that ran the command)</td></tr>
 <tr><td><code>##select window "&lt;title&gt;"</code></td><td>Brings the session window whose title <strong>contains</strong> <code>&lt;title&gt;</code> to the front</td></tr>
 <tr><td><code>##close window "&lt;title&gt;"</code></td><td>Closes that window (same partial title match)</td></tr>
+<tr><td><code>##open text window</code></td><td>Opens a new untitled Savitar plain-text window</td></tr>
+<tr><td><code>##send window "&lt;title&gt;" &lt;msg&gt;</code></td><td>Appends <code>&lt;msg&gt;</code> to the plain-text window whose title <strong>contains</strong> <code>&lt;title&gt;</code></td></tr>
 </tbody></table>
 <p>Useful when you play several worlds at once and want one trigger reply to poke another session.</p>
 <h3 id="local-commands-delays-wait">Delays (<code>##wait</code>)</h3>
-<p>```text</p>
-<p>##wait &lt;seconds&gt; [&lt;command&gt;]</p>
-<p>```</p>
+<pre><code>##wait &lt;seconds&gt; [&lt;command&gt;]</code></pre>
 <p>Waits *seconds*, then runs <code>&lt;command&gt;</code> if you provided one. Used heavily in <strong>trigger replies</strong> to stagger auto-actions:</p>
-<p>```text</p>
-<p>##wait 2 look</p>
-<p>##wait 5 cast heal</p>
-<p>```</p>
+<pre><code>##wait 2 look
+##wait 5 cast heal</code></pre>
 <p>With no command, <code>##wait</code> alone does nothing visible—it is meant as part of a reply chain.</p>
 <h3 id="local-commands-planned-next-not-in-this-release">Planned next (not in this release)</h3>
 <table>
 <thead><tr><th>Command</th><th>Notes</th></tr></thead>
 <tbody>
-<tr><td><code>##upload</code>, <code>##capture</code></td><td>Send a local file to the server and ad-hoc session capture—<strong>next Savitar 2 release</strong>, along with a logging shake-down</td></tr>
 <tr><td><code>##tell application</code></td><td>AppleScript-era integration—not planned</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map and future work.</p>
@@ -778,7 +771,9 @@
 <h3 id="output-appearance-word-wrap">Word wrap</h3>
 <p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).</p>
 <h3 id="output-appearance-session-logging">Session logging</h3>
-<p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong> and from <strong>New Text Document</strong> windows. See <a href="#output-tab">Output tab</a>.</p>
+<p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong>, from <strong>New Text Document</strong> windows, and from ad-hoc <strong><code>##capture</code></strong>.</p>
+<p><strong><code>##capture</code></strong> toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run <strong><code>##capture</code></strong> again to stop; Savitar confirms the file path in the output pane. Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.</p>
+<p>See <a href="#session-and-output">Local commands → Session and output</a> for syntax.</p>
 <h3 id="output-appearance-output-scrollback-differences-from-savitar-1">Output scrollback (differences from Savitar 1)</h3>
 <p>Savitar 1 exposed output <strong>buffer size</strong> and <strong>flush period</strong> in World Settings. Savitar 2 <strong>does not</strong> offer these controls. At <strong>beta</strong>, Savitar will silently trim scrollback using imported <code>OUTPUTMAX</code> and <code>OUTPUTMIN</code> from each world file (defaults ~100KB / ~25KB); <strong>flush period</strong> (<code>FLUSHTICKS</code>) is not used. Output uses a <code>WKWebView</code> with internal optimizations documented for developers in <a href="OutputPerformance.md">OutputPerformance.md</a>.</p>
 <p>If output feels laggy during very fast spam, use <strong>Help → Send Feedback…</strong> so we can profile scrollback behavior.</p>
@@ -990,7 +985,7 @@
 <hr/>
 <h2 id="getting-help">Getting help</h2>
 <ol>
-<li><strong>Savitar Help</strong> — <strong>Help → Savitar Help</strong> (⌘?) opens this guide inside the app (works offline).</li>
+<li><strong>Savitar Help</strong> — <strong>Help → Savitar Help</strong> (⌘?) opens this guide inside the app (works offline). <strong>Edit → Find…</strong> (⌘F), <strong>Find Next</strong> (⌘G), and <strong>Find Previous</strong> (⇧⌘G) search the guide while its window is frontmost.</li>
 <li><strong>About Privacy</strong> — <strong>Help → About Privacy…</strong> opens the <a href="#privacy">Privacy &amp; usage statistics</a> chapter (what we collect and what we do not).</li>
 <li><strong>Privacy on the web</strong> — <a href="https://www.heynow.com/savitar/privacy.html">heynow.com/savitar/privacy</a> mirrors the in-app disclosure.</li>
 <li><strong>Release notes</strong> — <strong>Help → Release Notes…</strong> lists recent changes on the web.</li>
@@ -1010,9 +1005,10 @@
 <tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Shipped</td></tr>
 <tr><td>MCP</td><td>Deferred</td></tr>
 <tr><td><strong><code>xch_cmd</code> links</strong></td><td>Shipped — see <a href="#html-in-output">HTML in output</a></td></tr>
-<tr><td><strong><code>##upload</code> / <code>##capture</code></strong></td><td>Next release (with session logging QA)</td></tr>
+<tr><td><strong><code>##upload</code></strong></td><td>Shipped — see <a href="#local-commands">Local commands</a></td></tr>
+<tr><td><strong><code>##capture</code></strong></td><td>Shipped — see <a href="#session-logging">Session logging</a> and <a href="#local-commands">Local commands</a></td></tr>
 <tr><td><strong>Status bars</strong> (<code>##set status</code>)</td><td>Shipped—inverse colors; styling setting planned for 2.1</td></tr>
-<tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a>; upload/capture next</td></tr>
+<tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a></td></tr>
 <tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map.</p>
