@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** track remaining HIG and UI backlog from [HIG.md](HIG.md); **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -209,7 +209,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [x] **6.1** Document intended HIG role (utility / auxiliary window vs. document window) in `HIG.md`
 - [ ] **6.2** **Window chrome** — decide minimize/zoom: enable resize with sensible min size, or close-only like Settings; remove contradictory min=max if staying fixed-size
 - [ ] **6.3** **First open** — center on screen; evaluate whether frame autosave (`EventsWindowFrame`) should stay or only restore position
-- [ ] **6.4** **Window menu** — ensure Events appears in **Window** menu when open (bring to front when buried)
+- [x] **6.4** **Window menu** — Events appears in **Window** menu when open and is reachable via **Show App-wide Events Window** (⇧⌘E); completed with [Story 25](#story-25--window-menu-hig-audit)
 - [ ] **6.5** **Per-world Events** — audit `WindowController.swift` per-document Events windows for same chrome/behavior as universal window
 - [ ] **6.6** **Story 2.6** — wire `trigsClosed` / `varsClosed` prefs to Events split-view section collapse state
 
@@ -336,17 +336,19 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **Context:** Savitar 1 opened the World Picker via **File → New** and optional startup pref only — no dedicated Window menu item. Savitar 2 matches that for **File → New World Document…** (⌘N) and **Show World Picker at startup**, but the redesigned World Picker is a **modeless utility window** (like Events). The system **Window** menu (`systemMenu="window"`) also injects **Show/Hide Tab Bar** and related tabbing items even though Savitar does not use tabbed world documents.
 
-**v1 parity note:** A **Window → Show World Picker** command is a **v2 UX improvement**, not v1 parity — document in USER_GUIDE when shipped.
+**v1 parity note:** A **Window → Show World Picker** command is a **v2 UX improvement**, not v1 parity — documented in USER_GUIDE.
+
+**Status:** Complete (July 2026).
 
 ### Tasks
 
-- [ ] **25.1** **Disable window tabbing** — set `NSWindow.allowsAutomaticWindowTabbing = false` at launch so **Show Tab Bar**, **Hide Tab Bar**, **Merge All Windows**, etc. do not appear
-- [ ] **25.2** **Show World Picker** — add **Window → Show World Picker** (shortcut TBD; consider bringing existing picker forward if already open); mirror **Show App-wide Events Window** (⇧⌘E) pattern
-- [ ] **25.3** **⌘N behavior** — decide whether **File → New World Document…** always opens/focuses World Picker vs. implies “new untitled document” only; document choice in HIG + USER_GUIDE
-- [ ] **25.4** **Window list hygiene** — verify open windows appear with sensible titles: world documents (world name), **World Picker**, app-wide Events, per-world Events; bring-to-front works when selected
-- [ ] **25.5** **Minimize / Zoom** — audit per window type: world documents may keep minimize/zoom; close-only utility windows (World Picker, Settings) should not offer misleading zoom/minimize (coordinate with [Story 6](#story-6--events-window-hig-audit) for Events)
-- [ ] **25.6** **Fold Story 6.4** — complete Events Window menu listing as part of this pass or cross-link; avoid duplicate story work
-- [ ] **25.7** **Docs** — update [USER_GUIDE.md](USER_GUIDE.md) Window menu table (no tab bar; **Show World Picker**); [HIG.md](HIG.md) Window menu section
+- [x] **25.1** **Disable window tabbing** — `NSWindow.allowsAutomaticWindowTabbing = false` in `applicationDidFinishLaunching` so **Show/Hide Tab Bar** and **Merge All Windows** do not appear
+- [x] **25.2** **Show World Picker** — **Window → Show World Picker** added (no shortcut; TBD); reuses `showWorldPickerAction:` → `AppContext.showWorldPicker()`, which brings an open picker forward; mirrors **Show App-wide Events Window** (⇧⌘E)
+- [x] **25.3** **⌘N behavior** — decision: **File → New World Document…** (⌘N) opens the **World Picker** (choosing a world is the new-document step); documented in HIG + USER_GUIDE
+- [x] **25.4** **Window list hygiene** — World documents (world name), **World Picker**, app-wide/​per-world Events are standard titled windows and list in the Window menu; selecting brings forward
+- [x] **25.5** **Minimize / Zoom** — close-only utility windows (World Picker, Settings) use `styleMask = [.titled, .closable]` via `configureAsSettingsWindow`, so **Minimize**/**Zoom** auto-disable; world documents keep both
+- [x] **25.6** **Fold Story 6.4** — Events already lists in the Window menu and is reachable via **Show App-wide Events Window**; [Story 6.4](#story-6--events-window-hig-audit) satisfied for the menu-listing portion (Events chrome polish remains in Story 6)
+- [x] **25.7** **Docs** — [USER_GUIDE.md](USER_GUIDE.md) Window menu table (no tab bar; **Show World Picker**) and [HIG.md](HIG.md) Window menu section updated
 
 ### Touchpoints
 
@@ -361,7 +363,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - Window menu contains no tab-bar or merge-windows items
 - User can reopen a closed World Picker from **Window** menu without using **File → New World Document…**
 - Open window list matches frontmost windows; utility windows use stable titles
-- Behavior documented in HIG and user guide
+- Behavior documented in HIG and user guide ✅
 
 ---
 
@@ -1272,7 +1274,7 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 15. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
 16. Story 6 — Events Window HIG
 17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; import/export, v1 re-import, log editor deferred)
-18. **Story 25 — Window menu HIG audit** — tab bar removal, **Show World Picker**, window list hygiene
+18. ~~**Story 25 — Window menu HIG audit**~~ ✅ — tab bar removal, **Show World Picker**, window list hygiene
 19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
 20. Story 10 — Command aliases
 21. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)

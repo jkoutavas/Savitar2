@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **App-wide appearance** — **Settings → Input & Display** popup: **System**, **Light**, or **Dark** for app chrome (Story 26; v2-only pref)
 - **Savitar Help** — help book CSS supports light and dark appearance (`prefers-color-scheme`)
+- **Window → Show World Picker** — reopen or bring forward the World Picker from the Window menu (Story 25)
+
+### Changed
+
+- **Window menu** — no longer shows **Show/Hide Tab Bar** or **Merge All Windows** (Savitar does not use tabbed windows); **File → New World Document…** (⌘N) opens the World Picker (Story 25)
 
 ### Fixed
 

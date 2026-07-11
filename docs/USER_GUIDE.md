@@ -450,7 +450,10 @@ Full detail is in the [Speech](#speech) chapter.
 | **Zoom** | — | Toggles the window between its user size and a larger size that fits content. |
 | **Bring All to Front** | — | Brings all Savitar windows above windows from other apps. |
 | *(document list)* | — | Lists open Savitar windows; select one to bring it forward. |
+| **Show World Picker** | — | Opens the **World Picker**, or brings it forward if already open. Same result as **File → New World Document…** (⌘N)—handy for reopening the picker after you close it. |
 | **Show App-wide Events Window** | ⇧⌘E | Opens the **app-wide Events** window for universal triggers and macros (imported from Savitar 1 preferences). Separate from per-world **Show World Events…**. |
+
+Savitar does not use window tabs, so the Window menu has no **Show Tab Bar** or **Merge All Windows** items.
 
 ### Help menu
 
