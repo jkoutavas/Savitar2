@@ -24,9 +24,9 @@ enum ClickerAppearance {
         static let arrowGreen = NSColor(srgbRed: 82 / 255, green: 153 / 255, blue: 107 / 255, alpha: 1)
         /// Grid labels — cooler teal-leaning green (`#52986D`).
         static let labelGreen = NSColor(srgbRed: 82 / 255, green: 152 / 255, blue: 109 / 255, alpha: 1)
-        /// Pressed green — arrow_down median.
-        static let greenPressed = NSColor(srgbRed: 80 / 255, green: 148 / 255, blue: 106 / 255, alpha: 1)
-        /// Grid pressed — lighter mint highlight.
+        /// Pressed up/down arrows — lighter mint (matches grid press feedback).
+        static let arrowGreenPressed = NSColor(srgbRed: 89 / 255, green: 156 / 255, blue: 116 / 255, alpha: 1)
+        /// Grid and vertical-arrow pressed background.
         static let greenHighlight = NSColor(srgbRed: 89 / 255, green: 156 / 255, blue: 116 / 255, alpha: 1)
     }
 
@@ -34,7 +34,7 @@ enum ClickerAppearance {
     static let directionLight = Reference.compassPressed
     static let directionOutline = Reference.compassOutline
     static let verticalFill = Reference.arrowGreen
-    static let verticalPressed = Reference.greenPressed
+    static let verticalPressed = Reference.arrowGreenPressed
     static let verticalStroke = NSColor.black
     static let labelFill = Reference.labelGreen
 
@@ -85,6 +85,10 @@ enum ClickerAppearance {
     }
 
     static func drawVerticalArrow(in rect: NSRect, up: Bool, pressed: Bool) {
+        if pressed {
+            Reference.greenHighlight.setFill()
+            rect.fill()
+        }
         let inset = rect.insetBy(dx: 1.5, dy: 1.5)
         let path = verticalArrowPath(up: up, in: inset)
         let fill = pressed ? verticalPressed : verticalFill
@@ -164,8 +168,12 @@ enum ClickerAppearance {
         drawWhimsicalLabel(label, in: rect)
     }
 
+    private static let labelFontScale: CGFloat = 0.96
+    private static let labelOutlineWidth: CGFloat = 8.5
+    private static let labelItalicShear: CGFloat = 0.08
+
     static func drawWhimsicalLabel(_ text: String, in rect: NSRect) {
-        let fontSize = min(rect.width, rect.height) * 0.90
+        let fontSize = min(rect.width, rect.height) * labelFontScale
         let font = whimsicalFont(size: fontSize)
         let tilt = whimsicalTilt(for: text)
         let nudge = whimsicalNudge(for: text)
@@ -175,23 +183,27 @@ enum ClickerAppearance {
 
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         context.translateBy(x: rect.midX, y: rect.midY)
-        context.concatenate(CGAffineTransform(a: 1, b: 0, c: 0.12, d: 1, tx: 0, ty: 0))
+        context.concatenate(CGAffineTransform(a: 1, b: 0, c: labelItalicShear, d: 1, tx: 0, ty: 0))
         context.rotate(by: tilt)
         context.translateBy(x: -rect.midX, y: -rect.midY)
 
-        let attrs: [NSAttributedString.Key: Any] = [
+        let outline = NSAttributedString(string: text, attributes: [
             .font: font,
-            .foregroundColor: labelFill,
+            .foregroundColor: NSColor.black,
             .strokeColor: NSColor.black,
-            .strokeWidth: -6.0
-        ]
-        let rendered = NSAttributedString(string: text, attributes: attrs)
-        let textSize = rendered.size()
+            .strokeWidth: -labelOutlineWidth
+        ])
+        let fill = NSAttributedString(string: text, attributes: [
+            .font: font,
+            .foregroundColor: labelFill
+        ])
+        let textSize = outline.size()
         let origin = NSPoint(
             x: rect.midX - textSize.width / 2 + nudge.x,
             y: rect.midY - textSize.height / 2 + nudge.y
         )
-        rendered.draw(at: origin)
+        outline.draw(at: origin)
+        fill.draw(at: origin)
     }
 
     static func whimsicalFont(size: CGFloat) -> NSFont {
@@ -228,10 +240,8 @@ enum ClickerAppearance {
 
     static func whimsicalLabel(_ text: String, size: CGFloat) -> NSAttributedString {
         NSAttributedString(string: text, attributes: [
-            .font: whimsicalFont(size: size),
-            .foregroundColor: labelFill,
-            .strokeColor: NSColor.black,
-            .strokeWidth: -6.0
+            .font: whimsicalFont(size: size * labelFontScale),
+            .foregroundColor: labelFill
         ])
     }
 
