@@ -64,4 +64,11 @@ class WindowRestorationTests: XCTestCase {
         XCTAssertFalse(updated.prefs.flags.contains(.startupPicker))
         XCTAssertEqual(updated.prefs.openSessions, [.file(URL(fileURLWithPath: "/tmp/example.world"))])
     }
+
+    func testOpenSessionsSerializationUsesLiveDocumentsNotStaleLoadedState() {
+        let stale: [SavedOpenSession] = [.file(URL(fileURLWithPath: "/tmp/stale.world"))]
+        let persisted = WindowRestoration.sessionsToPersist(storedSessions: stale, preferLiveCapture: true)
+        XCTAssertTrue(persisted.isEmpty)
+        XCTAssertNil(WindowRestoration.openSessionsElement(for: persisted))
+    }
 }

@@ -53,6 +53,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
     override func close() {
         super.close()
         session?.close()
+        AppContext.shared.syncOpenSessions()
     }
 
     override func makeWindowControllers() {

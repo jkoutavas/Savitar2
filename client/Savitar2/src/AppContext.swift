@@ -87,7 +87,7 @@ class AppContext {
 
     func prepareForTermination() {
         isTerminating = true
-        prefs.openSessions = WindowRestoration.captureOpenSessions(from: self)
+        syncOpenSessions(persist: false)
         save()
     }
 
@@ -95,6 +95,15 @@ class AppContext {
         if !isTerminating {
             prepareForTermination()
         } else {
+            save()
+        }
+    }
+
+    /// Keep saved session restoration aligned with currently open world documents.
+    func syncOpenSessions(persist: Bool = true) {
+        guard !isRunningTests else { return }
+        prefs.openSessions = WindowRestoration.captureOpenSessions(from: self)
+        if persist, !isTerminating {
             save()
         }
     }
