@@ -9,17 +9,34 @@ import Cocoa
 
 /// Savitar 1 Macro Clicker palette — vector recreation of v1 cicn whimsy (Story 11).
 enum ClickerAppearance {
-    static let panelGray = NSColor(calibratedWhite: 0.67, alpha: 1)
+    static let panelGray = NSColor(srgbRed: 186 / 255, green: 186 / 255, blue: 186 / 255, alpha: 1)
     static let gridLine = NSColor(calibratedWhite: 0.82, alpha: 1)
-    /// Savitar 1 cicn compass tones (`#ABAED8` highlight, `#666892` body).
-    static let directionLight = NSColor(srgbRed: 171 / 255, green: 174 / 255, blue: 216 / 255, alpha: 1)
-    static let directionDark = NSColor(srgbRed: 102 / 255, green: 104 / 255, blue: 146 / 255, alpha: 1)
-    static let directionOutline = NSColor(srgbRed: 0.12, green: 0.12, blue: 0.18, alpha: 0.7)
-    static let verticalFill = NSColor(calibratedRed: 0.08, green: 0.72, blue: 0.10, alpha: 1)
-    static let verticalPressed = NSColor(calibratedRed: 0.05, green: 0.58, blue: 0.07, alpha: 1)
+
+    // Sampled from v1 close-up crop (user image 2). Arrows and labels use different greens.
+    private enum Reference {
+        /// Compass wedge fill — periwinkle mode `#6766CE`.
+        static let compassBody = NSColor(srgbRed: 103 / 255, green: 102 / 255, blue: 206 / 255, alpha: 1)
+        /// Compass pressed — lightened body.
+        static let compassPressed = NSColor(srgbRed: 140 / 255, green: 139 / 255, blue: 218 / 255, alpha: 1)
+        /// Compass outline — dark blue-purple from wedge edges.
+        static let compassOutline = NSColor(srgbRed: 46 / 255, green: 46 / 255, blue: 67 / 255, alpha: 1)
+        /// Up/down arrows — warmer grass green (`#52996B`).
+        static let arrowGreen = NSColor(srgbRed: 82 / 255, green: 153 / 255, blue: 107 / 255, alpha: 1)
+        /// Grid labels — cooler teal-leaning green (`#52986D`).
+        static let labelGreen = NSColor(srgbRed: 82 / 255, green: 152 / 255, blue: 109 / 255, alpha: 1)
+        /// Pressed green — arrow_down median.
+        static let greenPressed = NSColor(srgbRed: 80 / 255, green: 148 / 255, blue: 106 / 255, alpha: 1)
+        /// Grid pressed — lighter mint highlight.
+        static let greenHighlight = NSColor(srgbRed: 89 / 255, green: 156 / 255, blue: 116 / 255, alpha: 1)
+    }
+
+    static let directionDark = Reference.compassBody
+    static let directionLight = Reference.compassPressed
+    static let directionOutline = Reference.compassOutline
+    static let verticalFill = Reference.arrowGreen
+    static let verticalPressed = Reference.greenPressed
     static let verticalStroke = NSColor.black
-    static let labelFill = NSColor(calibratedRed: 0.08, green: 0.72, blue: 0.10, alpha: 1)
-    static let gridPressed = NSColor(calibratedWhite: 0.58, alpha: 1)
+    static let labelFill = Reference.labelGreen
 
     static func drawDirectionArrow(in rect: NSRect, slot: ClickerSlotID, pressed: Bool) {
         let drawRect = rect.insetBy(dx: -1.5, dy: -1.5)
@@ -37,7 +54,7 @@ enum ClickerAppearance {
         (pressed ? directionLight : directionDark).setFill()
         path.fill()
         directionOutline.setStroke()
-        path.lineWidth = 0.7
+        path.lineWidth = 0.55
         path.lineJoinStyle = .miter
         path.stroke()
     }
@@ -74,7 +91,7 @@ enum ClickerAppearance {
         fill.setFill()
         path.fill()
         verticalStroke.setStroke()
-        path.lineWidth = 1.35
+        path.lineWidth = 1.0
         path.lineJoinStyle = .miter
         path.stroke()
     }
@@ -141,7 +158,7 @@ enum ClickerAppearance {
 
     static func drawGridCell(in rect: NSRect, label: String, pressed: Bool) {
         if pressed {
-            gridPressed.setFill()
+            Reference.greenHighlight.setFill()
             rect.fill()
         }
         drawWhimsicalLabel(label, in: rect)
