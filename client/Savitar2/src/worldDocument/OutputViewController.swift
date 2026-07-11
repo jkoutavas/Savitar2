@@ -12,6 +12,7 @@ import WebKit
 class OutputViewController: OutputViewNavigationDelegate {
     private var makeAppend = false
     private var lastAppendID = 0
+    weak var session: Session?
 
     private let statusBar = SessionStatusBarView()
     private let findBar = NSView()
@@ -77,6 +78,36 @@ class OutputViewController: OutputViewNavigationDelegate {
         if !makeAppend {
             lastAppendID += 1
         }
+    }
+
+    func outputLink(url: String, label: String, colorHex: String?) {
+        let href = XchCmdLinkProcessor.escapeAttribute(url)
+        let text = XchCmdLinkProcessor.escapeText(label)
+        let style = colorHex.map { " style=\"color: #\($0)\"" } ?? ""
+        let html = "<a href=\"\(href)\"\(style)>\(text)</a>"
+        let appending = makeAppend
+        makeAppend = false
+        outputView.outputHTMLFragment(html, makeAppend: makeAppend, appending: appending, appendID: lastAppendID)
+        lastAppendID += 1
+    }
+
+    func outputHTML(_ html: String) {
+        let appending = makeAppend
+        makeAppend = false
+        let processed = XchCmdLinkProcessor.process(html)
+        outputView.outputHTMLFragment(processed, makeAppend: false, appending: appending, appendID: lastAppendID)
+        lastAppendID += 1
+    }
+
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                          decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url,
+           let command = XchCmdLinkProcessor.command(from: url) {
+            session?.submitServerCmd(cmd: Command(text: command))
+            decisionHandler(.cancel)
+            return
+        }
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
 
     var isScrollLocked: Bool {

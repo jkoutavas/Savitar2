@@ -55,6 +55,10 @@ enum SessionLocalCommandExecutor {
             if !selectWindow(title: title) {
                 commandError(session, "Window \"\(title)\" not found.")
             }
+        case let .link(url, label, colorHex):
+            handler.outputLink(url: url, label: label, colorHex: colorHex)
+        case let .help(topic):
+            showHelp(topic: topic, session: session)
         case let .unknown(body):
             info(session, "Unknown local command: \(body)\n")
         }
@@ -68,6 +72,12 @@ enum SessionLocalCommandExecutor {
 
     private static func commandError(_ session: Session, _ text: String) {
         session.sessionHandler.output(result: .success("[SAVITAR] \(text)\n"))
+    }
+
+    private static func showHelp(topic: String?, session: Session) {
+        let marker = session.world.cmdMarker
+        let html = SessionLocalCommandHelp.html(marker: marker, topic: topic)
+        session.sessionHandler.outputHTML(html)
     }
 
     private static func commandHistoryText(_ session: Session) -> String {

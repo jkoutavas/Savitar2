@@ -12,16 +12,25 @@ import WebKit
 class OutputViewNavigationDelegate: NSViewController, WKNavigationDelegate {
     func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .other {
-            if let url = navigationAction.request.url {
-                NSWorkspace.shared.open(url)
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
-            }
-        } else {
-            print("not a user click")
+        guard let url = navigationAction.request.url else {
             decisionHandler(.allow)
+            return
         }
+
+        if navigationAction.navigationType == .linkActivated,
+           url.scheme == "http" || url.scheme == "https" {
+            NSWorkspace.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+
+        if navigationAction.navigationType == .other,
+           url.scheme == "http" || url.scheme == "https" {
+            NSWorkspace.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+
+        decisionHandler(.allow)
     }
 }

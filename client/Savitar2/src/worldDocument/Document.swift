@@ -68,14 +68,21 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
         addWindowController(windowController)
 
-        output(result: .success("Welcome to Savitar!\n\n"))
         session = Session(world: world, sessionHandler: self)
         sessionViewController = windowController.contentViewController as? SessionViewController
         sessionViewController?.session = session
+        sessionViewController?.outputViewController?.session = session
         guard let inputVC = sessionViewController?.inputViewController else { return }
         inputVC.session = session
         windowController.updateViews(world, wordWrap: session?.wordWrapEnabled ?? false, applyPaneLayout: true)
+        showWelcomeBanner()
         session?.connectAndRun()
+    }
+
+    private func showWelcomeBanner() {
+        let marker = world?.cmdMarker ?? "##"
+        let html = SavitarWelcome.html(commandMarker: marker, linkColorHex: world?.linkColor.toHex)
+        outputHTML(html)
     }
 
     override func read(from data: Data, ofType _: String) throws {
@@ -166,6 +173,17 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         guard let svc = sessionViewController else { return }
         guard let outputVC = svc.outputViewController else { return }
         outputVC.printSource()
+    }
+
+    func outputLink(url: String, label: String, colorHex: String?) {
+        let resolvedColor = colorHex ?? world?.linkColor.toHex
+        guard let outputVC = sessionViewController?.outputViewController else { return }
+        outputVC.outputLink(url: url, label: label, colorHex: resolvedColor)
+    }
+
+    func outputHTML(_ html: String) {
+        guard let outputVC = sessionViewController?.outputViewController else { return }
+        outputVC.outputHTML(html)
     }
 
     func commandHistory() -> [String] {

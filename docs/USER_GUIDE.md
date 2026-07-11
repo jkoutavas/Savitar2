@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), **`##upload` / `##capture`** local commands (next release), MCP SimpleEdit, `xch_cmd` links. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), **`##upload` / `##capture`** local commands (next release), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
 
 ---
 
@@ -478,6 +478,8 @@ A **world document** window is your live connection to a MUD or telnet host. It 
 
 Both panes are measured in monospace **columns** (width) and **rows** (height). The default for a new world is **80 columns × 24 output rows × 2 input rows**.
 
+When you connect, Savitar prints a short **Welcome to Savitar** banner at the top of the output pane (version, website link, and a hint to type `##help` for local commands)—the same tradition as Savitar 1.
+
 ### Resizing panes
 
 You can change pane size in three ways:
@@ -731,8 +733,22 @@ Examples below use the default `##` marker; substitute your world's marker if yo
 | `##recall <n>` | Puts command *n* from that list into the **input** line (same numbers as `##history`) |
 | `##!<n>` | Shorthand for `##recall <n>` — for example `##!3` recalls entry 3 |
 | `##clear screen` | Clears the output pane (same as **Edit → Clear Output**, ⌘K) |
+| `##link <url> "label" #RRGGBB` | Inserts a clickable hyperlink in the **output** pane (v1 syntax: angle brackets around the URL) |
+| `##help` | HTML list of local commands by category; click a command for syntax and details |
+| `##help <command>` | Detail for one command — for example `##help upload` |
 
-Example:
+`##help` works even when **Interpret HTML tags** is off. Commands in the list are clickable (Pueblo-style `xch_cmd` links) and run `##help <command>` for you.
+
+If you omit `"label"` on `##link`, the URL is used as the link text. If you omit `#color`, the world's **Link color** (World Settings → Appearance) is used. Web links open in your browser when clicked.
+
+```text
+##help
+##help upload
+##link <https://www.heynow.com/savitar> "Savitar home"
+##link <https://example.com> "Example" #FF6600
+```
+
+Example (`##history`):
 
 ```text
 ##history
@@ -926,7 +942,7 @@ Most MUDs send **ANSI escape codes** for color. Savitar converts them to HTML in
 
 ### HTML in output
 
-When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Code font** applies to `<code>` regions. Rich HTML and **`xch_cmd`** custom links are **not in Savitar 2 yet**—hosts that depend on them may show raw tags until supported.
+When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Code font** applies to `<code>` regions. **Pueblo `xch_cmd` links** (`<a xch_cmd="command">`) are clickable: the command is sent to the session (prefix with your local-command marker, e.g. `##help history`, for Savitar local commands). Normal `<a href="…">` links open in your browser.
 
 ### Word wrap
 
@@ -1219,7 +1235,8 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
 | **Aliases** (Story 10) | Blocked on implementation |
 | **Macro Clicker** (Story 11) | Shipped |
-| MCP, `xch_cmd` | Deferred |
+| MCP | Deferred |
+| **`xch_cmd` links** | Shipped — see [HTML in output](#html-in-output) |
 | **`##upload` / `##capture`** | Next release (with session logging QA) |
 | **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
 | **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands); upload/capture next |

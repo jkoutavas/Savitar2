@@ -113,6 +113,21 @@ class SessionLocalCommandsTests: XCTestCase {
         )
     }
 
+    func testParseLink() {
+        XCTAssertEqual(
+            SessionLocalCommands.parse("link <https://example.com>"),
+            .link(url: "https://example.com", label: "https://example.com", colorHex: nil)
+        )
+        XCTAssertEqual(
+            SessionLocalCommands.parse("link <https://example.com> \"Example\""),
+            .link(url: "https://example.com", label: "Example", colorHex: nil)
+        )
+        XCTAssertEqual(
+            SessionLocalCommands.parse("link <https://example.com> \"Example\" #FF0000"),
+            .link(url: "https://example.com", label: "Example", colorHex: "FF0000")
+        )
+    }
+
     func testUnknownCommandPreservesBody() {
         XCTAssertEqual(
             SessionLocalCommands.parse("set status sidebar nope"),
