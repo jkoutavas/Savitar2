@@ -22,6 +22,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private var isApplyingPaneLayout = false
     private var needsPaneLayout = false
     private var isUserResizingSplit = false
+    private var splitResizePollTimer: Timer?
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -47,6 +48,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     deinit {
+        stopSplitDividerTracking()
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -64,7 +66,41 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
     private func endResolutionOverlay() {
         isUserResizingSplit = false
+        stopSplitDividerTracking()
         resolutionOverlay.hide()
+    }
+
+    private func beginSplitDividerTracking() {
+        isUserResizingSplit = true
+        guard splitResizePollTimer == nil else { return }
+        // Divider drags run in event-tracking mode; local mouse-up monitors do not fire
+        // until the next click. Poll button state on the common run loop instead.
+        let timer = Timer(timeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
+            self?.pollSplitDividerDrag()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        splitResizePollTimer = timer
+    }
+
+    private func stopSplitDividerTracking() {
+        splitResizePollTimer?.invalidate()
+        splitResizePollTimer = nil
+    }
+
+    private func pollSplitDividerDrag() {
+        guard isUserResizingSplit else {
+            stopSplitDividerTracking()
+            return
+        }
+        if NSEvent.pressedMouseButtons == 0 {
+            finishSplitDividerDrag()
+        }
+    }
+
+    private func finishSplitDividerDrag() {
+        guard isUserResizingSplit else { return }
+        endResolutionOverlay()
+        persistMeasuredPaneDimensions()
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -295,12 +331,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
         PaneDimensions.measure(world: &measured, window: window, splitView: session.splitView, font: font)
 
         if NSEvent.pressedMouseButtons != 0 {
-            isUserResizingSplit = true
+            beginSplitDividerTracking()
             showResolutionOverlay(outputRows: measured.outputRows, columns: measured.columns)
         } else if isUserResizingSplit {
-            endResolutionOverlay()
-            doc.world = measured
-            doc.updateChangeCount(.changeDone)
+            finishSplitDividerDrag()
         }
     }
 

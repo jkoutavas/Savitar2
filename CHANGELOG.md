@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Session welcome** — banner was emitted before the output pane existed and never appeared; now outputs after the session view is wired up
 - **Session output HTML** — multiline HTML embedded in JavaScript no longer breaks WebKit (`SyntaxError: Unexpected token '<'`); `##help` and other HTML fragments render reliably
 - **Output link clicks** — `http`/`https` links in HTML output activate correctly (`.linkActivated` navigation policy)
-- **Resolution overlay** — yellow variable-resolution box no longer sticks when the app is backgrounded, the window loses key, or split-pane resize ends
+- **Resolution overlay** — yellow variable-resolution box no longer sticks when the app is backgrounded, the window loses key, split-pane resize ends (mouse-up), or window live resize ends
 - **HTML bold/strong** — `<strong>` / `<b>` and welcome title render bold despite the global output stylesheet `font` shorthand
 - **Session restoration** — closing a world document before quitting no longer causes it to reopen on relaunch; prefs now persist the live open-document list (#92)
 
