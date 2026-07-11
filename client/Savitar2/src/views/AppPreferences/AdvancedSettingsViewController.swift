@@ -52,7 +52,7 @@ final class AdvancedSettingsViewController: NSViewController {
             • World Picker world list and connection addresses
             • Universal triggers and macros
             • ANSI color palette
-            • Saved positions for utility windows
+            • Saved positions for utility windows (World Picker, Events, Macro Clicker)
             """
         preserveLabel.stringValue = "Saved world documents on disk are not deleted."
 

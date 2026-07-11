@@ -46,12 +46,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         SavitarUpdater.shared.startIfNeeded()
         SavitarFeedback.presentAlphaAnnouncementIfNeeded()
 
-        if AppContext.shared.prefs.flags.contains(.startupPicker) {
-            showWorldPickerAction(self)
-        }
-
-        if AppContext.shared.prefs.flags.contains(.startupEventsWindow) {
-            showEventsWindowAction(self)
+        // Defer until launch finishes; utility windows need a shown run loop pass.
+        DispatchQueue.main.async {
+            guard !isRunningTests else { return }
+            NSApp.activate(ignoringOtherApps: true)
+            AppContext.shared.openStartupUtilityWindows()
         }
     }
 
@@ -199,6 +198,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
 
     @IBAction func showWorldPickerAction(_: Any) {
         AppContext.shared.showWorldPicker()
+    }
+
+    @IBAction func showMacroClickerAction(_: Any) {
+        AppContext.shared.showMacroClicker()
     }
 
     @IBAction func newTextDocumentAction(_: Any) {

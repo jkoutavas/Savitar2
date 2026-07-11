@@ -21,6 +21,7 @@ final class EventsWindowController: NSWindowController, NSWindowDelegate {
 
     var onWillClose: ((_ isTerminating: Bool) -> Void)?
     var undoManagerProvider: (() -> UndoManager?)?
+    weak var owningSession: Session?
 
     override func windowDidLoad() {
         super.windowDidLoad()

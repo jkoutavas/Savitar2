@@ -113,8 +113,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
 
         paneViews[.startup] = paneView(items: [
             .enabled("showStartupPicker", title: "Show World Picker at startup"),
-            .disabled("showStartupClicker", title: "Show Macro Clicker at startup",
-                      toolTip: "Available when the Macro Clicker window ships."),
+            .enabled("showStartupClicker", title: "Show Macro Clicker at startup"),
             .enabled("showEventsWindowAtStartup", title: "Show Events Window at startup")
         ])
 
@@ -123,8 +122,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         paneViews[.audio] = paneView(items: [
             .enabled("muteSound", title: "Mute sound cues"),
             .enabled("muteSpeaking", title: "Mute speaking cues"),
-            .disabled("muteClicker", title: "Mute clicker sounds",
-                      toolTip: "Available when the Macro Clicker ships."),
+            .enabled("muteClicker", title: "Mute clicker sounds"),
             .enabled("muteBell", title: "Mute terminal bell")
         ])
 

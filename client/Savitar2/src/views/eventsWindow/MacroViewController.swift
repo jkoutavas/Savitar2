@@ -61,23 +61,33 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionsStoreSett
         macros = state.macroList.items
         if let index = state.macroList.selection, index < state.macroList.items.count {
             let macro = state.macroList.items[index]
+            let selectionChanged = macro.objectID != self.macro?.objectID
             self.macro = macro
-            representedObject = MacroController(macro: macro, store: store)
-            syncDetailFields(macro: macro)
+            if selectionChanged || !(representedObject is MacroController) {
+                // Recreate/rebind only when the selected macro changes. Continuous
+                // name/value bindings dispatch store updates; rebinding mid-edit
+                // caused EXC_BAD_ACCESS (Story 6 form rebuild).
+                representedObject = MacroController(macro: macro, store: store)
+                updateBindings()
+                syncDetailFields(macro: macro)
+            } else if let controller = representedObject as? MacroController {
+                controller.macro = macro
+                syncDetailFieldsPreservingEdits(macro: macro)
+            }
         } else {
             representedObject = nil
             macro = nil
+            updateBindings()
             syncDetailFields(macro: nil)
         }
-        updateBindings()
     }
 
     private func refreshFromStore() {
         guard let store else {
             representedObject = nil
             macro = nil
-            syncDetailFields(macro: nil)
             updateBindings()
+            syncDetailFields(macro: nil)
             return
         }
         newState(state: store.state)
@@ -183,6 +193,20 @@ class MacroViewController: NSViewController, StoreSubscriber, ReactionsStoreSett
         hotKeyField.stringValue = macro?.keyLabel ?? ""
     }
 
+    /// Update fields from store without clobbering the field currently being typed.
+    private func syncDetailFieldsPreservingEdits(macro: Macro) {
+        guard isViewLoaded else { return }
+        if nameField.currentEditor() == nil, nameField.stringValue != macro.name {
+            nameField.stringValue = macro.name
+        }
+        if valueField.currentEditor() == nil, valueField.stringValue != macro.value {
+            valueField.stringValue = macro.value
+        }
+        if hotKeyField.stringValue != macro.keyLabel {
+            hotKeyField.stringValue = macro.keyLabel
+        }
+    }
+
     func displayError(msg: String) {
         let alert = NSAlert()
         alert.messageText = msg
@@ -200,6 +224,7 @@ class MacroController: NSController {
     @objc dynamic var name: String {
         get { macro.name }
         set(name) {
+            guard name != macro.name else { return }
             store?.dispatch(MacroAction.rename(macro.objectID, name: name))
         }
     }
@@ -207,6 +232,7 @@ class MacroController: NSController {
     @objc dynamic var value: String {
         get { macro.value }
         set(value) {
+            guard value != macro.value else { return }
             store?.dispatch(MacroAction.changeValue(macro.objectID, value: value))
         }
     }

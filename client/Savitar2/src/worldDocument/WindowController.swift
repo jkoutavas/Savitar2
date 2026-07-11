@@ -102,6 +102,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let doc = document as? Document else { return }
 
         controller.reactionsStore = doc.store
+        controller.owningSession = doc.session
         controller.undoManagerProvider = { [weak doc] in doc?.undoManager }
         controller.onWillClose = { [weak self] _ in
             self?.eventsWindowController = nil

@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned or deferred): command **aliases**, **Macro Clicker**, MCP SimpleEdit, file upload, status bar divider, `xch_cmd` links. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned or deferred): command **aliases** (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, status bar divider, `xch_cmd` links. The guide marks these where relevant.
 
 ---
 
@@ -261,7 +261,7 @@ Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute fla
 |--------|----------------|
 | **Mute sound cues** | Suppresses **trigger sound** effects (chimes and custom sounds configured in the Events window). Trigger **speech** is not affected. |
 | **Mute speaking cues** | Suppresses all **spoken** output—trigger speech and **continuous speech**. If nothing is being read aloud, check this first. |
-| **Mute clicker sounds** | *(Not yet available.)* Will mute Macro Clicker button sounds when that feature ships. |
+| **Mute clicker sounds** | Mutes the click sound when you press a **Macro Clicker** button (Settings → Audio). |
 | **Mute terminal bell** | Suppresses the system beep when the server sends a telnet **bell** character (ASCII BEL). The character is still removed from output text; only the sound is skipped. |
 
 **Speech** voice and rate live on the separate **Speech** settings pane—see [Speech settings reference](#speech-speech-settings-reference). To stop speech that is already playing, use **Audio → Flush Speech Buffer** (⌘L) from the menu bar.
@@ -294,7 +294,7 @@ Open **Settings…** (⌘,) and select the **Startup** toolbar tab. These option
 |--------|----------------|
 | **Show World Picker at startup** | Opens the World Picker window when Savitar launches (default **on**). Turn off if you prefer to open worlds only via **File → Open…** or recent documents. |
 | **Show Events Window at startup** | Opens the **app-wide Events** window (⇧⌘E) automatically. Useful if you live in universal triggers and macros. |
-| **Show Macro Clicker at startup** | *(Grayed out — not yet available.)* Will open the Macro Clicker palette when Story 11 ships. |
+| **Show Macro Clicker at startup** | Opens the **Macro Clicker** palette when Savitar launches (see [Macros](#macros)). |
 
 Startup flags save immediately like other app Settings. They do not affect worlds already open from a previous session—only the next launch.
 
@@ -600,7 +600,26 @@ See [Events](#events) for the big picture. In short:
 | **Trigger** | Watches **output** (or input) and reacts when text matches a pattern |
 | **Trigger variable** | Scratch space triggers write into (for captured text), not a hotkey command |
 
-Savitar 1’s **Macro Clicker** used **aliases**—on-screen buttons that pointed at macros. That clicker window is not in Savitar 2 yet; macros themselves work via hotkeys. **Command aliases** (typed abbreviations like `n` → `go north`) are planned after Savitar 2.0 reaches Savitar 1 feature parity—see [Glossary](#glossary).
+Savitar 1 called these button slots **aliases** in its manual—they are **not** classical typed command aliases. Savitar 2 restores the palette as the **Macro Clicker** (Story 11). **Command aliases** (typed abbreviations like `n` → `go north`) are planned for Savitar 2.1 — see [Glossary](#glossary).
+
+### Macro Clicker
+
+The **Macro Clicker** is a floating palette titled **Macro Clicker** — the same whimsical layout as Savitar 1: a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a real button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
+
+**Default macro names** use underscores throughout: grid slots **1–9** → `MACRO_1` … `MACRO_9`; **a–f** → `MACRO_A` … `MACRO_F`; compass directions → `MACRO_NORTH`, `MACRO_EAST`, and so on. Names must match **exactly**—`MACRO_1` and `MACRO-1` are different macros. (Savitar 2 wires all 15 grid cells; v1 only bound **a** as `MACRO_10` and left **b–f** as artwork. Imported v1 prefs with 18 `ALIAS` entries still load; the **a** slot keeps a saved `MACRO_10` binding when present.)
+
+**World vs app-wide macros:** Each clicker button looks up its bound name in the **frontmost world** first (including macros you have just added in that world’s Events window, even before you save the document). If the world has no macro with that name, Savitar falls back to the matching **app-wide** macro. To override a universal macro for one world, create a world macro with the **same name**—for example, a world `MACRO_1` replaces the universal `MACRO_1` while that world is frontmost.
+
+| Action | Result |
+|--------|--------|
+| **Click** a button | Send the bound macro to the active session |
+| **Hover** a button | Caption shows the macro’s command text (or “Button not defined”) |
+| **⌘-click** a button | Choose which **app-wide** macro name this button uses (stored in app preferences) |
+| **Window → Show Macro Clicker** | Open or bring forward the palette |
+
+Bindings are stored in app preferences as v1-style `ALIAS` XML (`NAME` → macro name). Factory defaults point direction buttons at `MACRO_NORTH`, `MACRO_EAST`, and so on—the same names as the bundled keypad macros. Early Savitar 2 builds that used hyphenated letter names (`MACRO-A` … `MACRO-F`) are upgraded to underscores when preferences load.
+
+**Settings → Startup → Show Macro Clicker at startup** opens the palette at launch. **Settings → Audio → Mute clicker sounds** silences the button click cue.
 
 ---
 
@@ -899,7 +918,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Closing](#closing-tab) | Closing tab (logoff command) |
 | *(missing)* | MCP — not in v2 yet |
 
-Grayed-out app prefs (**Macro Clicker**, **Mute clicker**) will activate when those features ship.
+Grayed-out app prefs are documented in [Settings reference](#settings-reference); Macro Clicker and Mute clicker are now active.
 
 ---
 
@@ -1104,7 +1123,7 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 |-------|--------|
 | Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
 | **Aliases** (Story 10) | Blocked on implementation |
-| **Macro Clicker** (Story 11) | Blocked on implementation |
+| **Macro Clicker** (Story 11) | Shipped |
 | MCP, file upload, `xch_cmd`, status bar | Deferred—stubs in tables above |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 feature parity |
 

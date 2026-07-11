@@ -115,6 +115,16 @@
 		69C250082F08000400AB6BA6 /* WorldPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */; };
 		69C2500A2F08010000AB6BA6 /* WorldPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */; };
 		69C2500C2F08020000AB6BA6 /* AdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */; };
+		69MC00112F0B010100AB6BA6 /* ClickerSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */; };
+		69MC00212F0B010200AB6BA6 /* ClickerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00202F0B010200AB6BA6 /* ClickerMan.swift */; };
+		69MC00312F0B010300AB6BA6 /* MacroClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00302F0B010300AB6BA6 /* MacroClicker.swift */; };
+		69MC00412F0B010400AB6BA6 /* ClickerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */; };
+		69MC00512F0B010500AB6BA6 /* ClickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */; };
+		69MC00B12F0B010800AB6BA6 /* ClickerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */; };
+		69MC00C12F0B010900AB6BA6 /* ClickerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */; };
+		69MC00612F0B010600AB6BA6 /* Clicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69MC00602F0B010600AB6BA6 /* Clicker.storyboard */; };
+		69MC00812F0B010700AB6BA6 /* ClickerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */; };
+		69MC00922F0B010A00AB6BA6 /* MacroClickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -305,6 +315,16 @@
 		69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerWindowController.swift; sourceTree = "<group>"; };
 		69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerContentView.swift; sourceTree = "<group>"; };
 		69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsViewController.swift; sourceTree = "<group>"; };
+		69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerSlot.swift; sourceTree = "<group>"; };
+		69MC00202F0B010200AB6BA6 /* ClickerMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerMan.swift; sourceTree = "<group>"; };
+		69MC00302F0B010300AB6BA6 /* MacroClicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClicker.swift; sourceTree = "<group>"; };
+		69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerContentViewController.swift; sourceTree = "<group>"; };
+		69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindowController.swift; sourceTree = "<group>"; };
+		69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerAppearance.swift; sourceTree = "<group>"; };
+		69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindow.swift; sourceTree = "<group>"; };
+		69MC00602F0B010600AB6BA6 /* Clicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Clicker.storyboard; path = Base.lproj/Clicker.storyboard; sourceTree = "<group>"; };
+		69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerManTests.swift; sourceTree = "<group>"; };
+		69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClickerTests.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -444,6 +464,7 @@
 				695F5AFF2589A0B200AB6BA6 /* EventsWindow.storyboard */,
 				695484A71FC4E6E400A6983F /* Main.storyboard */,
 				695F5A4E2585C00100AB6BA6 /* WorldPicker.storyboard */,
+				69MC00602F0B010600AB6BA6 /* Clicker.storyboard */,
 				695F5A4B2585BD8300AB6BA6 /* WorldSettings.storyboard */,
 				695F5B4E2592E64E00AB6BA6 /* WorldWizard.storyboard */,
 				695484AA1FC4E6E400A6983F /* Info.plist */,
@@ -467,6 +488,8 @@
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
 				6952048C24B1EFB2004BDBE2 /* HotKeyTests.swift */,
 				69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */,
+				69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */,
+				69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */,
 				69CEEDD023B3EEA700E9F087 /* MacroTests.swift */,
 				695F5A602588562E00AB6BA6 /* ReSwiftTests.swift */,
 				69CEEDD923B4078400E9F087 /* SavColorTests.swift */,
@@ -487,11 +510,21 @@
 				695F5A6A25899CE000AB6BA6 /* SavitarObjectId.swift */,
 				695F5A6B25899CE000AB6BA6 /* ModelManager.swift */,
 				695F5A9925899EE200AB6BA6 /* colors */,
+				69MC00902F0B010800AB6BA6 /* clicker */,
 				695F5A8425899EBC00AB6BA6 /* macros */,
 				695F5A8925899EBC00AB6BA6 /* triggers */,
 				695F5A8D25899EBC00AB6BA6 /* worlds */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		69MC00902F0B010800AB6BA6 /* clicker */ = {
+			isa = PBXGroup;
+			children = (
+				69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */,
+				69MC00202F0B010200AB6BA6 /* ClickerMan.swift */,
+			);
+			path = clicker;
 			sourceTree = "<group>";
 		};
 		695F5A8425899EBC00AB6BA6 /* macros */ = {
@@ -577,10 +610,22 @@
 				695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */,
 				69C1F0CE25A2538E0048A739 /* AppPreferences */,
 				695F5AC625899FA400AB6BA6 /* eventsWindow */,
+				69MC00A02F0B010900AB6BA6 /* clickerWindow */,
 				695F5ADB25899FA400AB6BA6 /* worldPicker */,
 				695F5B512592E6B300AB6BA6 /* worldWizard */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		69MC00A02F0B010900AB6BA6 /* clickerWindow */ = {
+			isa = PBXGroup;
+			children = (
+				69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */,
+				69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */,
+				69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */,
+				69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */,
+			);
+			path = clickerWindow;
 			sourceTree = "<group>";
 		};
 		695F5AC625899FA400AB6BA6 /* eventsWindow */ = {
@@ -691,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				69000EE12397CF09009976E0 /* AppContext.swift */,
+				69MC00302F0B010300AB6BA6 /* MacroClicker.swift */,
 				69D2600A2F09010000AB6BA6 /* AppAppearance.swift */,
 				69A45B002A7F100100CDDE09 /* WindowRestoration.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
@@ -887,6 +933,7 @@
 				695484A61FC4E6E400A6983F /* Assets.xcassets in Resources */,
 				698667D424EA18500061AA86 /* Click.m4a in Resources */,
 				695F5A502585C00100AB6BA6 /* WorldPicker.storyboard in Resources */,
+				69MC00612F0B010600AB6BA6 /* Clicker.storyboard in Resources */,
 				69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */,
 				695F5A4D2585BD8300AB6BA6 /* WorldSettings.storyboard in Resources */,
 				690B462D23B16B54000445E4 /* StartupPreferences.xml in Resources */,
@@ -1051,6 +1098,13 @@
 				69C250082F08000400AB6BA6 /* WorldPickerWindowController.swift in Sources */,
 				69C2500A2F08010000AB6BA6 /* WorldPickerContentView.swift in Sources */,
 				69C2500C2F08020000AB6BA6 /* AdvancedSettingsViewController.swift in Sources */,
+				69MC00112F0B010100AB6BA6 /* ClickerSlot.swift in Sources */,
+				69MC00212F0B010200AB6BA6 /* ClickerMan.swift in Sources */,
+				69MC00312F0B010300AB6BA6 /* MacroClicker.swift in Sources */,
+				69MC00412F0B010400AB6BA6 /* ClickerContentViewController.swift in Sources */,
+				69MC00B12F0B010800AB6BA6 /* ClickerAppearance.swift in Sources */,
+				69MC00C12F0B010900AB6BA6 /* ClickerWindow.swift in Sources */,
+				69MC00512F0B010500AB6BA6 /* ClickerWindowController.swift in Sources */,
 				695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */,
 				695F5A7025899CE100AB6BA6 /* SavitarObject.swift in Sources */,
 				695F5A9125899EBC00AB6BA6 /* Keycode.swift in Sources */,
@@ -1078,6 +1132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */,
+				69MC00812F0B010700AB6BA6 /* ClickerManTests.swift in Sources */,
+				69MC00922F0B010A00AB6BA6 /* MacroClickerTests.swift in Sources */,
 				69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */,
 				69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */,
 				697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */,

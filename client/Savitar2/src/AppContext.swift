@@ -27,6 +27,7 @@ class AppContext {
     internal var appPrefsWindowController: AppSettingsWindowController?
     internal var universalEventsWindowController: NSWindowController?
     internal var worldPickerWindowController: WorldPickerWindowController?
+    internal var clickerWindowController: ClickerWindowController?
 
     // TODO: this is a good start. See Savitar 1.x's "CViewAppMac.cp" for references to Savitar's
     // "editing keys" (not support at this time) and the means used to add all menu command shortcut keys
@@ -55,6 +56,10 @@ class AppContext {
         worldPickerWindowController = nil
     }
 
+    func clickerWindowDidClose() {
+        clickerWindowController = nil
+    }
+
     func load() {
         prefs.load()
         AppAppearance.apply(prefs.appearanceMode)
@@ -76,6 +81,8 @@ class AppContext {
         worldPickerWindowController = nil
         universalEventsWindowController?.window?.close()
         universalEventsWindowController = nil
+        clickerWindowController?.window?.close()
+        clickerWindowController = nil
     }
 
     func prepareForTermination() {
@@ -96,6 +103,28 @@ class AppContext {
         let sessions = prefs.openSessions
         guard !sessions.isEmpty else { return }
         WindowRestoration.restoreSavedSessions(sessions, in: self)
+    }
+
+    /// Opens World Picker, Events, and Macro Clicker when their startup prefs are enabled.
+    func openStartupUtilityWindows() {
+        if prefs.flags.contains(.startupPicker) {
+            showWorldPicker()
+        }
+        if prefs.flags.contains(.startupEventsWindow) {
+            showUniversalEventsWindow()
+        }
+        if prefs.flags.contains(.startupClicker) {
+            showMacroClicker()
+            ensureMacroClickerVisibleAtStartup()
+        }
+    }
+
+    private func ensureMacroClickerVisibleAtStartup() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let self, prefs.flags.contains(.startupClicker) else { return }
+            guard clickerWindowController?.window?.isVisible != true else { return }
+            showMacroClicker()
+        }
     }
 
     func showAppPrefsWindow(selecting pane: AppSettingsPane = .startup) {
@@ -149,6 +178,23 @@ class AppContext {
         controller.present(autosaveName: "EventsWindowFrame", title: "Events Window")
         appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(true))
         save()
+    }
+
+    func showMacroClicker() {
+        if let controller = clickerWindowController {
+            controller.present()
+            return
+        }
+
+        let bundle = Bundle(for: Self.self)
+        let storyboard = NSStoryboard(name: "Clicker", bundle: bundle)
+        guard let controller = storyboard.instantiateInitialController() as? ClickerWindowController else { return }
+
+        clickerWindowController = controller
+        controller.onWillClose = { [weak self] _ in
+            self?.clickerWindowController = nil
+        }
+        controller.present()
     }
 
     func showWorldPicker() {

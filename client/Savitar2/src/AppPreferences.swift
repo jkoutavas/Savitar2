@@ -56,6 +56,7 @@ class AppPreferences: SavitarXMLProtocol {
     var colorMan = ColorMan()
 
     var openSessions: [SavedOpenSession] = []
+    var clickerMan = ClickerMan()
 
     init() {
         version = latestPrefsVersion
@@ -204,6 +205,8 @@ class AppPreferences: SavitarXMLProtocol {
         try macroMan.parse(xml: xml)
         AppContext.shared.universalReactionsStore.dispatch(SetMacrosAction(macros: macroMan.get()))
 
+        try prefs.clickerMan.parse(xml: xml)
+
         try prefs.colorMan.parse(xml: xml)
         prefs.openSessions = WindowRestoration.parseOpenSessions(xml: xml)
     }
@@ -263,6 +266,11 @@ class AppPreferences: SavitarXMLProtocol {
             if macrosElem.childCount > 0 {
                 prefsElem.addChild(macrosElem)
             }
+        }
+
+        let aliasesElem = try clickerMan.toXMLElement()
+        if aliasesElem.childCount > 0 {
+            prefsElem.addChild(aliasesElem)
         }
 
         let colorsElem = try colorMan.toXMLElement()

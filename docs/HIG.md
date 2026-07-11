@@ -17,7 +17,7 @@ When changing UI, check this doc, [.cursor/rules/macos-hig.mdc](../.cursor/rules
 ## General principles
 
 1. **System controls and terminology** — "Settings" not "Preferences" on macOS 13+.
-2. **Modeless by default** — app Settings, Events, World Picker, and Macro Clicker (when shipped) must not block document interaction.
+2. **Modeless by default** — app Settings, Events, World Picker, and Macro Clicker must not block document interaction.
 3. **Immediate feedback** — app Settings toggles apply at once and persist to prefs XML; World Settings use **OK** / **Cancel** on the modal dialog.
 4. **Disable, don't hide** — unavailable features stay visible, grayed, with a tooltip.
 5. **Keyboard shortcuts** — respect standard shortcuts (⌘,, ⌘W, ⌘Q, arrow keys in text, etc.).
@@ -46,7 +46,7 @@ One **modeless Settings window** (`AppSettingsWindowController`) with toolbar pa
 
 | Pane | Toolbar symbol | Content |
 |------|----------------|---------|
-| Startup | `play.circle` | World Picker, Events, Macro Clicker (when shipped) at launch |
+| Startup | `play.circle` | World Picker, Events, Macro Clicker at launch |
 | Input & Display | `keyboard` | App appearance (System / Light / Dark — [Story 26](Stories.md#story-26--app-wide-appearance-system--light--dark)); keypad, mono fonts, default word wrap for new sessions |
 | Colors | `paintpalette` | 24 ANSI palette wells + Restore Defaults |
 | Audio | `speaker.wave.2` | Mute sound / speaking / bell / clicker (clicker when shipped) |
@@ -127,9 +127,17 @@ Startup / **File → New World Document…** entry point for choosing a world.
 
 Touchpoints: `WorldPicker.storyboard`, `WorldPickerContentView.swift`, `AppContext.showWorldPicker`.
 
-### Macro Clicker (when shipped)
+### Macro Clicker
 
-Floating button palette — modeless utility window, frame autosave, optional startup. See [Story 11](Stories.md#story-11--macro-clicker).
+| Rule | Savitar 2 |
+|------|-------------|
+| Window type | Modeless utility — close-only, fixed size, movable |
+| Frame autosave | `MacroClickerFrame` |
+| **Window** menu | **Window → Show Macro Clicker**; listed when open |
+| Startup | **Settings → Startup → Show Macro Clicker at startup** |
+| Audio | **Settings → Audio → Mute clicker sounds** |
+
+Touchpoints: `Clicker.storyboard`, `ClickerContentViewController.swift`, `AppContext.showMacroClicker`.
 
 ---
 

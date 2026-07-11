@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 10th, 2026_
+_README last updated July 11th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -79,7 +79,7 @@ _ Implement remaining local commands
 √ Find/Find Next supported (input + output panes)
 √ Printing supported (session output)
 √ ANSI Color Settings pane in app Settings (Story 5)
-_ Macro Clicker
+√ Macro Clicker (Story 11)
 _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
