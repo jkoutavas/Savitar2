@@ -1,5 +1,7 @@
 # Fastlane Release Builds
 
+**Last updated July 11th, 2026**
+
 This Fastlane setup builds, signs, notarizes, and packages Savitar. It never
 commits certificates, passwords, API keys, release archives, or notarized
 artifacts. Dependencies are managed by Swift Package Manager, so there is no
@@ -117,17 +119,17 @@ signed build:
 3. **Add these secrets to the `release` environment** (Settings → Environments →
    `release` → Environment secrets):
 
-   | Secret | What it is |
-   | --- | --- |
-   | `MACOS_CERT_P12_BASE64` | Base64 of your exported *Developer ID Application* certificate **including its private key** (`.p12`) |
-   | `MACOS_CERT_PASSWORD` | Password you set when exporting the `.p12` |
-   | `APPLE_TEAM_ID` | e.g. `RFE485QN84` |
-   | `DEVELOPER_ID_APPLICATION` | e.g. `Developer ID Application: Your Name (RFE485QN84)` |
-   | `APP_STORE_CONNECT_KEY_ID` | App Store Connect API key ID |
-   | `APP_STORE_CONNECT_ISSUER_ID` | App Store Connect issuer ID |
-   | `APP_STORE_CONNECT_KEY_P8_BASE64` | Base64 of the App Store Connect API key file (`.p8`) |
-   | `SPARKLE_EDDSA_PRIVATE_KEY` | Contents of the Sparkle EdDSA private key file (from `generate_keys -x`; see [`appcast/README.md`](../appcast/README.md)) |
-   | `TELEMETRYDECK_APP_ID` | TelemetryDeck app identifier for anonymous install/usage analytics (Story 14); omitted from local and contributor builds |
+   | Secret                            | What it is                                                                                                                |
+   | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+   | `MACOS_CERT_P12_BASE64`           | Base64 of your exported _Developer ID Application_ certificate **including its private key** (`.p12`)                     |
+   | `MACOS_CERT_PASSWORD`             | Password you set when exporting the `.p12`                                                                                |
+   | `APPLE_TEAM_ID`                   | e.g. `RFE485QN84`                                                                                                         |
+   | `DEVELOPER_ID_APPLICATION`        | e.g. `Developer ID Application: Your Name (RFE485QN84)`                                                                   |
+   | `APP_STORE_CONNECT_KEY_ID`        | App Store Connect API key ID                                                                                              |
+   | `APP_STORE_CONNECT_ISSUER_ID`     | App Store Connect issuer ID                                                                                               |
+   | `APP_STORE_CONNECT_KEY_P8_BASE64` | Base64 of the App Store Connect API key file (`.p8`)                                                                      |
+   | `SPARKLE_EDDSA_PRIVATE_KEY`       | Contents of the Sparkle EdDSA private key file (from `generate_keys -x`; see [`appcast/README.md`](../appcast/README.md)) |
+   | `TELEMETRYDECK_APP_ID`            | TelemetryDeck app identifier for anonymous install/usage analytics (Story 14); omitted from local and contributor builds  |
 
    Generate the base64 blobs with:
 
@@ -146,8 +148,7 @@ signed build:
    bundle exec fastlane prepare_release version:2.0.16
    ```
 
-   Review the edit, then commit `CHANGELOG.md` through a pull request (master is
-   protected) and merge it.
+   Review the edit, then commit `CHANGELOG.md` through a pull request (or even more efficiently, use Jay's commit to master override) and merge it.
 
 2. **Tag the release.** The tag name is the marketing version, and only the
    repository owner can create `v*` tags (enforced by a tag ruleset):
