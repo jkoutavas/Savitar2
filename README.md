@@ -70,7 +70,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
 √ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, … — see USER_GUIDE)
-_ File upload & capture (`##upload`, `##capture`) — next PR; logging shake-down
+_ Implement local commands `##upload` and `##capture`
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
 √ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
