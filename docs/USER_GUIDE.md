@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned or deferred): command **aliases** (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, `xch_cmd` links. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), **`##upload` / `##capture`** local commands (next release), MCP SimpleEdit, `xch_cmd` links. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
 
 ---
 
@@ -517,7 +517,7 @@ Each pane (output and input) can show a one-line **status bar** at its top—a s
 ##close stats
 ```
 
-`##set status` opens the bar if needed and replaces its current text; variables (`%%`) expand in the message. `##close stats` hides both bars.
+`##set status` opens the bar if needed and replaces its current text; variables (`%%`) expand in the message. `##close stats` hides both bars; `##close status output` or `##close status input` hides one pane only. See [Local commands → Status bar commands](#local-commands).
 
 Status bars render in **inverse** session colors—the strip uses the world's foreground color as its background, and the text uses the background color—so they stand out from the panes. Bars are per-session: they are not saved in the world document.
 
@@ -656,7 +656,7 @@ Savitar remembers up to **100** recent commands per session window.
 | **↑** | Recall older commands |
 | **↓** | Recall newer commands; at the bottom, clears to a fresh empty line |
 
-Recall walks the history for **this session window** only.
+Recall walks the history for **this session window** only. You can also pull a numbered entry with [`##recall`](#local-commands) and [`##history`](#local-commands).
 
 ### Input editing keys
 
@@ -717,17 +717,20 @@ See [Triggers](#triggers) for wildcards (`$$`) and regex captures.
 
 **Local commands** are handled by Savitar—they are **not** sent to the game server. By default they start with the **command marker** `##` (configurable per world on **World Settings → Input**).
 
-### Implemented commands
+If the command marker is **empty**, local commands are disabled and all input goes to the server.
+
+**Variable expansion:** Text you send—including trigger replies and macros—is expanded for `%%variables` *before* Savitar checks for a local command. So a macro or reply can run `##history` by expanding to the command marker plus `history`.
+
+Examples below use the default `##` marker; substitute your world's marker if you changed it.
+
+### Session and output
 
 | Command | What it does |
 |---------|----------------|
-| `##history` | Prints numbered list of recent commands for this session in the output pane |
-| `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (developer debugging—not for everyday play) |
-| `##set status output <message>` | Shows `<message>` in a one-line [status bar](#status-bars) at the top of the **output** pane (opens the bar if needed) |
-| `##set status input <message>` | Same, for the **input** pane |
-| `##close stats` | Hides both status bars |
-
-Variables expand in status messages—`##set status input HP: %%hitpoints` from a trigger reply keeps a live readout on screen. See [Status bars](#status-bars).
+| `##history` | Prints a numbered list of recent commands for this session in the **output** pane |
+| `##recall <n>` | Puts command *n* from that list into the **input** line (same numbers as `##history`) |
+| `##!<n>` | Shorthand for `##recall <n>` — for example `##!3` recalls entry 3 |
+| `##clear screen` | Clears the output pane (same as **Edit → Clear Output**, ⌘K) |
 
 Example:
 
@@ -744,23 +747,98 @@ Might show:
  3  cast heal
 ```
 
-### Other local commands
+Then `##recall 2` or `##!2` puts `n` in the input line.
 
-Additional `##` commands are planned. If you used Savitar 1, the table below maps familiar commands to their status in Savitar 2—check [Stories.md](Stories.md) as more ship.
+### Status bar commands
 
-| Savitar 1 command | Status in Savitar 2 |
-|------------|---------------------|
-| `##history` | ✅ Shipped |
-| `##dump` / `@printsource` | ✅ `##dump` (console); `@printsource` related |
-| `##set status output \| input` | ✅ Shipped |
-| `##close status output \| input` | ✅ As `##close stats` (closes both bars) |
-| `##add macro`, `##add trigger` | Planned |
-| `##upload`, `##capture` | Not planned for 2.0 (file upload deferred) |
-| `##regex` | Planned with trigger regex work |
-| `##wait` | Planned (delay in reply chains) |
-| `##tell application` | Not planned (AppleScript era) |
+| Command | What it does |
+|---------|----------------|
+| `##set status output <message>` | Shows `<message>` in a one-line [status bar](#status-bars) at the top of the **output** pane (opens the bar if needed) |
+| `##set status input <message>` | Same, for the **input** pane |
+| `##close stats` | Hides **both** status bars |
+| `##close status output` | Hides only the output-pane status bar |
+| `##close status input` | Hides only the input-pane status bar |
 
-If the command marker is **empty**, local commands are disabled—all input goes to the server.
+Variables expand in status messages—`##set status input HP: %%hitpoints` from a trigger reply keeps a live readout on screen.
+
+### World flags and markers
+
+These change settings for the **current session's world** immediately (they are not saved until you save the world document):
+
+| Command | What it does |
+|---------|----------------|
+| `##set ansi on` / `off` | Toggle ANSI color processing on output |
+| `##set html on` / `off` | Toggle HTML output mode |
+| `##set echo on` / `off` | Toggle command echo (show sent commands in output) |
+| `##set cronly on` / `off` | Toggle CR-only line endings |
+| `##set autoclose on` / `off` | Toggle auto-close when the server disconnects |
+| `##set marker command <text>` | Set the local-command marker (up to 2 characters) |
+| `##set marker macro <text>` | Set the variable marker (default `%%`) |
+| `##set marker wildcard <text>` | Set the wildcard marker in trigger patterns (default `$$`) |
+| `##set macro "<name>" <value>` | Set a **scratch variable** `<name>` to `<value>` (same as `%%name` expansion—not a macro hotkey in the Events window) |
+
+### Triggers and macros
+
+| Command | What it does |
+|---------|----------------|
+| `##enable trigger "<name>"` | Enables a world or app-wide trigger by name (`##enable trigger beep` works for one-word names) |
+| `##disable trigger "<name>"` | Disables a trigger by name (same quoting rules as enable—use quotes when the name contains spaces) |
+| `##add trigger <XML>` | Parses a `<TRIGGER …>` XML fragment and adds it to **this world's** Events list |
+| `##add macro <XML>` | Parses a `<MACRO …>` XML fragment and adds it to **this world's** Events list |
+| `##regex "<text>" "<pattern>"` | Tests a regular expression; prints match groups and stores them in scratch variables `%%0`, `%%1`, … for this session |
+
+**Dump listings** (XML written to the output pane, pretty-printed):
+
+| Command | What it does |
+|---------|----------------|
+| `##dump colors` | App-wide ANSI color definitions |
+| `##dump macros` | App-wide and world macros |
+| `##dump triggers` | App-wide and world triggers |
+| `##dump worlds` | Worlds in the World Picker list |
+
+Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`. Dump output is safe to read even when **HTML output** is on—the XML is escaped so tags are not swallowed by the WebKit pane.
+
+**Developer debugging:**
+
+| Command | What it does |
+|---------|----------------|
+| `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (not the output pane) |
+
+To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
+
+### Windows and sessions
+
+| Command | What it does |
+|---------|----------------|
+| `##broadcast <command>` | Sends `<command>` to every **other** connected world session (not the one that ran the command) |
+| `##select window "<title>"` | Brings the session window whose title **contains** `<title>` to the front |
+| `##close window "<title>"` | Closes that window (same partial title match) |
+
+Useful when you play several worlds at once and want one trigger reply to poke another session.
+
+### Delays (`##wait`)
+
+```text
+##wait <seconds> [<command>]
+```
+
+Waits *seconds*, then runs `<command>` if you provided one. Used heavily in **trigger replies** to stagger auto-actions:
+
+```text
+##wait 2 look
+##wait 5 cast heal
+```
+
+With no command, `##wait` alone does nothing visible—it is meant as part of a reply chain.
+
+### Planned next (not in this release)
+
+| Command | Notes |
+|---------|--------|
+| `##upload`, `##capture` | Send a local file to the server and ad-hoc session capture—**next Savitar 2 release**, along with a logging shake-down |
+| `##tell application` | AppleScript-era integration—not planned |
+
+See [Stories.md](Stories.md) for the full v1 manual map and future work.
 
 ---
 
@@ -966,7 +1044,7 @@ When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help →
 | **Alias** | *(Planned.)* Typed abbreviation expanding to a command before send—distinct from macros |
 | **Event** | Savitar's umbrella term for **triggers** and **macros** (see [Events](#events)) |
 | **Gag** | Trigger appearance that hides matching text |
-| **Local command** | `##command` handled by Savitar, not sent to the server |
+| **Local command** | `##command` handled by Savitar, not sent to the server (see [Local commands](#local-commands)) |
 | **Macro** | Hotkey that sends a predefined command string |
 | **MUD** | Multi-User Dungeon—a text multiplayer game accessed via telnet-like protocols |
 | **MOO / MUSH** | Related text-world genres; Savitar connects to their servers like any telnet host |
@@ -1141,8 +1219,10 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
 | **Aliases** (Story 10) | Blocked on implementation |
 | **Macro Clicker** (Story 11) | Shipped |
-| MCP, file upload, `xch_cmd` | Deferred—stubs in tables above |
+| MCP, `xch_cmd` | Deferred |
+| **`##upload` / `##capture`** | Next release (with session logging QA) |
 | **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
+| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands); upload/capture next |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 |
 
 See [Stories.md](Stories.md) for the full v1 manual map.

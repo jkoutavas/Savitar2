@@ -286,6 +286,12 @@ private class MockSessionHandler: SessionHandlerProtocol {
     var history: [String] = []
     var statuses: [(pane: SessionStatusPane, text: String)] = []
     var closedStatusBars = false
+    var closedStatusPanes: [SessionStatusPane] = []
+    var recalledIndex: Int?
+    var clearedOutput = false
+    var refreshedDisplay = false
+    var worldTriggerList: [Trigger] = []
+    var worldMacroList: [Macro] = []
 
     func connectionStatusChanged(status _: ConnectionStatus) {}
 
@@ -312,6 +318,28 @@ private class MockSessionHandler: SessionHandlerProtocol {
 
     func closeSessionStatusBars() {
         closedStatusBars = true
+    }
+
+    func closeSessionStatus(pane: SessionStatusPane) {
+        closedStatusPanes.append(pane)
+    }
+
+    func recallCommand(at index: Int) {
+        recalledIndex = index
+    }
+
+    func clearOutputScreen() {
+        clearedOutput = true
+    }
+
+    func refreshSessionDisplay() {}
+
+    func worldTriggers() -> [Trigger] {
+        return worldTriggerList
+    }
+
+    func worldMacros() -> [Macro] {
+        return worldMacroList
     }
 }
 
@@ -388,6 +416,83 @@ class SessionLocalCommandTests: XCTestCase {
         session.submitServerCmd(cmd: Command(text: "##close stats"))
 
         XCTAssertTrue(handler.closedStatusBars)
+    }
+
+    func testCloseStatusOutputCommandClosesOnePane() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##close status output"))
+
+        XCTAssertEqual(handler.closedStatusPanes, [.output])
+    }
+
+    func testClearScreenCommandClearsOutput() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##clear screen"))
+
+        XCTAssertTrue(handler.clearedOutput)
+    }
+
+    func testRecallCommandRecallsHistoryEntry() {
+        let world = World()
+        let handler = MockSessionHandler()
+        handler.history = ["look", "say hi"]
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##recall 2"))
+
+        XCTAssertEqual(handler.recalledIndex, 2)
+    }
+
+    func testSetAnsiFlagCommand() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##set ansi on"))
+
+        XCTAssertTrue(session.world.flags.contains(.ansi))
+    }
+
+    func testSetScratchVariableCommand() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##set macro \"hp\" 42"))
+
+        XCTAssertEqual(session.world.variableMan.get("hp"), "42")
+    }
+
+    func testRegexCommandSetsCaptureVariables() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##regex \"abc123\" \"abc([0-9]+)\""))
+
+        XCTAssertEqual(session.world.variableMan.get("0"), "abc123")
+        XCTAssertEqual(session.world.variableMan.get("1"), "123")
+        XCTAssertTrue(handler.outputs.first?.contains("success") ?? false)
+    }
+
+    func testDumpTriggersUsesLiveWorldTriggerList() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let trigger = Trigger(name: "Gag spam", flags: .gag)
+        handler.worldTriggerList = [trigger]
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##dump triggers"))
+
+        XCTAssertTrue(handler.outputs.first?.contains("Gag spam") ?? false)
+        XCTAssertTrue(handler.outputs.first?.contains("&lt;TRIGGER") ?? false)
+        XCTAssertFalse(handler.outputs.first?.contains("&lt;?xml") ?? true)
     }
 }
 

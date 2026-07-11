@@ -182,6 +182,73 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         sessionViewController?.clearStatusBars()
     }
 
+    func closeSessionStatus(pane: SessionStatusPane) {
+        sessionViewController?.closeStatus(pane: pane)
+    }
+
+    func recallCommand(at index: Int) {
+        let history = commandHistory()
+        guard index > 0, index <= history.count else {
+            output(result: .success(
+                "[SAVITAR] Recall parameter must be in range 1 to \(history.count)\n"
+            ))
+            return
+        }
+        sessionViewController?.inputViewController?.recallCmd(index: index)
+    }
+
+    func clearOutputScreen() {
+        sessionViewController?.outputViewController?.outputView.clear()
+    }
+
+    func refreshSessionDisplay() {
+        guard let world = world else { return }
+        sessionViewController?.outputViewController?.setStyle(world: world)
+        sessionViewController?.outputViewController?.setLogging(world: world)
+        sessionViewController?.applyStatusBarStyle(world: world)
+    }
+
+    func insertWorldTrigger(_ trigger: Trigger) {
+        guard let world = world else { return }
+        world.triggerMan.add(trigger)
+        let triggers = world.triggerMan.get()
+        store.dispatch(InsertTriggerAction(trigger: trigger, atIndex: triggers.count - 1))
+        updateChangeCount(.changeDone)
+    }
+
+    func insertWorldMacro(_ macro: Macro) {
+        guard let world = world else { return }
+        world.macroMan.add(macro)
+        let macros = world.macroMan.get()
+        store.dispatch(InsertMacroAction(macro: macro, atIndex: macros.count - 1))
+        updateChangeCount(.changeDone)
+    }
+
+    func syncTriggerEnabled(_ trigger: Trigger, scope: SessionTriggerScope, enabled: Bool) {
+        let action: TriggerAction = enabled ? .enable(trigger.objectID) : .disable(trigger.objectID)
+        switch scope {
+        case .world:
+            store.dispatch(action)
+            updateChangeCount(.changeDone)
+        case .universal:
+            AppContext.shared.universalReactionsStore.dispatch(action)
+        }
+    }
+
+    func worldTriggers() -> [Trigger] {
+        if let state = store.state {
+            return state.triggerList.items
+        }
+        return world?.triggerMan.get() ?? []
+    }
+
+    func worldMacros() -> [Macro] {
+        if let state = store.state {
+            return state.macroList.items
+        }
+        return world?.macroMan.get() ?? []
+    }
+
     override func printDocument(_: Any?) {
         sessionViewController?.outputViewController?
             .printOutput(suggestedFilename: preferredFilenameBase)

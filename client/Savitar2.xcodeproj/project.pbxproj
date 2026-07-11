@@ -180,6 +180,7 @@
 		69MC00C12F0B010900AB6BA6 /* ClickerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */; };
 		69SB00112F0C010100AB6BA6 /* SessionStatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SB00102F0C010100AB6BA6 /* SessionStatusBarView.swift */; };
 		69SB00212F0C010200AB6BA6 /* SessionLocalCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SB00202F0C010200AB6BA6 /* SessionLocalCommands.swift */; };
+		69SB00412F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */; };
 		69SB00312F0C010300AB6BA6 /* SessionLocalCommandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */; };
 		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
 		69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */; };
@@ -381,6 +382,7 @@
 		69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindow.swift; sourceTree = "<group>"; };
 		69SB00102F0C010100AB6BA6 /* SessionStatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStatusBarView.swift; sourceTree = "<group>"; };
 		69SB00202F0C010200AB6BA6 /* SessionLocalCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLocalCommands.swift; sourceTree = "<group>"; };
+		69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLocalCommandExecutor.swift; sourceTree = "<group>"; };
 		69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLocalCommandsTests.swift; sourceTree = "<group>"; };
 		69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarTelemetry.swift; sourceTree = "<group>"; };
 		AAAA0001000000000000AAA1 /* AnsiPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsiPalette.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				695F5AA125899EFD00AB6BA6 /* OutputView.swift */,
 				695F5AA225899EFD00AB6BA6 /* Session.swift */,
 				69SB00202F0C010200AB6BA6 /* SessionLocalCommands.swift */,
+				69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */,
 				695F5AAA25899EFD00AB6BA6 /* SessionHandlerProtocol.swift */,
 				69SB00102F0C010100AB6BA6 /* SessionStatusBarView.swift */,
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
@@ -1096,6 +1099,7 @@
 				695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */,
 				695F5B29258E8EB100AB6BA6 /* ReactionsUndoMiddleware.swift in Sources */,
 				69SB00212F0C010200AB6BA6 /* SessionLocalCommands.swift in Sources */,
+				69SB00412F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift in Sources */,
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,

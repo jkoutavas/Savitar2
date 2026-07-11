@@ -73,6 +73,15 @@ class SessionViewController: NSSplitViewController {
         inputViewController?.clearStatusText()
     }
 
+    func closeStatus(pane: SessionStatusPane) {
+        switch pane {
+        case .output:
+            outputViewController?.clearStatusText()
+        case .input:
+            inputViewController?.clearStatusText()
+        }
+    }
+
     func applyStatusBarStyle(world: World) {
         outputViewController?.applyStatusBarStyle(world: world)
         inputViewController?.applyStatusBarStyle(world: world)

@@ -64,7 +64,7 @@
 <tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
 <tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
 </tbody></table>
-<p>Features <strong>not in Savitar 2 yet</strong> (but planned or deferred): command <strong>aliases</strong> (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, <code>xch_cmd</code> links. The guide marks these where relevant.</p>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code> / <code>##capture</code></strong> local commands (next release), MCP SimpleEdit, <code>xch_cmd</code> links. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
 <hr/>
 <h2 id="install-updates">Install &amp; updates</h2>
 <h3 id="install-updates-download-and-install">Download and install</h3>
@@ -443,7 +443,7 @@
 <p>##set status input HP: %%hitpoints</p>
 <p>##close stats</p>
 <p>```</p>
-<p><code>##set status</code> opens the bar if needed and replaces its current text; variables (<code>%%</code>) expand in the message. <code>##close stats</code> hides both bars.</p>
+<p><code>##set status</code> opens the bar if needed and replaces its current text; variables (<code>%%</code>) expand in the message. <code>##close stats</code> hides both bars; <code>##close status output</code> or <code>##close status input</code> hides one pane only. See <a href="#local-commands">Local commands → Status bar commands</a>.</p>
 <p>Status bars render in <strong>inverse</strong> session colors—the strip uses the world's foreground color as its background, and the text uses the background color—so they stand out from the panes. Bars are per-session: they are not saved in the world document.</p>
 <p>Configurable status bar styling (match session colors, or custom colors) is planned for <strong>2.1</strong>.</p>
 <h3 id="session-window-connection-indicator">Connection indicator</h3>
@@ -547,7 +547,7 @@
 <tr><td><strong>↑</strong></td><td>Recall older commands</td></tr>
 <tr><td><strong>↓</strong></td><td>Recall newer commands; at the bottom, clears to a fresh empty line</td></tr>
 </tbody></table>
-<p>Recall walks the history for <strong>this session window</strong> only.</p>
+<p>Recall walks the history for <strong>this session window</strong> only. You can also pull a numbered entry with <a href="#local-commands"><code>##recall</code></a> and <a href="#local-commands"><code>##history</code></a>.</p>
 <h3 id="entering-commands-input-editing-keys">Input editing keys</h3>
 <p>These keys work in the input pane during a live session:</p>
 <table>
@@ -591,17 +591,18 @@
 <hr/>
 <h2 id="local-commands">Local commands</h2>
 <p><strong>Local commands</strong> are handled by Savitar—they are <strong>not</strong> sent to the game server. By default they start with the <strong>command marker</strong> <code>##</code> (configurable per world on <strong>World Settings → Input</strong>).</p>
-<h3 id="local-commands-implemented-commands">Implemented commands</h3>
+<p>If the command marker is <strong>empty</strong>, local commands are disabled and all input goes to the server.</p>
+<p><strong>Variable expansion:</strong> Text you send—including trigger replies and macros—is expanded for <code>%%variables</code> *before* Savitar checks for a local command. So a macro or reply can run <code>##history</code> by expanding to the command marker plus <code>history</code>.</p>
+<p>Examples below use the default <code>##</code> marker; substitute your world's marker if you changed it.</p>
+<h3 id="local-commands-session-and-output">Session and output</h3>
 <table>
 <thead><tr><th>Command</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><code>##history</code></td><td>Prints numbered list of recent commands for this session in the output pane</td></tr>
-<tr><td><code>##dump</code></td><td>Prints the output pane's HTML source to the <strong>Xcode/console log</strong> (developer debugging—not for everyday play)</td></tr>
-<tr><td><code>##set status output &lt;message&gt;</code></td><td>Shows <code>&lt;message&gt;</code> in a one-line <a href="#status-bars">status bar</a> at the top of the <strong>output</strong> pane (opens the bar if needed)</td></tr>
-<tr><td><code>##set status input &lt;message&gt;</code></td><td>Same, for the <strong>input</strong> pane</td></tr>
-<tr><td><code>##close stats</code></td><td>Hides both status bars</td></tr>
+<tr><td><code>##history</code></td><td>Prints a numbered list of recent commands for this session in the <strong>output</strong> pane</td></tr>
+<tr><td><code>##recall &lt;n&gt;</code></td><td>Puts command *n* from that list into the <strong>input</strong> line (same numbers as <code>##history</code>)</td></tr>
+<tr><td><code>##!&lt;n&gt;</code></td><td>Shorthand for <code>##recall &lt;n&gt;</code> — for example <code>##!3</code> recalls entry 3</td></tr>
+<tr><td><code>##clear screen</code></td><td>Clears the output pane (same as <strong>Edit → Clear Output</strong>, ⌘K)</td></tr>
 </tbody></table>
-<p>Variables expand in status messages—<code>##set status input HP: %%hitpoints</code> from a trigger reply keeps a live readout on screen. See <a href="#status-bars">Status bars</a>.</p>
 <p>Example:</p>
 <p>```text</p>
 <p>##history</p>
@@ -613,22 +614,87 @@
 <p>2  n</p>
 <p>3  cast heal</p>
 <p>```</p>
-<h3 id="local-commands-other-local-commands">Other local commands</h3>
-<p>Additional <code>##</code> commands are planned. If you used Savitar 1, the table below maps familiar commands to their status in Savitar 2—check <a href="Stories.md">Stories.md</a> as more ship.</p>
+<p>Then <code>##recall 2</code> or <code>##!2</code> puts <code>n</code> in the input line.</p>
+<h3 id="local-commands-status-bar-commands">Status bar commands</h3>
 <table>
-<thead><tr><th>Savitar 1 command</th><th>Status in Savitar 2</th></tr></thead>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><code>##history</code></td><td>✅ Shipped</td></tr>
-<tr><td><code>##dump</code> / <code>@printsource</code></td><td>✅ <code>##dump</code> (console); <code>@printsource</code> related</td></tr>
-<tr><td>`##set status output \</td><td>input`</td><td>✅ Shipped</td></tr>
-<tr><td>`##close status output \</td><td>input`</td><td>✅ As <code>##close stats</code> (closes both bars)</td></tr>
-<tr><td><code>##add macro</code>, <code>##add trigger</code></td><td>Planned</td></tr>
-<tr><td><code>##upload</code>, <code>##capture</code></td><td>Not planned for 2.0 (file upload deferred)</td></tr>
-<tr><td><code>##regex</code></td><td>Planned with trigger regex work</td></tr>
-<tr><td><code>##wait</code></td><td>Planned (delay in reply chains)</td></tr>
-<tr><td><code>##tell application</code></td><td>Not planned (AppleScript era)</td></tr>
+<tr><td><code>##set status output &lt;message&gt;</code></td><td>Shows <code>&lt;message&gt;</code> in a one-line <a href="#status-bars">status bar</a> at the top of the <strong>output</strong> pane (opens the bar if needed)</td></tr>
+<tr><td><code>##set status input &lt;message&gt;</code></td><td>Same, for the <strong>input</strong> pane</td></tr>
+<tr><td><code>##close stats</code></td><td>Hides <strong>both</strong> status bars</td></tr>
+<tr><td><code>##close status output</code></td><td>Hides only the output-pane status bar</td></tr>
+<tr><td><code>##close status input</code></td><td>Hides only the input-pane status bar</td></tr>
 </tbody></table>
-<p>If the command marker is <strong>empty</strong>, local commands are disabled—all input goes to the server.</p>
+<p>Variables expand in status messages—<code>##set status input HP: %%hitpoints</code> from a trigger reply keeps a live readout on screen.</p>
+<h3 id="local-commands-world-flags-and-markers">World flags and markers</h3>
+<p>These change settings for the <strong>current session's world</strong> immediately (they are not saved until you save the world document):</p>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##set ansi on</code> / <code>off</code></td><td>Toggle ANSI color processing on output</td></tr>
+<tr><td><code>##set html on</code> / <code>off</code></td><td>Toggle HTML output mode</td></tr>
+<tr><td><code>##set echo on</code> / <code>off</code></td><td>Toggle command echo (show sent commands in output)</td></tr>
+<tr><td><code>##set cronly on</code> / <code>off</code></td><td>Toggle CR-only line endings</td></tr>
+<tr><td><code>##set autoclose on</code> / <code>off</code></td><td>Toggle auto-close when the server disconnects</td></tr>
+<tr><td><code>##set marker command &lt;text&gt;</code></td><td>Set the local-command marker (up to 2 characters)</td></tr>
+<tr><td><code>##set marker macro &lt;text&gt;</code></td><td>Set the variable marker (default <code>%%</code>)</td></tr>
+<tr><td><code>##set marker wildcard &lt;text&gt;</code></td><td>Set the wildcard marker in trigger patterns (default <code>$$</code>)</td></tr>
+<tr><td><code>##set macro "&lt;name&gt;" &lt;value&gt;</code></td><td>Set a <strong>scratch variable</strong> <code>&lt;name&gt;</code> to <code>&lt;value&gt;</code> (same as <code>%%name</code> expansion—not a macro hotkey in the Events window)</td></tr>
+</tbody></table>
+<h3 id="local-commands-triggers-and-macros">Triggers and macros</h3>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##enable trigger "&lt;name&gt;"</code></td><td>Enables a world or app-wide trigger by name (<code>##enable trigger beep</code> works for one-word names)</td></tr>
+<tr><td><code>##disable trigger "&lt;name&gt;"</code></td><td>Disables a trigger by name (same quoting rules as enable—use quotes when the name contains spaces)</td></tr>
+<tr><td><code>##add trigger &lt;XML&gt;</code></td><td>Parses a <code>&lt;TRIGGER …&gt;</code> XML fragment and adds it to <strong>this world's</strong> Events list</td></tr>
+<tr><td><code>##add macro &lt;XML&gt;</code></td><td>Parses a <code>&lt;MACRO …&gt;</code> XML fragment and adds it to <strong>this world's</strong> Events list</td></tr>
+<tr><td><code>##regex "&lt;text&gt;" "&lt;pattern&gt;"</code></td><td>Tests a regular expression; prints match groups and stores them in scratch variables <code>%%0</code>, <code>%%1</code>, … for this session</td></tr>
+</tbody></table>
+<p><strong>Dump listings</strong> (XML written to the output pane, pretty-printed):</p>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##dump colors</code></td><td>App-wide ANSI color definitions</td></tr>
+<tr><td><code>##dump macros</code></td><td>App-wide and world macros</td></tr>
+<tr><td><code>##dump triggers</code></td><td>App-wide and world triggers</td></tr>
+<tr><td><code>##dump worlds</code></td><td>Worlds in the World Picker list</td></tr>
+</tbody></table>
+<p>Each listing is split into <strong>universal</strong> (app-wide) and <strong>world specific</strong> sections. An empty section shows <code>(none)</code>. Dump output is safe to read even when <strong>HTML output</strong> is on—the XML is escaped so tags are not swallowed by the WebKit pane.</p>
+<p><strong>Developer debugging:</strong></p>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##dump</code></td><td>Prints the output pane's HTML source to the <strong>Xcode/console log</strong> (not the output pane)</td></tr>
+</tbody></table>
+<p>To copy a trigger or macro from one place to another, use <code>##dump triggers</code> or <code>##dump macros</code>, copy the XML block you need, then <code>##add trigger …</code> or <code>##add macro …</code>.</p>
+<h3 id="local-commands-windows-and-sessions">Windows and sessions</h3>
+<table>
+<thead><tr><th>Command</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>##broadcast &lt;command&gt;</code></td><td>Sends <code>&lt;command&gt;</code> to every <strong>other</strong> connected world session (not the one that ran the command)</td></tr>
+<tr><td><code>##select window "&lt;title&gt;"</code></td><td>Brings the session window whose title <strong>contains</strong> <code>&lt;title&gt;</code> to the front</td></tr>
+<tr><td><code>##close window "&lt;title&gt;"</code></td><td>Closes that window (same partial title match)</td></tr>
+</tbody></table>
+<p>Useful when you play several worlds at once and want one trigger reply to poke another session.</p>
+<h3 id="local-commands-delays-wait">Delays (<code>##wait</code>)</h3>
+<p>```text</p>
+<p>##wait &lt;seconds&gt; [&lt;command&gt;]</p>
+<p>```</p>
+<p>Waits *seconds*, then runs <code>&lt;command&gt;</code> if you provided one. Used heavily in <strong>trigger replies</strong> to stagger auto-actions:</p>
+<p>```text</p>
+<p>##wait 2 look</p>
+<p>##wait 5 cast heal</p>
+<p>```</p>
+<p>With no command, <code>##wait</code> alone does nothing visible—it is meant as part of a reply chain.</p>
+<h3 id="local-commands-planned-next-not-in-this-release">Planned next (not in this release)</h3>
+<table>
+<thead><tr><th>Command</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code>##upload</code>, <code>##capture</code></td><td>Send a local file to the server and ad-hoc session capture—<strong>next Savitar 2 release</strong>, along with a logging shake-down</td></tr>
+<tr><td><code>##tell application</code></td><td>AppleScript-era integration—not planned</td></tr>
+</tbody></table>
+<p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map and future work.</p>
 <hr/>
 <h2 id="triggers">Triggers</h2>
 <p>A <strong>trigger</strong> watches session text and <strong>reacts</strong> when a pattern matches. Triggers are the heart of Savitar automation—gags, highlights, sounds, auto-replies, and variable capture.</p>
@@ -789,7 +855,7 @@
 <tr><td><strong>Alias</strong></td><td>*(Planned.)* Typed abbreviation expanding to a command before send—distinct from macros</td></tr>
 <tr><td><strong>Event</strong></td><td>Savitar's umbrella term for <strong>triggers</strong> and <strong>macros</strong> (see <a href="#events">Events</a>)</td></tr>
 <tr><td><strong>Gag</strong></td><td>Trigger appearance that hides matching text</td></tr>
-<tr><td><strong>Local command</strong></td><td><code>##command</code> handled by Savitar, not sent to the server</td></tr>
+<tr><td><strong>Local command</strong></td><td><code>##command</code> handled by Savitar, not sent to the server (see <a href="#local-commands">Local commands</a>)</td></tr>
 <tr><td><strong>Macro</strong></td><td>Hotkey that sends a predefined command string</td></tr>
 <tr><td><strong>MUD</strong></td><td>Multi-User Dungeon—a text multiplayer game accessed via telnet-like protocols</td></tr>
 <tr><td><strong>MOO / MUSH</strong></td><td>Related text-world genres; Savitar connects to their servers like any telnet host</td></tr>
@@ -930,8 +996,10 @@
 <tr><td>Getting started, install, worlds, session, commands, triggers, glossary</td><td>✅ This guide (July 2026)</td></tr>
 <tr><td><strong>Aliases</strong> (Story 10)</td><td>Blocked on implementation</td></tr>
 <tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Shipped</td></tr>
-<tr><td>MCP, file upload, <code>xch_cmd</code></td><td>Deferred—stubs in tables above</td></tr>
+<tr><td>MCP, <code>xch_cmd</code></td><td>Deferred</td></tr>
+<tr><td><strong><code>##upload</code> / <code>##capture</code></strong></td><td>Next release (with session logging QA)</td></tr>
 <tr><td><strong>Status bars</strong> (<code>##set status</code>)</td><td>Shipped—inverse colors; styling setting planned for 2.1</td></tr>
+<tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a>; upload/capture next</td></tr>
 <tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map.</p>
