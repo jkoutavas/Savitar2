@@ -182,6 +182,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         outputVC.view.layer?.backgroundColor = w.backColor.cgColor
         outputVC.setWordWrap(wordWrap)
         outputVC.setStyle(world: w)
+        svc.applyStatusBarStyle(world: w)
 
         if let font = NSFont(name: w.fontName, size: w.fontSize) {
             inputVC.font = font

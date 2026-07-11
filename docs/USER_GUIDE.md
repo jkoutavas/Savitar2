@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned or deferred): command **aliases** (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, status bar divider, `xch_cmd` links. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned or deferred): command **aliases** (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, `xch_cmd` links. The guide marks these where relevant.
 
 ---
 
@@ -507,7 +507,21 @@ The **output** pane is a web view showing styled session text. You can:
 | **Find** | **Edit → Find…** (⌘F) when the output pane is active—see [Find](#find) under Edit menu |
 | **Speak selection** | **Edit → Speech → Speak Selected Text** |
 
-**Status bar** (divider row showing cursor position) is **not in Savitar 2 yet**; pane size is shown in the yellow resize overlay while dragging.
+### Status bars
+
+Savitar 1's per-pane **status bars** are back. Each pane (output and input) can show a one-line strip of text of your choosing at its top, set with [local commands](#local-commands)—typed directly or, more usefully, sent from a trigger reply:
+
+```text
+##set status output You are fighting: %%opponent
+##set status input HP: %%hitpoints
+##close stats
+```
+
+`##set status` opens the bar if needed and replaces its current text; variables (`%%`) expand in the message. `##close stats` hides both bars.
+
+Status bars render in **inverse** session colors—the strip is filled with the world's foreground color and the text uses the background color—so they stand out from the panes (like the white status bar in the Savitar 1 manual's session window screenshot). Bars are per-session: they are not saved in the world document.
+
+Configurable status bar styling (match session colors, or custom colors) is planned for **2.1**.
 
 ### Connection indicator
 
@@ -711,6 +725,11 @@ See [Triggers](#triggers) for wildcards (`$$`) and regex captures.
 |---------|----------------|
 | `##history` | Prints numbered list of recent commands for this session in the output pane |
 | `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (developer debugging—not for everyday play) |
+| `##set status output <message>` | Shows `<message>` in a one-line [status bar](#status-bars) at the top of the **output** pane (opens the bar if needed) |
+| `##set status input <message>` | Same, for the **input** pane |
+| `##close stats` | Hides both status bars |
+
+Variables expand in status messages—`##set status input HP: %%hitpoints` from a trigger reply keeps a live readout on screen. See [Status bars](#status-bars).
 
 Example:
 
@@ -735,6 +754,8 @@ Savitar 1 supported many `##` commands. The table below is honest about status�
 |------------|---------------------|
 | `##history` | ✅ Shipped |
 | `##dump` / `@printsource` | ✅ `##dump` (console); `@printsource` related |
+| `##set status output \| input` | ✅ Shipped |
+| `##close status output \| input` | ✅ As `##close stats` (closes both bars) |
 | `##add macro`, `##add trigger` | Planned |
 | `##upload`, `##capture` | Not planned for 2.0 (file upload deferred) |
 | `##regex` | Planned with trigger regex work |
@@ -1124,7 +1145,8 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
 | **Aliases** (Story 10) | Blocked on implementation |
 | **Macro Clicker** (Story 11) | Shipped |
-| MCP, file upload, `xch_cmd`, status bar | Deferred—stubs in tables above |
+| MCP, file upload, `xch_cmd` | Deferred—stubs in tables above |
+| **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 feature parity |
 
 See [Stories.md](Stories.md) for the full v1 manual map.

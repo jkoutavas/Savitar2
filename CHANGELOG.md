@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
 - **Macro Clicker** — floating button palette (Story 11): Savitar 1–style **Macro Clicker** window — periwinkle compass rose, green up/down arrows, whimsical green-outlined grid (1–9, a–f); all 15 grid cells are functional (`MACRO_A` … `MACRO_F` for a–f); direction + number buttons send bound macros to the frontmost session; **Window → Show Macro Clicker**; **⌘-click** to bind; hover caption; startup + mute prefs; v1 `ALIAS` XML import/export (18-entry imports preserve `MACRO_10` on **a** when saved)
 
 ### Changed

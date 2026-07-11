@@ -174,6 +174,14 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         return inputVC.commandHistory()
     }
 
+    func setSessionStatus(pane: SessionStatusPane, text: String) {
+        sessionViewController?.setStatus(pane: pane, text: text)
+    }
+
+    func closeSessionStatusBars() {
+        sessionViewController?.clearStatusBars()
+    }
+
     override func printDocument(_: Any?) {
         sessionViewController?.outputViewController?
             .printOutput(suggestedFilename: preferredFilenameBase)

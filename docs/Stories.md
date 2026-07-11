@@ -514,10 +514,10 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 - [x] **9.1** **Getting started** — v1 §1 + §3 — what Savitar is, requirements, migration, quick start
 - [x] **9.1b** **Install & updates** — v1 §2 + Story 12 — download, first launch, uninstall; Updates chapter for Sparkle
-- [x] **9.2** **The session window** — v1 §4 "Session Window" — panes, resize, scroll lock, navigation, connection note; status bar deferred
+- [x] **9.2** **The session window** — v1 §4 "Session Window" — panes, resize, scroll lock, navigation, connection note; status bars shipped July 2026 (`##set status`)
 - [x] **9.2b** **Entering commands** — recall (100 lines), sticky, ⌥Return, editing keys (honest v1 parity gaps)
 - [x] **9.2c** **Variables & macro expansion** — `%%` markers, wildcard cross-link
-- [x] **9.2d** **Local commands** — `##history`, `##dump`; v1 command status table
+- [x] **9.2d** **Local commands** — `##history`, `##dump`, `##set status`, `##close stats`; v1 command status table
 
 - [ ] **9.2e** **Aliases** — typed abbreviations (Story 10; not in v1 manual as such)
   - Classical MUD aliases vs v1 "Macro Clicker aliases" vs macros vs input triggers
@@ -543,7 +543,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 | File upload / capture | §4 Upload/Download, §6 `upload` | README beta | Stub in local commands table |
 | Text drag-and-drop to Events | §4 Text Drag and Drop | Verify v2 parity | **9.4b** if implemented |
 | HTML / xch_cmd links | §4 HTML, xch_cmd | README `_ xch_cmd` | **9.3** stub |
-| Status bar / divider | §4 Status Bar | README `_ Divider status bar` | **9.2** one-liner |
+| ~~Status bar / divider~~ | §4 Status Bar | ✅ Shipped July 2026 (`##set status`, inverse colors; styling setting → 2.1) | **9.2** [Status bars](USER_GUIDE.md#status-bars) |
 | Web interaction text | §4 Web Interaction | TBD | Defer |
 | Switching worlds drag | §4 Switching Worlds | TBD | **9.6** if drag-import still works |
 

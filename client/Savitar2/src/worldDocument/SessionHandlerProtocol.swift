@@ -21,4 +21,6 @@ protocol SessionHandlerProtocol {
     func output(result: OutputResult)
     func printSource()
     func commandHistory() -> [String]
+    func setSessionStatus(pane: SessionStatusPane, text: String)
+    func closeSessionStatusBars()
 }

@@ -284,6 +284,8 @@ private class MockSessionHandler: SessionHandlerProtocol {
     var errors: [String] = []
     var printedSource = false
     var history: [String] = []
+    var statuses: [(pane: SessionStatusPane, text: String)] = []
+    var closedStatusBars = false
 
     func connectionStatusChanged(status _: ConnectionStatus) {}
 
@@ -302,6 +304,14 @@ private class MockSessionHandler: SessionHandlerProtocol {
 
     func commandHistory() -> [String] {
         return history
+    }
+
+    func setSessionStatus(pane: SessionStatusPane, text: String) {
+        statuses.append((pane: pane, text: text))
+    }
+
+    func closeSessionStatusBars() {
+        closedStatusBars = true
     }
 }
 
@@ -356,6 +366,28 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertEqual(handler.outputs, [
             "[SAVITAR] Command history:\n1  look\n2  %%cmd\n"
         ])
+    }
+
+    func testSetStatusCommandUpdatesSessionStatus() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##set status output Hello world"))
+
+        XCTAssertEqual(handler.statuses.count, 1)
+        XCTAssertEqual(handler.statuses.first?.pane, .output)
+        XCTAssertEqual(handler.statuses.first?.text, "Hello world")
+    }
+
+    func testCloseStatsCommandClosesStatusBars() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##close stats"))
+
+        XCTAssertTrue(handler.closedStatusBars)
     }
 }
 

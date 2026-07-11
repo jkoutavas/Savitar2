@@ -83,7 +83,7 @@ _ Implement remaining local commands
 _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
-_ Divider status bar support
+√ Session status bars — ##set status output|input, ##close stats (inverse session colors)
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 √ Sparkle auto-updates (Story 12)
 √ Add bug reporting support (Story 15 — Help → Send Feedback…)
@@ -120,6 +120,7 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 ```
 - macOS 11 and beyond capabilities
 _ Alias support (Story 10)
+_ Status bar styling — per-world setting (match session / inverse / custom colors)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
 _ Text to emoji support

@@ -23,6 +23,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     internal var eventMonitor: Any?
 
     private var wordWrapEnabled = false
+    private let statusBar = SessionStatusBarView()
 
     @IBOutlet var textView: NSTextView!
 
@@ -70,6 +71,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupStatusBar()
+
         // Not setting the checkmark in the interface builder doesn't seem to work since OS X 10.9 Mavericks.
         // https://stackoverflow.com/questions/19801601/nstextview-with-smart-quotes-disabled-still-replaces-quotes
         textView.isRichText = false
@@ -78,6 +81,53 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         setDefaultTextStyle()
 
         newCmd()
+    }
+
+    func applyStatusBarStyle(world: World) {
+        statusBar.apply(world: world)
+    }
+
+    func setStatusText(_ text: String) {
+        statusBar.setText(text)
+    }
+
+    func clearStatusText() {
+        statusBar.clear()
+    }
+
+    private func setupStatusBar() {
+        guard let scrollView = textView.enclosingScrollView else { return }
+        scrollView.borderType = .noBorder
+        scrollView.drawsBackground = false
+        view.addSubview(statusBar)
+
+        let dividerOverlap = enclosingSplitView()?.dividerThickness ?? 0
+
+        let topConstraints = view.constraints.filter { constraint in
+            let firstIsScrollTop = constraint.firstItem as? NSView === scrollView && constraint.firstAttribute == .top
+            let secondIsScrollTop = constraint.secondItem as? NSView === scrollView
+                && constraint.secondAttribute == .top
+            return firstIsScrollTop || secondIsScrollTop
+        }
+        NSLayoutConstraint.deactivate(topConstraints)
+
+        NSLayoutConstraint.activate([
+            statusBar.topAnchor.constraint(equalTo: view.topAnchor, constant: -dividerOverlap),
+            statusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: statusBar.bottomAnchor)
+        ])
+    }
+
+    private func enclosingSplitView() -> NSSplitView? {
+        var ancestor: NSView? = view
+        while let current = ancestor {
+            if let splitView = current as? NSSplitView {
+                return splitView
+            }
+            ancestor = current.superview
+        }
+        return nil
     }
 
     override func viewWillAppear() {
