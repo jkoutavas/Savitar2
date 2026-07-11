@@ -16,6 +16,11 @@ enum Result<T, E> {
 
 typealias OutputResult = Result<String, String>
 
+enum SessionTriggerScope {
+    case world
+    case universal
+}
+
 protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
@@ -23,4 +28,25 @@ protocol SessionHandlerProtocol {
     func commandHistory() -> [String]
     func setSessionStatus(pane: SessionStatusPane, text: String)
     func closeSessionStatusBars()
+    func closeSessionStatus(pane: SessionStatusPane)
+    func recallCommand(at index: Int)
+    func clearOutputScreen()
+    func refreshSessionDisplay()
+    func insertWorldTrigger(_ trigger: Trigger)
+    func insertWorldMacro(_ macro: Macro)
+    func syncTriggerEnabled(_ trigger: Trigger, scope: SessionTriggerScope, enabled: Bool)
+    func worldTriggers() -> [Trigger]
+    func worldMacros() -> [Macro]
+}
+
+extension SessionHandlerProtocol {
+    func closeSessionStatus(pane _: SessionStatusPane) {}
+    func recallCommand(at _: Int) {}
+    func clearOutputScreen() {}
+    func refreshSessionDisplay() {}
+    func insertWorldTrigger(_: Trigger) {}
+    func insertWorldMacro(_: Macro) {}
+    func syncTriggerEnabled(_: Trigger, scope _: SessionTriggerScope, enabled _: Bool) {}
+    func worldTriggers() -> [Trigger] { return [] }
+    func worldMacros() -> [Macro] { return [] }
 }

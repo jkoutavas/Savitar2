@@ -142,7 +142,17 @@ class Session: NSObject, StreamDelegate {
 
     func expandKeypress(with event: NSEvent) -> Bool {
         return processMacros(with: event, macros: universalMacros) ||
-            processMacros(with: event, macros: world.macroMan.get())
+            processMacros(with: event, macros: liveWorldMacros())
+    }
+
+    private func liveWorldMacros() -> [Macro] {
+        let live = sessionHandler.worldMacros()
+        return live.isEmpty ? world.macroMan.get() : live
+    }
+
+    private func liveWorldTriggers() -> [Trigger] {
+        let live = sessionHandler.worldTriggers()
+        return live.isEmpty ? world.triggerMan.get() : live
     }
 
     func reallyCloseWindow() {
@@ -194,37 +204,9 @@ class Session: NSObject, StreamDelegate {
         guard trimmedCmd.hasPrefix(world.cmdMarker) else { return false }
 
         let localCmd = String(trimmedCmd.dropFirst(world.cmdMarker.count))
-        switch SessionLocalCommands.parse(localCmd) {
-        case .dump:
-            sessionHandler.printSource()
-        case .history:
-            localCommandOutput(commandHistoryText())
-        case let .setStatus(pane, message):
-            sessionHandler.setSessionStatus(pane: pane, text: message)
-        case .closeStats:
-            sessionHandler.closeSessionStatusBars()
-        case .unknown:
-            localCommandOutput("Unknown local command: \(trimmedCmd)\n")
-        }
+        let parsed = SessionLocalCommands.parse(localCmd)
+        SessionLocalCommandExecutor.execute(parsed, session: self)
         return true
-    }
-
-    private func commandHistoryText() -> String {
-        let history = sessionHandler.commandHistory()
-        guard history.count > 0 else {
-            return "[SAVITAR] No command history.\n"
-        }
-
-        let width = String(history.count).count
-        let lines = history.enumerated().map { index, command -> String in
-            let number = String(format: "%\(width)d", index + 1)
-            return "\(number)  \(command)"
-        }
-        return "[SAVITAR] Command history:\n\(lines.joined(separator: "\n"))\n"
-    }
-
-    private func localCommandOutput(_ text: String) {
-        sessionHandler.output(result: .success(text))
     }
 
     private func process(buffer: [UInt8], length: Int) -> Data {
@@ -273,7 +255,7 @@ class Session: NSObject, StreamDelegate {
         line = processTriggers(inputLine: line, triggers: universalTriggers, excludedType: excludedType,
                                effects: &effects)
         if line.count > 0 {
-            line = processTriggers(inputLine: line, triggers: world.triggerMan.get(),
+            line = processTriggers(inputLine: line, triggers: liveWorldTriggers(),
                                    excludedType: excludedType, effects: &effects)
         }
         return effects

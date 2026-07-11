@@ -69,8 +69,8 @@ Although the first release targets feature parity with production Savitar v1.6.3
 ~~ World settings Output tab — buffer size, flush period~~ (won't do — [OutputPerformance.md](docs/OutputPerformance.md))
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
-_ Implement remaining local commands
-√ Implement scroll locking
+√ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, … — see USER_GUIDE)
+_ Implement local commands `##upload` and `##capture`
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
 √ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
@@ -82,7 +82,7 @@ _ Implement remaining local commands
 √ Macro Clicker (Story 11)
 _ xch_cmd support
 _ MCP (? does anyone use this?)
-_ File upload
+√ Implement scroll locking
 √ Session status bars — ##set status output|input, ##close stats (inverse session colors)
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
 √ Sparkle auto-updates (Story 12)
