@@ -1,25 +1,18 @@
 ### Added
 
-- **World Picker** — redesigned first-run layout: welcome header, two-line world rows (`host:port`), connection detail card, primary **Connect** button (Story 7)
-- **Settings → Advanced** — **Restore Factory Defaults…** reloads bundled app settings, World Picker world list, universal triggers/macros, and ANSI colors; clears utility-window positions (Stories 23–24)
-- **Mordor MUD** added to bundled default worlds (`mordormud.net:4000`)
-- User guide **Advanced** chapter and contextual **?** anchor (`#settings-advanced`)
+- **Events window HIG** — close-only utility chrome, center on first open, shared `EventsWindowController` for app-wide and per-world Events windows (Story 6)
+- **App-wide appearance** — **Settings → Input & Display** popup: **System**, **Light**, or **Dark** for app chrome (Story 26; v2-only pref)
+- **Savitar Help** — help book CSS supports light and dark appearance (`prefers-color-scheme`)
+- **Window → Show World Picker** — reopen or bring forward the World Picker from the Window menu (Story 25)
 
 ### Changed
 
-- **Bundled world addresses** — FurToonia → `ft.furtoonia.net:9999`; The Builder's Academy → `tbamud.com:9091` (verified via MUD Connect)
-- **World Picker** — position-only frame restore (`WorldPickerFrameOrigin`); **Escape** / **⌘W** dismiss; window sizes to world list
-- **App Settings** — seventh toolbar pane **Advanced** (`gearshape.2`); **⌘.** dismisses Settings when key (Story 23)
-- **World Settings** — tab picker appears in the sheet toolbar (Starting, Appearance, Input, Output, Closing)
-- **World Settings dialog** — OK/Cancel (was Apply); Escape dismisses; modal child window with visible title (`Document — Tab`); resizes per tab; Appearance preview word-wraps; sample text copyright/URL updated
-- **User guide** — World Picker, Advanced, and settings reference updated; help book rebuilt
-- **Stories.md** / **HIG.md** — Story 7 (World Picker HIG) and Story 23 (App Settings HIG) marked complete; Story 24 tracks Advanced maintenance backlog
-
-### Removed
-
-- **Mediterranean Nights** removed from bundled default worlds (host offline)
+- **Events window** — list column (440pt, all columns visible) with detail editor filling the rest (~460pt); no split divider
+- **Window menu** — no longer shows **Show/Hide Tab Bar** or **Merge All Windows** (Savitar does not use tabbed windows); **File → New World Document…** (⌘N) opens the World Picker (Story 25)
 
 ### Fixed
 
-- World Picker **?** opens the World Picker chapter (`#worlds-connection-world-picker`); WKWebView scrolls to the target section after load
+- **Events → Macros detail pane** — form built in code with standard bordered fields (Name, Hotkey, Value); hotkey displays assigned key and updates when selection changes
+- **World session help** — contextual **?** opens the [Session window](docs/USER_GUIDE.md#session-window) chapter
+- **World Picker** — layer-backed colors refresh when macOS Auto light/dark changes or appearance pref changes
 
