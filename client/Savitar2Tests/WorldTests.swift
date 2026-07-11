@@ -540,6 +540,48 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertTrue(handler.outputs.first?.contains("&lt;TRIGGER") ?? false)
         XCTAssertFalse(handler.outputs.first?.contains("&lt;?xml") ?? true)
     }
+
+    func testDumpConnectionListsSessionState() {
+        var world = World()
+        world.name = "Echo Test"
+        world.host = "localhost"
+        world.port = 4000
+        world.flags = [.ansi, .html]
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+        session.status = .ConnectComplete
+
+        session.submitServerCmd(cmd: Command(text: "##dump connection"))
+
+        let output = handler.outputs.first ?? ""
+        XCTAssertTrue(output.contains("Echo Test"))
+        XCTAssertTrue(output.contains("localhost:4000"))
+        XCTAssertTrue(output.contains("ConnectComplete"))
+        XCTAssertTrue(output.contains("ansi"))
+        XCTAssertTrue(output.contains("html"))
+    }
+
+    func testDumpVariablesListsScratchVariables() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##set macro \"hp\" 42"))
+        session.submitServerCmd(cmd: Command(text: "##dump variables"))
+
+        let output = handler.outputs.last ?? ""
+        XCTAssertTrue(output.contains("%%hp =\"42\""))
+    }
+
+    func testDumpVariablesShowsNoneWhenEmpty() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##dump variables"))
+
+        XCTAssertTrue(handler.outputs.first?.contains("(none)") ?? false)
+    }
 }
 
 class InputTriggerVariableTests: XCTestCase {

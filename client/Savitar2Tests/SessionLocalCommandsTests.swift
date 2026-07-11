@@ -44,6 +44,8 @@ class SessionLocalCommandsTests: XCTestCase {
         XCTAssertEqual(SessionLocalCommands.parse("dump macros"), .dumpListing(.macros))
         XCTAssertEqual(SessionLocalCommands.parse("dump triggers"), .dumpListing(.triggers))
         XCTAssertEqual(SessionLocalCommands.parse("dump worlds"), .dumpListing(.worlds))
+        XCTAssertEqual(SessionLocalCommands.parse("dump connection"), .dumpListing(.connection))
+        XCTAssertEqual(SessionLocalCommands.parse("dump variables"), .dumpListing(.variables))
     }
 
     func testParseWorldFlags() {

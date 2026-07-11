@@ -109,9 +109,11 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .dump, keywords: ["dump aliases"], syntax: "dump aliases",
                               detail: nil),
         LocalCommandHelpEntry(category: .dump, keywords: ["dump connection"], syntax: "dump connection",
-                              detail: nil),
+                              detail: "Lists connection state for the current session "
+                                  + "(address, status, streams, flags)."),
         LocalCommandHelpEntry(category: .dump, keywords: ["dump variables"], syntax: "dump variables",
-                              detail: nil),
+                              detail: "Lists scratch variables for this session "
+                                  + "(from triggers, ##set macro, ##regex)."),
 
         LocalCommandHelpEntry(category: .windows, keywords: ["broadcast"], syntax: "broadcast <command>",
                               detail: "Sends a command to every open session window."),
