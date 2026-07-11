@@ -27,7 +27,7 @@ extension SavitarHelp {
             case .worldPicker:
                 return Anchor.worldsConnectionWorldPicker
             case .worldSession:
-                return Anchor.worldMenu
+                return Anchor.sessionWindow
             }
         }
 

@@ -535,7 +535,7 @@ You manage events in an **Events** window:
 - **Per-world** — **World → Show World Events…** (or the events button in the world window title bar). Triggers and macros here are saved in that world’s `.world` document.
 - **App-wide** — **Window → Show App-wide Events Window** (⇧⌘E). Triggers and macros here apply to **every** world—useful for universal gags, sounds, or shortcuts you always want. Imported from Savitar 1 preferences.
 
-Each Events window has two tabs: **Triggers** and **Macros**. Select an item in the list to edit it in the detail pane (matching rules, colors, audio cues, replies, hotkeys, and so on).
+Each Events window has two tabs: **Triggers** and **Macros**. The left side lists items in a table (440pt wide—all columns visible); the right side is the detail editor for the selected trigger or macro. There is no draggable split divider—the window is a fixed 900×400 utility panel, so column widths are tuned for that size. Events windows are **close-only** (no resize or minimize); Savitar remembers their position between sessions.
 
 When an Events window is frontmost, **Edit → New Trigger** or **New Macro** (⇧⌘N) adds an item to the active tab.
 

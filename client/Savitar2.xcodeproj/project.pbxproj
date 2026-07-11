@@ -72,12 +72,13 @@
 		695F5AEA25899FA400AB6BA6 /* TriggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD025899FA400AB6BA6 /* TriggerViewController.swift */; };
 		695F5AEB25899FA400AB6BA6 /* TriggersTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD125899FA400AB6BA6 /* TriggersTabController.swift */; };
 		695F5AEC25899FA400AB6BA6 /* TriggerAudioCueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD225899FA400AB6BA6 /* TriggerAudioCueViewController.swift */; };
-		695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD325899FA400AB6BA6 /* HotKeyEditor.swift */; };
+		695F5AED25899FA400AB6BA6 /* HotKeyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD325899FA400AB6BA6 /* HotKeyField.swift */; };
 		695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD425899FA400AB6BA6 /* TriggerTableDataSource.swift */; };
 		695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD525899FA400AB6BA6 /* MacroTableDataSource.swift */; };
 		695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */; };
 		695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */; };
-		695F5AF225899FA400AB6BA6 /* EventsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD825899FA400AB6BA6 /* EventsSplitViewController.swift */; };
+		695F5AF225899FA400AB6BA6 /* EventsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD825899FA400AB6BA6 /* EventsContentViewController.swift */; };
+		69E660082F0A100100AB6BA6 /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660072F0A100100AB6BA6 /* EventsWindowController.swift */; };
 		695F5AF325899FA400AB6BA6 /* TitledTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */; };
 		695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */; };
 		695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */; };
@@ -129,6 +130,8 @@
 		699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */; };
 		69A45B012A7F100100CDDE09 /* WindowRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B002A7F100100CDDE09 /* WindowRestoration.swift */; };
 		69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */; };
+		69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */; };
+		69E6600C2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */; };
 		69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A012A80100100CDDE09 /* InputEditingKeys.swift */; };
 		69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A022A80100100CDDE09 /* TerminalBell.swift */; };
 		69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */; };
@@ -259,12 +262,13 @@
 		695F5AD025899FA400AB6BA6 /* TriggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerViewController.swift; sourceTree = "<group>"; };
 		695F5AD125899FA400AB6BA6 /* TriggersTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggersTabController.swift; sourceTree = "<group>"; };
 		695F5AD225899FA400AB6BA6 /* TriggerAudioCueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerAudioCueViewController.swift; sourceTree = "<group>"; };
-		695F5AD325899FA400AB6BA6 /* HotKeyEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyEditor.swift; sourceTree = "<group>"; };
+		695F5AD325899FA400AB6BA6 /* HotKeyField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotKeyField.swift; sourceTree = "<group>"; };
 		695F5AD425899FA400AB6BA6 /* TriggerTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerTableDataSource.swift; sourceTree = "<group>"; };
 		695F5AD525899FA400AB6BA6 /* MacroTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroTableDataSource.swift; sourceTree = "<group>"; };
 		695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
 		695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTabViewController.swift; sourceTree = "<group>"; };
-		695F5AD825899FA400AB6BA6 /* EventsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsSplitViewController.swift; sourceTree = "<group>"; };
+		695F5AD825899FA400AB6BA6 /* EventsContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsContentViewController.swift; sourceTree = "<group>"; };
+		69E660072F0A100100AB6BA6 /* EventsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
 		695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldViewModel.swift; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 		699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrefsViewController.swift; sourceTree = "<group>"; };
 		69A45B002A7F100100CDDE09 /* WindowRestoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestoration.swift; sourceTree = "<group>"; };
 		69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestorationTests.swift; sourceTree = "<group>"; };
+		69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowControllerTests.swift; sourceTree = "<group>"; };
+		69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+SavitarFormField.swift"; sourceTree = "<group>"; };
 		69B46A012A80100100CDDE09 /* InputEditingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeys.swift; sourceTree = "<group>"; };
 		69B46A022A80100100CDDE09 /* TerminalBell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBell.swift; sourceTree = "<group>"; };
 		69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeysTests.swift; sourceTree = "<group>"; };
@@ -455,6 +461,7 @@
 				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
 				69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
+				69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */,
 				69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */,
 				69B46A042A80100100CDDE09 /* TerminalBellTests.swift */,
 				69CEEDD723B4064D00E9F087 /* ColorManTests.swift */,
@@ -580,10 +587,11 @@
 			isa = PBXGroup;
 			children = (
 				695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */,
-				695F5AD825899FA400AB6BA6 /* EventsSplitViewController.swift */,
+				695F5AD825899FA400AB6BA6 /* EventsContentViewController.swift */,
+				69E660072F0A100100AB6BA6 /* EventsWindowController.swift */,
 				695F5ACC25899FA400AB6BA6 /* EventsTabController.swift */,
 				695F5ACD25899FA400AB6BA6 /* EventsViewController.swift */,
-				695F5AD325899FA400AB6BA6 /* HotKeyEditor.swift */,
+				695F5AD325899FA400AB6BA6 /* HotKeyField.swift */,
 				695F5AC925899FA400AB6BA6 /* MacrosTabController.swift */,
 				695F5AD525899FA400AB6BA6 /* MacroTableDataSource.swift */,
 				695F5ACA25899FA400AB6BA6 /* MacroViewModel.swift */,
@@ -714,6 +722,7 @@
 				6991F4632393245B00E2BFDB /* Data+Extensions.swift */,
 				698EB8AF2661CD7400B3E1DF /* Dictionary+Extensions.swift */,
 				69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */,
+				69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */,
 				69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */,
 				69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */,
 				69662B25204367BD00E7CC7B /* String+Extensions.swift */,
@@ -957,7 +966,8 @@
 				69C250042F08000200AB6BA6 /* WorldSettingsTabViewController.swift in Sources */,
 				69C250062F08000300AB6BA6 /* WorldSettingsWindowController.swift in Sources */,
 				695F5B38258EE35000AB6BA6 /* ReactionsActions.swift in Sources */,
-				695F5AF225899FA400AB6BA6 /* EventsSplitViewController.swift in Sources */,
+				695F5AF225899FA400AB6BA6 /* EventsContentViewController.swift in Sources */,
+				69E660082F0A100100AB6BA6 /* EventsWindowController.swift in Sources */,
 				695F5B532592E71000AB6BA6 /* WorldWizardController.swift in Sources */,
 				69376D4F2579B01A00A99245 /* Collection+Extensions.swift in Sources */,
 				695F5AE725899FA400AB6BA6 /* EventsViewController.swift in Sources */,
@@ -1013,6 +1023,7 @@
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
 				69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */,
 				69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */,
+				69E6600C2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift in Sources */,
 				699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */,
 				69E1A1012A535A900736894 /* AppSettingsWindowController.swift in Sources */,
 				695F5A7225899CE100AB6BA6 /* SavitarObjectId.swift in Sources */,
@@ -1025,7 +1036,7 @@
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
 				695F5AEF25899FA400AB6BA6 /* MacroTableDataSource.swift in Sources */,
 				695F5AEE25899FA400AB6BA6 /* TriggerTableDataSource.swift in Sources */,
-				695F5AED25899FA400AB6BA6 /* HotKeyEditor.swift in Sources */,
+				695F5AED25899FA400AB6BA6 /* HotKeyField.swift in Sources */,
 				69C1F0D825A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift in Sources */,
 				695F5AF825899FA400AB6BA6 /* WorldTableDataSource.swift in Sources */,
 				695F5A9825899EBC00AB6BA6 /* World.swift in Sources */,
@@ -1075,6 +1086,7 @@
 				6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */,
 				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */,
+				69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */,
 				69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */,
 				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,
 				69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */,

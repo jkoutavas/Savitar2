@@ -21,6 +21,11 @@ extension NSWindow {
         isReleasedWhenClosed = false
     }
 
+    /// Whether AppKit has a saved frame for `windowFrameAutosaveName` / `setFrameAutosaveName`.
+    static func hasAutosavedFrame(named autosaveName: String) -> Bool {
+        UserDefaults.standard.object(forKey: "NSWindow Frame \(autosaveName)") != nil
+    }
+
     /// Sizes the window to a content area and optionally centers on first display.
     func fitContentSize(_ contentSize: NSSize, centerIfNeeded: Bool) {
         setContentSize(contentSize)
