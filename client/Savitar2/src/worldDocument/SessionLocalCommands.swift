@@ -17,6 +17,8 @@ enum SessionDumpTarget: Equatable {
     case macros
     case triggers
     case worlds
+    case connection
+    case variables
 }
 
 enum SessionWorldFlag: Equatable {
@@ -212,6 +214,10 @@ enum SessionLocalCommands {
                 return .dumpListing(.triggers)
             case "wor":
                 return .dumpListing(.worlds)
+            case "con":
+                return .dumpListing(.connection)
+            case "var":
+                return .dumpListing(.variables)
             default:
                 return .unknown(body: body)
             }

@@ -65,6 +65,12 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("plain-text window"))
     }
 
+    func testTopicHelpForDumpConnectionCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "dump connection")
+        XCTAssertTrue(html.contains("dump connection"))
+        XCTAssertTrue(html.contains("connection state"))
+    }
+
     func testTopicHelpForCommandWithoutDetail() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
         XCTAssertTrue(html.contains("add world"))

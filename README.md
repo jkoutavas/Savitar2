@@ -75,8 +75,8 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Local command ##open text window
 √ Local command ##send window
 _ Local command ##add world
-_ Local command ##dump connection
-_ Local command ##dump variables
+√ Local command ##dump connection
+√ Local command ##dump variables
 _ Local command ##play
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)

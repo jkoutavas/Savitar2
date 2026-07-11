@@ -299,6 +299,10 @@ enum SessionLocalCommandExecutor {
             dumpTriggers(session: session)
         case .worlds:
             dumpWorlds(session: session)
+        case .connection:
+            dumpConnection(session: session)
+        case .variables:
+            dumpVariables(session: session)
         }
     }
 
@@ -369,6 +373,80 @@ enum SessionLocalCommandExecutor {
         }
         output += heading("End of Dump", level: 1)
         info(session, output)
+    }
+
+    private static func dumpConnection(session: Session) {
+        let world = session.world
+        var output = heading("Dump of connection", level: 1)
+        output += dumpField("world", world.name)
+        output += dumpField("address", "\(world.host):\(world.port)")
+        output += dumpField("status", connectionStatusLabel(session.status))
+        output += dumpField("input stream", streamStatusLabel(session.inputStream))
+        output += dumpField("output stream", streamStatusLabel(session.outputStream))
+        output += dumpField("startup command sent", session.didStartupCmd ? "yes" : "no")
+        output += dumpField("retry seconds", String(world.retrySecs))
+        output += dumpField("keep-alive minutes", String(world.keepAliveMins))
+        output += dumpField("command marker", world.cmdMarker)
+        output += dumpField("variable marker", world.varMarker)
+        output += dumpField("wildcard marker", world.wildMarker)
+        output += dumpField("flags", activeWorldFlags(world.flags))
+        output += heading("End of Dump", level: 1)
+        info(session, output)
+    }
+
+    private static func dumpVariables(session: Session) {
+        let marker = session.world.varMarker
+        var output = heading("Dump of all variables", level: 1)
+        let entries = session.world.variableMan.allEntries()
+        if entries.isEmpty {
+            output += emptySectionNotice
+        } else {
+            for entry in entries {
+                output += "    \(marker)\(entry.name) =\"\(entry.value)\"\n"
+            }
+        }
+        output += heading("End of Dump", level: 1)
+        info(session, output)
+    }
+
+    private static func dumpField(_ name: String, _ value: String) -> String {
+        "    \(name) = \"\(value)\"\n"
+    }
+
+    private static func connectionStatusLabel(_ status: ConnectionStatus) -> String {
+        switch status {
+        case .New: return "New"
+        case .BindStart: return "BindStart"
+        case .Binding: return "Binding"
+        case .BindComplete: return "BindComplete"
+        case .ConnectComplete: return "ConnectComplete"
+        case .ConnectRetry: return "ConnectRetry"
+        case .Disconnecting: return "Disconnecting"
+        case .DisconnectComplete: return "DisconnectComplete"
+        case .ReallyCloseWindow: return "ReallyCloseWindow"
+        }
+    }
+
+    private static func streamStatusLabel(_ stream: Stream?) -> String {
+        guard let stream else { return "none" }
+        switch stream.streamStatus {
+        case .notOpen: return "not open"
+        case .opening: return "opening"
+        case .open: return "open"
+        case .reading: return "reading"
+        case .writing: return "writing"
+        case .atEnd: return "at end"
+        case .closed: return "closed"
+        case .error: return "error"
+        @unknown default: return "unknown"
+        }
+    }
+
+    private static func activeWorldFlags(_ flags: WorldFlags) -> String {
+        let active = WorldFlags.labels
+            .filter { flags.contains($0.0) }
+            .map(\.1)
+        return active.isEmpty ? "(none)" : active.joined(separator: ", ")
     }
 
     private static let emptySectionNotice = "    (none)\n"

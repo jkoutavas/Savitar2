@@ -77,6 +77,12 @@ class VariableMan {
         }
     }
 
+    func allEntries() -> [(name: String, value: String)] {
+        variables.keys.sorted().map { key in
+            (key, variables[key] ?? "")
+        }
+    }
+
     func expand(_ text: String, marker: String) -> String {
         guard !marker.isEmpty else { return text }
         guard text.contains(marker) else { return text }

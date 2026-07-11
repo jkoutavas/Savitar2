@@ -816,6 +816,8 @@ These change settings for the **current session's world** immediately (they are 
 | `##dump macros` | App-wide and world macros |
 | `##dump triggers` | App-wide and world triggers |
 | `##dump worlds` | Worlds in the World Picker list |
+| `##dump connection` | Connection state for this session (address, status, streams, flags) |
+| `##dump variables` | Scratch variables for this session (`%%name` values from triggers, `##set macro`, `##regex`) |
 
 Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`. Dump output is safe to read even when **HTML output** is on—the XML is escaped so tags are not swallowed by the WebKit pane.
 

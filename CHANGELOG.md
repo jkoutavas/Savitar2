@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`##upload`** — send a local text file to the connected world as raw bytes (`##upload <file-path>`); Savitar does not parse or interpret the file contents
 - **`##open text window`** — open a new untitled Savitar plain-text window
 - **`##send window`** — append text to a plain-text window by partial title match (`##send window "<title>" <msg>`)
+- **`##dump connection`** / **`##dump variables`** — list session connection state or scratch `%%variables` in the output pane
 - **Pueblo `xch_cmd` links** — `<a xch_cmd="…">` in HTML output becomes a clickable link; clicks send the command to the session (local commands when prefixed with the world marker, otherwise to the server)
 - **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
 - **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
