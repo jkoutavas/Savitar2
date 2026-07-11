@@ -63,7 +63,7 @@ final class ClickerContentViewController: NSViewController {
         captionField.stringValue = text
         let baseFont = NSFont.boldSystemFont(ofSize: Self.scaled(11))
         if text == MacroClicker.undefinedCaption {
-            captionField.font = NSFontManager.shared.convert(baseFont, toHaveTrait: .italicFontMask) ?? baseFont
+            captionField.font = NSFontManager.shared.convert(baseFont, toHaveTrait: .italicFontMask)
         } else {
             captionField.font = baseFont
         }

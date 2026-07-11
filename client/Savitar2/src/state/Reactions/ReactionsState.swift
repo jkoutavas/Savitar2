@@ -8,7 +8,7 @@
 
 import ReSwift
 
-struct ReactionsState: StateType {
+struct ReactionsState {
     var macroList = ItemListState<Macro>()
     var triggerList = ItemListState<Trigger>()
 }

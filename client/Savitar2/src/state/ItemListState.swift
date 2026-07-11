@@ -10,7 +10,7 @@ import ReSwift
 
 typealias SelectionState = Int?
 
-struct ItemListState<T: Equatable>: StateType {
+struct ItemListState<T: Equatable> {
     var items: [T] = []
     var selection: SelectionState = nil
 

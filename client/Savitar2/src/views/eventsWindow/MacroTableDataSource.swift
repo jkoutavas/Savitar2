@@ -47,7 +47,7 @@ extension MacroTableDataSource: NSTableViewDataSource {
 
         if let source = info.draggingSource as? NSTableView, source === tableView {
             // We're moving an item within the same tableview
-            let indexes = items.compactMap { $0.integer(forType: .tableViewIndex) }
+            let indexes = items.compactMap { $0.pasteboardInteger(forType: .tableViewIndex) }
             if !indexes.isEmpty {
                 store?.dispatch(MoveMacroAction(from: indexes[0], to: row))
                 return true

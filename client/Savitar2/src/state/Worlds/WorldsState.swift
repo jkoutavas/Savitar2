@@ -8,7 +8,7 @@
 
 import ReSwift
 
-struct WorldsState: StateType {
+struct WorldsState {
     var worldList = ItemListState<World>()
 }
 

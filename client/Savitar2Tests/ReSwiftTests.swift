@@ -31,11 +31,11 @@ struct Foo: Equatable {
     }
 }
 
-struct TestAppState: StateType {
+struct TestAppState {
     var itemList = ItemListState<Foo>()
 }
 
-struct ItemListState<T: Equatable>: StateType {
+struct ItemListState<T: Equatable> {
     var items: [T]
     var selection: Int?
 
@@ -104,15 +104,15 @@ class ReSwiftTests: XCTestCase {
     }
 }
 
-struct TestAppState2: StateType {
+struct TestAppState2 {
     var subState = SubState()
 }
 
-struct SubState: StateType {
+struct SubState {
     var subsub = SubSubState()
 }
 
-struct SubSubState: StateType {
+struct SubSubState {
     var itemList = ItemListState<Foo>()
 }
 

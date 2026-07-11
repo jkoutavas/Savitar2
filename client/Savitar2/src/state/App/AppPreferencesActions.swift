@@ -83,7 +83,7 @@ struct SetShowClickerAtStartupAction: AppPreferencesAction {
 
 struct RestoreFactoryDefaultsAction: AppPreferencesAction {
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
-        var result = AppPreferencesState()
+        let result = AppPreferencesState()
         do {
             try result.prefs.loadFactoryDefaults()
         } catch {

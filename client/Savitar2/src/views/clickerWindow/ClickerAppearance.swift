@@ -230,10 +230,10 @@ enum ClickerAppearance {
             return font
         }
         if let font = NSFont(name: "Arial-BoldMT", size: size) {
-            return NSFontManager.shared.convert(font, toHaveTrait: .italicFontMask) ?? font
+            return NSFontManager.shared.convert(font, toHaveTrait: .italicFontMask)
         }
         let base = NSFont.boldSystemFont(ofSize: size)
-        return NSFontManager.shared.convert(base, toHaveTrait: .italicFontMask) ?? base
+        return NSFontManager.shared.convert(base, toHaveTrait: .italicFontMask)
     }
 
     /// Tiny per-label rotation (radians) for hand-drawn irregularity.

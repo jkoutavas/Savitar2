@@ -446,7 +446,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard !isApplyingPaneLayout,
               sender.inLiveResize,
               let world = (document as? Document)?.world,
-              let session = contentViewController as? SessionViewController else {
+              contentViewController is SessionViewController else {
             return frameSize
         }
 

@@ -17,7 +17,7 @@ class SavitarObjectPasteboardWriter: NSObject, NSPasteboardWriting {
         self.index = index
     }
 
-    func writableTypes(for _: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    @objc func writableTypes(for _: NSPasteboard) -> [NSPasteboard.PasteboardType] {
         return []
     }
 
@@ -45,7 +45,7 @@ extension NSPasteboard.PasteboardType {
 }
 
 extension NSPasteboardItem {
-    open func integer(forType type: NSPasteboard.PasteboardType) -> Int? {
+    func pasteboardInteger(forType type: NSPasteboard.PasteboardType) -> Int? {
         guard let data = data(forType: type) else { return nil }
         let plist = try? PropertyListSerialization.propertyList(
             from: data,
