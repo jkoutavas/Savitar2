@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Resolution overlay** — yellow variable-resolution box no longer sticks when the app is backgrounded, the window loses key, split-pane resize ends (mouse-up), or window live resize ends
 - **HTML bold/strong** — `<strong>` / `<b>` and welcome title render bold despite the global output stylesheet `font` shorthand
 - **Session restoration** — closing a world document before quitting no longer causes it to reopen on relaunch; prefs now persist the live open-document list (#92)
+- **World Settings → Output** — log file picker opens as a sheet on the settings window; logging creates the log file when the path does not exist yet; log files use Unix line endings and plain text (ANSI stripped, HTML tags removed); session line splitting preserves source newlines so later output does not collapse the log into one line
 
 ## [2.0.22] - 2026-07-11
 

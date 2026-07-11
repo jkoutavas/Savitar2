@@ -121,7 +121,7 @@ class OutputView: WKWebView {
 
         var plainText: String?
         if let fh = loggingFileHandle {
-            plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
+            plainText = plainTextForLogging(displayString)
             if let text = plainText, let data = text.data(using: String.Encoding.utf8) {
                 fh.write(data)
             }
@@ -404,26 +404,44 @@ class OutputView: WKWebView {
         #endif
     }
 
+    private func plainTextForLogging(_ displayString: String) -> String {
+        let normalized = displayString
+            .replacingOccurrences(of: "\r\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: "\n")
+        var text = ansiToHtml.parse(ansi: normalized, hideANSI: true)
+        if text.contains("<") {
+            let wrapped = "<!DOCTYPE html><html><body>\(text)</body></html>"
+            if let plain = wrapped.html2AttributedString {
+                text = plain
+            }
+        }
+        return text
+    }
+
     func setLogging(world: World) {
         if loggingFileHandle != nil {
             loggingFileHandle!.closeFile()
             loggingFileHandle = nil
         }
-        if world.logfilePath.count > 0 && world.loggingEnabled.boolValue {
-            let url = URL(fileURLWithPath: world.logfilePath)
-            if FileManager.default.fileExists(atPath: url.path) {
-                if let fh = try? FileHandle(forWritingTo: url) {
-                    if world.loggingType == .append {
-                        fh.seekToEndOfFile()
-                        loggingFileHandle = fh
-                    } else {
-                        fh.truncateFile(atOffset: 0)
-                        fh.closeFile()
-                        loggingFileHandle = try? FileHandle(forWritingTo: url)
-                    }
-                }
-            }
+        guard world.logfilePath.count > 0, world.loggingEnabled.boolValue else { return }
+
+        let path = world.logfilePath
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: path) {
+            let url = URL(fileURLWithPath: path)
+            try? fileManager.createDirectory(at: url.deletingLastPathComponent(),
+                                              withIntermediateDirectories: true)
+            guard fileManager.createFile(atPath: path, contents: nil) else { return }
         }
+
+        let url = URL(fileURLWithPath: path)
+        guard let fh = try? FileHandle(forWritingTo: url) else { return }
+        if world.loggingType == .append {
+            fh.seekToEndOfFile()
+        } else {
+            fh.truncateFile(atOffset: 0)
+        }
+        loggingFileHandle = fh
     }
 
     func run(javaScript: String) {

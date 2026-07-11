@@ -356,9 +356,10 @@ class Trigger: SavitarObject, NSCopying {
                     }
                 } else if let style = self.style, appearance == .changeAppearance {
                     let content = line[range]
-                    if content.hasSuffix("\r") {
-                        // Close-off trigger appearance styling before the carriage return
-                        resultLine += style.on + content.dropLast() + style.off + "\r"
+                    if content.hasSuffix("\r") || content.hasSuffix("\n") {
+                        let suffix = content.suffix(1)
+                        // Close-off trigger appearance styling before the line ending
+                        resultLine += style.on + content.dropLast() + style.off + suffix
                     } else {
                         resultLine += style.on + content + style.off
                     }
