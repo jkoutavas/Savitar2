@@ -172,8 +172,8 @@ Opens app Settings → **Colors** pane (v1 `EditColors()` consolidated into Sett
 
 | Item | Shortcut | Behavior |
 |------|----------|----------|
-| **Find…** | ⌘F | Input: system find panel. Output: find bar above output |
-| **Find Next** | ⌘G | Continue in focused pane |
+| **Find…** | ⌘F | Input: system find panel. Output and Savitar Help: find bar above content |
+| **Find Next** | ⌘G | Continue in focused pane or help window |
 | **Find Previous** | ⌘⇧G | Search backward |
 | **Use Selection for Find** | ⌘E | Seed find string from selection |
 
@@ -216,7 +216,7 @@ Savitar does **not** use tabbed document windows: `NSWindow.allowsAutomaticWindo
 
 | Item | Shortcut | Behavior |
 |------|----------|----------|
-| **Savitar Help** | ⌘? | Bundled guide in `HelpGuideWindowController` + `WKWebView` (offline) |
+| **Savitar Help** | ⌘? | Bundled guide in `HelpGuideWindowController` + `WKWebView` (offline); Edit → Find works in the guide |
 | **Savitar Guide on the Web…** | — | GitHub `USER_GUIDE.md` (interim) |
 | **Send Feedback…** | — | `mailto:` to support address with pre-filled version info and prompts; clipboard fallback if Mail is unavailable |
 | **About Privacy…** | — | Savitar Help at `#privacy`; web copy at [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) |

@@ -219,6 +219,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
             return
         }
 
+        if HelpGuideWindowController.shared.isHelpWindow(window) {
+            HelpGuideWindowController.shared.performFindPanelAction(menuItem)
+            return
+        }
+
         guard let outputVC = sessionViewController(for: window)?.outputViewController else { return }
         outputVC.performFindPanelAction(menuItem)
     }
@@ -250,6 +255,7 @@ extension AppDelegate: NSMenuItemValidation {
 
     private func canPerformFind(in window: NSWindow?) -> Bool {
         guard window != nil else { return false }
+        if HelpGuideWindowController.shared.isHelpWindow(window) { return true }
         if sessionViewController(for: window) != nil { return true }
         if window?.firstResponder is NSTextView { return true }
         return false

@@ -205,7 +205,8 @@ CA
                                                             <action selector="performFindAction:" target="Voe-Tx-rLC" id="NDo-RZ-v9R"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="OwM-mh-QMV">
+                                                    <menuItem title="Find Previous" tag="3" keyEquivalent="g" id="OwM-mh-QMV">
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="performFindAction:" target="Voe-Tx-rLC" id="HOh-sY-3ay"/>
                                                         </connections>
@@ -213,11 +214,6 @@ CA
                                                     <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="buJ-ug-pKt">
                                                         <connections>
                                                             <action selector="performFindAction:" target="Voe-Tx-rLC" id="U76-nv-p5D"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Jump to Selection" keyEquivalent="j" id="S0p-oC-mLd">
-                                                        <connections>
-                                                            <action selector="centerSelectionInVisibleArea:" target="Ady-hI-5gd" id="IOG-6D-g5B"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>

@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Savitar Help** — Edit → Find… / Find Next / Find Previous / Use Selection for Find work in the bundled user guide (find bar above the help web view)
+- **Help book** — fenced Markdown code blocks (` ```text `) render as monospace `<pre>` sections instead of showing raw backticks
+- **Edit menu** — removed **Jump to Selection** (⌘J); little use in Savitar and did not apply to session output or help
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
 - **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, and `##send window`
 

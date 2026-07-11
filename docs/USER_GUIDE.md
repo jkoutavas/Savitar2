@@ -50,7 +50,7 @@ Official builds are **free downloads** from [GitHub Releases](https://github.com
 
 The session window has separate **output** (top) and **input** (bottom) panes. Resize them by dragging the window corner or the split divider—see [Session window](#session-window).
 
-**Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline.
+**Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline. Use **Edit → Find…** (⌘F) to search within the guide.
 
 **Contextual help:** Major windows show a **?** that opens this guide to the relevant section — **World Picker**, **world session window**, **Events**, **Settings** (per toolbar pane), and **World Settings** (per tab, top-right of the sheet).
 
@@ -404,7 +404,6 @@ The in-game `@printsource` command is separate: it is a debug/logging action, no
 | **Find Next** | ⌘G | Jumps to the next match. |
 | **Find Previous** | ⇧⌘G | Jumps to the previous match. |
 | **Use Selection for Find** | ⌘E | Copies the current selection into the find string. |
-| **Jump to Selection** | ⌘J | Scrolls the focused text view so the selection is visible. |
 | **Speech → Speak Selected Text** | — | Speaks the selected text in the input or output pane. See the [Speech](#speech) chapter. |
 
 #### Find
@@ -415,8 +414,9 @@ Find behavior depends on which pane is active in a world document:
 |-------------|---------|-------|
 | **Input** | Standard macOS find panel | Full keyboard navigation (⌘F, ⌘G, ⌘⇧G). |
 | **Output** | Find bar above the output pane | Same menu commands; search runs in the session output (HTML content is searched as plain text). |
+| **Savitar Help** | Find bar above the guide | Same menu commands (⌘F, ⌘G, ⇧⌘G, ⌘E); search runs in the bundled user guide. |
 
-Find is available when a world document window is frontmost, or when any text view in the app has focus.
+Find is available when a world document window is frontmost, when **Savitar Help** is frontmost, or when any text view in the app has focus.
 
 ### World menu
 
@@ -1224,7 +1224,7 @@ The same policy is published on the web at [heynow.com/savitar/privacy](https://
 
 ## Getting help
 
-1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline).
+1. **Savitar Help** — **Help → Savitar Help** (⌘?) opens this guide inside the app (works offline). **Edit → Find…** (⌘F), **Find Next** (⌘G), and **Find Previous** (⇧⌘G) search the guide while its window is frontmost.
 2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
 3. **Privacy on the web** — [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) mirrors the in-app disclosure.
 4. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
