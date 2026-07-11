@@ -193,18 +193,17 @@ class Session: NSObject, StreamDelegate {
         guard !world.cmdMarker.isEmpty else { return false }
         guard trimmedCmd.hasPrefix(world.cmdMarker) else { return false }
 
-        let localCmd = trimmedCmd.dropFirst(world.cmdMarker.count)
-        guard let commandName = localCmd.split(separator: " ").first?.lowercased() else {
-            localCommandOutput("Unknown local command: \(trimmedCmd)\n")
-            return true
-        }
-
-        switch commandName {
-        case "dump":
+        let localCmd = String(trimmedCmd.dropFirst(world.cmdMarker.count))
+        switch SessionLocalCommands.parse(localCmd) {
+        case .dump:
             sessionHandler.printSource()
-        case "history":
+        case .history:
             localCommandOutput(commandHistoryText())
-        default:
+        case let .setStatus(pane, message):
+            sessionHandler.setSessionStatus(pane: pane, text: message)
+        case .closeStats:
+            sessionHandler.closeSessionStatusBars()
+        case .unknown:
             localCommandOutput("Unknown local command: \(trimmedCmd)\n")
         }
         return true

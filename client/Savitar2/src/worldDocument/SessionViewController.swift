@@ -58,4 +58,23 @@ class SessionViewController: NSSplitViewController {
     func setScrollLocked(_ locked: Bool) {
         outputViewController?.setScrollLocked(locked)
     }
+
+    func setStatus(pane: SessionStatusPane, text: String) {
+        switch pane {
+        case .output:
+            outputViewController?.setStatusText(text)
+        case .input:
+            inputViewController?.setStatusText(text)
+        }
+    }
+
+    func clearStatusBars() {
+        outputViewController?.clearStatusText()
+        inputViewController?.clearStatusText()
+    }
+
+    func applyStatusBarStyle(world: World) {
+        outputViewController?.applyStatusBarStyle(world: world)
+        inputViewController?.applyStatusBarStyle(world: world)
+    }
 }

@@ -13,9 +13,12 @@ class OutputViewController: OutputViewNavigationDelegate {
     private var makeAppend = false
     private var lastAppendID = 0
 
+    private let statusBar = SessionStatusBarView()
     private let findBar = NSView()
     private let findSearchField = NSSearchField()
     private var findBarHeightConstraint: NSLayoutConstraint!
+    private var outputTopToFindConstraint: NSLayoutConstraint!
+    private var outputTopToStatusConstraint: NSLayoutConstraint!
     private var findEscapeMonitor: Any?
 
     lazy var outputView: OutputView = {
@@ -43,12 +46,18 @@ class OutputViewController: OutputViewNavigationDelegate {
         super.viewDidLoad()
 
         setupFindBar()
+        view.addSubview(statusBar)
         view.addSubview(outputView)
+        outputTopToStatusConstraint = outputView.topAnchor.constraint(equalTo: statusBar.bottomAnchor)
+        outputTopToFindConstraint = outputView.topAnchor.constraint(equalTo: findBar.bottomAnchor)
         NSLayoutConstraint.activate([
-            findBar.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBar.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            findBar.topAnchor.constraint(equalTo: statusBar.bottomAnchor),
             findBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             findBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            outputView.topAnchor.constraint(equalTo: findBar.bottomAnchor),
+            outputTopToStatusConstraint,
             outputView.leftAnchor.constraint(equalTo: view.leftAnchor),
             outputView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             outputView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -88,7 +97,20 @@ class OutputViewController: OutputViewNavigationDelegate {
     }
 
     func setStyle(world: World) {
+        statusBar.apply(world: world)
         outputView.setStyle(world: world)
+    }
+
+    func applyStatusBarStyle(world: World) {
+        statusBar.apply(world: world)
+    }
+
+    func setStatusText(_ text: String) {
+        statusBar.setText(text)
+    }
+
+    func clearStatusText() {
+        statusBar.clear()
     }
 
     func setLogging(world: World) {
@@ -172,6 +194,7 @@ class OutputViewController: OutputViewNavigationDelegate {
 
     private func setupFindBar() {
         findBar.translatesAutoresizingMaskIntoConstraints = false
+        findBar.clipsToBounds = true
         findBar.isHidden = true
         view.addSubview(findBar)
 
@@ -194,6 +217,8 @@ class OutputViewController: OutputViewNavigationDelegate {
     private func showFindBar(focus: Bool) {
         findBar.isHidden = false
         findBarHeightConstraint.constant = 28
+        outputTopToStatusConstraint.isActive = false
+        outputTopToFindConstraint.isActive = true
         if let findString = NSPasteboard(name: .find).string(forType: .string), !findString.isEmpty {
             findSearchField.stringValue = findString
         }
@@ -206,6 +231,8 @@ class OutputViewController: OutputViewNavigationDelegate {
     private func hideFindBar() {
         findBar.isHidden = true
         findBarHeightConstraint.constant = 0
+        outputTopToFindConstraint.isActive = false
+        outputTopToStatusConstraint.isActive = true
         removeFindEscapeMonitor()
         view.window?.makeFirstResponder(outputView)
     }
