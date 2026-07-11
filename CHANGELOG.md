@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.22] - 2026-07-11
+
 ### Added
 
 - **Events window HIG** — close-only utility chrome, center on first open, shared `EventsWindowController` for app-wide and per-world Events windows (Story 6)
@@ -155,7 +157,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.21...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.22...HEAD
+[2.0.22]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.22
 [2.0.21]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.21
 [2.0.20]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.20
 [2.0.19]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.19
