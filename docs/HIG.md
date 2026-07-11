@@ -100,7 +100,7 @@ Triggers, macros, and (when shipped) aliases. Universal (app-wide) and per-world
 | Frame autosave | `EventsWindowFrame` | Revisit center-on-first-open vs restore ([Story 6](Stories.md#story-6--events-window-hig-audit)) |
 | Resize chrome | Minimize + resize with fixed min=max | Enable sensible resize **or** close-only — no fake resize ([Story 6](Stories.md#story-6--events-window-hig-audit)) |
 | **Window** menu listing when open | TBD | [Story 6](Stories.md#story-6--events-window-hig-audit) |
-| Section collapse ↔ prefs (`trigsClosed` / `varsClosed`) | TBD | [Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior) |
+| v1 outline disclosure (`trigsClosed` / `varsClosed`) | N/A — import-only | **Won't do** — v2 uses separate universal/per-world Events windows with flat lists ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
 
 Touchpoints: `EventsWindow.storyboard`, `AppContext.showUniversalEventsWindow`, per-world `WindowController`.
 

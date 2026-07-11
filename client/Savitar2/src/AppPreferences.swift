@@ -26,6 +26,7 @@ struct PrefsFlags: OptionSet {
     static let muteBell = PrefsFlags(rawValue: 1 << 5)
     static let startupClicker = PrefsFlags(rawValue: 1 << 6)
     static let useKeypad = PrefsFlags(rawValue: 1 << 7)
+    /// v1 Events outline disclosure (Universal / per-world groups). Import-only in v2 — no UI uses these flags.
     static let trigsClosed = PrefsFlags(rawValue: 1 << 8)
     static let varsClosed = PrefsFlags(rawValue: 1 << 9)
     static let debug = PrefsFlags(rawValue: 1 << 10)

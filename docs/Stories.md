@@ -62,7 +62,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **Goal:** Flags that exist in XML but do nothing today actually affect the app.
 
-**Status:** Partially complete — keypad, mono fonts, mute bell, and default word wrap are wired; clicker remains.
+**Status:** Partially complete — keypad, mono fonts, mute bell, and default word wrap are wired; clicker remains. `trigsClosed` / `varsClosed` are import-only ([2.6](#story-2--wire-preference-flags-to-behavior) won't do).
 
 ### Tasks
 
@@ -71,7 +71,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`). *v2.0 scope: v1 pref parity only; per-session toggle and live updates → [Story 20](#story-20--session-word-wrap-v21)*
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
 - [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists (Story 11)
-- [ ] **2.6** **Events window sections** — wire `trigsClosed` / `varsClosed` to Events window UI state (stretch; not in main prefs window)
+- [x] **2.6** **`trigsClosed` / `varsClosed`** — **won't do.** In v1 these flags remembered whether **Universal** and **per-world** outline groups were collapsed in a single Events table (Triggers tab and Macros tab each had disclosure triangles for every connected world). v2 splits that into a **universal** Events window and **per-document** Events windows, each a flat trigger/macro list with no outline groups — window choice replaces group collapse. Flags stay in `PrefsFlags` so v1 prefs XML still loads; no behavior to wire.
 
 ### Touchpoints
 
@@ -85,7 +85,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 ### Acceptance
 
-- Each flag has at least one observable effect when toggled (except blocked items)
+- Each flag has at least one observable effect when toggled (except blocked items and import-only flags: `trigsClosed`, `varsClosed` — [2.6](#story-2--wire-preference-flags-to-behavior) won't do)
 
 ---
 
@@ -211,7 +211,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [ ] **6.3** **First open** — center on screen; evaluate whether frame autosave (`EventsWindowFrame`) should stay or only restore position
 - [x] **6.4** **Window menu** — Events appears in **Window** menu when open and is reachable via **Show App-wide Events Window** (⇧⌘E); completed with [Story 25](#story-25--window-menu-hig-audit)
 - [ ] **6.5** **Per-world Events** — audit `WindowController.swift` per-document Events windows for same chrome/behavior as universal window
-- [ ] **6.6** **Story 2.6** — wire `trigsClosed` / `varsClosed` prefs to Events split-view section collapse state
+- [x] **6.6** **`trigsClosed` / `varsClosed`** — **won't do** (same rationale as [2.6](#story-2--wire-preference-flags-to-behavior)); Events layout persistence is **frame autosave** (`EventsWindowFrame`), not section-collapse prefs
 
 ### Touchpoints
 
@@ -224,7 +224,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 - Events window behavior is documented and consistent (universal + per-world)
 - No disabled resize affordances; chrome matches documented intent
-- Section open/closed state persists via prefs (2.6)
+- Frame position/size persists via `EventsWindowFrame` autosave (not v1 outline-collapse prefs — [2.6](#story-2--wire-preference-flags-to-behavior) won't do)
 
 ---
 
@@ -315,7 +315,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [ ] **24.3** **Export preferences…** — write current `Savitar2 Prefs` XML to a user-chosen file (backup / support)
 - [ ] **24.4** **Import preferences…** — load a previously exported Savitar 2 prefs file
 - [ ] **24.5** **Capture file editor** — `logEditorName` app pref UI when session logging / external editor ships (v1: `DoPreferences` capture editor field)
-- [ ] **24.6** **Events section defaults** — expose or wire `trigsClosed` / `varsClosed` when [Story 2.6](#story-2--wire-preference-flags-to-behavior) / [Story 6.6](#story-6--events-window-hig-audit) land (Events window UI, not a separate prefs dialog)
+- [x] **24.6** **`trigsClosed` / `varsClosed`** — **won't do**; no Advanced-pane UI or wiring — see [2.6](#story-2--wire-preference-flags-to-behavior)
 
 ### Touchpoints
 
@@ -1270,10 +1270,10 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 11. ~~Story 18 — Help → About Privacy~~ ✅
 12. ~~Story 15 — Send Feedback (email)~~ ✅
 13. ~~**Story 21 — About box with scrolling credits**~~ ✅
-14. **Story 2** — *in progress* (remaining: 2.5 clicker, 2.6 Events sections)
+14. **Story 2** — *in progress* (remaining: 2.5 clicker; 2.6 won't do)
 15. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
-16. Story 6 — Events Window HIG
-17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; import/export, v1 re-import, log editor deferred)
+16. Story 6 — Events Window HIG (6.6 won't do)
+17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; 24.6 won't do; import/export, v1 re-import, log editor deferred)
 18. ~~**Story 25 — Window menu HIG audit**~~ ✅ — tab bar removal, **Show World Picker**, window list hygiene
 19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
 20. Story 10 — Command aliases
@@ -1306,3 +1306,4 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Mute clicker | `muteClicker` | UI only (grayed out) |
 | Check for updates | `updatingEnabled` | Done — Story 12 |
 | Capture file editor | `logEditorName` | Deferred — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |
+| Events outline disclosure (v1 only) | `trigsClosed`, `varsClosed` | Import-only — won't do ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
