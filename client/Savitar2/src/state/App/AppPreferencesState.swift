@@ -8,7 +8,7 @@
 
 import ReSwift
 
-struct AppPreferencesState: StateType {
+struct AppPreferencesState {
     var prefs = AppPreferences()
 }
 

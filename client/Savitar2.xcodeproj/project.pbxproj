@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		69000EE22397CF09009976E0 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EE12397CF09009976E0 /* AppContext.swift */; };
-		69D2600B2F09010000AB6BA6 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2600A2F09010000AB6BA6 /* AppAppearance.swift */; };
 		69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3823A52A7B001C58B1 /* TriggerManTests.swift */; };
 		69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */; };
 		69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */; };
@@ -78,7 +77,6 @@
 		695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */; };
 		695F5AF125899FA400AB6BA6 /* DetailsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */; };
 		695F5AF225899FA400AB6BA6 /* EventsContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD825899FA400AB6BA6 /* EventsContentViewController.swift */; };
-		69E660082F0A100100AB6BA6 /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660072F0A100100AB6BA6 /* EventsWindowController.swift */; };
 		695F5AF325899FA400AB6BA6 /* TitledTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */; };
 		695F5AF425899FA400AB6BA6 /* CheckableTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */; };
 		695F5AF525899FA400AB6BA6 /* WorldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */; };
@@ -109,22 +107,6 @@
 		695F5B502592E64E00AB6BA6 /* WorldWizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695F5B4E2592E64E00AB6BA6 /* WorldWizard.storyboard */; };
 		695F5B532592E71000AB6BA6 /* WorldWizardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5B522592E71000AB6BA6 /* WorldWizardController.swift */; };
 		69652A9B26443E4B0044877A /* OutputSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69652A9A26443E4B0044877A /* OutputSettingsController.swift */; };
-		69C250022F08000100AB6BA6 /* ClosingSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */; };
-		69C250042F08000200AB6BA6 /* WorldSettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */; };
-		69C250062F08000300AB6BA6 /* WorldSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250052F08000300AB6BA6 /* WorldSettingsWindowController.swift */; };
-		69C250082F08000400AB6BA6 /* WorldPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */; };
-		69C2500A2F08010000AB6BA6 /* WorldPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */; };
-		69C2500C2F08020000AB6BA6 /* AdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */; };
-		69MC00112F0B010100AB6BA6 /* ClickerSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */; };
-		69MC00212F0B010200AB6BA6 /* ClickerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00202F0B010200AB6BA6 /* ClickerMan.swift */; };
-		69MC00312F0B010300AB6BA6 /* MacroClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00302F0B010300AB6BA6 /* MacroClicker.swift */; };
-		69MC00412F0B010400AB6BA6 /* ClickerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */; };
-		69MC00512F0B010500AB6BA6 /* ClickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */; };
-		69MC00B12F0B010800AB6BA6 /* ClickerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */; };
-		69MC00C12F0B010900AB6BA6 /* ClickerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */; };
-		69MC00612F0B010600AB6BA6 /* Clicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69MC00602F0B010600AB6BA6 /* Clicker.storyboard */; };
-		69MC00812F0B010700AB6BA6 /* ClickerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */; };
-		69MC00922F0B010A00AB6BA6 /* MacroClickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */; };
 		69662B2D204367BD00E7CC7B /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */; };
 		69662B2E204367BD00E7CC7B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B25204367BD00E7CC7B /* String+Extensions.swift */; };
 		69662B2F204367BD00E7CC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69662B26204367BD00E7CC7B /* AppDelegate.swift */; };
@@ -140,17 +122,11 @@
 		699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */; };
 		69A45B012A7F100100CDDE09 /* WindowRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B002A7F100100CDDE09 /* WindowRestoration.swift */; };
 		69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */; };
-		69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */; };
-		69E6600C2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */; };
+		69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABT022043A6E100E7CC7C /* AboutWindowController.swift */; };
 		69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A012A80100100CDDE09 /* InputEditingKeys.swift */; };
 		69B46A062A80100100CDDE09 /* TerminalBell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A022A80100100CDDE09 /* TerminalBell.swift */; };
 		69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */; };
 		69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A042A80100100CDDE09 /* TerminalBellTests.swift */; };
-		69C2A0022F03000100AB6BA6 /* WordWrapFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */; };
-		69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */; };
-		69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */; };
-		69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */; };
-		69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */; };
 		69BE3EAF24FC41C30035CF88 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAD24FC41C30035CF88 /* AppIcon.icns */; };
 		69BE3EB024FC41C30035CF88 /* World.icns in Resources */ = {isa = PBXBuildFile; fileRef = 69BE3EAE24FC41C30035CF88 /* World.icns */; };
 		69C1F0D225A3E5480048A739 /* AppPreferencesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */; };
@@ -158,28 +134,52 @@
 		69C1F0D825A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D725A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift */; };
 		69C1F0DA25A3E8A90048A739 /* AppPreferencesUndoContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0D925A3E8A90048A739 /* AppPreferencesUndoContext.swift */; };
 		69C1F0DC25A4A9F60048A739 /* SpeechPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */; };
+		69C250022F08000100AB6BA6 /* ClosingSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */; };
+		69C250042F08000200AB6BA6 /* WorldSettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */; };
+		69C250062F08000300AB6BA6 /* WorldSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250052F08000300AB6BA6 /* WorldSettingsWindowController.swift */; };
+		69C250082F08000400AB6BA6 /* WorldPickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */; };
+		69C2500A2F08010000AB6BA6 /* WorldPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */; };
+		69C2500C2F08020000AB6BA6 /* AdvancedSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */; };
+		69C2A0022F03000100AB6BA6 /* WordWrapFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */; };
+		69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */; };
+		69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */; };
+		69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */; };
+		69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
 		69CEEDD123B3EEA700E9F087 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD023B3EEA700E9F087 /* MacroTests.swift */; };
 		69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD723B4064D00E9F087 /* ColorManTests.swift */; };
 		69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD923B4078400E9F087 /* SavColorTests.swift */; };
 		69CEEDE623C2A07B00E9F087 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */; };
 		69CEEDF323D6213900E9F087 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69CEEDF223D6213900E9F087 /* ReSwift */; };
+		69D2600B2F09010000AB6BA6 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2600A2F09010000AB6BA6 /* AppAppearance.swift */; };
 		69D6E5EF24B203CB00058D70 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 69D6E5EE24B203CB00058D70 /* SwiftyXMLParser */; };
 		69E1A1012A535A900736894 /* AppSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1A1022A535A900736894 /* AppSettingsWindowController.swift */; };
+		69E660082F0A100100AB6BA6 /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660072F0A100100AB6BA6 /* EventsWindowController.swift */; };
+		69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */; };
+		69E6600C2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */; };
 		69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 69E7SPK124B203CB00058D01 /* Sparkle */; };
 		69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */; };
-		69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */; };
-		69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP012043A6E100E7CC7C /* SavitarHelp.swift */; };
-		69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */; };
-		69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABT022043A6E100E7CC7C /* AboutWindowController.swift */; };
-		69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */; };
-		69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */; };
-		69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */; };
-		69HLP062043A6E100E7CC7C /* Savitar.help in Resources */ = {isa = PBXBuildFile; fileRef = 69HLP032043A6E100E7CC7C /* Savitar.help */; };
-		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
 		69F620DF204B86E700301A8D /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */; };
 		69F620E1204B872400301A8D /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F620E0204B872400301A8D /* CGFloat+Extensions.swift */; };
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
+		69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */; };
+		69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */; };
+		69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP012043A6E100E7CC7C /* SavitarHelp.swift */; };
+		69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */; };
+		69HLP062043A6E100E7CC7C /* Savitar.help in Resources */ = {isa = PBXBuildFile; fileRef = 69HLP032043A6E100E7CC7C /* Savitar.help */; };
+		69HLP092043A6E100E7CC7C /* SavitarHelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */; };
+		69MC00112F0B010100AB6BA6 /* ClickerSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */; };
+		69MC00212F0B010200AB6BA6 /* ClickerMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00202F0B010200AB6BA6 /* ClickerMan.swift */; };
+		69MC00312F0B010300AB6BA6 /* MacroClicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00302F0B010300AB6BA6 /* MacroClicker.swift */; };
+		69MC00412F0B010400AB6BA6 /* ClickerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */; };
+		69MC00512F0B010500AB6BA6 /* ClickerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */; };
+		69MC00612F0B010600AB6BA6 /* Clicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69MC00602F0B010600AB6BA6 /* Clicker.storyboard */; };
+		69MC00812F0B010700AB6BA6 /* ClickerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */; };
+		69MC00922F0B010A00AB6BA6 /* MacroClickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */; };
+		69MC00B12F0B010800AB6BA6 /* ClickerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */; };
+		69MC00C12F0B010900AB6BA6 /* ClickerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */; };
+		69TDSPK224B203CB00058D02 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 69TDSPK124B203CB00058D01 /* TelemetryDeck */; };
+		69TDSPK324B203CB00058D03 /* SavitarTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */; };
 		AAAA0001000000000000BBB1 /* AnsiPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0001000000000000AAA1 /* AnsiPalette.swift */; };
 		AAAA0002000000000000BBB2 /* ColorsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA0002000000000000AAA2 /* ColorsSettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -203,7 +203,6 @@
 
 /* Begin PBXFileReference section */
 		69000EE12397CF09009976E0 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
-		69D2600A2F09010000AB6BA6 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		69071B3823A52A7B001C58B1 /* TriggerManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManTests.swift; sourceTree = "<group>"; };
 		69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyXMLParserTests.swift; sourceTree = "<group>"; };
 		69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XMLElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -278,7 +277,6 @@
 		695F5AD625899FA400AB6BA6 /* TriggerAppearanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerAppearanceViewController.swift; sourceTree = "<group>"; };
 		695F5AD725899FA400AB6BA6 /* DetailsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTabViewController.swift; sourceTree = "<group>"; };
 		695F5AD825899FA400AB6BA6 /* EventsContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsContentViewController.swift; sourceTree = "<group>"; };
-		69E660072F0A100100AB6BA6 /* EventsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
 		695F5AD925899FA400AB6BA6 /* TitledTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADA25899FA400AB6BA6 /* CheckableTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckableTableCellView.swift; sourceTree = "<group>"; };
 		695F5ADC25899FA400AB6BA6 /* WorldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldViewModel.swift; sourceTree = "<group>"; };
@@ -309,22 +307,6 @@
 		695F5B4F2592E64E00AB6BA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorldWizard.storyboard; sourceTree = "<group>"; };
 		695F5B522592E71000AB6BA6 /* WorldWizardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldWizardController.swift; sourceTree = "<group>"; };
 		69652A9A26443E4B0044877A /* OutputSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputSettingsController.swift; sourceTree = "<group>"; };
-		69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingSettingsController.swift; sourceTree = "<group>"; };
-		69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsTabViewController.swift; sourceTree = "<group>"; };
-		69C250052F08000300AB6BA6 /* WorldSettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsWindowController.swift; sourceTree = "<group>"; };
-		69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerWindowController.swift; sourceTree = "<group>"; };
-		69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerContentView.swift; sourceTree = "<group>"; };
-		69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsViewController.swift; sourceTree = "<group>"; };
-		69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerSlot.swift; sourceTree = "<group>"; };
-		69MC00202F0B010200AB6BA6 /* ClickerMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerMan.swift; sourceTree = "<group>"; };
-		69MC00302F0B010300AB6BA6 /* MacroClicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClicker.swift; sourceTree = "<group>"; };
-		69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerContentViewController.swift; sourceTree = "<group>"; };
-		69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindowController.swift; sourceTree = "<group>"; };
-		69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerAppearance.swift; sourceTree = "<group>"; };
-		69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindow.swift; sourceTree = "<group>"; };
-		69MC00602F0B010600AB6BA6 /* Clicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Clicker.storyboard; path = Base.lproj/Clicker.storyboard; sourceTree = "<group>"; };
-		69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerManTests.swift; sourceTree = "<group>"; };
-		69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClickerTests.swift; sourceTree = "<group>"; };
 		69662B24204367BD00E7CC7B /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		69662B25204367BD00E7CC7B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		69662B26204367BD00E7CC7B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -341,17 +323,11 @@
 		699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrefsViewController.swift; sourceTree = "<group>"; };
 		69A45B002A7F100100CDDE09 /* WindowRestoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestoration.swift; sourceTree = "<group>"; };
 		69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRestorationTests.swift; sourceTree = "<group>"; };
-		69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowControllerTests.swift; sourceTree = "<group>"; };
-		69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+SavitarFormField.swift"; sourceTree = "<group>"; };
+		69ABT022043A6E100E7CC7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		69B46A012A80100100CDDE09 /* InputEditingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeys.swift; sourceTree = "<group>"; };
 		69B46A022A80100100CDDE09 /* TerminalBell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBell.swift; sourceTree = "<group>"; };
 		69B46A032A80100100CDDE09 /* InputEditingKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEditingKeysTests.swift; sourceTree = "<group>"; };
 		69B46A042A80100100CDDE09 /* TerminalBellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalBellTests.swift; sourceTree = "<group>"; };
-		69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormatting.swift; sourceTree = "<group>"; };
-		69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormattingTests.swift; sourceTree = "<group>"; };
-		69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensions.swift; sourceTree = "<group>"; };
-		69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionOverlay.swift; sourceTree = "<group>"; };
-		69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensionsTests.swift; sourceTree = "<group>"; };
 		69BE3EAD24FC41C30035CF88 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		69BE3EAE24FC41C30035CF88 /* World.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = World.icns; sourceTree = "<group>"; };
 		69C1F0D125A3E5480048A739 /* AppPreferencesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesStore.swift; sourceTree = "<group>"; };
@@ -359,24 +335,48 @@
 		69C1F0D725A3E70B0048A739 /* AppPreferencesUndoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesUndoMiddleware.swift; sourceTree = "<group>"; };
 		69C1F0D925A3E8A90048A739 /* AppPreferencesUndoContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesUndoContext.swift; sourceTree = "<group>"; };
 		69C1F0DB25A4A9F60048A739 /* SpeechPrefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechPrefsViewController.swift; sourceTree = "<group>"; };
+		69C250012F08000100AB6BA6 /* ClosingSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosingSettingsController.swift; sourceTree = "<group>"; };
+		69C250032F08000200AB6BA6 /* WorldSettingsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsTabViewController.swift; sourceTree = "<group>"; };
+		69C250052F08000300AB6BA6 /* WorldSettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldSettingsWindowController.swift; sourceTree = "<group>"; };
+		69C250072F08000400AB6BA6 /* WorldPickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerWindowController.swift; sourceTree = "<group>"; };
+		69C250092F08010000AB6BA6 /* WorldPickerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldPickerContentView.swift; sourceTree = "<group>"; };
+		69C2500B2F08020000AB6BA6 /* AdvancedSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsViewController.swift; sourceTree = "<group>"; };
+		69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormatting.swift; sourceTree = "<group>"; };
+		69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWrapFormattingTests.swift; sourceTree = "<group>"; };
+		69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensions.swift; sourceTree = "<group>"; };
+		69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionOverlay.swift; sourceTree = "<group>"; };
+		69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensionsTests.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
 		69CEEDD023B3EEA700E9F087 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		69CEEDD723B4064D00E9F087 /* ColorManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManTests.swift; sourceTree = "<group>"; };
 		69CEEDD923B4078400E9F087 /* SavColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavColorTests.swift; sourceTree = "<group>"; };
 		69CEEDE523C2A07A00E9F087 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		69D2600A2F09010000AB6BA6 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		69E1A1022A535A900736894 /* AppSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsWindowController.swift; sourceTree = "<group>"; };
+		69E660072F0A100100AB6BA6 /* EventsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
+		69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowControllerTests.swift; sourceTree = "<group>"; };
+		69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+SavitarFormField.swift"; sourceTree = "<group>"; };
 		69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarUpdater.swift; sourceTree = "<group>"; };
-		69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarTelemetry.swift; sourceTree = "<group>"; };
-		69HLP012043A6E100E7CC7C /* SavitarHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelp.swift; sourceTree = "<group>"; };
-		69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelpButton.swift; sourceTree = "<group>"; };
-		69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGuideWindowController.swift; sourceTree = "<group>"; };
-		69ABT022043A6E100E7CC7C /* AboutWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
-		69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedback.swift; sourceTree = "<group>"; };
-		69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedbackTests.swift; sourceTree = "<group>"; };
-		69HLP032043A6E100E7CC7C /* Savitar.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Savitar.help; path = Savitar.help; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
+		69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedback.swift; sourceTree = "<group>"; };
+		69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedbackTests.swift; sourceTree = "<group>"; };
+		69HLP012043A6E100E7CC7C /* SavitarHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelp.swift; sourceTree = "<group>"; };
+		69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGuideWindowController.swift; sourceTree = "<group>"; };
+		69HLP032043A6E100E7CC7C /* Savitar.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Savitar.help; sourceTree = "<group>"; };
+		69HLP082043A6E100E7CC7C /* SavitarHelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelpButton.swift; sourceTree = "<group>"; };
+		69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerSlot.swift; sourceTree = "<group>"; };
+		69MC00202F0B010200AB6BA6 /* ClickerMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerMan.swift; sourceTree = "<group>"; };
+		69MC00302F0B010300AB6BA6 /* MacroClicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClicker.swift; sourceTree = "<group>"; };
+		69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerContentViewController.swift; sourceTree = "<group>"; };
+		69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindowController.swift; sourceTree = "<group>"; };
+		69MC00602F0B010600AB6BA6 /* Clicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Clicker.storyboard; path = Base.lproj/Clicker.storyboard; sourceTree = "<group>"; };
+		69MC00802F0B010700AB6BA6 /* ClickerManTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerManTests.swift; sourceTree = "<group>"; };
+		69MC00912F0B010A00AB6BA6 /* MacroClickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroClickerTests.swift; sourceTree = "<group>"; };
+		69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerAppearance.swift; sourceTree = "<group>"; };
+		69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickerWindow.swift; sourceTree = "<group>"; };
+		69TDSPK424B203CB00058D04 /* SavitarTelemetry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarTelemetry.swift; sourceTree = "<group>"; };
 		AAAA0001000000000000AAA1 /* AnsiPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnsiPalette.swift; sourceTree = "<group>"; };
 		AAAA0002000000000000AAA2 /* ColorsSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,15 +518,6 @@
 			path = models;
 			sourceTree = "<group>";
 		};
-		69MC00902F0B010800AB6BA6 /* clicker */ = {
-			isa = PBXGroup;
-			children = (
-				69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */,
-				69MC00202F0B010200AB6BA6 /* ClickerMan.swift */,
-			);
-			path = clicker;
-			sourceTree = "<group>";
-		};
 		695F5A8425899EBC00AB6BA6 /* macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,17 +606,6 @@
 				695F5B512592E6B300AB6BA6 /* worldWizard */,
 			);
 			path = views;
-			sourceTree = "<group>";
-		};
-		69MC00A02F0B010900AB6BA6 /* clickerWindow */ = {
-			isa = PBXGroup;
-			children = (
-				69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */,
-				69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */,
-				69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */,
-				69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */,
-			);
-			path = clickerWindow;
 			sourceTree = "<group>";
 		};
 		695F5AC625899FA400AB6BA6 /* eventsWindow */ = {
@@ -802,6 +782,26 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		69MC00902F0B010800AB6BA6 /* clicker */ = {
+			isa = PBXGroup;
+			children = (
+				69MC00102F0B010100AB6BA6 /* ClickerSlot.swift */,
+				69MC00202F0B010200AB6BA6 /* ClickerMan.swift */,
+			);
+			path = clicker;
+			sourceTree = "<group>";
+		};
+		69MC00A02F0B010900AB6BA6 /* clickerWindow */ = {
+			isa = PBXGroup;
+			children = (
+				69MC00B02F0B010800AB6BA6 /* ClickerAppearance.swift */,
+				69MC00402F0B010400AB6BA6 /* ClickerContentViewController.swift */,
+				69MC00C02F0B010900AB6BA6 /* ClickerWindow.swift */,
+				69MC00502F0B010500AB6BA6 /* ClickerWindowController.swift */,
+			);
+			path = clickerWindow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -872,8 +872,9 @@
 		695484941FC4E6E400A6983F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 2650;
 				ORGANIZATIONNAME = "Heynow Software";
 				TargetAttributes = {
 					6954849B1FC4E6E400A6983F = {
@@ -974,6 +975,10 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/.swiftlint.yml",
+				"$(SRCROOT)/Savitar2",
+				"$(SRCROOT)/Savitar2Tests",
+				"$(SRCROOT)/Savitar2UITests",
 			);
 			name = SwiftLint;
 			outputFileListPaths = (
@@ -982,7 +987,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\nif [ \"$CI\" = \"true\" ]; then\n  echo \"note: SwiftLint runs as a dedicated CI job; skipping build-phase lint\"\n  exit 0\nfi\nif ! command -v swiftlint >/dev/null; then\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\n  exit 0\nfi\n# Keep REQUIRED in sync with .github/workflows/test-build.yml\nREQUIRED=\"0.65.0\"\nINSTALLED=\"$(swiftlint version)\"\nLOWEST=\"$(echo \"$REQUIRED\n$INSTALLED\" | sort -V | head -n1)\"\nif [ \"$LOWEST\" != \"$REQUIRED\" ]; then\n  echo \"warning: SwiftLint $INSTALLED is older than the pinned $REQUIRED; run: brew upgrade swiftlint\"\nfi\ncd \"$SRCROOT\" || { echo \"warning: SwiftLint skipped (SRCROOT unavailable)\"; exit 0; }\nswiftlint\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin:/usr/local/bin\"\nif [ \"$CI\" = \"true\" ]; then\n  echo \"note: SwiftLint runs as a dedicated CI job; skipping build-phase lint\"\n  exit 0\nfi\nif ! command -v swiftlint >/dev/null; then\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\n  exit 0\nfi\n# Keep REQUIRED in sync with .github/workflows/test-build.yml\nREQUIRED=\"0.65.0\"\nINSTALLED=\"$(swiftlint version)\"\nLOWEST=\"$(echo \"$REQUIRED\n$INSTALLED\" | sort -V | head -n1)\"\nif [ \"$LOWEST\" != \"$REQUIRED\" ]; then\n  echo \"warning: SwiftLint $INSTALLED is older than the pinned $REQUIRED; run: brew upgrade swiftlint\"\nfi\ncd \"$SRCROOT\" || { echo \"warning: SwiftLint skipped (SRCROOT unavailable)\"; exit 0; }\nswiftlint --config \"${SCRIPT_INPUT_FILE_0}\" --no-cache Savitar2 Savitar2Tests Savitar2UITests\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1264,9 +1269,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = RFE485QN84;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1285,6 +1293,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1325,9 +1334,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = RFE485QN84;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1339,6 +1351,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -1354,24 +1367,24 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Savitar2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_MODULE_NAME = Savitar2;
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
-				TELEMETRYDECK_APP_ID = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_TELNET DEBUG_WKWEBKIT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TELEMETRYDECK_APP_ID = "";
 			};
 			name = Debug;
 		};
@@ -1384,41 +1397,41 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Savitar2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.savitar2;
 				PRODUCT_MODULE_NAME = Savitar2;
 				PRODUCT_NAME = Savitar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SPARKLE_PUBLIC_ED_KEY = "lQTnINUBZrY8H1yJCYOpdLNoOgLfL4xGPQU7XHS/d78=";
-				TELEMETRYDECK_APP_ID = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savitar2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TELEMETRYDECK_APP_ID = "";
 			};
 			name = Release;
 		};
 		695484C81FC4E6E400A6983F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = Savitar2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.Savitar2Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1430,18 +1443,18 @@
 		695484C91FC4E6E400A6983F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = Savitar2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heynow.Savitar2Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1453,16 +1466,16 @@
 		695484CB1FC4E6E400A6983F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = Savitar2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1473,16 +1486,16 @@
 		695484CC1FC4E6E400A6983F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RFE485QN84;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = Savitar2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Heynow.Savitar2UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
