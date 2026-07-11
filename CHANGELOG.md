@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Local commands (2.0 set)** — `##history`, `##recall` / `##!n`, `##clear screen`, status bars (`##set status`, `##close stats`, per-pane close), world flags and markers, scratch variables (`##set macro`), trigger enable/disable and XML add, `##dump` listings (pretty-printed, HTML-safe), `##regex`, `##wait`, `##broadcast`, window select/close; live Events store for world triggers/macros
 - **`##help`** — HTML local-command reference grouped by category; tap a command (`xch_cmd`) to drill into syntax and a short description; back link to the full list; works even when **Interpret HTML tags** is off
 - **`##link`** — insert a colored hyperlink into the output pane: `##link <url> "<label>" #RRGGBB`
+- **`##capture`** — toggle ad-hoc session output capture to a plain-text file (save panel on start; run again to stop); capture path in the output pane is a link that opens the file in a Savitar text window; separate from World Settings → Output logging
 - **Pueblo `xch_cmd` links** — `<a xch_cmd="…">` in HTML output becomes a clickable link; clicks send the command to the session (local commands when prefixed with the world marker, otherwise to the server)
 - **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
 - **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
@@ -20,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
-- **User guide** — documents `##link` and `##help`
+- **User guide** — documents `##link`, `##help`, and `##capture`
 
 ### Fixed
 

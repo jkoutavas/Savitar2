@@ -71,10 +71,11 @@ class OutputViewController: OutputViewNavigationDelegate {
         }
     }
 
-    func output(string: String) {
+    func output(string: String, skipCapture: Bool = false) {
         let appending = makeAppend
         makeAppend = !string.endsWithNewline()
-        outputView.output(string: string, makeAppend: makeAppend, appending: appending, appendID: lastAppendID)
+        outputView.output(string: string, makeAppend: makeAppend, appending: appending,
+                          appendID: lastAppendID, skipCapture: skipCapture)
         if !makeAppend {
             lastAppendID += 1
         }
@@ -91,16 +92,23 @@ class OutputViewController: OutputViewNavigationDelegate {
         lastAppendID += 1
     }
 
-    func outputHTML(_ html: String) {
+    func outputHTML(_ html: String, skipCapture: Bool = false) {
         let appending = makeAppend
         makeAppend = false
         let processed = XchCmdLinkProcessor.process(html)
-        outputView.outputHTMLFragment(processed, makeAppend: false, appending: appending, appendID: lastAppendID)
+        outputView.outputHTMLFragment(processed, makeAppend: false, appending: appending,
+                                      appendID: lastAppendID, skipCapture: skipCapture)
         lastAppendID += 1
     }
 
     override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                           decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url,
+           let filePath = SavitarFileLinkProcessor.filePath(from: url) {
+            SavitarFileLinkProcessor.openFile(at: filePath)
+            decisionHandler(.cancel)
+            return
+        }
         if let url = navigationAction.request.url,
            let command = XchCmdLinkProcessor.command(from: url) {
             session?.submitServerCmd(cmd: Command(text: command))
@@ -146,6 +154,20 @@ class OutputViewController: OutputViewNavigationDelegate {
 
     func setLogging(world: World) {
         outputView.setLogging(world: world)
+    }
+
+    var isCapturing: Bool {
+        return outputView.isCapturing
+    }
+
+    @discardableResult
+    func startCapture(at path: String) -> Bool {
+        return outputView.startCapture(at: path)
+    }
+
+    @discardableResult
+    func stopCapture() -> String? {
+        return outputView.stopCapture()
     }
 
     func printOutput(suggestedFilename: String = "Untitled") {

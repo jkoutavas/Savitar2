@@ -56,6 +56,7 @@ enum SessionLocalCommand: Equatable {
     case selectWindow(title: String)
     case link(url: String, label: String, colorHex: String?)
     case help(topic: String?)
+    case capture
     case unknown(body: String)
 }
 
@@ -76,6 +77,8 @@ enum SessionLocalCommands {
             return parseAdd(trimmed, words: words, body: body)
         case "broadcast":
             return parseBroadcast(trimmed, words: words, body: body)
+        case "capture":
+            return words.count == 1 ? .capture : .unknown(body: body)
         case "clear":
             return parseClear(words: words, body: body)
         case "close":

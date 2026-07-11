@@ -64,7 +64,7 @@
 <tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
 <tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
 </tbody></table>
-<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code> / <code>##capture</code></strong> local commands (next release), MCP SimpleEdit. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code></strong> local command (next release), MCP SimpleEdit. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
 <hr/>
 <h2 id="install-updates">Install &amp; updates</h2>
 <h3 id="install-updates-download-and-install">Download and install</h3>
@@ -606,12 +606,14 @@
 <tr><td><code>##link &lt;url&gt; "label" #RRGGBB</code></td><td>Inserts a clickable hyperlink in the <strong>output</strong> pane (v1 syntax: angle brackets around the URL)</td></tr>
 <tr><td><code>##help</code></td><td>HTML list of local commands by category; click a command for syntax and details</td></tr>
 <tr><td><code>##help &lt;command&gt;</code></td><td>Detail for one command — for example <code>##help upload</code></td></tr>
+<tr><td><code>##capture</code></td><td>Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window.</td></tr>
 </tbody></table>
 <p><code>##help</code> works even when <strong>Interpret HTML tags</strong> is off. Commands in the list are clickable (Pueblo-style <code>xch_cmd</code> links) and run <code>##help &lt;command&gt;</code> for you.</p>
 <p>If you omit <code>"label"</code> on <code>##link</code>, the URL is used as the link text. If you omit <code>#color</code>, the world's <strong>Link color</strong> (World Settings → Appearance) is used. Web links open in your browser when clicked.</p>
 <p>```text</p>
 <p>##help</p>
 <p>##help upload</p>
+<p>##capture</p>
 <p>##link &lt;https://www.heynow.com/savitar&gt; "Savitar home"</p>
 <p>##link &lt;https://example.com&gt; "Example" #FF6600</p>
 <p>```</p>
@@ -703,7 +705,7 @@
 <table>
 <thead><tr><th>Command</th><th>Notes</th></tr></thead>
 <tbody>
-<tr><td><code>##upload</code>, <code>##capture</code></td><td>Send a local file to the server and ad-hoc session capture—<strong>next Savitar 2 release</strong>, along with a logging shake-down</td></tr>
+<tr><td><code>##upload</code></td><td>Send a local file to the server—<strong>next Savitar 2 release</strong></td></tr>
 <tr><td><code>##tell application</code></td><td>AppleScript-era integration—not planned</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map and future work.</p>
@@ -778,7 +780,9 @@
 <h3 id="output-appearance-word-wrap">Word wrap</h3>
 <p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).</p>
 <h3 id="output-appearance-session-logging">Session logging</h3>
-<p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong> and from <strong>New Text Document</strong> windows. See <a href="#output-tab">Output tab</a>.</p>
+<p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong>, from <strong>New Text Document</strong> windows, and from ad-hoc <strong><code>##capture</code></strong>.</p>
+<p><strong><code>##capture</code></strong> toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run <strong><code>##capture</code></strong> again to stop; Savitar confirms the file path in the output pane. Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.</p>
+<p>See <a href="#session-and-output">Local commands → Session and output</a> for syntax.</p>
 <h3 id="output-appearance-output-scrollback-differences-from-savitar-1">Output scrollback (differences from Savitar 1)</h3>
 <p>Savitar 1 exposed output <strong>buffer size</strong> and <strong>flush period</strong> in World Settings. Savitar 2 <strong>does not</strong> offer these controls. At <strong>beta</strong>, Savitar will silently trim scrollback using imported <code>OUTPUTMAX</code> and <code>OUTPUTMIN</code> from each world file (defaults ~100KB / ~25KB); <strong>flush period</strong> (<code>FLUSHTICKS</code>) is not used. Output uses a <code>WKWebView</code> with internal optimizations documented for developers in <a href="OutputPerformance.md">OutputPerformance.md</a>.</p>
 <p>If output feels laggy during very fast spam, use <strong>Help → Send Feedback…</strong> so we can profile scrollback behavior.</p>
@@ -1010,9 +1014,10 @@
 <tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Shipped</td></tr>
 <tr><td>MCP</td><td>Deferred</td></tr>
 <tr><td><strong><code>xch_cmd</code> links</strong></td><td>Shipped — see <a href="#html-in-output">HTML in output</a></td></tr>
-<tr><td><strong><code>##upload</code> / <code>##capture</code></strong></td><td>Next release (with session logging QA)</td></tr>
+<tr><td><strong><code>##upload</code></strong></td><td>Next release</td></tr>
+<tr><td><strong><code>##capture</code></strong></td><td>Shipped — see <a href="#session-logging">Session logging</a> and <a href="#local-commands">Local commands</a></td></tr>
 <tr><td><strong>Status bars</strong> (<code>##set status</code>)</td><td>Shipped—inverse colors; styling setting planned for 2.1</td></tr>
-<tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a>; upload/capture next</td></tr>
+<tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a>; <code>##upload</code> next</td></tr>
 <tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map.</p>

@@ -183,6 +183,7 @@
 		69SB00412F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */; };
 		69XC00012F0C020400AB6BA6 /* XchCmdLinkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69XC00022F0C020400AB6BA6 /* XchCmdLinkProcessor.swift */; };
 		69XC00112F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69XC00122F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift */; };
+		69FL00012F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */; };
 		69SW00012F0C040400AB6BA6 /* SavitarWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SW00022F0C040400AB6BA6 /* SavitarWelcome.swift */; };
 		69SW00112F0C040400AB6BA6 /* SavitarWelcomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */; };
 		69HP00012F0C030400AB6BA6 /* SessionLocalCommandHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HP00022F0C030400AB6BA6 /* SessionLocalCommandHelp.swift */; };
@@ -391,6 +392,7 @@
 		69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLocalCommandExecutor.swift; sourceTree = "<group>"; };
 		69XC00022F0C020400AB6BA6 /* XchCmdLinkProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XchCmdLinkProcessor.swift; sourceTree = "<group>"; };
 		69XC00122F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XchCmdLinkProcessorTests.swift; sourceTree = "<group>"; };
+		69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFileLinkProcessor.swift; sourceTree = "<group>"; };
 		69SW00022F0C040400AB6BA6 /* SavitarWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarWelcome.swift; sourceTree = "<group>"; };
 		69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarWelcomeTests.swift; sourceTree = "<group>"; };
 		69HP00022F0C030400AB6BA6 /* SessionLocalCommandHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLocalCommandHelp.swift; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				69HP00022F0C030400AB6BA6 /* SessionLocalCommandHelp.swift */,
 				69SW00022F0C040400AB6BA6 /* SavitarWelcome.swift */,
 				69XC00022F0C020400AB6BA6 /* XchCmdLinkProcessor.swift */,
+				69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */,
 				695F5AAA25899EFD00AB6BA6 /* SessionHandlerProtocol.swift */,
 				69SB00102F0C010100AB6BA6 /* SessionStatusBarView.swift */,
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
@@ -1119,6 +1122,7 @@
 				69SB00212F0C010200AB6BA6 /* SessionLocalCommands.swift in Sources */,
 				69SB00412F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift in Sources */,
 				69XC00012F0C020400AB6BA6 /* XchCmdLinkProcessor.swift in Sources */,
+				69FL00012F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift in Sources */,
 				69HP00012F0C030400AB6BA6 /* SessionLocalCommandHelp.swift in Sources */,
 				69SW00012F0C040400AB6BA6 /* SavitarWelcome.swift in Sources */,
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,

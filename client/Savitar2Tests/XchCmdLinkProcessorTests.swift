@@ -38,3 +38,27 @@ class XchCmdLinkProcessorTests: XCTestCase {
         XCTAssertEqual(XchCmdLinkProcessor.process(input), input)
     }
 }
+
+class SavitarFileLinkProcessorTests: XCTestCase {
+    func testFilePathRoundTripWithSpaces() {
+        let path = "/Users/jay/Documents/Echo Server capture 2026-07-11 190640.txt"
+        guard let href = SavitarFileLinkProcessor.hrefURL(forFilePath: path),
+              let url = URL(string: href),
+              let decoded = SavitarFileLinkProcessor.filePath(from: url) else {
+            return XCTFail("Expected savitar-file URL")
+        }
+        XCTAssertEqual(decoded, path)
+    }
+
+    func testStatusHTMLUsesSavitarFileLink() {
+        let html = SavitarFileLinkProcessor.statusHTML(
+            heading: "Capture started.",
+            verb: "Saving to",
+            path: "/tmp/test.txt",
+            linkColorHex: "AABBCC"
+        )
+        XCTAssertTrue(html.contains("savitar-file://"))
+        XCTAssertTrue(html.contains("/tmp/test.txt"))
+        XCTAssertTrue(html.contains("color: #AABBCC"))
+    }
+}

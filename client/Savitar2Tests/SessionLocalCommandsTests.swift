@@ -80,6 +80,8 @@ class SessionLocalCommandsTests: XCTestCase {
     func testParseBroadcastClearAndWait() {
         XCTAssertEqual(SessionLocalCommands.parse("broadcast say hello"), .broadcast(command: "say hello"))
         XCTAssertEqual(SessionLocalCommands.parse("clear screen"), .clearScreen)
+        XCTAssertEqual(SessionLocalCommands.parse("capture"), .capture)
+        XCTAssertEqual(SessionLocalCommands.parse("capture extra"), .unknown(body: "capture extra"))
         XCTAssertEqual(
             SessionLocalCommands.parse("wait 5 look"),
             .wait(seconds: 5, followUp: "look")

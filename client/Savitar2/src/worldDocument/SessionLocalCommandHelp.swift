@@ -51,7 +51,9 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .session, keywords: ["upload"], syntax: "upload <file-path>",
                               detail: nil),
         LocalCommandHelpEntry(category: .session, keywords: ["capture"], syntax: "capture",
-                              detail: nil),
+                              detail: "Toggles ad-hoc capture of session output to a plain-text file. "
+                                  + "Run again to stop. The file path is a link that opens the capture "
+                                  + "in a Savitar text window. Separate from World Settings → Output logging."),
 
         LocalCommandHelpEntry(category: .status, keywords: ["set status"], syntax: "set status output|input <message>",
                               detail: "Sets custom text on the output or input status bar."),

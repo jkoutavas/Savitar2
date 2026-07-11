@@ -38,6 +38,13 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("savitar-help-back"))
     }
 
+    func testTopicHelpForCaptureCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "capture")
+        XCTAssertTrue(html.contains("capture"))
+        XCTAssertTrue(html.contains("Toggles ad-hoc capture"))
+        XCTAssertTrue(html.contains("World Settings"))
+    }
+
     func testTopicHelpForCommandWithoutDetail() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "upload")
         XCTAssertTrue(html.contains("upload"))

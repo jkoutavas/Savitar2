@@ -21,12 +21,18 @@ enum SessionTriggerScope {
     case universal
 }
 
+enum SessionCaptureBeginResult: Equatable {
+    case started(path: String)
+    case cancelled
+    case failed
+}
+
 protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
-    func output(result: OutputResult)
+    func output(result: OutputResult, skipCapture: Bool)
     func printSource()
     func outputLink(url: String, label: String, colorHex: String?)
-    func outputHTML(_ html: String)
+    func outputHTML(_ html: String, skipCapture: Bool)
     func commandHistory() -> [String]
     func setSessionStatus(pane: SessionStatusPane, text: String)
     func closeSessionStatusBars()
@@ -39,11 +45,21 @@ protocol SessionHandlerProtocol {
     func syncTriggerEnabled(_ trigger: Trigger, scope: SessionTriggerScope, enabled: Bool)
     func worldTriggers() -> [Trigger]
     func worldMacros() -> [Macro]
+    var isSessionCapturing: Bool { get }
+    func beginSessionCapture() -> SessionCaptureBeginResult
+    func stopSessionCapture() -> String?
 }
 
 extension SessionHandlerProtocol {
+    func output(result: OutputResult) {
+        output(result: result, skipCapture: false)
+    }
+
     func outputLink(url _: String, label _: String, colorHex _: String?) {}
-    func outputHTML(_: String) {}
+    func outputHTML(_ html: String) {
+        outputHTML(html, skipCapture: false)
+    }
+    func outputHTML(_: String, skipCapture _: Bool) {}
     func closeSessionStatus(pane _: SessionStatusPane) {}
     func recallCommand(at _: Int) {}
     func clearOutputScreen() {}
@@ -53,4 +69,7 @@ extension SessionHandlerProtocol {
     func syncTriggerEnabled(_: Trigger, scope _: SessionTriggerScope, enabled _: Bool) {}
     func worldTriggers() -> [Trigger] { return [] }
     func worldMacros() -> [Macro] { return [] }
+    var isSessionCapturing: Bool { false }
+    func beginSessionCapture() -> SessionCaptureBeginResult { .failed }
+    func stopSessionCapture() -> String? { nil }
 }
