@@ -28,6 +28,7 @@ final class ClickerWindowController: NSWindowController, NSWindowDelegate {
         window.hidesOnDeactivate = false
         clearLegacyAutosavedFrame()
         applyDesignedContentSize()
+        SavitarHelpButton.installInTitleBar(of: window, for: .macroClicker)
         installKeyWindowObserver()
     }
 

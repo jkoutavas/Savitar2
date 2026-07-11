@@ -13,7 +13,7 @@
                     <window key="window" title="Macro Clicker" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MC1-WN-001" customClass="ClickerWindow" customModule="Savitar2" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="294" y="362" width="200" height="440"/>
+                        <rect key="contentRect" x="294" y="362" width="228" height="440"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
                     </window>
                     <connections>
@@ -29,7 +29,7 @@
             <objects>
                 <viewController id="MC1-VC-001" customClass="ClickerContentViewController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="MC1-VW-001">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="440"/>
+                        <rect key="frame" x="0.0" y="0.0" width="228" height="440"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>

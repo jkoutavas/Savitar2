@@ -15,7 +15,8 @@ private struct ClickerCompassPlacement {
 
 /// Macro Clicker palette — Savitar 1 whimsical compass, up/down, and macro grid (Story 11).
 final class ClickerContentViewController: NSViewController {
-    static let designedContentSize = NSSize(width: 200, height: 440)
+    /// Slightly wider than the 200pt v1 palette so the title bar fits **Macro Clicker** + contextual **?**.
+    static let designedContentSize = NSSize(width: 228, height: 440)
     private static let captionAreaMinHeight: CGFloat = 80
 
     private let captionField: NSTextField = {

@@ -15,6 +15,7 @@ extension SavitarHelp {
         case worldSettings(SavitarHelp.WorldSettingsTab)
         case worldPicker
         case worldSession
+        case macroClicker
 
         var anchor: String {
             switch self {
@@ -28,6 +29,8 @@ extension SavitarHelp {
                 return Anchor.worldsConnectionWorldPicker
             case .worldSession:
                 return Anchor.sessionWindow
+            case .macroClicker:
+                return Anchor.macrosMacroClicker
             }
         }
 
@@ -43,6 +46,8 @@ extension SavitarHelp {
                 return "Help for World Picker"
             case .worldSession:
                 return "Help for world session window"
+            case .macroClicker:
+                return "Help for Macro Clicker"
             }
         }
 
@@ -58,6 +63,8 @@ extension SavitarHelp {
                 return "Open help for choosing and opening worlds"
             case .worldSession:
                 return "Open help for the world window and World menu"
+            case .macroClicker:
+                return "Open help for the Macro Clicker palette"
             }
         }
 
@@ -74,6 +81,8 @@ extension SavitarHelp {
                 return "savitar-contextual-help-worldPicker"
             case .worldSession:
                 return "savitar-contextual-help-worldSession"
+            case .macroClicker:
+                return "savitar-contextual-help-macroClicker"
             }
         }
 
@@ -89,6 +98,8 @@ extension SavitarHelp {
                 return "worldPicker"
             case .worldSession:
                 return "worldSession"
+            case .macroClicker:
+                return "macroClicker"
             }
         }
 

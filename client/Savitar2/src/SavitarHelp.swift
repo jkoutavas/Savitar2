@@ -34,6 +34,7 @@ enum SavitarHelp {
         static let sessionWindow = "session-window"
         static let events = "events"
         static let macros = "macros"
+        static let macrosMacroClicker = "macros-macro-clicker"
         static let enteringCommands = "entering-commands"
         static let variablesExpansion = "variables-expansion"
         static let localCommands = "local-commands"
