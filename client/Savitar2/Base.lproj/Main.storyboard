@@ -349,6 +349,12 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wl3-W1-gTE"/>
+                                        <menuItem title="Show World Picker" id="wp1-Sh-Pkr">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showWorldPickerAction:" target="Voe-Tx-rLC" id="wp1-Sh-Act"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Show App-wide Events Window" keyEquivalent="E" id="kRU-49-nfY">
                                             <connections>
                                                 <action selector="showEventsWindowAction:" target="Voe-Tx-rLC" id="7mA-cl-DqA"/>

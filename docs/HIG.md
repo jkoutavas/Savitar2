@@ -185,6 +185,21 @@ Savitar-specific audio (not standard Edit → Speech):
 
 **New Text Document** (⇧⌘T) for `.txt` / `.text` / `.log`. **Open…** routes plain-text files to the text editor; `.world` files open as sessions.
 
+### Window menu
+
+Savitar does **not** use tabbed document windows: `NSWindow.allowsAutomaticWindowTabbing = false` at launch suppresses **Show/Hide Tab Bar** and **Merge All Windows** (Story 25).
+
+| Item | Shortcut | Behavior |
+|------|----------|----------|
+| **Minimize** | ⌘M | Standard; disabled for close-only utility windows (World Picker, Settings) |
+| **Zoom** | — | Standard; disabled for non-resizable utility windows |
+| **Bring All to Front** | — | Standard |
+| *(open window list)* | — | World documents (by world name), **World Picker**, app-wide/​per-world Events |
+| **Show World Picker** | — | Opens or brings forward the World Picker; mirrors **File → New World Document…** (⌘N) |
+| **Show App-wide Events Window** | ⇧⌘E | Opens or brings forward universal Events |
+
+**⌘N** (**File → New World Document…**) opens the **World Picker** rather than an untitled document — choosing a world *is* the new-document step. **Show World Picker** in the Window menu reopens it after it has been closed (no keyboard shortcut assigned; TBD).
+
 ### Help menu
 
 | Item | Shortcut | Behavior |
@@ -241,9 +256,9 @@ Remaining UI/HIG work is tracked as user stories — do not duplicate task lists
 | Area | Story |
 |------|-------|
 | App Settings toolbar, Advanced pane, factory reset | [Story 23](Stories.md#story-23--app-settings-hig-audit) ✅; maintenance backlog [Story 24](Stories.md#story-24--settings-advanced-maintenance) |
-| Events Window chrome, Window menu, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit); **Window menu** → [Story 25](Stories.md#story-25--window-menu-hig-audit) |
+| Events Window chrome, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit) |
 | World Picker layout, keyboard, positioning | [Story 7](Stories.md#story-7--world-picker-hig-audit) ✅ |
-| Window menu — tab bar, Show World Picker, listing | [Story 25](Stories.md#story-25--window-menu-hig-audit) |
+| Window menu — tab bar, Show World Picker, listing | [Story 25](Stories.md#story-25--window-menu-hig-audit) ✅ |
 | App-wide appearance (System / Light / Dark) | [Story 26](Stories.md#story-26--app-wide-appearance-system--light--dark) — **Input & Display** pane |
 | SwiftUI `Settings` scene evaluation (exploratory) | [Story 8](Stories.md#story-8--swiftui-settings-migration-exploratory) |
 

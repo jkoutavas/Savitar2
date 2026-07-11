@@ -31,6 +31,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     }
 
     func applicationDidFinishLaunching(_: Notification) {
+        // Savitar does not use tabbed document windows; suppress the system Window menu's
+        // Show/Hide Tab Bar and Merge All Windows items (Story 25).
+        NSWindow.allowsAutomaticWindowTabbing = false
+
         if isRunningTests {
             return
         }
