@@ -527,7 +527,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
   - Button palette, keypad mapping, startup pref
   - *Blocked on Story 11 implementation*
 
-- [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; buffer/flush noted as XML-only until UI ships
+- [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; v1 buffer/flush UI won't do ([OutputPerformance.md](OutputPerformance.md))
 - [x] **9.4** **Triggers in depth** — order, types, matching, wildcards, appearance, audio, reply
 - [x] **9.4b** **Editing events** — new/rename/reorder/undo; per-world vs app-wide
 - [x] **9.5** **Settings reference** — v1 → v2 mapping tables; Startup pane; MCP deferred; Closing tab shipped
@@ -556,7 +556,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 3. ~~**9.2b + 9.2c**~~ ✅
 4. ~~**9.6**~~ ✅
 5. ~~**9.5**~~ ✅ (Startup + reference tables)
-6. ~~**9.3**~~ ✅ (buffer/flush UI deferred noted)
+6. ~~**9.3**~~ ✅ (v1 buffer/flush won't do — [OutputPerformance.md](OutputPerformance.md))
 7. ~~**9.2d**~~ ✅ (grows as commands ship)
 8. ~~**9.1b**~~ ✅
 9. ~~**9.7, 9.8**~~ ✅
@@ -1124,8 +1124,8 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 
 ```
 ┌─ World Settings — Output ─────────────────────────────────────────┐
-│  Buffer size …    Flush period …                                  │
 │  Word wrap:  (•) Use app default   ( ) On   ( ) Off               │
+│  (logging, columns/rows — see Output tab)                         │
 └───────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1248,6 +1248,62 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 
 ---
 
+## Story 27 — Output scrollback & performance
+
+**Goal:** Keep session output smooth on long plays and combat spam **without** restoring v1 World Settings buffer/flush controls. Honor `OUTPUTMAX` / `OUTPUTMIN` internally; treat `FLUSHTICKS` as dead.
+
+**Context:** Output renders in `WKWebView` (`OutputView`). Engineering watchpoints, phased plan, and diagnostics sketch: **[OutputPerformance.md](OutputPerformance.md)**.
+
+**Schedule:** **Start of beta** — Savitar 2 is practically v1 feature-complete on the 2.0 track; this epic gates comfortable long-session dogfooding during beta (before wider release).
+
+**Status:** Documented; implementation queued for beta kickoff.
+
+### Policy
+
+| Item | Status |
+|------|--------|
+| World Settings UI for buffer size / flush period | **Won't do** ([OutputPerformance.md](OutputPerformance.md#decision-v1-bufferflush-ui-wont-do)) |
+| `FLUSHTICKS` at runtime | **Dead** — import-only; replaced by internal append coalescing |
+| `OUTPUTMAX` / `OUTPUTMIN` at runtime | **Honor internally** — silent DOM trim using per-world XML values |
+
+### Won't do
+
+- [x] **27.0** **World Settings UI** for buffer size / flush period
+
+### Phase 1 — Quick wins (beta, first)
+
+- [ ] **27.1** **Scroll policy** — instant scroll-to-bottom during live output; throttle or disable smooth scroll on spam
+- [ ] **27.2** **Coalesce appends** — batch telnet chunks to one JS commit per run-loop turn (replaces `FLUSHTICKS`)
+
+### Phase 2 — Honor `OUTPUTMAX` / `OUTPUTMIN` (beta)
+
+- [ ] **27.3** **Internal scrollback trim** — trim oldest DOM when over `world.outputMax`, toward `world.outputMin`; block-based trim + v1 defaults as fallback
+- [ ] **27.4** **Cheaper DOM append** — avoid unbounded `innerHTML +=` on huge `<pre>` blocks (`insertAdjacentHTML`, split growing lines)
+
+### Phase 3 — Diagnostics (beta, after 27.1–27.4)
+
+- [ ] **27.5** **Output diagnostics overlay** — optional session status strip: updates/sec, scrollback blocks, est. HTML size, JS bridge latency, last trim; **Settings → Advanced** toggle; local only, no telemetry
+- [ ] **27.6** **Profile checklist** — record baseline metrics in OutputPerformance.md after optimizations land
+
+### Touchpoints
+
+- [OutputPerformance.md](OutputPerformance.md)
+- `client/Savitar2/src/worldDocument/OutputView.swift`
+- `client/Savitar2/src/worldDocument/OutputViewController.swift`
+- `client/Savitar2/src/worldDocument/Session.swift`
+- `client/Savitar2/src/models/worlds/World.swift`
+- `client/Savitar2/src/views/AppPreferences/AdvancedSettingsViewController.swift` (diagnostics toggle — TBD)
+
+### Acceptance
+
+- No World Settings fields for buffer/flush; USER_GUIDE and README reflect won't do ✅
+- `FLUSHTICKS` never read at runtime; coalescing replaces flush semantics
+- Long sessions trim silently using `OUTPUTMAX` / `OUTPUTMIN` (or defaults)
+- Diagnostics overlay available for beta dogfooding when enabled
+- Combat-spam / overnight scenarios measurably improved vs pre-beta builds
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -1288,6 +1344,7 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 23. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
 24. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
 25. Story 8 — SwiftUI Settings spike (optional, post-beta)
+26. **Story 27 — Output scrollback & performance** — **beta kickoff**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).
@@ -1313,3 +1370,4 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Check for updates | `updatingEnabled` | Done — Story 12 |
 | Capture file editor | `logEditorName` | Deferred — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |
 | Events outline disclosure (v1 only) | `trigsClosed`, `varsClosed` | Import-only — won't do ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
+| Output buffer / flush (v1 only) | `outputMax`, `outputMin`, `flushTicks` | `flushTicks` import-only, dead at runtime; `outputMax`/`outputMin` honored internally at beta ([Story 27](Stories.md#story-27--output-scrollback--performance), [OutputPerformance.md](OutputPerformance.md)) |

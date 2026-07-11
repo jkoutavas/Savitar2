@@ -456,7 +456,7 @@
 <li><strong>Per-world</strong> — <strong>World → Show World Events…</strong> (or the events button in the world window title bar). Triggers and macros here are saved in that world’s <code>.world</code> document.</li>
 <li><strong>App-wide</strong> — <strong>Window → Show App-wide Events Window</strong> (⇧⌘E). Triggers and macros here apply to <strong>every</strong> world—useful for universal gags, sounds, or shortcuts you always want. Imported from Savitar 1 preferences.</li>
 </ul>
-<p>Each Events window has two tabs: <strong>Triggers</strong> and <strong>Macros</strong>. Select an item in the list to edit it in the detail pane (matching rules, colors, audio cues, replies, hotkeys, and so on).</p>
+<p>Each Events window has two tabs: <strong>Triggers</strong> and <strong>Macros</strong>. The left side lists items in a table (440pt wide—all columns visible); the right side is the detail editor for the selected trigger or macro. There is no draggable split divider—the window is a fixed 900×400 utility panel, so column widths are tuned for that size. Events windows are <strong>close-only</strong> (no resize or minimize); Savitar remembers their position between sessions.</p>
 <p>When an Events window is frontmost, <strong>Edit → New Trigger</strong> or <strong>New Macro</strong> (⇧⌘N) adds an item to the active tab.</p>
 <h3 id="events-why-event">Why “event”?</h3>
 <p>The word predates Savitar 2—it is Savitar 1’s name for this whole family of behaviors. It is <strong>not</strong> a generic programming term in the UI; you will not configure “events” separately from triggers and macros. If you see <strong>Events</strong> in a menu or window title, read it as <strong>triggers and macros for this world (or for the whole app)</strong>.</p>
@@ -673,8 +673,9 @@
 <p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).</p>
 <h3 id="output-appearance-session-logging">Session logging</h3>
 <p><strong>World Settings → Output</strong> can append or overwrite a log file on disk—separate from <strong>File → Print…</strong> and from <strong>New Text Document</strong> windows. See <a href="#output-tab">Output tab</a>.</p>
-<h3 id="output-appearance-buffer-flush-advanced">Buffer &amp; flush (advanced)</h3>
-<p>Savitar 1 exposed output <strong>buffer size</strong> and <strong>flush period</strong> in World Settings. These values exist in world XML (<code>FLUSHTICKS</code>, etc.) for imported worlds, but <strong>Savitar 2 does not yet expose them in the World Settings UI</strong>. If output feels laggy on very fast spam, note it in <strong>Help → Send Feedback…</strong>—tuning may return in a later release.</p>
+<h3 id="output-appearance-buffer-flush-v1-only">Buffer &amp; flush (v1 only)</h3>
+<p>Savitar 1 exposed output <strong>buffer size</strong> and <strong>flush period</strong> in World Settings. Savitar 2 <strong>does not</strong> offer these controls. At <strong>beta</strong>, Savitar will silently trim scrollback using imported <code>OUTPUTMAX</code> and <code>OUTPUTMIN</code> from each world file (defaults ~100KB / ~25KB); <strong>flush period</strong> (<code>FLUSHTICKS</code>) is not used. Output uses a <code>WKWebView</code> with internal optimizations documented for developers in <a href="OutputPerformance.md">OutputPerformance.md</a>.</p>
+<p>If output feels laggy during very fast spam, use <strong>Help → Send Feedback…</strong> so we can profile scrollback behavior.</p>
 <hr/>
 <h2 id="worlds-connection">Worlds &amp; connection</h2>
 <h3 id="worlds-connection-world-picker">World Picker</h3>
@@ -747,7 +748,7 @@
 <tr><td><strong>Wrong colors</strong></td><td><a href="#ansi-colors">ANSI colors</a>; Appearance fore/back; ANSI interpretation on</td></tr>
 <tr><td><strong>Can't connect</strong></td><td><a href="#worlds--connection">Worlds &amp; connection</a>—host, port, line ending</td></tr>
 <tr><td><strong>MUX/MUSH marker conflicts</strong></td><td>Some worlds use `<code> </code> `<code> for commands; Savitar default is </code>##`—change command marker in Input tab if local commands collide</td></tr>
-<tr><td><strong>Laggy output on spam</strong></td><td>Buffer/flush UI not exposed yet—feedback welcome</td></tr>
+<tr><td><strong>Laggy output on spam</strong></td><td>Long sessions fill the output pane — use <strong>Help → Send Feedback…</strong> with world name and what you were doing (combat spam, AFK, etc.)</td></tr>
 </tbody></table>
 <p>When in doubt: <strong>Help → Savitar Help</strong> (⌘?) for the chapter, then <strong>Help → Send Feedback…</strong> with version info included.</p>
 <hr/>

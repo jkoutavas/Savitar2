@@ -105,6 +105,8 @@ Triggers, macros, and (when shipped) aliases. Universal (app-wide) and per-world
 
 Touchpoints: `EventsWindow.storyboard`, `EventsContentViewController`, `EventsWindowController`, `AppContext.showUniversalEventsWindow`, per-world `WindowController`, `MacroViewController` (programmatic detail form).
 
+Session output scrollback policy: [OutputPerformance.md](OutputPerformance.md) (Story 27).
+
 ### World Picker
 
 Startup / **File → New World Document…** entry point for choosing a world.
@@ -136,8 +138,9 @@ Floating button palette — modeless utility window, frame autosave, optional st
 World sessions are **document windows** (one `.world` per window). Plain-text notes use separate text-document windows.
 
 - World-specific appearance and connection options → **World Settings**, not app Settings.
-- Session window exposes contextual **?** → world menu / session help anchor.
+- Session window exposes contextual **?** → [Session window](USER_GUIDE.md#session-window) help anchor.
 - **Scroll lock** (⌃S) and title-bar control; see [USER_GUIDE.md](USER_GUIDE.md) Menus chapter.
+- Output pane (`WKWebView`) — no v1 buffer/flush Settings; `FLUSHTICKS` dead; `OUTPUTMAX`/`OUTPUTMIN` honored internally at beta ([OutputPerformance.md](OutputPerformance.md), Story 27).
 
 ---
 

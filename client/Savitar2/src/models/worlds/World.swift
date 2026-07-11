@@ -169,7 +169,8 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var windowSize = NSSize(width: 480, height: 270)
     @objc dynamic var zoomed = false
 
-    // v1.0 settings currently not in use in v2.0
+    /// v1 output scrollback caps (`OUTPUTMAX` / `OUTPUTMIN`) — honored internally at beta (Story 27).
+    /// `FLUSHTICKS` is import-only; dead at runtime (replaced by append coalescing). See docs/OutputPerformance.md.
     @objc dynamic var outputMax = 100 * 1024
     @objc dynamic var outputMin = 25 * 1024
     @objc dynamic var flushTicks = 30

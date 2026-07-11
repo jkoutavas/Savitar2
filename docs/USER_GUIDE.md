@@ -820,9 +820,11 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 **World Settings → Output** can append or overwrite a log file on disk—separate from **File → Print…** and from **New Text Document** windows. See [Output tab](#output-tab).
 
-### Buffer & flush (advanced)
+### Buffer & flush (v1 only)
 
-Savitar 1 exposed output **buffer size** and **flush period** in World Settings. These values exist in world XML (`FLUSHTICKS`, etc.) for imported worlds, but **Savitar 2 does not yet expose them in the World Settings UI**. If output feels laggy on very fast spam, note it in **Help → Send Feedback…**—tuning may return in a later release.
+Savitar 1 exposed output **buffer size** and **flush period** in World Settings. Savitar 2 **does not** offer these controls. At **beta**, Savitar will silently trim scrollback using imported `OUTPUTMAX` and `OUTPUTMIN` from each world file (defaults ~100KB / ~25KB); **flush period** (`FLUSHTICKS`) is not used. Output uses a `WKWebView` with internal optimizations documented for developers in [OutputPerformance.md](OutputPerformance.md).
+
+If output feels laggy during very fast spam, use **Help → Send Feedback…** so we can profile scrollback behavior.
 
 ---
 
@@ -911,7 +913,7 @@ Grayed-out app prefs (**Macro Clicker**, **Mute clicker**) will activate when th
 | **Wrong colors** | [ANSI colors](#ansi-colors); Appearance fore/back; ANSI interpretation on |
 | **Can't connect** | [Worlds & connection](#worlds--connection)—host, port, line ending |
 | **MUX/MUSH marker conflicts** | Some worlds use `` ` `` for commands; Savitar default is `##`—change command marker in Input tab if local commands collide |
-| **Laggy output on spam** | Buffer/flush UI not exposed yet—feedback welcome |
+| **Laggy output on spam** | Long sessions fill the output pane — use **Help → Send Feedback…** with world name and what you were doing (combat spam, AFK, etc.) |
 
 When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help → Send Feedback…** with version info included.
 

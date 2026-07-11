@@ -1,3 +1,5 @@
+**Engineering references (living docs):** [OutputPerformance.md](OutputPerformance.md) — session output scrollback, beta perf plan (Story 27 kickoff), diagnostics overlay; v1 `FLUSHTICKS` dead, `OUTPUTMAX`/`OUTPUTMIN` honored internally.
+
 ## November 12th, 2019
 
 Choices I’ve considered for Savitar’s Text Engine:

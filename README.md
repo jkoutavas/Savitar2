@@ -13,14 +13,15 @@ Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutav
 
 ## Documentation
 
-| Document                                             | Audience   | Contents                                                                                                                                      |
-| ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                         | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)              |
-| [docs/JOURNEY.md](docs/JOURNEY.md)                   | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
-| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)             | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation); bundled in-app as **Savitar Help**, Stories 16–17) |
-| [docs/Stories.md](docs/Stories.md)                   | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
-| [docs/HIG.md](docs/HIG.md)                           | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE                                                             |
-| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md) | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
+| Document                                               | Audience   | Contents                                                                                                                                      |
+| ------------------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                           | Everyone   | Version history and release notes ([Keep a Changelog](https://keepachangelog.com/); also Sparkle **Version History** in the app)              |
+| [docs/JOURNEY.md](docs/JOURNEY.md)                     | Everyone   | Reading the dev notes against today: the Savitar 1 → 2 arc, in the spirit of the original assessment                                          |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md)               | Users      | How to use the app ([Story 9](docs/Stories.md#story-9--user-guide-full-app-documentation); bundled in-app as **Savitar Help**, Stories 16–17) |
+| [docs/Stories.md](docs/Stories.md)                     | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
+| [docs/HIG.md](docs/HIG.md)                             | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE                                                             |
+| [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md)   | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
+| [docs/OutputPerformance.md](docs/OutputPerformance.md) | Developers | Session output scrollback, beta perf plan, diagnostics overlay ([Story 27](docs/Stories.md#story-27--output-scrollback--performance))         |
 
 ## Current state of the application
 
@@ -65,7 +66,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Connect/disconnect session handling
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
-_ World settings Output tab — buffer size, flush period
+~~ World settings Output tab — buffer size, flush period~~ (won't do — [OutputPerformance.md](docs/OutputPerformance.md))
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
 _ Implement remaining local commands
@@ -100,12 +101,13 @@ _ Implement next gen startup commands (trigger based)
 √ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 ```
 
-### start of beta
+### Start of beta
 
 ```
 √ Move github repo to public
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
 _ Crash reporting (Sentry — separate from TelemetryDeck analytics)
+_ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md) — honor `OUTPUTMAX`/`OUTPUTMIN`, coalesce appends, session metrics strip)
 _ Start promoting the beta test
 _ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
 _ Polish, address beta test issues
