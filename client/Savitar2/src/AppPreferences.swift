@@ -278,7 +278,9 @@ class AppPreferences: SavitarXMLProtocol {
             prefsElem.addChild(colorsElem)
         }
 
-        if let openSessionsElem = WindowRestoration.openSessionsElement(for: openSessions) {
+        if let openSessionsElem = WindowRestoration.openSessionsElement(
+            for: WindowRestoration.sessionsToPersist(storedSessions: openSessions)
+        ) {
             prefsElem.addChild(openSessionsElem)
         }
 

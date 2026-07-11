@@ -47,6 +47,15 @@ enum WindowRestoration {
         return sessions
     }
 
+    /// Sessions written to prefs: live open documents in the app, stored list during unit tests.
+    static func sessionsToPersist(
+        storedSessions: [SavedOpenSession],
+        preferLiveCapture: Bool = !isRunningTests
+    ) -> [SavedOpenSession] {
+        guard preferLiveCapture else { return storedSessions }
+        return captureOpenSessions(from: AppContext.shared)
+    }
+
     static func restoreSavedSessions(_ sessions: [SavedOpenSession], in context: AppContext) {
         for session in sessions {
             switch session {

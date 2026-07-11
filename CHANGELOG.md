@@ -14,7 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
-- **Macro Clicker** — frontmost **world** macro overrides an app-wide macro with the same name (live Events edits included before save)
+
+### Fixed
+
+- **Session restoration** — closing a world document before quitting no longer causes it to reopen on relaunch; prefs now persist the live open-document list (#92)
 
 ## [2.0.22] - 2026-07-11
 
