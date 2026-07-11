@@ -26,13 +26,31 @@ enum MacroClicker {
         guard !trimmed.isEmpty else { return nil }
 
         if let session {
-            if let macro = session.world.macroMan.get().first(where: { $0.name == trimmed }) {
+            if let macro = liveMacros(for: session).first(where: { $0.name == trimmed }) {
                 return macro
             }
         }
 
         return AppContext.shared.universalReactionsStore.state?.macroList.items
             .first(where: { $0.name == trimmed })
+    }
+
+    /// Live macros from the world's Events store when available; otherwise persisted `macroMan`.
+    private static func liveMacros(for session: Session) -> [Macro] {
+        if let document = session.sessionHandler as? Document,
+           let macros = document.store.state?.macroList.items {
+            return macros
+        }
+        for window in NSApp.orderedWindows {
+            guard let windowController = window.windowController as? WindowController,
+                  let sessionViewController = windowController.contentViewController as? SessionViewController,
+                  sessionViewController.session === session,
+                  let document = windowController.document as? Document,
+                  let macros = document.store.state?.macroList.items
+            else { continue }
+            return macros
+        }
+        return session.world.macroMan.get()
     }
 
     static func caption(for macroName: String, session: Session?) -> String {
@@ -60,7 +78,12 @@ enum MacroClicker {
     }
 
     private static func session(in window: NSWindow) -> Session? {
-        guard let windowController = window.windowController as? WindowController else { return nil }
-        return (windowController.contentViewController as? SessionViewController)?.session
+        if let windowController = window.windowController as? WindowController {
+            return (windowController.contentViewController as? SessionViewController)?.session
+        }
+        if let eventsWindowController = window.windowController as? EventsWindowController {
+            return eventsWindowController.owningSession
+        }
+        return nil
     }
 }

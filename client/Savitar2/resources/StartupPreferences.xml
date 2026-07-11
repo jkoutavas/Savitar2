@@ -83,12 +83,12 @@ say ...and here is command two!</VALUE>
         <ALIAS NAME="MACRO_7"/>
         <ALIAS NAME="MACRO_8"/>
         <ALIAS NAME="MACRO_9"/>
-        <ALIAS NAME="MACRO-A"/>
-        <ALIAS NAME="MACRO-B"/>
-        <ALIAS NAME="MACRO-C"/>
-        <ALIAS NAME="MACRO-D"/>
-        <ALIAS NAME="MACRO-E"/>
-        <ALIAS NAME="MACRO-F"/>
+        <ALIAS NAME="MACRO_A"/>
+        <ALIAS NAME="MACRO_B"/>
+        <ALIAS NAME="MACRO_C"/>
+        <ALIAS NAME="MACRO_D"/>
+        <ALIAS NAME="MACRO_E"/>
+        <ALIAS NAME="MACRO_F"/>
     </ALIASES>
     <COLORS>
         <COLOR NAME="black" RGB="#000000"></COLOR>

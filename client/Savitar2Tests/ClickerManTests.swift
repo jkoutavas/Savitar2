@@ -19,9 +19,24 @@ class ClickerManTests: XCTestCase {
             XCTAssertEqual(man.slots[index].macroName, slotID.defaultMacroName)
         }
         XCTAssertEqual(ClickerSlotID.ten.whimsicalLabel, "a")
-        XCTAssertEqual(ClickerSlotID.ten.defaultMacroName, "MACRO-A")
+        XCTAssertEqual(ClickerSlotID.ten.defaultMacroName, "MACRO_A")
         XCTAssertEqual(ClickerSlotID.fifteen.whimsicalLabel, "f")
-        XCTAssertEqual(ClickerSlotID.fifteen.defaultMacroName, "MACRO-F")
+        XCTAssertEqual(ClickerSlotID.fifteen.defaultMacroName, "MACRO_F")
+    }
+
+    func testParseLegacyHyphenatedLetterBindings() throws {
+        let xml = """
+        <PREFERENCES>
+            <ALIASES>
+                <ALIAS NAME="MACRO-A"/>
+            </ALIASES>
+        </PREFERENCES>
+        """
+        let parsed = try XML.parse(xml)
+        let man = ClickerMan()
+        try man.parse(xml: parsed["PREFERENCES"])
+
+        XCTAssertEqual(man.slot(for: .ten).macroName, "MACRO_A")
     }
 
     func testParseV1StyleAliases() throws {
@@ -49,7 +64,7 @@ class ClickerManTests: XCTestCase {
         XCTAssertEqual(man.slot(for: .one).macroName, "CUSTOM_1")
         XCTAssertEqual(man.slot(for: .two).macroName, "CUSTOM_2")
         XCTAssertEqual(man.slot(for: .three).macroName, "MACRO_3")
-        XCTAssertEqual(man.slot(for: .eleven).macroName, "MACRO-B")
+        XCTAssertEqual(man.slot(for: .eleven).macroName, "MACRO_B")
     }
 
     func testParseV1EighteenAliasImportPreservesMacro10OnA() throws {
@@ -82,8 +97,8 @@ class ClickerManTests: XCTestCase {
         try man.parse(xml: parsed["PREFERENCES"])
 
         XCTAssertEqual(man.slot(for: .ten).macroName, "MACRO_10")
-        XCTAssertEqual(man.slot(for: .eleven).macroName, "MACRO-B")
-        XCTAssertEqual(man.slot(for: .fifteen).macroName, "MACRO-F")
+        XCTAssertEqual(man.slot(for: .eleven).macroName, "MACRO_B")
+        XCTAssertEqual(man.slot(for: .fifteen).macroName, "MACRO_F")
     }
 
     func testRoundTripSerialization() throws {

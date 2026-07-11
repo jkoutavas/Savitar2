@@ -85,12 +85,12 @@ enum ClickerSlotID: Int, CaseIterable {
         case .seven: return "MACRO_7"
         case .eight: return "MACRO_8"
         case .nine: return "MACRO_9"
-        case .ten: return "MACRO-A"
-        case .eleven: return "MACRO-B"
-        case .twelve: return "MACRO-C"
-        case .thirteen: return "MACRO-D"
-        case .fourteen: return "MACRO-E"
-        case .fifteen: return "MACRO-F"
+        case .ten: return "MACRO_A"
+        case .eleven: return "MACRO_B"
+        case .twelve: return "MACRO_C"
+        case .thirteen: return "MACRO_D"
+        case .fourteen: return "MACRO_E"
+        case .fifteen: return "MACRO_F"
         }
     }
 

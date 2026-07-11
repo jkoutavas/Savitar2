@@ -604,16 +604,20 @@ Savitar 1 called these button slots **aliases** in its manual—they are **not**
 
 ### Macro Clicker
 
-The **Macro Clicker** is a floating palette titled **Clicker** — the same whimsical layout as Savitar 1: a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a real button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**. Slots **1–9** map to `MACRO_1` … `MACRO_9`; **a–f** map to `MACRO-A` … `MACRO-F` (Savitar 2 improvement — v1 only wired **a** as `MACRO_10` and left **b–f** as artwork). Imported v1 prefs with 18 `ALIAS` entries still load; the **a** slot keeps a saved `MACRO_10` binding if present.
+The **Macro Clicker** is a floating palette titled **Macro Clicker** — the same whimsical layout as Savitar 1: a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a real button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
+
+**Default macro names** use underscores throughout: grid slots **1–9** → `MACRO_1` … `MACRO_9`; **a–f** → `MACRO_A` … `MACRO_F`; compass directions → `MACRO_NORTH`, `MACRO_EAST`, and so on. Names must match **exactly**—`MACRO_1` and `MACRO-1` are different macros. (Savitar 2 wires all 15 grid cells; v1 only bound **a** as `MACRO_10` and left **b–f** as artwork. Imported v1 prefs with 18 `ALIAS` entries still load; the **a** slot keeps a saved `MACRO_10` binding when present.)
+
+**World vs app-wide macros:** Each clicker button looks up its bound name in the **frontmost world** first (including macros you have just added in that world’s Events window, even before you save the document). If the world has no macro with that name, Savitar falls back to the matching **app-wide** macro. To override a universal macro for one world, create a world macro with the **same name**—for example, a world `MACRO_1` replaces the universal `MACRO_1` while that world is frontmost.
 
 | Action | Result |
 |--------|--------|
 | **Click** a button | Send the bound macro to the active session |
 | **Hover** a button | Caption shows the macro’s command text (or “Button not defined”) |
-| **⌘-click** a button | Choose which **universal** macro this button uses |
+| **⌘-click** a button | Choose which **app-wide** macro name this button uses (stored in app preferences) |
 | **Window → Show Macro Clicker** | Open or bring forward the palette |
 
-Bindings are stored in app preferences as v1-style `ALIAS` XML (`NAME` → macro name). Factory defaults point direction buttons at `MACRO_NORTH`, `MACRO_EAST`, and so on—the same names as the bundled keypad macros.
+Bindings are stored in app preferences as v1-style `ALIAS` XML (`NAME` → macro name). Factory defaults point direction buttons at `MACRO_NORTH`, `MACRO_EAST`, and so on—the same names as the bundled keypad macros. Early Savitar 2 builds that used hyphenated letter names (`MACRO-A` … `MACRO-F`) are upgraded to underscores when preferences load.
 
 **Settings → Startup → Show Macro Clicker at startup** opens the palette at launch. **Settings → Audio → Mute clicker sounds** silences the button click cue.
 

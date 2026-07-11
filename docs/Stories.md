@@ -27,7 +27,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 │  [Startup] [Input & Display] [Audio] [Updates] [Speech]     │
 │───────────────────────────────────────────────────────────│
 │  ☐ Show World Picker at startup                           │
-│  ☐ Show Macro Clicker at startup         (grayed out)     │
+│  ☐ Show Macro Clicker at startup                          │
 │  ☐ Show Events Window at startup                          │
 └───────────────────────────────────────────────────────────┘
 ```
@@ -62,7 +62,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **Goal:** Flags that exist in XML but do nothing today actually affect the app.
 
-**Status:** Partially complete — keypad, mono fonts, mute bell, default word wrap, and mute clicker are wired; clicker startup pref ships with Story 11. `trigsClosed` / `varsClosed` are import-only ([2.6](#story-2--wire-preference-flags-to-behavior) won't do).
+**Status:** Complete — all wired flags honor v1 semantics; `trigsClosed` / `varsClosed` are import-only ([2.6](#story-2--wire-preference-flags-to-behavior) won't do).
 
 ### Tasks
 
@@ -653,21 +653,23 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 - [x] **11.2** **`ClickerMan`** — fixed slot list (direction + number buttons per v1 `TVAlias_t_*`); parse/serialize v1 `ALIAS` elements from prefs.
 - [x] **11.3** **Macro Clicker window** — modeless utility window; button grid; click → `Session.submitServerCmd` on key session; ⌘-click to bind slot to macro (v1: `DoEditButton`).
 - [x] **11.4** **Menu & prefs** — **Window → Macro Clicker**; enable **Show Macro Clicker at startup** and **Mute clicker sounds** (Story **2.5**); frame autosave (`MacroClickerFrame`).
-- [x] **11.5** **Assets** — direction arrows via SF Symbols (macOS 11+); N/NE/… text fallback on 10.14; numbered buttons.
+- [x] **11.5** **Assets** — vector compass rose, up/down arrows, and whimsical grid labels (colors sampled from v1 screenshot); `extract_clicker_art.py` reference script only (PNG bundle not shipped).
 - [x] **11.6** **User guide** — Story 9 task **9.2f**: Macros chapter Macro Clicker section.
 
 ### Touchpoints
 
-- New: `client/Savitar2/src/views/ClickerWindow/` (or similar)
+- `client/Savitar2/src/views/clickerWindow/`
+- `client/Savitar2/src/MacroClicker.swift`, `models/clicker/`
 - `client/Savitar2/src/AppContext.swift`, `AppDelegate.swift`
-- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (un-gray 2.5 / startup clicker)
+- `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift`
 - v1 reference: `CClickerW.cp`, `CAliasMan.h`, `CTVAlias.cp`
 
 ### Acceptance
 
 - Macro Clicker opens from menu and optional startup pref; buttons send bound macro commands to active world session.
+- Frontmost world macro overrides app-wide macro with the same name; hover caption reflects resolved value.
 - Click sound respects **Mute clicker** pref.
-- v1 `ALIAS` entries in imported prefs load into clicker slots.
+- v1 `ALIAS` entries in imported prefs load into clicker slots; 18-entry imports preserve `MACRO_10` on **a**.
 
 ---
 
@@ -1308,9 +1310,9 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 
 | Item | Blocked by | v1 reference | Prefs UI |
 |------|------------|--------------|----------|
-| Show Macro Clicker at startup | Story 11 | `TVPrefFlag_t_StartupClicker` | Grayed out |
+| Show Macro Clicker at startup | — ✅ | `TVPrefFlag_t_StartupClicker` | Enabled (Story 11) |
 | Default word wrap | Story 2.3 ✅ | `TVPrefFlag_t_DefaultWordWrap` | Enabled |
-| Mute clicker sounds | Story 11 | `cmd_MuteClicker` | Grayed out |
+| Mute clicker sounds | — ✅ | `cmd_MuteClicker` | Enabled (Story 11) |
 | Check for updates | Story 12 (Sparkle) ✅ | `CUpdateChecker`, `updatingEnabled` | Enabled |
 | Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
 | Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
@@ -1332,14 +1334,14 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 11. ~~Story 18 — Help → About Privacy~~ ✅
 12. ~~Story 15 — Send Feedback (email)~~ ✅
 13. ~~**Story 21 — About box with scrolling credits**~~ ✅
-14. **Story 2** — *in progress* (remaining: 2.5 clicker; 2.6 won't do)
-15. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
+14. ~~**Story 2** — Wire preference flags~~ ✅
+15. **Story 9 — User guide** — *in progress* (aliases 9.2e when Story 10 lands; drag-to-create triggers TBD)
 16. ~~**Story 6 — Events Window HIG audit**~~ ✅ — close-only chrome, center on first open, shared `EventsWindowController`
 17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; 24.6 won't do; import/export, v1 re-import, log editor deferred)
 18. ~~**Story 25 — Window menu HIG audit**~~ ✅ — tab bar removal, **Show World Picker**, window list hygiene
 19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
 20. Story 10 — Command aliases
-21. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
+21. ~~Story 11 — Macro Clicker~~ ✅
 22. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
 23. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
 24. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
@@ -1359,14 +1361,14 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | v1 control | `PrefsFlags` / field | v2 status |
 |------------|---------------------|-----------|
 | Show World Picker at startup | `startupPicker` | Done |
-| Show Macro Clicker at startup | `startupClicker` | UI only (grayed out) |
+| Show Macro Clicker at startup | `startupClicker` | Done — Story 11 |
 | Show Events Window at startup | `startupEventsWindow` | Done |
 | Use keypad | `useKeypad` | Done |
 | Mono fonts only | `monoFontsOnly` | Done |
 | Default word wrap | `defaultWordWrap` | Done — Story 2.3 |
 | Mute sound / Mute speaking | `muteSound`, `muteSpeaking` | Done (prefs + Audio menu) |
 | Mute terminal bell | `muteBell` | Done |
-| Mute clicker | `muteClicker` | UI only (grayed out) |
+| Mute clicker | `muteClicker` | Done — Story 11 |
 | Check for updates | `updatingEnabled` | Done — Story 12 |
 | Capture file editor | `logEditorName` | Deferred — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |
 | Events outline disclosure (v1 only) | `trigsClosed`, `varsClosed` | Import-only — won't do ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
