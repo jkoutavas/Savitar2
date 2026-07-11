@@ -10,15 +10,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Local commands (2.0 set)** — `##history`, `##recall` / `##!n`, `##clear screen`, status bars (`##set status`, `##close stats`, per-pane close), world flags and markers, scratch variables (`##set macro`), trigger enable/disable and XML add, `##dump` listings (pretty-printed, HTML-safe), `##regex`, `##wait`, `##broadcast`, window select/close; live Events store for world triggers/macros
+- **`##help`** — HTML local-command reference grouped by category; tap a command (`xch_cmd`) to drill into syntax and a short description; back link to the full list; works even when **Interpret HTML tags** is off
+- **`##link`** — insert a colored hyperlink into the output pane: `##link <url> "<label>" #RRGGBB`
+- **Pueblo `xch_cmd` links** — `<a xch_cmd="…">` in HTML output becomes a clickable link; clicks send the command to the session (local commands when prefixed with the world marker, otherwise to the server)
+- **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
 - **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
 - **Macro Clicker** — floating button palette (Story 11): Savitar 1–style **Macro Clicker** window — periwinkle compass rose, green up/down arrows, whimsical green-outlined grid (1–9, a–f); all 15 grid cells are functional (`MACRO_A` … `MACRO_F` for a–f); direction + number buttons send bound macros to the frontmost session; **Window → Show Macro Clicker**; **⌘-click** to bind; hover caption; startup + mute prefs; v1 `ALIAS` XML import/export (18-entry imports preserve `MACRO_10` on **a** when saved)
 
 ### Changed
 
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
+- **User guide** — documents `##link` and `##help`
 
 ### Fixed
 
+- **Session welcome** — banner was emitted before the output pane existed and never appeared; now outputs after the session view is wired up
+- **Session output HTML** — multiline HTML embedded in JavaScript no longer breaks WebKit (`SyntaxError: Unexpected token '<'`); `##help` and other HTML fragments render reliably
+- **Output link clicks** — `http`/`https` links in HTML output activate correctly (`.linkActivated` navigation policy)
+- **Resolution overlay** — yellow variable-resolution box no longer sticks when the app is backgrounded, the window loses key, or split-pane resize ends
+- **HTML bold/strong** — `<strong>` / `<b>` and welcome title render bold despite the global output stylesheet `font` shorthand
 - **Session restoration** — closing a world document before quitting no longer causes it to reopen on relaunch; prefs now persist the live open-document list (#92)
 
 ## [2.0.22] - 2026-07-11

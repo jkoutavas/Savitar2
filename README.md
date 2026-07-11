@@ -69,7 +69,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 ~~ World settings Output tab — buffer size, flush period~~ (won't do — [OutputPerformance.md](docs/OutputPerformance.md))
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
-√ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, … — see USER_GUIDE)
+√ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, `##link`, … — see USER_GUIDE)
 _ Implement local commands `##upload` and `##capture`
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
@@ -80,8 +80,7 @@ _ Implement local commands `##upload` and `##capture`
 √ Printing supported (session output)
 √ ANSI Color Settings pane in app Settings (Story 5)
 √ Macro Clicker (Story 11)
-_ xch_cmd support
-_ MCP (? does anyone use this?)
+√ xch_cmd support (Pueblo clickable command links in HTML output)
 √ Implement scroll locking
 √ Session status bars — ##set status output|input, ##close stats (inverse session colors)
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
@@ -90,26 +89,55 @@ _ MCP (? does anyone use this?)
 √ In-app Savitar Help — bundled user guide (Story 16)
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
-_ Release alpha to select testers, start getting feedback
+√ Release alpha to select testers, start getting feedback
 _ Address key things found in alpha test
+√ Move github repo to public
+```
+
+#### Remaining v1 local commands
+
+Shipped commands are documented in [USER_GUIDE → Local commands](docs/USER_GUIDE.md#local-commands). Still to implement from the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.html):
+
+```
+_ ##upload
+_ ##capture
+_ ##add world
+_ ##dump aliases          (blocked on Story 10 — command aliases)
+_ ##dump connection
+_ ##dump variables
+_ ##play
+_ ##open text window
+_ ##send window
+```
+
+Not planned (v1 stubs, disabled, or out of scope for 2.x):
+
+```
+~~ ##tell application     (AppleScript — not planned)
+~~ ##delete trigger|macro (v1 always returned “bad command”)
+~~ ##connect / ##disconnect (disabled or broken in v1)
+~~ ##clear line / ##goto  (#if 0 in v1 — XY addressing)
+~~ ##show task / ##task / ##kill / ##profile / ##timer  (dev/profiling builds only)
+~~ ##test / ##xy
+~~ Python ##ent / ##run / backtick lines  (optional v1 build)
 ```
 
 #### New 2.0 features
 
 ```
-_ Implement next gen startup commands (trigger based)
 √ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 ```
 
 ### Start of beta
 
 ```
-√ Move github repo to public
+_ Implement next gen startup commands (trigger based)
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
 _ Crash reporting (Sentry — separate from TelemetryDeck analytics)
 _ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md) — honor `OUTPUTMAX`/`OUTPUTMIN`, coalesce appends, session metrics strip)
 _ Start promoting the beta test
 _ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
+_ MCP (? does anyone use this?)
 _ Polish, address beta test issues
 ```
 
@@ -122,6 +150,7 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 _ Alias support (Story 10)
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
+_ New `##say` local command for voicing text
 _ SSL support
 _ Text to emoji support
 _ Javascript scripting?

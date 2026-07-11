@@ -64,7 +64,7 @@
 <tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
 <tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
 </tbody></table>
-<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code> / <code>##capture</code></strong> local commands (next release), MCP SimpleEdit, <code>xch_cmd</code> links. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned): command <strong>aliases</strong> (Story 10, 2.1), <strong><code>##upload</code> / <code>##capture</code></strong> local commands (next release), MCP SimpleEdit. <strong><code>##tell application</code></strong> (AppleScript) is not planned. The guide marks these where relevant.</p>
 <hr/>
 <h2 id="install-updates">Install &amp; updates</h2>
 <h3 id="install-updates-download-and-install">Download and install</h3>
@@ -410,6 +410,7 @@
 <tr><td><strong>Input</strong> (bottom)</td><td>The command line where you type; press <strong>Return</strong> to send</td></tr>
 </tbody></table>
 <p>Both panes are measured in monospace <strong>columns</strong> (width) and <strong>rows</strong> (height). The default for a new world is <strong>80 columns × 24 output rows × 2 input rows</strong>.</p>
+<p>When you connect, Savitar prints a short <strong>Welcome to Savitar</strong> banner at the top of the output pane (version, website link, and a hint to type <code>##help</code> for local commands)—the same tradition as Savitar 1.</p>
 <h3 id="session-window-resizing-panes">Resizing panes</h3>
 <p>You can change pane size in three ways:</p>
 <ol>
@@ -602,8 +603,19 @@
 <tr><td><code>##recall &lt;n&gt;</code></td><td>Puts command *n* from that list into the <strong>input</strong> line (same numbers as <code>##history</code>)</td></tr>
 <tr><td><code>##!&lt;n&gt;</code></td><td>Shorthand for <code>##recall &lt;n&gt;</code> — for example <code>##!3</code> recalls entry 3</td></tr>
 <tr><td><code>##clear screen</code></td><td>Clears the output pane (same as <strong>Edit → Clear Output</strong>, ⌘K)</td></tr>
+<tr><td><code>##link &lt;url&gt; "label" #RRGGBB</code></td><td>Inserts a clickable hyperlink in the <strong>output</strong> pane (v1 syntax: angle brackets around the URL)</td></tr>
+<tr><td><code>##help</code></td><td>HTML list of local commands by category; click a command for syntax and details</td></tr>
+<tr><td><code>##help &lt;command&gt;</code></td><td>Detail for one command — for example <code>##help upload</code></td></tr>
 </tbody></table>
-<p>Example:</p>
+<p><code>##help</code> works even when <strong>Interpret HTML tags</strong> is off. Commands in the list are clickable (Pueblo-style <code>xch_cmd</code> links) and run <code>##help &lt;command&gt;</code> for you.</p>
+<p>If you omit <code>"label"</code> on <code>##link</code>, the URL is used as the link text. If you omit <code>#color</code>, the world's <strong>Link color</strong> (World Settings → Appearance) is used. Web links open in your browser when clicked.</p>
+<p>```text</p>
+<p>##help</p>
+<p>##help upload</p>
+<p>##link &lt;https://www.heynow.com/savitar&gt; "Savitar home"</p>
+<p>##link &lt;https://example.com&gt; "Example" #FF6600</p>
+<p>```</p>
+<p>Example (<code>##history</code>):</p>
 <p>```text</p>
 <p>##history</p>
 <p>```</p>
@@ -762,7 +774,7 @@
 <li>Check fore/back defaults on the Appearance tab for invisible combinations (white on white)</li>
 </ol>
 <h3 id="output-appearance-html-in-output">HTML in output</h3>
-<p>When <strong>Interpret HTML tags</strong> is on, simple HTML in server text is rendered; <strong>Code font</strong> applies to <code>&lt;code&gt;</code> regions. Rich HTML and <strong><code>xch_cmd</code></strong> custom links are <strong>not in Savitar 2 yet</strong>—hosts that depend on them may show raw tags until supported.</p>
+<p>When <strong>Interpret HTML tags</strong> is on, simple HTML in server text is rendered; <strong>Code font</strong> applies to <code>&lt;code&gt;</code> regions. <strong>Pueblo <code>xch_cmd</code> links</strong> (<code>&lt;a xch_cmd="command"&gt;</code>) are clickable: the command is sent to the session (prefix with your local-command marker, e.g. <code>##help history</code>, for Savitar local commands). Normal <code>&lt;a href="…"&gt;</code> links open in your browser.</p>
 <h3 id="output-appearance-word-wrap">Word wrap</h3>
 <p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).</p>
 <h3 id="output-appearance-session-logging">Session logging</h3>
@@ -996,7 +1008,8 @@
 <tr><td>Getting started, install, worlds, session, commands, triggers, glossary</td><td>✅ This guide (July 2026)</td></tr>
 <tr><td><strong>Aliases</strong> (Story 10)</td><td>Blocked on implementation</td></tr>
 <tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Shipped</td></tr>
-<tr><td>MCP, <code>xch_cmd</code></td><td>Deferred</td></tr>
+<tr><td>MCP</td><td>Deferred</td></tr>
+<tr><td><strong><code>xch_cmd</code> links</strong></td><td>Shipped — see <a href="#html-in-output">HTML in output</a></td></tr>
 <tr><td><strong><code>##upload</code> / <code>##capture</code></strong></td><td>Next release (with session logging QA)</td></tr>
 <tr><td><strong>Status bars</strong> (<code>##set status</code>)</td><td>Shipped—inverse colors; styling setting planned for 2.1</td></tr>
 <tr><td><strong>Local commands</strong> (2.0 set)</td><td>Shipped—see <a href="#local-commands">Local commands</a>; upload/capture next</td></tr>

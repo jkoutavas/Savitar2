@@ -25,6 +25,8 @@ protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult)
     func printSource()
+    func outputLink(url: String, label: String, colorHex: String?)
+    func outputHTML(_ html: String)
     func commandHistory() -> [String]
     func setSessionStatus(pane: SessionStatusPane, text: String)
     func closeSessionStatusBars()
@@ -40,6 +42,8 @@ protocol SessionHandlerProtocol {
 }
 
 extension SessionHandlerProtocol {
+    func outputLink(url _: String, label _: String, colorHex _: String?) {}
+    func outputHTML(_: String) {}
     func closeSessionStatus(pane _: SessionStatusPane) {}
     func recallCommand(at _: Int) {}
     func clearOutputScreen() {}

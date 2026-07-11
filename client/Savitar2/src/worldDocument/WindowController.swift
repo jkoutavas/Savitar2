@@ -42,6 +42,8 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(colorsDidChange),
                                                name: .savitarColorsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidResignActive),
+                                               name: NSApplication.didResignActiveNotification, object: nil)
     }
 
     deinit {
@@ -54,6 +56,15 @@ class WindowController: NSWindowController, NSWindowDelegate {
         let splitViewController = contentViewController as? SessionViewController
         splitViewController?.outputViewController?.setWordWrap(doc.session?.wordWrapEnabled ?? false)
         splitViewController?.outputViewController?.setStyle(world: world)
+    }
+
+    @objc private func applicationDidResignActive() {
+        endResolutionOverlay()
+    }
+
+    private func endResolutionOverlay() {
+        isUserResizingSplit = false
+        resolutionOverlay.hide()
     }
 
     override func windowTitle(forDocumentDisplayName displayName: String) -> String {
@@ -287,8 +298,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
             isUserResizingSplit = true
             showResolutionOverlay(outputRows: measured.outputRows, columns: measured.columns)
         } else if isUserResizingSplit {
-            isUserResizingSplit = false
-            resolutionOverlay.hide()
+            endResolutionOverlay()
             doc.world = measured
             doc.updateChangeCount(.changeDone)
         }
@@ -462,8 +472,16 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     func windowDidEndLiveResize(_: Notification) {
-        resolutionOverlay.hide()
+        endResolutionOverlay()
         persistMeasuredPaneDimensions()
+    }
+
+    func windowDidResignKey(_: Notification) {
+        endResolutionOverlay()
+    }
+
+    func windowDidMiniaturize(_: Notification) {
+        endResolutionOverlay()
     }
 
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {

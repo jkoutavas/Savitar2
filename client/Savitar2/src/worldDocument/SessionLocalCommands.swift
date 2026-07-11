@@ -54,6 +54,8 @@ enum SessionLocalCommand: Equatable {
     case addMacro(xml: String)
     case addTrigger(xml: String)
     case selectWindow(title: String)
+    case link(url: String, label: String, colorHex: String?)
+    case help(topic: String?)
     case unknown(body: String)
 }
 
@@ -86,6 +88,10 @@ enum SessionLocalCommands {
             return parseEnable(trimmed, words: words, body: body)
         case "history":
             return words.count == 1 ? .history : .unknown(body: body)
+        case "help":
+            return parseHelp(trimmed, words: words, body: body)
+        case "link":
+            return parseLink(trimmed, body: body)
         case "recall":
             return parseRecall(words: words, body: body)
         case "regex":
@@ -217,6 +223,53 @@ enum SessionLocalCommands {
             return .unknown(body: body)
         }
         return .recall(index: index)
+    }
+
+    private static func parseHelp(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {
+        guard words.count >= 1 else { return .unknown(body: body) }
+        if words.count == 1 {
+            return .help(topic: nil)
+        }
+        let topic = payload(afterLeadingWords: 1, in: trimmed)?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let topic, !topic.isEmpty else { return .help(topic: nil) }
+        return .help(topic: topic)
+    }
+
+    private static func parseLink(_ trimmed: String, body: String) -> SessionLocalCommand {
+        guard let payload = payload(afterLeadingWords: 1, in: trimmed),
+              payload.first == "<",
+              let closeIndex = payload.firstIndex(of: ">") else {
+            return .unknown(body: body)
+        }
+
+        let urlStart = payload.index(after: payload.startIndex)
+        let url = String(payload[urlStart ..< closeIndex])
+        guard !url.isEmpty else { return .unknown(body: body) }
+
+        var remainder = String(payload[payload.index(after: closeIndex)...])
+            .trimmingCharacters(in: .whitespaces)
+
+        var label: String?
+        if remainder.hasPrefix("\"") {
+            guard let quoted = parseQuotedString(at: remainder.startIndex, in: remainder) else {
+                return .unknown(body: body)
+            }
+            label = quoted.value
+            remainder = quoted.remainder.trimmingCharacters(in: .whitespaces)
+        }
+
+        var colorHex: String?
+        if remainder.hasPrefix("#") {
+            colorHex = String(remainder.dropFirst())
+            if colorHex?.isEmpty == true {
+                return .unknown(body: body)
+            }
+        } else if !remainder.isEmpty {
+            return .unknown(body: body)
+        }
+
+        return .link(url: url, label: label ?? url, colorHex: colorHex)
     }
 
     private static func parseRegex(_ trimmed: String, body: String) -> SessionLocalCommand {

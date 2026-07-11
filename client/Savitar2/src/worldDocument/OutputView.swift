@@ -110,7 +110,10 @@ class OutputView: WKWebView {
             .replacingOccurrences(of: "\\", with: "\\\\")
 
         // Convert any ANSI escape codes to HTML spans
-        let result = ansiToHtml.parse(ansi: cleanString, hideANSI: !useANSI)
+        var result = ansiToHtml.parse(ansi: cleanString, hideANSI: !useANSI)
+        if useHTML {
+            result = XchCmdLinkProcessor.process(result)
+        }
         if result.count > 0 {
             let htmlStr = result.replacingOccurrences(of: "\"", with: "'")
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
@@ -135,6 +138,43 @@ class OutputView: WKWebView {
                 AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
             }
         }
+    }
+
+    func outputHTMLFragment(_ html: String, makeAppend: Bool = false, appending: Bool = false, appendID: Int = 0) {
+        var fragment = html
+        if useHTML {
+            fragment = XchCmdLinkProcessor.process(fragment)
+        }
+        let htmlStr = javascriptStringLiteral(fragment)
+        if appending {
+            let js = """
+            var elem = document.getElementById(\(appendID));
+            if (elem !== null && elem.innerHTML !== null) {
+                elem.innerHTML = elem.innerHTML + \"\(htmlStr)\";
+            }
+            \(scrollToBottomJavaScript())
+            """
+            run(javaScript: js)
+        } else {
+            let js = """
+            var i=document.createElement('div');
+            i.setAttribute('class', 'reset bg-reset');
+            i.innerHTML="\(htmlStr)";
+            document.body.appendChild(i);
+            \(scrollToBottomJavaScript())
+            """
+            run(javaScript: js)
+        }
+    }
+
+    /// Escape HTML for embedding in a JavaScript double-quoted string passed to `innerHTML`.
+    private func javascriptStringLiteral(_ text: String) -> String {
+        return text
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "'")
+            .replacingOccurrences(of: "\r\n", with: "")
+            .replacingOccurrences(of: "\n", with: "")
+            .replacingOccurrences(of: "\r", with: "")
     }
 
     private func output(html: String, makeAppend: Bool, appending: Bool, appendID: Int) {
@@ -228,7 +268,7 @@ class OutputView: WKWebView {
         \(fgColorCSS)
         \(bgColorCSS)
         .underline   {text-decoration: underline;}
-        .bold        {font-weight: bold;}
+        .bold, strong, b {font-weight: bold;}
         .lighter     {font-weight: lighter;}
         .italic      {font-style: italic;}
         .blink       {animation: blink 2s ease infinite;}
@@ -239,6 +279,103 @@ class OutputView: WKWebView {
         }
         .crossed-out {text-decoration: line-through;}
         .highlighted {filter: contrast(70%) brightness(190%);}
+
+        .savitar-welcome {
+            margin: 0;
+            padding: 0;
+            line-height: 1.25;
+        }
+        .savitar-welcome strong {
+            font-weight: bold;
+        }
+        .savitar-welcome a {
+            color: #\(linkColor);
+        }
+
+        .savitar-help {
+            margin: 0.35em 0 0.75em;
+            padding: 0.85em 1em;
+            border: 1px solid rgba(127, 127, 127, 0.45);
+            border-radius: 8px;
+            background: rgba(127, 127, 127, 0.12);
+            color: #\(foreColor);
+        }
+        .savitar-help h3 {
+            margin: 0 0 0.55em;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #\(foreColor);
+        }
+        .savitar-help-lead {
+            margin: 0 0 0.45em;
+            line-height: 1.45;
+            opacity: 0.92;
+        }
+        .savitar-help-marker,
+        .savitar-help code {
+            font: \(world.fontSize)px \(world.monoFontName);
+            color: #\(linkColor);
+        }
+        .savitar-help-section {
+            margin-top: 0.85em;
+        }
+        .savitar-help-section h4 {
+            margin: 0 0 0.35em;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            opacity: 0.72;
+            color: #\(foreColor);
+        }
+        .savitar-help-commands {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .savitar-help-commands li {
+            margin: 0;
+            padding: 0.3em 0.45em;
+            border-radius: 5px;
+        }
+        .savitar-help-commands li:hover {
+            background: rgba(127, 127, 127, 0.18);
+        }
+        .savitar-help a.savitar-help-cmd {
+            color: #\(foreColor);
+            font: \(world.fontSize)px \(world.fontName);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .savitar-help a.savitar-help-cmd:hover {
+            color: #\(linkColor);
+            text-decoration: underline;
+        }
+        .savitar-help-nav {
+            margin: 0 0 0.65em;
+        }
+        .savitar-help a.savitar-help-back {
+            color: #\(linkColor);
+            font-size: 0.92em;
+            text-decoration: none;
+        }
+        .savitar-help a.savitar-help-back:hover {
+            text-decoration: underline;
+        }
+        .savitar-help-topic .savitar-help-syntax-line {
+            margin: 0.35em 0 0.55em;
+            font: \(world.fontSize)px \(world.monoFontName);
+            color: #\(linkColor);
+            line-height: 1.45;
+        }
+        .savitar-help-detail-text {
+            margin: 0;
+            line-height: 1.5;
+            opacity: 0.92;
+        }
+        .savitar-help-missing {
+            margin: 0;
+        }
 
         ::-webkit-scrollbar {
             -webkit-appearance: none;

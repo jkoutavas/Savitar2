@@ -8,6 +8,18 @@ class EchoServer {
     static let shutdownCommand: String = "SHUTDOWN"
     static let bufferSize = 4096
 
+    /// HTML and Pueblo-style clickable commands for Savitar output testing (`##set html on`).
+    static let puebloTestPreamble = """
+        HTML test examples (turn on Interpret HTML tags in Savitar):
+        <b>bold</b>, <i>italic</i>, <u>underline</u>, and <code>code text</code>
+        <font color="#66ccff">colored font text</font> and <a href="https://www.heynow.com/savitar">normal web link</a>
+
+        Pueblo xch_cmd test (turn on Interpret HTML tags in Savitar):
+        <a xch_cmd="look">Look around</a> | <a xch_cmd="who" xch_hint="Who is online?">Who</a> | <a xch_cmd="help">Help</a>
+        When xch_cmd support is enabled, clicking a link sends that command here.
+
+        """
+
     let port: Int
     var listenSocket: Socket?
     var continueRunningValue = true
@@ -101,6 +113,7 @@ class EchoServer {
                 try socket.write(from: "\(ansiTestStr)\n")
                 try socket.write(from: "Hello, type 'QUIT' to end session\nor 'SHUTDOWN' to stop server.\n")
                 try socket.write(from: "https://www.heynow.com/savitar\n")
+                try socket.write(from: Self.puebloTestPreamble)
 
                 repeat {
                     try socket.write(from: "prompt: ")
