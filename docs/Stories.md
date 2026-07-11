@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance. **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** and **Story 25** track remaining HIG and UI backlog from [HIG.md](HIG.md). **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -384,15 +384,17 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **v1 parity:** New v2-only pref (default **System**). No v1 XML to import.
 
+**Status:** Complete (July 2026).
+
 ### Tasks
 
-- [ ] **26.1** **Model** — `AppAppearanceMode` enum (`system`, `light`, `dark`); persist as v2 prefs XML attribute (e.g. `APPAPPEARANCE` on `PREFERENCES`); default `system`; include in `save()` / load paths and factory reset ([Story 24.1](#story-24--settings-advanced-maintenance))
-- [ ] **26.2** **UI** — `NSPopUpButton` (or segmented control) on **Settings → Input & Display**; live save like other checkboxes; `resizeToFitCurrentPane` if pane grows
-- [ ] **26.3** **Apply** — set `NSApp.appearance` at launch (`AppDelegate`) and immediately on change (`nil` = System, `.aqua` = Light, `.darkAqua` = Dark); post notification or reuse existing color-change path if other subsystems need refresh
-- [ ] **26.4** **Layer-backed views** — audit custom `wantsLayer` / `layer?.backgroundColor` fills (World Picker ✅ partial fix; About box; any others) so **System** + Auto light/dark transitions and explicit pref changes re-resolve dynamic colors (`updateLayer`, `viewDidChangeEffectiveAppearance`)
-- [ ] **26.5** **Out of scope check** — confirm world session `WKWebView` output, ANSI Colors pane, and Sparkle/update UI are unaffected or behave acceptably under forced light/dark
-- [ ] **26.6** **Docs** — [USER_GUIDE.md](USER_GUIDE.md) **Input & Display** table + short “App appearance vs world appearance” note; [HIG.md](HIG.md) panes table; optional CHANGELOG on ship
-- [ ] **26.7** **Tests** — `AppPreferencesTests` round-trip save/load; default `system` after factory reset
+- [x] **26.1** **Model** — `AppAppearanceMode` enum (`system`, `light`, `dark`); persist as v2 prefs XML attribute (e.g. `APPAPPEARANCE` on `PREFERENCES`); default `system`; include in `save()` / load paths and factory reset ([Story 24.1](#story-24--settings-advanced-maintenance))
+- [x] **26.2** **UI** — `NSPopUpButton` (or segmented control) on **Settings → Input & Display**; live save like other checkboxes; `resizeToFitCurrentPane` if pane grows
+- [x] **26.3** **Apply** — set `NSApp.appearance` at launch (`AppDelegate`) and immediately on change (`nil` = System, `.aqua` = Light, `.darkAqua` = Dark); post notification or reuse existing color-change path if other subsystems need refresh
+- [x] **26.4** **Layer-backed views** — audit custom `wantsLayer` / `layer?.backgroundColor` fills (World Picker ✅ partial fix; About box; any others) so **System** + Auto light/dark transitions and explicit pref changes re-resolve dynamic colors (`updateLayer`, `viewDidChangeEffectiveAppearance`)
+- [x] **26.5** **Out of scope check** — confirm world session `WKWebView` output, ANSI Colors pane, and Sparkle/update UI are unaffected or behave acceptably under forced light/dark
+- [x] **26.6** **Docs** — [USER_GUIDE.md](USER_GUIDE.md) **Input & Display** table + short “App appearance vs world appearance” note; [HIG.md](HIG.md) panes table; optional CHANGELOG on ship
+- [x] **26.7** **Tests** — `AppPreferencesTests` round-trip save/load; default `system` after factory reset
 
 ### Sketch (Input & Display pane)
 
@@ -415,7 +417,9 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - `client/Savitar2/src/state/App/AppPreferencesActions.swift`
 - `client/Savitar2/src/views/AppPreferences/AppPrefsViewController.swift` (Input & Display section)
 - `client/Savitar2/src/AppDelegate.swift`
+- `client/Savitar2/src/HelpGuideWindowController.swift` (help book inherits app appearance)
 - `client/Savitar2/src/views/worldPicker/WorldPickerContentView.swift` (layer refresh pattern)
+- `client/scripts/build_help_book.py` — `savitar-help.css` dark mode (`prefers-color-scheme`)
 - `docs/USER_GUIDE.md`, `docs/HIG.md`
 
 ### Acceptance
@@ -1269,7 +1273,7 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 16. Story 6 — Events Window HIG
 17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; import/export, v1 re-import, log editor deferred)
 18. **Story 25 — Window menu HIG audit** — tab bar removal, **Show World Picker**, window list hygiene
-19. **Story 26 — App-wide appearance** — System / Light / Dark on **Input & Display** pane
+19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
 20. Story 10 — Command aliases
 21. Story 11 — Macro Clicker (README beta; unblocks Story 2.5)
 22. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships

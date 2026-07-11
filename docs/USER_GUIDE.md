@@ -232,8 +232,19 @@ Speech and printing strip or ignore ANSI styling: continuous speech reads plain 
 
 Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. These options apply **app-wide** and save immediately.
 
+### App appearance vs world appearance
+
+| | **Settings → Input & Display** | **World Settings → Appearance** |
+|--|-------------------------------|----------------------------------|
+| **Scope** | App windows and dialogs (World Picker, Settings, Events, menus) | One connected world’s session output |
+| **Controls** | **System** / **Light** / **Dark** popup | Fore/back colors, fonts, ANSI interpretation |
+| **ANSI palette** | Unchanged — see [ANSI colors](#ansi-colors) | Unchanged |
+
+**App appearance** is a Savitar 2-only preference (no Savitar 1 import). **System** follows macOS light/dark, including Auto sunrise/sunset. **Savitar Help** (⌘?) uses the same appearance for its content; world session output colors are unchanged.
+
 | Option | What it does |
 |--------|----------------|
+| **App appearance** | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows. |
 | **Use keypad for macro entry** | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. Matches Savitar 1’s **Use keypad** preference. |
 | **Mono fonts only (in font menus)** | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned. |
 | **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. Matches Savitar 1’s default for new text windows, applied here to session panes. |
@@ -865,7 +876,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | Savitar 2 pane | v1 equivalent (approx.) |
 |----------------|-------------------------|
 | [Startup](#startup) | World Picker / Events / Clicker at launch |
-| [Input & Display](#input-display) | Keypad, mono fonts, default word wrap |
+| [Input & Display](#input-display) | App appearance (System / Light / Dark), keypad, mono fonts, default word wrap |
 | [Colors](#ansi-colors) | ANSI Color Settings |
 | [Audio](#audio) | Mute sound / speaking / bell / clicker |
 | [Updates](#updates) | Check for updates |

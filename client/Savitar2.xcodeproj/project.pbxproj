@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		69000EE22397CF09009976E0 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69000EE12397CF09009976E0 /* AppContext.swift */; };
+		69D2600B2F09010000AB6BA6 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2600A2F09010000AB6BA6 /* AppAppearance.swift */; };
 		69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3823A52A7B001C58B1 /* TriggerManTests.swift */; };
 		69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */; };
 		69071B3D23A6816A001C58B1 /* XMLElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */; };
@@ -189,6 +190,7 @@
 
 /* Begin PBXFileReference section */
 		69000EE12397CF09009976E0 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		69D2600A2F09010000AB6BA6 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		69071B3823A52A7B001C58B1 /* TriggerManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManTests.swift; sourceTree = "<group>"; };
 		69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyXMLParserTests.swift; sourceTree = "<group>"; };
 		69071B3C23A6816A001C58B1 /* XMLElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XMLElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 			isa = PBXGroup;
 			children = (
 				69000EE12397CF09009976E0 /* AppContext.swift */,
+				69D2600A2F09010000AB6BA6 /* AppAppearance.swift */,
 				69A45B002A7F100100CDDE09 /* WindowRestoration.swift */,
 				69662B26204367BD00E7CC7B /* AppDelegate.swift */,
 				69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */,
@@ -940,6 +943,7 @@
 				695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */,
 				695F5A9425899EBC00AB6BA6 /* TrigTextStyle.swift in Sources */,
 				69000EE22397CF09009976E0 /* AppContext.swift in Sources */,
+				69D2600B2F09010000AB6BA6 /* AppAppearance.swift in Sources */,
 				69A45B012A7F100100CDDE09 /* WindowRestoration.swift in Sources */,
 				695F5ABC25899EFD00AB6BA6 /* OutputViewController.swift in Sources */,
 				695F5AC325899EFD00AB6BA6 /* WorldSettingsController.swift in Sources */,

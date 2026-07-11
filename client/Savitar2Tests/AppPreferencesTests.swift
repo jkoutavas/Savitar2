@@ -46,15 +46,46 @@ class AppPreferencesTests: XCTestCase {
     }
 
     func testRestoreFactoryDefaultsReloadsBundledWorlds() {
+        AppContext.shared.appPrefsStore.dispatch(SetAppAppearanceModeAction(mode: .dark))
+        XCTAssertEqual(AppContext.shared.prefs.appearanceMode, .dark)
         AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteBell, enabled: true))
         XCTAssertTrue(AppContext.shared.prefs.flags.contains(.muteBell))
 
         AppContext.shared.restoreFactoryDefaults()
 
         XCTAssertEqual(AppContext.shared.worldPickerStore.state.worldList.items.count, 11)
+        XCTAssertEqual(AppContext.shared.prefs.appearanceMode, .system)
         XCTAssertFalse(AppContext.shared.prefs.flags.contains(.muteBell))
         XCTAssertTrue(AppContext.shared.prefs.flags.contains(.startupPicker))
         XCTAssertTrue(AppContext.shared.prefs.flags.contains(.useKeypad))
+    }
+
+    func testAppAppearanceModeDefaultsToSystem() {
+        let prefs = AppPreferences()
+        XCTAssertEqual(prefs.appearanceMode, .system)
+    }
+
+    func testAppAppearanceModeXMLRoundTrip() throws {
+        var prefs = AppPreferences()
+        prefs.appearanceMode = .dark
+        let xml = try prefs.toXMLElement()
+        XCTAssertTrue(xml.xmlString.contains("APPAPPEARANCE=\"DARK\""))
+
+        var loaded = AppPreferences()
+        try loaded.parse(xml: XML.parse(xml.xmlString)[PreferencesElemIdentifier])
+        XCTAssertEqual(loaded.appearanceMode, .dark)
+
+        prefs.appearanceMode = .system
+        let systemXml = try prefs.toXMLElement()
+        XCTAssertFalse(systemXml.xmlString.contains("APPAPPEARANCE"))
+    }
+
+    func testSetAppAppearanceModeAction() {
+        var state = AppPreferencesState()
+        state = SetAppAppearanceModeAction(mode: .light).apply(oldState: state)
+        XCTAssertEqual(state.prefs.appearanceMode, .light)
+        state = SetAppAppearanceModeAction(mode: .system).apply(oldState: state)
+        XCTAssertEqual(state.prefs.appearanceMode, .system)
     }
 
     func testTriggerMan() {
