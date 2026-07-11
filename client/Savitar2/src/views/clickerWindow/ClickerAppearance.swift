@@ -59,6 +59,25 @@ enum ClickerAppearance {
         path.stroke()
     }
 
+    /// Hit-test compass wedges — overlapping button frames use square bounds, but only the triangle should count.
+    static func directionWedgeContains(_ point: NSPoint, in rect: NSRect, slot: ClickerSlotID) -> Bool {
+        let drawRect = rect.insetBy(dx: -1.5, dy: -1.5)
+        let center = CGPoint(x: drawRect.midX, y: drawRect.midY)
+        let unrotated = rotate(point: point, around: center, by: -directionRotation(for: slot))
+        return canonicalDirectionPath(in: drawRect).contains(unrotated)
+    }
+
+    private static func rotate(point: NSPoint, around center: CGPoint, by angle: CGFloat) -> NSPoint {
+        let deltaX = point.x - center.x
+        let deltaY = point.y - center.y
+        let cosAngle = cos(angle)
+        let sinAngle = sin(angle)
+        return NSPoint(
+            x: center.x + deltaX * cosAngle - deltaY * sinAngle,
+            y: center.y + deltaX * sinAngle + deltaY * cosAngle
+        )
+    }
+
     /// One isosceles wedge rotated per slot — matches v1 uniform compass triangles.
     private static func directionRotation(for slot: ClickerSlotID) -> CGFloat {
         switch slot {

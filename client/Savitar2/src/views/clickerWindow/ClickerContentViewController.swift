@@ -119,7 +119,7 @@ final class ClickerContentViewController: NSViewController {
         ]
 
         for placement in compassLayout {
-            let button = makeDirectionButton(slot: placement.slot, size: compassSize)
+            let button = makeDirectionButton(slot: placement.slot)
             slotButtons[placement.slot] = button
             compassPanel.addSubview(button)
             NSLayoutConstraint.activate([
@@ -134,6 +134,27 @@ final class ClickerContentViewController: NSViewController {
                     constant: CGFloat(placement.row) * compassStepV
                 )
             ])
+        }
+
+        compassPanel.configure(
+            placements: compassLayout.map { placement in
+                ClickerCompassPanel.Placement(
+                    slot: placement.slot,
+                    frame: NSRect(
+                        x: CGFloat(placement.col) * compassStepH,
+                        y: CGFloat(placement.row) * compassStepV,
+                        width: compassSize,
+                        height: compassSize
+                    )
+                )
+            }
+        )
+        compassPanel.onHoverSlot = { [weak self] slot in
+            if let slot {
+                self?.refreshCaption(for: slot)
+            } else {
+                self?.refreshCaption(for: nil)
+            }
         }
 
         let upButton = makeVerticalButton(up: true)
@@ -230,13 +251,21 @@ final class ClickerContentViewController: NSViewController {
         ]
     }
 
-    private func makeDirectionButton(slot: ClickerSlotID, size: CGFloat) -> ClickerPaletteButton {
+    private func makeDirectionButton(slot: ClickerSlotID) -> ClickerPaletteButton {
         let button = ClickerPaletteButton(frame: .zero)
         button.style = .direction(slot)
         button.slotID = slot
-        wireButton(button) { [weak self] in self?.refreshCaption(for: slot) }
         button.translatesAutoresizingMaskIntoConstraints = false
         button.toolTip = "⌘-click to bind macro"
+        button.onClick = { [weak self] in
+            guard let self else { return }
+            if NSApp.currentEvent?.modifierFlags.contains(.command) == true {
+                bindSlot(slot)
+                return
+            }
+            let macroName = AppContext.shared.prefs.clickerMan.slot(for: slot).macroName
+            MacroClicker.sendMacro(named: macroName)
+        }
         return button
     }
 
@@ -346,12 +375,74 @@ private final class ClickerRootView: NSView {
 }
 
 private final class ClickerCompassPanel: NSView {
+    struct Placement {
+        let slot: ClickerSlotID
+        let frame: NSRect
+    }
+
+    private var placements: [Placement] = []
+    private var hoveredSlot: ClickerSlotID?
+    var onHoverSlot: ((ClickerSlotID?) -> Void)?
+
     override var isFlipped: Bool { true }
     override var isOpaque: Bool { true }
+
+    func configure(placements: [Placement]) {
+        self.placements = placements
+    }
 
     override func draw(_ dirtyRect: NSRect) {
         ClickerAppearance.panelGray.setFill()
         bounds.fill()
+    }
+
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        trackingAreas.forEach { removeTrackingArea($0) }
+        let area = NSTrackingArea(
+            rect: bounds,
+            options: [.mouseMoved, .mouseEnteredAndExited, .activeAlways, .inVisibleRect],
+            owner: self,
+            userInfo: nil
+        )
+        addTrackingArea(area)
+    }
+
+    override func mouseMoved(with event: NSEvent) {
+        updateHover(at: convert(event.locationInWindow, from: nil))
+    }
+
+    override func mouseEntered(with event: NSEvent) {
+        updateHover(at: convert(event.locationInWindow, from: nil))
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        setHoveredSlot(nil)
+    }
+
+    private func updateHover(at point: NSPoint) {
+        setHoveredSlot(directionSlot(at: point))
+    }
+
+    private func setHoveredSlot(_ slot: ClickerSlotID?) {
+        guard slot != hoveredSlot else { return }
+        hoveredSlot = slot
+        onHoverSlot?(slot)
+    }
+
+    private func directionSlot(at point: NSPoint) -> ClickerSlotID? {
+        for placement in placements {
+            guard placement.frame.contains(point) else { continue }
+            let localPoint = NSPoint(
+                x: point.x - placement.frame.minX,
+                y: point.y - placement.frame.minY
+            )
+            let localRect = NSRect(origin: .zero, size: placement.frame.size)
+            if ClickerAppearance.directionWedgeContains(localPoint, in: localRect, slot: placement.slot) {
+                return placement.slot
+            }
+        }
+        return nil
     }
 }
 
@@ -411,13 +502,29 @@ private final class ClickerPaletteButton: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        guard bounds.contains(point) else { return nil }
+        if case let .direction(slot) = style {
+            guard ClickerAppearance.directionWedgeContains(point, in: bounds, slot: slot) else {
+                return nil
+            }
+        }
+        return self
+    }
+
     override func mouseDown(with event: NSEvent) {
         isHighlighted = true
         needsDisplay = true
     }
 
     override func mouseUp(with event: NSEvent) {
-        let inside = bounds.contains(convert(event.locationInWindow, from: nil))
+        let point = convert(event.locationInWindow, from: nil)
+        let inside: Bool
+        if case let .direction(slot) = style {
+            inside = ClickerAppearance.directionWedgeContains(point, in: bounds, slot: slot)
+        } else {
+            inside = bounds.contains(point)
+        }
         isHighlighted = false
         needsDisplay = true
         if inside {
@@ -440,6 +547,9 @@ private final class ClickerPaletteButton: NSView {
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
         trackingAreas.forEach { removeTrackingArea($0) }
+        if case .direction = style {
+            return
+        }
         let area = NSTrackingArea(
             rect: bounds,
             options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],

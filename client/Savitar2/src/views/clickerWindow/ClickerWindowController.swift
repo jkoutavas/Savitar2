@@ -26,6 +26,7 @@ final class ClickerWindowController: NSWindowController, NSWindowDelegate {
         window.isReleasedWhenClosed = false
         window.titleVisibility = .visible
         window.hidesOnDeactivate = false
+        window.acceptsMouseMovedEvents = true
         clearLegacyAutosavedFrame()
         applyDesignedContentSize()
         SavitarHelpButton.installInTitleBar(of: window, for: .macroClicker)
