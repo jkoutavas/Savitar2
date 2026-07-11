@@ -65,6 +65,31 @@
 say ...and here is command two!</VALUE>
         </MACRO>
     </VARIABLES>
+    <ALIASES>
+        <ALIAS NAME="MACRO_NORTH"/>
+        <ALIAS NAME="MACRO_NEAST"/>
+        <ALIAS NAME="MACRO_EAST"/>
+        <ALIAS NAME="MACRO_SEAST"/>
+        <ALIAS NAME="MACRO_SOUTH"/>
+        <ALIAS NAME="MACRO_SWEST"/>
+        <ALIAS NAME="MACRO_WEST"/>
+        <ALIAS NAME="MACRO_NWEST"/>
+        <ALIAS NAME="MACRO_1"/>
+        <ALIAS NAME="MACRO_2"/>
+        <ALIAS NAME="MACRO_3"/>
+        <ALIAS NAME="MACRO_4"/>
+        <ALIAS NAME="MACRO_5"/>
+        <ALIAS NAME="MACRO_6"/>
+        <ALIAS NAME="MACRO_7"/>
+        <ALIAS NAME="MACRO_8"/>
+        <ALIAS NAME="MACRO_9"/>
+        <ALIAS NAME="MACRO-A"/>
+        <ALIAS NAME="MACRO-B"/>
+        <ALIAS NAME="MACRO-C"/>
+        <ALIAS NAME="MACRO-D"/>
+        <ALIAS NAME="MACRO-E"/>
+        <ALIAS NAME="MACRO-F"/>
+    </ALIASES>
     <COLORS>
         <COLOR NAME="black" RGB="#000000"></COLOR>
         <COLOR NAME="blackd" RGB="#616161"></COLOR>

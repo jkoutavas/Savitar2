@@ -64,7 +64,7 @@
 <tr><td><strong>Menus</strong></td><td><strong>Edit → Speech → Speak Selected Text</strong> replaces v1 <strong>Start Speaking</strong>; <strong>Audio → Flush Speech Buffer</strong> (⌘L) clears queued speech</td></tr>
 <tr><td><strong>Settings</strong></td><td>Scattered v1 preference dialogs are now <strong>Settings…</strong> (⌘,) toolbar panes—see <a href="#settings-reference">Settings reference</a></td></tr>
 </tbody></table>
-<p>Features <strong>not in Savitar 2 yet</strong> (but planned or deferred): command <strong>aliases</strong>, <strong>Macro Clicker</strong>, MCP SimpleEdit, file upload, status bar divider, <code>xch_cmd</code> links. The guide marks these where relevant.</p>
+<p>Features <strong>not in Savitar 2 yet</strong> (but planned or deferred): command <strong>aliases</strong> (typed abbreviations — Story 10, planned for 2.1), MCP SimpleEdit, file upload, status bar divider, <code>xch_cmd</code> links. The guide marks these where relevant.</p>
 <hr/>
 <h2 id="install-updates">Install &amp; updates</h2>
 <h3 id="install-updates-download-and-install">Download and install</h3>
@@ -227,7 +227,7 @@
 <tbody>
 <tr><td><strong>Mute sound cues</strong></td><td>Suppresses <strong>trigger sound</strong> effects (chimes and custom sounds configured in the Events window). Trigger <strong>speech</strong> is not affected.</td></tr>
 <tr><td><strong>Mute speaking cues</strong></td><td>Suppresses all <strong>spoken</strong> output—trigger speech and <strong>continuous speech</strong>. If nothing is being read aloud, check this first.</td></tr>
-<tr><td><strong>Mute clicker sounds</strong></td><td>*(Not yet available.)* Will mute Macro Clicker button sounds when that feature ships.</td></tr>
+<tr><td><strong>Mute clicker sounds</strong></td><td>Mutes the click sound when you press a <strong>Macro Clicker</strong> button (Settings → Audio).</td></tr>
 <tr><td><strong>Mute terminal bell</strong></td><td>Suppresses the system beep when the server sends a telnet <strong>bell</strong> character (ASCII BEL). The character is still removed from output text; only the sound is skipped.</td></tr>
 </tbody></table>
 <p><strong>Speech</strong> voice and rate live on the separate <strong>Speech</strong> settings pane—see <a href="#speech-speech-settings-reference">Speech settings reference</a>. To stop speech that is already playing, use <strong>Audio → Flush Speech Buffer</strong> (⌘L) from the menu bar.</p>
@@ -251,7 +251,7 @@
 <tbody>
 <tr><td><strong>Show World Picker at startup</strong></td><td>Opens the World Picker window when Savitar launches (default <strong>on</strong>). Turn off if you prefer to open worlds only via <strong>File → Open…</strong> or recent documents.</td></tr>
 <tr><td><strong>Show Events Window at startup</strong></td><td>Opens the <strong>app-wide Events</strong> window (⇧⌘E) automatically. Useful if you live in universal triggers and macros.</td></tr>
-<tr><td><strong>Show Macro Clicker at startup</strong></td><td>*(Grayed out — not yet available.)* Will open the Macro Clicker palette when Story 11 ships.</td></tr>
+<tr><td><strong>Show Macro Clicker at startup</strong></td><td>Opens the <strong>Macro Clicker</strong> palette when Savitar launches (see <a href="#macros">Macros</a>).</td></tr>
 </tbody></table>
 <p>Startup flags save immediately like other app Settings. They do not affect worlds already open from a previous session—only the next launch.</p>
 <hr/>
@@ -505,7 +505,19 @@
 <tr><td><strong>Trigger</strong></td><td>Watches <strong>output</strong> (or input) and reacts when text matches a pattern</td></tr>
 <tr><td><strong>Trigger variable</strong></td><td>Scratch space triggers write into (for captured text), not a hotkey command</td></tr>
 </tbody></table>
-<p>Savitar 1’s <strong>Macro Clicker</strong> used <strong>aliases</strong>—on-screen buttons that pointed at macros. That clicker window is not in Savitar 2 yet; macros themselves work via hotkeys. <strong>Command aliases</strong> (typed abbreviations like <code>n</code> → <code>go north</code>) are planned after Savitar 2.0 reaches Savitar 1 feature parity—see <a href="#glossary">Glossary</a>.</p>
+<p>Savitar 1 called these button slots <strong>aliases</strong> in its manual—they are <strong>not</strong> classical typed command aliases. Savitar 2 restores the palette as the <strong>Macro Clicker</strong> (Story 11). <strong>Command aliases</strong> (typed abbreviations like <code>n</code> → <code>go north</code>) are planned for Savitar 2.1 — see <a href="#glossary">Glossary</a>.</p>
+<h3 id="macros-macro-clicker">Macro Clicker</h3>
+<p>The <strong>Macro Clicker</strong> is a floating palette titled <strong>Clicker</strong> — the same whimsical layout as Savitar 1: a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (<strong>1–9</strong> and <strong>a–f</strong>). Every grid cell is a real button bound to a <strong>macro name</strong>; clicking sends that macro’s value to the <strong>frontmost world session</strong>. Slots <strong>1–9</strong> map to <code>MACRO_1</code> … <code>MACRO_9</code>; <strong>a–f</strong> map to <code>MACRO-A</code> … <code>MACRO-F</code> (Savitar 2 improvement — v1 only wired <strong>a</strong> as <code>MACRO_10</code> and left <strong>b–f</strong> as artwork). Imported v1 prefs with 18 <code>ALIAS</code> entries still load; the <strong>a</strong> slot keeps a saved <code>MACRO_10</code> binding if present.</p>
+<table>
+<thead><tr><th>Action</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><strong>Click</strong> a button</td><td>Send the bound macro to the active session</td></tr>
+<tr><td><strong>Hover</strong> a button</td><td>Caption shows the macro’s command text (or “Button not defined”)</td></tr>
+<tr><td><strong>⌘-click</strong> a button</td><td>Choose which <strong>universal</strong> macro this button uses</td></tr>
+<tr><td><strong>Window → Show Macro Clicker</strong></td><td>Open or bring forward the palette</td></tr>
+</tbody></table>
+<p>Bindings are stored in app preferences as v1-style <code>ALIAS</code> XML (<code>NAME</code> → macro name). Factory defaults point direction buttons at <code>MACRO_NORTH</code>, <code>MACRO_EAST</code>, and so on—the same names as the bundled keypad macros.</p>
+<p><strong>Settings → Startup → Show Macro Clicker at startup</strong> opens the palette at launch. <strong>Settings → Audio → Mute clicker sounds</strong> silences the button click cue.</p>
 <hr/>
 <h2 id="entering-commands">Entering commands</h2>
 <p>The <strong>input</strong> pane is a single-line (or few-row) command editor. What you type is sent to the server when you press <strong>Return</strong>—unless Savitar intercepts it as a <strong>local command</strong> or an <strong>input trigger</strong>.</p>
@@ -736,7 +748,7 @@
 <tr><td><a href="#closing-tab">Closing</a></td><td>Closing tab (logoff command)</td></tr>
 <tr><td>*(missing)*</td><td>MCP — not in v2 yet</td></tr>
 </tbody></table>
-<p>Grayed-out app prefs (<strong>Macro Clicker</strong>, <strong>Mute clicker</strong>) will activate when those features ship.</p>
+<p>Grayed-out app prefs are documented in <a href="#settings-reference">Settings reference</a>; Macro Clicker and Mute clicker are now active.</p>
 <hr/>
 <h2 id="tips-troubleshooting">Tips &amp; troubleshooting</h2>
 <table>
@@ -902,7 +914,7 @@
 <tbody>
 <tr><td>Getting started, install, worlds, session, commands, triggers, glossary</td><td>✅ This guide (July 2026)</td></tr>
 <tr><td><strong>Aliases</strong> (Story 10)</td><td>Blocked on implementation</td></tr>
-<tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Blocked on implementation</td></tr>
+<tr><td><strong>Macro Clicker</strong> (Story 11)</td><td>Shipped</td></tr>
 <tr><td>MCP, file upload, <code>xch_cmd</code>, status bar</td><td>Deferred—stubs in tables above</td></tr>
 <tr><td><strong>Session word wrap</strong> live toggle (Story 20)</td><td>Post–2.0 feature parity</td></tr>
 </tbody></table>

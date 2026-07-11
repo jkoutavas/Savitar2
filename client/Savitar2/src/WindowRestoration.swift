@@ -161,5 +161,10 @@ enum WindowRestoration {
         for key in defaults.dictionaryRepresentation().keys where key.hasPrefix("NSWindow Frame EventsWindowFrame") {
             defaults.removeObject(forKey: key)
         }
+        let clickerPrefix = "NSWindow Frame \(ClickerWindowController.legacyFrameAutosaveName)"
+        for key in defaults.dictionaryRepresentation().keys where key.hasPrefix(clickerPrefix) {
+            defaults.removeObject(forKey: key)
+        }
+        ClickerWindowController.clearSavedPosition()
     }
 }

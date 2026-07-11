@@ -360,6 +360,12 @@ CA
                                                 <action selector="showEventsWindowAction:" target="Voe-Tx-rLC" id="7mA-cl-DqA"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Show Macro Clicker" id="MC1-Mn-Clk">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showMacroClickerAction:" target="Voe-Tx-rLC" id="MC1-Mn-Act"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

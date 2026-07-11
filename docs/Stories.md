@@ -62,7 +62,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **Goal:** Flags that exist in XML but do nothing today actually affect the app.
 
-**Status:** Partially complete — keypad, mono fonts, mute bell, and default word wrap are wired; clicker remains. `trigsClosed` / `varsClosed` are import-only ([2.6](#story-2--wire-preference-flags-to-behavior) won't do).
+**Status:** Partially complete — keypad, mono fonts, mute bell, default word wrap, and mute clicker are wired; clicker startup pref ships with Story 11. `trigsClosed` / `varsClosed` are import-only ([2.6](#story-2--wire-preference-flags-to-behavior) won't do).
 
 ### Tasks
 
@@ -70,7 +70,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
 - [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`). *v2.0 scope: v1 pref parity only; per-session toggle and live updates → [Story 20](#story-20--session-word-wrap-v21)*
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
-- [ ] **2.5** **Mute clicker** — honor flag once Macro Clicker exists (Story 11)
+- [x] **2.5** **Mute clicker** — `muteClicker` pref honored when Macro Clicker button fires (Story 11)
 - [x] **2.6** **`trigsClosed` / `varsClosed`** — **won't do.** In v1 these flags remembered whether **Universal** and **per-world** outline groups were collapsed in a single Events table (Triggers tab and Macros tab each had disclosure triangles for every connected world). v2 splits that into a **universal** Events window and **per-document** Events windows, each a flat trigger/macro list with no outline groups — window choice replaces group collapse. Flags stay in `PrefsFlags` so v1 prefs XML still loads; no behavior to wire.
 
 ### Touchpoints
@@ -468,7 +468,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 **Goal:** Ship a complete end-user guide covering all Savitar 2 features at v1 parity, written for players and world builders—not developers.
 
-**Status:** In progress (July 2026) — beta-critical chapters are in [USER_GUIDE.md](USER_GUIDE.md) and bundled in-app (Stories 16–17). **Getting started**, install, session depth, triggers, local commands, glossary, and settings reference shipped July 2026; aliases/clicker chapters blocked on Stories 10–11.
+**Status:** In progress (July 2026) — beta-critical chapters are in [USER_GUIDE.md](USER_GUIDE.md) and bundled in-app (Stories 16–17). **Getting started**, install, session depth, triggers, local commands, glossary, settings reference, and Macro Clicker shipped July 2026; command aliases (9.2e) remain Story 10 / 2.1.
 
 **Source:** The [Savitar 1.4 User's Manual](http://heynow.com/savitar/manual140.html) (last updated 2009) is the content blueprint. Savitar 2's guide should cover the same *topics* with updated menu paths, HIG Settings layout, and honest notes where features are deferred (MCP, file upload, Macro Clicker, status bar, xch_cmd).
 
@@ -523,9 +523,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
   - Classical MUD aliases vs v1 "Macro Clicker aliases" vs macros vs input triggers
   - *Blocked on Story 10 implementation*
 
-- [ ] **9.2f** **Macro Clicker** — v1 §4 "Macro Clicker" (Story 11)
-  - Button palette, keypad mapping, startup pref
-  - *Blocked on Story 11 implementation*
+- [x] **9.2f** **Macro Clicker** — v1 §4 "Macro Clicker" (Story 11); see [Macros](USER_GUIDE.md#macros)
 
 - [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; v1 buffer/flush UI won't do ([OutputPerformance.md](OutputPerformance.md))
 - [x] **9.4** **Triggers in depth** — order, types, matching, wildcards, appearance, audio, reply
@@ -634,6 +632,8 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 
 **Goal:** Restore v1 **Macro Clicker** window — floating button palette; each slot is a v1-style `ALIAS` (name → macro reference); click sends macro value to frontmost session.
 
+**Status:** Shipped (July 2026).
+
 **Context:** Savitar 1 called these entries **aliases** (`ALIAS` XML, `CAliasMan`, `CClickerW`), but they are not classical typed command aliases — see [Story 10](#story-10--command-aliases). README beta item.
 
 **Sketch:**
@@ -649,12 +649,12 @@ typed line → alias expansion → variable expansion (%%) → input triggers �
 
 ### Tasks
 
-- [ ] **11.1** **`ClickerSlot` model** — v1 `ALIAS` XML: `NAME` attribute maps to macro name; import from Savitar 1 prefs `ALIAS` list (`CAliasMan`, `CTVAlias`). Separate from `CommandAlias` / `CMDALIAS` in Story 10.
-- [ ] **11.2** **`ClickerMan`** — fixed slot list (direction + number buttons per v1 `TVAlias_t_*`); parse/serialize v1 `ALIAS` elements from prefs.
-- [ ] **11.3** **Macro Clicker window** — modeless utility window; button grid; click → `Session.sendString(macro.value)` on key session; ⌘-click to bind slot to macro (v1: `DoEditButton`).
-- [ ] **11.4** **Menu & prefs** — **Window → Macro Clicker** (or Savitar2 menu); enable **Show Macro Clicker at startup** and **Mute clicker sounds** (Story **2.5**); frame autosave (`mClickerPos` / v1 `GetClickerPos`).
-- [ ] **11.5** **Assets** — direction / number button icons (v1 cicn resources or SF Symbols).
-- [ ] **11.6** **User guide** — Story 9 task **9.2c**: update Macros chapter; distinguish clicker button slots from typed command aliases.
+- [x] **11.1** **`ClickerSlot` model** — v1 `ALIAS` XML: `NAME` attribute maps to macro name; import from Savitar 1 prefs `ALIAS` list (`CAliasMan`, `CTVAlias`). Separate from `CommandAlias` / `CMDALIAS` in Story 10.
+- [x] **11.2** **`ClickerMan`** — fixed slot list (direction + number buttons per v1 `TVAlias_t_*`); parse/serialize v1 `ALIAS` elements from prefs.
+- [x] **11.3** **Macro Clicker window** — modeless utility window; button grid; click → `Session.submitServerCmd` on key session; ⌘-click to bind slot to macro (v1: `DoEditButton`).
+- [x] **11.4** **Menu & prefs** — **Window → Macro Clicker**; enable **Show Macro Clicker at startup** and **Mute clicker sounds** (Story **2.5**); frame autosave (`MacroClickerFrame`).
+- [x] **11.5** **Assets** — direction arrows via SF Symbols (macOS 11+); N/NE/… text fallback on 10.14; numbered buttons.
+- [x] **11.6** **User guide** — Story 9 task **9.2f**: Macros chapter Macro Clicker section.
 
 ### Touchpoints
 

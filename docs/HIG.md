@@ -127,9 +127,17 @@ Startup / **File → New World Document…** entry point for choosing a world.
 
 Touchpoints: `WorldPicker.storyboard`, `WorldPickerContentView.swift`, `AppContext.showWorldPicker`.
 
-### Macro Clicker (when shipped)
+### Macro Clicker
 
-Floating button palette — modeless utility window, frame autosave, optional startup. See [Story 11](Stories.md#story-11--macro-clicker).
+| Rule | Savitar 2 |
+|------|-------------|
+| Window type | Modeless utility — close-only, fixed size, movable |
+| Frame autosave | `MacroClickerFrame` |
+| **Window** menu | **Window → Show Macro Clicker**; listed when open |
+| Startup | **Settings → Startup → Show Macro Clicker at startup** |
+| Audio | **Settings → Audio → Mute clicker sounds** |
+
+Touchpoints: `Clicker.storyboard`, `ClickerContentViewController.swift`, `AppContext.showMacroClicker`.
 
 ---
 

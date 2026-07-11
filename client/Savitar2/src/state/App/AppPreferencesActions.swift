@@ -62,6 +62,25 @@ struct SetShowEventsWindowAtStartupAction: AppPreferencesAction {
     }
 }
 
+struct SetShowClickerAtStartupAction: AppPreferencesAction {
+    let enabled: Bool
+
+    init(_ enabled: Bool) {
+        self.enabled = enabled
+    }
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        if enabled {
+            result.prefs.flags.insert(.startupClicker)
+        } else {
+            result.prefs.flags.remove(.startupClicker)
+        }
+        result.prefs.save()
+        return result
+    }
+}
+
 struct RestoreFactoryDefaultsAction: AppPreferencesAction {
     func apply(oldState: AppPreferencesState) -> AppPreferencesState {
         var result = AppPreferencesState()

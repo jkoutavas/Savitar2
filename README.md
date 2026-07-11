@@ -79,7 +79,7 @@ _ Implement remaining local commands
 √ Find/Find Next supported (input + output panes)
 √ Printing supported (session output)
 √ ANSI Color Settings pane in app Settings (Story 5)
-_ Macro Clicker
+√ Macro Clicker (Story 11)
 _ xch_cmd support
 _ MCP (? does anyone use this?)
 _ File upload
