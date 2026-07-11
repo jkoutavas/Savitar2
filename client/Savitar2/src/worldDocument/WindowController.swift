@@ -14,7 +14,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private static let settingsButtonTag = 1003
 
     internal var reallyClosing = false
-    private var eventsWindowController: NSWindowController?
+    private var eventsWindowController: EventsWindowController?
     private weak var scrollLockButton: NSButton?
     private var windowTitle = ""
     private let resolutionOverlay = ResolutionOverlay()
@@ -91,25 +91,24 @@ class WindowController: NSWindowController, NSWindowDelegate {
     }
 
     @IBAction func showWorldEvents(_: Any) {
-        if eventsWindowController != nil {
-            eventsWindowController?.window?.makeKeyAndOrderFront(self)
+        if let controller = eventsWindowController {
+            controller.window?.makeKeyAndOrderFront(self)
             return
         }
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let controller = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let myWindow = controller.window else { return }
-        myWindow.title = "\(windowTitle) - \(myWindow.title)"
-        myWindow.delegate = self
-        controller.windowFrameAutosaveName = "EventsWindowFrame - \(windowTitle)"
-        eventsWindowController = controller
+        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else { return }
+        guard let doc = document as? Document else { return }
 
-        if let splitViewController = myWindow.contentViewController as? EventsSplitViewController {
-            guard let doc = document as? Document else { return }
-            splitViewController.store = doc.store
-            controller.showWindow(self)
+        controller.reactionsStore = doc.store
+        controller.undoManagerProvider = { [weak doc] in doc?.undoManager }
+        controller.onWillClose = { [weak self] _ in
+            self?.eventsWindowController = nil
         }
+        let title = "\(windowTitle) - Events Window"
+        controller.present(autosaveName: "EventsWindowFrame - \(windowTitle)", title: title)
+        eventsWindowController = controller
     }
 
     @IBAction func showWorldSetting(_: Any) {
@@ -491,9 +490,6 @@ class WindowController: NSWindowController, NSWindowDelegate {
                 }
                 return false
             }
-            return true
-        } else if window == eventsWindowController?.window {
-            eventsWindowController = nil
             return true
         }
 

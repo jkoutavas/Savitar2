@@ -28,9 +28,6 @@ class AppContext {
     internal var universalEventsWindowController: NSWindowController?
     internal var worldPickerWindowController: WorldPickerWindowController?
 
-    // swiftlint:disable:this weak_delegate
-    private var universalEventsWindowDelegate: UniversalEventsWindowDelegate?
-
     // TODO: this is a good start. See Savitar 1.x's "CViewAppMac.cp" for references to Savitar's
     // "editing keys" (not support at this time) and the means used to add all menu command shortcut keys
     let reservedKeyList = ["return", "space", "up arrow", "down arrow", "left arrow", "right arrow"]
@@ -46,8 +43,6 @@ class AppContext {
 
         speakerMan = AppContext.hasContinuousSpeech() ? SpeakerManAV() : SpeakerManNS()
         worldMan = WorldMan()
-
-        universalEventsWindowDelegate = UniversalEventsWindowDelegate(self)
     }
 
     var appUndoManager: UndoManager { appUndoManagerInstance }
@@ -131,26 +126,29 @@ class AppContext {
     }
 
     func showUniversalEventsWindow() {
-        if universalEventsWindowController != nil {
-            universalEventsWindowController?.window?.makeKeyAndOrderFront(self)
+        if let controller = universalEventsWindowController as? EventsWindowController {
+            controller.window?.makeKeyAndOrderFront(self)
             return
         }
 
         let bundle = Bundle(for: Self.self)
         let storyboard = NSStoryboard(name: "EventsWindow", bundle: bundle)
-        guard let windowController = storyboard.instantiateInitialController() as? NSWindowController else { return }
-        guard let window = windowController.window else { return }
+        guard let controller = storyboard.instantiateInitialController() as? EventsWindowController else { return }
 
-        universalEventsWindowController = windowController
-        window.delegate = universalEventsWindowDelegate
-
-        if let contentController = window.contentViewController as? EventsSplitViewController {
-            contentController.store = universalReactionsStore
-            windowController.windowFrameAutosaveName = "EventsWindowFrame"
-            windowController.showWindow(self)
-            appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(true))
-            save()
+        universalEventsWindowController = controller
+        controller.reactionsStore = universalReactionsStore
+        controller.undoManagerProvider = { appUndoManagerInstance }
+        controller.onWillClose = { [weak self] isTerminating in
+            guard let self else { return }
+            if !isTerminating {
+                appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(false))
+                save()
+            }
+            universalEventsWindowController = nil
         }
+        controller.present(autosaveName: "EventsWindowFrame", title: "Events Window")
+        appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(true))
+        save()
     }
 
     func showWorldPicker() {
@@ -171,26 +169,5 @@ class AppContext {
             contentController.store = worldPickerStore
             windowController.present()
         }
-    }
-}
-
-class UniversalEventsWindowDelegate: NSObject, NSWindowDelegate {
-    var ctx: AppContext
-    init(_ ctx: AppContext) {
-        self.ctx = ctx
-    }
-
-    func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {
-        return appUndoManagerInstance
-    }
-
-    func windowWillClose(_: Notification) {
-        // Only remove the startupEventsWindow flag if the user has closed the window. (windowWillClose gets called
-        // on application termination too.)
-        if !ctx.isTerminating {
-            ctx.appPrefsStore.dispatch(SetShowEventsWindowAtStartupAction(false))
-            ctx.save()
-        }
-        ctx.universalEventsWindowController = nil
     }
 }

@@ -97,12 +97,13 @@ Triggers, macros, and (when shipped) aliases. Universal (app-wide) and per-world
 | Modeless; does not block sessions | ✅ | — |
 | **Window → Show App-wide Events Window** (⇧⌘E) | ✅ | — |
 | Contextual **?** in title bar | ✅ | — |
-| Frame autosave | `EventsWindowFrame` | Revisit center-on-first-open vs restore ([Story 6](Stories.md#story-6--events-window-hig-audit)) |
-| Resize chrome | Minimize + resize with fixed min=max | Enable sensible resize **or** close-only — no fake resize ([Story 6](Stories.md#story-6--events-window-hig-audit)) |
-| **Window** menu listing when open | TBD | [Story 6](Stories.md#story-6--events-window-hig-audit) |
+| Frame autosave | `EventsWindowFrame` | ✅ Center on first open when no saved frame; restore full frame thereafter |
+| Window chrome | Close-only, fixed 900×400 | ✅ `EventsWindowController` (universal + per-world) |
+| Layout | Fixed two columns (440pt list + detail) | ✅ `EventsContentViewController`; no split divider (fixed window made draggable split unnecessary) |
+| **Window** menu listing when open | ✅ | Standard window list + **Show App-wide Events Window** (⇧⌘E) |
 | v1 outline disclosure (`trigsClosed` / `varsClosed`) | N/A — import-only | **Won't do** — v2 uses separate universal/per-world Events windows with flat lists ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
 
-Touchpoints: `EventsWindow.storyboard`, `AppContext.showUniversalEventsWindow`, per-world `WindowController`.
+Touchpoints: `EventsWindow.storyboard`, `EventsContentViewController`, `EventsWindowController`, `AppContext.showUniversalEventsWindow`, per-world `WindowController`, `MacroViewController` (programmatic detail form).
 
 ### World Picker
 
@@ -256,7 +257,7 @@ Remaining UI/HIG work is tracked as user stories — do not duplicate task lists
 | Area | Story |
 |------|-------|
 | App Settings toolbar, Advanced pane, factory reset | [Story 23](Stories.md#story-23--app-settings-hig-audit) ✅; maintenance backlog [Story 24](Stories.md#story-24--settings-advanced-maintenance) |
-| Events Window chrome, section prefs | [Story 6](Stories.md#story-6--events-window-hig-audit) |
+| Events Window chrome | [Story 6](Stories.md#story-6--events-window-hig-audit) ✅ |
 | World Picker layout, keyboard, positioning | [Story 7](Stories.md#story-7--world-picker-hig-audit) ✅ |
 | Window menu — tab bar, Show World Picker, listing | [Story 25](Stories.md#story-25--window-menu-hig-audit) ✅ |
 | App-wide appearance (System / Light / Dark) | [Story 26](Stories.md#story-26--app-wide-appearance-system--light--dark) — **Input & Display** pane |

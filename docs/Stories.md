@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) is complete. **Story 2** is partially complete (see below). **Stories 6–8** track remaining HIG and UI backlog from [HIG.md](HIG.md); **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) and **Story 6** (Events Window HIG) are complete. **Story 2** is partially complete (see below). **Story 8** tracks SwiftUI Settings exploration; **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -198,33 +198,39 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 ---
 
-## Story 6 — Events Window HIG audit
+## Story 6 — Events Window HIG audit ✅
 
 **Goal:** Align the universal and per-world **Events** windows with [HIG.md](HIG.md) utility-window patterns.
 
-**Context:** Events is a modeless utility window (triggers/variables), not app Settings. It currently uses frame autosave, shows minimize+resize chrome with a fixed min=max size, and can open at startup.
+**Context:** Events is a modeless utility window (triggers/macros), not app Settings. Fixed 900×400 layout: 440pt list column (all table columns visible) + detail editor filling the remainder; frame autosave restores position on subsequent opens.
+
+**Status:** Complete (July 2026).
 
 ### Tasks
 
 - [x] **6.1** Document intended HIG role (utility / auxiliary window vs. document window) in `HIG.md`
-- [ ] **6.2** **Window chrome** — decide minimize/zoom: enable resize with sensible min size, or close-only like Settings; remove contradictory min=max if staying fixed-size
-- [ ] **6.3** **First open** — center on screen; evaluate whether frame autosave (`EventsWindowFrame`) should stay or only restore position
+- [x] **6.2** **Window chrome** — close-only (no minimize/zoom); removed storyboard min=max fake resize; `EventsWindowController` applies fixed designed content size
+- [x] **6.3** **First open** — center when no autosaved frame; keep full frame autosave (`EventsWindowFrame` / per-world `EventsWindowFrame - {title}`)
 - [x] **6.4** **Window menu** — Events appears in **Window** menu when open and is reachable via **Show App-wide Events Window** (⇧⌘E); completed with [Story 25](#story-25--window-menu-hig-audit)
-- [ ] **6.5** **Per-world Events** — audit `WindowController.swift` per-document Events windows for same chrome/behavior as universal window
+- [x] **6.5** **Per-world Events** — `WindowController.showWorldEvents` uses the same `EventsWindowController` chrome and presentation as the universal window
 - [x] **6.6** **`trigsClosed` / `varsClosed`** — **won't do** (same rationale as [2.6](#story-2--wire-preference-flags-to-behavior)); Events layout persistence is **frame autosave** (`EventsWindowFrame`), not section-collapse prefs
+- [x] **6.7** **Layout** — replaced `NSSplitViewController` with fixed two-column layout (`EventsContentViewController`); Macros detail form built in code with bordered fields
 
 ### Touchpoints
 
 - `client/Savitar2/Base.lproj/EventsWindow.storyboard`
+- `client/Savitar2/src/views/eventsWindow/EventsContentViewController.swift`
+- `client/Savitar2/src/views/eventsWindow/EventsWindowController.swift`
+- `client/Savitar2/src/views/eventsWindow/MacroViewController.swift`
 - `client/Savitar2/src/AppContext.swift` (`showUniversalEventsWindow`)
 - `client/Savitar2/src/worldDocument/WindowController.swift` (per-world Events)
 - `client/Savitar2/src/extensions/NSWindow+Extensions.swift`
 
 ### Acceptance
 
-- Events window behavior is documented and consistent (universal + per-world)
-- No disabled resize affordances; chrome matches documented intent
-- Frame position/size persists via `EventsWindowFrame` autosave (not v1 outline-collapse prefs — [2.6](#story-2--wire-preference-flags-to-behavior) won't do)
+- Events window behavior is documented and consistent (universal + per-world) ✅
+- No disabled resize affordances; close-only chrome matches documented intent ✅
+- Frame position/size persists via `EventsWindowFrame` autosave; first open centers when no saved frame ✅
 
 ---
 
@@ -347,7 +353,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [x] **25.3** **⌘N behavior** — decision: **File → New World Document…** (⌘N) opens the **World Picker** (choosing a world is the new-document step); documented in HIG + USER_GUIDE
 - [x] **25.4** **Window list hygiene** — World documents (world name), **World Picker**, app-wide/​per-world Events are standard titled windows and list in the Window menu; selecting brings forward
 - [x] **25.5** **Minimize / Zoom** — close-only utility windows (World Picker, Settings) use `styleMask = [.titled, .closable]` via `configureAsSettingsWindow`, so **Minimize**/**Zoom** auto-disable; world documents keep both
-- [x] **25.6** **Fold Story 6.4** — Events already lists in the Window menu and is reachable via **Show App-wide Events Window**; [Story 6.4](#story-6--events-window-hig-audit) satisfied for the menu-listing portion (Events chrome polish remains in Story 6)
+- [x] **25.6** **Fold Story 6.4** — Events already lists in the Window menu and is reachable via **Show App-wide Events Window**; [Story 6.4](#story-6--events-window-hig-audit) satisfied for the menu-listing portion (Events chrome completed in [Story 6](#story-6--events-window-hig-audit))
 - [x] **25.7** **Docs** — [USER_GUIDE.md](USER_GUIDE.md) Window menu table (no tab bar; **Show World Picker**) and [HIG.md](HIG.md) Window menu section updated
 
 ### Touchpoints
@@ -1272,7 +1278,7 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 13. ~~**Story 21 — About box with scrolling credits**~~ ✅
 14. **Story 2** — *in progress* (remaining: 2.5 clicker; 2.6 won't do)
 15. **Story 9 — User guide** — *in progress* (aliases 9.2e, clicker 9.2f when Stories 10–11 land; drag-to-create triggers TBD)
-16. Story 6 — Events Window HIG (6.6 won't do)
+16. ~~**Story 6 — Events Window HIG audit**~~ ✅ — close-only chrome, center on first open, shared `EventsWindowController`
 17. **Story 24 — Settings → Advanced maintenance** — *in progress* (24.1 factory reset ✅; 24.6 won't do; import/export, v1 re-import, log editor deferred)
 18. ~~**Story 25 — Window menu HIG audit**~~ ✅ — tab bar removal, **Show World Picker**, window list hygiene
 19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
