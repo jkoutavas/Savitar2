@@ -70,7 +70,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ World settings Closing tab — logoff/disconnect command on close; auto-close
 √ World settings sheet — OK/Cancel, settings window title (world + tab), per-tab resize, Appearance preview wrap
 √ Implement remaining local commands (`##history`, `##dump`, flags, triggers, windows, `##wait`, `##link`, … — see USER_GUIDE)
-_ Implement local command `##upload`
+√ Implement local command `##upload`
 √ Implement local command `##capture`
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
@@ -100,7 +100,7 @@ _ Address key things found in alpha test
 Shipped commands are documented in [USER_GUIDE → Local commands](docs/USER_GUIDE.md#local-commands). Still to implement from the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.html):
 
 ```
-_ ##upload
+√ ##upload
 √ ##capture
 _ ##add world
 _ ##dump aliases          (blocked on Story 10 — command aliases)

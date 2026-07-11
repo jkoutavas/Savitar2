@@ -61,6 +61,8 @@ enum SessionLocalCommandExecutor {
             showHelp(topic: topic, session: session)
         case .capture:
             toggleCapture(session: session)
+        case let .upload(path):
+            uploadFile(at: path, session: session)
         case let .unknown(body):
             info(session, "Unknown local command: \(body)\n")
         }
@@ -108,6 +110,24 @@ enum SessionLocalCommandExecutor {
             linkColorHex: session.world.linkColor.toHex
         )
         session.sessionHandler.outputHTML(html, skipCapture: true)
+    }
+
+    private static func uploadFile(at path: String, session: Session) {
+        switch SessionFileUpload.upload(path: path, session: session) {
+        case let .success(byteCount):
+            let resolved = SessionFileUpload.resolvePath(path)
+            info(session, "[SAVITAR] Uploaded \(byteCount) bytes from \(resolved).\n")
+        case .failure(.notConnected):
+            commandError(session, "Not connected.")
+        case .failure(.emptyPath):
+            commandError(session, "Upload requires a file path.")
+        case let .failure(.notAFile(resolved)):
+            commandError(session, "Not a file: \(resolved)")
+        case let .failure(.fileNotFound(resolved)):
+            commandError(session, "File not found: \(resolved)")
+        case let .failure(.unreadable(resolved)):
+            commandError(session, "Could not read file: \(resolved)")
+        }
     }
 
     private static func commandHistoryText(_ session: Session) -> String {

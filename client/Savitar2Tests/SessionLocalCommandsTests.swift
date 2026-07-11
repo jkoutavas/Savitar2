@@ -82,6 +82,12 @@ class SessionLocalCommandsTests: XCTestCase {
         XCTAssertEqual(SessionLocalCommands.parse("clear screen"), .clearScreen)
         XCTAssertEqual(SessionLocalCommands.parse("capture"), .capture)
         XCTAssertEqual(SessionLocalCommands.parse("capture extra"), .unknown(body: "capture extra"))
+        XCTAssertEqual(SessionLocalCommands.parse("upload /tmp/script.txt"), .upload(path: "/tmp/script.txt"))
+        XCTAssertEqual(
+            SessionLocalCommands.parse("upload \"/tmp/my script.txt\""),
+            .upload(path: "/tmp/my script.txt")
+        )
+        XCTAssertEqual(SessionLocalCommands.parse("upload"), .unknown(body: "upload"))
         XCTAssertEqual(
             SessionLocalCommands.parse("wait 5 look"),
             .wait(seconds: 5, followUp: "look")

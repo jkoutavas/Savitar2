@@ -49,7 +49,9 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .session, keywords: ["help"], syntax: "help [<command>]",
                               detail: "Shows this help. Tap a command in the list for details."),
         LocalCommandHelpEntry(category: .session, keywords: ["upload"], syntax: "upload <file-path>",
-                              detail: nil),
+                              detail: "Sends a local text file to the connected world as raw bytes. "
+                                  + "Savitar does not parse or interpret the file contents. "
+                                  + "Use a POSIX path or ~; quote paths that contain spaces."),
         LocalCommandHelpEntry(category: .session, keywords: ["capture"], syntax: "capture",
                               detail: "Toggles ad-hoc capture of session output to a plain-text file. "
                                   + "Run again to stop. The file path is a link that opens the capture "

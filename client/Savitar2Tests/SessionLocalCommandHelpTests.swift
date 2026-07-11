@@ -45,9 +45,16 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("World Settings"))
     }
 
-    func testTopicHelpForCommandWithoutDetail() {
+    func testTopicHelpForUploadCommand() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "upload")
         XCTAssertTrue(html.contains("upload"))
+        XCTAssertTrue(html.contains("Sends a local text file"))
+        XCTAssertTrue(html.contains("does not parse"))
+    }
+
+    func testTopicHelpForCommandWithoutDetail() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
+        XCTAssertTrue(html.contains("add world"))
         XCTAssertFalse(html.contains("savitar-help-detail-text"))
     }
 

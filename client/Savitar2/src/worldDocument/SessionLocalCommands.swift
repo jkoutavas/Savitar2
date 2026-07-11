@@ -57,6 +57,7 @@ enum SessionLocalCommand: Equatable {
     case link(url: String, label: String, colorHex: String?)
     case help(topic: String?)
     case capture
+    case upload(path: String)
     case unknown(body: String)
 }
 
@@ -103,6 +104,8 @@ enum SessionLocalCommands {
             return parseSet(trimmed, words: words, body: body)
         case "select":
             return parseSelect(trimmed, words: words, body: body)
+        case "upload":
+            return parseUpload(trimmed, words: words, body: body)
         case "wait":
             return parseWait(trimmed, words: words, body: body)
         default:
@@ -294,6 +297,17 @@ enum SessionLocalCommands {
             return .unknown(body: body)
         }
         return .selectWindow(title: title.value)
+    }
+
+    private static func parseUpload(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {
+        guard words.count >= 2 else { return .unknown(body: body) }
+        if let quoted = parseQuotedString(from: trimmed, afterWordIndex: 1) {
+            return .upload(path: quoted.value)
+        }
+        guard let path = payload(afterLeadingWords: 1, in: trimmed), !path.isEmpty else {
+            return .unknown(body: body)
+        }
+        return .upload(path: path)
     }
 
     private static func parseSet(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {

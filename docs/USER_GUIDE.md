@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), **`##upload`** local command (next release), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
+Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
 
 ---
 
@@ -737,6 +737,7 @@ Examples below use the default `##` marker; substitute your world's marker if yo
 | `##help` | HTML list of local commands by category; click a command for syntax and details |
 | `##help <command>` | Detail for one command — for example `##help upload` |
 | `##capture` | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window. |
+| `##upload <file-path>` | Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or `~`; quote paths with spaces. |
 
 `##help` works even when **Interpret HTML tags** is off. Commands in the list are clickable (Pueblo-style `xch_cmd` links) and run `##help <command>` for you.
 
@@ -746,6 +747,8 @@ If you omit `"label"` on `##link`, the URL is used as the link text. If you omit
 ##help
 ##help upload
 ##capture
+##upload ~/scripts/login.txt
+##upload "/Users/me/My Scripts/refresh.txt"
 ##link <https://www.heynow.com/savitar> "Savitar home"
 ##link <https://example.com> "Example" #FF6600
 ```
@@ -853,7 +856,6 @@ With no command, `##wait` alone does nothing visible—it is meant as part of a 
 
 | Command | Notes |
 |---------|--------|
-| `##upload` | Send a local file to the server—**next Savitar 2 release** |
 | `##tell application` | AppleScript-era integration—not planned |
 
 See [Stories.md](Stories.md) for the full v1 manual map and future work.
@@ -1243,10 +1245,10 @@ Most beta-critical material is now in this guide. Remaining Story 9 work:
 | **Macro Clicker** (Story 11) | Shipped |
 | MCP | Deferred |
 | **`xch_cmd` links** | Shipped — see [HTML in output](#html-in-output) |
-| **`##upload`** | Next release |
+| **`##upload`** | Shipped — see [Local commands](#local-commands) |
 | **`##capture`** | Shipped — see [Session logging](#session-logging) and [Local commands](#local-commands) |
 | **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
-| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands); `##upload` next |
+| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands) |
 | **Session word wrap** live toggle (Story 20) | Post–2.0 |
 
 See [Stories.md](Stories.md) for the full v1 manual map.
