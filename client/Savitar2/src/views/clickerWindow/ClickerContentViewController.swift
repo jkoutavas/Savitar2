@@ -17,12 +17,16 @@ private struct ClickerCompassPlacement {
 final class ClickerContentViewController: NSViewController {
     /// Slightly wider than the 200pt v1 palette so the title bar fits **Macro Clicker** + contextual **?**.
     static let designedContentSize = NSSize(width: 228, height: 440)
+    /// Layout constants in `buildLayout()` were tuned for this v1 content width.
+    private static let legacyContentWidth: CGFloat = 200
+    private static var layoutScale: CGFloat { designedContentSize.width / legacyContentWidth }
+    private static func scaled(_ value: CGFloat) -> CGFloat { (value * layoutScale).rounded() }
     private static let captionAreaMinHeight: CGFloat = 80
 
     private let captionField: NSTextField = {
         let field = NSTextField(wrappingLabelWithString: "")
         field.lineBreakMode = .byWordWrapping
-        field.font = NSFont.boldSystemFont(ofSize: 11)
+        field.font = NSFont.boldSystemFont(ofSize: ClickerContentViewController.scaled(11))
         field.textColor = NSColor(calibratedWhite: 0.12, alpha: 1)
         field.alignment = .center
         field.maximumNumberOfLines = 2
@@ -46,12 +50,22 @@ final class ClickerContentViewController: NSViewController {
 
     func refreshCaption(for slot: ClickerSlotID? = nil, fixedMacro: String? = nil) {
         if let fixedMacro {
-            captionField.stringValue = MacroClicker.caption(for: fixedMacro, session: MacroClicker.frontmostSession())
+            setCaption(MacroClicker.caption(for: fixedMacro, session: MacroClicker.frontmostSession()))
         } else if let slot {
             let name = AppContext.shared.prefs.clickerMan.slot(for: slot).macroName
-            captionField.stringValue = MacroClicker.caption(for: name, session: MacroClicker.frontmostSession())
+            setCaption(MacroClicker.caption(for: name, session: MacroClicker.frontmostSession()))
         } else {
-            captionField.stringValue = ""
+            setCaption("")
+        }
+    }
+
+    private func setCaption(_ text: String) {
+        captionField.stringValue = text
+        let baseFont = NSFont.boldSystemFont(ofSize: Self.scaled(11))
+        if text == MacroClicker.undefinedCaption {
+            captionField.font = NSFontManager.shared.convert(baseFont, toHaveTrait: .italicFontMask) ?? baseFont
+        } else {
+            captionField.font = baseFont
         }
     }
 
@@ -73,14 +87,17 @@ final class ClickerContentViewController: NSViewController {
     }
 
     private func buildLayout() {
-        let compassSize: CGFloat = 30
-        let compassOverlap: CGFloat = 13
+        let compassSize = Self.scaled(30)
+        let compassOverlap = Self.scaled(13)
         let compassStepH = compassSize - compassOverlap
         let compassStepV = compassSize - compassOverlap
-        let verticalSize = NSSize(width: 36, height: 28)
-        let verticalGap: CGFloat = 2
-        let gridCell = NSSize(width: 56, height: 48)
-        let topInset: CGFloat = 10
+        let verticalSize = NSSize(width: Self.scaled(36), height: Self.scaled(28))
+        let verticalGap = Self.scaled(2)
+        // Slightly shorter than uniform scale so compass + grid still fit the fixed window height.
+        let gridCell = NSSize(width: Self.scaled(56), height: Self.scaled(48) - 2)
+        let topInset = Self.scaled(10)
+        let controlsGridGap = Self.scaled(8)
+        let compassVerticalGap = Self.scaled(8)
 
         let compassPanel = ClickerCompassPanel()
         compassPanel.translatesAutoresizingMaskIntoConstraints = false
@@ -150,7 +167,7 @@ final class ClickerContentViewController: NSViewController {
         let gridWidth = gridCell.width * 3
         let gridHeight = gridCell.height * 5
 
-        let controlsWidth = compassWidth + 8 + verticalSize.width
+        let controlsWidth = compassWidth + compassVerticalGap + verticalSize.width
         let controlsHeight = max(compassHeight, verticalSize.height * 2 + verticalGap)
 
         NSLayoutConstraint.activate([
@@ -164,7 +181,7 @@ final class ClickerContentViewController: NSViewController {
             compassPanel.widthAnchor.constraint(equalToConstant: compassWidth),
             compassPanel.heightAnchor.constraint(equalToConstant: compassHeight),
 
-            upButton.leadingAnchor.constraint(equalTo: compassPanel.trailingAnchor, constant: 8),
+            upButton.leadingAnchor.constraint(equalTo: compassPanel.trailingAnchor, constant: compassVerticalGap),
             upButton.topAnchor.constraint(equalTo: topControlsPanel.topAnchor),
             upButton.widthAnchor.constraint(equalToConstant: verticalSize.width),
             upButton.heightAnchor.constraint(equalToConstant: verticalSize.height),
@@ -175,7 +192,7 @@ final class ClickerContentViewController: NSViewController {
             downButton.heightAnchor.constraint(equalToConstant: verticalSize.height),
 
             gridPanel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            gridPanel.topAnchor.constraint(equalTo: topControlsPanel.bottomAnchor, constant: 8),
+            gridPanel.topAnchor.constraint(equalTo: topControlsPanel.bottomAnchor, constant: controlsGridGap),
             gridPanel.widthAnchor.constraint(equalToConstant: gridWidth),
             gridPanel.heightAnchor.constraint(equalToConstant: gridHeight),
 

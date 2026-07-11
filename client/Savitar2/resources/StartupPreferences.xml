@@ -66,29 +66,29 @@ say ...and here is command two!</VALUE>
         </MACRO>
     </VARIABLES>
     <ALIASES>
-        <ALIAS NAME="MACRO_NORTH"/>
-        <ALIAS NAME="MACRO_NEAST"/>
-        <ALIAS NAME="MACRO_EAST"/>
-        <ALIAS NAME="MACRO_SEAST"/>
-        <ALIAS NAME="MACRO_SOUTH"/>
-        <ALIAS NAME="MACRO_SWEST"/>
-        <ALIAS NAME="MACRO_WEST"/>
-        <ALIAS NAME="MACRO_NWEST"/>
-        <ALIAS NAME="MACRO_1"/>
-        <ALIAS NAME="MACRO_2"/>
-        <ALIAS NAME="MACRO_3"/>
-        <ALIAS NAME="MACRO_4"/>
-        <ALIAS NAME="MACRO_5"/>
-        <ALIAS NAME="MACRO_6"/>
-        <ALIAS NAME="MACRO_7"/>
-        <ALIAS NAME="MACRO_8"/>
-        <ALIAS NAME="MACRO_9"/>
-        <ALIAS NAME="MACRO_A"/>
-        <ALIAS NAME="MACRO_B"/>
-        <ALIAS NAME="MACRO_C"/>
-        <ALIAS NAME="MACRO_D"/>
-        <ALIAS NAME="MACRO_E"/>
-        <ALIAS NAME="MACRO_F"/>
+        <ALIAS NAME="MACRO_NORTH"></ALIAS>
+        <ALIAS NAME="MACRO_NEAST"></ALIAS>
+        <ALIAS NAME="MACRO_EAST"></ALIAS>
+        <ALIAS NAME="MACRO_SEAST"></ALIAS>
+        <ALIAS NAME="MACRO_SOUTH"></ALIAS>
+        <ALIAS NAME="MACRO_SWEST"></ALIAS>
+        <ALIAS NAME="MACRO_WEST"></ALIAS>
+        <ALIAS NAME="MACRO_NWEST"></ALIAS>
+        <ALIAS NAME="MACRO_1"></ALIAS>
+        <ALIAS NAME="MACRO_2"></ALIAS>
+        <ALIAS NAME="MACRO_3"></ALIAS>
+        <ALIAS NAME="MACRO_4"></ALIAS>
+        <ALIAS NAME="MACRO_5"></ALIAS>
+        <ALIAS NAME="MACRO_6"></ALIAS>
+        <ALIAS NAME="MACRO_7"></ALIAS>
+        <ALIAS NAME="MACRO_8"></ALIAS>
+        <ALIAS NAME="MACRO_9"></ALIAS>
+        <ALIAS NAME="MACRO_A"></ALIAS>
+        <ALIAS NAME="MACRO_B"></ALIAS>
+        <ALIAS NAME="MACRO_C"></ALIAS>
+        <ALIAS NAME="MACRO_D"></ALIAS>
+        <ALIAS NAME="MACRO_E"></ALIAS>
+        <ALIAS NAME="MACRO_F"></ALIAS>
     </ALIASES>
     <COLORS>
         <COLOR NAME="black" RGB="#000000"></COLOR>
