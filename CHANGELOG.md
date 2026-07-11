@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`##link`** — insert a colored hyperlink into the output pane: `##link <url> "<label>" #RRGGBB`
 - **`##capture`** — toggle ad-hoc session output capture to a plain-text file (save panel on start; run again to stop); capture path in the output pane is a link that opens the file in a Savitar text window; separate from World Settings → Output logging
 - **`##upload`** — send a local text file to the connected world as raw bytes (`##upload <file-path>`); Savitar does not parse or interpret the file contents
+- **`##open text window`** — open a new untitled Savitar plain-text window
+- **`##send window`** — append text to a plain-text window by partial title match (`##send window "<title>" <msg>`)
 - **Pueblo `xch_cmd` links** — `<a xch_cmd="…">` in HTML output becomes a clickable link; clicks send the command to the session (local commands when prefixed with the world marker, otherwise to the server)
 - **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
 - **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
@@ -22,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
-- **User guide** — documents `##link`, `##help`, `##capture`, and `##upload`
+- **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, and `##send window`
 
 ### Fixed
 

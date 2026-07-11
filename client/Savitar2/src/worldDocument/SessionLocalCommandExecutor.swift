@@ -63,6 +63,10 @@ enum SessionLocalCommandExecutor {
             toggleCapture(session: session)
         case let .upload(path):
             uploadFile(at: path, session: session)
+        case .openTextWindow:
+            PlainTextDocument.openNewUntitled()
+        case let .sendWindow(title, message):
+            sendWindow(title: title, message: message, session: session)
         case let .unknown(body):
             info(session, "Unknown local command: \(body)\n")
         }
@@ -419,6 +423,14 @@ enum SessionLocalCommandExecutor {
         guard let window = window(matching: title) else { return false }
         window.makeKeyAndOrderFront(nil)
         return true
+    }
+
+    private static func sendWindow(title: String, message: String, session: Session) {
+        guard let document = PlainTextDocument.document(matchingTitle: title) else {
+            commandError(session, "Text window \"\(title)\" not found.")
+            return
+        }
+        document.appendText(message)
     }
 
     private static func window(matching title: String) -> NSWindow? {

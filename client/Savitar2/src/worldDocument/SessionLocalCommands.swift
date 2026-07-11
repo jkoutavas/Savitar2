@@ -58,6 +58,8 @@ enum SessionLocalCommand: Equatable {
     case help(topic: String?)
     case capture
     case upload(path: String)
+    case openTextWindow
+    case sendWindow(title: String, message: String)
     case unknown(body: String)
 }
 
@@ -96,6 +98,8 @@ enum SessionLocalCommands {
             return parseHelp(trimmed, words: words, body: body)
         case "link":
             return parseLink(trimmed, body: body)
+        case "open":
+            return parseOpen(words: words, body: body)
         case "recall":
             return parseRecall(words: words, body: body)
         case "regex":
@@ -104,6 +108,8 @@ enum SessionLocalCommands {
             return parseSet(trimmed, words: words, body: body)
         case "select":
             return parseSelect(trimmed, words: words, body: body)
+        case "send":
+            return parseSend(trimmed, words: words, body: body)
         case "upload":
             return parseUpload(trimmed, words: words, body: body)
         case "wait":
@@ -242,6 +248,15 @@ enum SessionLocalCommands {
         return .help(topic: topic)
     }
 
+    private static func parseOpen(words: [Substring], body: String) -> SessionLocalCommand {
+        guard words.count == 3,
+              words[1].lowercased().hasPrefix("tex"),
+              words[2].lowercased().hasPrefix("win") else {
+            return .unknown(body: body)
+        }
+        return .openTextWindow
+    }
+
     private static func parseLink(_ trimmed: String, body: String) -> SessionLocalCommand {
         guard let payload = payload(afterLeadingWords: 1, in: trimmed),
               payload.first == "<",
@@ -297,6 +312,18 @@ enum SessionLocalCommands {
             return .unknown(body: body)
         }
         return .selectWindow(title: title.value)
+    }
+
+    private static func parseSend(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {
+        guard words.count >= 2, words[1].lowercased().hasPrefix("win") else {
+            return .unknown(body: body)
+        }
+        guard let title = parseQuotedString(from: trimmed, afterWordIndex: 2) else {
+            return .unknown(body: body)
+        }
+        let message = title.remainder.trimmingCharacters(in: .whitespaces)
+        guard !message.isEmpty else { return .unknown(body: body) }
+        return .sendWindow(title: title.value, message: message)
     }
 
     private static func parseUpload(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {

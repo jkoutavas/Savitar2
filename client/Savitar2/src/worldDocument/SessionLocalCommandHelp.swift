@@ -120,9 +120,10 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .windows, keywords: ["close window"], syntax: "close window \"<title>\"",
                               detail: "Closes a session window by title."),
         LocalCommandHelpEntry(category: .windows, keywords: ["open text window"], syntax: "open text window",
-                              detail: nil),
+                              detail: "Opens a new untitled Savitar plain-text window."),
         LocalCommandHelpEntry(category: .windows, keywords: ["send window"], syntax: "send window \"<title>\" <msg>",
-                              detail: nil),
+                              detail: "Appends text to a Savitar plain-text window whose title contains "
+                                  + "the quoted name."),
 
         LocalCommandHelpEntry(category: .automation, keywords: ["wait"], syntax: "wait <seconds> [<command>]",
                               detail: "Pauses, then optionally runs another local command."),

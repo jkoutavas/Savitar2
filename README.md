@@ -107,8 +107,8 @@ _ ##dump aliases          (blocked on Story 10 — command aliases)
 _ ##dump connection
 _ ##dump variables
 _ ##play
-_ ##open text window
-_ ##send window
+√ ##open text window
+√ ##send window
 ```
 
 Not planned (v1 stubs, disabled, or out of scope for 2.x):

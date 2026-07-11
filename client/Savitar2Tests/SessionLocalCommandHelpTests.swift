@@ -52,6 +52,19 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("does not parse"))
     }
 
+    func testTopicHelpForOpenTextWindowCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "open text window")
+        XCTAssertTrue(html.contains("open text window"))
+        XCTAssertTrue(html.contains("Opens a new untitled"))
+    }
+
+    func testTopicHelpForSendWindowCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "send window")
+        XCTAssertTrue(html.contains("send window"))
+        XCTAssertTrue(html.contains("Appends text"))
+        XCTAssertTrue(html.contains("plain-text window"))
+    }
+
     func testTopicHelpForCommandWithoutDetail() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
         XCTAssertTrue(html.contains("add world"))

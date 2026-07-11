@@ -205,15 +205,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
     }
 
     @IBAction func newTextDocumentAction(_: Any) {
-        do {
-            let document = try NSDocumentController.shared.makeUntitledDocument(
-                ofType: PlainTextDocument.fileType
-            )
-            NSDocumentController.shared.addDocument(document)
-            document.makeWindowControllers()
-        } catch {
-            NSApp.presentError(error)
-        }
+        PlainTextDocument.openNewUntitled()
     }
 
     @IBAction func performFindAction(_ sender: Any) {

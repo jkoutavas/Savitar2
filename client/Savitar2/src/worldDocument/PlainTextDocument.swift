@@ -12,6 +12,43 @@ class PlainTextDocument: NSDocument {
     static let fileType = "public.plain-text"
     fileprivate static let windowFrameAutosaveName = "PlainTextDocument"
 
+    @discardableResult
+    static func openNewUntitled() -> Bool {
+        do {
+            let document = try NSDocumentController.shared.makeUntitledDocument(ofType: fileType)
+            NSDocumentController.shared.addDocument(document)
+            document.makeWindowControllers()
+            return true
+        } catch {
+            NSApp.presentError(error)
+            return false
+        }
+    }
+
+    static func document(matchingTitle title: String) -> PlainTextDocument? {
+        let needle = title.lowercased()
+        for document in NSDocumentController.shared.documents {
+            guard let textDocument = document as? PlainTextDocument,
+                  let window = document.windowControllers.first?.window else { continue }
+            if window.title.lowercased().contains(needle) {
+                return textDocument
+            }
+        }
+        return nil
+    }
+
+    func appendText(_ text: String) {
+        guard !text.isEmpty else { return }
+        if let textView = textView {
+            let endLocation = (textView.string as NSString).length
+            textView.insertText(text, replacementRange: NSRange(location: endLocation, length: 0))
+            textView.scrollRangeToVisible(NSRange(location: endLocation + (text as NSString).length, length: 0))
+        } else {
+            loadedContent += text
+            updateChangeCount(.changeDone)
+        }
+    }
+
     private var textView: NSTextView?
     private var loadedContent = ""
 

@@ -834,6 +834,8 @@ To copy a trigger or macro from one place to another, use `##dump triggers` or `
 | `##broadcast <command>` | Sends `<command>` to every **other** connected world session (not the one that ran the command) |
 | `##select window "<title>"` | Brings the session window whose title **contains** `<title>` to the front |
 | `##close window "<title>"` | Closes that window (same partial title match) |
+| `##open text window` | Opens a new untitled Savitar plain-text window |
+| `##send window "<title>" <msg>` | Appends `<msg>` to the plain-text window whose title **contains** `<title>` |
 
 Useful when you play several worlds at once and want one trigger reply to poke another session.
 

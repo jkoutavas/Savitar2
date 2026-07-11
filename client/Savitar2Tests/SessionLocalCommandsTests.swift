@@ -88,6 +88,23 @@ class SessionLocalCommandsTests: XCTestCase {
             .upload(path: "/tmp/my script.txt")
         )
         XCTAssertEqual(SessionLocalCommands.parse("upload"), .unknown(body: "upload"))
+        XCTAssertEqual(SessionLocalCommands.parse("open text window"), .openTextWindow)
+        XCTAssertEqual(SessionLocalCommands.parse("OPEN TEXT WINDOW"), .openTextWindow)
+        XCTAssertEqual(SessionLocalCommands.parse("open text"), .unknown(body: "open text"))
+        XCTAssertEqual(
+            SessionLocalCommands.parse("open text window extra"),
+            .unknown(body: "open text window extra")
+        )
+        XCTAssertEqual(
+            SessionLocalCommands.parse("send window \"Notes\" Hello world"),
+            .sendWindow(title: "Notes", message: "Hello world")
+        )
+        XCTAssertEqual(
+            SessionLocalCommands.parse("send window \"My Notes\" line one\nline two"),
+            .sendWindow(title: "My Notes", message: "line one\nline two")
+        )
+        XCTAssertEqual(SessionLocalCommands.parse("send window \"Notes\""), .unknown(body: "send window \"Notes\""))
+        XCTAssertEqual(SessionLocalCommands.parse("send window Notes hi"), .unknown(body: "send window Notes hi"))
         XCTAssertEqual(
             SessionLocalCommands.parse("wait 5 look"),
             .wait(seconds: 5, followUp: "look")
