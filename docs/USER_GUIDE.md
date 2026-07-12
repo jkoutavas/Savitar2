@@ -885,15 +885,6 @@ Respects **Settings → Audio → Mute Sound Cues** (same as trigger audio cues)
 ##play Pop
 ```
 
-### Planned next (not in this release)
-
-| Command | Notes |
-|---------|--------|
-| **`##dump aliases`** / **command aliases** (Story 10) | Typed abbreviations (`n` → `go north`); listed in `##help` but not implemented yet |
-| `##tell application` | AppleScript-era integration—not planned |
-
-See [Stories.md](Stories.md) for the full v1 manual map and future work.
-
 ---
 
 ## Triggers
