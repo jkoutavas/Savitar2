@@ -71,7 +71,7 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .world, keywords: ["set echo"], syntax: "set echo on|off",
                               detail: "Toggles echoing sent commands to the output pane."),
         LocalCommandHelpEntry(category: .world, keywords: ["set cronly"], syntax: "set cronly on|off",
-                              detail: "When echo is off, shows only a line break after each sent command."),
+                              detail: "Toggles CR-only line endings when sending commands (not echo mode)."),
         LocalCommandHelpEntry(category: .world, keywords: ["set autoclose"], syntax: "set autoclose on|off",
                               detail: "Toggles whether the session closes automatically on disconnect."),
         LocalCommandHelpEntry(

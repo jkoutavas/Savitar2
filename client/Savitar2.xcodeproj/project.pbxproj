@@ -121,6 +121,8 @@
 		699A413025CE2C190001C033 /* AppPrefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A412E25CE2C190001C033 /* AppPrefs.storyboard */; };
 		699A413225CE2CDD0001C033 /* AppPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A413125CE2CDD0001C033 /* AppPrefsViewController.swift */; };
 		69A45B012A7F100100CDDE09 /* WindowRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B002A7F100100CDDE09 /* WindowRestoration.swift */; };
+		69RF00122F0C090700AB6BA6 /* SavitarUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69RF00112F0C090700AB6BA6 /* SavitarUserDefaults.swift */; };
+		69RF00222F0C090800AB6BA6 /* DocumentRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */; };
 		69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */; };
 		69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ABT022043A6E100E7CC7C /* AboutWindowController.swift */; };
 		69B46A052A80100100CDDE09 /* InputEditingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B46A012A80100100CDDE09 /* InputEditingKeys.swift */; };
@@ -375,6 +377,8 @@
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		69F620E0204B872400301A8D /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+Extensions.swift"; sourceTree = "<group>"; };
+		69RF00112F0C090700AB6BA6 /* SavitarUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarUserDefaults.swift; sourceTree = "<group>"; };
+		69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentRegistrationTests.swift; sourceTree = "<group>"; };
 		69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedback.swift; sourceTree = "<group>"; };
 		69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedbackTests.swift; sourceTree = "<group>"; };
 		69HLP012043A6E100E7CC7C /* SavitarHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelp.swift; sourceTree = "<group>"; };
@@ -512,6 +516,7 @@
 				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
 				69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
+				69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */,
 				69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */,
 				69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */,
 				69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */,
@@ -772,6 +777,7 @@
 				69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */,
 				69ABT022043A6E100E7CC7C /* AboutWindowController.swift */,
 				69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */,
+				69RF00112F0C090700AB6BA6 /* SavitarUserDefaults.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
 				69662B23204367BD00E7CC7B /* extensions */,
@@ -1091,6 +1097,7 @@
 				69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */,
 				69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */,
 				69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */,
+				69RF00122F0C090700AB6BA6 /* SavitarUserDefaults.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
 				695F5AF025899FA400AB6BA6 /* TriggerAppearanceViewController.swift in Sources */,
@@ -1200,6 +1207,7 @@
 				6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */,
 				690B462B23B16AAD000445E4 /* AppPreferencesTests.swift in Sources */,
 				69A45B032A7F100100CDDE09 /* WindowRestorationTests.swift in Sources */,
+				69RF00222F0C090800AB6BA6 /* DocumentRegistrationTests.swift in Sources */,
 				69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */,
 				69B46A072A80100100CDDE09 /* InputEditingKeysTests.swift in Sources */,
 				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,

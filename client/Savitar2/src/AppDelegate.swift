@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.appPrefsStore.subscribe(self)
         SavitarTelemetry.initializeIfConfigured()
         SavitarUpdater.shared.startIfNeeded()
-        SavitarFeedback.presentAlphaAnnouncementIfNeeded()
+        SavitarFeedback.presentBetaAnnouncementIfNeeded()
 
         // Defer until launch finishes; utility windows need a shown run loop pass.
         DispatchQueue.main.async {

@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
 - **Session status bars** — Savitar 1's per-pane status bars return: `##set status output|input <message>` shows a one-line strip at the top of the pane (variables expand in the message); `##close stats` hides both; strips render in **inverse** session colors for contrast — configurable styling is planned for 2.1
 - **Macro Clicker** — floating button palette (Story 11): Savitar 1–style **Macro Clicker** window — periwinkle compass rose, green up/down arrows, whimsical green-outlined grid (1–9, a–f); all 15 grid cells are functional (`MACRO_A` … `MACRO_F` for a–f); direction + number buttons send bound macros to the frontmost session; **Window → Show Macro Clicker**; **⌘-click** to bind; hover caption; startup + mute prefs; v1 `ALIAS` XML import/export (18-entry imports preserve `MACRO_10` on **a** when saved)
+- **Input editing keys** — **⌃E** (end of line), **⌃U** (clear input), **⌃W** (delete word backward) in the input pane (v1 parity; **⌃A** retained)
 
 ### Changed
 
@@ -31,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Help book** — fenced Markdown code blocks (` ```text `) render as monospace `<pre>` sections instead of showing raw backticks
 - **Edit menu** — removed **Jump to Selection** (⌘J); little use in Savitar and did not apply to session output or help
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
-- **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, `##send window`, `##play`, and `##add world`
+- **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, `##send window`, `##play`, and `##add world`; input editing keys **⌃E**, **⌃U**, **⌃W**
 
 ### Fixed
 
@@ -42,6 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **HTML bold/strong** — `<strong>` / `<b>` and welcome title render bold despite the global output stylesheet `font` shorthand
 - **Session restoration** — closing a world document before quitting no longer causes it to reopen on relaunch; prefs now persist the live open-document list (#92)
 - **World Settings → Output** — log file picker opens as a sheet on the settings window; logging creates the log file when the path does not exist yet; log files use Unix line endings and plain text (ANSI stripped, HTML tags removed); session line splitting preserves source newlines so later output does not collapse the log into one line
+- **Input pane height on connect** — bottom split no longer stays at the Connecting tab's storyboard height (~80px) after connect; divider restores to saved `inputRows` (default 2) on `ConnectComplete`
+- **Input pane defaults for new worlds** — disabled shared `NSSplitView` autosave that let the previous session's divider override per-world `RESOLUTION`; pane measurement no longer mutates the live session `World` during resize notifications; World Picker sessions copy catalog worlds so layout changes do not corrupt shared prefs entries
+- **File → Open Recent** — worlds opened from the World Picker or session restoration register with `NSDocumentController` and appear in recents after save; unit tests use an isolated UserDefaults suite so `xcodebuild test` no longer clears the developer install's recent-documents list (#97)
 
 ## [2.0.22] - 2026-07-11
 
@@ -96,7 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **About Savitar** — custom About box with the classic medallion and scrolling “Special Heynows” credits (Savitar 1 parity)
 - **Help → Send Feedback…** — pre-filled email to the Savitar team with version diagnostics; clipboard fallback when Mail is unavailable (Story 15)
-- **Alpha welcome** — one-time announcement explaining the Savitar 2 alpha test and how to send feedback
+- **Beta welcome** — first-launch dialog updated from alpha to beta messaging; new UserDefaults key so existing alpha testers see the updated welcome
 
 ### Changed
 

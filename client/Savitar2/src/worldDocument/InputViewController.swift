@@ -261,6 +261,16 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         case .beginningOfLine:
             textView.moveToBeginningOfLine(nil)
             return true
+        case .endOfLine:
+            textView.moveToEndOfLine(nil)
+            return true
+        case .clearInputLine:
+            textView.selectAll(nil)
+            textView.cut(nil)
+            return true
+        case .deleteWordBackward:
+            textView.deleteWordBackward(nil)
+            return true
         case .sendInterrupt:
             session.sendString(string: InputEditingKeys.interruptCharacter)
             return true

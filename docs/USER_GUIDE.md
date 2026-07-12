@@ -2,7 +2,7 @@
 
 _Last updated July 11, 2026._
 
-This guide explains how to use Savitar 2. It is written for **players and world builders**, not developers. See [Stories.md](Stories.md) **Story 9** for chapters still in progress.
+This guide explains how to use Savitar 2. It is written for **players and world builders**, not developers.
 
 If you are upgrading from Savitar 1, see [Migrating from Savitar 1](#migrating-from-savitar-1) for import behavior and menu or settings changes.
 
@@ -45,7 +45,7 @@ Official builds are **free downloads** from [GitHub Releases](https://github.com
 
 1. **Launch Savitar** and open the **World Picker** (at startup by default, or **File → New World Document…**).
 2. **Double-click a world** (for example Alter Aeon) to open a session window and connect.
-3. Type a command in the **input** pane at the bottom and press **Return**.
+3. Type a command in the **input** pane at the bottom and press **Return** (or type `##help` to browse Savitar's local commands).
 4. Open the **Events** window (**World → Show World Events…**) to add triggers or macros.
 
 The session window has separate **output** (top) and **input** (bottom) panes. Resize them by dragging the window corner or the split divider—see [Session window](#session-window).
@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
+Savitar 2 does not include **MCP** (Multi-Client Protocol) World Settings that Savitar 1 offered.
 
 ---
 
@@ -83,7 +83,7 @@ There is no Classic Mac OS installer. **Uninstall** = quit Savitar and move **Sa
 ### First launch
 
 - If **Show World Picker at startup** is on (default), the World Picker opens automatically—see [Startup](#startup).
-- Savitar 2 may show a **one-time welcome** during alpha testing explaining feedback and what to expect.
+- Savitar 2 may show a **one-time welcome** during beta testing — for Savitar 1 migrants and first-time players alike — explaining feedback and what to expect.
 - Importing v1 preferences happens automatically when a v1 prefs file is present; you do not need a separate import step.
 
 ### Updates
@@ -318,8 +318,6 @@ Your saved **`.world` documents on disk are not deleted**. Savitar asks for conf
 
 Use this when prefs feel corrupted, you want the bundled world list back, or you need a clean slate without reinstalling.
 
-**Planned for Advanced** (not shipped yet): import/export preferences, re-import Savitar 1 preferences — see [Stories.md](Stories.md#story-24--settings-advanced-maintenance).
-
 ---
 
 ## Menus
@@ -490,6 +488,8 @@ You can change pane size in three ways:
 
 Savitar saves the size in your `.world` document (`RESOLUTION` in the XML). The next time you open that world, the window restores to the saved dimensions.
 
+While a session is **connecting**, the bottom area briefly shows a **Connecting** status panel. That panel is taller than the normal input line; Savitar restores the saved input row count automatically once the connection completes and the input pane appears.
+
 **Tips**
 
 - Sizes are most accurate with a **monospace** font (see **World Settings → Appearance**). Proportional fonts make row/column counts approximate.
@@ -522,8 +522,6 @@ Each pane (output and input) can show a one-line **status bar** at its top—a s
 `##set status` opens the bar if needed and replaces its current text; variables (`%%`) expand in the message. `##close stats` hides both bars; `##close status output` or `##close status input` hides one pane only. See [Local commands → Status bar commands](#local-commands).
 
 Status bars render in **inverse** session colors—the strip uses the world's foreground color as its background, and the text uses the background color—so they stand out from the panes. Bars are per-session: they are not saved in the world document.
-
-Configurable status bar styling (match session colors, or custom colors) is planned for **2.1**.
 
 ### Connection indicator
 
@@ -618,7 +616,7 @@ See [Events](#events) for the big picture. In short:
 
 ### Macro Clicker
 
-The **Macro Clicker** is a floating palette of quick-access buttons—distinct from typed command **aliases** (abbreviations like `n` → `go north`), which are planned for Savitar 2.1. See [Glossary](#glossary). It has a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
+The **Macro Clicker** is a floating palette of quick-access buttons for **macros**. It has a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
 
 **Default macro names** use underscores throughout: grid slots **1–9** → `MACRO_1` … `MACRO_9`; **a–f** → `MACRO_A` … `MACRO_F`; compass directions → `MACRO_NORTH`, `MACRO_EAST`, and so on. Names must match **exactly**—`MACRO_1` and `MACRO-1` are different macros. When importing Savitar 1 preferences, legacy `ALIAS` bindings load; the **a** slot may retain a saved `MACRO_10` binding.
 
@@ -668,11 +666,13 @@ These keys work in the input pane during a live session:
 |-----|--------|
 | **← / →** | Move cursor |
 | **⌃A** | Beginning of line |
+| **⌘← / ⌘→** | Start / end of command line |
+| **⌃E** | End of line |
+| **⌃U** | Clear current input (select all, cut) |
+| **⌃W** | Delete the word before the cursor |
 | **⌃C** | Send telnet **interrupt** (ASCII ETX)—some servers treat this as break/cancel |
 | **⌃G** | Send telnet **bell** (ASCII BEL) |
 | **⌃S** | Toggle **scroll lock** on output (not input editing) |
-
-**Not yet implemented:** **⌃E** (end of line), **⌃U** (clear line), and **⌃W** (delete word) may return in a future update.
 
 ### Sticky commands
 
@@ -700,6 +700,8 @@ When the command is processed, `%%name` is replaced with the current value store
 |--------|---------|
 | **Trigger wildcards** | A trigger pattern `tell $$target hello` captures `target` when it matches |
 | **Trigger sets** | Triggers can write captured text into named variables for later replies |
+| **`##regex`** | A local command stores match groups in `%%0`, `%%1`, … — see [Local commands → Dump listings](#dump-listings) |
+| **`##set macro`** | `##set macro "hp" 42` sets `%%hp` for this session — see [Local commands](#local-commands) |
 | **Manual use** | You type `%%var` in macros, startup commands, or replies |
 
 Variable markers are configured per world on **World Settings → Input → Markers**. The default is `%%`.
@@ -724,6 +726,8 @@ If the command marker is **empty**, local commands are disabled and all input go
 **Variable expansion:** Text you send—including trigger replies and macros—is expanded for `%%variables` *before* Savitar checks for a local command. So a macro or reply can run `##history` by expanding to the command marker plus `history`.
 
 Examples below use the default `##` marker; substitute your world's marker if you changed it.
+
+**Savitar messages:** Many local commands print feedback prefixed with `[SAVITAR]` (for example command history, errors, and confirmations like `World "My MUD" added to World Picker.`). That text is highlighted with the world's **echo-back color** (soft yellow by default)—the same highlight used when **Echo all input** is on. See [World Settings → Input](#input-tab).
 
 ### Session and output
 
@@ -790,8 +794,8 @@ These change settings for the **current session's world** immediately (they are 
 |---------|----------------|
 | `##set ansi on` / `off` | Toggle ANSI color processing on output |
 | `##set html on` / `off` | Toggle HTML output mode |
-| `##set echo on` / `off` | Toggle command echo (show sent commands in output) |
-| `##set cronly on` / `off` | Toggle CR-only line endings |
+| `##set echo on` / `off` | Toggle **Echo all input** (full command line echoed to output). Does not switch to “echo CR only”—use **World Settings → Input** for the three-way echo choice |
+| `##set cronly on` / `off` | Toggle **CR-only line endings** when sending commands (not the echo mode) |
 | `##set autoclose on` / `off` | Toggle auto-close when the server disconnects |
 | `##set marker command <text>` | Set the local-command marker (up to 2 characters) |
 | `##set marker macro <text>` | Set the variable marker (default `%%`) |
@@ -809,7 +813,18 @@ These change settings for the **current session's world** immediately (they are 
 | `##add macro <XML>` | Parses a `<MACRO …>` XML fragment and adds it to **this world's** Events list |
 | `##regex "<text>" "<pattern>"` | Tests a regular expression; prints match groups and stores them in scratch variables `%%0`, `%%1`, … for this session |
 
-**Dump listings** (XML written to the output pane, pretty-printed):
+To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
+
+To add a world to the **World Picker**, run `##dump worlds`, copy a `<WORLD …>` block, and paste it after `##add world`:
+
+```text
+##dump worlds
+##add world <WORLD NAME="My MUD" URL="telnet://mud.example.com:4000" FLAGS="ansi+html"><LOGOFFCMD>quit</LOGOFFCMD></WORLD>
+```
+
+### Dump listings
+
+XML listings written to the output pane (pretty-printed; safe when **HTML output** is on):
 
 | Command | What it does |
 |---------|----------------|
@@ -820,15 +835,13 @@ These change settings for the **current session's world** immediately (they are 
 | `##dump connection` | Connection state for this session (address, status, streams, flags) |
 | `##dump variables` | Scratch variables for this session (`%%name` values from triggers, `##set macro`, `##regex`) |
 
-Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`. Dump output is safe to read even when **HTML output** is on—the XML is escaped so tags are not swallowed by the WebKit pane.
+Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`.
 
 **Developer debugging:**
 
 | Command | What it does |
 |---------|----------------|
 | `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (not the output pane) |
-
-To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
 
 ### Windows and sessions
 
@@ -848,7 +861,7 @@ Useful when you play several worlds at once and want one trigger reply to poke a
 ##wait <seconds> [<command>]
 ```
 
-Waits *seconds*, then runs `<command>` if you provided one. Used heavily in **trigger replies** to stagger auto-actions:
+Waits *seconds*, then runs `<command>` if you provided one. The follow-up is submitted **as if you typed it and pressed Return**—server commands and local commands (with your command marker) both work. Used heavily in **trigger replies** to stagger auto-actions:
 
 ```text
 ##wait 2 look
@@ -871,14 +884,6 @@ Respects **Settings → Audio → Mute Sound Cues** (same as trigger audio cues)
 ##play Basso
 ##play Pop
 ```
-
-### Planned next (not in this release)
-
-| Command | Notes |
-|---------|--------|
-| `##tell application` | AppleScript-era integration—not planned |
-
-See [Stories.md](Stories.md) for the full v1 manual map and future work.
 
 ---
 
@@ -970,7 +975,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).
+**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions.
 
 ### Session logging
 
@@ -1046,7 +1051,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Audio](#audio) | Mute sound / speaking / bell / clicker |
 | [Updates](#updates) | Check for updates |
 | [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate |
-| [Advanced](#advanced) | Restore factory defaults; import/export (planned) |
+| [Advanced](#advanced) | Restore factory defaults |
 
 ### World Settings sheet (⇧⌘J)
 
@@ -1057,7 +1062,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Input](#input-tab) | Input tab |
 | [Output](#output-tab) | Output tab |
 | [Closing](#closing-tab) | Closing tab (logoff command) |
-| *(missing)* | MCP — not in v2 yet |
+| — | MCP (not in Savitar 2) |
 
 Grayed-out app prefs are documented in [Settings reference](#settings-reference); Macro Clicker and Mute clicker are now active.
 
@@ -1085,7 +1090,6 @@ When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help →
 |------|---------|
 | **ANSI** | Terminal color/style escape codes in server text |
 | **App-wide events** | Triggers/macros stored in preferences and applied to every world |
-| **Alias** | *(Planned.)* Typed abbreviation expanding to a command before send—distinct from macros |
 | **Event** | Savitar's umbrella term for **triggers** and **macros** (see [Events](#events)) |
 | **Gag** | Trigger appearance that hides matching text |
 | **Local command** | `##command` handled by Savitar, not sent to the server (see [Local commands](#local-commands)) |
@@ -1119,7 +1123,7 @@ Changes are staged in the sheet until you click **OK** (or **Cancel** to discard
 | **Output** | Session logging to a file |
 | **Closing** | Logoff command sent when closing a connected session |
 
-The **MCP** settings tab is not in Savitar 2 yet; see the [README](../README.md) checklist.
+Savitar 2 does not include an **MCP** tab in World Settings.
 
 ### Starting tab
 
@@ -1246,29 +1250,8 @@ The same policy is published on the web at [heynow.com/savitar/privacy](https://
 2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
 3. **Privacy on the web** — [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) mirrors the in-app disclosure.
 4. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
-5. **Send Feedback** — **Help → Send Feedback…** opens your email app with a pre-filled message to the Savitar team. Include what you were doing, what went wrong, and whether it is a bug or a feature idea. You do not need a GitHub account. We read every message; response time varies during the alpha.
-6. **Savitar website** — [heynow.com/savitar](https://www.heynow.com/savitar/) shows alpha news on the landing page when we are in an active test period.
+5. **Send Feedback** — **Help → Send Feedback…** opens your email app with a pre-filled message to the Savitar team. Include what you were doing, what went wrong, and whether it is a bug or a feature idea. You do not need a GitHub account. We read every message; response time varies during the beta.
+6. **Savitar website** — [heynow.com/savitar](https://www.heynow.com/savitar/) shows beta news on the landing page when we are in an active test period.
 7. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
 
 Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). **Help → Send Feedback…** already includes your Savitar version and macOS version in the message body.
-
----
-
-## More chapters (planned)
-
-Most beta-critical material is now in this guide. Remaining Story 9 work:
-
-| Topic | Status |
-|-------|--------|
-| Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
-| **Aliases** (Story 10) | Blocked on implementation |
-| **Macro Clicker** (Story 11) | Shipped |
-| MCP | Deferred |
-| **`xch_cmd` links** | Shipped — see [HTML in output](#html-in-output) |
-| **`##upload`** | Shipped — see [Local commands](#local-commands) |
-| **`##capture`** | Shipped — see [Session logging](#session-logging) and [Local commands](#local-commands) |
-| **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
-| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands) |
-| **Session word wrap** live toggle (Story 20) | Post–2.0 |
-
-See [Stories.md](Stories.md) for the full v1 manual map.

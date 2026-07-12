@@ -7,9 +7,9 @@
 
 import Cocoa
 
-/// Email feedback flow and one-time alpha announcement (Story 15).
+/// Email feedback flow and one-time beta announcement (Story 15).
 enum SavitarFeedback {
-    static let hasSeenAnnouncementKey = "SavitarHasSeenAlphaFeedbackAnnouncement"
+    static let hasSeenAnnouncementKey = "SavitarHasSeenBetaFeedbackAnnouncement"
 
     private static let defaultSupportEmail = "jay@heynow.com"
 
@@ -21,13 +21,13 @@ enum SavitarFeedback {
         return trimmed.isEmpty ? defaultSupportEmail : trimmed
     }
 
-    static func presentAlphaAnnouncementIfNeeded() {
+    static func presentBetaAnnouncementIfNeeded() {
         guard !isRunningTests else { return }
-        guard !UserDefaults.standard.bool(forKey: hasSeenAnnouncementKey) else { return }
+        guard !SavitarUserDefaults.standard.bool(forKey: hasSeenAnnouncementKey) else { return }
 
         let alert = NSAlert()
-        alert.messageText = "Welcome to the Savitar 2 alpha"
-        alert.informativeText = alphaAnnouncementText
+        alert.messageText = "Welcome to the Savitar 2 beta"
+        alert.informativeText = betaAnnouncementText
         alert.alertStyle = .informational
 
         alert.addButton(withTitle: "Open Savitar Help")
@@ -36,7 +36,7 @@ enum SavitarFeedback {
         gotIt.keyEquivalent = "\r"
 
         let response = alert.runModal()
-        UserDefaults.standard.set(true, forKey: hasSeenAnnouncementKey)
+        SavitarUserDefaults.standard.set(true, forKey: hasSeenAnnouncementKey)
 
         switch response {
         case .alertFirstButtonReturn:
@@ -111,22 +111,32 @@ enum SavitarFeedback {
         return components.url
     }
 
-    private static let alphaAnnouncementText = """
-    Savitar 2 is in an alpha test — early software we share with a small group while we finish \
-    the last Savitar 1 features and polish rough edges before a wider beta.
+    private static let betaAnnouncementText = """
+    Savitar 2 is ready for a wider beta — software we share while we polish rough edges and \
+    prepare the 2.0 release.
 
-    What is an alpha test?
+    Whether you used Savitar 1 for years or are trying Savitar (and MUDs) for the first time, \
+    welcome. Returning players get Savitar 1.6.3 feature parity; newcomers get in-app help to \
+    get connected and playing.
 
-    You are using Savitar while we are still building it. Features may be missing, behave oddly, \
-    or change between updates. That is expected. Your job is to play for real and tell us what \
-    works and what does not.
+    What is a beta test?
 
-    We are close to Savitar 1 feature complete in version 2.0. After that milestone ships, we \
-    will add command aliases and other Savitar 2-only features.
+    You are using Savitar while we finish validation with a broader audience. Things may still \
+    change, and you may hit bugs or rough edges. That is expected. Play for real and tell us \
+    what works and what does not.
+
+    If you used Savitar 1: compare behavior to what you remember — triggers, macros, local \
+    commands, and world settings should feel familiar. If something is missing or different, \
+    we want to know.
+
+    If Savitar is new to you: open the World Picker, connect to a world, and type ##help in \
+    the input line. Help → Savitar Help (⌘?) walks through sessions, triggers, and settings \
+    at your own pace.
+
+    Command aliases and other Savitar 2-only features are planned after the 2.0 milestone ships.
 
     Please send any and all feedback — bugs, confusing UI, missing Savitar 1 behavior, or ideas. \
-    Use Help → Send Feedback… (no GitHub account needed). Try Help → Savitar Help (⌘?) first if \
-    you are not sure where a setting lives.
+    Use Help → Send Feedback… (no GitHub account needed).
     """
 
     private static func presentMailUnavailableAlert() {

@@ -52,7 +52,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Speech menus — Edit → Speech → Speak Selected Text (input + output); Audio → Flush Speech Buffer (⌘L), Speech Settings…
 √ Implement the start of local commands, ##history
 √ Implement sticky commands
-√ Handle left-arrow, right-arrow, ctrl-a, ctrl-c, and bell input
+√ Handle left-arrow, right-arrow, ctrl-a/e/u/w/c, and bell input
 √ Implement audio cue triggers
 √ Implement reply triggers
 √ Implement input triggers

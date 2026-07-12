@@ -224,7 +224,7 @@ Savitar does **not** use tabbed document windows: `NSWindow.allowsAutomaticWindo
 
 **Do not** route primary help through macOS Help Viewer (`NSHelpManager` / `helpd`) — unreliable for Xcode and non–`/Applications` builds. The `.help` bundle remains for indexing and possible future `registerBooks` integration.
 
-**Alpha announcement** — one-time modal on first launch after Story 15 (`SavitarFeedback.presentAlphaAnnouncementIfNeeded`) explains the alpha test and points users to **Send Feedback…** and **Savitar Help**.
+**Beta announcement** — one-time modal on first launch (`SavitarFeedback.presentBetaAnnouncementIfNeeded`) welcomes both Savitar 1 migrants and first-time Savitar/MUD players, explains the beta test, and points users to **Send Feedback…**, `##help`, and **Savitar Help**. The `SavitarHasSeenBetaFeedbackAnnouncement` preference key intentionally differs from the alpha key so existing alpha testers see the beta welcome once.
 
 Touchpoint: `client/Savitar2/src/SavitarFeedback.swift`.
 

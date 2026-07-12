@@ -26,9 +26,9 @@ enum SavitarTelemetry {
         let parameters = versionParameters(isReleaseBuild: true)
         TelemetryDeck.signal("Savitar.launched", parameters: parameters)
 
-        if !UserDefaults.standard.bool(forKey: hasLaunchedBeforeKey) {
+        if !SavitarUserDefaults.standard.bool(forKey: hasLaunchedBeforeKey) {
             TelemetryDeck.signal("Savitar.firstLaunch", parameters: parameters)
-            UserDefaults.standard.set(true, forKey: hasLaunchedBeforeKey)
+            SavitarUserDefaults.standard.set(true, forKey: hasLaunchedBeforeKey)
         }
     }
 
