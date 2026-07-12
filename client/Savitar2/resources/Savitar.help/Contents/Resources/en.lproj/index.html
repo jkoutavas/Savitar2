@@ -48,7 +48,7 @@
 <ol>
 <li><strong>Launch Savitar</strong> and open the <strong>World Picker</strong> (at startup by default, or <strong>File → New World Document…</strong>).</li>
 <li><strong>Double-click a world</strong> (for example Alter Aeon) to open a session window and connect.</li>
-<li>Type a command in the <strong>input</strong> pane at the bottom and press <strong>Return</strong>.</li>
+<li>Type a command in the <strong>input</strong> pane at the bottom and press <strong>Return</strong> (or type <code>##help</code> to browse Savitar's local commands).</li>
 <li>Open the <strong>Events</strong> window (<strong>World → Show World Events…</strong>) to add triggers or macros.</li>
 </ol>
 <p>The session window has separate <strong>output</strong> (top) and <strong>input</strong> (bottom) panes. Resize them by dragging the window corner or the split divider—see <a href="#session-window">Session window</a>.</p>
@@ -575,6 +575,8 @@
 <tbody>
 <tr><td><strong>Trigger wildcards</strong></td><td>A trigger pattern <code>tell $$target hello</code> captures <code>target</code> when it matches</td></tr>
 <tr><td><strong>Trigger sets</strong></td><td>Triggers can write captured text into named variables for later replies</td></tr>
+<tr><td><strong><code>##regex</code></strong></td><td>A local command stores match groups in <code>%%0</code>, <code>%%1</code>, … — see <a href="#dump-listings">Local commands → Dump listings</a></td></tr>
+<tr><td><strong><code>##set macro</code></strong></td><td><code>##set macro "hp" 42</code> sets <code>%%hp</code> for this session — see <a href="#local-commands">Local commands</a></td></tr>
 <tr><td><strong>Manual use</strong></td><td>You type <code>%%var</code> in macros, startup commands, or replies</td></tr>
 </tbody></table>
 <p>Variable markers are configured per world on <strong>World Settings → Input → Markers</strong>. The default is <code>%%</code>.</p>
@@ -592,6 +594,7 @@
 <p>If the command marker is <strong>empty</strong>, local commands are disabled and all input goes to the server.</p>
 <p><strong>Variable expansion:</strong> Text you send—including trigger replies and macros—is expanded for <code>%%variables</code> *before* Savitar checks for a local command. So a macro or reply can run <code>##history</code> by expanding to the command marker plus <code>history</code>.</p>
 <p>Examples below use the default <code>##</code> marker; substitute your world's marker if you changed it.</p>
+<p><strong>Savitar messages:</strong> Many local commands print feedback prefixed with <code>[SAVITAR]</code> (for example command history, errors, and confirmations like <code>World "My MUD" added to World Picker.</code>). That text is highlighted with the world's <strong>echo-back color</strong> (soft yellow by default)—the same highlight used when <strong>Echo all input</strong> is on. See <a href="#input-tab">World Settings → Input</a>.</p>
 <h3 id="local-commands-session-and-output">Session and output</h3>
 <table>
 <thead><tr><th>Command</th><th>What it does</th></tr></thead>
@@ -641,8 +644,8 @@
 <tbody>
 <tr><td><code>##set ansi on</code> / <code>off</code></td><td>Toggle ANSI color processing on output</td></tr>
 <tr><td><code>##set html on</code> / <code>off</code></td><td>Toggle HTML output mode</td></tr>
-<tr><td><code>##set echo on</code> / <code>off</code></td><td>Toggle command echo (show sent commands in output)</td></tr>
-<tr><td><code>##set cronly on</code> / <code>off</code></td><td>Toggle CR-only line endings</td></tr>
+<tr><td><code>##set echo on</code> / <code>off</code></td><td>Toggle <strong>Echo all input</strong> (full command line echoed to output). Does not switch to “echo CR only”—use <strong>World Settings → Input</strong> for the three-way echo choice</td></tr>
+<tr><td><code>##set cronly on</code> / <code>off</code></td><td>Toggle <strong>CR-only line endings</strong> when sending commands (not the echo mode)</td></tr>
 <tr><td><code>##set autoclose on</code> / <code>off</code></td><td>Toggle auto-close when the server disconnects</td></tr>
 <tr><td><code>##set marker command &lt;text&gt;</code></td><td>Set the local-command marker (up to 2 characters)</td></tr>
 <tr><td><code>##set marker macro &lt;text&gt;</code></td><td>Set the variable marker (default <code>%%</code>)</td></tr>
@@ -660,7 +663,12 @@
 <tr><td><code>##add macro &lt;XML&gt;</code></td><td>Parses a <code>&lt;MACRO …&gt;</code> XML fragment and adds it to <strong>this world's</strong> Events list</td></tr>
 <tr><td><code>##regex "&lt;text&gt;" "&lt;pattern&gt;"</code></td><td>Tests a regular expression; prints match groups and stores them in scratch variables <code>%%0</code>, <code>%%1</code>, … for this session</td></tr>
 </tbody></table>
-<p><strong>Dump listings</strong> (XML written to the output pane, pretty-printed):</p>
+<p>To copy a trigger or macro from one place to another, use <code>##dump triggers</code> or <code>##dump macros</code>, copy the XML block you need, then <code>##add trigger …</code> or <code>##add macro …</code>.</p>
+<p>To add a world to the <strong>World Picker</strong>, run <code>##dump worlds</code>, copy a <code>&lt;WORLD …&gt;</code> block, and paste it after <code>##add world</code>:</p>
+<pre><code>##dump worlds
+##add world &lt;WORLD NAME=&quot;My MUD&quot; URL=&quot;telnet://mud.example.com:4000&quot; FLAGS=&quot;ansi+html&quot;&gt;&lt;LOGOFFCMD&gt;quit&lt;/LOGOFFCMD&gt;&lt;/WORLD&gt;</code></pre>
+<h3 id="local-commands-dump-listings">Dump listings</h3>
+<p>XML listings written to the output pane (pretty-printed; safe when <strong>HTML output</strong> is on):</p>
 <table>
 <thead><tr><th>Command</th><th>What it does</th></tr></thead>
 <tbody>
@@ -671,14 +679,13 @@
 <tr><td><code>##dump connection</code></td><td>Connection state for this session (address, status, streams, flags)</td></tr>
 <tr><td><code>##dump variables</code></td><td>Scratch variables for this session (<code>%%name</code> values from triggers, <code>##set macro</code>, <code>##regex</code>)</td></tr>
 </tbody></table>
-<p>Each listing is split into <strong>universal</strong> (app-wide) and <strong>world specific</strong> sections. An empty section shows <code>(none)</code>. Dump output is safe to read even when <strong>HTML output</strong> is on—the XML is escaped so tags are not swallowed by the WebKit pane.</p>
+<p>Each listing is split into <strong>universal</strong> (app-wide) and <strong>world specific</strong> sections. An empty section shows <code>(none)</code>.</p>
 <p><strong>Developer debugging:</strong></p>
 <table>
 <thead><tr><th>Command</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><code>##dump</code></td><td>Prints the output pane's HTML source to the <strong>Xcode/console log</strong> (not the output pane)</td></tr>
 </tbody></table>
-<p>To copy a trigger or macro from one place to another, use <code>##dump triggers</code> or <code>##dump macros</code>, copy the XML block you need, then <code>##add trigger …</code> or <code>##add macro …</code>.</p>
 <h3 id="local-commands-windows-and-sessions">Windows and sessions</h3>
 <table>
 <thead><tr><th>Command</th><th>What it does</th></tr></thead>
@@ -692,7 +699,7 @@
 <p>Useful when you play several worlds at once and want one trigger reply to poke another session.</p>
 <h3 id="local-commands-delays-wait">Delays (<code>##wait</code>)</h3>
 <pre><code>##wait &lt;seconds&gt; [&lt;command&gt;]</code></pre>
-<p>Waits *seconds*, then runs <code>&lt;command&gt;</code> if you provided one. Used heavily in <strong>trigger replies</strong> to stagger auto-actions:</p>
+<p>Waits *seconds*, then runs <code>&lt;command&gt;</code> if you provided one. The follow-up is submitted <strong>as if you typed it and pressed Return</strong>—server commands and local commands (with your command marker) both work. Used heavily in <strong>trigger replies</strong> to stagger auto-actions:</p>
 <pre><code>##wait 2 look
 ##wait 5 cast heal</code></pre>
 <p>With no command, <code>##wait</code> alone does nothing visible—it is meant as part of a reply chain.</p>
@@ -706,6 +713,7 @@
 <table>
 <thead><tr><th>Command</th><th>Notes</th></tr></thead>
 <tbody>
+<tr><td><strong><code>##dump aliases</code></strong> / <strong>command aliases</strong> (Story 10)</td><td>Typed abbreviations (<code>n</code> → <code>go north</code>); listed in <code>##help</code> but not implemented yet</td></tr>
 <tr><td><code>##tell application</code></td><td>AppleScript-era integration—not planned</td></tr>
 </tbody></table>
 <p>See <a href="Stories.md">Stories.md</a> for the full v1 manual map and future work.</p>

@@ -45,7 +45,7 @@ Official builds are **free downloads** from [GitHub Releases](https://github.com
 
 1. **Launch Savitar** and open the **World Picker** (at startup by default, or **File → New World Document…**).
 2. **Double-click a world** (for example Alter Aeon) to open a session window and connect.
-3. Type a command in the **input** pane at the bottom and press **Return**.
+3. Type a command in the **input** pane at the bottom and press **Return** (or type `##help` to browse Savitar's local commands).
 4. Open the **Events** window (**World → Show World Events…**) to add triggers or macros.
 
 The session window has separate **output** (top) and **input** (bottom) panes. Resize them by dragging the window corner or the split divider—see [Session window](#session-window).
@@ -700,6 +700,8 @@ When the command is processed, `%%name` is replaced with the current value store
 |--------|---------|
 | **Trigger wildcards** | A trigger pattern `tell $$target hello` captures `target` when it matches |
 | **Trigger sets** | Triggers can write captured text into named variables for later replies |
+| **`##regex`** | A local command stores match groups in `%%0`, `%%1`, … — see [Local commands → Dump listings](#dump-listings) |
+| **`##set macro`** | `##set macro "hp" 42` sets `%%hp` for this session — see [Local commands](#local-commands) |
 | **Manual use** | You type `%%var` in macros, startup commands, or replies |
 
 Variable markers are configured per world on **World Settings → Input → Markers**. The default is `%%`.
@@ -724,6 +726,8 @@ If the command marker is **empty**, local commands are disabled and all input go
 **Variable expansion:** Text you send—including trigger replies and macros—is expanded for `%%variables` *before* Savitar checks for a local command. So a macro or reply can run `##history` by expanding to the command marker plus `history`.
 
 Examples below use the default `##` marker; substitute your world's marker if you changed it.
+
+**Savitar messages:** Many local commands print feedback prefixed with `[SAVITAR]` (for example command history, errors, and confirmations like `World "My MUD" added to World Picker.`). That text is highlighted with the world's **echo-back color** (soft yellow by default)—the same highlight used when **Echo all input** is on. See [World Settings → Input](#input-tab).
 
 ### Session and output
 
@@ -790,8 +794,8 @@ These change settings for the **current session's world** immediately (they are 
 |---------|----------------|
 | `##set ansi on` / `off` | Toggle ANSI color processing on output |
 | `##set html on` / `off` | Toggle HTML output mode |
-| `##set echo on` / `off` | Toggle command echo (show sent commands in output) |
-| `##set cronly on` / `off` | Toggle CR-only line endings |
+| `##set echo on` / `off` | Toggle **Echo all input** (full command line echoed to output). Does not switch to “echo CR only”—use **World Settings → Input** for the three-way echo choice |
+| `##set cronly on` / `off` | Toggle **CR-only line endings** when sending commands (not the echo mode) |
 | `##set autoclose on` / `off` | Toggle auto-close when the server disconnects |
 | `##set marker command <text>` | Set the local-command marker (up to 2 characters) |
 | `##set marker macro <text>` | Set the variable marker (default `%%`) |
@@ -809,7 +813,18 @@ These change settings for the **current session's world** immediately (they are 
 | `##add macro <XML>` | Parses a `<MACRO …>` XML fragment and adds it to **this world's** Events list |
 | `##regex "<text>" "<pattern>"` | Tests a regular expression; prints match groups and stores them in scratch variables `%%0`, `%%1`, … for this session |
 
-**Dump listings** (XML written to the output pane, pretty-printed):
+To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
+
+To add a world to the **World Picker**, run `##dump worlds`, copy a `<WORLD …>` block, and paste it after `##add world`:
+
+```text
+##dump worlds
+##add world <WORLD NAME="My MUD" URL="telnet://mud.example.com:4000" FLAGS="ansi+html"><LOGOFFCMD>quit</LOGOFFCMD></WORLD>
+```
+
+### Dump listings
+
+XML listings written to the output pane (pretty-printed; safe when **HTML output** is on):
 
 | Command | What it does |
 |---------|----------------|
@@ -820,15 +835,13 @@ These change settings for the **current session's world** immediately (they are 
 | `##dump connection` | Connection state for this session (address, status, streams, flags) |
 | `##dump variables` | Scratch variables for this session (`%%name` values from triggers, `##set macro`, `##regex`) |
 
-Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`. Dump output is safe to read even when **HTML output** is on—the XML is escaped so tags are not swallowed by the WebKit pane.
+Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`.
 
 **Developer debugging:**
 
 | Command | What it does |
 |---------|----------------|
 | `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (not the output pane) |
-
-To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
 
 ### Windows and sessions
 
@@ -848,7 +861,7 @@ Useful when you play several worlds at once and want one trigger reply to poke a
 ##wait <seconds> [<command>]
 ```
 
-Waits *seconds*, then runs `<command>` if you provided one. Used heavily in **trigger replies** to stagger auto-actions:
+Waits *seconds*, then runs `<command>` if you provided one. The follow-up is submitted **as if you typed it and pressed Return**—server commands and local commands (with your command marker) both work. Used heavily in **trigger replies** to stagger auto-actions:
 
 ```text
 ##wait 2 look
@@ -876,6 +889,7 @@ Respects **Settings → Audio → Mute Sound Cues** (same as trigger audio cues)
 
 | Command | Notes |
 |---------|--------|
+| **`##dump aliases`** / **command aliases** (Story 10) | Typed abbreviations (`n` → `go north`); listed in `##help` but not implemented yet |
 | `##tell application` | AppleScript-era integration—not planned |
 
 See [Stories.md](Stories.md) for the full v1 manual map and future work.
