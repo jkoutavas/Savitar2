@@ -130,4 +130,16 @@ extension NSColor {
     func lighter(lighter: CGFloat) -> NSColor {
         return darker(darker: -lighter)
     }
+
+    /// Black or white text that reads clearly on this color as a background.
+    func readableTextColor() -> NSColor {
+        let rgb = usingColorSpace(.deviceRGB) ?? self
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        rgb.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let luminance = 0.299 * red + 0.587 * green + 0.114 * blue
+        return luminance > 0.5 ? .black : .white
+    }
 }

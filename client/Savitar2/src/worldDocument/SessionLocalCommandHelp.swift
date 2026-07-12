@@ -129,8 +129,9 @@ enum SessionLocalCommandHelp {
 
         LocalCommandHelpEntry(category: .automation, keywords: ["wait"], syntax: "wait <seconds> [<command>]",
                               detail: "Pauses, then optionally runs another local command."),
-        LocalCommandHelpEntry(category: .automation, keywords: ["play"], syntax: "play <sound-file-path>",
-                              detail: nil)
+        LocalCommandHelpEntry(category: .automation, keywords: ["play"], syntax: "play <sound-name>",
+                              detail: "Plays a system sound by name—the same sounds listed in trigger Audio Cue. "
+                                  + "Quote names that contain spaces.")
     ]
 
     static func html(marker: String, topic: String?) -> String {

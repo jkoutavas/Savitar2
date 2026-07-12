@@ -11,12 +11,16 @@ import XCTest
 
 private final class UploadMockSessionHandler: SessionHandlerProtocol {
     var outputs: [String] = []
+    var echoBackOutputs: [String] = []
 
     func connectionStatusChanged(status _: ConnectionStatus) {}
     func output(result: OutputResult, skipCapture _: Bool) {
         if case let .success(output) = result {
             outputs.append(output)
         }
+    }
+    func outputEchoBack(_ text: String, skipCapture _: Bool) {
+        echoBackOutputs.append(text)
     }
     func printSource() {}
     func commandHistory() -> [String] { [] }
@@ -69,8 +73,9 @@ class SessionFileUploadTests: XCTestCase {
 
         session.submitServerCmd(cmd: Command(text: "##upload \(missingPath)"))
 
-        XCTAssertEqual(handler.outputs, [
+        XCTAssertEqual(handler.echoBackOutputs, [
             "[SAVITAR] File not found: \(missingPath)\n"
         ])
+        XCTAssertTrue(handler.outputs.isEmpty)
     }
 }

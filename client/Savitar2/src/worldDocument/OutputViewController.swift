@@ -81,6 +81,16 @@ class OutputViewController: OutputViewNavigationDelegate {
         }
     }
 
+    func outputEchoBack(_ text: String, skipCapture: Bool = false) {
+        let appending = makeAppend
+        makeAppend = !text.endsWithNewline()
+        outputView.outputEchoBack(string: text, makeAppend: makeAppend, appending: appending,
+                                  appendID: lastAppendID, skipCapture: skipCapture)
+        if !makeAppend {
+            lastAppendID += 1
+        }
+    }
+
     func outputLink(url: String, label: String, colorHex: String?) {
         let href = XchCmdLinkProcessor.escapeAttribute(url)
         let text = XchCmdLinkProcessor.escapeText(label)

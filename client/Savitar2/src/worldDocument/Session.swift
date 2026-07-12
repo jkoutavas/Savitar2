@@ -160,6 +160,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     func sendData(data: Data) {
+        guard outputStream != nil else { return }
         let blockOperation = { [weak self] in
             data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
                 //               self?.logger.info("sendData: \(data.hexString)")
@@ -183,9 +184,9 @@ class Session: NSObject, StreamDelegate {
         let postfix = cmd.flags.contains(.dontPostFix) ? "" : world.commandLinePostfix
         let str = "\(expandedCmd.cmdStr)\(postfix)"
         if world.flags.contains(.echoCmds) {
-            acceptedText(text: str)
+            echoBack(text: str)
         } else if world.flags.contains(.echoCR) {
-            acceptedText(text: postfix == "\r" ? "\n" : "\r\n")
+            echoBack(text: postfix == "\r" ? "\n" : "\r\n")
         }
         sendString(string: str)
     }
@@ -269,7 +270,10 @@ class Session: NSObject, StreamDelegate {
 
         for effect in effects {
             if let reply = effect.reply, reply.count > 0 {
-                submitServerCmd(cmd: Command(text: reply))
+                if effect.echoReply {
+                    echoBack(text: "[Triggered reply:\"\(reply)\"]\n")
+                }
+                submitServerCmd(cmd: Command(text: reply, flags: .suppressEcho))
             }
             if effect.audioType != .silent {
                 AppContext.shared.speakerMan.playAudio(trigger: effect,
@@ -280,8 +284,22 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func acceptedText(text: String) {
-        OperationQueue.main.addOperation { [weak self] in
+        runOnMain { [weak self] in
             self?.sessionHandler.output(result: .success(text))
+        }
+    }
+
+    private func echoBack(text: String) {
+        runOnMain { [weak self] in
+            self?.sessionHandler.outputEchoBack(text)
+        }
+    }
+
+    private func runOnMain(_ block: @escaping () -> Void) {
+        if Thread.isMainThread {
+            block()
+        } else {
+            OperationQueue.main.addOperation(block)
         }
     }
 

@@ -143,6 +143,37 @@ class OutputView: WKWebView {
         }
     }
 
+    func outputEchoBack(string: String,
+                        makeAppend: Bool = false,
+                        appending: Bool = false,
+                        appendID: Int = 0,
+                        skipCapture: Bool = false) {
+        let mutedBell = AppContext.shared.prefs.flags.contains(.muteBell)
+        let displayString = TerminalBell.process(string, muted: mutedBell)
+        let html = Self.echoBackHTML(from: displayString)
+        if html.isEmpty { return }
+
+        outputHTMLFragment(html, makeAppend: makeAppend, appending: appending, appendID: appendID,
+                           skipCapture: skipCapture)
+
+        if loggingFileHandle != nil || (!skipCapture && captureFileHandle != nil) {
+            let plainText = plainTextForLogging(displayString)
+            appendPlainTextToOutputFiles(plainText, capture: !skipCapture)
+        }
+    }
+
+    static func echoBackHTML(from text: String) -> String {
+        var cleanString = text
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+        cleanString = cleanString
+            .replacingOccurrences(of: "\r\n", with: "<br>")
+            .replacingOccurrences(of: "\n", with: "<br>")
+            .replacingOccurrences(of: "\r", with: "")
+        guard !cleanString.isEmpty else { return "" }
+        return "<span class=\"savitar-echo-back\">\(cleanString)</span>"
+    }
+
     func outputHTMLFragment(_ html: String, makeAppend: Bool = false, appending: Bool = false,
                             appendID: Int = 0, skipCapture: Bool = false) {
         var fragment = html
@@ -232,6 +263,8 @@ class OutputView: WKWebView {
         let backColor = world.backColor.toHex!
         let foreColor = world.foreColor.toHex!
         let linkColor = world.linkColor.toHex!
+        let echoBackColor = world.echoBackColor.toHex!
+        let echoForeColor = world.echoBackColor.readableTextColor().toHex!
 
         let colorMan = AppContext.shared.prefs.colorMan
         colorMan.installDefaultsIfNeeded()
@@ -268,6 +301,10 @@ class OutputView: WKWebView {
         \(WordWrapFormatting.outputPreCSS(wordWrapEnabled: wordWrapEnabled))
         .reset       {color: #\(foreColor);}
         .bg-reset    {background-color: #\(backColor);}
+        .savitar-echo-back {
+            background-color: #\(echoBackColor);
+            color: #\(echoForeColor);
+        }
         .inverted    {color: #\(backColor);}
         .bg-inverted {background-color: #\(foreColor);}
         \(fgColorCSS)

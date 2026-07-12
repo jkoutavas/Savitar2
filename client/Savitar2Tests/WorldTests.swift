@@ -281,6 +281,7 @@ class WorldTests: XCTestCase {
 
 private class MockSessionHandler: SessionHandlerProtocol {
     var outputs: [String] = []
+    var echoBackOutputs: [String] = []
     var errors: [String] = []
     var printedSource = false
     var history: [String] = []
@@ -305,6 +306,10 @@ private class MockSessionHandler: SessionHandlerProtocol {
         case let .error(error):
             errors.append(error)
         }
+    }
+
+    func outputEchoBack(_ text: String, skipCapture _: Bool) {
+        echoBackOutputs.append(text)
     }
 
     func printSource() {
@@ -374,9 +379,10 @@ class SessionLocalCommandTests: XCTestCase {
 
         session.submitServerCmd(cmd: Command(text: "##history"))
 
-        XCTAssertEqual(handler.outputs, [
+        XCTAssertEqual(handler.echoBackOutputs, [
             "[SAVITAR] Command history:\n1  look\n2  say hello\n3  ##history\n"
         ])
+        XCTAssertTrue(handler.outputs.isEmpty)
         XCTAssertTrue(handler.errors.isEmpty)
         XCTAssertFalse(handler.printedSource)
     }
@@ -390,7 +396,8 @@ class SessionLocalCommandTests: XCTestCase {
 
         session.submitServerCmd(cmd: Command(text: "//history"))
 
-        XCTAssertEqual(handler.outputs, ["[SAVITAR] Command history:\n1  //history\n"])
+        XCTAssertEqual(handler.echoBackOutputs, ["[SAVITAR] Command history:\n1  //history\n"])
+        XCTAssertTrue(handler.outputs.isEmpty)
     }
 
     func testDumpCommandUsesLocalCommandDispatcher() {
@@ -413,9 +420,10 @@ class SessionLocalCommandTests: XCTestCase {
 
         session.submitServerCmd(cmd: Command(text: "%%cmd"))
 
-        XCTAssertEqual(handler.outputs, [
+        XCTAssertEqual(handler.echoBackOutputs, [
             "[SAVITAR] Command history:\n1  look\n2  %%cmd\n"
         ])
+        XCTAssertTrue(handler.outputs.isEmpty)
     }
 
     func testSetStatusCommandUpdatesSessionStatus() {
@@ -582,6 +590,40 @@ class SessionLocalCommandTests: XCTestCase {
 
         XCTAssertTrue(handler.outputs.first?.contains("(none)") ?? false)
     }
+
+    func testPlayUnknownSoundReportsError() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##play NotARealSoundName"))
+
+        XCTAssertTrue(handler.echoBackOutputs.first?.contains("Unknown sound") ?? false)
+        XCTAssertTrue(handler.outputs.isEmpty)
+    }
+
+    func testInputEchoUsesEchoBackColor() {
+        let world = World()
+        world.flags.insert(.echoCmds)
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "look"))
+
+        XCTAssertEqual(handler.echoBackOutputs, ["look\r\n"])
+        XCTAssertTrue(handler.outputs.isEmpty)
+    }
+
+    func testTriggerReplyEchoUsesEchoBackColor() {
+        let world = World()
+        let handler = MockSessionHandler()
+        let session = Session(world: world, sessionHandler: handler)
+        let trigger = Trigger(name: "ping", echoReply: true, reply: "pong")
+
+        session.handleEffects([trigger])
+
+        XCTAssertEqual(handler.echoBackOutputs, ["[Triggered reply:\"pong\"]\n"])
+    }
 }
 
 class InputTriggerVariableTests: XCTestCase {
@@ -602,9 +644,10 @@ class InputTriggerVariableTests: XCTestCase {
 
         session.handleEffects(effects)
 
-        XCTAssertEqual(handler.outputs, [
+        XCTAssertEqual(handler.echoBackOutputs, [
             "[SAVITAR] Command history:\n1  set ##history\n"
         ])
+        XCTAssertTrue(handler.outputs.isEmpty)
     }
 }
 

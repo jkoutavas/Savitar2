@@ -71,6 +71,12 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("connection state"))
     }
 
+    func testTopicHelpForPlayCommand() {
+        let html = SessionLocalCommandHelp.html(marker: "##", topic: "play")
+        XCTAssertTrue(html.contains("play"))
+        XCTAssertTrue(html.contains("Audio Cue"))
+    }
+
     func testTopicHelpForCommandWithoutDetail() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
         XCTAssertTrue(html.contains("add world"))

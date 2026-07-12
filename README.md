@@ -77,7 +77,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 _ Local command ##add world
 √ Local command ##dump connection
 √ Local command ##dump variables
-_ Local command ##play
+√ Local command ##play
 √ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
 √ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
@@ -144,6 +144,7 @@ _ Alias support (Story 10)
 _ New `##dump` aliases local command (Story 10)
 _ New `##say` local command for voicing text
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
+_ Echo back color — World Settings → Appearance swatch for `ECHOBGCOLOR` (Story 28; v1 stored the color but never shipped the control)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
 _ Text to emoji support
