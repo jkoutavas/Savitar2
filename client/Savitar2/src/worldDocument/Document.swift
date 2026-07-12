@@ -48,6 +48,28 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         return prepared
     }
 
+    /// World Picker and session restoration open untitled documents with `makeUntitledDocument`;
+    /// they must be registered or File → Open Recent and live session capture behave incorrectly.
+    func registerWithDocumentControllerIfNeeded() {
+        let controller = NSDocumentController.shared
+        guard !controller.documents.contains(where: { $0 === self }) else { return }
+        controller.addDocument(self)
+    }
+
+    override func save(to url: URL,
+                       ofType typeName: String,
+                       for saveOperation: NSDocument.SaveOperationType,
+                       completionHandler: @escaping (Error?) -> Void) {
+        super.save(to: url, ofType: typeName, for: saveOperation) { error in
+            if error == nil {
+                self.registerWithDocumentControllerIfNeeded()
+                NSDocumentController.shared.noteNewRecentDocumentURL(url)
+                AppContext.shared.syncOpenSessions()
+            }
+            completionHandler(error)
+        }
+    }
+
     lazy var store = reactionsStore(undoManagerProvider: { self.undoManager! })
 
     override func close() {
@@ -164,6 +186,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
         case .ConnectComplete:
             sessionViewController?.select(panel: .Input)
+            windowController?.reapplyPaneLayoutFromResolution()
 
         case .DisconnectComplete:
             sessionViewController?.select(panel: .Offline)

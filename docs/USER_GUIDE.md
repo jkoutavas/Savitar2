@@ -488,6 +488,8 @@ You can change pane size in three ways:
 
 Savitar saves the size in your `.world` document (`RESOLUTION` in the XML). The next time you open that world, the window restores to the saved dimensions.
 
+While a session is **connecting**, the bottom area briefly shows a **Connecting** status panel. That panel is taller than the normal input line; Savitar restores the saved input row count automatically once the connection completes and the input pane appears.
+
 **Tips**
 
 - Sizes are most accurate with a **monospace** font (see **World Settings → Appearance**). Proportional fonts make row/column counts approximate.
@@ -664,6 +666,10 @@ These keys work in the input pane during a live session:
 |-----|--------|
 | **← / →** | Move cursor |
 | **⌃A** | Beginning of line |
+| **⌘← / ⌘→** | Start / end of command line |
+| **⌃E** | End of line |
+| **⌃U** | Clear current input (select all, cut) |
+| **⌃W** | Delete the word before the cursor |
 | **⌃C** | Send telnet **interrupt** (ASCII ETX)—some servers treat this as break/cancel |
 | **⌃G** | Send telnet **bell** (ASCII BEL) |
 | **⌃S** | Toggle **scroll lock** on output (not input editing) |

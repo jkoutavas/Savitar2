@@ -48,8 +48,12 @@ enum PaneDimensions {
 
     static func splitPosition(outputRows: Int, inputRows: Int, font: NSFont, contentHeight: CGFloat,
                               dividerThickness: CGFloat) -> CGFloat {
-        let inputHeight = lineHeight(for: font) * (CGFloat(max(inputRows, 1)) + inputChromeRows)
+        let inputHeight = inputPaneHeight(inputRows: inputRows, font: font)
         return max(0, contentHeight - dividerThickness - inputHeight)
+    }
+
+    static func inputPaneHeight(inputRows: Int, font: NSFont) -> CGFloat {
+        lineHeight(for: font) * (CGFloat(max(inputRows, 1)) + inputChromeRows)
     }
 
     static func apply(world: World,
@@ -71,24 +75,37 @@ enum PaneDimensions {
         splitView.setPosition(split, ofDividerAt: 0)
     }
 
-    static func measure(world: inout World,
-                        window: NSWindow,
+    /// Snapshot of the current window/split layout in resolution terms.
+    /// A value type so measuring never mutates a live `World` (a class);
+    /// callers decide when a measurement should be written back.
+    struct Measurement {
+        var windowSize: NSSize
+        var columns: Int
+        var outputRows: Int
+        var inputRows: Int
+    }
+
+    static func measure(window: NSWindow,
                         splitView: NSSplitView,
-                        font: NSFont) {
+                        font: NSFont) -> Measurement {
         let dividerThickness = splitView.dividerThickness
         let contentSize = window.contentRect(forFrameRect: window.frame).size
         let charW = max(charWidth(for: font), 1)
         let lineH = max(lineHeight(for: font), 1)
 
-        world.windowSize = contentSize
-        world.columns = max(1, Int(floor((contentSize.width - verticalScrollbarWidth) / charW)))
+        let columns = max(1, Int(floor((contentSize.width - verticalScrollbarWidth) / charW)))
 
         let split = splitView.subviews.first.map { $0.frame.height } ?? 0
-        world.outputRows = max(1, Int(floor(split / lineH)))
+        let outputRows = max(1, Int(floor(split / lineH)))
 
         let inputHeight = contentSize.height - split - dividerThickness
         let inputRowCount = inputHeight / lineH - inputChromeRows
-        world.inputRows = max(1, Int(round(inputRowCount)))
+        let inputRows = max(1, Int(round(inputRowCount)))
+
+        return Measurement(windowSize: contentSize,
+                           columns: columns,
+                           outputRows: outputRows,
+                           inputRows: inputRows)
     }
 
     static func resolutionLabel(columns: Int, outputRows: Int, inputRows: Int) -> String {

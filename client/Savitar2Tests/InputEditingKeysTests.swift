@@ -35,6 +35,21 @@ class InputEditingKeysTests: XCTestCase {
         XCTAssertEqual(InputEditingKeys.action(for: keyEvent(keyCode: Keycode.g, modifiers: .control)), .sendBell)
     }
 
+    func testControlEUClearAndWordEditing() {
+        XCTAssertEqual(
+            InputEditingKeys.action(for: keyEvent(keyCode: Keycode.e, modifiers: .control)),
+            .endOfLine
+        )
+        XCTAssertEqual(
+            InputEditingKeys.action(for: keyEvent(keyCode: Keycode.u, modifiers: .control)),
+            .clearInputLine
+        )
+        XCTAssertEqual(
+            InputEditingKeys.action(for: keyEvent(keyCode: Keycode.w, modifiers: .control)),
+            .deleteWordBackward
+        )
+    }
+
     func testCommandAIsNotBeginningOfLine() {
         XCTAssertNil(InputEditingKeys.action(for: keyEvent(keyCode: Keycode.a, modifiers: .command)))
     }

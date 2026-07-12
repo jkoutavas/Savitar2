@@ -45,4 +45,9 @@ class PaneDimensionsTests: XCTestCase {
                                                  dividerThickness: 1)
         XCTAssertEqual(split, 240, accuracy: 1)
     }
+
+    func testInputPaneHeightMatchesTwoLineDefault() {
+        let font = NSFont(name: "Monaco", size: 9) ?? NSFont.systemFont(ofSize: 9)
+        XCTAssertEqual(PaneDimensions.inputPaneHeight(inputRows: 2, font: font), 30, accuracy: 1)
+    }
 }

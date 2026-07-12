@@ -253,7 +253,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
         }
 
         installSplitViewObservationIfNeeded(svc.splitView)
-        svc.splitView.autosaveName = "splitViewAutoSave"
+        // Pane dimensions are persisted per world in RESOLUTION/WINDOWSIZE.
+        // A shared NSSplitView autosave name lets the last session's divider
+        // position override newly created worlds (whose input pane defaults to
+        // two rows), so do not enable AppKit's competing global persistence.
+        svc.splitView.autosaveName = nil
         updateScrollLockControl(locked: svc.isScrollLocked)
     }
 
@@ -268,6 +272,25 @@ class WindowController: NSWindowController, NSWindowDelegate {
         )
     }
 
+    func reapplyPaneLayoutFromResolution() {
+        guard let world = (document as? Document)?.world,
+              let session = contentViewController as? SessionViewController,
+              session.splitView.subviews.count >= 2 else { return }
+
+        let font = sessionFont(for: world)
+        isApplyingPaneLayout = true
+        defer { isApplyingPaneLayout = false }
+
+        session.splitView.layoutSubtreeIfNeeded()
+        let contentHeight = session.splitView.bounds.height
+        let split = PaneDimensions.splitPosition(outputRows: world.outputRows,
+                                                 inputRows: world.inputRows,
+                                                 font: font,
+                                                 contentHeight: contentHeight,
+                                                 dividerThickness: session.splitView.dividerThickness)
+        session.splitView.setPosition(split, ofDividerAt: 0)
+    }
+
     private func applyPendingPaneLayoutIfNeeded() {
         guard needsPaneLayout,
               let window, window.isVisible,
@@ -276,9 +299,10 @@ class WindowController: NSWindowController, NSWindowDelegate {
               session.splitView.subviews.count >= 2 else { return }
 
         needsPaneLayout = false
+        let font = sessionFont(for: world)
         applyPaneDimensions(world: world,
                             session: session,
-                            font: sessionFont(for: world),
+                            font: font,
                             fromResolution: true)
     }
 
@@ -327,8 +351,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         let font = sessionFont(for: world)
         session.splitView.layoutSubtreeIfNeeded()
-        var measured = world
-        PaneDimensions.measure(world: &measured, window: window, splitView: session.splitView, font: font)
+        let measured = PaneDimensions.measure(window: window, splitView: session.splitView, font: font)
 
         if NSEvent.pressedMouseButtons != 0 {
             beginSplitDividerTracking()
@@ -345,12 +368,13 @@ class WindowController: NSWindowController, NSWindowDelegate {
               let window else { return }
 
         session.splitView.layoutSubtreeIfNeeded()
-        var measured = world
-        PaneDimensions.measure(world: &measured,
-                               window: window,
-                               splitView: session.splitView,
-                               font: sessionFont(for: world))
-        doc.world = measured
+        let measured = PaneDimensions.measure(window: window,
+                                              splitView: session.splitView,
+                                              font: sessionFont(for: world))
+        world.windowSize = measured.windowSize
+        world.columns = measured.columns
+        world.outputRows = measured.outputRows
+        world.inputRows = measured.inputRows
         doc.updateChangeCount(.changeDone)
     }
 

@@ -85,11 +85,11 @@ final class ClickerWindowController: NSWindowController, NSWindowDelegate {
     private func saveOrigin() {
         guard let window else { return }
         let origin = window.frame.origin
-        UserDefaults.standard.set(NSStringFromPoint(origin), forKey: Self.positionAutosaveKey)
+        SavitarUserDefaults.standard.set(NSStringFromPoint(origin), forKey: Self.positionAutosaveKey)
     }
 
     private static func savedOrigin() -> NSPoint? {
-        guard let string = UserDefaults.standard.string(forKey: positionAutosaveKey) else { return nil }
+        guard let string = SavitarUserDefaults.standard.string(forKey: positionAutosaveKey) else { return nil }
         let origin = NSPointFromString(string)
         return isOriginOnVisibleScreen(origin) ? origin : nil
     }
@@ -112,7 +112,7 @@ final class ClickerWindowController: NSWindowController, NSWindowDelegate {
     }
 
     static func clearSavedPosition() {
-        UserDefaults.standard.removeObject(forKey: positionAutosaveKey)
+        SavitarUserDefaults.standard.removeObject(forKey: positionAutosaveKey)
         let defaults = UserDefaults.standard
         let prefix = "NSWindow Frame \(legacyFrameAutosaveName)"
         for key in defaults.dictionaryRepresentation().keys where key.hasPrefix(prefix) {

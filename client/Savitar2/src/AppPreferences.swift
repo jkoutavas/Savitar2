@@ -63,6 +63,11 @@ class AppPreferences: SavitarXMLProtocol {
     }
 
     func load() {
+        if isRunningTests {
+            try? loadFactoryDefaults()
+            return
+        }
+
         // An interesting bit of Savitar history trivia... Savitar v1.x named its prefs file as "2.0"
         // during a significant change in the content of the preferences during minor releases, and I was
         // anticipating bumping Savitar's major version, but that didn't come to pass.

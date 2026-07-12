@@ -12,7 +12,9 @@ import ReSwift
 extension Document {
     func loadAndShow(world: World) {
         version = 2
-        self.world = world
+        // Copy picker/catalog worlds so session layout changes never mutate the shared store entry.
+        self.world = World(world: world)
+        registerWithDocumentControllerIfNeeded()
         makeWindowControllers()
         showWindows()
     }

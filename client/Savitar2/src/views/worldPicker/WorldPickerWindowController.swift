@@ -76,7 +76,7 @@ final class WorldPickerWindowController: NSWindowController, NSWindowDelegate {
     }
 
     private func savedFrameOrigin() -> NSPoint? {
-        guard let value = UserDefaults.standard.string(forKey: Self.frameOriginKey) else { return nil }
+        guard let value = SavitarUserDefaults.standard.string(forKey: Self.frameOriginKey) else { return nil }
         let parts = value.split(separator: ",")
         guard parts.count == 2,
               let x = Double(parts[0]),
@@ -87,7 +87,7 @@ final class WorldPickerWindowController: NSWindowController, NSWindowDelegate {
     private func saveFrameOrigin() {
         guard let window else { return }
         let origin = window.frame.origin
-        UserDefaults.standard.set("\(origin.x),\(origin.y)", forKey: Self.frameOriginKey)
+        SavitarUserDefaults.standard.set("\(origin.x),\(origin.y)", forKey: Self.frameOriginKey)
     }
 
     func windowWillClose(_: Notification) {

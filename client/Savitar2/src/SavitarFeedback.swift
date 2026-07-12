@@ -23,7 +23,7 @@ enum SavitarFeedback {
 
     static func presentAlphaAnnouncementIfNeeded() {
         guard !isRunningTests else { return }
-        guard !UserDefaults.standard.bool(forKey: hasSeenAnnouncementKey) else { return }
+        guard !SavitarUserDefaults.standard.bool(forKey: hasSeenAnnouncementKey) else { return }
 
         let alert = NSAlert()
         alert.messageText = "Welcome to the Savitar 2 alpha"
@@ -36,7 +36,7 @@ enum SavitarFeedback {
         gotIt.keyEquivalent = "\r"
 
         let response = alert.runModal()
-        UserDefaults.standard.set(true, forKey: hasSeenAnnouncementKey)
+        SavitarUserDefaults.standard.set(true, forKey: hasSeenAnnouncementKey)
 
         switch response {
         case .alertFirstButtonReturn:
