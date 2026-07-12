@@ -186,6 +186,8 @@
 		69FL00012F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */; };
 		69FU00012F0C060400AB6BA6 /* SessionFileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FU00022F0C060400AB6BA6 /* SessionFileUpload.swift */; };
 		69FU00112F0C060400AB6BA6 /* SessionFileUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */; };
+		69SM00112F0C070500AB6BA6 /* SpeakerManSoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */; };
+		69EB00112F0C080600AB6BA6 /* OutputEchoBackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */; };
 		69SW00012F0C040400AB6BA6 /* SavitarWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SW00022F0C040400AB6BA6 /* SavitarWelcome.swift */; };
 		69SW00112F0C040400AB6BA6 /* SavitarWelcomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */; };
 		69HP00012F0C030400AB6BA6 /* SessionLocalCommandHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HP00022F0C030400AB6BA6 /* SessionLocalCommandHelp.swift */; };
@@ -397,6 +399,8 @@
 		69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFileLinkProcessor.swift; sourceTree = "<group>"; };
 		69FU00022F0C060400AB6BA6 /* SessionFileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFileUpload.swift; sourceTree = "<group>"; };
 		69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFileUploadTests.swift; sourceTree = "<group>"; };
+		69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerManSoundTests.swift; sourceTree = "<group>"; };
+		69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputEchoBackTests.swift; sourceTree = "<group>"; };
 		69SW00022F0C040400AB6BA6 /* SavitarWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarWelcome.swift; sourceTree = "<group>"; };
 		69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarWelcomeTests.swift; sourceTree = "<group>"; };
 		69HP00022F0C030400AB6BA6 /* SessionLocalCommandHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLocalCommandHelp.swift; sourceTree = "<group>"; };
@@ -510,6 +514,8 @@
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
 				69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */,
 				69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */,
+				69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */,
+				69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */,
 				69XC00122F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift */,
 				69HP00122F0C030400AB6BA6 /* SessionLocalCommandHelpTests.swift */,
 				69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */,
@@ -1200,6 +1206,8 @@
 				69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */,
 				69SB00312F0C010300AB6BA6 /* SessionLocalCommandsTests.swift in Sources */,
 				69FU00112F0C060400AB6BA6 /* SessionFileUploadTests.swift in Sources */,
+				69SM00112F0C070500AB6BA6 /* SpeakerManSoundTests.swift in Sources */,
+				69EB00112F0C080600AB6BA6 /* OutputEchoBackTests.swift in Sources */,
 				69XC00112F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift in Sources */,
 				69HP00112F0C030400AB6BA6 /* SessionLocalCommandHelpTests.swift in Sources */,
 				69SW00112F0C040400AB6BA6 /* SavitarWelcomeTests.swift in Sources */,

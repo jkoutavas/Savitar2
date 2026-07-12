@@ -648,6 +648,7 @@
 <tr><td><code>##set marker macro &lt;text&gt;</code></td><td>Set the variable marker (default <code>%%</code>)</td></tr>
 <tr><td><code>##set marker wildcard &lt;text&gt;</code></td><td>Set the wildcard marker in trigger patterns (default <code>$$</code>)</td></tr>
 <tr><td><code>##set macro "&lt;name&gt;" &lt;value&gt;</code></td><td>Set a <strong>scratch variable</strong> <code>&lt;name&gt;</code> to <code>&lt;value&gt;</code> (same as <code>%%name</code> expansion—not a macro hotkey in the Events window)</td></tr>
+<tr><td><code>##add world &lt;XML&gt;</code></td><td>Parses a <code>&lt;WORLD …&gt;</code> XML fragment and adds it to the <strong>World Picker</strong> list (saved in app preferences)</td></tr>
 </tbody></table>
 <h3 id="local-commands-triggers-and-macros">Triggers and macros</h3>
 <table>
@@ -695,6 +696,12 @@
 <pre><code>##wait 2 look
 ##wait 5 cast heal</code></pre>
 <p>With no command, <code>##wait</code> alone does nothing visible—it is meant as part of a reply chain.</p>
+<h3 id="local-commands-sounds-play">Sounds (<code>##play</code>)</h3>
+<pre><code>##play &lt;sound-name&gt;</code></pre>
+<p>Plays a system sound by name—the same list as trigger <strong>Audio Cue → Sound</strong> in the Events window (<code>Basso</code>, <code>Pop</code>, <code>Click</code>, and other sounds in your macOS sound folders). Matching is case-insensitive; you can include or omit the file extension. Quote names that contain spaces.</p>
+<p>Respects <strong>Settings → Audio → Mute Sound Cues</strong> (same as trigger audio cues).</p>
+<pre><code>##play Basso
+##play Pop</code></pre>
 <h3 id="local-commands-planned-next-not-in-this-release">Planned next (not in this release)</h3>
 <table>
 <thead><tr><th>Command</th><th>Notes</th></tr></thead>
@@ -927,7 +934,7 @@
 <tbody>
 <tr><td><strong>No echo</strong></td><td>Input is sent to the server only; nothing is shown locally</td></tr>
 <tr><td><strong>Echo carriage return only</strong></td><td>Only a line break appears in output when you press Return</td></tr>
-<tr><td><strong>Echo all input</strong></td><td>The full command line is shown in output before it is sent</td></tr>
+<tr><td><strong>Echo all input</strong></td><td>The full command line is shown in output before it is sent, highlighted with the world's echo-back color (soft yellow by default)</td></tr>
 </tbody></table>
 <h4 id="world-settings-input-tab-sticky-commands">Sticky commands</h4>
 <p>When <strong>Sticky commands</strong> is checked, pressing Return after a command <strong>leaves the text selected</strong> in the input line instead of clearing it. Type over the selection or press ↑/↓ to recall history as usual. Useful when you send the same command repeatedly with small edits.</p>

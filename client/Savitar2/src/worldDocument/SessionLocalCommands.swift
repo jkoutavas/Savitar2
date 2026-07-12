@@ -55,6 +55,7 @@ enum SessionLocalCommand: Equatable {
     case wait(seconds: Int, followUp: String?)
     case addMacro(xml: String)
     case addTrigger(xml: String)
+    case addWorld(xml: String)
     case selectWindow(title: String)
     case link(url: String, label: String, colorHex: String?)
     case help(topic: String?)
@@ -62,6 +63,7 @@ enum SessionLocalCommand: Equatable {
     case upload(path: String)
     case openTextWindow
     case sendWindow(title: String, message: String)
+    case play(soundName: String)
     case unknown(body: String)
 }
 
@@ -102,6 +104,8 @@ enum SessionLocalCommands {
             return parseLink(trimmed, body: body)
         case "open":
             return parseOpen(words: words, body: body)
+        case "play":
+            return parsePlay(trimmed, words: words, body: body)
         case "recall":
             return parseRecall(words: words, body: body)
         case "regex":
@@ -143,6 +147,8 @@ enum SessionLocalCommands {
             return .addMacro(xml: payload)
         case "tri":
             return .addTrigger(xml: payload)
+        case "wor":
+            return .addWorld(xml: payload)
         default:
             return .unknown(body: body)
         }
@@ -261,6 +267,19 @@ enum SessionLocalCommands {
             return .unknown(body: body)
         }
         return .openTextWindow
+    }
+
+    private static func parsePlay(_ trimmed: String, words: [Substring], body: String) -> SessionLocalCommand {
+        guard words.count >= 2 else { return .unknown(body: body) }
+        if let quoted = parseQuotedString(from: trimmed, afterWordIndex: 1) {
+            let name = quoted.value.trimmingCharacters(in: .whitespaces)
+            guard !name.isEmpty else { return .unknown(body: body) }
+            return .play(soundName: name)
+        }
+        guard let name = payload(afterLeadingWords: 1, in: trimmed), !name.isEmpty else {
+            return .unknown(body: body)
+        }
+        return .play(soundName: name)
     }
 
     private static func parseLink(_ trimmed: String, body: String) -> SessionLocalCommand {

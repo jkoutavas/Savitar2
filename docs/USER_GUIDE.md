@@ -797,6 +797,7 @@ These change settings for the **current session's world** immediately (they are 
 | `##set marker macro <text>` | Set the variable marker (default `%%`) |
 | `##set marker wildcard <text>` | Set the wildcard marker in trigger patterns (default `$$`) |
 | `##set macro "<name>" <value>` | Set a **scratch variable** `<name>` to `<value>` (same as `%%name` expansion—not a macro hotkey in the Events window) |
+| `##add world <XML>` | Parses a `<WORLD …>` XML fragment and adds it to the **World Picker** list (saved in app preferences) |
 
 ### Triggers and macros
 
@@ -855,6 +856,21 @@ Waits *seconds*, then runs `<command>` if you provided one. Used heavily in **tr
 ```
 
 With no command, `##wait` alone does nothing visible—it is meant as part of a reply chain.
+
+### Sounds (`##play`)
+
+```text
+##play <sound-name>
+```
+
+Plays a system sound by name—the same list as trigger **Audio Cue → Sound** in the Events window (`Basso`, `Pop`, `Click`, and other sounds in your macOS sound folders). Matching is case-insensitive; you can include or omit the file extension. Quote names that contain spaces.
+
+Respects **Settings → Audio → Mute Sound Cues** (same as trigger audio cues).
+
+```text
+##play Basso
+##play Pop
+```
 
 ### Planned next (not in this release)
 
@@ -1148,7 +1164,7 @@ Choose whether typed input is copied into the **output** pane:
 |--------|----------|
 | **No echo** | Input is sent to the server only; nothing is shown locally |
 | **Echo carriage return only** | Only a line break appears in output when you press Return |
-| **Echo all input** | The full command line is shown in output before it is sent |
+| **Echo all input** | The full command line is shown in output before it is sent, highlighted with the world's echo-back color (soft yellow by default) |
 
 #### Sticky commands
 

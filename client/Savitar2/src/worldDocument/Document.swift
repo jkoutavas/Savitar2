@@ -152,6 +152,11 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         }
     }
 
+    func outputEchoBack(_ text: String, skipCapture: Bool) {
+        guard let outputVC = sessionViewController?.outputViewController else { return }
+        outputVC.outputEchoBack(text, skipCapture: skipCapture)
+    }
+
     func connectionStatusChanged(status: ConnectionStatus) {
         switch status {
         case .BindStart:

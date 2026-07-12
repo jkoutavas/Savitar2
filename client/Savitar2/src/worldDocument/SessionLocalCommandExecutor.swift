@@ -18,7 +18,7 @@ enum SessionLocalCommandExecutor {
         case let .dumpListing(target):
             dumpListing(target, session: session)
         case .history:
-            info(session, commandHistoryText(session))
+            clientMessage(session, commandHistoryText(session))
         case let .setStatus(pane, message):
             handler.setSessionStatus(pane: pane, text: message)
         case let .setWorldFlag(flag, enabled):
@@ -51,6 +51,8 @@ enum SessionLocalCommandExecutor {
             addMacro(xml: xml, session: session)
         case let .addTrigger(xml):
             addTrigger(xml: xml, session: session)
+        case let .addWorld(xml):
+            addWorld(xml: xml, session: session)
         case let .selectWindow(title):
             if !selectWindow(title: title) {
                 commandError(session, "Window \"\(title)\" not found.")
@@ -67,8 +69,10 @@ enum SessionLocalCommandExecutor {
             PlainTextDocument.openNewUntitled()
         case let .sendWindow(title, message):
             sendWindow(title: title, message: message, session: session)
+        case let .play(soundName):
+            playSound(named: soundName, session: session)
         case let .unknown(body):
-            info(session, "Unknown local command: \(body)\n")
+            clientMessage(session, "Unknown local command: \(body)\n")
         }
     }
 
@@ -78,8 +82,12 @@ enum SessionLocalCommandExecutor {
         session.sessionHandler.output(result: .success(text), skipCapture: skipCapture)
     }
 
+    private static func clientMessage(_ session: Session, _ text: String, skipCapture: Bool = false) {
+        session.sessionHandler.outputEchoBack(text, skipCapture: skipCapture)
+    }
+
     private static func commandError(_ session: Session, _ text: String, skipCapture: Bool = false) {
-        session.sessionHandler.output(result: .success("[SAVITAR] \(text)\n"), skipCapture: skipCapture)
+        clientMessage(session, "[SAVITAR] \(text)\n", skipCapture: skipCapture)
     }
 
     private static func showHelp(topic: String?, session: Session) {
@@ -120,7 +128,7 @@ enum SessionLocalCommandExecutor {
         switch SessionFileUpload.upload(path: path, session: session) {
         case let .success(byteCount):
             let resolved = SessionFileUpload.resolvePath(path)
-            info(session, "[SAVITAR] Uploaded \(byteCount) bytes from \(resolved).\n")
+            clientMessage(session, "[SAVITAR] Uploaded \(byteCount) bytes from \(resolved).\n")
         case .failure(.notConnected):
             commandError(session, "Not connected.")
         case .failure(.emptyPath):
@@ -131,6 +139,20 @@ enum SessionLocalCommandExecutor {
             commandError(session, "File not found: \(resolved)")
         case let .failure(.unreadable(resolved)):
             commandError(session, "Could not read file: \(resolved)")
+        }
+    }
+
+    private static func playSound(named name: String, session: Session) {
+        guard !AppContext.shared.prefs.flags.contains(.muteSound) else { return }
+
+        let speaker = AppContext.shared.speakerMan
+        guard let resolved = speaker.resolveSoundName(name) else {
+            commandError(session, "Unknown sound \"\(name)\".")
+            return
+        }
+        guard speaker.playSound(named: resolved) else {
+            commandError(session, "Could not play sound \"\(resolved)\".")
+            return
         }
     }
 
@@ -196,7 +218,7 @@ enum SessionLocalCommandExecutor {
         match.trigger.enabled = enabled
         session.sessionHandler.syncTriggerEnabled(match.trigger, scope: match.scope, enabled: enabled)
         let state = enabled ? "enabled" : "disabled"
-        info(session, "Trigger \"\(match.trigger.name)\" \(state).\n")
+        clientMessage(session, "Trigger \"\(match.trigger.name)\" \(state).\n")
     }
 
     private static func findTrigger(named name: String,
@@ -262,7 +284,7 @@ enum SessionLocalCommandExecutor {
             let macro = Macro()
             try macro.parse(xml: elem)
             session.sessionHandler.insertWorldMacro(macro)
-            info(session, "Macro \"\(macro.name)\" added.\n")
+            clientMessage(session, "Macro \"\(macro.name)\" added.\n")
         } catch {
             commandError(session, "Could not parse macro XML.")
         }
@@ -281,9 +303,37 @@ enum SessionLocalCommandExecutor {
                 trigger.style!.formOnOff()
             }
             session.sessionHandler.insertWorldTrigger(trigger)
-            info(session, "Trigger \"\(trigger.name)\" added.\n")
+            clientMessage(session, "Trigger \"\(trigger.name)\" added.\n")
         } catch {
             commandError(session, "Could not parse trigger XML.")
+        }
+    }
+
+    private static func addWorld(xml: String, session: Session) {
+        do {
+            let accessor = try XML.parse(xml)
+            let elem = accessor[WorldElemIdentifier]
+            if case .failure = elem {
+                throw SessionLocalCommandError.invalidXML
+            }
+            let world = World()
+            try world.parse(xml: elem)
+            guard !world.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                commandError(session, "World XML requires a NAME attribute.")
+                return
+            }
+            guard !world.host.isEmpty else {
+                commandError(session, "World XML requires a telnet:// URL.")
+                return
+            }
+
+            let store = AppContext.shared.worldPickerStore
+            let index = store.state?.worldList.items.count ?? 0
+            store.dispatch(InsertWorldAction(world: world, atIndex: index))
+            AppContext.shared.save()
+            clientMessage(session, "World \"\(world.name)\" added to World Picker.\n")
+        } catch {
+            commandError(session, "Could not parse world XML.")
         }
     }
 

@@ -83,7 +83,7 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .world, keywords: ["set macro"], syntax: "set macro \"<name>\" <value>",
                               detail: "Sets a session macro variable used in command expansion."),
         LocalCommandHelpEntry(category: .world, keywords: ["add world"], syntax: "add world <XML>",
-                              detail: nil),
+                              detail: "Parses a <WORLD …> XML fragment and adds it to the World Picker list."),
 
         LocalCommandHelpEntry(category: .events, keywords: ["enable trigger"], syntax: "enable trigger \"<name>\"",
                               detail: "Enables a trigger by name."),
@@ -129,8 +129,9 @@ enum SessionLocalCommandHelp {
 
         LocalCommandHelpEntry(category: .automation, keywords: ["wait"], syntax: "wait <seconds> [<command>]",
                               detail: "Pauses, then optionally runs another local command."),
-        LocalCommandHelpEntry(category: .automation, keywords: ["play"], syntax: "play <sound-file-path>",
-                              detail: nil)
+        LocalCommandHelpEntry(category: .automation, keywords: ["play"], syntax: "play <sound-name>",
+                              detail: "Plays a system sound by name—the same sounds listed in trigger Audio Cue. "
+                                  + "Quote names that contain spaces.")
     ]
 
     static func html(marker: String, topic: String?) -> String {

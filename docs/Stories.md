@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) and **Story 6** (Events Window HIG) are complete. **Story 2** is partially complete (see below). **Story 8** tracks SwiftUI Settings exploration; **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) and **Story 6** (Events Window HIG) are complete. **Story 2** is partially complete (see below). **Story 8** tracks SwiftUI Settings exploration; **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 28** (v2.1) adds the echo-back color swatch Savitar 1 never shipped. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -1306,6 +1306,94 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 
 ---
 
+## Story 28 — Echo back color (World Settings Appearance, v2.1)
+
+**Goal:** Expose **`ECHOBGCOLOR`** in **World Settings → Appearance** so players can customize the highlight behind echoed input, trigger-reply banners, and `[SAVITAR]` client messages.
+
+**Target release:** Savitar **2.1** (post–feature-matching beta). Not a 2.0 blocker.
+
+**Context — what 2.0 ships today**
+
+Savitar 2.0 wires echo-back **rendering** end-to-end:
+
+| Layer | Status (2.0) |
+|-------|----------------|
+| **World model** | `World.echoBackColor` loads/saves `ECHOBGCOLOR` in `.world` XML; default soft yellow (`#FFF88F`, v1 `DEFAULT_ECHOBACK_COLOR`) |
+| **Output pane** | `outputEchoBack` → `.savitar-echo-back` CSS; foreground uses luminance-based black/white (`NSColor.readableTextColor()`) |
+| **Applied to** | Echoed commands (`echoCmds` / `echoCR`), trigger reply banners, `[SAVITAR]` local-command messages |
+| **World Settings UI** | **No swatch** — Fore / Back / Link only (matches the shipped Savitar 1 Appearance tab) |
+
+**v1 reference (why this is a 2.1 story, not 2.0 parity)**
+
+Savitar 1 stored echo-back color in every world (`ECHOBGCOLOR`, default yellow) and declared `echoBackSwatch` in `CTVWorldEditor.h`, but the **Appearance tab users saw** only Fore / Back / Link (+ ANSI intense). The swatch control was never wired into the shipped dialog — Savitar 1 “missed the boat.” v2.0 restores the **behavior** v1 worlds expected; v2.1 finishes the **editor** v1 should have had.
+
+**Design**
+
+Add a fourth color row on the Appearance tab, aligned with Fore / Back / Link:
+
+```
+Fore color   [■]    Back color   [■]    Link color   [■]
+Echo back color   [■]
+```
+
+| Item | Behavior |
+|------|----------|
+| **Control** | Label + `NSColorWell`, bound to `representedObject.echoBackColor` (same pattern as other swatches) |
+| **Layout** | Second row below Fore/Back/Link — **do not** squeeze swatches onto one row (avoids overlap with Body font controls) |
+| **Preview** | When the swatch changes, append or refresh an echo-back sample line in the Appearance preview pane (e.g. `Echo-back preview: look`) |
+| **Live session** | Changing color in World Settings should refresh output CSS via existing `setStyle(world:)` / preview path (same as other appearance colors) |
+| **Text contrast** | Keep `readableTextColor()` on echo-back background — no separate “echo fore color” swatch |
+
+**Sketch (World Settings → Appearance tab)**
+
+```
+┌─ World Settings — Appearance ─────────────────────────────────────┐
+│  [preview pane — includes echo-back sample when editing swatch]   │
+│  Fore color [■]  Back color [■]  Link color [■]                   │
+│  Echo back color [■]                                              │
+│  Body font: [Monaco ▾]  Size [18]                                 │
+│  …                                                                │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+### Tasks
+
+- [ ] **28.1** **Storyboard** — Echo back color label + `NSColorWell` on Appearance tab; Auto Layout on a dedicated row below Fore/Back/Link.
+- [ ] **28.2** **Binding** — color well → `World.echoBackColor`; verify v1 world import and save round-trip for `ECHOBGCOLOR`.
+- [ ] **28.3** **Preview** — `AppearanceSettingsController` echo-back sample line when swatch changes (remove when reverting to saved color if preview diff is jarring — match other swatch preview behavior).
+- [ ] **28.4** **Regression guard** — echo-back HTML continues through `outputHTMLFragment` (JS-safe quoting); quoted sound names in `[SAVITAR]` errors must not throw WKWebView JS exceptions.
+- [ ] **28.5** **Docs** — `USER_GUIDE.md` World Settings → Appearance; `HIG.md` World Settings tabs; contextual **?** anchor if copy changes.
+- [ ] **28.6** **Tests** — retain `OutputEchoBackTests` / session echo-back routing; add UI test or snapshot checklist for Appearance tab layout (no overlap at minimum window size).
+
+### Touchpoints
+
+- `client/Savitar2/Base.lproj/WorldSettings.storyboard`
+- `client/Savitar2/src/worldDocument/AppearanceSettingsController.swift`
+- `client/Savitar2/src/models/worlds/World.swift` (`echoBackColor`, `ECHOBGCOLOR`)
+- `client/Savitar2/src/worldDocument/OutputView.swift` (`.savitar-echo-back`, `readableTextColor()`)
+- `client/Savitar2/src/extensions/NSColor+Extensions.swift`
+- `docs/USER_GUIDE.md`, `docs/HIG.md`
+
+### Acceptance
+
+- User opens **World Settings → Appearance** and sees **Echo back color** below the Fore/Back/Link row; layout does not overlap Body font or other controls at default window size.
+- Changing the swatch updates the preview pane echo-back sample and persists to `.world` XML as `ECHOBGCOLOR`.
+- Open session output reflects the new echo-back background after OK (or live preview if other colors already do).
+- Echo-back text remains readable (black on yellow default; white on dark custom colors).
+- v1 worlds with `ECHOBGCOLOR` in XML load the correct swatch value on first open in v2.1.
+
+### Dependency
+
+- Echo-back **rendering** shipped in 2.0 (`outputEchoBack`, `Session` routing, `[SAVITAR]` client messages).
+
+### Non-goals (2.1)
+
+- Separate “echo fore color” swatch (contrast is computed).
+- App-wide default echo-back color in **Settings** (per-world only, as in v1 XML).
+- Restoring v1 `UseEchoStyle` / `echoStyle` checkbox unless audit shows it was user-visible and distinct from `echoCmds`.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -1343,10 +1431,11 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 20. Story 10 — Command aliases
 21. ~~Story 11 — Macro Clicker~~ ✅
 22. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
-23. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
-24. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
-25. Story 8 — SwiftUI Settings spike (optional, post-beta)
-26. **Story 27 — Output scrollback & performance** — **beta kickoff**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
+23. **Story 28 — Echo back color (v2.1)** — World Settings → Appearance swatch for `ECHOBGCOLOR`; v1 never shipped the control
+24. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
+25. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
+26. Story 8 — SwiftUI Settings spike (optional, post-beta)
+27. **Story 27 — Output scrollback & performance** — **beta kickoff**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).

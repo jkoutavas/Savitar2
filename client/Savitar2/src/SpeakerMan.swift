@@ -28,9 +28,26 @@ class SpeakerMan {
         return names
     }
 
+    static func resolveSoundName(_ input: String, in availableNames: [String]) -> String? {
+        let trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+        let baseName = trimmed.contains(".") ? trimmed.fileName() : trimmed
+        let needle = baseName.lowercased()
+        return availableNames.first { $0.lowercased() == needle }
+    }
+
+    func resolveSoundName(_ input: String) -> String? {
+        Self.resolveSoundName(input, in: soundNames())
+    }
+
+    @discardableResult
+    func playSound(named soundName: String) -> Bool {
+        NSSound(named: NSSound.Name(soundName))?.play() ?? false
+    }
+
     func playAudio(trigger: Trigger, muteSound: Bool = false, muteSpeaking: Bool = false) {
         if !muteSound && trigger.audioType == .sound, let soundName = trigger.sound {
-            NSSound(named: NSSound.Name(soundName))?.play()
+            playSound(named: soundName)
         } else if !muteSpeaking {
             guard let voiceName = trigger.voice else { return }
             var say: String?

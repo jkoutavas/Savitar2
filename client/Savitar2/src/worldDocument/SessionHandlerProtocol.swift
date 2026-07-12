@@ -30,6 +30,7 @@ enum SessionCaptureBeginResult: Equatable {
 protocol SessionHandlerProtocol {
     func connectionStatusChanged(status: ConnectionStatus)
     func output(result: OutputResult, skipCapture: Bool)
+    func outputEchoBack(_ text: String, skipCapture: Bool)
     func printSource()
     func outputLink(url: String, label: String, colorHex: String?)
     func outputHTML(_ html: String, skipCapture: Bool)
@@ -54,6 +55,12 @@ extension SessionHandlerProtocol {
     func output(result: OutputResult) {
         output(result: result, skipCapture: false)
     }
+
+    func outputEchoBack(_ text: String) {
+        outputEchoBack(text, skipCapture: false)
+    }
+
+    func outputEchoBack(_: String, skipCapture _: Bool) {}
 
     func outputLink(url _: String, label _: String, colorHex _: String?) {}
     func outputHTML(_ html: String) {

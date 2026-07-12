@@ -107,6 +107,16 @@ class SessionLocalCommandsTests: XCTestCase {
         )
         XCTAssertEqual(SessionLocalCommands.parse("send window \"Notes\""), .unknown(body: "send window \"Notes\""))
         XCTAssertEqual(SessionLocalCommands.parse("send window Notes hi"), .unknown(body: "send window Notes hi"))
+        XCTAssertEqual(SessionLocalCommands.parse("play Basso"), .play(soundName: "Basso"))
+        XCTAssertEqual(
+            SessionLocalCommands.parse("play \"Pop\""),
+            .play(soundName: "Pop")
+        )
+        XCTAssertEqual(SessionLocalCommands.parse("play"), .unknown(body: "play"))
+        XCTAssertEqual(
+            SessionLocalCommands.parse("add world <WORLD NAME=\"Test\" URL=\"telnet://host:1\"/>"),
+            .addWorld(xml: "<WORLD NAME=\"Test\" URL=\"telnet://host:1\"/>")
+        )
         XCTAssertEqual(
             SessionLocalCommands.parse("wait 5 look"),
             .wait(seconds: 5, followUp: "look")
