@@ -2,7 +2,7 @@
 
 _Last updated July 11, 2026._
 
-This guide explains how to use Savitar 2. It is written for **players and world builders**, not developers. See [Stories.md](Stories.md) **Story 9** for chapters still in progress.
+This guide explains how to use Savitar 2. It is written for **players and world builders**, not developers.
 
 If you are upgrading from Savitar 1, see [Migrating from Savitar 1](#migrating-from-savitar-1) for import behavior and menu or settings changes.
 
@@ -66,7 +66,7 @@ If you used Savitar 1 on an older Mac:
 | **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
 | **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
 
-Features **not in Savitar 2 yet** (but planned): command **aliases** (Story 10, 2.1), MCP SimpleEdit. **`##tell application`** (AppleScript) is not planned. The guide marks these where relevant.
+Savitar 2 does not include **MCP** (Multi-Client Protocol) World Settings that Savitar 1 offered.
 
 ---
 
@@ -318,8 +318,6 @@ Your saved **`.world` documents on disk are not deleted**. Savitar asks for conf
 
 Use this when prefs feel corrupted, you want the bundled world list back, or you need a clean slate without reinstalling.
 
-**Planned for Advanced** (not shipped yet): import/export preferences, re-import Savitar 1 preferences — see [Stories.md](Stories.md#story-24--settings-advanced-maintenance).
-
 ---
 
 ## Menus
@@ -523,8 +521,6 @@ Each pane (output and input) can show a one-line **status bar** at its top—a s
 
 Status bars render in **inverse** session colors—the strip uses the world's foreground color as its background, and the text uses the background color—so they stand out from the panes. Bars are per-session: they are not saved in the world document.
 
-Configurable status bar styling (match session colors, or custom colors) is planned for **2.1**.
-
 ### Connection indicator
 
 The session window title area shows connection state (connecting, connected, retrying). If a host is unreachable, Savitar retries according to **World Settings → Starting → Retry Seconds**. Closing the window disconnects the session; if **World Settings → Closing** has a logoff command configured, Savitar sends it to the world first.
@@ -618,7 +614,7 @@ See [Events](#events) for the big picture. In short:
 
 ### Macro Clicker
 
-The **Macro Clicker** is a floating palette of quick-access buttons—distinct from typed command **aliases** (abbreviations like `n` → `go north`), which are planned for Savitar 2.1. See [Glossary](#glossary). It has a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
+The **Macro Clicker** is a floating palette of quick-access buttons for **macros**. It has a periwinkle compass rose, green up/down arrows, and a 3×5 grid of chunky green-outlined labels (**1–9** and **a–f**). Every grid cell is a button bound to a **macro name**; clicking sends that macro’s value to the **frontmost world session**.
 
 **Default macro names** use underscores throughout: grid slots **1–9** → `MACRO_1` … `MACRO_9`; **a–f** → `MACRO_A` … `MACRO_F`; compass directions → `MACRO_NORTH`, `MACRO_EAST`, and so on. Names must match **exactly**—`MACRO_1` and `MACRO-1` are different macros. When importing Savitar 1 preferences, legacy `ALIAS` bindings load; the **a** slot may retain a saved `MACRO_10` binding.
 
@@ -671,8 +667,6 @@ These keys work in the input pane during a live session:
 | **⌃C** | Send telnet **interrupt** (ASCII ETX)—some servers treat this as break/cancel |
 | **⌃G** | Send telnet **bell** (ASCII BEL) |
 | **⌃S** | Toggle **scroll lock** on output (not input editing) |
-
-**Not yet implemented:** **⌃E** (end of line), **⌃U** (clear line), and **⌃W** (delete word) may return in a future update.
 
 ### Sticky commands
 
@@ -975,7 +969,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. Per-session toggle and per-world default are planned (Story 20).
+**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions.
 
 ### Session logging
 
@@ -1051,7 +1045,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Audio](#audio) | Mute sound / speaking / bell / clicker |
 | [Updates](#updates) | Check for updates |
 | [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate |
-| [Advanced](#advanced) | Restore factory defaults; import/export (planned) |
+| [Advanced](#advanced) | Restore factory defaults |
 
 ### World Settings sheet (⇧⌘J)
 
@@ -1062,7 +1056,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Input](#input-tab) | Input tab |
 | [Output](#output-tab) | Output tab |
 | [Closing](#closing-tab) | Closing tab (logoff command) |
-| *(missing)* | MCP — not in v2 yet |
+| — | MCP (not in Savitar 2) |
 
 Grayed-out app prefs are documented in [Settings reference](#settings-reference); Macro Clicker and Mute clicker are now active.
 
@@ -1090,7 +1084,6 @@ When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help →
 |------|---------|
 | **ANSI** | Terminal color/style escape codes in server text |
 | **App-wide events** | Triggers/macros stored in preferences and applied to every world |
-| **Alias** | *(Planned.)* Typed abbreviation expanding to a command before send—distinct from macros |
 | **Event** | Savitar's umbrella term for **triggers** and **macros** (see [Events](#events)) |
 | **Gag** | Trigger appearance that hides matching text |
 | **Local command** | `##command` handled by Savitar, not sent to the server (see [Local commands](#local-commands)) |
@@ -1124,7 +1117,7 @@ Changes are staged in the sheet until you click **OK** (or **Cancel** to discard
 | **Output** | Session logging to a file |
 | **Closing** | Logoff command sent when closing a connected session |
 
-The **MCP** settings tab is not in Savitar 2 yet; see the [README](../README.md) checklist.
+Savitar 2 does not include an **MCP** tab in World Settings.
 
 ### Starting tab
 
@@ -1256,24 +1249,3 @@ The same policy is published on the web at [heynow.com/savitar/privacy](https://
 7. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
 
 Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). **Help → Send Feedback…** already includes your Savitar version and macOS version in the message body.
-
----
-
-## More chapters (planned)
-
-Most beta-critical material is now in this guide. Remaining Story 9 work:
-
-| Topic | Status |
-|-------|--------|
-| Getting started, install, worlds, session, commands, triggers, glossary | ✅ This guide (July 2026) |
-| **Aliases** (Story 10) | Blocked on implementation |
-| **Macro Clicker** (Story 11) | Shipped |
-| MCP | Deferred |
-| **`xch_cmd` links** | Shipped — see [HTML in output](#html-in-output) |
-| **`##upload`** | Shipped — see [Local commands](#local-commands) |
-| **`##capture`** | Shipped — see [Session logging](#session-logging) and [Local commands](#local-commands) |
-| **Status bars** (`##set status`) | Shipped—inverse colors; styling setting planned for 2.1 |
-| **Local commands** (2.0 set) | Shipped—see [Local commands](#local-commands) |
-| **Session word wrap** live toggle (Story 20) | Post–2.0 |
-
-See [Stories.md](Stories.md) for the full v1 manual map.
