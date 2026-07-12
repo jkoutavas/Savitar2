@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`##send window`** — append text to a plain-text window by partial title match (`##send window "<title>" <msg>`)
 - **`##dump connection`** / **`##dump variables`** — list session connection state or scratch `%%variables` in the output pane
 - **`##play`** — play a system sound by name (same sound list as trigger Audio Cue; honors Mute Sound Cues)
+- **`##add world`** — parse a `<WORLD …>` XML fragment and add it to the World Picker list
 - **Echo-back color** — Savitar 1's echo-back highlight returns: echoed input, trigger-reply banners, and `[SAVITAR]` client messages render on the world's echo-back color (`ECHOBGCOLOR`, default soft yellow) in the output pane
 - **Pueblo `xch_cmd` links** — `<a xch_cmd="…">` in HTML output becomes a clickable link; clicks send the command to the session (local commands when prefixed with the world marker, otherwise to the server)
 - **Session welcome banner** — Savitar 1–style opening block at connect: bold **Welcome to Savitar**, version/copyright, website link, and a hint to type `##help`; single tight HTML block with one blank line before server output
@@ -30,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Help book** — fenced Markdown code blocks (` ```text `) render as monospace `<pre>` sections instead of showing raw backticks
 - **Edit menu** — removed **Jump to Selection** (⌘J); little use in Savitar and did not apply to session output or help
 - **Macro Clicker** — default letter-slot bindings use underscores (`MACRO_A` … `MACRO_F`) to match `MACRO_1` … `MACRO_9`; early hyphenated factory prefs upgrade on load
-- **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, `##send window`, and `##play`
+- **User guide** — documents `##link`, `##help`, `##capture`, `##upload`, `##open text window`, `##send window`, `##play`, and `##add world`
 
 ### Fixed
 

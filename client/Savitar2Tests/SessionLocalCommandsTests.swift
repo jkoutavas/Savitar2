@@ -114,6 +114,10 @@ class SessionLocalCommandsTests: XCTestCase {
         )
         XCTAssertEqual(SessionLocalCommands.parse("play"), .unknown(body: "play"))
         XCTAssertEqual(
+            SessionLocalCommands.parse("add world <WORLD NAME=\"Test\" URL=\"telnet://host:1\"/>"),
+            .addWorld(xml: "<WORLD NAME=\"Test\" URL=\"telnet://host:1\"/>")
+        )
+        XCTAssertEqual(
             SessionLocalCommands.parse("wait 5 look"),
             .wait(seconds: 5, followUp: "look")
         )

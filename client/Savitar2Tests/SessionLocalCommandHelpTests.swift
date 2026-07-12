@@ -77,10 +77,11 @@ class SessionLocalCommandHelpTests: XCTestCase {
         XCTAssertTrue(html.contains("Audio Cue"))
     }
 
-    func testTopicHelpForCommandWithoutDetail() {
+    func testTopicHelpForAddWorldCommand() {
         let html = SessionLocalCommandHelp.html(marker: "##", topic: "add world")
         XCTAssertTrue(html.contains("add world"))
-        XCTAssertFalse(html.contains("savitar-help-detail-text"))
+        XCTAssertTrue(html.contains("World Picker"))
+        XCTAssertTrue(html.contains("savitar-help-detail-text"))
     }
 
     func testTopicHelpUnknownCommand() {

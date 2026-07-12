@@ -74,7 +74,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Local command ##capture
 √ Local command ##open text window
 √ Local command ##send window
-_ Local command ##add world
+√ Local command ##add world
 √ Local command ##dump connection
 √ Local command ##dump variables
 √ Local command ##play
@@ -97,7 +97,6 @@ _ Local command ##add world
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
 √ Release alpha to select testers, start getting feedback
-_ Address key things found in alpha test
 √ Move github repo to public
 ```
 
@@ -124,7 +123,6 @@ From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.h
 ### Start of beta
 
 ```
-_ Implement next gen startup commands (trigger based)
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
 _ Crash reporting (Sentry — separate from TelemetryDeck analytics)
 _ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md) — honor `OUTPUTMAX`/`OUTPUTMIN`, coalesce appends, session metrics strip)
@@ -140,6 +138,7 @@ These features take Savitar 2.1 beyond what 1.6.x provides:
 
 ```
 - macOS 11 and beyond capabilities
+_ Implement next gen startup commands (trigger based)
 _ Alias support (Story 10)
 _ New `##dump` aliases local command (Story 10)
 _ New `##say` local command for voicing text

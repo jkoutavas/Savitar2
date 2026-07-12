@@ -55,6 +55,7 @@ enum SessionLocalCommand: Equatable {
     case wait(seconds: Int, followUp: String?)
     case addMacro(xml: String)
     case addTrigger(xml: String)
+    case addWorld(xml: String)
     case selectWindow(title: String)
     case link(url: String, label: String, colorHex: String?)
     case help(topic: String?)
@@ -146,6 +147,8 @@ enum SessionLocalCommands {
             return .addMacro(xml: payload)
         case "tri":
             return .addTrigger(xml: payload)
+        case "wor":
+            return .addWorld(xml: payload)
         default:
             return .unknown(body: body)
         }

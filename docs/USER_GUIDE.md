@@ -797,6 +797,7 @@ These change settings for the **current session's world** immediately (they are 
 | `##set marker macro <text>` | Set the variable marker (default `%%`) |
 | `##set marker wildcard <text>` | Set the wildcard marker in trigger patterns (default `$$`) |
 | `##set macro "<name>" <value>` | Set a **scratch variable** `<name>` to `<value>` (same as `%%name` expansion—not a macro hotkey in the Events window) |
+| `##add world <XML>` | Parses a `<WORLD …>` XML fragment and adds it to the **World Picker** list (saved in app preferences) |
 
 ### Triggers and macros
 

@@ -83,7 +83,7 @@ enum SessionLocalCommandHelp {
         LocalCommandHelpEntry(category: .world, keywords: ["set macro"], syntax: "set macro \"<name>\" <value>",
                               detail: "Sets a session macro variable used in command expansion."),
         LocalCommandHelpEntry(category: .world, keywords: ["add world"], syntax: "add world <XML>",
-                              detail: nil),
+                              detail: "Parses a <WORLD …> XML fragment and adds it to the World Picker list."),
 
         LocalCommandHelpEntry(category: .events, keywords: ["enable trigger"], syntax: "enable trigger \"<name>\"",
                               detail: "Enables a trigger by name."),

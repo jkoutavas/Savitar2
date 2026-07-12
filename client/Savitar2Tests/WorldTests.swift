@@ -624,6 +624,52 @@ class SessionLocalCommandTests: XCTestCase {
 
         XCTAssertEqual(handler.echoBackOutputs, ["[Triggered reply:\"pong\"]\n"])
     }
+
+    func testAddWorldCommandInsertsIntoWorldPicker() {
+        let store = AppContext.shared.worldPickerStore
+        let initialCount = store.state.worldList.items.count
+        let worldName = "Add World Test \(UUID().uuidString)"
+        let handler = MockSessionHandler()
+        let session = Session(world: World(), sessionHandler: handler)
+        let xml = "<WORLD NAME=\"\(worldName)\" URL=\"telnet://addworld.test:4321\" FLAGS=\"ansi\"/>"
+
+        session.submitServerCmd(cmd: Command(text: "##add world \(xml)"))
+
+        let items = store.state.worldList.items
+        XCTAssertEqual(items.count, initialCount + 1)
+        XCTAssertTrue(items.contains {
+            $0.name == worldName && $0.host == "addworld.test" && $0.port == 4321
+        })
+        XCTAssertEqual(handler.echoBackOutputs.last, "World \"\(worldName)\" added to World Picker.\n")
+
+        if let added = items.first(where: { $0.name == worldName }) {
+            store.dispatch(RemoveWorldAction(worldID: added.objectID))
+        }
+    }
+
+    func testAddWorldRejectsInvalidXML() {
+        let store = AppContext.shared.worldPickerStore
+        let initialCount = store.state.worldList.items.count
+        let handler = MockSessionHandler()
+        let session = Session(world: World(), sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##add world <WORLD"))
+
+        XCTAssertEqual(store.state.worldList.items.count, initialCount)
+        XCTAssertTrue(handler.echoBackOutputs.last?.contains("Could not parse world XML") ?? false)
+    }
+
+    func testAddWorldRejectsMissingURL() {
+        let store = AppContext.shared.worldPickerStore
+        let initialCount = store.state.worldList.items.count
+        let handler = MockSessionHandler()
+        let session = Session(world: World(), sessionHandler: handler)
+
+        session.submitServerCmd(cmd: Command(text: "##add world <WORLD NAME=\"No URL\"/>"))
+
+        XCTAssertEqual(store.state.worldList.items.count, initialCount)
+        XCTAssertTrue(handler.echoBackOutputs.last?.contains("telnet:// URL") ?? false)
+    }
 }
 
 class InputTriggerVariableTests: XCTestCase {

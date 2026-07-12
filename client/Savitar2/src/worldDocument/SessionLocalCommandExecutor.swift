@@ -51,6 +51,8 @@ enum SessionLocalCommandExecutor {
             addMacro(xml: xml, session: session)
         case let .addTrigger(xml):
             addTrigger(xml: xml, session: session)
+        case let .addWorld(xml):
+            addWorld(xml: xml, session: session)
         case let .selectWindow(title):
             if !selectWindow(title: title) {
                 commandError(session, "Window \"\(title)\" not found.")
@@ -304,6 +306,34 @@ enum SessionLocalCommandExecutor {
             clientMessage(session, "Trigger \"\(trigger.name)\" added.\n")
         } catch {
             commandError(session, "Could not parse trigger XML.")
+        }
+    }
+
+    private static func addWorld(xml: String, session: Session) {
+        do {
+            let accessor = try XML.parse(xml)
+            let elem = accessor[WorldElemIdentifier]
+            if case .failure = elem {
+                throw SessionLocalCommandError.invalidXML
+            }
+            let world = World()
+            try world.parse(xml: elem)
+            guard !world.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                commandError(session, "World XML requires a NAME attribute.")
+                return
+            }
+            guard !world.host.isEmpty else {
+                commandError(session, "World XML requires a telnet:// URL.")
+                return
+            }
+
+            let store = AppContext.shared.worldPickerStore
+            let index = store.state?.worldList.items.count ?? 0
+            store.dispatch(InsertWorldAction(world: world, atIndex: index))
+            AppContext.shared.save()
+            clientMessage(session, "World \"\(world.name)\" added to World Picker.\n")
+        } catch {
+            commandError(session, "Could not parse world XML.")
         }
     }
 
