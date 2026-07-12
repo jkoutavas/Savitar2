@@ -112,20 +112,31 @@ enum SavitarFeedback {
     }
 
     private static let betaAnnouncementText = """
-    Savitar 2 has reached Savitar 1.6.3 feature parity and is ready for a wider beta — \
-    software we share with more players while we polish rough edges and prepare the 2.0 release.
+    Savitar 2 is ready for a wider beta — software we share while we polish rough edges and \
+    prepare the 2.0 release.
+
+    Whether you used Savitar 1 for years or are trying Savitar (and MUDs) for the first time, \
+    welcome. Returning players get Savitar 1.6.3 feature parity; newcomers get in-app help to \
+    get connected and playing.
 
     What is a beta test?
 
-    You are using Savitar while we finish validation with a broader audience. Most Savitar 1 \
-    behavior is here; you may still find bugs, missing polish, or changes between updates. \
-    That is expected. Your job is to play for real and tell us what works and what does not.
+    You are using Savitar while we finish validation with a broader audience. Things may still \
+    change, and you may hit bugs or rough edges. That is expected. Play for real and tell us \
+    what works and what does not.
+
+    If you used Savitar 1: compare behavior to what you remember — triggers, macros, local \
+    commands, and world settings should feel familiar. If something is missing or different, \
+    we want to know.
+
+    If Savitar is new to you: open the World Picker, connect to a world, and type ##help in \
+    the input line. Help → Savitar Help (⌘?) walks through sessions, triggers, and settings \
+    at your own pace.
 
     Command aliases and other Savitar 2-only features are planned after the 2.0 milestone ships.
 
     Please send any and all feedback — bugs, confusing UI, missing Savitar 1 behavior, or ideas. \
-    Use Help → Send Feedback… (no GitHub account needed). Try Help → Savitar Help (⌘?) first if \
-    you are not sure where a setting lives.
+    Use Help → Send Feedback… (no GitHub account needed).
     """
 
     private static func presentMailUnavailableAlert() {

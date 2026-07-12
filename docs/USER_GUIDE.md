@@ -83,7 +83,7 @@ There is no Classic Mac OS installer. **Uninstall** = quit Savitar and move **Sa
 ### First launch
 
 - If **Show World Picker at startup** is on (default), the World Picker opens automatically—see [Startup](#startup).
-- Savitar 2 may show a **one-time welcome** during beta testing explaining feedback and what to expect.
+- Savitar 2 may show a **one-time welcome** during beta testing — for Savitar 1 migrants and first-time players alike — explaining feedback and what to expect.
 - Importing v1 preferences happens automatically when a v1 prefs file is present; you do not need a separate import step.
 
 ### Updates
