@@ -236,14 +236,14 @@ git add appcast/appcast.xml appcast/*.md
 
 ## Local testing tips
 
-### Reset the alpha welcome dialog
+### Reset the beta welcome dialog
 
-Story 15 shows a **one-time** modal on first launch (`SavitarFeedback.presentAlphaAnnouncementIfNeeded`). It stores a flag in `UserDefaults` under key `SavitarHasSeenAlphaFeedbackAnnouncement` (see `SavitarFeedback.hasSeenAnnouncementKey` in `SavitarFeedback.swift`).
+Story 15 shows a **one-time** modal on first launch (`SavitarFeedback.presentBetaAnnouncementIfNeeded`). It stores a flag in `UserDefaults` under key `SavitarHasSeenBetaFeedbackAnnouncement` (see `SavitarFeedback.hasSeenAnnouncementKey` in `SavitarFeedback.swift`).
 
 **Quit Savitar**, then run:
 
 ```bash
-defaults delete com.heynow.savitar2 SavitarHasSeenAlphaFeedbackAnnouncement
+defaults delete com.heynow.savitar2 SavitarHasSeenBetaFeedbackAnnouncement
 ```
 
 Relaunch from Xcode or Finder — the welcome dialog appears again.

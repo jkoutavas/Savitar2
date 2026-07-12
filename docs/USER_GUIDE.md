@@ -83,7 +83,7 @@ There is no Classic Mac OS installer. **Uninstall** = quit Savitar and move **Sa
 ### First launch
 
 - If **Show World Picker at startup** is on (default), the World Picker opens automatically—see [Startup](#startup).
-- Savitar 2 may show a **one-time welcome** during alpha testing explaining feedback and what to expect.
+- Savitar 2 may show a **one-time welcome** during beta testing explaining feedback and what to expect.
 - Importing v1 preferences happens automatically when a v1 prefs file is present; you do not need a separate import step.
 
 ### Updates
@@ -1250,8 +1250,8 @@ The same policy is published on the web at [heynow.com/savitar/privacy](https://
 2. **About Privacy** — **Help → About Privacy…** opens the [Privacy & usage statistics](#privacy) chapter (what we collect and what we do not).
 3. **Privacy on the web** — [heynow.com/savitar/privacy](https://www.heynow.com/savitar/privacy.html) mirrors the in-app disclosure.
 4. **Release notes** — **Help → Release Notes…** lists recent changes on the web.
-5. **Send Feedback** — **Help → Send Feedback…** opens your email app with a pre-filled message to the Savitar team. Include what you were doing, what went wrong, and whether it is a bug or a feature idea. You do not need a GitHub account. We read every message; response time varies during the alpha.
-6. **Savitar website** — [heynow.com/savitar](https://www.heynow.com/savitar/) shows alpha news on the landing page when we are in an active test period.
+5. **Send Feedback** — **Help → Send Feedback…** opens your email app with a pre-filled message to the Savitar team. Include what you were doing, what went wrong, and whether it is a bug or a feature idea. You do not need a GitHub account. We read every message; response time varies during the beta.
+6. **Savitar website** — [heynow.com/savitar](https://www.heynow.com/savitar/) shows beta news on the landing page when we are in an active test period.
 7. **Web guide** — the latest draft of this guide is also in the [Savitar 2 repository](https://github.com/jkoutavas/Savitar2/blob/master/docs/USER_GUIDE.md).
 
 Before reporting a problem, check the relevant chapter here (triggers, speech, world settings). **Help → Send Feedback…** already includes your Savitar version and macOS version in the message body.

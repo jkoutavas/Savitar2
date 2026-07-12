@@ -7,9 +7,9 @@
 
 import Cocoa
 
-/// Email feedback flow and one-time alpha announcement (Story 15).
+/// Email feedback flow and one-time beta announcement (Story 15).
 enum SavitarFeedback {
-    static let hasSeenAnnouncementKey = "SavitarHasSeenAlphaFeedbackAnnouncement"
+    static let hasSeenAnnouncementKey = "SavitarHasSeenBetaFeedbackAnnouncement"
 
     private static let defaultSupportEmail = "jay@heynow.com"
 
@@ -21,13 +21,13 @@ enum SavitarFeedback {
         return trimmed.isEmpty ? defaultSupportEmail : trimmed
     }
 
-    static func presentAlphaAnnouncementIfNeeded() {
+    static func presentBetaAnnouncementIfNeeded() {
         guard !isRunningTests else { return }
         guard !SavitarUserDefaults.standard.bool(forKey: hasSeenAnnouncementKey) else { return }
 
         let alert = NSAlert()
-        alert.messageText = "Welcome to the Savitar 2 alpha"
-        alert.informativeText = alphaAnnouncementText
+        alert.messageText = "Welcome to the Savitar 2 beta"
+        alert.informativeText = betaAnnouncementText
         alert.alertStyle = .informational
 
         alert.addButton(withTitle: "Open Savitar Help")
@@ -111,18 +111,17 @@ enum SavitarFeedback {
         return components.url
     }
 
-    private static let alphaAnnouncementText = """
-    Savitar 2 is in an alpha test — early software we share with a small group while we finish \
-    the last Savitar 1 features and polish rough edges before a wider beta.
+    private static let betaAnnouncementText = """
+    Savitar 2 has reached Savitar 1.6.3 feature parity and is ready for a wider beta — \
+    software we share with more players while we polish rough edges and prepare the 2.0 release.
 
-    What is an alpha test?
+    What is a beta test?
 
-    You are using Savitar while we are still building it. Features may be missing, behave oddly, \
-    or change between updates. That is expected. Your job is to play for real and tell us what \
-    works and what does not.
+    You are using Savitar while we finish validation with a broader audience. Most Savitar 1 \
+    behavior is here; you may still find bugs, missing polish, or changes between updates. \
+    That is expected. Your job is to play for real and tell us what works and what does not.
 
-    We are close to Savitar 1 feature complete in version 2.0. After that milestone ships, we \
-    will add command aliases and other Savitar 2-only features.
+    Command aliases and other Savitar 2-only features are planned after the 2.0 milestone ships.
 
     Please send any and all feedback — bugs, confusing UI, missing Savitar 1 behavior, or ideas. \
     Use Help → Send Feedback… (no GitHub account needed). Try Help → Savitar Help (⌘?) first if \
