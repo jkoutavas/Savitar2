@@ -98,9 +98,17 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ In-app Savitar Help — bundled user guide (Story 16)
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
+_ ANSI intense Appearance — auto / bold / color + intense color swatch (`INTENSETYPE` / `INTENSECOLOR` import today; not wired to UI or rendering)
+_ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
+_ Drag selected output text into Events to create a new trigger (v1 text → Events DnD; v2 Events reorder-only)
+_ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs`); v2 always submits on click
+_ Capture / log file editor binding — open capture/log files in a chosen app (Story 24.5)
+_ `telnet://` / Web Interaction helper — open or hand off world URLs from outside the app
 √ Release alpha to select testers, start getting feedback
 √ Move github repo to public
 ```
+
+Skipped on purpose: v1’s “italics instead of blinking” — Savitar 2 already maps ANSI blink to a CSS animation in the HTML output pane.
 
 #### Savitar 1 local commands not planned for 2.x
 
