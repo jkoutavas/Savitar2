@@ -49,6 +49,10 @@ class Session: NSObject, StreamDelegate {
     /// Initial wrap state for this session (from app Settings → Input & Display at connect time).
     let wordWrapEnabled: Bool
 
+    /// Last time we wrote to the server (user cmds, macros, telnet replies, keepalives).
+    private var lastOutboundActivity = Date()
+    private var keepAliveTimer: Timer?
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
@@ -82,6 +86,7 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func performClose() {
+        stopKeepAliveTimer()
         status = .Disconnecting
         AppContext.shared.universalReactionsStore.unsubscribe(self)
         inputStream?.close()
@@ -161,6 +166,7 @@ class Session: NSObject, StreamDelegate {
 
     func sendData(data: Data) {
         guard outputStream != nil else { return }
+        noteOutboundActivity()
         let blockOperation = { [weak self] in
             data.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
                 //               self?.logger.info("sendData: \(data.hexString)")
@@ -173,6 +179,63 @@ class Session: NSObject, StreamDelegate {
 
     func sendString(string: String) {
         sendData(data: string.data(using: .utf8)!)
+    }
+
+    // MARK: - Keepalive (v1 parity)
+
+    private func noteOutboundActivity() {
+        lastOutboundActivity = Date()
+    }
+
+    private func startKeepAliveTimer() {
+        stopKeepAliveTimer()
+        lastOutboundActivity = Date()
+        let timer = Timer(timeInterval: SessionKeepAlive.pollIntervalSeconds, repeats: true) { [weak self] _ in
+            self?.checkKeepAlive()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        keepAliveTimer = timer
+    }
+
+    private func stopKeepAliveTimer() {
+        keepAliveTimer?.invalidate()
+        keepAliveTimer = nil
+    }
+
+    private func checkKeepAlive() {
+        guard status == .ConnectComplete else { return }
+        guard SessionKeepAlive.shouldSend(
+            keepAliveMins: world.keepAliveMins,
+            lastOutbound: lastOutboundActivity
+        ) else { return }
+        sendKeepAlive()
+    }
+
+    /// Quiet null-byte probe after outbound idle — same as Savitar 1 `SendKeepAlive`.
+    private func sendKeepAlive() {
+        guard status == .ConnectComplete else { return }
+        guard outputStream != nil else {
+            close()
+            return
+        }
+
+        noteOutboundActivity()
+        let data = SessionKeepAlive.nullBytePayload
+        queue.addOperation { [weak self] in
+            guard let self else { return }
+            guard let stream = self.outputStream else {
+                self.runOnMain { self.close() }
+                return
+            }
+            let written = data.withUnsafeBytes { rawBufferPointer -> Int in
+                let bufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
+                guard let baseAddress = bufferPointer.baseAddress else { return -1 }
+                return stream.write(baseAddress, maxLength: data.count)
+            }
+            if written < 0 {
+                self.runOnMain { self.close() }
+            }
+        }
     }
 
     func submitServerCmd(cmd: Command) {
@@ -400,6 +463,7 @@ class Session: NSObject, StreamDelegate {
         case Stream.Event.hasBytesAvailable:
             if status != .ConnectComplete {
                 status = .ConnectComplete
+                startKeepAliveTimer()
             }
             guard let inputStream = aStream as? InputStream else { break }
             read(stream: inputStream)

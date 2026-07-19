@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Keepalive Minutes** — World Settings → Starting now sends Savitar 1–style idle keepalive: after N minutes with no outbound traffic, a quiet null byte is written on the TCP connection (`0` = off); timer resets on sends; a failed keepalive closes the session (#105)
+
 ## [2.0.23] - 2026-07-12
 
 ### Added

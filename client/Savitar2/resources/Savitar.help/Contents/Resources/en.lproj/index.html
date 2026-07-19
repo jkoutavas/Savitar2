@@ -909,7 +909,7 @@
 <tr><td><strong>Host Name</strong></td><td>Server hostname or IP address to connect to.</td></tr>
 <tr><td><strong>Host Port</strong></td><td>TCP port (for example <code>3000</code> for many MUDs).</td></tr>
 <tr><td><strong>Retry Seconds</strong></td><td>How long to wait between connection retries after a failed connect (<code>0</code> = use Savitar’s default).</td></tr>
-<tr><td><strong>Keepalive Minutes</strong></td><td>Interval for keepalive traffic on idle connections (<code>0</code> = off). Helps some hosts drop stale sessions less aggressively.</td></tr>
+<tr><td><strong>Keepalive Minutes</strong></td><td>After this many minutes with <strong>no outbound</strong> traffic, Savitar writes a quiet null byte on the connection to discourage idle drops (<code>0</code> = off). Inbound mud output does not reset the timer; any send (commands, macros, etc.) does.</td></tr>
 <tr><td><strong>Startup commands</strong></td><td>Commands sent automatically after a successful connect, one per line—often login name, password, or <code>look</code>.</td></tr>
 </tbody></table>
 <p>Changes apply when you click <strong>OK</strong> and take effect on the <strong>next</strong> connection to that world.</p>
