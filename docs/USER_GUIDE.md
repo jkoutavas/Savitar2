@@ -1134,7 +1134,7 @@ Connection and identity for **this world document**:
 | **World Name** | Display name for the world (shown in the window title and lists). |
 | **Host Name** | Server hostname or IP address to connect to. |
 | **Host Port** | TCP port (for example `3000` for many MUDs). |
-| **Retry Seconds** | How long to wait between connection retries after a failed connect (`0` = use Savitar’s default). |
+| **Retry Seconds** | How long to wait before auto-reconnecting after an unexpected disconnect or failed connect (`0` = off). Stop on the connecting pane cancels a pending retry. |
 | **Keepalive Minutes** | After this many minutes with **no outbound** traffic, Savitar writes a quiet null byte on the connection to discourage idle drops (`0` = off). Inbound mud output does not reset the timer; any send (commands, macros, etc.) does. |
 | **Startup commands** | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`. |
 

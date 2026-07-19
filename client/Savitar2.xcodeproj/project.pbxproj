@@ -189,6 +189,8 @@
 		69FU00012F0C060400AB6BA6 /* SessionFileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FU00022F0C060400AB6BA6 /* SessionFileUpload.swift */; };
 		69KA00012F0E010100AB6BA6 /* SessionKeepAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69KA00022F0E010100AB6BA6 /* SessionKeepAlive.swift */; };
 		69KA00032F0E010100AB6BA6 /* SessionKeepAliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69KA00042F0E010100AB6BA6 /* SessionKeepAliveTests.swift */; };
+		69CR00012F0E020100AB6BA6 /* SessionConnectRetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CR00022F0E020100AB6BA6 /* SessionConnectRetry.swift */; };
+		69CR00032F0E020100AB6BA6 /* SessionConnectRetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CR00042F0E020100AB6BA6 /* SessionConnectRetryTests.swift */; };
 		69FU00112F0C060400AB6BA6 /* SessionFileUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */; };
 		69SM00112F0C070500AB6BA6 /* SpeakerManSoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */; };
 		69EB00112F0C080600AB6BA6 /* OutputEchoBackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */; };
@@ -406,6 +408,8 @@
 		69FU00022F0C060400AB6BA6 /* SessionFileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFileUpload.swift; sourceTree = "<group>"; };
 		69KA00022F0E010100AB6BA6 /* SessionKeepAlive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionKeepAlive.swift; sourceTree = "<group>"; };
 		69KA00042F0E010100AB6BA6 /* SessionKeepAliveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionKeepAliveTests.swift; sourceTree = "<group>"; };
+		69CR00022F0E020100AB6BA6 /* SessionConnectRetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionConnectRetry.swift; sourceTree = "<group>"; };
+		69CR00042F0E020100AB6BA6 /* SessionConnectRetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionConnectRetryTests.swift; sourceTree = "<group>"; };
 		69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFileUploadTests.swift; sourceTree = "<group>"; };
 		69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerManSoundTests.swift; sourceTree = "<group>"; };
 		69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputEchoBackTests.swift; sourceTree = "<group>"; };
@@ -524,6 +528,7 @@
 				69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */,
 				69FU00122F0C060400AB6BA6 /* SessionFileUploadTests.swift */,
 				69KA00042F0E010100AB6BA6 /* SessionKeepAliveTests.swift */,
+				69CR00042F0E020100AB6BA6 /* SessionConnectRetryTests.swift */,
 				69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */,
 				69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */,
 				69XC00122F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift */,
@@ -636,6 +641,7 @@
 				69FL00022F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift */,
 				69FU00022F0C060400AB6BA6 /* SessionFileUpload.swift */,
 				69KA00022F0E010100AB6BA6 /* SessionKeepAlive.swift */,
+				69CR00022F0E020100AB6BA6 /* SessionConnectRetry.swift */,
 				695F5AAA25899EFD00AB6BA6 /* SessionHandlerProtocol.swift */,
 				69SB00102F0C010100AB6BA6 /* SessionStatusBarView.swift */,
 				695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */,
@@ -1150,6 +1156,7 @@
 				69FL00012F0C050400AB6BA6 /* SavitarFileLinkProcessor.swift in Sources */,
 				69FU00012F0C060400AB6BA6 /* SessionFileUpload.swift in Sources */,
 				69KA00012F0E010100AB6BA6 /* SessionKeepAlive.swift in Sources */,
+				69CR00012F0E020100AB6BA6 /* SessionConnectRetry.swift in Sources */,
 				69HP00012F0C030400AB6BA6 /* SessionLocalCommandHelp.swift in Sources */,
 				69SW00012F0C040400AB6BA6 /* SavitarWelcome.swift in Sources */,
 				695F5AB925899EFD00AB6BA6 /* WindowController.swift in Sources */,
@@ -1222,6 +1229,7 @@
 				69SB00312F0C010300AB6BA6 /* SessionLocalCommandsTests.swift in Sources */,
 				69FU00112F0C060400AB6BA6 /* SessionFileUploadTests.swift in Sources */,
 				69KA00032F0E010100AB6BA6 /* SessionKeepAliveTests.swift in Sources */,
+				69CR00032F0E020100AB6BA6 /* SessionConnectRetryTests.swift in Sources */,
 				69SM00112F0C070500AB6BA6 /* SpeakerManSoundTests.swift in Sources */,
 				69EB00112F0C080600AB6BA6 /* OutputEchoBackTests.swift in Sources */,
 				69XC00112F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift in Sources */,

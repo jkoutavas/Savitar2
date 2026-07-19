@@ -53,6 +53,12 @@ class Session: NSObject, StreamDelegate {
     private var lastOutboundActivity = Date()
     private var keepAliveTimer: Timer?
 
+    /// Prevents double-register when auto-retry reconnects.
+    private var sessionRegistered = false
+    /// User hit Stop/Close — do not schedule auto-retry.
+    private var suppressAutoRetry = false
+    private var connectRetryTimer: Timer?
+
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
@@ -65,6 +71,8 @@ class Session: NSObject, StreamDelegate {
     }
 
     func close(sendLogoff: Bool = false) {
+        suppressAutoRetry = true
+        cancelConnectRetryTimer()
         if sendLogoff {
             sendLogoffCommandsIfNeeded()
         }
@@ -86,24 +94,36 @@ class Session: NSObject, StreamDelegate {
     }
 
     private func performClose() {
+        cancelConnectRetryTimer()
         stopKeepAliveTimer()
         status = .Disconnecting
-        AppContext.shared.universalReactionsStore.unsubscribe(self)
-        inputStream?.close()
-        outputStream?.close()
+        if sessionRegistered {
+            AppContext.shared.universalReactionsStore.unsubscribe(self)
+            AppContext.shared.worldMan.remove(world)
+            sessionRegistered = false
+        }
+        closeNetworkStreams()
         logger.info("closed connection")
         status = .DisconnectComplete
-
-        AppContext.shared.worldMan.remove(world)
         telnetParser = nil
     }
 
     func connectAndRun() {
+        suppressAutoRetry = false
+        cancelConnectRetryTimer()
+        registerSessionIfNeeded()
+        didStartupCmd = false
+        openConnection()
+    }
+
+    private func registerSessionIfNeeded() {
+        guard !sessionRegistered else { return }
         AppContext.shared.universalReactionsStore.subscribe(self)
         AppContext.shared.worldMan.add(world)
+        sessionRegistered = true
+    }
 
-        didStartupCmd = false
-
+    private func openConnection() {
         logger.info("connecting...")
 
         var readStream: Unmanaged<CFReadStream>?
@@ -141,8 +161,17 @@ class Session: NSObject, StreamDelegate {
             outputStream.open()
             status = .BindComplete
         } else {
-            sessionHandler.output(result: .error("[SAVITAR] Failed Getting Streams"))
+            handleConnectionFailure(message: "Failed getting streams.")
         }
+    }
+
+    private func closeNetworkStreams() {
+        inputStream?.delegate = nil
+        outputStream?.delegate = nil
+        inputStream?.close()
+        outputStream?.close()
+        inputStream = nil
+        outputStream = nil
     }
 
     func expandKeypress(with event: NSEvent) -> Bool {
@@ -161,6 +190,8 @@ class Session: NSObject, StreamDelegate {
     }
 
     func reallyCloseWindow() {
+        suppressAutoRetry = true
+        cancelConnectRetryTimer()
         status = .ReallyCloseWindow
     }
 
@@ -215,7 +246,7 @@ class Session: NSObject, StreamDelegate {
     private func sendKeepAlive() {
         guard status == .ConnectComplete else { return }
         guard outputStream != nil else {
-            close()
+            handleConnectionFailure(message: "Keepalive failed (no stream).")
             return
         }
 
@@ -224,7 +255,7 @@ class Session: NSObject, StreamDelegate {
         queue.addOperation { [weak self] in
             guard let self else { return }
             guard let stream = self.outputStream else {
-                self.runOnMain { self.close() }
+                self.runOnMain { self.handleConnectionFailure(message: "Keepalive failed (no stream).") }
                 return
             }
             let written = data.withUnsafeBytes { rawBufferPointer -> Int in
@@ -233,9 +264,54 @@ class Session: NSObject, StreamDelegate {
                 return stream.write(baseAddress, maxLength: data.count)
             }
             if written < 0 {
-                self.runOnMain { self.close() }
+                self.runOnMain { self.handleConnectionFailure(message: "Keepalive write failed.") }
             }
         }
+    }
+
+    // MARK: - Connect retry (v1 parity)
+
+    private func cancelConnectRetryTimer() {
+        connectRetryTimer?.invalidate()
+        connectRetryTimer = nil
+    }
+
+    /// Unexpected disconnect / connect failure — auto-retry when Retry Seconds > 0.
+    private func handleConnectionFailure(message: String) {
+        guard status != .Disconnecting,
+              status != .DisconnectComplete,
+              status != .ReallyCloseWindow else { return }
+
+        stopKeepAliveTimer()
+        closeNetworkStreams()
+        telnetParser = nil
+
+        if !suppressAutoRetry, SessionConnectRetry.shouldAutoRetry(retrySecs: world.retrySecs) {
+            let secs = world.retrySecs
+            status = .ConnectRetry
+            sessionHandler.output(result: .error("[SAVITAR] \(message) Retrying in \(secs)s…\n"))
+            scheduleConnectRetry(after: SessionConnectRetry.delaySeconds(retrySecs: secs))
+        } else {
+            sessionHandler.output(result: .error("[SAVITAR] \(message)\n"))
+            performClose()
+        }
+    }
+
+    private func scheduleConnectRetry(after delay: TimeInterval) {
+        cancelConnectRetryTimer()
+        let timer = Timer(timeInterval: delay, repeats: false) { [weak self] _ in
+            self?.performScheduledConnectRetry()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        connectRetryTimer = timer
+    }
+
+    private func performScheduledConnectRetry() {
+        connectRetryTimer = nil
+        guard !suppressAutoRetry, status == .ConnectRetry else { return }
+        logger.info("auto-retry connecting...")
+        didStartupCmd = false
+        openConnection()
     }
 
     func submitServerCmd(cmd: Command) {
@@ -469,10 +545,9 @@ class Session: NSObject, StreamDelegate {
             read(stream: inputStream)
         case Stream.Event.endEncountered:
             logger.info("end encountered")
-            close()
+            handleConnectionFailure(message: "Connection closed by remote host.")
         case Stream.Event.errorOccurred:
-            sessionHandler.output(result: .error("[SAVITAR] stream error occurred"))
-            close()
+            handleConnectionFailure(message: "Stream error occurred.")
         case Stream.Event.hasSpaceAvailable:
             logger.info("has space available")
         default:

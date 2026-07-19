@@ -64,6 +64,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Implement Macro editor
 √ Implement World settings Starting tab
 √ Keepalive Minutes — idle null-byte probe on outbound silence (v1 parity; World Settings → Starting)
+√ Retry Seconds — auto-reconnect after unexpected disconnect / failed connect (v1 parity; `0` = off)
 √ Connect/disconnect session handling
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
