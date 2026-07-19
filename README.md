@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 11th, 2026_
+_README last updated July 19th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -63,6 +63,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Implement Trigger Reply tab view
 √ Implement Macro editor
 √ Implement World settings Starting tab
+√ Keepalive Minutes — idle null-byte probe on outbound silence (v1 parity; World Settings → Starting)
 √ Connect/disconnect session handling
 √ World settings Input tab — input echo, sticky commands, command marker, CR/LF postfix, variable (%%) and wildcard ($$) markers, input rows
 √ World settings Output tab (partial) — session logging (path, append/overwrite); pane columns and output rows
