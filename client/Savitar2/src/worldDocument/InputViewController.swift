@@ -161,12 +161,21 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         guard let locWindow = view.window,
               NSApplication.shared.keyWindow === locWindow else { return false }
 
+        // Leave Find-in-output alone (field editor / search field).
+        if isOutputFindFieldActive(in: locWindow) {
+            return false
+        }
+
         guard let sess = session else { return false }
         if handleEditingKey(with: event, session: sess) {
+            ensureInputFirstResponder(in: locWindow)
             return true
         }
 
-        if sess.expandKeypress(with: event) { return true }
+        if sess.expandKeypress(with: event) {
+            ensureInputFirstResponder(in: locWindow)
+            return true
+        }
 
         if event.modifierFlags.contains(.control), event.keyCode == Keycode.s {
             toggleScrollLock()
@@ -244,10 +253,43 @@ class InputViewController: NSViewController, NSTextViewDelegate {
             }
 
         default:
-            return false
+            // Output WKWebView (or a stale responder after Services) can hold first
+            // responder with no caret in the send window. Reclaim on typing only —
+            // leave Cmd/Ctrl shortcuts alone so Copy from output still works.
+            return reclaimInputFocusForTypingIfNeeded(event, in: locWindow)
         }
 
+        ensureInputFirstResponder(in: locWindow)
         return true
+    }
+
+    private func isOutputFindFieldActive(in window: NSWindow) -> Bool {
+        let session = window.contentViewController as? SessionViewController
+        return session?.outputViewController?.isFindFieldActive(in: window) == true
+    }
+
+    private func ensureInputFirstResponder(in window: NSWindow) {
+        if window.firstResponder !== textView {
+            window.makeFirstResponder(textView)
+        }
+    }
+
+    /// If focus is not on the input line, take it back and insert the typed characters.
+    private func reclaimInputFocusForTypingIfNeeded(_ event: NSEvent, in window: NSWindow) -> Bool {
+        guard SessionInputFocus.shouldReclaimForTyping(
+            modifierFlags: event.modifierFlags,
+            characters: event.characters
+        ) else {
+            return false
+        }
+        guard window.firstResponder !== textView else { return false }
+
+        window.makeFirstResponder(textView)
+        if let characters = event.characters, !characters.isEmpty {
+            textView.insertText(characters as Any, replacementRange: NSRange(location: NSNotFound, length: 0))
+            return true
+        }
+        return false
     }
 
     private func handleEditingKey(with event: NSEvent, session: Session) -> Bool {

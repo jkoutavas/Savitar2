@@ -297,7 +297,23 @@ class OutputViewController: OutputViewNavigationDelegate {
         outputTopToFindConstraint.isActive = false
         outputTopToStatusConstraint.isActive = true
         removeFindEscapeMonitor()
-        view.window?.makeFirstResponder(outputView)
+        if let windowController = view.window?.windowController as? WindowController {
+            windowController.focusInputLineIfAppropriate()
+        } else {
+            view.window?.makeFirstResponder(outputView)
+        }
+    }
+
+    /// True when the Find field (or its field editor) is first responder.
+    func isFindFieldActive(in window: NSWindow) -> Bool {
+        guard !findBar.isHidden else { return false }
+        if window.firstResponder === findSearchField {
+            return true
+        }
+        if let editor = findSearchField.currentEditor() {
+            return window.firstResponder === editor
+        }
+        return false
     }
 
     private func installFindEscapeMonitor() {

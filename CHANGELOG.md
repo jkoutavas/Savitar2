@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Input caret / send window focus** — restoring the session window after backgrounding, using Services on output text, or dismissing Find no longer leaves typing stuck with no caret in the send window; printable keys reclaim the input line while Cmd/Ctrl shortcuts (e.g. Copy from output) still work (#105)
+
 ## [2.0.23] - 2026-07-12
 
 ### Added
