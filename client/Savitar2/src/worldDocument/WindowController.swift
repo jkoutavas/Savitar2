@@ -534,8 +534,30 @@ class WindowController: NSWindowController, NSWindowDelegate {
         persistMeasuredPaneDimensions()
     }
 
+    func windowDidBecomeKey(_: Notification) {
+        // Session windows often lose the input caret after backgrounding, Services, or
+        // output-pane clicks (WKWebView takes first responder). Restore typing focus
+        // unless Find in output is active — same idea as PlainTextDocument.
+        focusInputLineIfAppropriate()
+    }
+
     func windowDidResignKey(_: Notification) {
         endResolutionOverlay()
+    }
+
+    /// Puts the input `NSTextView` first responder when the session is ready for typing.
+    func focusInputLineIfAppropriate() {
+        guard let window,
+              let session = contentViewController as? SessionViewController,
+              let textView = session.inputViewController?.textView else { return }
+
+        if session.outputViewController?.isFindFieldActive(in: window) == true {
+            return
+        }
+
+        if window.firstResponder !== textView {
+            window.makeFirstResponder(textView)
+        }
     }
 
     func windowDidMiniaturize(_: Notification) {
