@@ -181,7 +181,7 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
 
     func connectionStatusChanged(status: ConnectionStatus) {
         switch status {
-        case .BindStart:
+        case .BindStart, .ConnectRetry:
             sessionViewController?.select(panel: .Connecting)
 
         case .ConnectComplete:
