@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.24] - 2026-07-20
+
 ### Added
 
 - **Keepalive Minutes** — World Settings → Starting now sends Savitar 1–style idle keepalive: after N minutes with no outbound traffic, a quiet null byte is written on the TCP connection (`0` = off); timer resets on sends; a failed keepalive closes the session (#105)
@@ -208,7 +210,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.23...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.24...HEAD
+[2.0.24]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.24
 [2.0.23]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.23
 [2.0.22]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.22
 [2.0.21]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.21
