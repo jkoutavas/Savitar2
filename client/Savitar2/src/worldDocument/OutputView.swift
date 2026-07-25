@@ -21,53 +21,13 @@ class OutputView: WKWebView {
     private(set) var layoutFontName = "Monaco"
     private(set) var layoutFontSize: CGFloat = 9
     private(set) var wordWrapEnabled = false
-    private var contextMenuLinkURL: URL?
 
     private static let contextMenuScript = """
     if (!window.savitarContextMenuInstalled) {
         window.savitarContextMenuInstalled = true;
         document.addEventListener('contextmenu', function(event) {
-            function nearestLink(start) {
-                let node = start;
-                while (node && node.nodeType !== Node.ELEMENT_NODE) {
-                    node = node.parentElement;
-                }
-                while (node && node !== document) {
-                    if (node.matches && node.matches('a[href]')) {
-                        return node;
-                    }
-                    node = node.parentElement;
-                }
-                return null;
-            }
-
-            function urlNearPoint(x, y) {
-                const range = document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null;
-                const node = range ? range.startContainer : null;
-                if (!node || node.nodeType !== Node.TEXT_NODE) {
-                    return null;
-                }
-
-                const text = node.textContent || '';
-                const offset = range.startOffset || 0;
-                const urlRegex = /https?:\\/\\/[^\\s<>"']+/g;
-                let match;
-                while ((match = urlRegex.exec(text)) !== null) {
-                    const start = match.index;
-                    const end = start + match[0].length;
-                    if (offset >= start && offset <= end) {
-                        return match[0];
-                    }
-                }
-                return null;
-            }
-
-            const pointElement = document.elementFromPoint(event.clientX, event.clientY);
-            const link = nearestLink(pointElement) || nearestLink(event.target);
-            const href = link ? link.href : urlNearPoint(event.clientX, event.clientY);
             event.preventDefault();
             webkit.messageHandlers.contextMenu.postMessage({
-                href: href,
                 x: event.clientX,
                 y: event.clientY
             });
@@ -84,13 +44,12 @@ class OutputView: WKWebView {
 
     override func menu(for event: NSEvent) -> NSMenu? {
         window?.makeFirstResponder(self)
-        return contextMenu(linkURL: nil)
+        return contextMenu()
     }
 
-    func showContextMenu(href: String?, clientX: CGFloat, clientY: CGFloat) {
-        contextMenuLinkURL = Self.externalContextMenuURL(from: href.flatMap(URL.init(string:)))
+    func showContextMenu(clientX: CGFloat, clientY: CGFloat) {
         let point = NSPoint(x: clientX, y: bounds.height - clientY)
-        let menu = contextMenu(linkURL: contextMenuLinkURL)
+        let menu = contextMenu()
         DispatchQueue.main.async {
             menu.popUp(positioning: nil, at: point, in: self)
         }
@@ -132,9 +91,7 @@ class OutputView: WKWebView {
         menu.allowsContextMenuPlugIns = false
     }
 
-    private func contextMenu(linkURL: URL?) -> NSMenu {
-        contextMenuLinkURL = linkURL
-
+    private func contextMenu() -> NSMenu {
         let menu = NSMenu()
         menu.allowsContextMenuPlugIns = false
 
@@ -142,23 +99,10 @@ class OutputView: WKWebView {
         addContextMenuItem(to: menu, title: "Select All", action: #selector(selectAllAction(_:)))
         addContextMenuItem(to: menu, title: "Search Selection", action: #selector(searchSelectionAction(_:)))
         addContextMenuItem(to: menu, title: "Speak Selected Text", action: #selector(speakSelectedTextAction(_:)))
-        if linkURL != nil {
-            menu.addItem(.separator())
-            addContextMenuItem(to: menu, title: "Open URL", action: #selector(openURLAction(_:)))
-            addContextMenuItem(to: menu, title: "Copy URL", action: #selector(copyURLAction(_:)))
-        }
         menu.addItem(.separator())
         addContextMenuItem(to: menu, title: "Clear", action: #selector(clearAction(_:)))
 
         return menu
-    }
-
-    private static func externalContextMenuURL(from url: URL?) -> URL? {
-        guard let url, let scheme = url.scheme?.lowercased(),
-              scheme == "http" || scheme == "https" else {
-            return nil
-        }
-        return url
     }
 
     private func addContextMenuItem(to menu: NSMenu, title: String, action: Selector) {
@@ -192,16 +136,6 @@ class OutputView: WKWebView {
                 AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
             }
         }
-    }
-
-    @objc func openURLAction(_: AnyObject) {
-        guard let url = contextMenuLinkURL else { return }
-        NSWorkspace.shared.open(url)
-    }
-
-    @objc func copyURLAction(_: AnyObject) {
-        guard let url = contextMenuLinkURL else { return }
-        copyToPasteboard(url.absoluteString)
     }
 
     private func copyToPasteboard(_ text: String) {

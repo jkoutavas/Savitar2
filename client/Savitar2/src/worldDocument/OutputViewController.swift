@@ -40,7 +40,7 @@ class OutputViewController: OutputViewNavigationDelegate {
                       let x = cgFloat(body["x"]),
                       let y = cgFloat(body["y"]) else { return }
 
-                outputView.showContextMenu(href: body["href"] as? String, clientX: x, clientY: y)
+                outputView.showContextMenu(clientX: x, clientY: y)
             }
 
             private func cgFloat(_ value: Any?) -> CGFloat? {
