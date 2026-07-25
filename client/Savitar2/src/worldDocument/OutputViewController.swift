@@ -30,14 +30,38 @@ class OutputViewController: OutputViewNavigationDelegate {
             }
         }
 
+        class ContextMenuMessageHandler: NSObject, WKScriptMessageHandler {
+            weak var outputView: OutputView?
+
+            func userContentController(_: WKUserContentController,
+                                       didReceive message: WKScriptMessage) {
+                guard let outputView,
+                      let body = message.body as? [String: Any],
+                      let x = cgFloat(body["x"]),
+                      let y = cgFloat(body["y"]) else { return }
+
+                outputView.showContextMenu(href: body["href"] as? String, clientX: x, clientY: y)
+            }
+
+            private func cgFloat(_ value: Any?) -> CGFloat? {
+                if let value = value as? CGFloat { return value }
+                if let value = value as? Double { return CGFloat(value) }
+                if let value = value as? NSNumber { return CGFloat(truncating: value) }
+                return nil
+            }
+        }
+
         let userContentController = WKUserContentController()
         userContentController.add(LoggingMessageHandler(), name: "logging")
+        let contextMenuMessageHandler = ContextMenuMessageHandler()
+        userContentController.add(contextMenuMessageHandler, name: "contextMenu")
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
 
         let outputView = OutputView(frame: .zero, configuration: webViewConfig)
         outputView.translatesAutoresizingMaskIntoConstraints = false
         outputView.navigationDelegate = self
+        contextMenuMessageHandler.outputView = outputView
 
         return outputView
     }()

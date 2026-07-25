@@ -504,10 +504,14 @@ The **output** pane is a web view showing styled session text. You can:
 |--------|-----|
 | **Scroll** | Trackpad, mouse wheel, or scrollbar |
 | **Scroll lock** | **World → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
-| **Select & copy** | Drag to select; **Edit → Copy** (⌘C) |
-| **Clear** | **Edit → Clear Output** (⌘K) |
+| **Select & copy** | Drag to select; **Edit → Copy** (⌘C), or right-click and choose **Copy** |
+| **Search or speak selection** | Select text, then right-click and choose **Search Selection** or **Speak Selected Text** |
+| **Open or copy a link** | Right-click a link and choose **Open URL** or **Copy URL** |
+| **Clear** | **Edit → Clear Output** (⌘K), or right-click and choose **Clear** |
 | **Find** | **Edit → Find…** (⌘F) when the output pane is active—see [Find](#find) under Edit menu |
 | **Speak selection** | **Edit → Speech → Speak Selected Text** |
+
+The **input** pane uses the standard macOS text contextual menu for editing commands such as Cut, Copy, Paste, and spelling services. The output pane uses Savitar's smaller transcript menu so world text does not show browser-only commands such as Reload.
 
 ### Status bars
 

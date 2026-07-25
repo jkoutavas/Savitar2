@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Session contextual menus** — right-clicking the input pane shows the standard editable text menu; right-clicking output shows a focused transcript menu with Copy, Select All, Search Selection, Speak Selected Text, Clear, and link-specific Open URL / Copy URL actions (#110)
+
 ## [2.0.24] - 2026-07-20
 
 ### Added

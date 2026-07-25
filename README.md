@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 19th, 2026_
+_README last updated July 24th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -93,6 +93,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Implement scroll locking
 √ Session status bars — ##set status output|input, ##close stats (inverse session colors)
 √ Core Edit menu (undo, cut/copy/paste, clear output, find, print)
+√ Contextual edit menus for session input and output panes
 √ Sparkle auto-updates (Story 12)
 √ Add bug reporting support (Story 15 — Help → Send Feedback…)
 √ In-app Savitar Help — bundled user guide (Story 16)

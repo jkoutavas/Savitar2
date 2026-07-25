@@ -21,12 +21,79 @@ class OutputView: WKWebView {
     private(set) var layoutFontName = "Monaco"
     private(set) var layoutFontSize: CGFloat = 9
     private(set) var wordWrapEnabled = false
+    private var contextMenuLinkURL: URL?
+
+    private static let contextMenuScript = """
+    if (!window.savitarContextMenuInstalled) {
+        window.savitarContextMenuInstalled = true;
+        document.addEventListener('contextmenu', function(event) {
+            function nearestLink(start) {
+                let node = start;
+                while (node && node.nodeType !== Node.ELEMENT_NODE) {
+                    node = node.parentElement;
+                }
+                while (node && node !== document) {
+                    if (node.matches && node.matches('a[href]')) {
+                        return node;
+                    }
+                    node = node.parentElement;
+                }
+                return null;
+            }
+
+            function urlNearPoint(x, y) {
+                const range = document.caretRangeFromPoint ? document.caretRangeFromPoint(x, y) : null;
+                const node = range ? range.startContainer : null;
+                if (!node || node.nodeType !== Node.TEXT_NODE) {
+                    return null;
+                }
+
+                const text = node.textContent || '';
+                const offset = range.startOffset || 0;
+                const urlRegex = /https?:\\/\\/[^\\s<>"']+/g;
+                let match;
+                while ((match = urlRegex.exec(text)) !== null) {
+                    const start = match.index;
+                    const end = start + match[0].length;
+                    if (offset >= start && offset <= end) {
+                        return match[0];
+                    }
+                }
+                return null;
+            }
+
+            const pointElement = document.elementFromPoint(event.clientX, event.clientY);
+            const link = nearestLink(pointElement) || nearestLink(event.target);
+            const href = link ? link.href : urlNearPoint(event.clientX, event.clientY);
+            event.preventDefault();
+            webkit.messageHandlers.contextMenu.postMessage({
+                href: href,
+                x: event.clientX,
+                y: event.clientY
+            });
+        }, true);
+    }
+    """
 
     override var acceptsFirstResponder: Bool { true }
 
     override func mouseDown(with event: NSEvent) {
         window?.makeFirstResponder(self)
         super.mouseDown(with: event)
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        window?.makeFirstResponder(self)
+        return contextMenu(linkURL: nil)
+    }
+
+    func showContextMenu(href: String?, clientX: CGFloat, clientY: CGFloat) {
+        contextMenuLinkURL = Self.externalContextMenuURL(from: href.flatMap(URL.init(string:)))
+        let point = NSPoint(x: clientX, y: bounds.height - clientY)
+        let menu = contextMenu(linkURL: contextMenuLinkURL)
+        DispatchQueue.main.async {
+            menu.popUp(positioning: nil, at: point, in: self)
+        }
     }
 
     func find(string: String, forward: Bool) {
@@ -62,12 +129,95 @@ class OutputView: WKWebView {
     }
 
     override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
-        menu.removeAllItems()
-        let menuItem = NSMenuItem()
-        menuItem.title = "Clear"
-        menuItem.action = #selector(clearAction)
-        menuItem.target = self
-        menu.addItem(menuItem)
+        menu.allowsContextMenuPlugIns = false
+    }
+
+    private func contextMenu(linkURL: URL?) -> NSMenu {
+        contextMenuLinkURL = linkURL
+
+        let menu = NSMenu()
+        menu.allowsContextMenuPlugIns = false
+
+        addContextMenuItem(to: menu, title: "Copy", action: #selector(copyAction(_:)))
+        addContextMenuItem(to: menu, title: "Select All", action: #selector(selectAllAction(_:)))
+        addContextMenuItem(to: menu, title: "Search Selection", action: #selector(searchSelectionAction(_:)))
+        addContextMenuItem(to: menu, title: "Speak Selected Text", action: #selector(speakSelectedTextAction(_:)))
+        if linkURL != nil {
+            menu.addItem(.separator())
+            addContextMenuItem(to: menu, title: "Open URL", action: #selector(openURLAction(_:)))
+            addContextMenuItem(to: menu, title: "Copy URL", action: #selector(copyURLAction(_:)))
+        }
+        menu.addItem(.separator())
+        addContextMenuItem(to: menu, title: "Clear", action: #selector(clearAction(_:)))
+
+        return menu
+    }
+
+    private static func externalContextMenuURL(from url: URL?) -> URL? {
+        guard let url, let scheme = url.scheme?.lowercased(),
+              scheme == "http" || scheme == "https" else {
+            return nil
+        }
+        return url
+    }
+
+    private func addContextMenuItem(to menu: NSMenu, title: String, action: Selector) {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        item.target = self
+        menu.addItem(item)
+    }
+
+    @objc func copyAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            DispatchQueue.main.async { self.copyToPasteboard(text) }
+        }
+    }
+
+    @objc func searchSelectionAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            var components = URLComponents(string: "https://www.google.com/search")
+            components?.queryItems = [URLQueryItem(name: "q", value: text)]
+            guard let url = components?.url else { return }
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+        }
+    }
+
+    @objc func speakSelectedTextAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            let voice = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
+            DispatchQueue.main.async {
+                AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
+            }
+        }
+    }
+
+    @objc func openURLAction(_: AnyObject) {
+        guard let url = contextMenuLinkURL else { return }
+        NSWorkspace.shared.open(url)
+    }
+
+    @objc func copyURLAction(_: AnyObject) {
+        guard let url = contextMenuLinkURL else { return }
+        copyToPasteboard(url.absoluteString)
+    }
+
+    private func copyToPasteboard(_ text: String) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(text, forType: .string)
+    }
+
+    @objc func selectAllAction(_: AnyObject) {
+        run(javaScript: """
+        const range = document.createRange();
+        range.selectNodeContents(document.body);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        """)
     }
 
     @objc func clearAction(_: AnyObject) {
@@ -532,7 +682,8 @@ class OutputView: WKWebView {
     }
 
     func run(javaScript: String) {
-        evaluateJavaScript("(function() {\(javaScript); })();") { result, error in
+        let script = "\(Self.contextMenuScript)\n\(javaScript)"
+        evaluateJavaScript("(function() {\(script); })();") { result, error in
             if error != nil {
                 print("javascript run error: \(error!)")
             } else if result != nil {
