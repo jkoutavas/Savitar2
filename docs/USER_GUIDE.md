@@ -1150,6 +1150,7 @@ How **this world** renders text in the session window:
 | Control                      | What it does                                                                                                                                                               |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane.                                                                                                        |
+| **Intense**                  | How ANSI **bold / intense** (SGR `1`) is shown: **Auto** uses each hue’s intense palette color; **Bold** keeps normal palette colors and applies bold weight; **Color** uses the intense color swatch (enabled only in Color mode). Bright codes (`90–97`) still use intense palette colors. |
 | **Body font** and **size**   | Proportional font for normal output text.                                                                                                                                  |
 | **Interpret ANSI codes**     | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
 | **Interpret HTML tags**      | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions.                                                                           |
@@ -1157,7 +1158,7 @@ How **this world** renders text in the session window:
 
 The preview pane at the top shows sample styled text as you change options; long lines wrap within the pane (no horizontal scrollbar). Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
 
-ANSI **palette** colors are app-wide—see [ANSI colors](#ansi-colors). This tab sets base fore/back/link and fonts for the world.
+ANSI **palette** colors are app-wide—see [ANSI colors](#ansi-colors). This tab sets base fore/back/link, ANSI intense behavior, and fonts for the world.
 
 ### Input tab
 

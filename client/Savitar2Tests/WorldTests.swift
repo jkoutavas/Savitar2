@@ -57,7 +57,7 @@ class WorldTests: XCTestCase {
         // v2 XML
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append"></WORLD>
+        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" INTENSETYPE="0" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append"></WORLD>
         """
 
         XCTAssertEqual(xmlOutString, expectedOutput)
@@ -129,7 +129,7 @@ class WorldTests: XCTestCase {
         // v2 XML
         let expectedOutput = """
         <?xml version="1.0" encoding="UTF-8"?>
-        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append">
+        <WORLD URL="telnet://dentinmud.org:3000" NAME="Alter Aeon" FLAGS="ansi+html" CMDMARKER="##" VARMARKER="%%" WILDMARKER="$$" FORECOLOR="#FFFFFF" BACKCOLOR="#666699" LINKCOLOR="#9CA6FF" ECHOBGCOLOR="#FFF88F" INTENSECOLOR="#FFFFFF" INTENSETYPE="0" FONT="Monaco" FONTSIZE="9" MONO="Monaco" MONOSIZE="9" MCPFONT="Monaco" MCPFONTSIZE="9" RESOLUTION="80x24x2" POSITION="50,50" WINDOWSIZE="0,0" ZOOMED="FALSE" OUTPUTMAX="102400" OUTPUTMIN="25600" FLUSHTICKS="30" RETRYSECS="0" KEEPALIVEMINS="0" LOGFILEPATH="" LOGGINGENABLED="FALSE" LOGGINGTYPE="append">
             <LOGONCMD>connect spinlock fnordy\nwho</LOGONCMD>
             <LOGOFFCMD>@quit</LOGOFFCMD>
             <TRIGGERS>
@@ -161,6 +161,45 @@ class WorldTests: XCTestCase {
 
         let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
         XCTAssertTrue(xmlOutString.contains("CMDMARKER=\"//\""))
+    }
+
+    func testIntenseTypeAndColorRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            INTENSECOLOR="#FF00AA"
+            INTENSETYPE="2"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertEqual(world.intensityType, .color)
+        XCTAssertEqual(world.intenseColor.toHex, "FF00AA")
+
+        world.intensityType = .bold
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("INTENSETYPE=\"1\""))
+        XCTAssertTrue(xmlOutString.contains("INTENSECOLOR=\"#FF00AA\""))
+    }
+
+    func testIntenseTypeAcceptsLabelStrings() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            INTENSETYPE="bold"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertEqual(world.intensityType, .bold)
     }
 
     func testStartingConnectionSettingsRoundTripThroughXML() throws {

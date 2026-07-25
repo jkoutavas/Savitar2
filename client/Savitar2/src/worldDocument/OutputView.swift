@@ -360,15 +360,39 @@ class OutputView: WKWebView {
 
         // Foreground ANSI classes sourced from the user's palette. Dim (SGR 2 -> .lighter) and
         // intense (SGR 1 / bright -> .bold / .highlighted) variants override the base hue via CSS
-        // specificity, so the ANSI parser needs no changes.
+        // specificity, so the ANSI parser needs no changes. World intensityType selects how SGR 1
+        // maps: auto → palette intense, bold → palette normal + font-weight, color → intenseColor.
+        let intenseColorHex = contrast(color: world.intenseColor, withHex: backColor)
         let fgColorCSS = AnsiColorName.allCases.map { hue -> String in
             let name = hue.rawValue
+            let boldRule: String
+            switch world.intensityType {
+            case .auto:
+                boldRule = ".bold.\(name), .highlighted.\(name) {color: #\(fgHex(hue, .intense));}"
+            case .bold:
+                boldRule = """
+                .bold.\(name) {color: #\(fgHex(hue, .normal));}
+                .highlighted.\(name) {color: #\(fgHex(hue, .intense));}
+                """
+            case .color:
+                boldRule = """
+                .bold.\(name) {color: #\(intenseColorHex);}
+                .highlighted.\(name) {color: #\(fgHex(hue, .intense));}
+                """
+            }
             return """
             .\(name) {color: #\(fgHex(hue, .normal));}
             .lighter.\(name) {color: #\(fgHex(hue, .dim));}
-            .bold.\(name), .highlighted.\(name) {color: #\(fgHex(hue, .intense));}
+            \(boldRule)
             """
         }.joined(separator: "\n")
+
+        let colorIntenseCSS: String
+        if world.intensityType == .color {
+            colorIntenseCSS = ".bold {color: #\(intenseColorHex);}\n"
+        } else {
+            colorIntenseCSS = ""
+        }
 
         let bgColorCSS = AnsiColorName.allCases.map { hue -> String in
             let name = AnsiPalette.name(for: hue, shade: .normal)
@@ -392,7 +416,7 @@ class OutputView: WKWebView {
         .inverted    {color: #\(backColor);}
         .bg-inverted {background-color: #\(foreColor);}
         \(fgColorCSS)
-        \(bgColorCSS)
+        \(colorIntenseCSS)\(bgColorCSS)
         .underline   {text-decoration: underline;}
         .bold, strong, b {font-weight: bold;}
         .lighter     {font-weight: lighter;}
