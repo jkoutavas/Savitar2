@@ -22,11 +22,37 @@ class OutputView: WKWebView {
     private(set) var layoutFontSize: CGFloat = 9
     private(set) var wordWrapEnabled = false
 
+    private static let contextMenuScript = """
+    if (!window.savitarContextMenuInstalled) {
+        window.savitarContextMenuInstalled = true;
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            webkit.messageHandlers.contextMenu.postMessage({
+                x: event.clientX,
+                y: event.clientY
+            });
+        }, true);
+    }
+    """
+
     override var acceptsFirstResponder: Bool { true }
 
     override func mouseDown(with event: NSEvent) {
         window?.makeFirstResponder(self)
         super.mouseDown(with: event)
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        window?.makeFirstResponder(self)
+        return contextMenu()
+    }
+
+    func showContextMenu(clientX: CGFloat, clientY: CGFloat) {
+        let point = NSPoint(x: clientX, y: bounds.height - clientY)
+        let menu = contextMenu()
+        DispatchQueue.main.async {
+            menu.popUp(positioning: nil, at: point, in: self)
+        }
     }
 
     func find(string: String, forward: Bool) {
@@ -62,12 +88,70 @@ class OutputView: WKWebView {
     }
 
     override func willOpenMenu(_ menu: NSMenu, with _: NSEvent) {
-        menu.removeAllItems()
-        let menuItem = NSMenuItem()
-        menuItem.title = "Clear"
-        menuItem.action = #selector(clearAction)
-        menuItem.target = self
-        menu.addItem(menuItem)
+        menu.allowsContextMenuPlugIns = false
+    }
+
+    private func contextMenu() -> NSMenu {
+        let menu = NSMenu()
+        menu.allowsContextMenuPlugIns = false
+
+        addContextMenuItem(to: menu, title: "Copy", action: #selector(copyAction(_:)))
+        addContextMenuItem(to: menu, title: "Select All", action: #selector(selectAllAction(_:)))
+        addContextMenuItem(to: menu, title: "Search Selection", action: #selector(searchSelectionAction(_:)))
+        addContextMenuItem(to: menu, title: "Speak Selected Text", action: #selector(speakSelectedTextAction(_:)))
+        menu.addItem(.separator())
+        addContextMenuItem(to: menu, title: "Clear", action: #selector(clearAction(_:)))
+
+        return menu
+    }
+
+    private func addContextMenuItem(to menu: NSMenu, title: String, action: Selector) {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        item.target = self
+        menu.addItem(item)
+    }
+
+    @objc func copyAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            DispatchQueue.main.async { self.copyToPasteboard(text) }
+        }
+    }
+
+    @objc func searchSelectionAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            var components = URLComponents(string: "https://www.google.com/search")
+            components?.queryItems = [URLQueryItem(name: "q", value: text)]
+            guard let url = components?.url else { return }
+            DispatchQueue.main.async { NSWorkspace.shared.open(url) }
+        }
+    }
+
+    @objc func speakSelectedTextAction(_: AnyObject) {
+        selectedPlainText { text in
+            guard let text else { return }
+            let voice = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
+            DispatchQueue.main.async {
+                AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
+            }
+        }
+    }
+
+    private func copyToPasteboard(_ text: String) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(text, forType: .string)
+    }
+
+    @objc func selectAllAction(_: AnyObject) {
+        run(javaScript: """
+        const range = document.createRange();
+        range.selectNodeContents(document.body);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        """)
     }
 
     @objc func clearAction(_: AnyObject) {
@@ -532,7 +616,8 @@ class OutputView: WKWebView {
     }
 
     func run(javaScript: String) {
-        evaluateJavaScript("(function() {\(javaScript); })();") { result, error in
+        let script = "\(Self.contextMenuScript)\n\(javaScript)"
+        evaluateJavaScript("(function() {\(script); })();") { result, error in
             if error != nil {
                 print("javascript run error: \(error!)")
             } else if result != nil {

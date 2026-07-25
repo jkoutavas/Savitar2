@@ -8,9 +8,9 @@ If you are upgrading from Savitar 1, see [Migrating from Savitar 1](#migrating-f
 
 **A note from Savitar's author, Jay "Ktown" Koutavas.**
 
-*Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you're stuck—then tell me what still doesn't feel like Savitar. Help → Send Feedback… is the fastest way.*
+_Savitar has been my labor of love for Mac MUD players since 1996. For you old timers, version 2 carries your worlds, triggers, and habits forward after the 32-bit era ended. And those just getting started with Savitar, Welcome! Use this guide when you're stuck—then tell me what still doesn't feel like Savitar. Help → Send Feedback… is the fastest way._
 
-*May you have many exciting stories to share, adventurer!*
+_May you have many exciting stories to share, adventurer!_
 
 ---
 
@@ -32,12 +32,12 @@ For the story behind the rewrite, see [JOURNEY.md](JOURNEY.md) in the repository
 
 ### System requirements
 
-| Requirement | Detail |
-|-------------|--------|
-| **macOS** | **10.12 (Sierra)** or later for Savitar 2 |
+| Requirement   | Detail                                                                                                                                    |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **macOS**     | **10.12 (Sierra)** or later for Savitar 2                                                                                                 |
 | **Savitar 1** | Runs only on **32-bit** macOS through **10.14 Mojave**. It does **not** run on **Catalina (10.15)** or later—that is why Savitar 2 exists |
-| **Network** | TCP connection to your world's host and port (typical MUD ports: 3000, 4000, 23) |
-| **Speech** | Optional; continuous speech requires **macOS 10.15+** and an English voice installed |
+| **Network**   | TCP connection to your world's host and port (typical MUD ports: 3000, 4000, 23)                                                          |
+| **Speech**    | Optional; continuous speech requires **macOS 10.15+** and an English voice installed                                                      |
 
 Official builds are **free downloads** from [GitHub Releases](https://github.com/jkoutavas/Savitar2/releases). Savitar is open source; you may also build from source for your own use.
 
@@ -58,13 +58,13 @@ The session window has separate **output** (top) and **input** (bottom) panes. R
 
 If you used Savitar 1 on an older Mac:
 
-| Topic | Savitar 2 behavior |
-|-------|-------------------|
-| **Preferences** | On first launch, Savitar 2 imports your v1 **preferences XML** (triggers, macros, colors, flags) when it finds a Savitar 1 prefs file |
-| **World files** | Open legacy `.world` documents; they are **read-only** until you **Save** as a Savitar 2 world |
-| **Universal events** | v1 "universal" triggers and macros appear in **Window → Show App-wide Events Window** (⇧⌘E) |
-| **Menus** | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech |
-| **Settings** | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference) |
+| Topic                | Savitar 2 behavior                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Preferences**      | On first launch, Savitar 2 imports your v1 **preferences XML** (triggers, macros, colors, flags) when it finds a Savitar 1 prefs file |
+| **World files**      | Open legacy `.world` documents; they are **read-only** until you **Save** as a Savitar 2 world                                        |
+| **Universal events** | v1 "universal" triggers and macros appear in **Window → Show App-wide Events Window** (⇧⌘E)                                           |
+| **Menus**            | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech     |
+| **Settings**         | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference)                |
 
 Savitar 2 does not include **MCP** (Multi-Client Protocol) World Settings that Savitar 1 offered.
 
@@ -132,11 +132,11 @@ Settings save immediately when you change them.
 
 Triggers in the **Events** window can play audio cues when matched:
 
-| Cue type | Behavior |
-|----------|----------|
-| **Sound** | Plays a system or custom sound file |
+| Cue type        | Behavior                                 |
+| --------------- | ---------------------------------------- |
+| **Sound**       | Plays a system or custom sound file      |
 | **Speak event** | Speaks the text that matched the trigger |
-| **Say text** | Speaks a fixed phrase you configure |
+| **Say text**    | Speaks a fixed phrase you configure      |
 
 Each trigger can use its own voice. The speech **rate** slider in Speech settings applies to trigger speech as well.
 
@@ -147,27 +147,27 @@ Trigger speech respects the same mute flags as continuous speech:
 
 ### Edit → Speech
 
-| Menu item | What it does |
-|-----------|--------------|
+| Menu item               | What it does                                                                                                                                   |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Speak Selected Text** | Speak the selected text in the **input** or **output** pane (enabled when the active pane has a selection, or when the output pane is focused) |
 
 Select text in either pane, then choose **Edit → Speech → Speak Selected Text**. Savitar speaks the selection using the voice engine configured in **Settings → Speech**.
 
 ### Audio menu
 
-| Menu item | What it does |
-|-----------|--------------|
-| **Mute Sound Cues** | Toggle trigger sound effects on/off |
-| **Mute Speaking Cues** | Toggle all spoken output (triggers + continuous speech) |
+| Menu item                    | What it does                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------- |
+| **Mute Sound Cues**          | Toggle trigger sound effects on/off                                                         |
+| **Mute Speaking Cues**       | Toggle all spoken output (triggers + continuous speech)                                     |
 | **Flush Speech Buffer** (⌘L) | Stop speech immediately and discard queued utterances (enabled only while speech is active) |
-| **Speech Settings…** | Opens **Settings → Speech** |
+| **Speech Settings…**         | Opens **Settings → Speech**                                                                 |
 
 **Speech menu locations**
 
-| Command | Menu | Purpose |
-|---------|------|---------|
-| **Speak Selected Text** | **Edit → Speech** | Read selected text in input or output |
-| **Flush Speech Buffer** (⌘L) | **Audio** | Stop Savitar speech and clear its queue (continuous + trigger speech) |
+| Command                      | Menu              | Purpose                                                               |
+| ---------------------------- | ----------------- | --------------------------------------------------------------------- |
+| **Speak Selected Text**      | **Edit → Speech** | Read selected text in input or output                                 |
+| **Flush Speech Buffer** (⌘L) | **Audio**         | Stop Savitar speech and clear its queue (continuous + trigger speech) |
 
 If you used Savitar 1: **Start Speaking** is now **Speak Selected Text** under **Edit → Speech**; queued speech is cleared with **Flush Speech Buffer** (⌘L), not a separate Stop Speaking command.
 
@@ -175,12 +175,12 @@ If you used Savitar 1: **Start Speaking** is now **Speak Selected Text** under *
 
 Open **Settings…** → **Speech**:
 
-| Control | Description |
-|---------|-------------|
-| **Continuous speech enabled** | Master switch for reading world output aloud |
-| **Voice** | Default English voice for continuous speech and **Speak Selected Text** |
-| **Speaker button** | Plays a sample sentence with the selected voice |
-| **Rate** | Slow (5) through Fast (20); **10** is normal speed. Affects continuous speech, trigger speech, and ad-hoc speech |
+| Control                       | Description                                                                                                      |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Continuous speech enabled** | Master switch for reading world output aloud                                                                     |
+| **Voice**                     | Default English voice for continuous speech and **Speak Selected Text**                                          |
+| **Speaker button**            | Plays a sample sentence with the selected voice                                                                  |
+| **Rate**                      | Slow (5) through Fast (20); **10** is normal speed. Affects continuous speech, trigger speech, and ad-hoc speech |
 
 Voice and rate changes take effect on the next spoken utterance; you do not need to restart the app or reconnect to a world.
 
@@ -207,10 +207,10 @@ Changes apply immediately to every open world window; you do not need to reconne
 
 The pane shows **eight hues** (black through white) across **three shades** each:
 
-| Shade | Role |
-|-------|------|
-| **Normal** | Standard foreground/background for that hue |
-| **Dim** | Lighter or muted variant (ANSI “dim” / faint) |
+| Shade       | Role                                              |
+| ----------- | ------------------------------------------------- |
+| **Normal**  | Standard foreground/background for that hue       |
+| **Dim**     | Lighter or muted variant (ANSI “dim” / faint)     |
 | **Intense** | Bold or highlighted variant (ANSI bold or bright) |
 
 Click any swatch to pick a new color. Use **Restore Defaults** to reset all 24 colors to Savitar’s built-in palette.
@@ -219,10 +219,10 @@ Color edits in Settings are **undoable** (⌘Z) like other preference changes. Y
 
 ### Colors vs World Settings → Appearance
 
-| | **Settings → Colors** | **World Settings → Appearance** |
-|--|------------------------|----------------------------------|
-| Scope | **App-wide** — all worlds share the same ANSI palette | **Per world** — fonts, default fore/back colors, HTML/ANSI interpretation for that document |
-| Use when | ANSI colors look wrong everywhere, or you want a custom theme | One world needs different fonts or base colors |
+|          | **Settings → Colors**                                         | **World Settings → Appearance**                                                             |
+| -------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Scope    | **App-wide** — all worlds share the same ANSI palette         | **Per world** — fonts, default fore/back colors, HTML/ANSI interpretation for that document |
+| Use when | ANSI colors look wrong everywhere, or you want a custom theme | One world needs different fonts or base colors                                              |
 
 Speech and printing strip or ignore ANSI styling: continuous speech reads plain text, and **File → Print…** outputs black on white. See [Speech](#speech) and [Printing](#printing) under the File menu.
 
@@ -234,20 +234,20 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 
 ### App appearance vs world appearance
 
-| | **Settings → Input & Display** | **World Settings → Appearance** |
-|--|-------------------------------|----------------------------------|
-| **Scope** | App windows and dialogs (World Picker, Settings, Events, menus) | One connected world’s session output |
-| **Controls** | **System** / **Light** / **Dark** popup | Fore/back colors, fonts, ANSI interpretation |
-| **ANSI palette** | Unchanged — see [ANSI colors](#ansi-colors) | Unchanged |
+|                  | **Settings → Input & Display**                                  | **World Settings → Appearance**              |
+| ---------------- | --------------------------------------------------------------- | -------------------------------------------- |
+| **Scope**        | App windows and dialogs (World Picker, Settings, Events, menus) | One connected world’s session output         |
+| **Controls**     | **System** / **Light** / **Dark** popup                         | Fore/back colors, fonts, ANSI interpretation |
+| **ANSI palette** | Unchanged — see [ANSI colors](#ansi-colors)                     | Unchanged                                    |
 
 **App appearance** is a Savitar 2-only preference (no Savitar 1 import). **System** follows macOS light/dark, including Auto sunrise/sunset. **Savitar Help** (⌘?) uses the same appearance for its content; world session output colors are unchanged.
 
-| Option | What it does |
-|--------|----------------|
-| **App appearance** | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows. |
-| **Use keypad for macro entry** | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
-| **Mono fonts only (in font menus)** | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned. |
-| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open. |
+| Option                                 | What it does                                                                                                                                                                                                              |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **App appearance**                     | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows.                                                                      |
+| **Use keypad for macro entry**         | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
+| **Mono fonts only (in font menus)**    | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.                                                          |
+| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open.               |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -257,12 +257,12 @@ Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-wo
 
 Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute flags apply **app-wide** and save immediately. The same two cue toggles are available from the menu bar **Audio** menu while a session is open—Settings and the menu stay in sync.
 
-| Option | What it does |
-|--------|----------------|
-| **Mute sound cues** | Suppresses **trigger sound** effects (chimes and custom sounds configured in the Events window). Trigger **speech** is not affected. |
-| **Mute speaking cues** | Suppresses all **spoken** output—trigger speech and **continuous speech**. If nothing is being read aloud, check this first. |
-| **Mute clicker sounds** | Mutes the click sound when you press a **Macro Clicker** button (Settings → Audio). |
-| **Mute terminal bell** | Suppresses the system beep when the server sends a telnet **bell** character (ASCII BEL). The character is still removed from output text; only the sound is skipped. |
+| Option                  | What it does                                                                                                                                                          |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Mute sound cues**     | Suppresses **trigger sound** effects (chimes and custom sounds configured in the Events window). Trigger **speech** is not affected.                                  |
+| **Mute speaking cues**  | Suppresses all **spoken** output—trigger speech and **continuous speech**. If nothing is being read aloud, check this first.                                          |
+| **Mute clicker sounds** | Mutes the click sound when you press a **Macro Clicker** button (Settings → Audio).                                                                                   |
+| **Mute terminal bell**  | Suppresses the system beep when the server sends a telnet **bell** character (ASCII BEL). The character is still removed from output text; only the sound is skipped. |
 
 **Speech** voice and rate live on the separate **Speech** settings pane—see [Speech settings reference](#speech-speech-settings-reference). To stop speech that is already playing, use **Audio → Flush Speech Buffer** (⌘L) from the menu bar.
 
@@ -272,8 +272,8 @@ Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute fla
 
 Official Savitar builds check for newer versions using [Sparkle](https://sparkle-project.org/). Open **Settings…** (⌘,) and select the **Updates** toolbar tab.
 
-| Option | What it does |
-|--------|----------------|
+| Option                              | What it does                                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Check for updates automatically** | When on, Savitar periodically looks for a newer signed release in the background and can notify you when one is available. When off, you can still check manually. |
 
 To check on demand, choose **Savitar → Check for Updates…** from the menu bar. If an update is available, Sparkle shows release notes (from the project changelog) and walks you through download and install.
@@ -290,11 +290,11 @@ Your automatic-update preference is saved in app preferences and survives relaun
 
 Open **Settings…** (⌘,) and select the **Startup** toolbar tab. These options control what Savitar opens when you launch the app.
 
-| Option | What it does |
-|--------|----------------|
-| **Show World Picker at startup** | Opens the World Picker window when Savitar launches (default **on**). Turn off if you prefer to open worlds only via **File → Open…** or recent documents. |
-| **Show Events Window at startup** | Opens the **app-wide Events** window (⇧⌘E) automatically. Useful if you live in universal triggers and macros. |
-| **Show Macro Clicker at startup** | Opens the **Macro Clicker** palette when Savitar launches (see [Macros](#macros)). |
+| Option                            | What it does                                                                                                                                               |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Show World Picker at startup**  | Opens the World Picker window when Savitar launches (default **on**). Turn off if you prefer to open worlds only via **File → Open…** or recent documents. |
+| **Show Events Window at startup** | Opens the **app-wide Events** window (⇧⌘E) automatically. Useful if you live in universal triggers and macros.                                             |
+| **Show Macro Clicker at startup** | Opens the **Macro Clicker** palette when Savitar launches (see [Macros](#macros)).                                                                         |
 
 Startup flags save immediately like other app Settings. They do not affect worlds already open from a previous session—only the next launch.
 
@@ -328,36 +328,36 @@ World document windows, the **World Picker**, and the **Events** windows each en
 
 ### Savitar menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **About Savitar** | — | Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss. |
-| **Check for Updates…** | — | Looks for a newer Savitar release (Sparkle). See [Updates](#updates). |
-| **Settings…** | ⌘, | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech, **Advanced**). Changes apply immediately; there is no Save button. |
-| **Services** | — | Standard macOS Services submenu for the current selection (when a supporting service is installed). |
-| **Hide Savitar** | ⌘H | Hides all Savitar windows. |
-| **Hide Others** | ⌥⌘H | Hides every app except Savitar. |
-| **Show All** | — | Un-hides other applications. |
-| **Quit Savitar** | ⌘Q | Quits the app. Open world documents are closed according to each window’s save state. |
+| Menu item              | Shortcut | What it does                                                                                                                                                                       |
+| ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **About Savitar**      | —        | Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss.                              |
+| **Check for Updates…** | —        | Looks for a newer Savitar release (Sparkle). See [Updates](#updates).                                                                                                              |
+| **Settings…**          | ⌘,       | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech, **Advanced**). Changes apply immediately; there is no Save button. |
+| **Services**           | —        | Standard macOS Services submenu for the current selection (when a supporting service is installed).                                                                                |
+| **Hide Savitar**       | ⌘H       | Hides all Savitar windows.                                                                                                                                                         |
+| **Hide Others**        | ⌥⌘H      | Hides every app except Savitar.                                                                                                                                                    |
+| **Show All**           | —        | Un-hides other applications.                                                                                                                                                       |
+| **Quit Savitar**       | ⌘Q       | Quits the app. Open world documents are closed according to each window’s save state.                                                                                              |
 
 See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), [Updates](#updates), and [Advanced](#advanced) for the other Settings toolbar panes.
 
 ### File menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **New World Document…** | ⌘N | Opens the **World Picker** so you can choose a world to connect to. Double-clicking a world opens a new session in an untitled document window. |
-| **New Text Document** | ⇧⌘T | Opens a new plain-text editor window for notes, logs, or other `.txt` / `.text` / `.log` files. |
-| **Open…** | ⌘O | Opens a saved `.world` document or a plain-text file (`.txt`, `.text`, `.log`). Savitar reads Savitar 2 and legacy Savitar 1 world files. |
-| **Open Recent** | — | Lists recently opened world documents. Choose **Clear Menu** at the bottom to reset the list. |
-| **Close** | ⌘W | Closes the frontmost window (World Picker, world document, or Events window). If a world document has unsaved changes, macOS prompts you to save. |
-| **Save** | ⌘S | Saves the active world document. For an untitled document, opens the save sheet first. The default filename is the **world’s name** (for example, `Alter Aeon.world`). |
-| **Duplicate** | ⇧⌘S | *(System menu item.)* Creates a new untitled copy of the current world document with the same settings, triggers, and macros. The copy is not saved until you choose **Save**. |
-| **Rename…** | — | *(System menu item.)* Renames the saved file for the current world document in place. |
-| **Move To…** | — | *(System menu item.)* Moves the saved world file to another folder. |
-| **Revert To** | — | *(System submenu.)* Discards unsaved changes and restores the document to a previously saved version on disk. |
-| **Share** | — | *(System menu item.)* Opens the standard macOS share sheet for the saved world file. |
-| **Page Setup…** | ⇧⌘P | Sets paper size, orientation, and margins for printing. |
-| **Print…** | ⌘P | Prints the frontmost document. For a **world** window, prints session **output** as plain text (see [Printing](#printing) below). For a **text document**, prints the editor contents using the standard macOS print dialog. |
+| Menu item               | Shortcut | What it does                                                                                                                                                                                                                 |
+| ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **New World Document…** | ⌘N       | Opens the **World Picker** so you can choose a world to connect to. Double-clicking a world opens a new session in an untitled document window.                                                                              |
+| **New Text Document**   | ⇧⌘T      | Opens a new plain-text editor window for notes, logs, or other `.txt` / `.text` / `.log` files.                                                                                                                              |
+| **Open…**               | ⌘O       | Opens a saved `.world` document or a plain-text file (`.txt`, `.text`, `.log`). Savitar reads Savitar 2 and legacy Savitar 1 world files.                                                                                    |
+| **Open Recent**         | —        | Lists recently opened world documents. Choose **Clear Menu** at the bottom to reset the list.                                                                                                                                |
+| **Close**               | ⌘W       | Closes the frontmost window (World Picker, world document, or Events window). If a world document has unsaved changes, macOS prompts you to save.                                                                            |
+| **Save**                | ⌘S       | Saves the active world document. For an untitled document, opens the save sheet first. The default filename is the **world’s name** (for example, `Alter Aeon.world`).                                                       |
+| **Duplicate**           | ⇧⌘S      | _(System menu item.)_ Creates a new untitled copy of the current world document with the same settings, triggers, and macros. The copy is not saved until you choose **Save**.                                               |
+| **Rename…**             | —        | _(System menu item.)_ Renames the saved file for the current world document in place.                                                                                                                                        |
+| **Move To…**            | —        | _(System menu item.)_ Moves the saved world file to another folder.                                                                                                                                                          |
+| **Revert To**           | —        | _(System submenu.)_ Discards unsaved changes and restores the document to a previously saved version on disk.                                                                                                                |
+| **Share**               | —        | _(System menu item.)_ Opens the standard macOS share sheet for the saved world file.                                                                                                                                         |
+| **Page Setup…**         | ⇧⌘P      | Sets paper size, orientation, and margins for printing.                                                                                                                                                                      |
+| **Print…**              | ⌘P       | Prints the frontmost document. For a **world** window, prints session **output** as plain text (see [Printing](#printing) below). For a **text document**, prints the editor contents using the standard macOS print dialog. |
 
 **Tips**
 
@@ -387,32 +387,32 @@ The in-game `@printsource` command is separate: it is a debug/logging action, no
 
 ### Edit menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **Undo** | ⌘Z | Undoes the last edit in the focused text field or Events editor. World settings changes made in **World Settings** are also undoable. |
-| **Redo** | ⇧⌘Z | Re-applies the last undone edit. |
-| **Clear Output** | ⌘K | Clears all text in the **output** pane of the frontmost **world** document. Disabled for plain-text document windows. |
-| **New Trigger** / **New Macro** | ⇧⌘N | When an **Events** window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key. |
-| **Cut** | ⌘X | Cuts the selection in the focused text field (typically the input line or an Events editor field). |
-| **Copy** | ⌘C | Copies the selection. Works in the input line, Events editors, and the output pane (when text is selected). |
-| **Paste** | ⌘V | Pastes into the focused text field. |
-| **Delete** | ⌫ | Deletes the selection in the focused text field. |
-| **Select All** | ⌘A | Selects all text in the focused text field. |
-| **Find…** | ⌘F | Opens find for the active pane (see [Find](#find) below). |
-| **Find Next** | ⌘G | Jumps to the next match. |
-| **Find Previous** | ⇧⌘G | Jumps to the previous match. |
-| **Use Selection for Find** | ⌘E | Copies the current selection into the find string. |
-| **Speech → Speak Selected Text** | — | Speaks the selected text in the input or output pane. See the [Speech](#speech) chapter. |
+| Menu item                        | Shortcut | What it does                                                                                                                                                                  |
+| -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Undo**                         | ⌘Z       | Undoes the last edit in the focused text field or Events editor. World settings changes made in **World Settings** are also undoable.                                         |
+| **Redo**                         | ⇧⌘Z      | Re-applies the last undone edit.                                                                                                                                              |
+| **Clear Output**                 | ⌘K       | Clears all text in the **output** pane of the frontmost **world** document. Disabled for plain-text document windows.                                                         |
+| **New Trigger** / **New Macro**  | ⇧⌘N      | When an **Events** window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key. |
+| **Cut**                          | ⌘X       | Cuts the selection in the focused text field (typically the input line or an Events editor field).                                                                            |
+| **Copy**                         | ⌘C       | Copies the selection. Works in the input line, Events editors, and the output pane (when text is selected).                                                                   |
+| **Paste**                        | ⌘V       | Pastes into the focused text field.                                                                                                                                           |
+| **Delete**                       | ⌫        | Deletes the selection in the focused text field.                                                                                                                              |
+| **Select All**                   | ⌘A       | Selects all text in the focused text field.                                                                                                                                   |
+| **Find…**                        | ⌘F       | Opens find for the active pane (see [Find](#find) below).                                                                                                                     |
+| **Find Next**                    | ⌘G       | Jumps to the next match.                                                                                                                                                      |
+| **Find Previous**                | ⇧⌘G      | Jumps to the previous match.                                                                                                                                                  |
+| **Use Selection for Find**       | ⌘E       | Copies the current selection into the find string.                                                                                                                            |
+| **Speech → Speak Selected Text** | —        | Speaks the selected text in the input or output pane. See the [Speech](#speech) chapter.                                                                                      |
 
 #### Find
 
 Find behavior depends on which pane is active in a world document:
 
-| Active pane | Find UI | Notes |
-|-------------|---------|-------|
-| **Input** | Standard macOS find panel | Full keyboard navigation (⌘F, ⌘G, ⌘⇧G). |
-| **Output** | Find bar above the output pane | Same menu commands; search runs in the session output (HTML content is searched as plain text). |
-| **Savitar Help** | Find bar above the guide | Same menu commands (⌘F, ⌘G, ⇧⌘G, ⌘E); search runs in the bundled user guide. |
+| Active pane      | Find UI                        | Notes                                                                                           |
+| ---------------- | ------------------------------ | ----------------------------------------------------------------------------------------------- |
+| **Input**        | Standard macOS find panel      | Full keyboard navigation (⌘F, ⌘G, ⌘⇧G).                                                         |
+| **Output**       | Find bar above the output pane | Same menu commands; search runs in the session output (HTML content is searched as plain text). |
+| **Savitar Help** | Find bar above the guide       | Same menu commands (⌘F, ⌘G, ⇧⌘G, ⌘E); search runs in the bundled user guide.                    |
 
 Find is available when a world document window is frontmost, when **Savitar Help** is frontmost, or when any text view in the app has focus.
 
@@ -420,48 +420,48 @@ Find is available when a world document window is frontmost, when **Savitar Help
 
 Available when a **world document** window is frontmost.
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **Enter Full Screen** | ⌃⌘F | Toggles full-screen mode for the world window. |
-| **Show World Events…** | — | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name. |
-| **Show World Settings…** | ⇧⌘J | Opens the **World Settings** sheet for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard. |
-| **Scroll Lock** | ⌃S | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
+| Menu item                | Shortcut | What it does                                                                                                                                                                                                                                                           |
+| ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Enter Full Screen**    | ⌃⌘F      | Toggles full-screen mode for the world window.                                                                                                                                                                                                                         |
+| **Show World Events…**   | —        | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name.                                                                     |
+| **Show World Settings…** | ⇧⌘J      | Opens the **World Settings** sheet for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard.                                                                                                                        |
+| **Scroll Lock**          | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
 
 The same **World Settings** and **Events** commands are available from buttons in the world window’s title bar.
 
 ### Audio menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **Mute Sound Cues** | — | Toggles trigger **sound** effects on or off (checkmark when muted). Mirrors **Settings → Audio**. |
-| **Mute Speaking Cues** | — | Toggles all **spoken** output—trigger speech and continuous speech (checkmark when muted). Mirrors **Settings → Audio**. |
-| **Flush Speech Buffer** | ⌘L | Stops speech immediately and discards queued utterances. Enabled only while Savitar is speaking. |
-| **Speech Settings…** | — | Opens **Settings → Speech** (continuous speech, voice, and rate). |
+| Menu item               | Shortcut | What it does                                                                                                             |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Mute Sound Cues**     | —        | Toggles trigger **sound** effects on or off (checkmark when muted). Mirrors **Settings → Audio**.                        |
+| **Mute Speaking Cues**  | —        | Toggles all **spoken** output—trigger speech and continuous speech (checkmark when muted). Mirrors **Settings → Audio**. |
+| **Flush Speech Buffer** | ⌘L       | Stops speech immediately and discards queued utterances. Enabled only while Savitar is speaking.                         |
+| **Speech Settings…**    | —        | Opens **Settings → Speech** (continuous speech, voice, and rate).                                                        |
 
 Full detail is in the [Speech](#speech) chapter.
 
 ### Window menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **Minimize** | ⌘M | Minimizes the frontmost window to the Dock. |
-| **Zoom** | — | Toggles the window between its user size and a larger size that fits content. |
-| **Bring All to Front** | — | Brings all Savitar windows above windows from other apps. |
-| *(document list)* | — | Lists open Savitar windows; select one to bring it forward. |
-| **Show World Picker** | — | Opens the **World Picker**, or brings it forward if already open. Same result as **File → New World Document…** (⌘N)—handy for reopening the picker after you close it. |
-| **Show App-wide Events Window** | ⇧⌘E | Opens the **app-wide Events** window for universal triggers and macros. Separate from per-world **Show World Events…**. |
+| Menu item                       | Shortcut | What it does                                                                                                                                                            |
+| ------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Minimize**                    | ⌘M       | Minimizes the frontmost window to the Dock.                                                                                                                             |
+| **Zoom**                        | —        | Toggles the window between its user size and a larger size that fits content.                                                                                           |
+| **Bring All to Front**          | —        | Brings all Savitar windows above windows from other apps.                                                                                                               |
+| _(document list)_               | —        | Lists open Savitar windows; select one to bring it forward.                                                                                                             |
+| **Show World Picker**           | —        | Opens the **World Picker**, or brings it forward if already open. Same result as **File → New World Document…** (⌘N)—handy for reopening the picker after you close it. |
+| **Show App-wide Events Window** | ⇧⌘E      | Opens the **app-wide Events** window for universal triggers and macros. Separate from per-world **Show World Events…**.                                                 |
 
 Savitar does not use window tabs, so the Window menu has no **Show Tab Bar** or **Merge All Windows** items.
 
 ### Help menu
 
-| Menu item | Shortcut | What it does |
-|-----------|----------|--------------|
-| **Savitar Help** | ⌘? | Opens this user guide in a Savitar window (works offline). |
-| **Savitar Guide on the Web…** | — | Opens the latest draft of this guide on GitHub. |
-| **Send Feedback…** | — | Opens your email app with a pre-filled message to the Savitar team (version info included). No GitHub account needed. |
-| **About Privacy…** | — | Opens the [Privacy & usage statistics](#privacy) chapter in Savitar Help (TelemetryDeck analytics; no session text). See also [Privacy on the web](https://www.heynow.com/savitar/privacy.html). |
-| **Release Notes…** | — | Opens the GitHub releases page with version history. |
+| Menu item                     | Shortcut | What it does                                                                                                                                                                                     |
+| ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Savitar Help**              | ⌘?       | Opens this user guide in a Savitar window (works offline).                                                                                                                                       |
+| **Savitar Guide on the Web…** | —        | Opens the latest draft of this guide on GitHub.                                                                                                                                                  |
+| **Send Feedback…**            | —        | Opens your email app with a pre-filled message to the Savitar team (version info included). No GitHub account needed.                                                                            |
+| **About Privacy…**            | —        | Opens the [Privacy & usage statistics](#privacy) chapter in Savitar Help (TelemetryDeck analytics; no session text). See also [Privacy on the web](https://www.heynow.com/savitar/privacy.html). |
+| **Release Notes…**            | —        | Opens the GitHub releases page with version history.                                                                                                                                             |
 
 ---
 
@@ -469,10 +469,10 @@ Savitar does not use window tabs, so the Window menu has no **Show Tab Bar** or 
 
 A **world document** window is your live connection to a MUD or telnet host. It has two panes:
 
-| Pane | Purpose |
-|------|---------|
-| **Output** (top) | Server text, ANSI colors, and (optionally) echoed commands |
-| **Input** (bottom) | The command line where you type; press **Return** to send |
+| Pane               | Purpose                                                    |
+| ------------------ | ---------------------------------------------------------- |
+| **Output** (top)   | Server text, ANSI colors, and (optionally) echoed commands |
+| **Input** (bottom) | The command line where you type; press **Return** to send  |
 
 Both panes are measured in monospace **columns** (width) and **rows** (height). The default for a new world is **80 columns × 24 output rows × 2 input rows**.
 
@@ -500,14 +500,17 @@ While a session is **connecting**, the bottom area briefly shows a **Connecting*
 
 The **output** pane is a web view showing styled session text. You can:
 
-| Action | How |
-|--------|-----|
-| **Scroll** | Trackpad, mouse wheel, or scrollbar |
-| **Scroll lock** | **World → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
-| **Select & copy** | Drag to select; **Edit → Copy** (⌘C) |
-| **Clear** | **Edit → Clear Output** (⌘K) |
-| **Find** | **Edit → Find…** (⌘F) when the output pane is active—see [Find](#find) under Edit menu |
-| **Speak selection** | **Edit → Speech → Speak Selected Text** |
+| Action                        | How                                                                                                                              |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Scroll**                    | Trackpad, mouse wheel, or scrollbar                                                                                              |
+| **Scroll lock**               | **World → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
+| **Select & copy**             | Drag to select; **Edit → Copy** (⌘C), or right-click and choose **Copy**                                                         |
+| **Search or speak selection** | Select text, then right-click and choose **Search Selection** or **Speak Selected Text**                                         |
+| **Clear**                     | **Edit → Clear Output** (⌘K), or right-click and choose **Clear**                                                                |
+| **Find**                      | **Edit → Find…** (⌘F) when the output pane is active—see [Find](#find) under Edit menu                                           |
+| **Speak selection**           | **Edit → Speech → Speak Selected Text**                                                                                          |
+
+The **input** pane uses the standard macOS text contextual menu for editing commands such as Cut, Copy, Paste, and spelling services. The output pane uses Savitar's smaller transcript menu so world text does not show browser-only commands such as Reload.
 
 ### Status bars
 
@@ -535,10 +538,10 @@ In Savitar, an **event** is anything the client does **automatically** on your b
 
 Most players think of two kinds:
 
-| Kind | You define it to… | Typical example |
-|------|-------------------|-----------------|
+| Kind        | You define it to…                                       | Typical example                                                                                       |
+| ----------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | **Trigger** | Run when matching **text** appears in output (or input) | Play a chime when “You feel hungry” arrives; gag a spammy line; send a reply when the MUD prompts you |
-| **Macro** | Run when you press a **hotkey** | Send `cast heal` on F5 instead of typing it |
+| **Macro**   | Run when you press a **hotkey**                         | Send `cast heal` on F5 instead of typing it                                                           |
 
 Triggers are **reactive**—they fire when something happens in the session. Macros are **initiated by you**—but both are edited in the same place and stored the same way, so Savitar groups them under one name: **events**.
 
@@ -563,13 +566,13 @@ See [Macros](#macros) below for hotkey commands. Full trigger detail is in [Trig
 
 The Events window is where you create and maintain triggers and macros:
 
-| Action | How |
-|--------|-----|
-| **New item** | **Edit → New Trigger** or **New Macro** (⇧⌘N) when an Events window is frontmost—the label matches the active tab |
-| **Rename** | Click the name in the list and type (in-place editing) |
-| **Reorder** | Drag items in the list to change processing order (**triggers**—order matters; see [Triggers](#triggers)) |
-| **Enable / disable** | Checkbox in the list |
-| **Undo** | ⌘Z after edits in detail fields |
+| Action               | How                                                                                                               |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **New item**         | **Edit → New Trigger** or **New Macro** (⇧⌘N) when an Events window is frontmost—the label matches the active tab |
+| **Rename**           | Click the name in the list and type (in-place editing)                                                            |
+| **Reorder**          | Drag items in the list to change processing order (**triggers**—order matters; see [Triggers](#triggers))         |
+| **Enable / disable** | Checkbox in the list                                                                                              |
+| **Undo**             | ⌘Z after edits in detail fields                                                                                   |
 
 **Per-world** vs **app-wide** windows are separate lists—see [The Events window](#the-events-window) above. Changes to a world document's events are saved with **File → Save** (⌘S).
 
@@ -586,12 +589,12 @@ Suppose you play **Alter Aeon** and often type `cast heal`. You can create a mac
 The same idea works for common MUD commands:
 
 | You might macro… | Value (command sent) |
-|------------------|----------------------|
-| Heal | `cast heal` |
-| Look around | `look` |
-| Go north | `n` |
-| Rest | `rest` |
-| A custom emote | `wave` |
+| ---------------- | -------------------- |
+| Heal             | `cast heal`          |
+| Look around      | `look`               |
+| Go north         | `n`                  |
+| Rest             | `rest`               |
+| A custom emote   | `wave`               |
 
 Macros are for the repetitive stuff—the commands you use dozens of times per session.
 
@@ -608,10 +611,10 @@ To add one quickly: bring an Events window forward and choose **Edit → New Mac
 
 See [Events](#events) for the big picture. In short:
 
-| Feature | What it does |
-|---------|----------------|
-| **Macro** | Hotkey sends a fixed command you define |
-| **Trigger** | Watches **output** (or input) and reacts when text matches a pattern |
+| Feature              | What it does                                                                |
+| -------------------- | --------------------------------------------------------------------------- |
+| **Macro**            | Hotkey sends a fixed command you define                                     |
+| **Trigger**          | Watches **output** (or input) and reacts when text matches a pattern        |
 | **Trigger variable** | Scratch space triggers write into (for captured text), not a hotkey command |
 
 ### Macro Clicker
@@ -622,12 +625,12 @@ The **Macro Clicker** is a floating palette of quick-access buttons for **macros
 
 **World vs app-wide macros:** Each clicker button looks up its bound name in the **frontmost world** first (including macros you have just added in that world’s Events window, even before you save the document). If the world has no macro with that name, Savitar falls back to the matching **app-wide** macro. To override a universal macro for one world, create a world macro with the **same name**—for example, a world `MACRO_1` replaces the universal `MACRO_1` while that world is frontmost.
 
-| Action | Result |
-|--------|--------|
-| **Click** a button | Send the bound macro to the active session |
-| **Hover** a button | Caption shows the macro’s command text (or “Button not defined”) |
-| **⌘-click** a button | Choose which **app-wide** macro name this button uses (stored in app preferences) |
-| **Window → Show Macro Clicker** | Open or bring forward the palette |
+| Action                          | Result                                                                            |
+| ------------------------------- | --------------------------------------------------------------------------------- |
+| **Click** a button              | Send the bound macro to the active session                                        |
+| **Hover** a button              | Caption shows the macro’s command text (or “Button not defined”)                  |
+| **⌘-click** a button            | Choose which **app-wide** macro name this button uses (stored in app preferences) |
+| **Window → Show Macro Clicker** | Open or bring forward the palette                                                 |
 
 Bindings are stored in app preferences as `ALIAS` XML (`NAME` → macro name). Factory defaults point direction buttons at `MACRO_NORTH`, `MACRO_EAST`, and so on—the same names as the bundled keypad macros. Early Savitar 2 builds that used hyphenated letter names (`MACRO-A` … `MACRO-F`) are upgraded to underscores when preferences load.
 
@@ -641,19 +644,19 @@ The **input** pane is a single-line (or few-row) command editor. What you type i
 
 ### Sending lines
 
-| Key / action | Result |
-|--------------|--------|
-| **Return** | Send the current line (with world line-ending postfix—see [World Settings → Input](#input-tab)) |
-| **Return** on empty line | Sends only the line ending (useful for worlds that treat a blank line specially) |
+| Key / action                | Result                                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Return**                  | Send the current line (with world line-ending postfix—see [World Settings → Input](#input-tab))                    |
+| **Return** on empty line    | Sends only the line ending (useful for worlds that treat a blank line specially)                                   |
 | **⌥Return** (Option-Return) | Insert a newline **in the input field** without sending—useful when composing multi-line macros or startup scripts |
 
 ### Command recall
 
 Savitar remembers up to **100** recent commands per session window.
 
-| Key | Result |
-|-----|--------|
-| **↑** | Recall older commands |
+| Key   | Result                                                             |
+| ----- | ------------------------------------------------------------------ |
+| **↑** | Recall older commands                                              |
 | **↓** | Recall newer commands; at the bottom, clears to a fresh empty line |
 
 Recall walks the history for **this session window** only. You can also pull a numbered entry with [`##recall`](#local-commands) and [`##history`](#local-commands).
@@ -662,17 +665,17 @@ Recall walks the history for **this session window** only. You can also pull a n
 
 These keys work in the input pane during a live session:
 
-| Key | Action |
-|-----|--------|
-| **← / →** | Move cursor |
-| **⌃A** | Beginning of line |
-| **⌘← / ⌘→** | Start / end of command line |
-| **⌃E** | End of line |
-| **⌃U** | Clear current input (select all, cut) |
-| **⌃W** | Delete the word before the cursor |
-| **⌃C** | Send telnet **interrupt** (ASCII ETX)—some servers treat this as break/cancel |
-| **⌃G** | Send telnet **bell** (ASCII BEL) |
-| **⌃S** | Toggle **scroll lock** on output (not input editing) |
+| Key         | Action                                                                        |
+| ----------- | ----------------------------------------------------------------------------- |
+| **← / →**   | Move cursor                                                                   |
+| **⌃A**      | Beginning of line                                                             |
+| **⌘← / ⌘→** | Start / end of command line                                                   |
+| **⌃E**      | End of line                                                                   |
+| **⌃U**      | Clear current input (select all, cut)                                         |
+| **⌃W**      | Delete the word before the cursor                                             |
+| **⌃C**      | Send telnet **interrupt** (ASCII ETX)—some servers treat this as break/cancel |
+| **⌃G**      | Send telnet **bell** (ASCII BEL)                                              |
+| **⌃S**      | Toggle **scroll lock** on output (not input editing)                          |
 
 ### Sticky commands
 
@@ -696,21 +699,21 @@ When the command is processed, `%%name` is replaced with the current value store
 
 ### Where values come from
 
-| Source | Example |
-|--------|---------|
-| **Trigger wildcards** | A trigger pattern `tell $$target hello` captures `target` when it matches |
-| **Trigger sets** | Triggers can write captured text into named variables for later replies |
-| **`##regex`** | A local command stores match groups in `%%0`, `%%1`, … — see [Local commands → Dump listings](#dump-listings) |
-| **`##set macro`** | `##set macro "hp" 42` sets `%%hp` for this session — see [Local commands](#local-commands) |
-| **Manual use** | You type `%%var` in macros, startup commands, or replies |
+| Source                | Example                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Trigger wildcards** | A trigger pattern `tell $$target hello` captures `target` when it matches                                     |
+| **Trigger sets**      | Triggers can write captured text into named variables for later replies                                       |
+| **`##regex`**         | A local command stores match groups in `%%0`, `%%1`, … — see [Local commands → Dump listings](#dump-listings) |
+| **`##set macro`**     | `##set macro "hp" 42` sets `%%hp` for this session — see [Local commands](#local-commands)                    |
+| **Manual use**        | You type `%%var` in macros, startup commands, or replies                                                      |
 
 Variable markers are configured per world on **World Settings → Input → Markers**. The default is `%%`.
 
 ### Macros vs variables
 
-| | **Macro** | **Variable (`%%name`)** |
-|--|-----------|-------------------------|
-| Fires when | You press a **hotkey** | Expanded whenever the text runs |
+|             | **Macro**              | **Variable (`%%name`)**                |
+| ----------- | ---------------------- | -------------------------------------- |
+| Fires when  | You press a **hotkey** | Expanded whenever the text runs        |
 | Typical use | `F5` sends `cast heal` | `say %%target` uses last captured name |
 
 See [Triggers](#triggers) for wildcards (`$$`) and regex captures.
@@ -723,7 +726,7 @@ See [Triggers](#triggers) for wildcards (`$$`) and regex captures.
 
 If the command marker is **empty**, local commands are disabled and all input goes to the server.
 
-**Variable expansion:** Text you send—including trigger replies and macros—is expanded for `%%variables` *before* Savitar checks for a local command. So a macro or reply can run `##history` by expanding to the command marker plus `history`.
+**Variable expansion:** Text you send—including trigger replies and macros—is expanded for `%%variables` _before_ Savitar checks for a local command. So a macro or reply can run `##history` by expanding to the command marker plus `history`.
 
 Examples below use the default `##` marker; substitute your world's marker if you changed it.
 
@@ -731,17 +734,17 @@ Examples below use the default `##` marker; substitute your world's marker if yo
 
 ### Session and output
 
-| Command | What it does |
-|---------|----------------|
-| `##history` | Prints a numbered list of recent commands for this session in the **output** pane |
-| `##recall <n>` | Puts command *n* from that list into the **input** line (same numbers as `##history`) |
-| `##!<n>` | Shorthand for `##recall <n>` — for example `##!3` recalls entry 3 |
-| `##clear screen` | Clears the output pane (same as **Edit → Clear Output**, ⌘K) |
-| `##link <url> "label" #RRGGBB` | Inserts a clickable hyperlink in the **output** pane (v1 syntax: angle brackets around the URL) |
-| `##help` | HTML list of local commands by category; click a command for syntax and details |
-| `##help <command>` | Detail for one command — for example `##help upload` |
-| `##capture` | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window. |
-| `##upload <file-path>` | Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or `~`; quote paths with spaces. |
+| Command                        | What it does                                                                                                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `##history`                    | Prints a numbered list of recent commands for this session in the **output** pane                                                                                                                         |
+| `##recall <n>`                 | Puts command _n_ from that list into the **input** line (same numbers as `##history`)                                                                                                                     |
+| `##!<n>`                       | Shorthand for `##recall <n>` — for example `##!3` recalls entry 3                                                                                                                                         |
+| `##clear screen`               | Clears the output pane (same as **Edit → Clear Output**, ⌘K)                                                                                                                                              |
+| `##link <url> "label" #RRGGBB` | Inserts a clickable hyperlink in the **output** pane (v1 syntax: angle brackets around the URL)                                                                                                           |
+| `##help`                       | HTML list of local commands by category; click a command for syntax and details                                                                                                                           |
+| `##help <command>`             | Detail for one command — for example `##help upload`                                                                                                                                                      |
+| `##capture`                    | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window. |
+| `##upload <file-path>`         | Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or `~`; quote paths with spaces.                                                                    |
 
 `##help` works even when **Interpret HTML tags** is off. Commands in the list are clickable (Pueblo-style `xch_cmd` links) and run `##help <command>` for you.
 
@@ -776,13 +779,13 @@ Then `##recall 2` or `##!2` puts `n` in the input line.
 
 ### Status bar commands
 
-| Command | What it does |
-|---------|----------------|
+| Command                         | What it does                                                                                                           |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `##set status output <message>` | Shows `<message>` in a one-line [status bar](#status-bars) at the top of the **output** pane (opens the bar if needed) |
-| `##set status input <message>` | Same, for the **input** pane |
-| `##close stats` | Hides **both** status bars |
-| `##close status output` | Hides only the output-pane status bar |
-| `##close status input` | Hides only the input-pane status bar |
+| `##set status input <message>`  | Same, for the **input** pane                                                                                           |
+| `##close stats`                 | Hides **both** status bars                                                                                             |
+| `##close status output`         | Hides only the output-pane status bar                                                                                  |
+| `##close status input`          | Hides only the input-pane status bar                                                                                   |
 
 Variables expand in status messages—`##set status input HP: %%hitpoints` from a trigger reply keeps a live readout on screen.
 
@@ -790,27 +793,27 @@ Variables expand in status messages—`##set status input HP: %%hitpoints` from 
 
 These change settings for the **current session's world** immediately (they are not saved until you save the world document):
 
-| Command | What it does |
-|---------|----------------|
-| `##set ansi on` / `off` | Toggle ANSI color processing on output |
-| `##set html on` / `off` | Toggle HTML output mode |
-| `##set echo on` / `off` | Toggle **Echo all input** (full command line echoed to output). Does not switch to “echo CR only”—use **World Settings → Input** for the three-way echo choice |
-| `##set cronly on` / `off` | Toggle **CR-only line endings** when sending commands (not the echo mode) |
-| `##set autoclose on` / `off` | Toggle auto-close when the server disconnects |
-| `##set marker command <text>` | Set the local-command marker (up to 2 characters) |
-| `##set marker macro <text>` | Set the variable marker (default `%%`) |
-| `##set marker wildcard <text>` | Set the wildcard marker in trigger patterns (default `$$`) |
-| `##set macro "<name>" <value>` | Set a **scratch variable** `<name>` to `<value>` (same as `%%name` expansion—not a macro hotkey in the Events window) |
-| `##add world <XML>` | Parses a `<WORLD …>` XML fragment and adds it to the **World Picker** list (saved in app preferences) |
+| Command                        | What it does                                                                                                                                                   |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `##set ansi on` / `off`        | Toggle ANSI color processing on output                                                                                                                         |
+| `##set html on` / `off`        | Toggle HTML output mode                                                                                                                                        |
+| `##set echo on` / `off`        | Toggle **Echo all input** (full command line echoed to output). Does not switch to “echo CR only”—use **World Settings → Input** for the three-way echo choice |
+| `##set cronly on` / `off`      | Toggle **CR-only line endings** when sending commands (not the echo mode)                                                                                      |
+| `##set autoclose on` / `off`   | Toggle auto-close when the server disconnects                                                                                                                  |
+| `##set marker command <text>`  | Set the local-command marker (up to 2 characters)                                                                                                              |
+| `##set marker macro <text>`    | Set the variable marker (default `%%`)                                                                                                                         |
+| `##set marker wildcard <text>` | Set the wildcard marker in trigger patterns (default `$$`)                                                                                                     |
+| `##set macro "<name>" <value>` | Set a **scratch variable** `<name>` to `<value>` (same as `%%name` expansion—not a macro hotkey in the Events window)                                          |
+| `##add world <XML>`            | Parses a `<WORLD …>` XML fragment and adds it to the **World Picker** list (saved in app preferences)                                                          |
 
 ### Triggers and macros
 
-| Command | What it does |
-|---------|----------------|
-| `##enable trigger "<name>"` | Enables a world or app-wide trigger by name (`##enable trigger beep` works for one-word names) |
-| `##disable trigger "<name>"` | Disables a trigger by name (same quoting rules as enable—use quotes when the name contains spaces) |
-| `##add trigger <XML>` | Parses a `<TRIGGER …>` XML fragment and adds it to **this world's** Events list |
-| `##add macro <XML>` | Parses a `<MACRO …>` XML fragment and adds it to **this world's** Events list |
+| Command                        | What it does                                                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `##enable trigger "<name>"`    | Enables a world or app-wide trigger by name (`##enable trigger beep` works for one-word names)                        |
+| `##disable trigger "<name>"`   | Disables a trigger by name (same quoting rules as enable—use quotes when the name contains spaces)                    |
+| `##add trigger <XML>`          | Parses a `<TRIGGER …>` XML fragment and adds it to **this world's** Events list                                       |
+| `##add macro <XML>`            | Parses a `<MACRO …>` XML fragment and adds it to **this world's** Events list                                         |
 | `##regex "<text>" "<pattern>"` | Tests a regular expression; prints match groups and stores them in scratch variables `%%0`, `%%1`, … for this session |
 
 To copy a trigger or macro from one place to another, use `##dump triggers` or `##dump macros`, copy the XML block you need, then `##add trigger …` or `##add macro …`.
@@ -826,32 +829,32 @@ To add a world to the **World Picker**, run `##dump worlds`, copy a `<WORLD …>
 
 XML listings written to the output pane (pretty-printed; safe when **HTML output** is on):
 
-| Command | What it does |
-|---------|----------------|
-| `##dump colors` | App-wide ANSI color definitions |
-| `##dump macros` | App-wide and world macros |
-| `##dump triggers` | App-wide and world triggers |
-| `##dump worlds` | Worlds in the World Picker list |
-| `##dump connection` | Connection state for this session (address, status, streams, flags) |
-| `##dump variables` | Scratch variables for this session (`%%name` values from triggers, `##set macro`, `##regex`) |
+| Command             | What it does                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| `##dump colors`     | App-wide ANSI color definitions                                                              |
+| `##dump macros`     | App-wide and world macros                                                                    |
+| `##dump triggers`   | App-wide and world triggers                                                                  |
+| `##dump worlds`     | Worlds in the World Picker list                                                              |
+| `##dump connection` | Connection state for this session (address, status, streams, flags)                          |
+| `##dump variables`  | Scratch variables for this session (`%%name` values from triggers, `##set macro`, `##regex`) |
 
 Each listing is split into **universal** (app-wide) and **world specific** sections. An empty section shows `(none)`.
 
 **Developer debugging:**
 
-| Command | What it does |
-|---------|----------------|
+| Command  | What it does                                                                            |
+| -------- | --------------------------------------------------------------------------------------- |
 | `##dump` | Prints the output pane's HTML source to the **Xcode/console log** (not the output pane) |
 
 ### Windows and sessions
 
-| Command | What it does |
-|---------|----------------|
-| `##broadcast <command>` | Sends `<command>` to every **other** connected world session (not the one that ran the command) |
-| `##select window "<title>"` | Brings the session window whose title **contains** `<title>` to the front |
-| `##close window "<title>"` | Closes that window (same partial title match) |
-| `##open text window` | Opens a new untitled Savitar plain-text window |
-| `##send window "<title>" <msg>` | Appends `<msg>` to the plain-text window whose title **contains** `<title>` |
+| Command                         | What it does                                                                                    |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `##broadcast <command>`         | Sends `<command>` to every **other** connected world session (not the one that ran the command) |
+| `##select window "<title>"`     | Brings the session window whose title **contains** `<title>` to the front                       |
+| `##close window "<title>"`      | Closes that window (same partial title match)                                                   |
+| `##open text window`            | Opens a new untitled Savitar plain-text window                                                  |
+| `##send window "<title>" <msg>` | Appends `<msg>` to the plain-text window whose title **contains** `<title>`                     |
 
 Useful when you play several worlds at once and want one trigger reply to poke another session.
 
@@ -861,7 +864,7 @@ Useful when you play several worlds at once and want one trigger reply to poke a
 ##wait <seconds> [<command>]
 ```
 
-Waits *seconds*, then runs `<command>` if you provided one. The follow-up is submitted **as if you typed it and pressed Return**—server commands and local commands (with your command marker) both work. Used heavily in **trigger replies** to stagger auto-actions:
+Waits _seconds_, then runs `<command>` if you provided one. The follow-up is submitted **as if you typed it and pressed Return**—server commands and local commands (with your command marker) both work. Used heavily in **trigger replies** to stagger auto-actions:
 
 ```text
 ##wait 2 look
@@ -893,10 +896,10 @@ A **trigger** watches session text and **reacts** when a pattern matches. Trigge
 
 ### Trigger types
 
-| Type | Watches | Typical use |
-|------|---------|-------------|
-| **Output** | Text arriving from the server | Gag spam, play a sound on "You feel hungry", highlight guild chat |
-| **Input** | Text you type before it is sent | Shortcuts that never reach the server, input-side patterns |
+| Type       | Watches                         | Typical use                                                       |
+| ---------- | ------------------------------- | ----------------------------------------------------------------- |
+| **Output** | Text arriving from the server   | Gag spam, play a sound on "You feel hungry", highlight guild chat |
+| **Input**  | Text you type before it is sent | Shortcuts that never reach the server, input-side patterns        |
 
 Configure type in the Events window detail pane.
 
@@ -914,11 +917,11 @@ When a line of text is processed:
 
 In the trigger editor **Matching** tab:
 
-| Mode | Matches when |
-|------|----------------|
-| **Contains** | The line includes the pattern text |
-| **Starts with** | The line begins with the pattern |
-| **Regular expression** | Pattern is a regex (power users) |
+| Mode                   | Matches when                       |
+| ---------------------- | ---------------------------------- |
+| **Contains**           | The line includes the pattern text |
+| **Starts with**        | The line begins with the pattern   |
+| **Regular expression** | Pattern is a regex (power users)   |
 
 Additional flags (**exact**, **whole line**, **whole word**) refine matching.
 
@@ -930,18 +933,18 @@ Use captured values in replies with `%%player` (or your variable marker).
 
 ### Appearance (gags & color)
 
-| Appearance | Effect |
-|------------|--------|
-| **Gag** | Matching text is removed from output (or input processing) |
-| **Change appearance** | Recolor matching text using trigger style settings |
-| **Don't use style** | Match only—used with audio or reply |
+| Appearance            | Effect                                                     |
+| --------------------- | ---------------------------------------------------------- |
+| **Gag**               | Matching text is removed from output (or input processing) |
+| **Change appearance** | Recolor matching text using trigger style settings         |
+| **Don't use style**   | Match only—used with audio or reply                        |
 
 ### Audio & reply
 
-| Tab | Purpose |
-|-----|---------|
-| **Audio Cue** | Play a sound, speak the matched line, or speak fixed text |
-| **Reply** | Automatically send a command to the server when matched (can include `%%variables`) |
+| Tab           | Purpose                                                                             |
+| ------------- | ----------------------------------------------------------------------------------- |
+| **Audio Cue** | Play a sound, speak the matched line, or speak fixed text                           |
+| **Reply**     | Automatically send a command to the server when matched (can include `%%variables`) |
 
 Replies run through the same expansion and local-command handling as typed input. Audio respects **Audio** menu mute flags—see [Speech](#speech).
 
@@ -999,12 +1002,12 @@ If output feels laggy during very fast spam, use **Help → Send Feedback…** s
 
 The **World Picker** is Savitar’s front door — a modeless utility window listing worlds from your app preferences (bundled defaults, imported worlds, or ones you added).
 
-| Action | How |
-|--------|-----|
-| **Connect** | Double-click a world, select one and press **Connect** or Return, or use the **Connect** button |
-| **Add** | **Add…** opens the **World Wizard** (name, host, port) |
-| **Remove** | Select a world and click **Remove** or press Delete |
-| **Edit connection** | Open a session, then **World → Show World Settings…** (⇧⌘J) |
+| Action              | How                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------- |
+| **Connect**         | Double-click a world, select one and press **Connect** or Return, or use the **Connect** button |
+| **Add**             | **Add…** opens the **World Wizard** (name, host, port)                                          |
+| **Remove**          | Select a world and click **Remove** or press Delete                                             |
+| **Edit connection** | Open a session, then **World → Show World Settings…** (⇧⌘J)                                     |
 
 Each row shows the world name and `host:port`. The connection card below the list shows the full `telnet://` address for the selected world.
 
@@ -1028,12 +1031,12 @@ On connect, Savitar:
 
 ### Troubleshooting connections
 
-| Symptom | Things to try |
-|---------|----------------|
+| Symptom                     | Things to try                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------ |
 | Commands ignored or doubled | Wrong **line ending**—toggle **CR** vs **CR/LF** on **World Settings → Input** |
-| Immediate disconnect | Verify host/port; check firewall; try from another client |
-| Idle timeout | Increase **Keepalive Minutes** on Starting tab |
-| Garbled text | ANSI/HTML interpretation flags on Appearance tab |
+| Immediate disconnect        | Verify host/port; check firewall; try from another client                      |
+| Idle timeout                | Increase **Keepalive Minutes** on Starting tab                                 |
+| Garbled text                | ANSI/HTML interpretation flags on Appearance tab                               |
 
 ---
 
@@ -1043,26 +1046,26 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 
 ### App Settings (⌘,)
 
-| Savitar 2 pane | v1 equivalent (approx.) |
-|----------------|-------------------------|
-| [Startup](#startup) | World Picker / Events / Clicker at launch |
-| [Input & Display](#input-display) | App appearance (System / Light / Dark), keypad, mono fonts, default word wrap |
-| [Colors](#ansi-colors) | ANSI Color Settings |
-| [Audio](#audio) | Mute sound / speaking / bell / clicker |
-| [Updates](#updates) | Check for updates |
-| [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate |
-| [Advanced](#advanced) | Restore factory defaults |
+| Savitar 2 pane                              | v1 equivalent (approx.)                                                       |
+| ------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Startup](#startup)                         | World Picker / Events / Clicker at launch                                     |
+| [Input & Display](#input-display)           | App appearance (System / Light / Dark), keypad, mono fonts, default word wrap |
+| [Colors](#ansi-colors)                      | ANSI Color Settings                                                           |
+| [Audio](#audio)                             | Mute sound / speaking / bell / clicker                                        |
+| [Updates](#updates)                         | Check for updates                                                             |
+| [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate                                                |
+| [Advanced](#advanced)                       | Restore factory defaults                                                      |
 
 ### World Settings sheet (⇧⌘J)
 
-| Savitar 2 tab | v1 equivalent |
-|---------------|---------------|
-| [Starting](#starting-tab) | Starting tab |
-| [Appearance](#appearance-tab) | Appearance tab |
-| [Input](#input-tab) | Input tab |
-| [Output](#output-tab) | Output tab |
-| [Closing](#closing-tab) | Closing tab (logoff command) |
-| — | MCP (not in Savitar 2) |
+| Savitar 2 tab                 | v1 equivalent                |
+| ----------------------------- | ---------------------------- |
+| [Starting](#starting-tab)     | Starting tab                 |
+| [Appearance](#appearance-tab) | Appearance tab               |
+| [Input](#input-tab)           | Input tab                    |
+| [Output](#output-tab)         | Output tab                   |
+| [Closing](#closing-tab)       | Closing tab (logoff command) |
+| —                             | MCP (not in Savitar 2)       |
 
 Grayed-out app prefs are documented in [Settings reference](#settings-reference); Macro Clicker and Mute clicker are now active.
 
@@ -1070,15 +1073,15 @@ Grayed-out app prefs are documented in [Settings reference](#settings-reference)
 
 ## Tips & troubleshooting
 
-| Problem | Things to check |
-|---------|-----------------|
-| **No speech** | [Speech](#speech)—continuous enabled? **Mute Speaking Cues** off? macOS 10.15+? |
-| **Trigger never fires** | List order; trigger enabled; correct **output vs input** type; pattern spelling |
-| **Trigger fires too much** | Narrow match (whole line / regex); move gag above loose patterns |
-| **Wrong colors** | [ANSI colors](#ansi-colors); Appearance fore/back; ANSI interpretation on |
-| **Can't connect** | [Worlds & connection](#worlds--connection)—host, port, line ending |
-| **MUX/MUSH marker conflicts** | Some worlds use `` ` `` for commands; Savitar default is `##`—change command marker in Input tab if local commands collide |
-| **Laggy output on spam** | Long sessions fill the output pane — use **Help → Send Feedback…** with world name and what you were doing (combat spam, AFK, etc.) |
+| Problem                       | Things to check                                                                                                                     |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **No speech**                 | [Speech](#speech)—continuous enabled? **Mute Speaking Cues** off? macOS 10.15+?                                                     |
+| **Trigger never fires**       | List order; trigger enabled; correct **output vs input** type; pattern spelling                                                     |
+| **Trigger fires too much**    | Narrow match (whole line / regex); move gag above loose patterns                                                                    |
+| **Wrong colors**              | [ANSI colors](#ansi-colors); Appearance fore/back; ANSI interpretation on                                                           |
+| **Can't connect**             | [Worlds & connection](#worlds--connection)—host, port, line ending                                                                  |
+| **MUX/MUSH marker conflicts** | Some worlds use `` ` `` for commands; Savitar default is `##`—change command marker in Input tab if local commands collide          |
+| **Laggy output on spam**      | Long sessions fill the output pane — use **Help → Send Feedback…** with world name and what you were doing (combat spam, AFK, etc.) |
 
 When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help → Send Feedback…** with version info included.
 
@@ -1086,24 +1089,24 @@ When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help →
 
 ## Glossary
 
-| Term | Meaning |
-|------|---------|
-| **ANSI** | Terminal color/style escape codes in server text |
-| **App-wide events** | Triggers/macros stored in preferences and applied to every world |
-| **Event** | Savitar's umbrella term for **triggers** and **macros** (see [Events](#events)) |
-| **Gag** | Trigger appearance that hides matching text |
-| **Local command** | `##command` handled by Savitar, not sent to the server (see [Local commands](#local-commands)) |
-| **Macro** | Hotkey that sends a predefined command string |
-| **MUD** | Multi-User Dungeon—a text multiplayer game accessed via telnet-like protocols |
-| **MOO / MUSH** | Related text-world genres; Savitar connects to their servers like any telnet host |
-| **MUVE** | Multi-User Virtual Environment—umbrella term (see heynow.com MUVE pages) |
-| **Output pane** | Top pane showing server text |
-| **Input pane** | Bottom pane where you type commands |
-| **Trigger** | Pattern-driven automation on session text |
-| **Variable (`%%`)** | Named scratch value expanded into commands and replies |
-| **Wildcard (`$$`)** | Pattern placeholder in trigger names that captures text |
-| **World** | A saved connection profile (host, port, events, settings) |
-| **World document** | Open window representing one world session or saved `.world` file |
+| Term                | Meaning                                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| **ANSI**            | Terminal color/style escape codes in server text                                               |
+| **App-wide events** | Triggers/macros stored in preferences and applied to every world                               |
+| **Event**           | Savitar's umbrella term for **triggers** and **macros** (see [Events](#events))                |
+| **Gag**             | Trigger appearance that hides matching text                                                    |
+| **Local command**   | `##command` handled by Savitar, not sent to the server (see [Local commands](#local-commands)) |
+| **Macro**           | Hotkey that sends a predefined command string                                                  |
+| **MUD**             | Multi-User Dungeon—a text multiplayer game accessed via telnet-like protocols                  |
+| **MOO / MUSH**      | Related text-world genres; Savitar connects to their servers like any telnet host              |
+| **MUVE**            | Multi-User Virtual Environment—umbrella term (see heynow.com MUVE pages)                       |
+| **Output pane**     | Top pane showing server text                                                                   |
+| **Input pane**      | Bottom pane where you type commands                                                            |
+| **Trigger**         | Pattern-driven automation on session text                                                      |
+| **Variable (`%%`)** | Named scratch value expanded into commands and replies                                         |
+| **Wildcard (`$$`)** | Pattern placeholder in trigger names that captures text                                        |
+| **World**           | A saved connection profile (host, port, events, settings)                                      |
+| **World document**  | Open window representing one world session or saved `.world` file                              |
 
 ---
 
@@ -1115,13 +1118,13 @@ Changes are staged in the sheet until you click **OK** (or **Cancel** to discard
 
 ### Tabs
 
-| Tab | Purpose |
-|-----|---------|
-| **Starting** | Host, port, retry/keepalive, startup commands |
+| Tab            | Purpose                                               |
+| -------------- | ----------------------------------------------------- |
+| **Starting**   | Host, port, retry/keepalive, startup commands         |
 | **Appearance** | Colors, body/code fonts, ANSI and HTML interpretation |
-| **Input** | Echo, sticky commands, markers, line ending |
-| **Output** | Session logging to a file |
-| **Closing** | Logoff command sent when closing a connected session |
+| **Input**      | Echo, sticky commands, markers, line ending           |
+| **Output**     | Session logging to a file                             |
+| **Closing**    | Logoff command sent when closing a connected session  |
 
 Savitar 2 does not include an **MCP** tab in World Settings.
 
@@ -1129,14 +1132,14 @@ Savitar 2 does not include an **MCP** tab in World Settings.
 
 Connection and identity for **this world document**:
 
-| Field | What it does |
-|-------|----------------|
-| **World Name** | Display name for the world (shown in the window title and lists). |
-| **Host Name** | Server hostname or IP address to connect to. |
-| **Host Port** | TCP port (for example `3000` for many MUDs). |
-| **Retry Seconds** | How long to wait before auto-reconnecting after an unexpected disconnect or failed connect (`0` = off). Stop on the connecting pane cancels a pending retry. |
+| Field                 | What it does                                                                                                                                                                                                                        |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **World Name**        | Display name for the world (shown in the window title and lists).                                                                                                                                                                   |
+| **Host Name**         | Server hostname or IP address to connect to.                                                                                                                                                                                        |
+| **Host Port**         | TCP port (for example `3000` for many MUDs).                                                                                                                                                                                        |
+| **Retry Seconds**     | How long to wait before auto-reconnecting after an unexpected disconnect or failed connect (`0` = off). Stop on the connecting pane cancels a pending retry.                                                                        |
 | **Keepalive Minutes** | After this many minutes with **no outbound** traffic, Savitar writes a quiet null byte on the connection to discourage idle drops (`0` = off). Inbound mud output does not reset the timer; any send (commands, macros, etc.) does. |
-| **Startup commands** | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`. |
+| **Startup commands**  | Commands sent automatically after a successful connect, one per line—often login name, password, or `look`.                                                                                                                         |
 
 Changes apply when you click **OK** and take effect on the **next** connection to that world.
 
@@ -1144,13 +1147,13 @@ Changes apply when you click **OK** and take effect on the **next** connection t
 
 How **this world** renders text in the session window:
 
-| Control | What it does |
-|---------|----------------|
-| **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane. |
-| **Body font** and **size** | Proportional font for normal output text. |
-| **Interpret ANSI codes** | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
-| **Interpret HTML tags** | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions. |
-| **Code font** and **size** | Monospace font for HTML code blocks (only when HTML interpretation is on). |
+| Control                      | What it does                                                                                                                                                               |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane.                                                                                                        |
+| **Body font** and **size**   | Proportional font for normal output text.                                                                                                                                  |
+| **Interpret ANSI codes**     | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
+| **Interpret HTML tags**      | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions.                                                                           |
+| **Code font** and **size**   | Monospace font for HTML code blocks (only when HTML interpretation is on).                                                                                                 |
 
 The preview pane at the top shows sample styled text as you change options; long lines wrap within the pane (no horizontal scrollbar). Per-world fonts respect **Settings → Input & Display → Mono fonts only** when choosing monospace faces.
 
@@ -1164,11 +1167,11 @@ Controls how Savitar handles what you type and how commands are sent to the serv
 
 Choose whether typed input is copied into the **output** pane:
 
-| Option | Behavior |
-|--------|----------|
-| **No echo** | Input is sent to the server only; nothing is shown locally |
-| **Echo carriage return only** | Only a line break appears in output when you press Return |
-| **Echo all input** | The full command line is shown in output before it is sent, highlighted with the world's echo-back color (soft yellow by default) |
+| Option                        | Behavior                                                                                                                          |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **No echo**                   | Input is sent to the server only; nothing is shown locally                                                                        |
+| **Echo carriage return only** | Only a line break appears in output when you press Return                                                                         |
+| **Echo all input**            | The full command line is shown in output before it is sent, highlighted with the world's echo-back color (soft yellow by default) |
 
 #### Sticky commands
 
@@ -1178,11 +1181,11 @@ When **Sticky commands** is checked, pressing Return after a command **leaves th
 
 Markers are short strings Savitar recognizes in commands, triggers, and macros:
 
-| Marker | Default | Used for |
-|--------|---------|----------|
-| **Command** | `##` | [Local commands](http://heynow.com/savitar/manual140/_mancontent6.html) (handled by Savitar, not sent to the server) |
-| **Variable** | `%%` | Expanding scratch values (for example `say %%name`) and trigger-set variables |
-| **Wildcard** | `$$` | Wildcard patterns in trigger names (for example `tell $$target`) |
+| Marker       | Default | Used for                                                                                                             |
+| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Command**  | `##`    | [Local commands](http://heynow.com/savitar/manual140/_mancontent6.html) (handled by Savitar, not sent to the server) |
+| **Variable** | `%%`    | Expanding scratch values (for example `say %%name`) and trigger-set variables                                        |
+| **Wildcard** | `$$`    | Wildcard patterns in trigger names (for example `tell $$target`)                                                     |
 
 You can change any marker per world. Use a string that will not appear in normal game text. Empty markers disable that feature.
 
@@ -1190,10 +1193,10 @@ You can change any marker per world. Use a string that will not appear in normal
 
 Choose what Savitar appends when a command is sent (including an empty Return):
 
-| Option | Sent bytes | Typical use |
-|--------|------------|-------------|
-| **Carriage return only (CR)** | `\r` | Many MUDs and older telnet hosts |
-| **Carriage return + line feed (CR/LF)** | `\r\n` | Default; common on Windows-oriented servers |
+| Option                                  | Sent bytes | Typical use                                 |
+| --------------------------------------- | ---------- | ------------------------------------------- |
+| **Carriage return only (CR)**           | `\r`       | Many MUDs and older telnet hosts            |
+| **Carriage return + line feed (CR/LF)** | `\r\n`     | Default; common on Windows-oriented servers |
 
 Savitar 1 called this **CROnly** in world files (`FLAGS="…+CROnly"`). Worlds imported from v1 keep their line-ending preference.
 
@@ -1201,21 +1204,21 @@ Savitar 1 called this **CROnly** in world files (`FLAGS="…+CROnly"`). Worlds i
 
 #### Input pane size
 
-| Control | Description |
-|---------|-------------|
+| Control        | Description                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Input rows** | Height of the command-entry pane in text rows (default **2**). Changing this resizes the split between output and input when you click **OK**. |
 
 See also [Session window](#session-window) for resizing by dragging the window or split divider.
 
 ### Output tab
 
-| Control | Description |
-|---------|-------------|
-| **Columns** | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
-| **Output rows** | Height of the output pane in text rows (default **24**). |
-| **Logging Enabled** | When on, Savitar writes session output to a log file in the background |
-| **Append / Overwrite** | Whether each session adds to the file or replaces it |
-| **Log file path** | Where the log is stored; use **Set now** to pick a location |
+| Control                | Description                                                                                                                                          |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Columns**            | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
+| **Output rows**        | Height of the output pane in text rows (default **24**).                                                                                             |
+| **Logging Enabled**    | When on, Savitar writes session output to a log file in the background                                                                               |
+| **Append / Overwrite** | Whether each session adds to the file or replaces it                                                                                                 |
+| **Log file path**      | Where the log is stored; use **Set now** to pick a location                                                                                          |
 
 Session logging is separate from **text document** windows and from **File → Print…**. See [Text documents](#text-documents) under the File menu.
 
@@ -1223,9 +1226,9 @@ Session logging is separate from **text document** windows and from **File → P
 
 When you close a **connected** session window (or quit Savitar while worlds are connected), Savitar can send a **logoff command** to the game before disconnecting—so the server records a clean quit instead of a dropped connection.
 
-| Control | What it does |
-|---------|----------------|
-| **Logoff command** | Command sent to the world on close (for example `quit`, `@quit`, or `QUIT`). Leave blank to disconnect without sending anything. |
+| Control                        | What it does                                                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Logoff command**             | Command sent to the world on close (for example `quit`, `@quit`, or `QUIT`). Leave blank to disconnect without sending anything.                          |
 | **Close window automatically** | When on, the window closes right after disconnect. When off (default), Savitar shows the **offline** panel first—you close again to dismiss the document. |
 
 Imported Savitar 1 worlds keep their `LOGOFFCMD` and `autoClose` flag from world XML (`FLAGS="…+autoClose"`). Changes apply when you click **OK** and take effect the next time you close a connected session.

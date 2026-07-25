@@ -409,9 +409,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         return false
     }
 
-    func textView(_: NSTextView, menu _: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
-        // No contextual menu for our input view please
-        return nil
+    func textView(_: NSTextView, menu: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
+        menu
     }
 
     func textDidChange(_: Notification) {
