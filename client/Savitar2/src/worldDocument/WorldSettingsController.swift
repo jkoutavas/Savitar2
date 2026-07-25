@@ -145,7 +145,7 @@ private extension SavitarHelp.WorldSettingsTab {
     var preferredSheetHeight: CGFloat {
         switch self {
         case .starting: return 400
-        case .appearance: return 480
+        case .appearance: return 520
         case .input: return 480
         case .output: return 300
         case .closing: return 380

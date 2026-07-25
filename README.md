@@ -99,7 +99,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ In-app Savitar Help — bundled user guide (Story 16)
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
-_ ANSI intense Appearance — auto / bold / color + intense color swatch (`INTENSETYPE` / `INTENSECOLOR` import today; not wired to UI or rendering)
+√ ANSI intense Appearance — auto / bold / color + intense color swatch (`INTENSETYPE` / `INTENSECOLOR`)
 _ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
 _ Drag selected output text into Events to create a new trigger (v1 text → Events DnD; v2 Events reorder-only)
 _ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs`); v2 always submits on click

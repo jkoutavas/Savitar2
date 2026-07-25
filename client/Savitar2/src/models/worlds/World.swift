@@ -45,7 +45,7 @@ extension WorldFlags: StrOptionSet {
     ] }
 }
 
-enum IntensityType: Int {
+@objc enum IntensityType: Int {
     case auto
     case bold
     case color
@@ -215,7 +215,7 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var loggingType = LoggingType.append
 
     var flags: WorldFlags = [.ansi, .html]
-    var intensityType: IntensityType = .auto
+    @objc dynamic var intensityType = IntensityType.auto
 
     var macroMan = MacroMan()
     var triggerMan = TriggerMan()
@@ -543,6 +543,9 @@ class World: SavitarObject, NSCopying {
             worldElem.addAttribute(name: WorldAttribIdentifier.intenseColor.rawValue, stringValue: "#\(colorStr)")
         }
 
+        worldElem.addAttribute(name: WorldAttribIdentifier.intenseType.rawValue,
+                               stringValue: "\(intensityType.rawValue)")
+
         worldElem.addAttribute(name: WorldAttribIdentifier.font.rawValue, stringValue: fontName)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.fontSize.rawValue, stringValue: "\(Int(fontSize))")
@@ -576,8 +579,6 @@ class World: SavitarObject, NSCopying {
         worldElem.addAttribute(name: WorldAttribIdentifier.retrySecs.rawValue, stringValue: String(retrySecs))
 
         worldElem.addAttribute(name: WorldAttribIdentifier.keepAliveMins.rawValue, stringValue: String(keepAliveMins))
-
-        // TODO: intenseType not being written (and is not used)
 
         worldElem.addAttribute(name: WorldAttribIdentifier.logfilePath.rawValue,
              stringValue: logfilePath)
