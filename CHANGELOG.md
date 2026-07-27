@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.25] - 2026-07-26
+
 ### Added
 
 - **ANSI intense Appearance** — World Settings → Appearance now exposes Savitar 1’s Intense mode (Auto / Bold / Color) and intense color swatch (`INTENSETYPE` / `INTENSECOLOR`); modes affect how ANSI SGR 1 renders in the output pane
@@ -215,7 +217,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.24...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.25...HEAD
+[2.0.25]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.25
 [2.0.24]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.24
 [2.0.23]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.23
 [2.0.22]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.22
