@@ -46,12 +46,13 @@ enum WordWrapFormatting {
 
         if enabled {
             let wrapWidth = max(scrollView.contentSize.width, scrollView.contentView.bounds.width, 1)
+            let minimumSize = minimumDocumentSize(for: textView, in: scrollView)
 
             textView.isHorizontallyResizable = false
             textView.autoresizingMask = [.width]
             // Override storyboard maxSize.width (600), which lets the text view outgrow the pane.
             textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-            textView.minSize = NSSize(width: 0, height: 0)
+            textView.minSize = minimumSize
 
             textContainer.widthTracksTextView = true
             textContainer.lineBreakMode = .byCharWrapping
@@ -60,12 +61,13 @@ enum WordWrapFormatting {
             if let layoutManager = textView.layoutManager {
                 layoutManager.ensureLayout(for: textContainer)
             }
+            synchronizeVisibleDocumentHeight(of: textView, in: scrollView)
         } else {
             textView.isHorizontallyResizable = true
             // Do not pin width to the scroll view; that forces soft line breaks.
             textView.autoresizingMask = []
             textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-            textView.minSize = NSSize(width: 0, height: 0)
+            textView.minSize = minimumDocumentSize(for: textView, in: scrollView)
 
             textContainer.widthTracksTextView = false
             textContainer.lineBreakMode = .byWordWrapping
@@ -88,11 +90,31 @@ enum WordWrapFormatting {
         layoutManager.ensureLayout(for: textContainer)
         let usedWidth = ceil(layoutManager.usedRect(for: textContainer).width)
         let clipWidth = scrollView?.contentView.bounds.width ?? textView.bounds.width
+        let clipHeight = scrollView?.contentView.bounds.height ?? textView.bounds.height
+        var frame = textView.frame
         let targetWidth = max(usedWidth, clipWidth)
+        let targetHeight = max(frame.size.height, clipHeight)
+
+        guard abs(frame.size.width - targetWidth) > 0.5
+            || abs(frame.size.height - targetHeight) > 0.5 else { return }
+        frame.size.width = targetWidth
+        frame.size.height = targetHeight
+        textView.setFrameSize(frame.size)
+    }
+
+    private static func minimumDocumentSize(for textView: NSTextView, in scrollView: NSScrollView) -> NSSize {
+        NSSize(
+            width: min(textView.frame.width, scrollView.contentView.bounds.width),
+            height: scrollView.contentView.bounds.height
+        )
+    }
+
+    private static func synchronizeVisibleDocumentHeight(of textView: NSTextView, in scrollView: NSScrollView) {
+        let targetHeight = scrollView.contentView.bounds.height
+        guard textView.frame.height < targetHeight else { return }
 
         var frame = textView.frame
-        guard abs(frame.size.width - targetWidth) > 0.5 else { return }
-        frame.size.width = targetWidth
+        frame.size.height = targetHeight
         textView.setFrameSize(frame.size)
     }
 }

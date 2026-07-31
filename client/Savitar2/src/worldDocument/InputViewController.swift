@@ -23,6 +23,7 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     internal var eventMonitor: Any?
 
     private var wordWrapEnabled = false
+    private var pendingHorizontalSizeSync = false
     private let statusBar = SessionStatusBarView()
 
     @IBOutlet var textView: NSTextView!
@@ -409,12 +410,24 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         return false
     }
 
-    func textView(_: NSTextView, menu: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
-        menu
+    func textView(_ textView: NSTextView, menu: NSMenu, for _: NSEvent, at _: Int) -> NSMenu? {
+        textView.window?.makeFirstResponder(textView)
+        return menu
     }
 
     func textDidChange(_: Notification) {
         guard !wordWrapEnabled else { return }
-        WordWrapFormatting.synchronizeHorizontalSize(of: textView)
+        scheduleHorizontalSizeSync()
+    }
+
+    private func scheduleHorizontalSizeSync() {
+        guard !pendingHorizontalSizeSync else { return }
+        pendingHorizontalSizeSync = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.pendingHorizontalSizeSync = false
+            guard !self.wordWrapEnabled else { return }
+            WordWrapFormatting.synchronizeHorizontalSize(of: self.textView)
+        }
     }
 }

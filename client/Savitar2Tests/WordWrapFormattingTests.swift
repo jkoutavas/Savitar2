@@ -39,6 +39,7 @@ class WordWrapFormattingTests: XCTestCase {
         XCTAssertTrue(scrollView.hasHorizontalScroller)
         XCTAssertFalse(textView.textContainer?.widthTracksTextView ?? true)
         XCTAssertEqual(textView.autoresizingMask, [])
+        XCTAssertEqual(textView.minSize.height, scrollView.contentView.bounds.height, accuracy: 0.5)
     }
 
     func testDisabledWordWrapKeepsLongLineOnOneRow() {
@@ -58,11 +59,36 @@ class WordWrapFormattingTests: XCTestCase {
 
         layoutManager.ensureLayout(for: textContainer)
         var lineCount = 0
-        layoutManager.enumerateLineFragments(forGlyphRange: layoutManager.glyphRange(for: textContainer)) { _, _, _, _, _ in
+        let glyphRange = layoutManager.glyphRange(for: textContainer)
+        layoutManager.enumerateLineFragments(forGlyphRange: glyphRange) { _, _, _, _, _ in
             lineCount += 1
         }
 
         XCTAssertEqual(lineCount, 1)
         XCTAssertGreaterThan(textView.frame.width, scrollView.contentView.bounds.width)
+    }
+
+    func testDisabledWordWrapKeepsTextViewAtLeastAsTallAsVisiblePane() {
+        let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 200, height: 160))
+        let textView = NSTextView(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        scrollView.documentView = textView
+        textView.string = "look"
+
+        WordWrapFormatting.apply(to: textView, enabled: false)
+
+        XCTAssertGreaterThanOrEqual(textView.frame.height, scrollView.contentView.bounds.height)
+        XCTAssertEqual(textView.minSize.height, scrollView.contentView.bounds.height, accuracy: 0.5)
+    }
+
+    func testSynchronizedHorizontalSizePreservesVisiblePaneHeight() {
+        let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 200, height: 160))
+        let textView = NSTextView(frame: NSRect(x: 0, y: 0, width: 80, height: 24))
+        scrollView.documentView = textView
+        textView.string = "look"
+
+        WordWrapFormatting.synchronizeHorizontalSize(of: textView, in: scrollView)
+
+        XCTAssertGreaterThanOrEqual(textView.frame.width, scrollView.contentView.bounds.width)
+        XCTAssertGreaterThanOrEqual(textView.frame.height, scrollView.contentView.bounds.height)
     }
 }

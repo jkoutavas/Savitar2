@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Input contextual menu after paste** — right-click Paste in taller session input panes keeps working after the first paste; the send-box text view continues covering the visible pane while horizontal sizing refreshes after AppKit finishes the contextual-menu edit cycle (#110)
+
 ## [2.0.25] - 2026-07-26
 
 ### Added
