@@ -329,9 +329,12 @@ class Trigger: SavitarObject, NSCopying {
             ranges = variableMatch.ranges
             captures = variableMatch.captures
         } else {
-            ranges = line.ranges(of: pattern, options: options)
             if specifier == .useRegex {
-                captures = regexCaptures(in: line, pattern: pattern)
+                let regexMatch = regexMatches(in: line, pattern: pattern)
+                ranges = regexMatch.ranges
+                captures = regexMatch.captures
+            } else {
+                ranges = line.ranges(of: pattern, options: options)
             }
         }
         matched = ranges.count > 0
@@ -379,25 +382,34 @@ class Trigger: SavitarObject, NSCopying {
         return TriggerReaction(matched: matched, captures: captures)
     }
 
-    private func regexCaptures(in line: String, pattern: String) -> [String: String] {
+    private func regexMatches(in line: String, pattern: String) -> (ranges: [Range<String.Index>],
+                                                                    captures: [String: String]) {
+        var ranges: [Range<String.Index>] = []
         var captures: [String: String] = [:]
         let options: NSRegularExpression.Options = caseSensitive ? [] : .caseInsensitive
         guard let expression = try? NSRegularExpression(pattern: pattern, options: options) else {
-            return captures
+            return ([], captures)
         }
 
         let nsRange = NSRange(line.startIndex ..< line.endIndex, in: line)
         expression.enumerateMatches(in: line, options: [], range: nsRange) { match, _, _ in
             guard let match = match else { return }
+            let fullRange = match.range(at: 0)
+            guard fullRange.location != NSNotFound,
+                  fullRange.length != NSNotFound,
+                  let swiftFullRange = Range(fullRange, in: line) else { return }
+            ranges.append(swiftFullRange)
+
             for index in 0 ..< match.numberOfRanges {
                 let range = match.range(at: index)
                 guard range.location != NSNotFound,
+                      range.length != NSNotFound,
                       let swiftRange = Range(range, in: line) else { continue }
                 captures["\(index)"] = String(line[swiftRange])
             }
         }
 
-        return captures
+        return (ranges, captures)
     }
 
     private func wildcardMatches(in line: String, wildMarker: String,

@@ -122,6 +122,48 @@ class TriggerTests: XCTestCase {
         XCTAssertEqual(reaction.captures["2"], "elf")
     }
 
+    func testIncompleteRegexTriggerDoesNotCrash() {
+        let t = Trigger(name: "(", flags: [.caseSensitive, .useRegex, .gag])
+        var line = "orc hits elf"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertFalse(reaction.matched)
+        XCTAssertEqual(line, "orc hits elf")
+        XCTAssertEqual(reaction.captures, [:])
+    }
+
+    func testRegexTriggerSkipsUnmatchedOptionalCaptures() {
+        let t = Trigger(name: "(orc )?hits (\\w+)", flags: [.caseSensitive, .useRegex, .gag])
+        var line = "hits elf"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertTrue(reaction.matched)
+        XCTAssertEqual(reaction.captures["0"], "hits elf")
+        XCTAssertNil(reaction.captures["1"])
+        XCTAssertEqual(reaction.captures["2"], "elf")
+    }
+
+    func testEmptyRegexTriggerDoesNotCrash() {
+        let t = Trigger(name: "", flags: [.caseSensitive, .useRegex])
+        var line = "orc hits elf"
+
+        let reaction = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertFalse(reaction.matched)
+        XCTAssertEqual(line, "orc hits elf")
+    }
+
+    func testEmptyLiteralTriggerDoesNotCrash() {
+        let t = Trigger(name: "", flags: [.caseSensitive])
+        var line = "orc hits elf"
+
+        _ = t.reactionTo(line: &line, wildMarker: "$$")
+
+        XCTAssertEqual(line, "orc hits elf")
+    }
+
     func testTextStyleFaces() {
         let esc = "\u{1B}"
         var t = Trigger(name: "bold",

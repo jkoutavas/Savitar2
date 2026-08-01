@@ -154,6 +154,7 @@ _ Alias support (Story 10)
 _ New `##dump` aliases local command (Story 10)
 _ New `##say` local command for voicing text
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
+_ Trigger notifications — optional macOS notification action when a trigger event fires
 _ Echo back color — World Settings → Appearance swatch for `ECHOBGCOLOR` (Story 28; v1 stored the color but never shipped the control)
 _ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
