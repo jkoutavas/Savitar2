@@ -76,14 +76,12 @@ extension String {
         var position = startIndex
         while let range = range(of: occurrence, options: mask, range: position ..< endIndex) {
             ranges.append(range)
-            let offset = distance(from: range.lowerBound,
-                                  to: range.upperBound) - 1
-            guard let after = index(range.lowerBound,
-                                    offsetBy: offset,
-                                    limitedBy: endIndex) else {
-                break
+            guard range.lowerBound != range.upperBound else {
+                guard range.upperBound < endIndex else { break }
+                position = index(after: range.upperBound)
+                continue
             }
-            position = index(after: after)
+            position = range.upperBound
         }
         return ranges
     }

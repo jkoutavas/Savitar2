@@ -254,6 +254,7 @@ enum SessionLocalCommandExecutor {
         for index in 0 ..< match.numberOfRanges {
             let range = match.range(at: index)
             guard range.location != NSNotFound,
+                  range.length != NSNotFound,
                   let swiftRange = Range(range, in: testString) else { continue }
             let capture = String(testString[swiftRange])
             session.world.variableMan.set("\(index)", value: capture)

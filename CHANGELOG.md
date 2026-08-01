@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Regex event editing crash** — incomplete or zero-length regular-expression triggers no longer crash Savitar while Events edits are still in progress (#116)
+
 ## [2.0.26] - 2026-07-31
 
 ### Fixed
