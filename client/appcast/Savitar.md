@@ -1,4 +1,8 @@
+### Added
+
+- **Macro pop-ups** — type three or more characters of a macro name in the session input pane to see a tooltip of the first match’s value; Return expands the name to that value in place (Savitar 1 `CTVVarPopup` parity)
+
 ### Fixed
 
-- **Input contextual menu after paste** — right-click Paste in taller session input panes keeps working after the first paste; the send-box text view continues covering the visible pane while horizontal sizing refreshes after AppKit finishes the contextual-menu edit cycle (#110)
+- **Regex event editing crash** — incomplete or zero-length regular-expression triggers no longer crash Savitar while Events edits are still in progress (#116)
 
