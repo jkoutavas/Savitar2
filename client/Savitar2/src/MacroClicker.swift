@@ -35,8 +35,25 @@ enum MacroClicker {
             .first(where: { $0.name == trimmed })
     }
 
+    /// World live macros then app-wide macros (v1 `CTVVarPopup::MakeVarList` order).
+    static func candidateMacros(for session: Session?) -> [Macro] {
+        var result: [Macro] = []
+        if let session {
+            result.append(contentsOf: liveMacros(for: session))
+        }
+        if let universal = AppContext.shared.universalReactionsStore.state?.macroList.items {
+            result.append(contentsOf: universal)
+        }
+        return result
+    }
+
+    /// Case-sensitive name prefix matches from world then universal list order.
+    static func macrosMatching(prefix: String, session: Session?) -> [Macro] {
+        candidateMacros(for: session).filter { $0.name.hasPrefix(prefix) }
+    }
+
     /// Live macros from the world's Events store when available; otherwise persisted `macroMan`.
-    private static func liveMacros(for session: Session) -> [Macro] {
+    static func liveMacros(for session: Session) -> [Macro] {
         if let document = session.sessionHandler as? Document,
            let macros = document.store.state?.macroList.items {
             return macros

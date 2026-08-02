@@ -607,6 +607,10 @@ Each macro has a **name** (for your reference in the list), a **value** (the tex
 
 To add one quickly: bring an Events window forward and choose **Edit → New Macro** (⇧⌘N when the Macros tab is active).
 
+### Macro pop-ups (type-ahead)
+
+While typing in the session **input** pane, Savitar watches for macro **names**. After you type **three or more** letters, digits, or underscores that match the start of a macro name, a yellow tooltip shows the first match’s **value** (world macros first, then app-wide). Press **Return** to replace the typed name with that value in the input line—press Return again to send. Space or other punctuation dismisses the popup. This is expansion by name, not `%%` scratch-variable substitution.
+
 ### Macros vs other Savitar features
 
 See [Events](#events) for the big picture. In short:
