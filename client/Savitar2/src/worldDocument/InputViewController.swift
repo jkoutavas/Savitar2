@@ -25,6 +25,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     private var wordWrapEnabled = false
     private var pendingHorizontalSizeSync = false
     private let statusBar = SessionStatusBarView()
+    private let macroPopup = MacroPopupController()
+    private let macroPopupOverlay = MacroPopupOverlay()
 
     @IBOutlet var textView: NSTextView!
 
@@ -147,6 +149,8 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         if let monitor = eventMonitor {
             NSEvent.removeMonitor(monitor)
         }
+        macroPopup.reset()
+        macroPopupOverlay.hide()
     }
 
     // MARK: - Command Handling
@@ -165,6 +169,12 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         // Leave Find-in-output alone (field editor / search field).
         if isOutputFindFieldActive(in: locWindow) {
             return false
+        }
+
+        // v1 CTVVarPopup: type-ahead before editing keys / macro hotkeys / submit.
+        if handleMacroPopup(with: event) {
+            ensureInputFirstResponder(in: locWindow)
+            return true
         }
 
         guard let sess = session else { return false }
@@ -267,6 +277,58 @@ class InputViewController: NSViewController, NSTextViewDelegate {
     private func isOutputFindFieldActive(in window: NSWindow) -> Bool {
         let session = window.contentViewController as? SessionViewController
         return session?.outputViewController?.isFindFieldActive(in: window) == true
+    }
+
+    /// Macro name type-ahead (v1 `CTVVarPopup`). Returns `true` only when Return accepts a match.
+    private func handleMacroPopup(with event: NSEvent) -> Bool {
+        let key = MacroPopupController.key(fromEventKeyCode: event.keyCode, characters: event.characters)
+        let action = macroPopup.handle(key: key) { [weak self] in
+            MacroClicker.candidateMacros(for: self?.session)
+        }
+
+        switch action {
+        case .accept(let value, let replaceLength):
+            macroPopupOverlay.hide()
+            replaceTypedPrefix(length: replaceLength, with: value)
+            return true
+        case .update(.show(let value, let blink)):
+            if let point = caretScreenPoint() {
+                macroPopupOverlay.show(text: value, near: point, in: view.window?.screen, blink: blink)
+            }
+            return false
+        case .update(.hide):
+            macroPopupOverlay.hide()
+            return false
+        case .none:
+            return false
+        }
+    }
+
+    private func replaceTypedPrefix(length: Int, with value: String) {
+        guard length > 0 else {
+            textView.insertText(value as Any, replacementRange: NSRange(location: NSNotFound, length: 0))
+            return
+        }
+        let selected = textView.selectedRange()
+        let start = max(0, selected.location - length)
+        let range = NSRange(location: start, length: selected.location - start)
+        textView.insertText(value as Any, replacementRange: range)
+    }
+
+    private func caretScreenPoint() -> NSPoint? {
+        guard let window = textView.window,
+              let layoutManager = textView.layoutManager,
+              let textContainer = textView.textContainer else { return nil }
+
+        let selected = textView.selectedRange()
+        let glyphIndex = min(layoutManager.glyphIndexForCharacter(at: selected.location),
+                             max(0, layoutManager.numberOfGlyphs - 1))
+        var rect = layoutManager.boundingRect(forGlyphRange: NSRange(location: glyphIndex, length: 0),
+                                              in: textContainer)
+        rect.origin.x += textView.textContainerOrigin.x
+        rect.origin.y += textView.textContainerOrigin.y
+        let windowPoint = textView.convert(NSPoint(x: rect.midX, y: rect.maxY), to: nil)
+        return window.convertPoint(toScreen: windowPoint)
     }
 
     private func ensureInputFirstResponder(in window: NSWindow) {

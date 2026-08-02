@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated July 24th, 2026_
+_README last updated August 1st, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -100,7 +100,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Contextual ? help on major windows (Story 17)
 √ Help → About Privacy… (Story 18)
 √ ANSI intense Appearance — auto / bold / color + intense color swatch (`INTENSETYPE` / `INTENSECOLOR`)
-_ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
+√ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
 _ Drag selected output text into Events to create a new trigger (v1 text → Events DnD; v2 Events reorder-only)
 _ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs`); v2 always submits on click
 _ Capture / log file editor binding — open capture/log files in a chosen app (Story 24.5)

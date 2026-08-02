@@ -149,6 +149,9 @@
 		69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */; };
 		69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */; };
 		69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */; };
+		69MP00022F0F010100AB6BA6 /* MacroPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MP00012F0F010100AB6BA6 /* MacroPopupController.swift */; };
+		69MP00042F0F010200AB6BA6 /* MacroPopupOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MP00032F0F010200AB6BA6 /* MacroPopupOverlay.swift */; };
+		69MP00062F0F010300AB6BA6 /* MacroPopupControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69MP00052F0F010300AB6BA6 /* MacroPopupControllerTests.swift */; };
 		69CEEDCF23B3D75F00E9F087 /* MacroManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */; };
 		69CEEDD123B3EEA700E9F087 /* MacroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD023B3EEA700E9F087 /* MacroTests.swift */; };
 		69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CEEDD723B4064D00E9F087 /* ColorManTests.swift */; };
@@ -371,6 +374,9 @@
 		69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensions.swift; sourceTree = "<group>"; };
 		69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionOverlay.swift; sourceTree = "<group>"; };
 		69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneDimensionsTests.swift; sourceTree = "<group>"; };
+		69MP00012F0F010100AB6BA6 /* MacroPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroPopupController.swift; sourceTree = "<group>"; };
+		69MP00032F0F010200AB6BA6 /* MacroPopupOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroPopupOverlay.swift; sourceTree = "<group>"; };
+		69MP00052F0F010300AB6BA6 /* MacroPopupControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroPopupControllerTests.swift; sourceTree = "<group>"; };
 		69CEEDCE23B3D75F00E9F087 /* MacroManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroManTests.swift; sourceTree = "<group>"; };
 		69CEEDD023B3EEA700E9F087 /* MacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTests.swift; sourceTree = "<group>"; };
 		69CEEDD723B4064D00E9F087 /* ColorManTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManTests.swift; sourceTree = "<group>"; };
@@ -526,6 +532,7 @@
 				690B462A23B16AAD000445E4 /* AppPreferencesTests.swift */,
 				69C2A0032F03000100AB6BA6 /* WordWrapFormattingTests.swift */,
 				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
+				69MP00052F0F010300AB6BA6 /* MacroPopupControllerTests.swift */,
 				69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
 				69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */,
@@ -656,6 +663,8 @@
 				69C2A0012F03000100AB6BA6 /* WordWrapFormatting.swift */,
 				69C2A0052F03000200AB6BA6 /* PaneDimensions.swift */,
 				69C2A0072F03000200AB6BA6 /* ResolutionOverlay.swift */,
+				69MP00012F0F010100AB6BA6 /* MacroPopupController.swift */,
+				69MP00032F0F010200AB6BA6 /* MacroPopupOverlay.swift */,
 				695F5AB025899EFD00AB6BA6 /* WorldSettingsController.swift */,
 			);
 			path = worldDocument;
@@ -1142,6 +1151,8 @@
 				69C2A0022F03000100AB6BA6 /* WordWrapFormatting.swift in Sources */,
 				69C2A0062F03000200AB6BA6 /* PaneDimensions.swift in Sources */,
 				69C2A0082F03000200AB6BA6 /* ResolutionOverlay.swift in Sources */,
+				69MP00022F0F010100AB6BA6 /* MacroPopupController.swift in Sources */,
+				69MP00042F0F010200AB6BA6 /* MacroPopupOverlay.swift in Sources */,
 				695F5AC125899EFD00AB6BA6 /* AppearanceSettingsController.swift in Sources */,
 				695F5A7125899CE100AB6BA6 /* SavitarObjectPasteboardWriter.swift in Sources */,
 				695F5B49258EE73800AB6BA6 /* WorldsUndoContext.swift in Sources */,
@@ -1234,6 +1245,7 @@
 				69SIF0042F0D010400AB6BA6 /* SessionInputFocusTests.swift in Sources */,
 				69B46A082A80100100CDDE09 /* TerminalBellTests.swift in Sources */,
 				69C2A0042F03000100AB6BA6 /* WordWrapFormattingTests.swift in Sources */,
+				69MP00062F0F010300AB6BA6 /* MacroPopupControllerTests.swift in Sources */,
 				69SB00312F0C010300AB6BA6 /* SessionLocalCommandsTests.swift in Sources */,
 				69FU00112F0C060400AB6BA6 /* SessionFileUploadTests.swift in Sources */,
 				69KA00032F0E010100AB6BA6 /* SessionKeepAliveTests.swift in Sources */,
