@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.27] - 2026-08-01
+
 ### Added
 
 - **Macro pop-ups** — type three or more characters of a macro name in the session input pane to see a tooltip of the first match’s value; Return expands the name to that value in place (Savitar 1 `CTVVarPopup` parity)
@@ -231,7 +233,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.26...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.27...HEAD
+[2.0.27]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.27
 [2.0.26]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.26
 [2.0.25]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.25
 [2.0.24]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.24
