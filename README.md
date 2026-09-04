@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated August 1st, 2026_
+_README last updated September 4th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
