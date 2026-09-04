@@ -55,8 +55,9 @@ class EchoServer {
 
         queue.async { [unowned self] in
             do {
-                // Create an IPV6 socket...
-                try self.listenSocket = Socket.create(family: .inet6)
+                // IPv4 so telnet://127.0.0.1:1337 / Savitar CFStreams work (macOS IPv6-only
+                // listen rejects 127.0.0.1 even when ::1 succeeds).
+                try self.listenSocket = Socket.create(family: .inet)
 
                 guard let socket = self.listenSocket else {
                     print("Unable to unwrap socket...")
@@ -211,6 +212,7 @@ class EchoServer {
 let port = 1337
 let server = EchoServer(port: port)
 print("Swift Echo Server Sample")
-print("Connect with a command line window by entering 'telnet ::1 \(port)'")
+print("Connect from Savitar: open -b com.heynow.savitar2 'telnet://127.0.0.1:\(port)'")
+print("(Or nc 127.0.0.1 \(port) for a raw TCP check — macOS has no telnet CLI.)")
 
 server.run()

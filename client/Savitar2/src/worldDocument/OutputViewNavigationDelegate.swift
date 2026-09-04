@@ -17,15 +17,21 @@ class OutputViewNavigationDelegate: NSViewController, WKNavigationDelegate {
             return
         }
 
-        if navigationAction.navigationType == .linkActivated,
-           url.scheme == "http" || url.scheme == "https" {
-            NSWorkspace.shared.open(url)
+        let isLinkClick = navigationAction.navigationType == .linkActivated
+            || navigationAction.navigationType == .other
+        guard isLinkClick else {
+            decisionHandler(.allow)
+            return
+        }
+
+        let scheme = url.scheme?.lowercased()
+        if scheme == TelnetURLHandler.scheme {
+            TelnetURLHandler.open(url)
             decisionHandler(.cancel)
             return
         }
 
-        if navigationAction.navigationType == .other,
-           url.scheme == "http" || url.scheme == "https" {
+        if scheme == "http" || scheme == "https" || scheme == "mailto" {
             NSWorkspace.shared.open(url)
             decisionHandler(.cancel)
             return

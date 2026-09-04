@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`telnet://` / Web Interaction helper** — Savitar registers as a `telnet` URL handler so browser/mail `telnet://host:port` links open a session (matching World Picker settings when host/port match, otherwise an untitled ephemeral world); `telnet://` and `mailto:` links in session output are handled the same way / handed off to the system
+
 ## [2.0.27] - 2026-08-01
 
 ### Added

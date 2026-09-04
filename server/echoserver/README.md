@@ -10,7 +10,18 @@ swift build
 .build/debug/echoserver
 ```
 
-Connect from Savitar using world URL `telnet://127.0.0.1:1337`, or from the shell: `telnet 127.0.0.1 1337`
+macOS no longer ships a `telnet` CLI. Connect with Savitar instead:
+
+1. Run Savitar from Xcode (so Launch Services sees this build).
+2. In Terminal:
+
+```bash
+open -b com.heynow.savitar2 'telnet://127.0.0.1:1337'
+```
+
+Or add a World Picker entry / World Wizard host `127.0.0.1`, port `1337`, and Connect.
+
+For a raw TCP check without Savitar: `nc 127.0.0.1 1337` (type a line and press Return; `QUIT` to leave).
 
 ## What it sends
 

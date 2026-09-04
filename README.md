@@ -104,7 +104,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 _ Drag selected output text into Events to create a new trigger (v1 text → Events DnD; v2 Events reorder-only)
 _ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs`); v2 always submits on click
 _ Capture / log file editor binding — open capture/log files in a chosen app (Story 24.5)
-_ `telnet://` / Web Interaction helper — open or hand off world URLs from outside the app
+√ `telnet://` / Web Interaction helper — open or hand off world URLs from outside the app
 √ Release alpha to select testers, start getting feedback
 √ Move github repo to public
 ```
@@ -179,6 +179,12 @@ Here are the steps to build and run it on macOS:
 $ cd server/echoserver
 $ swift build
 $ .build/debug/echoserver
+```
+
+Then connect from a Debug Savitar build (macOS has no `telnet` CLI):
+
+```bash
+$ open -b com.heynow.savitar2 'telnet://127.0.0.1:1337'
 ```
 
 If you want to generate an xcode project for the echoserver, do this:
