@@ -1015,6 +1015,17 @@ The **World Picker** is Savitar’s front door — a modeless utility window lis
 
 Each row shows the world name and `host:port`. The connection card below the list shows the full `telnet://` address for the selected world.
 
+### Opening `telnet://` links
+
+Savitar can act as the system **telnet helper** (v1 Web Interaction). When you click a `telnet://host:port` link in a browser, mail client, or elsewhere:
+
+1. macOS launches Savitar (or brings it forward) if it is registered for the `telnet` scheme
+2. If a World Picker entry already uses that **host** and **port**, Savitar opens a session with that world’s settings
+3. Otherwise Savitar opens an **untitled** session for that address (name defaults to the host). Use **File → Save** if you want to keep it; it is not added to the World Picker automatically
+4. If a session to that host/port is already open, Savitar brings that window forward instead of opening a duplicate
+
+The same rules apply when you click a `telnet://` link in the session output pane. Ordinary `http` / `https` / `mailto` links in output still open in your default browser or mail app.
+
 **Settings → Advanced → Restore Factory Defaults** resets the World Picker world list to Savitar’s bundled defaults without deleting your saved `.world` files.
 
 Each **connection** opens a **world document window**—you can have multiple worlds open at once. Use the **Window** menu to switch.

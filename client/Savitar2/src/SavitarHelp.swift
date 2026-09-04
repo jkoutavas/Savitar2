@@ -42,6 +42,7 @@ enum SavitarHelp {
         static let outputAppearance = "output-appearance"
         static let worldsConnection = "worlds-connection"
         static let worldsConnectionWorldPicker = "worlds-connection-world-picker"
+        static let worldsConnectionOpeningTelnetLinks = "worlds-connection-opening-telnet-links"
         static let settingsReference = "settings-reference"
         static let tipsTroubleshooting = "tips-troubleshooting"
         static let glossary = "glossary"

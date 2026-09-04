@@ -544,7 +544,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 | Text drag-and-drop to Events | §4 Text Drag and Drop | Verify v2 parity | **9.4b** if implemented |
 | HTML / xch_cmd links | §4 HTML, xch_cmd | README `_ xch_cmd` | **9.3** stub |
 | ~~Status bar / divider~~ | §4 Status Bar | ✅ Shipped July 2026 (`##set status`, inverse colors; styling setting → 2.1) | **9.2** [Status bars](USER_GUIDE.md#status-bars) |
-| Web interaction text | §4 Web Interaction | TBD | Defer |
+| ~~Web interaction text~~ | §4 Web Interaction | ✅ `telnet://` helper + output hand-off | **9.6** [Opening `telnet://` links](USER_GUIDE.md#opening-telnet-links) |
 | Switching worlds drag | §4 Switching Worlds | TBD | **9.6** if drag-import still works |
 
 ### Suggested writing order

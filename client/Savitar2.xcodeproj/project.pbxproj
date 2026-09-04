@@ -171,6 +171,8 @@
 		69FC914D23A1E15C00980CBF /* OptionSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FC914C23A1E15C00980CBF /* OptionSet+Extensions.swift */; };
 		69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */; };
 		69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */; };
+		69TN00012F0C070400AB6BA6 /* TelnetURLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TN00022F0C070400AB6BA6 /* TelnetURLHandler.swift */; };
+		69TN00112F0C070400AB6BA6 /* TelnetURLHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TN00122F0C070400AB6BA6 /* TelnetURLHandlerTests.swift */; };
 		69HLP002043A6E100E7CC7C /* SavitarHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP012043A6E100E7CC7C /* SavitarHelp.swift */; };
 		69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */; };
 		69HLP062043A6E100E7CC7C /* Savitar.help in Resources */ = {isa = PBXBuildFile; fileRef = 69HLP032043A6E100E7CC7C /* Savitar.help */; };
@@ -395,6 +397,8 @@
 		69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentRegistrationTests.swift; sourceTree = "<group>"; };
 		69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedback.swift; sourceTree = "<group>"; };
 		69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarFeedbackTests.swift; sourceTree = "<group>"; };
+		69TN00022F0C070400AB6BA6 /* TelnetURLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetURLHandler.swift; sourceTree = "<group>"; };
+		69TN00122F0C070400AB6BA6 /* TelnetURLHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelnetURLHandlerTests.swift; sourceTree = "<group>"; };
 		69HLP012043A6E100E7CC7C /* SavitarHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavitarHelp.swift; sourceTree = "<group>"; };
 		69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpGuideWindowController.swift; sourceTree = "<group>"; };
 		69HLP032043A6E100E7CC7C /* Savitar.help */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Savitar.help; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 				69C2A0092F03000200AB6BA6 /* PaneDimensionsTests.swift */,
 				69MP00052F0F010300AB6BA6 /* MacroPopupControllerTests.swift */,
 				69FDB0032F04000100E7CC7C /* SavitarFeedbackTests.swift */,
+				69TN00122F0C070400AB6BA6 /* TelnetURLHandlerTests.swift */,
 				69A45B022A7F100100CDDE09 /* WindowRestorationTests.swift */,
 				69RF00212F0C090800AB6BA6 /* DocumentRegistrationTests.swift */,
 				69SB00302F0C010300AB6BA6 /* SessionLocalCommandsTests.swift */,
@@ -804,6 +809,7 @@
 				69HLP022043A6E100E7CC7C /* HelpGuideWindowController.swift */,
 				69ABT022043A6E100E7CC7C /* AboutWindowController.swift */,
 				69FDB0012F04000100E7CC7C /* SavitarFeedback.swift */,
+				69TN00022F0C070400AB6BA6 /* TelnetURLHandler.swift */,
 				69RF00112F0C090700AB6BA6 /* SavitarUserDefaults.swift */,
 				690B462223AA4CB0000445E4 /* AppPreferences.swift */,
 				698667CF24E97E710061AA86 /* SpeakerMan.swift */,
@@ -1124,6 +1130,7 @@
 				69HLP042043A6E100E7CC7C /* HelpGuideWindowController.swift in Sources */,
 				69ABT042043A6E100E7CC7C /* AboutWindowController.swift in Sources */,
 				69FDB0022F04000100E7CC7C /* SavitarFeedback.swift in Sources */,
+				69TN00012F0C070400AB6BA6 /* TelnetURLHandler.swift in Sources */,
 				69RF00122F0C090700AB6BA6 /* SavitarUserDefaults.swift in Sources */,
 				695F5AFD25899FD500AB6BA6 /* ListViewModel.swift in Sources */,
 				695F5A9525899EBC00AB6BA6 /* Trigger.swift in Sources */,
@@ -1257,6 +1264,7 @@
 				69SW00112F0C040400AB6BA6 /* SavitarWelcomeTests.swift in Sources */,
 				69C2A00A2F03000200AB6BA6 /* PaneDimensionsTests.swift in Sources */,
 				69FDB0042F04000100E7CC7C /* SavitarFeedbackTests.swift in Sources */,
+				69TN00112F0C070400AB6BA6 /* TelnetURLHandlerTests.swift in Sources */,
 				695F5A612588562E00AB6BA6 /* ReSwiftTests.swift in Sources */,
 				69071B3923A52A7B001C58B1 /* TriggerManTests.swift in Sources */,
 				69CEEDDA23B4078400E9F087 /* SavColorTests.swift in Sources */,

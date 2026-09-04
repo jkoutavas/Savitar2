@@ -15,6 +15,9 @@ var isRunningTests: Bool {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
+    private var didFinishLaunching = false
+    private var pendingOpenURLs: [URL] = []
+
     @objc dynamic var muteSound: Bool {
         get { AppContext.shared.prefs.flags.contains(.muteSound) }
         set { AppContext.shared.appPrefsStore.dispatch(SetPrefsFlagAction(flag: .muteSound, enabled: newValue)) }
@@ -30,12 +33,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         AppContext.shared.load()
     }
 
+    func applicationWillFinishLaunching(_: Notification) {
+        // GURL can arrive before didFinishLaunching; register early (v1 Web Interaction / AE GetURL).
+        NSAppleEventManager.shared().setEventHandler(
+            self,
+            andSelector: #selector(handleGetURLEvent(_:withReplyEvent:)),
+            forEventClass: AEEventClass(kInternetEventClass),
+            andEventID: AEEventID(kAEGetURL)
+        )
+    }
+
     func applicationDidFinishLaunching(_: Notification) {
         // Savitar does not use tabbed document windows; suppress the system Window menu's
         // Show/Hide Tab Bar and Merge All Windows items (Story 25).
         NSWindow.allowsAutomaticWindowTabbing = false
 
         if isRunningTests {
+            didFinishLaunching = true
             return
         }
 
@@ -46,11 +60,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, StoreSubscriber {
         SavitarUpdater.shared.startIfNeeded()
         SavitarFeedback.presentBetaAnnouncementIfNeeded()
 
+        didFinishLaunching = true
+        flushPendingOpenURLs()
+
         // Defer until launch finishes; utility windows need a shown run loop pass.
         DispatchQueue.main.async {
             guard !isRunningTests else { return }
             NSApp.activate(ignoringOtherApps: true)
             AppContext.shared.openStartupUtilityWindows()
+        }
+    }
+
+    func application(_: NSApplication, open urls: [URL]) {
+        enqueueOrOpen(urls)
+    }
+
+    @objc private func handleGetURLEvent(_ event: NSAppleEventDescriptor,
+                                         withReplyEvent _: NSAppleEventDescriptor) {
+        guard let urlString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
+              let url = URL(string: urlString) else { return }
+        enqueueOrOpen([url])
+    }
+
+    private func enqueueOrOpen(_ urls: [URL]) {
+        guard !isRunningTests else { return }
+        if didFinishLaunching {
+            for url in urls {
+                TelnetURLHandler.open(url)
+            }
+        } else {
+            for url in urls where !pendingOpenURLs.contains(url) {
+                pendingOpenURLs.append(url)
+            }
+        }
+    }
+
+    private func flushPendingOpenURLs() {
+        let urls = pendingOpenURLs
+        pendingOpenURLs.removeAll()
+        for url in urls {
+            TelnetURLHandler.open(url)
         }
     }
 
