@@ -1,8 +1,4 @@
 ### Added
 
-- **Macro pop-ups** — type three or more characters of a macro name in the session input pane to see a tooltip of the first match’s value; Return expands the name to that value in place (Savitar 1 `CTVVarPopup` parity)
-
-### Fixed
-
-- **Regex event editing crash** — incomplete or zero-length regular-expression triggers no longer crash Savitar while Events edits are still in progress (#116)
+- **`telnet://` / Web Interaction helper** — Savitar registers as a `telnet` URL handler so browser/mail `telnet://host:port` links open a session (matching World Picker settings when host/port match, otherwise an untitled ephemeral world); `telnet://` and `mailto:` links in session output are handled the same way / handed off to the system
 
