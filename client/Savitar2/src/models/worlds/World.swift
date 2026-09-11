@@ -21,6 +21,7 @@ struct WorldFlags: OptionSet, Hashable {
     static let stickyCmds = WorldFlags(rawValue: 1 << 4)
     static let crOnly = WorldFlags(rawValue: 1 << 5)
     static let autoClose = WorldFlags(rawValue: 1 << 6)
+    static let directXCmds = WorldFlags(rawValue: 1 << 7)
 }
 
 extension WorldFlags: StrOptionSet {
@@ -32,7 +33,8 @@ extension WorldFlags: StrOptionSet {
         (.html, "html"),
         (.stickyCmds, "stickyCmds"),
         (.crOnly, "CROnly"),
-        (.autoClose, "autoClose")
+        (.autoClose, "autoClose"),
+        (.directXCmds, "directXCmds")
     ] }
     static var labelDict: [String: Self] { return [
         "ansi": .ansi,
@@ -41,7 +43,8 @@ extension WorldFlags: StrOptionSet {
         "html": .html,
         "stickyCmds": .stickyCmds,
         "CROnly": .crOnly,
-        "autoClose": .autoClose
+        "autoClose": .autoClose,
+        "directXCmds": .directXCmds
     ] }
 }
 
@@ -201,6 +204,19 @@ class World: SavitarObject, NSCopying {
                 flags.insert(.html)
             } else {
                 flags.remove(.html)
+            }
+        }
+    }
+
+    /// v1 `TVWorldFlag_t_DirectXCMDs` / XML `directXCmds`.
+    /// When on, Pueblo `xch_cmd` clicks submit immediately; when off, the command is placed in the input line.
+    @objc dynamic var directXCmdsEnabled: Bool {
+        get { flags.contains(.directXCmds) }
+        set(enabled) {
+            if enabled {
+                flags.insert(.directXCmds)
+            } else {
+                flags.remove(.directXCmds)
             }
         }
     }

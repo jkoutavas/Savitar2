@@ -244,6 +244,10 @@ class Document: NSDocument, SessionHandlerProtocol, SavitarXMLProtocol {
         sessionViewController?.inputViewController?.recallCmd(index: index)
     }
 
+    func appendToInput(_ text: String) {
+        sessionViewController?.inputViewController?.append(text)
+    }
+
     func clearOutputScreen() {
         sessionViewController?.outputViewController?.outputView.clear()
     }

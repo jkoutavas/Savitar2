@@ -17,6 +17,8 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     private var intenseColorWell: NSColorWell?
     private var intenseRadios: [NSButton] = []
     private var didInstallIntenseControls = false
+    private var directXCmdsButton: NSButton?
+    private var didInstallDirectXCmdsControl = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +40,14 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
         }
 
         installIntenseControlsIfNeeded()
+        installDirectXCmdsControlIfNeeded()
 
         guard let world = representedObject as? World else { return }
 
         fontPopup.selectItem(withTitle: world.fontName)
         monoFontPopup.selectItem(withTitle: world.monoFontName)
         syncIntenseControls(from: world)
+        syncDirectXCmdsControl(from: world)
         attributeChanged()
     }
 
@@ -184,5 +188,44 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     private func updateIntenseColorWellEnabled() {
         let enabled = (representedObject as? World)?.intensityType == .color
         intenseColorWell?.isEnabled = enabled
+    }
+
+    /// v1 Appearance checkbox `bDirectXCMDs` ("Send xch_cmds immediately").
+    private func installDirectXCmdsControlIfNeeded() {
+        guard !didInstallDirectXCmdsControl else { return }
+        // Place just above the Interpret HTML box (v1 Appearance panel, near HTML).
+        guard let htmlBox = view.subviews.first(where: {
+            ($0 as? NSBox)?.title.contains("Interpret HTML") == true
+        }) else { return }
+
+        didInstallDirectXCmdsControl = true
+        let button = NSButton(
+            checkboxWithTitle: "Send xch_cmds immediately",
+            target: self,
+            action: #selector(directXCmdsCheckboxChanged(_:)))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.bind(.value, to: self, withKeyPath: "representedObject.directXCmdsEnabled", options: [
+            .continuouslyUpdatesValue: true
+        ])
+        view.addSubview(button)
+        directXCmdsButton = button
+
+        NSLayoutConstraint.activate([
+            button.leadingAnchor.constraint(equalTo: htmlBox.leadingAnchor, constant: 4),
+            button.bottomAnchor.constraint(equalTo: htmlBox.topAnchor, constant: -6)
+        ])
+
+        if let world = representedObject as? World {
+            syncDirectXCmdsControl(from: world)
+        }
+    }
+
+    @objc private func directXCmdsCheckboxChanged(_ sender: NSButton) {
+        guard let world = representedObject as? World else { return }
+        world.directXCmdsEnabled = sender.state == .on
+    }
+
+    private func syncDirectXCmdsControl(from world: World) {
+        directXCmdsButton?.state = world.directXCmdsEnabled ? .on : .off
     }
 }

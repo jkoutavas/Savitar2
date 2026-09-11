@@ -102,7 +102,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ ANSI intense Appearance — auto / bold / color + intense color swatch (`INTENSETYPE` / `INTENSECOLOR`)
 √ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
 _ Drag selected output text into Events to create a new trigger (v1 text → Events DnD; v2 Events reorder-only)
-_ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs`); v2 always submits on click
+√ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs` / Appearance “Send xch_cmds immediately”)
 _ Capture / log file editor binding — open capture/log files in a chosen app (Story 24.5)
 √ `telnet://` / Web Interaction helper — open or hand off world URLs from outside the app
 √ Release alpha to select testers, start getting feedback

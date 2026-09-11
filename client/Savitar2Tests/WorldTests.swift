@@ -286,6 +286,29 @@ class WorldTests: XCTestCase {
         XCTAssertTrue(xmlOutString.contains("autoClose"))
     }
 
+    func testDirectXCmdsFlagRoundTripThroughXML() throws {
+        let xmlString = """
+        <WORLD
+            NAME="Alter Aeon"
+            URL="telnet://dentinmud.org:3000"
+            FLAGS="html+ansi+directXCmds"
+        />
+        """
+
+        let xml = try XML.parse(xmlString)
+        let world = World()
+        try world.parse(xml: xml[WorldElemIdentifier])
+
+        XCTAssertTrue(world.flags.contains(.directXCmds))
+        XCTAssertTrue(world.directXCmdsEnabled)
+
+        let xmlOutString = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xmlOutString.contains("FLAGS=\"ansi+html+directXCmds\""))
+
+        world.directXCmdsEnabled = false
+        XCTAssertFalse(world.flags.contains(.directXCmds))
+    }
+
     func testCommandLinePostfixDefaultsToCRLF() {
         let world = World()
         XCTAssertEqual(world.commandLinePostfix, "\r\n")
@@ -319,6 +342,7 @@ class WorldTests: XCTestCase {
 }
 
 private class MockSessionHandler: SessionHandlerProtocol {
+    var appendToInputCalls: [String] = []
     var outputs: [String] = []
     var echoBackOutputs: [String] = []
     var errors: [String] = []
@@ -373,6 +397,10 @@ private class MockSessionHandler: SessionHandlerProtocol {
 
     func recallCommand(at index: Int) {
         recalledIndex = index
+    }
+
+    func appendToInput(_ text: String) {
+        appendToInputCalls.append(text)
     }
 
     func clearOutputScreen() {

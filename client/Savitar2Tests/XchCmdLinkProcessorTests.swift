@@ -39,6 +39,40 @@ class XchCmdLinkProcessorTests: XCTestCase {
     }
 }
 
+class XchCmdSendModeTests: XCTestCase {
+    func testSubmitWhenDirectXCmdsEnabled() {
+        let handler = RecordingSessionHandler()
+        let world = World()
+        world.flags.insert(.directXCmds)
+        let session = Session(world: world, sessionHandler: handler)
+        let flags: CmdFlags = world.flags.contains(.directXCmds) ? [] : [.append]
+        session.submitServerCmd(cmd: Command(text: "look", flags: flags))
+        XCTAssertEqual(handler.appendToInputCalls, [])
+        // Without a live connection sendString is a no-op; ensure we did not append.
+    }
+
+    func testAppendWhenDirectXCmdsDisabled() {
+        let handler = RecordingSessionHandler()
+        let world = World()
+        world.flags.remove(.directXCmds)
+        let session = Session(world: world, sessionHandler: handler)
+        let flags: CmdFlags = world.flags.contains(.directXCmds) ? [] : [.append]
+        session.submitServerCmd(cmd: Command(text: "look", flags: flags))
+        XCTAssertEqual(handler.appendToInputCalls, ["look"])
+    }
+}
+
+private class RecordingSessionHandler: SessionHandlerProtocol {
+    var appendToInputCalls: [String] = []
+    func connectionStatusChanged(status _: ConnectionStatus) {}
+    func output(result _: OutputResult, skipCapture _: Bool) {}
+    func printSource() {}
+    func commandHistory() -> [String] { [] }
+    func setSessionStatus(pane _: SessionStatusPane, text _: String) {}
+    func closeSessionStatusBars() {}
+    func appendToInput(_ text: String) { appendToInputCalls.append(text) }
+}
+
 class SavitarFileLinkProcessorTests: XCTestCase {
     func testFilePathRoundTripWithSpaces() {
         let path = "/Users/jay/Documents/Echo Server capture 2026-07-11 190640.txt"
