@@ -20,7 +20,7 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
         super.windowDidLoad()
         guard let window else { return }
 
-        window.styleMask = [.titled, .closable, .resizable]
+        window.styleMask = [.titled, .closable]
         window.delegate = self
         window.isReleasedWhenClosed = false
         if #available(macOS 11.0, *) {
@@ -74,8 +74,12 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
         let width = max(contentSize.width, estimatedToolbarWidth(), 480)
         let height = max(contentSize.height, 320)
 
-        window.setContentSizeKeepingTitleBar(NSSize(width: width, height: height), animate: animated)
-        window.contentMinSize = NSSize(width: 480, height: 280)
+        let size = NSSize(width: width, height: height)
+        window.contentMinSize = NSSize(width: 1, height: 1)
+        window.contentMaxSize = NSSize(width: 10_000, height: 10_000)
+        window.setContentSizeKeepingTitleBar(size, animate: animated)
+        window.contentMinSize = size
+        window.contentMaxSize = size
     }
 
     private func installEscapeKeyMonitor() {

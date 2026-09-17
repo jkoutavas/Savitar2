@@ -139,9 +139,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
     @IBAction func toggleWrapLinesAction(_: Any) {
         guard let session = (document as? Document)?.session else { return }
-        session.wordWrapEnabled.toggle()
-        applySessionWordWrap(session.wordWrapEnabled)
-        updateWrapLinesControl(enabled: session.wordWrapEnabled)
+        persistSessionWordWrap(enabled: !session.wordWrapEnabled)
     }
 
     @IBAction func toggleScrollLockAction(_ sender: Any) {
@@ -193,16 +191,26 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         settingsWC.settingsController = vc
         vc.sheetWindowController = settingsWC
+        let wrapSnapshot = doc.session?.wordWrapEnabled
         vc.completionHandler = { [weak self] apply, editedWorld in
             guard let self else { return }
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
+            } else if let wrapSnapshot {
+                self.applyLiveWordWrap(enabled: wrapSnapshot, persistToWorld: false)
             }
             settingsWC.dismissModal()
         }
 
         settingsWC.loadWindow()
         vc.world = doc.world
+        let appDefault = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        if let edited = vc.world, let wrapSnapshot {
+            edited.wordWrapDefault = edited.wordWrapDefaultMatching(
+                sessionEnabled: wrapSnapshot,
+                appDefault: appDefault
+            )
+        }
         settingsWC.presentModally()
     }
 
@@ -315,6 +323,36 @@ class WindowController: NSWindowController, NSWindowDelegate {
         if let font = NSFont(name: world.fontName, size: world.fontSize) {
             inputVC.font = font
         }
+    }
+
+    func applyEditedWorldWordWrap(_ world: World) {
+        applyLiveWordWrap(
+            enabled: world.resolvedWordWrapEnabled(
+                appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+            ),
+            persistToWorld: false
+        )
+    }
+
+    private func persistSessionWordWrap(enabled: Bool) {
+        applyLiveWordWrap(enabled: enabled, persistToWorld: true)
+    }
+
+    private func applyLiveWordWrap(enabled: Bool, persistToWorld: Bool) {
+        guard let doc = document as? Document, let session = doc.session else { return }
+        session.wordWrapEnabled = enabled
+        applySessionWordWrap(enabled)
+        updateWrapLinesControl(enabled: enabled)
+        guard persistToWorld, let world = doc.world, world.editable else { return }
+        let previous = world.wordWrapDefault
+        let next: WordWrapDefault = enabled ? .on : .off
+        guard previous != next else { return }
+        world.wordWrapDefault = next
+        doc.undoManager?.registerUndo(withTarget: self, handler: { controller in
+            controller.applyLiveWordWrap(enabled: !enabled, persistToWorld: true)
+        })
+        doc.undoManager?.setActionName(NSLocalizedString("Wrap Lines", comment: "Wrap Lines"))
+        doc.updateChangeCount(.changeDone)
     }
 
     private func applySessionWordWrap(_ enabled: Bool) {

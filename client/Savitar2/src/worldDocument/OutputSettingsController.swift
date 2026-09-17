@@ -128,8 +128,7 @@ class OutputSettingsController: NSViewController {
         wrapBox.title = "Word wrap"
         wrapBox.translatesAutoresizingMaskIntoConstraints = false
         let wrapHelp = NSTextField(wrappingLabelWithString:
-            "Default for new connections to this world. " +
-                "View → Wrap Lines still changes the open session only.")
+            "Applies to this session and new connections. Matches View → Wrap Lines.")
         wrapHelp.font = NSFont.systemFont(ofSize: 11)
         wrapHelp.textColor = .secondaryLabelColor
         let appRadio = wrapRadio(title: "Use app default", type: .useAppDefault)
@@ -172,7 +171,7 @@ class OutputSettingsController: NSViewController {
             logFileBox.topAnchor.constraint(equalTo: loggingEnabledButton.bottomAnchor, constant: spacing),
             logFileBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             logFileBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
-            logFileBox.heightAnchor.constraint(greaterThanOrEqualToConstant: 152),
+            logFileBox.heightAnchor.constraint(equalToConstant: 152),
             view.bottomAnchor.constraint(equalTo: logFileBox.bottomAnchor, constant: margin)
         ])
     }
@@ -212,6 +211,8 @@ class OutputSettingsController: NSViewController {
               let type = WordWrapDefault(rawValue: sender.tag) else { return }
         world.wordWrapDefault = type
         syncWrapRadios(from: world)
+        (view.window?.parent?.windowController as? WindowController)?
+            .applyEditedWorldWordWrap(world)
     }
 
     private func syncWrapRadios(from world: World) {

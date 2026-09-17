@@ -437,7 +437,7 @@ Available when a **world document** window is frontmost. These affect how the se
 | **Bigger Text**      | ⌘+       | Increases the world’s body and code font sizes by one point (also ⌘=). Same values as **World Settings → Appearance**. Disabled at the maximum size or for read-only v1 worlds.                              |
 | **Smaller Text**     | ⌘-       | Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.                                                                                                            |
 | **Scroll Lock**      | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar. |
-| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. New sessions start from **World Settings → Output → Word wrap** (or the app default). The menu changes this session only; reconnect uses the world/app default again. Also a title-bar button. |
+| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. Same setting as **World Settings → Output → Word wrap**. Also a title-bar button. |
 | **Enter Full Screen** | ⌃⌘F     | Toggles full-screen mode for the world window.                                                                                                                                                               |
 
 ### Audio menu
@@ -993,7 +993,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** is the fallback for new connections and new text windows. **World Settings → Output → Word wrap** can pin a world to On, Off, or Use app default. **View → Wrap Lines** (and the session title-bar wrap button) toggles the open session immediately without rewriting those defaults. A reconnect uses the world/app default again.
+**Settings → Input & Display → Default word wrap for new sessions** is the fallback when a world uses **Use app default**. **World Settings → Output → Word wrap** and **View → Wrap Lines** (and the title-bar wrap button) stay in sync for the open session.
 
 ### Session logging
 
@@ -1244,7 +1244,7 @@ See also [Session window](#session-window) for resizing by dragging the window o
 | **Columns**            | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
 | **Output rows**        | Height of the output pane in text rows (default **24**).                                                                                             |
 | **Logging Enabled**    | When on, Savitar writes session output to a log file in the background                                                                               |
-| **Word wrap**          | **Use app default**, **On**, or **Off** for new connections to this world. **View → Wrap Lines** still changes only the session that is already open. |
+| **Word wrap**          | **Use app default**, **On**, or **Off**. Matches **View → Wrap Lines** for this session and is saved with the world. |
 | **Append / Overwrite** | Whether each session adds to the file or replaces it                                                                                                 |
 | **Log file path**      | Where the log is stored; use **Set now** to pick a location                                                                                          |
 

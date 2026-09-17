@@ -87,7 +87,7 @@ class WorldSettingsController: NSViewController {
             tabView.layoutSubtreeIfNeeded()
             let fitted = tabView.fittingSize
             if fitted.height > 1 {
-                tabHeight = max(fitted.height, preferredTabHeight)
+                tabHeight = fitted.height
             }
         }
         return NSSize(width: max(width, tabViewWidth(for: tab)), height: tabHeight + footerHeight)

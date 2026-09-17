@@ -46,8 +46,7 @@ class Session: NSObject, StreamDelegate {
 
     var didStartupCmd = false
 
-    /// Wrap state for this session. Starts from World Settings → Output
-    /// (or the app default). **View → Wrap Lines** can change it live.
+    /// Wrap state for this session. Matches World Settings → Output and View → Wrap Lines.
     var wordWrapEnabled: Bool
 
     /// Re-apply wrap from the current world (World Settings OK).

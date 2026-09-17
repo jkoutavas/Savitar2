@@ -261,6 +261,14 @@ class World: SavitarObject, NSCopying {
         }
     }
 
+    /// Radios that match the live session without dropping “Use app default” when it still applies.
+    func wordWrapDefaultMatching(sessionEnabled: Bool, appDefault: Bool) -> WordWrapDefault {
+        if wordWrapDefault == .useAppDefault, sessionEnabled == appDefault {
+            return .useAppDefault
+        }
+        return sessionEnabled ? .on : .off
+    }
+
     var flags: WorldFlags = [.ansi, .html]
     @objc dynamic var intensityType = IntensityType.auto
 
