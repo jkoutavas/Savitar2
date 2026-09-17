@@ -469,6 +469,17 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertFalse(session.wordWrapEnabled)
     }
 
+    func testChangingWorldWrapDefaultResolvesOntoExistingSession() {
+        let world = World()
+        world.wordWrapDefault = .on
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+        XCTAssertTrue(session.wordWrapEnabled)
+        world.wordWrapDefault = .off
+        session.world = world
+        session.applyWordWrapFromWorld()
+        XCTAssertFalse(session.wordWrapEnabled)
+    }
+
     func testHistoryCommandUsesWorldCommandMarker() {
         let world = World()
         world.cmdMarker = "//"

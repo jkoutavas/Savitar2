@@ -46,9 +46,16 @@ class Session: NSObject, StreamDelegate {
 
     var didStartupCmd = false
 
-    /// Wrap state for this session. Starts from app Settings → Input & Display;
-    /// **View → Wrap Lines** can change it live.
+    /// Wrap state for this session. Starts from World Settings → Output
+    /// (or the app default). **View → Wrap Lines** can change it live.
     var wordWrapEnabled: Bool
+
+    /// Re-apply wrap from the current world (World Settings OK).
+    func applyWordWrapFromWorld() {
+        wordWrapEnabled = world.resolvedWordWrapEnabled(
+            appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        )
+    }
 
     /// Last time we wrote to the server (user cmds, macros, telnet replies, keepalives).
     private var lastOutboundActivity = Date()

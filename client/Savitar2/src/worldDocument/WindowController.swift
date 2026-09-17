@@ -219,7 +219,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
+        let previousWrapDefault = doc.world?.wordWrapDefault
         doc.worldDidChange(fromWorld: fromWorld)
+        if let session = doc.session, previousWrapDefault != fromWorld.wordWrapDefault {
+            session.applyWordWrapFromWorld()
+        }
         let wordWrap = doc.session?.wordWrapEnabled ?? false
         updateViews(fromWorld, wordWrap: wordWrap, applyPaneLayout: true)
     }
