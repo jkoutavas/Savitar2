@@ -39,11 +39,15 @@ class EventsViewController: NSTabViewController {
 
     // **************************************
 
-    override func tabView(_: NSTabView, didSelect _: NSTabViewItem?) {
+    override func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
+        super.tabView(tabView, didSelect: tabViewItem)
         // Keep the detail tab selection in lock-step with the events tab selection
         if let vc = detailViewController {
             vc.selectedTabViewItemIndex = selectedTabViewItemIndex
         }
+        let animated = view.window?.isVisible == true
+        (view.window?.windowController as? EventsWindowController)?
+            .updateForSelectedTab(animated: animated)
     }
 }
 

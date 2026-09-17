@@ -98,7 +98,7 @@ Triggers, macros, and (when shipped) aliases. Universal (app-wide) and per-world
 | **Window → Show App-wide Events Window** (⇧⌘E) | ✅ | — |
 | Contextual **?** in title bar | ✅ | — |
 | Frame autosave | `EventsWindowFrame` | ✅ Center on first open when no saved frame; restore full frame thereafter |
-| Window chrome | Close-only, fixed 900×400 | ✅ `EventsWindowController` (universal + per-world) |
+| Window chrome | Close-only, 900pt wide; height fits Triggers vs Macros | ✅ `EventsWindowController`; tab height animates with the title bar fixed |
 | Layout | Fixed two columns (440pt list + detail) | ✅ `EventsContentViewController`; no split divider (fixed window made draggable split unnecessary) |
 | **Window** menu listing when open | ✅ | Standard window list + **Show App-wide Events Window** (⇧⌘E) |
 | v1 outline disclosure (`trigsClosed` / `varsClosed`) | N/A — import-only | **Won't do** — v2 uses separate universal/per-world Events windows with flat lists ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |

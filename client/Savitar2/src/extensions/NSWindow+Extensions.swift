@@ -36,6 +36,20 @@ extension NSWindow {
         }
     }
 
+    /// Resize content while keeping the title bar in place (Settings HIG pane changes).
+    func setContentSizeKeepingTitleBar(_ contentSize: NSSize, animate: Bool) {
+        let contentRect = contentRect(forFrameRect: frame)
+        let chromeWidth = frame.width - contentRect.width
+        let chromeHeight = frame.height - contentRect.height
+        var newFrame = frame
+        newFrame.size = NSSize(
+            width: contentSize.width + chromeWidth,
+            height: contentSize.height + chromeHeight
+        )
+        newFrame.origin.y = frame.maxY - newFrame.height
+        setFrame(newFrame, display: true, animate: animate)
+    }
+
     /// Centers this window over `parent` (child modal dialogs).
     func centerRelative(to parent: NSWindow) {
         let parentFrame = parent.frame

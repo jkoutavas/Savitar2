@@ -74,16 +74,7 @@ final class WorldSettingsWindowController: NSWindowController, NSWindowDelegate 
         let width = max(contentSize.width, estimatedToolbarWidth(), 480)
         let height = max(contentSize.height, 320)
 
-        let size = NSSize(width: width, height: height)
-        let contentRect = window.contentRect(forFrameRect: window.frame)
-        let chromeWidth = window.frame.width - contentRect.width
-        let chromeHeight = window.frame.height - contentRect.height
-        var frame = window.frame
-        let newHeight = size.height + chromeHeight
-        let newWidth = size.width + chromeWidth
-        frame.origin.y += frame.height - newHeight
-        frame.size = NSSize(width: newWidth, height: newHeight)
-        window.setFrame(frame, display: true, animate: animated)
+        window.setContentSizeKeepingTitleBar(NSSize(width: width, height: height), animate: animated)
         window.contentMinSize = NSSize(width: 480, height: 280)
     }
 
