@@ -92,6 +92,7 @@ class OutputSettingsController: NSViewController {
         logFileBox = view.subviews.compactMap { $0 as? NSBox }
             .first { $0.title == "Log File" }
         guard let loggingEnabledButton, let logFileBox else { return }
+        logFileBox.setContentCompressionResistancePriority(.required, for: .vertical)
 
         for subview in view.subviews {
             subview.translatesAutoresizingMaskIntoConstraints = false
@@ -171,7 +172,8 @@ class OutputSettingsController: NSViewController {
             logFileBox.topAnchor.constraint(equalTo: paneSizeBox.bottomAnchor, constant: spacing),
             logFileBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             logFileBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
-            logFileBox.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin)
+            logFileBox.heightAnchor.constraint(greaterThanOrEqualToConstant: 152),
+            view.bottomAnchor.constraint(equalTo: logFileBox.bottomAnchor, constant: margin)
         ])
     }
 
