@@ -874,6 +874,26 @@ class OutputViewCaptureTests: XCTestCase {
         XCTAssertTrue(captured.contains("Welcome"))
         XCTAssertTrue(captured.contains("Savitar"))
     }
+
+    func testAdjustSessionFontSizesClampsAndStepsBothFaces() {
+        let world = World()
+        world.fontSize = 9
+        world.monoFontSize = 11
+
+        XCTAssertTrue(world.adjustSessionFontSizes(by: 1))
+        XCTAssertEqual(world.fontSize, 10)
+        XCTAssertEqual(world.monoFontSize, 12)
+
+        world.fontSize = World.minSessionFontSize
+        world.monoFontSize = World.minSessionFontSize
+        XCTAssertFalse(world.adjustSessionFontSizes(by: -1))
+        XCTAssertEqual(world.fontSize, World.minSessionFontSize)
+
+        world.fontSize = World.maxSessionFontSize
+        world.monoFontSize = World.maxSessionFontSize
+        XCTAssertFalse(world.adjustSessionFontSizes(by: 1))
+        XCTAssertEqual(world.fontSize, World.maxSessionFontSize)
+    }
 }
 
 class OutputViewScrollLockTests: XCTestCase {

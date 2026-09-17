@@ -62,7 +62,7 @@ extension SavitarHelp {
             case .worldPicker:
                 return "Open help for choosing and opening worlds"
             case .worldSession:
-                return "Open help for the world window and World menu"
+                return "Open help for the world window, World menu, and View menu"
             case .macroClicker:
                 return "Open help for the Macro Clicker palette"
             }

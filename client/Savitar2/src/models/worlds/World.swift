@@ -168,6 +168,21 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var fontSize: CGFloat = 9
     @objc dynamic var monoFontName = "Monaco"
     @objc dynamic var monoFontSize: CGFloat = 9
+
+    /// Live session font zoom (View → Bigger/Smaller Text). Matches Appearance size stepper floor.
+    static let minSessionFontSize: CGFloat = 6
+    static let maxSessionFontSize: CGFloat = 96
+
+    /// Adjusts body and code font sizes together. Returns false when already at the limit.
+    @discardableResult
+    func adjustSessionFontSizes(by delta: CGFloat) -> Bool {
+        let body = min(max(fontSize + delta, Self.minSessionFontSize), Self.maxSessionFontSize)
+        let mono = min(max(monoFontSize + delta, Self.minSessionFontSize), Self.maxSessionFontSize)
+        guard body != fontSize || mono != monoFontSize else { return false }
+        fontSize = body
+        monoFontSize = mono
+        return true
+    }
     @objc dynamic var MCPFontName = "Monaco"
     @objc dynamic var MCPFontSize: CGFloat = 9
 

@@ -247,13 +247,6 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="World" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
                                         <menuItem title="Show World Events…" id="inP-pn-qUA">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -265,11 +258,40 @@ CA
                                                 <action selector="showWorldSetting:" target="Ady-hI-5gd" id="e2R-uX-Nlx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="bHX-os-Jm1"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="View" id="Vie-mn-Itm">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="Vie-mn-Sub">
+                                    <items>
+                                        <menuItem title="Bigger Text" keyEquivalent="+" id="Vie-Bg-Txt">
+                                            <connections>
+                                                <action selector="biggerTextAction:" target="Ady-hI-5gd" id="Vie-Bg-Act"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Bigger Text" hidden="YES" keyEquivalent="=" id="Vie-Bg-Eq">
+                                            <connections>
+                                                <action selector="biggerTextAction:" target="Ady-hI-5gd" id="Vie-Eq-Act"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Smaller Text" keyEquivalent="-" id="Vie-Sm-Txt">
+                                            <connections>
+                                                <action selector="smallerTextAction:" target="Ady-hI-5gd" id="Vie-Sm-Act"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Vie-Sep-1"/>
                                         <menuItem title="Scroll Lock" keyEquivalent="s" id="6bA-KM-V2i">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                             <connections>
                                                 <action selector="toggleScrollLockAction:" target="Ady-hI-5gd" id="bpg-5Z-rgJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Vie-Sep-2"/>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
                                             </connections>
                                         </menuItem>
                                     </items>

@@ -127,6 +127,14 @@ class WindowController: NSWindowController, NSWindowDelegate {
         outputVC.outputView.clear()
     }
 
+    @IBAction func biggerTextAction(_: Any) {
+        adjustSessionFontSize(by: 1)
+    }
+
+    @IBAction func smallerTextAction(_: Any) {
+        adjustSessionFontSize(by: -1)
+    }
+
     @IBAction func toggleScrollLockAction(_ sender: Any) {
         let splitViewController = contentViewController as? SessionViewController
         guard let svc = splitViewController else { return }
@@ -259,6 +267,40 @@ class WindowController: NSWindowController, NSWindowDelegate {
         // two rows), so do not enable AppKit's competing global persistence.
         svc.splitView.autosaveName = nil
         updateScrollLockControl(locked: svc.isScrollLocked)
+    }
+
+    private func adjustSessionFontSize(by delta: CGFloat) {
+        guard let world = (document as? Document)?.world else { return }
+        applySessionFontSizes(body: world.fontSize + delta, mono: world.monoFontSize + delta)
+    }
+
+    private func applySessionFontSizes(body: CGFloat, mono: CGFloat) {
+        guard let doc = document as? Document, let world = doc.world, world.editable else { return }
+        let previousBody = world.fontSize
+        let previousMono = world.monoFontSize
+        let nextBody = min(max(body, World.minSessionFontSize), World.maxSessionFontSize)
+        let nextMono = min(max(mono, World.minSessionFontSize), World.maxSessionFontSize)
+        guard nextBody != previousBody || nextMono != previousMono else { return }
+        world.fontSize = nextBody
+        world.monoFontSize = nextMono
+
+        doc.undoManager?.registerUndo(withTarget: self, handler: { controller in
+            controller.applySessionFontSizes(body: previousBody, mono: previousMono)
+        })
+        doc.undoManager?.setActionName(NSLocalizedString("Change Font Size", comment: "Change Font Size"))
+        doc.updateChangeCount(.changeDone)
+        applySessionFonts(from: world)
+    }
+
+    private func applySessionFonts(from world: World) {
+        guard let svc = contentViewController as? SessionViewController,
+              let inputVC = svc.inputViewController,
+              let outputVC = svc.outputViewController else { return }
+        outputVC.setStyle(world: world)
+        svc.applyStatusBarStyle(world: world)
+        if let font = NSFont(name: world.fontName, size: world.fontSize) {
+            inputVC.font = font
+        }
     }
 
     private func installSplitViewObservationIfNeeded(_ splitView: NSSplitView) {
@@ -602,6 +644,16 @@ extension WindowController: NSMenuItemValidation {
         if menuItem.action == #selector(toggleScrollLockAction(_:)) {
             let splitViewController = contentViewController as? SessionViewController
             menuItem.state = splitViewController?.isScrollLocked == true ? .on : .off
+        }
+        if menuItem.action == #selector(biggerTextAction(_:))
+            || menuItem.action == #selector(smallerTextAction(_:)) {
+            guard let world = (document as? Document)?.world, world.editable else { return false }
+            if menuItem.action == #selector(biggerTextAction(_:)) {
+                return world.fontSize < World.maxSessionFontSize
+                    || world.monoFontSize < World.maxSessionFontSize
+            }
+            return world.fontSize > World.minSessionFontSize
+                || world.monoFontSize > World.minSessionFontSize
         }
         return true
     }

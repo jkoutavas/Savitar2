@@ -389,7 +389,7 @@ The in-game `@printsource` command is separate: it is a debug/logging action, no
 
 | Menu item                        | Shortcut | What it does                                                                                                                                                                  |
 | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Undo**                         | ⌘Z       | Undoes the last edit in the focused text field or Events editor. World settings changes made in **World Settings** are also undoable.                                         |
+| **Undo**                         | ⌘Z       | Undoes the last edit in the focused text field or Events editor. World settings changes (including **View → Bigger/Smaller Text**) are also undoable.                         |
 | **Redo**                         | ⇧⌘Z      | Re-applies the last undone edit.                                                                                                                                              |
 | **Clear Output**                 | ⌘K       | Clears all text in the **output** pane of the frontmost **world** document. Disabled for plain-text document windows.                                                         |
 | **New Trigger** / **New Macro**  | ⇧⌘N      | When an **Events** window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key. |
@@ -422,12 +422,21 @@ Available when a **world document** window is frontmost.
 
 | Menu item                | Shortcut | What it does                                                                                                                                                                                                                                                           |
 | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Enter Full Screen**    | ⌃⌘F      | Toggles full-screen mode for the world window.                                                                                                                                                                                                                         |
 | **Show World Events…**   | —        | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name.                                                                     |
 | **Show World Settings…** | ⇧⌘J      | Opens the **World Settings** sheet for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard.                                                                                                                        |
-| **Scroll Lock**          | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
 
 The same **World Settings** and **Events** commands are available from buttons in the world window’s title bar.
+
+### View menu
+
+Available when a **world document** window is frontmost. These affect how the session is shown, not which world is open.
+
+| Menu item            | Shortcut | What it does                                                                                                                                                                                                 |
+| -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Bigger Text**      | ⌘+       | Increases the world’s body and code font sizes by one point (also ⌘=). Same values as **World Settings → Appearance**. Disabled at the maximum size or for read-only v1 worlds.                              |
+| **Smaller Text**     | ⌘-       | Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.                                                                                                            |
+| **Scroll Lock**      | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar. |
+| **Enter Full Screen** | ⌃⌘F     | Toggles full-screen mode for the world window.                                                                                                                                                               |
 
 ### Audio menu
 
@@ -494,7 +503,7 @@ While a session is **connecting**, the bottom area briefly shows a **Connecting*
 
 - Sizes are most accurate with a **monospace** font (see **World Settings → Appearance**). Proportional fonts make row/column counts approximate.
 - **Default word wrap** (Settings → Input & Display) affects how long lines behave inside the pane width; it does not change the column count.
-- **Scroll lock** (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the [World menu](#world-menu) table.
+- **Scroll lock** (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the [View menu](#view-menu) table.
 
 ### Navigating output
 
@@ -503,7 +512,7 @@ The **output** pane is a web view showing styled session text. You can:
 | Action                        | How                                                                                                                              |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **Scroll**                    | Trackpad, mouse wheel, or scrollbar                                                                                              |
-| **Scroll lock**               | **World → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
+| **Scroll lock**               | **View → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
 | **Select & copy**             | Drag to select; **Edit → Copy** (⌘C), or right-click and choose **Copy**                                                         |
 | **Search or speak selection** | Select text, then right-click and choose **Search Selection** or **Speak Selected Text**                                         |
 | **Clear**                     | **Edit → Clear Output** (⌘K), or right-click and choose **Clear**                                                                |
@@ -1166,7 +1175,7 @@ How **this world** renders text in the session window:
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane.                                                                                                        |
 | **Intense**                  | How ANSI **bold / intense** (SGR `1`) is shown: **Auto** uses each hue’s intense palette color; **Bold** keeps normal palette colors and applies bold weight; **Color** uses the intense color swatch (enabled only in Color mode). Bright codes (`90–97`) still use intense palette colors. |
-| **Body font** and **size**   | Proportional font for normal output text.                                                                                                                                  |
+| **Body font** and **size**   | Proportional font for normal output text. **View → Bigger Text** / **Smaller Text** (⌘+/⌘-) also change this size (and **Code font** size) while a session is open. |
 | **Interpret ANSI codes**     | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
 | **Interpret HTML tags**      | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions.                                                                           |
 | **Code font** and **size**   | Monospace font for HTML code blocks (only when HTML interpretation is on).                                                                                                 |

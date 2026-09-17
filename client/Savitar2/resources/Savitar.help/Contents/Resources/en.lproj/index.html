@@ -332,7 +332,7 @@
 <table>
 <thead><tr><th>Menu item</th><th>Shortcut</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><strong>Undo</strong></td><td>⌘Z</td><td>Undoes the last edit in the focused text field or Events editor. World settings changes made in <strong>World Settings</strong> are also undoable.</td></tr>
+<tr><td><strong>Undo</strong></td><td>⌘Z</td><td>Undoes the last edit in the focused text field or Events editor. World settings changes (including <strong>View → Bigger/Smaller Text</strong>) are also undoable.</td></tr>
 <tr><td><strong>Redo</strong></td><td>⇧⌘Z</td><td>Re-applies the last undone edit.</td></tr>
 <tr><td><strong>Clear Output</strong></td><td>⌘K</td><td>Clears all text in the <strong>output</strong> pane of the frontmost <strong>world</strong> document. Disabled for plain-text document windows.</td></tr>
 <tr><td><strong>New Trigger</strong> / <strong>New Macro</strong></td><td>⇧⌘N</td><td>When an <strong>Events</strong> window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key.</td></tr>
@@ -362,12 +362,20 @@
 <table>
 <thead><tr><th>Menu item</th><th>Shortcut</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><strong>Enter Full Screen</strong></td><td>⌃⌘F</td><td>Toggles full-screen mode for the world window.</td></tr>
 <tr><td><strong>Show World Events…</strong></td><td>—</td><td>Opens the <strong>Events</strong> window for this world document—triggers and macros stored in the <code>.world</code> file. If the window is already open, brings it forward. The title includes the world document name.</td></tr>
 <tr><td><strong>Show World Settings…</strong></td><td>⇧⌘J</td><td>Opens the <strong>World Settings</strong> sheet for this world. See <a href="#world-settings">World Settings</a> below. Click <strong>OK</strong> to apply or <strong>Cancel</strong> to discard.</td></tr>
-<tr><td><strong>Scroll Lock</strong></td><td>⌃S</td><td>Toggles <strong>scroll lock</strong> on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar.</td></tr>
 </tbody></table>
 <p>The same <strong>World Settings</strong> and <strong>Events</strong> commands are available from buttons in the world window’s title bar.</p>
+<h3 id="menus-view-menu">View menu</h3>
+<p>Available when a <strong>world document</strong> window is frontmost. These affect how the session is shown, not which world is open.</p>
+<table>
+<thead><tr><th>Menu item</th><th>Shortcut</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><strong>Bigger Text</strong></td><td>⌘+</td><td>Increases the world’s body and code font sizes by one point (also ⌘=). Same values as <strong>World Settings → Appearance</strong>. Disabled at the maximum size or for read-only v1 worlds.</td></tr>
+<tr><td><strong>Smaller Text</strong></td><td>⌘-</td><td>Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.</td></tr>
+<tr><td><strong>Scroll Lock</strong></td><td>⌃S</td><td>Toggles <strong>scroll lock</strong> on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar.</td></tr>
+<tr><td><strong>Enter Full Screen</strong></td><td>⌃⌘F</td><td>Toggles full-screen mode for the world window.</td></tr>
+</tbody></table>
 <h3 id="menus-audio-menu">Audio menu</h3>
 <table>
 <thead><tr><th>Menu item</th><th>Shortcut</th><th>What it does</th></tr></thead>
@@ -424,7 +432,7 @@
 <ul>
 <li>Sizes are most accurate with a <strong>monospace</strong> font (see <strong>World Settings → Appearance</strong>). Proportional fonts make row/column counts approximate.</li>
 <li><strong>Default word wrap</strong> (Settings → Input &amp; Display) affects how long lines behave inside the pane width; it does not change the column count.</li>
-<li><strong>Scroll lock</strong> (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the <a href="#world-menu">World menu</a> table.</li>
+<li><strong>Scroll lock</strong> (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the <a href="#view-menu">View menu</a> table.</li>
 </ul>
 <h3 id="session-window-navigating-output">Navigating output</h3>
 <p>The <strong>output</strong> pane is a web view showing styled session text. You can:</p>
@@ -432,7 +440,7 @@
 <thead><tr><th>Action</th><th>How</th></tr></thead>
 <tbody>
 <tr><td><strong>Scroll</strong></td><td>Trackpad, mouse wheel, or scrollbar</td></tr>
-<tr><td><strong>Scroll lock</strong></td><td><strong>World → Scroll Lock</strong> (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom</td></tr>
+<tr><td><strong>Scroll lock</strong></td><td><strong>View → Scroll Lock</strong> (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom</td></tr>
 <tr><td><strong>Select &amp; copy</strong></td><td>Drag to select; <strong>Edit → Copy</strong> (⌘C), or right-click and choose <strong>Copy</strong></td></tr>
 <tr><td><strong>Search or speak selection</strong></td><td>Select text, then right-click and choose <strong>Search Selection</strong> or <strong>Speak Selected Text</strong></td></tr>
 <tr><td><strong>Clear</strong></td><td><strong>Edit → Clear Output</strong> (⌘K), or right-click and choose <strong>Clear</strong></td></tr>
@@ -782,7 +790,7 @@
 <li>Check fore/back defaults on the Appearance tab for invisible combinations (white on white)</li>
 </ol>
 <h3 id="output-appearance-html-in-output">HTML in output</h3>
-<p>When <strong>Interpret HTML tags</strong> is on, simple HTML in server text is rendered; <strong>Code font</strong> applies to <code>&lt;code&gt;</code> regions. <strong>Pueblo <code>xch_cmd</code> links</strong> (<code>&lt;a xch_cmd="command"&gt;</code>) are clickable: the command is sent to the session (prefix with your local-command marker, e.g. <code>##help history</code>, for Savitar local commands). Normal <code>&lt;a href="…"&gt;</code> links open in your browser.</p>
+<p>When <strong>Interpret HTML tags</strong> is on, simple HTML in server text is rendered; <strong>Code font</strong> applies to <code>&lt;code&gt;</code> regions. <strong>Pueblo <code>xch_cmd</code> links</strong> (<code>&lt;a xch_cmd="command"&gt;</code>) are clickable. With <strong>World Settings → Appearance → Send xch_cmds immediately</strong> on (XML <code>directXCmds</code>), the click submits right away; with it off, the command is placed in the input line so you can edit before sending. Prefix with your local-command marker (e.g. <code>##help history</code>) for Savitar local commands. Normal <code>&lt;a href="…"&gt;</code> links open in your browser.</p>
 <h3 id="output-appearance-word-wrap">Word wrap</h3>
 <p><strong>Settings → Input &amp; Display → Default word wrap for new sessions</strong> sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions.</p>
 <h3 id="output-appearance-session-logging">Session logging</h3>
@@ -933,7 +941,7 @@
 <tbody>
 <tr><td><strong>Fore / Back / Link color</strong></td><td>Default text, background, and hyperlink colors for the output pane.</td></tr>
 <tr><td><strong>Intense</strong></td><td>How ANSI <strong>bold / intense</strong> (SGR <code>1</code>) is shown: <strong>Auto</strong> uses each hue’s intense palette color; <strong>Bold</strong> keeps normal palette colors and applies bold weight; <strong>Color</strong> uses the intense color swatch (enabled only in Color mode). Bright codes (<code>90–97</code>) still use intense palette colors.</td></tr>
-<tr><td><strong>Body font</strong> and <strong>size</strong></td><td>Proportional font for normal output text.</td></tr>
+<tr><td><strong>Body font</strong> and <strong>size</strong></td><td>Proportional font for normal output text. <strong>View → Bigger Text</strong> / <strong>Smaller Text</strong> (⌘+/⌘-) also change this size (and <strong>Code font</strong> size) while a session is open.</td></tr>
 <tr><td><strong>Interpret ANSI codes</strong></td><td>When on, ANSI color and style sequences from the server are shown using the global palette from <strong>Settings → Colors</strong>. When off, raw escape codes may appear as gibberish.</td></tr>
 <tr><td><strong>Interpret HTML tags</strong></td><td>When on, simple HTML in output is rendered. Enables <strong>Code font</strong> and size for <code>&lt;code&gt;</code> regions.</td></tr>
 <tr><td><strong>Code font</strong> and <strong>size</strong></td><td>Monospace font for HTML code blocks (only when HTML interpretation is on).</td></tr>

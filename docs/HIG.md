@@ -212,6 +212,22 @@ Savitar does **not** use tabbed document windows: `NSWindow.allowsAutomaticWindo
 
 **⌘N** (**File → New World Document…**) opens the **World Picker** rather than an untitled document — choosing a world *is* the new-document step. **Show World Picker** in the Window menu reopens it after it has been closed (no keyboard shortcut assigned; TBD).
 
+### View menu
+
+How the frontmost **world document** is shown (not window zoom, and not which world is open):
+
+| Item | Shortcut | Behavior |
+|------|----------|----------|
+| **Bigger Text** | ⌘+ (also ⌘=) | Increase body and code font sizes by 1pt; persist on the world |
+| **Smaller Text** | ⌘- | Decrease those sizes by 1pt |
+| **Scroll Lock** | ⌃S | Checkmark when output auto-scroll is locked; same as the title-bar lock |
+| **Enter Full Screen** | ⌃⌘F | Standard; last item on View |
+| *(font items disabled)* | | Read-only v1 worlds, or min (6pt) / max (96pt) |
+
+Do **not** put font size on **Window** — **Window → Zoom** already means grow/shrink the window frame.
+
+Touchpoint: `WindowController` + `Main.storyboard`.
+
 ### Help menu
 
 | Item | Shortcut | Behavior |

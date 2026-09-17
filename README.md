@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated September 4th, 2026_
+_README last updated September 17th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -80,7 +80,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Local command ##dump connection
 √ Local command ##dump variables
 √ Local command ##play
-√ Menubar finalized (world + text documents, Audio, Edit → Speech, Find, Print; see docs/HIG.md and docs/USER_GUIDE.md)
+√ Menubar — File/Edit/World/View/Audio/Window/Help (see docs/HIG.md and docs/USER_GUIDE.md)
 √ App Settings window — HIG toolbar panes: Startup, Input & Display, Audio, Updates, Speech, **Advanced** (Stories 1, 23)
 √ **Restore Factory Defaults** — Settings → Advanced reloads bundled prefs and World Picker world list (Story 24.1)
 √ World Picker HIG — welcome layout, keyboard dismiss, position-only restore (Story 7)
@@ -129,6 +129,8 @@ From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.h
 
 ```
 √ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
+√ Increase/decrease a world's font size — View → Bigger Text / Smaller Text (⌘+ / ⌘-)
+√ View menu — Bigger/Smaller Text, Scroll Lock (⌃S), Enter Full Screen (⌃⌘F)
 ```
 
 ### Start of beta
