@@ -81,6 +81,8 @@ class PlainTextDocument: NSDocument {
         textView.isAutomaticTextReplacementEnabled = false
 
         self.textView = textView
+        let wrapEnabled = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        WordWrapFormatting.apply(to: textView, enabled: wrapEnabled)
 
         NotificationCenter.default.addObserver(
             self,
@@ -102,7 +104,11 @@ class PlainTextDocument: NSDocument {
         scrollView.autoresizingMask = [.width, .height]
         window.contentView?.addSubview(scrollView)
 
-        let windowController = PlainTextWindowController(window: window, textView: textView)
+        let windowController = PlainTextWindowController(
+            window: window,
+            textView: textView,
+            wrapLinesEnabled: wrapEnabled
+        )
         windowController.windowFrameAutosaveName = Self.windowFrameAutosaveName
         addWindowController(windowController)
         windowController.showWindow(self)
@@ -173,11 +179,13 @@ class PlainTextDocument: NSDocument {
     }
 }
 
-private final class PlainTextWindowController: NSWindowController {
+private final class PlainTextWindowController: NSWindowController, NSMenuItemValidation {
     private weak var textView: NSTextView?
+    private var wrapLinesEnabled: Bool
 
-    init(window: NSWindow, textView: NSTextView) {
+    init(window: NSWindow, textView: NSTextView, wrapLinesEnabled: Bool) {
         self.textView = textView
+        self.wrapLinesEnabled = wrapLinesEnabled
         super.init(window: window)
     }
 
@@ -218,5 +226,20 @@ private final class PlainTextWindowController: NSWindowController {
         if window.firstResponder !== textView {
             window.makeFirstResponder(textView)
         }
+    }
+
+    @IBAction func toggleWrapLinesAction(_: Any) {
+        wrapLinesEnabled.toggle()
+        if let textView {
+            WordWrapFormatting.apply(to: textView, enabled: wrapLinesEnabled)
+        }
+    }
+
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(toggleWrapLinesAction(_:)) {
+            menuItem.state = wrapLinesEnabled ? .on : .off
+            return true
+        }
+        return true
     }
 }

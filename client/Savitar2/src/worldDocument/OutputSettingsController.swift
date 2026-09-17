@@ -16,6 +16,7 @@ class OutputSettingsController: NSViewController {
     private weak var logFileBox: NSBox?
 
     private var didInstallLayout = false
+    private var wrapRadios: [NSButton] = []
 
     @objc dynamic var outputRows: Int {
         get { (representedObject as? World)?.outputRows ?? 24 }
@@ -34,6 +35,14 @@ class OutputSettingsController: NSViewController {
         guard let world = representedObject as? World else { return }
         appendLoggingRadio.state = world.loggingType == World.LoggingType.append ? .on : .off
         overwriteLoggingRadio.state = world.loggingType == World.LoggingType.overwrite ? .on : .off
+        syncWrapRadios(from: world)
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        if let world = representedObject as? World {
+            syncWrapRadios(from: world)
+        }
     }
 
     @objc dynamic var logfilePath: String {
@@ -114,11 +123,43 @@ class OutputSettingsController: NSViewController {
 
         view.addSubview(paneSizeBox)
 
+        let wrapBox = NSBox()
+        wrapBox.title = "Word wrap"
+        wrapBox.translatesAutoresizingMaskIntoConstraints = false
+        let wrapHelp = NSTextField(wrappingLabelWithString:
+            "Default for new connections to this world. " +
+                "View → Wrap Lines still changes the open session only.")
+        wrapHelp.font = NSFont.systemFont(ofSize: 11)
+        wrapHelp.textColor = .secondaryLabelColor
+        let appRadio = wrapRadio(title: "Use app default", type: .useAppDefault)
+        let onRadio = wrapRadio(title: "On", type: .on)
+        let offRadio = wrapRadio(title: "Off", type: .off)
+        wrapRadios = [appRadio, onRadio, offRadio]
+        let wrapRow = NSStackView(views: wrapRadios)
+        wrapRow.orientation = .horizontal
+        wrapRow.spacing = 12
+        let wrapContent = NSStackView(views: [wrapHelp, wrapRow])
+        wrapContent.orientation = .vertical
+        wrapContent.alignment = .leading
+        wrapContent.spacing = 8
+        wrapContent.translatesAutoresizingMaskIntoConstraints = false
+        wrapBox.contentView?.addSubview(wrapContent)
+        view.addSubview(wrapBox)
+
         NSLayoutConstraint.activate([
             loggingEnabledButton.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
             loggingEnabledButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
 
-            paneSizeBox.topAnchor.constraint(equalTo: loggingEnabledButton.bottomAnchor, constant: spacing),
+            wrapBox.topAnchor.constraint(equalTo: loggingEnabledButton.bottomAnchor, constant: spacing),
+            wrapBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+            wrapBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+
+            wrapContent.leadingAnchor.constraint(equalTo: wrapBox.contentView!.leadingAnchor, constant: 16),
+            wrapContent.trailingAnchor.constraint(equalTo: wrapBox.contentView!.trailingAnchor, constant: -16),
+            wrapContent.topAnchor.constraint(equalTo: wrapBox.contentView!.topAnchor, constant: 14),
+            wrapContent.bottomAnchor.constraint(equalTo: wrapBox.contentView!.bottomAnchor, constant: -14),
+
+            paneSizeBox.topAnchor.constraint(equalTo: wrapBox.bottomAnchor, constant: spacing),
             paneSizeBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             paneSizeBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
 
@@ -153,6 +194,28 @@ class OutputSettingsController: NSViewController {
         row.orientation = .horizontal
         row.spacing = 8
         return row
+    }
+
+    private func wrapRadio(title: String, type: WordWrapDefault) -> NSButton {
+        let button = NSButton(
+            radioButtonWithTitle: title,
+            target: self,
+            action: #selector(wrapDefaultRadioChanged(_:)))
+        button.tag = type.rawValue
+        return button
+    }
+
+    @objc private func wrapDefaultRadioChanged(_ sender: NSButton) {
+        guard let world = representedObject as? World,
+              let type = WordWrapDefault(rawValue: sender.tag) else { return }
+        world.wordWrapDefault = type
+        syncWrapRadios(from: world)
+    }
+
+    private func syncWrapRadios(from world: World) {
+        for button in wrapRadios {
+            button.state = button.tag == world.wordWrapDefault.rawValue ? .on : .off
+        }
     }
 }
 

@@ -12,10 +12,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private static let scrollLockButtonTag = 1001
     private static let eventsButtonTag = 1002
     private static let settingsButtonTag = 1003
+    private static let wrapLinesButtonTag = 1004
 
     internal var reallyClosing = false
     private var eventsWindowController: EventsWindowController?
     private weak var scrollLockButton: NSButton?
+    private weak var wrapLinesButton: NSButton?
     private var windowTitle = ""
     private let resolutionOverlay = ResolutionOverlay()
     private weak var observedSplitView: NSSplitView?
@@ -139,6 +141,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let session = (document as? Document)?.session else { return }
         session.wordWrapEnabled.toggle()
         applySessionWordWrap(session.wordWrapEnabled)
+        updateWrapLinesControl(enabled: session.wordWrapEnabled)
     }
 
     @IBAction func toggleScrollLockAction(_ sender: Any) {
@@ -273,6 +276,7 @@ class WindowController: NSWindowController, NSWindowDelegate {
         // two rows), so do not enable AppKit's competing global persistence.
         svc.splitView.autosaveName = nil
         updateScrollLockControl(locked: svc.isScrollLocked)
+        updateWrapLinesControl(enabled: (document as? Document)?.session?.wordWrapEnabled ?? false)
     }
 
     private func adjustSessionFontSize(by delta: CGFloat) {
@@ -446,6 +450,17 @@ class WindowController: NSWindowController, NSWindowDelegate {
         scrollLockButton = button
         updateScrollLockControl(locked: false)
 
+        if let wrapButton = titlebarView.viewWithTag(Self.wrapLinesButtonTag) as? NSButton {
+            configureTitlebarButton(wrapButton,
+                                    action: #selector(toggleWrapLinesAction(_:)),
+                                    image: Self.wrapLinesIcon(enabled: false),
+                                    alternateImage: Self.wrapLinesIcon(enabled: true),
+                                    label: "Wrap Lines")
+            wrapButton.setButtonType(.toggle)
+            wrapLinesButton = wrapButton
+            updateWrapLinesControl(enabled: false)
+        }
+
         if let eventsButton = titlebarView.viewWithTag(Self.eventsButtonTag) as? NSButton {
             configureTitlebarButton(eventsButton,
                                     action: #selector(showWorldEvents(_:)),
@@ -478,6 +493,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
         button.setAccessibilityLabel(label)
         button.bezelStyle = .texturedRounded
         button.imageScaling = .scaleProportionallyDown
+    }
+
+    private func updateWrapLinesControl(enabled: Bool) {
+        wrapLinesButton?.state = enabled ? .on : .off
+        wrapLinesButton?.toolTip = enabled ? "Wrap lines is on" : "Wrap lines is off"
+        wrapLinesButton?.setAccessibilityValue(enabled ? "On" : "Off")
     }
 
     private func updateScrollLockControl(locked: Bool) {
@@ -514,6 +535,26 @@ class WindowController: NSWindowController, NSWindowDelegate {
                           controlPoint2: NSPoint(x: locked ? 11 : 13.2, y: 14))
             shackle.line(to: NSPoint(x: locked ? 11 : 13.2, y: locked ? 8.4 : 10.4))
             shackle.stroke()
+        }
+    }
+
+    private static func wrapLinesIcon(enabled: Bool) -> NSImage {
+        return iconImage { _ in
+            let path = NSBezierPath()
+            path.lineWidth = 1.6
+            path.lineCapStyle = .round
+            path.move(to: NSPoint(x: 2.5, y: 12.5))
+            path.line(to: NSPoint(x: 13.5, y: 12.5))
+            path.move(to: NSPoint(x: 2.5, y: 8.5))
+            path.line(to: NSPoint(x: enabled ? 10.5 : 13.5, y: 8.5))
+            if enabled {
+                path.move(to: NSPoint(x: 2.5, y: 4.5))
+                path.line(to: NSPoint(x: 8.5, y: 4.5))
+            } else {
+                path.move(to: NSPoint(x: 2.5, y: 4.5))
+                path.line(to: NSPoint(x: 13.5, y: 4.5))
+            }
+            path.stroke()
         }
     }
 

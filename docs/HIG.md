@@ -147,7 +147,7 @@ World sessions are **document windows** (one `.world` per window). Plain-text no
 
 - World-specific appearance and connection options → **World Settings**, not app Settings.
 - Session window exposes contextual **?** → [Session window](USER_GUIDE.md#session-window) help anchor.
-- **Scroll lock** (⌃S) and title-bar control; see [USER_GUIDE.md](USER_GUIDE.md) Menus chapter.
+- **Scroll lock** (⌃S) and **Wrap Lines** title-bar controls; see [USER_GUIDE.md](USER_GUIDE.md) Menus chapter.
 - Output pane (`WKWebView`) — no v1 buffer/flush Settings; `FLUSHTICKS` dead; `OUTPUTMAX`/`OUTPUTMIN` honored internally at beta ([OutputPerformance.md](OutputPerformance.md), Story 27).
 
 ---
@@ -221,7 +221,7 @@ How the frontmost **world document** is shown (not window zoom, and not which wo
 | **Bigger Text** | ⌘+ (also ⌘=) | Increase body and code font sizes by 1pt; persist on the world |
 | **Smaller Text** | ⌘- | Decrease those sizes by 1pt |
 | **Scroll Lock** | ⌃S | Checkmark when output auto-scroll is locked; same as the title-bar lock |
-| **Wrap Lines** | — | Checkmark when input and output wrap; live for this session only (app pref is the start value) |
+| **Wrap Lines** | — | Checkmark when input and output wrap; live for this session. New sessions use World Settings → Output, else the app pref. Title-bar wrap button stays in sync. |
 | **Enter Full Screen** | ⌃⌘F | Standard; last item on View |
 | *(font items disabled)* | | Read-only v1 worlds, or min (6pt) / max (96pt) |
 

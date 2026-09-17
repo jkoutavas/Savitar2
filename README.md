@@ -131,18 +131,19 @@ From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.h
 √ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 √ Increase/decrease a world's font size — View → Bigger Text / Smaller Text (⌘+ / ⌘-)
 √ View menu — Bigger/Smaller Text, Scroll Lock (⌃S), Wrap Lines, Enter Full Screen (⌃⌘F)
+√ Session word wrap — live View toggle, per-world Output default, title-bar button (Story 20)
 ```
 
-### Start of beta
+### Completion of 2.0 beta
 
 ```
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
 _ Crash reporting (Sentry — separate from TelemetryDeck analytics)
 _ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md) — honor `OUTPUTMAX`/`OUTPUTMIN`, coalesce appends, session metrics strip)
-_ Start promoting the beta test
-_ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
+√  Start promoting the beta test
+√ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
 _ MCP (? does anyone use this?)
-_ Polish, address beta test issues
+√ Polish, address beta test issues
 ```
 
 ### Post first release
@@ -158,7 +159,6 @@ _ New `##say` local command for voicing text
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
 _ Trigger notifications — optional macOS notification action when a trigger event fires
 _ Echo back color — World Settings → Appearance swatch for `ECHOBGCOLOR` (Story 28; v1 stored the color but never shipped the control)
-_ Session word wrap UX — live per-session toggle, per-world default (Story 20)
 _ SSL support
 _ Text to emoji support
 _ Javascript scripting?

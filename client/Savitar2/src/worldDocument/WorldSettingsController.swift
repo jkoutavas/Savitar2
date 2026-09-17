@@ -147,7 +147,7 @@ private extension SavitarHelp.WorldSettingsTab {
         case .starting: return 400
         case .appearance: return 580
         case .input: return 480
-        case .output: return 300
+        case .output: return 380
         case .closing: return 380
         }
     }

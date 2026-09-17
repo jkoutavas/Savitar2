@@ -247,7 +247,7 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 | **App appearance**                     | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows.                                                                      |
 | **Use keypad for macro entry**         | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
 | **Mono fonts only (in font menus)**    | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.                                                          |
-| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open—use **View → Wrap Lines** for that. |
+| **Default word wrap for new sessions** | When on, new world sessions (and new **text documents**) start wrapped unless the world overrides it. Does not change wrap on sessions already open—use **View → Wrap Lines** for that. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -370,6 +370,7 @@ See [Speech settings reference](#speech-speech-settings-reference) for **Speech*
 Plain-text windows are separate from world sessions. Use them to view or edit log files, notes, or other text outside a live connection.
 
 - **New Text Document** (⇧⌘T) opens an empty editor with a fixed-pitch font.
+- **View → Wrap Lines** starts from the app default word-wrap pref and can be toggled per window.
 - **Open…** accepts `.txt`, `.text`, and `.log` files in addition to `.world` documents.
 - Standard **Save**, **Duplicate**, **Print**, and **Edit** commands apply. Find uses the system find panel.
 - Window position and size are remembered between launches (shared across all text document windows).
@@ -436,7 +437,7 @@ Available when a **world document** window is frontmost. These affect how the se
 | **Bigger Text**      | ⌘+       | Increases the world’s body and code font sizes by one point (also ⌘=). Same values as **World Settings → Appearance**. Disabled at the maximum size or for read-only v1 worlds.                              |
 | **Smaller Text**     | ⌘-       | Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.                                                                                                            |
 | **Scroll Lock**      | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar. |
-| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. Starts from **Settings → Input & Display → Default word wrap for new sessions**; changing it here does not rewrite that pref. Lost on reconnect. |
+| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. New sessions start from **World Settings → Output → Word wrap** (or the app default). The menu changes this session only; reconnect uses the world/app default again. Also a title-bar button. |
 | **Enter Full Screen** | ⌃⌘F     | Toggles full-screen mode for the world window.                                                                                                                                                               |
 
 ### Audio menu
@@ -992,7 +993,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. **View → Wrap Lines** toggles wrap immediately for the frontmost session (input and output together) without writing the pref.
+**Settings → Input & Display → Default word wrap for new sessions** is the fallback for new connections and new text windows. **World Settings → Output → Word wrap** can pin a world to On, Off, or Use app default. **View → Wrap Lines** (and the session title-bar wrap button) toggles the open session immediately without rewriting those defaults. A reconnect uses the world/app default again.
 
 ### Session logging
 
@@ -1243,6 +1244,7 @@ See also [Session window](#session-window) for resizing by dragging the window o
 | **Columns**            | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
 | **Output rows**        | Height of the output pane in text rows (default **24**).                                                                                             |
 | **Logging Enabled**    | When on, Savitar writes session output to a log file in the background                                                                               |
+| **Word wrap**          | **Use app default**, **On**, or **Off** for new connections to this world. **View → Wrap Lines** still changes only the session that is already open. |
 | **Append / Overwrite** | Whether each session adds to the file or replaces it                                                                                                 |
 | **Log file path**      | Where the log is stored; use **Set now** to pick a location                                                                                          |
 

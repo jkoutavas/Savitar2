@@ -462,6 +462,13 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertTrue(session.wordWrapEnabled)
     }
 
+    func testSessionHonorsWorldWrapOffEvenIfAppPrefWouldWrap() {
+        let world = World()
+        world.wordWrapDefault = .off
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+        XCTAssertFalse(session.wordWrapEnabled)
+    }
+
     func testHistoryCommandUsesWorldCommandMarker() {
         let world = World()
         world.cmdMarker = "//"
@@ -901,6 +908,35 @@ class OutputViewCaptureTests: XCTestCase {
         world.monoFontSize = World.maxSessionFontSize
         XCTAssertFalse(world.adjustSessionFontSizes(by: 1))
         XCTAssertEqual(world.fontSize, World.maxSessionFontSize)
+    }
+
+    func testWordWrapDefaultOmittedFromXMLWhenUsingAppDefault() throws {
+        let world = World()
+        world.wordWrapDefault = .useAppDefault
+        let xml = try world.toXMLElement().xmlString
+        XCTAssertFalse(xml.contains("WORDWRAP"))
+        XCTAssertTrue(world.resolvedWordWrapEnabled(appDefault: true))
+        XCTAssertFalse(world.resolvedWordWrapEnabled(appDefault: false))
+    }
+
+    func testWordWrapDefaultOnOffRoundTripAndOverridesAppPref() throws {
+        let world = World()
+        world.wordWrapDefault = .off
+        XCTAssertFalse(world.resolvedWordWrapEnabled(appDefault: true))
+        var xml = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xml.contains("WORDWRAP=\"off\""))
+
+        let parsedOff = World()
+        try parsedOff.parse(xml: try XML.parse(xml)[WorldElemIdentifier])
+        XCTAssertEqual(parsedOff.wordWrapDefault, .off)
+
+        world.wordWrapDefault = .on
+        XCTAssertTrue(world.resolvedWordWrapEnabled(appDefault: false))
+        xml = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xml.contains("WORDWRAP=\"on\""))
+        let parsedOn = World()
+        try parsedOn.parse(xml: try XML.parse(xml)[WorldElemIdentifier])
+        XCTAssertEqual(parsedOn.wordWrapDefault, .on)
     }
 }
 

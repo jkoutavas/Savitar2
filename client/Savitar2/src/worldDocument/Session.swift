@@ -63,7 +63,9 @@ class Session: NSObject, StreamDelegate {
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
-        wordWrapEnabled = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        wordWrapEnabled = world.resolvedWordWrapEnabled(
+            appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        )
         logger = Logger(label: "savitar2")
         logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         logger[metadataKey: "m"] = "Session" // "m" is for "module"
