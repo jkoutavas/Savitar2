@@ -39,6 +39,8 @@ protocol SessionHandlerProtocol {
     func closeSessionStatusBars()
     func closeSessionStatus(pane: SessionStatusPane)
     func recallCommand(at index: Int)
+    /// Place text into the session input pane without submitting (v1 `TVCmdFlag_t_Append`).
+    func appendToInput(_ text: String)
     func clearOutputScreen()
     func refreshSessionDisplay()
     func insertWorldTrigger(_ trigger: Trigger)
@@ -69,6 +71,7 @@ extension SessionHandlerProtocol {
     func outputHTML(_: String, skipCapture _: Bool) {}
     func closeSessionStatus(pane _: SessionStatusPane) {}
     func recallCommand(at _: Int) {}
+    func appendToInput(_: String) {}
     func clearOutputScreen() {}
     func refreshSessionDisplay() {}
     func insertWorldTrigger(_: Trigger) {}

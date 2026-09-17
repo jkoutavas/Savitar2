@@ -159,6 +159,19 @@ class InputViewController: NSViewController, NSTextViewDelegate {
         textView.string = ""
     }
 
+    /// v1 `CTinpPane::Append` — insert command text at the current selection without submitting.
+    func append(_ text: String) {
+        guard !text.isEmpty else { return }
+        let selected = textView.selectedRange()
+        if textView.shouldChangeText(in: selected, replacementString: text) {
+            textView.replaceCharacters(in: selected, with: text)
+            textView.didChangeText()
+        }
+        if let window = view.window {
+            window.makeFirstResponder(textView)
+        }
+    }
+
     func getTextLength() -> Int { textView.string.count }
 
     func myKeyDown(with event: NSEvent) -> Bool {

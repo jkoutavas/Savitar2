@@ -17,6 +17,8 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     private var intenseColorWell: NSColorWell?
     private var intenseRadios: [NSButton] = []
     private var didInstallIntenseControls = false
+    private var directXCmdsButton: NSButton?
+    private var didInstallDirectXCmdsControl = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +40,14 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
         }
 
         installIntenseControlsIfNeeded()
+        installDirectXCmdsControlIfNeeded()
 
         guard let world = representedObject as? World else { return }
 
         fontPopup.selectItem(withTitle: world.fontName)
         monoFontPopup.selectItem(withTitle: world.monoFontName)
         syncIntenseControls(from: world)
+        syncDirectXCmdsControl(from: world)
         attributeChanged()
     }
 
@@ -184,5 +188,70 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     private func updateIntenseColorWellEnabled() {
         let enabled = (representedObject as? World)?.intensityType == .color
         intenseColorWell?.isEnabled = enabled
+    }
+
+    /// v1 Appearance checkbox `bDirectXCMDs` ("Send xch_cmds immediately").
+    private func installDirectXCmdsControlIfNeeded() {
+        guard !didInstallDirectXCmdsControl else { return }
+        guard let ansiCheckbox = view.subviews.compactMap({ $0 as? NSButton }).first(where: {
+            $0.title == "Interpret ANSI codes"
+        }) else { return }
+        guard let htmlBox = view.subviews.first(where: {
+            ($0 as? NSBox)?.title.contains("Interpret HTML") == true
+        }) as? NSBox else { return }
+        let htmlCheckbox = view.constraints.compactMap { constraint -> NSButton? in
+            guard constraint.firstAttribute == .top, constraint.secondAttribute == .top else { return nil }
+            if (constraint.firstItem as? NSView) === htmlBox {
+                return constraint.secondItem as? NSButton
+            }
+            if (constraint.secondItem as? NSView) === htmlBox {
+                return constraint.firstItem as? NSButton
+            }
+            return nil
+        }.first
+        guard let htmlCheckbox else { return }
+
+        htmlBox.setContentCompressionResistancePriority(.required, for: .vertical)
+        htmlBox.heightAnchor.constraint(greaterThanOrEqualToConstant: 75).isActive = true
+
+        didInstallDirectXCmdsControl = true
+        let button = NSButton(
+            checkboxWithTitle: "Send xch_cmds immediately",
+            target: self,
+            action: #selector(directXCmdsCheckboxChanged(_:)))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.bind(.value, to: self, withKeyPath: "representedObject.directXCmdsEnabled", options: [
+            .continuouslyUpdatesValue: true
+        ])
+        view.addSubview(button)
+        directXCmdsButton = button
+
+        for constraint in view.constraints where
+            (constraint.firstItem as? NSView) === htmlCheckbox &&
+            constraint.firstAttribute == .top &&
+            (constraint.secondItem as? NSView) === ansiCheckbox &&
+            constraint.secondAttribute == .bottom {
+            constraint.isActive = false
+            break
+        }
+
+        NSLayoutConstraint.activate([
+            button.leadingAnchor.constraint(equalTo: ansiCheckbox.leadingAnchor),
+            button.topAnchor.constraint(equalTo: ansiCheckbox.bottomAnchor, constant: 8),
+            htmlCheckbox.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 8)
+        ])
+
+        if let world = representedObject as? World {
+            syncDirectXCmdsControl(from: world)
+        }
+    }
+
+    @objc private func directXCmdsCheckboxChanged(_ sender: NSButton) {
+        guard let world = representedObject as? World else { return }
+        world.directXCmdsEnabled = sender.state == .on
+    }
+
+    private func syncDirectXCmdsControl(from world: World) {
+        directXCmdsButton?.state = world.directXCmdsEnabled ? .on : .off
     }
 }

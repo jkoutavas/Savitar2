@@ -316,6 +316,10 @@ class Session: NSObject, StreamDelegate {
 
     func submitServerCmd(cmd: Command) {
         let expandedCmd = expandVariables(in: cmd)
+        if expandedCmd.flags.contains(.append) {
+            sessionHandler.appendToInput(expandedCmd.cmdStr)
+            return
+        }
         if handleLocalCommand(expandedCmd) {
             return
         }

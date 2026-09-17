@@ -145,7 +145,12 @@ class OutputViewController: OutputViewNavigationDelegate {
         }
         if let url = navigationAction.request.url,
            let command = XchCmdLinkProcessor.command(from: url) {
-            session?.submitServerCmd(cmd: Command(text: command))
+            // v1 CReactiveText: if !UseDirectXCMDs() then TVCmdFlag_t_Append (put in input).
+            var flags: CmdFlags = []
+            if session?.world.flags.contains(.directXCmds) != true {
+                flags.insert(.append)
+            }
+            session?.submitServerCmd(cmd: Command(text: command, flags: flags))
             decisionHandler(.cancel)
             return
         }

@@ -978,7 +978,7 @@ Most MUDs send **ANSI escape codes** for color. Savitar converts them to HTML in
 
 ### HTML in output
 
-When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Code font** applies to `<code>` regions. **Pueblo `xch_cmd` links** (`<a xch_cmd="command">`) are clickable: the command is sent to the session (prefix with your local-command marker, e.g. `##help history`, for Savitar local commands). Normal `<a href="…">` links open in your browser.
+When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Code font** applies to `<code>` regions. **Pueblo `xch_cmd` links** (`<a xch_cmd="command">`) are clickable. With **World Settings → Appearance → Send xch_cmds immediately** on (XML `directXCmds`), the click submits right away; with it off, the command is placed in the input line so you can edit before sending. Prefix with your local-command marker (e.g. `##help history`) for Savitar local commands. Normal `<a href="…">` links open in your browser.
 
 ### Word wrap
 
