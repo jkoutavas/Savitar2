@@ -221,6 +221,7 @@ How the frontmost **world document** is shown (not window zoom, and not which wo
 | **Bigger Text** | ⌘+ (also ⌘=) | Increase body and code font sizes by 1pt; persist on the world |
 | **Smaller Text** | ⌘- | Decrease those sizes by 1pt |
 | **Scroll Lock** | ⌃S | Checkmark when output auto-scroll is locked; same as the title-bar lock |
+| **Wrap Lines** | — | Checkmark when input and output wrap; live for this session only (app pref is the start value) |
 | **Enter Full Screen** | ⌃⌘F | Standard; last item on View |
 | *(font items disabled)* | | Read-only v1 worlds, or min (6pt) / max (96pt) |
 

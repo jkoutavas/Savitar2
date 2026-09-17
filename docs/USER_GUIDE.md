@@ -247,7 +247,7 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 | **App appearance**                     | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows.                                                                      |
 | **Use keypad for macro entry**         | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
 | **Mono fonts only (in font menus)**    | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.                                                          |
-| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open.               |
+| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open—use **View → Wrap Lines** for that. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -436,6 +436,7 @@ Available when a **world document** window is frontmost. These affect how the se
 | **Bigger Text**      | ⌘+       | Increases the world’s body and code font sizes by one point (also ⌘=). Same values as **World Settings → Appearance**. Disabled at the maximum size or for read-only v1 worlds.                              |
 | **Smaller Text**     | ⌘-       | Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.                                                                                                            |
 | **Scroll Lock**      | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar. |
+| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. Starts from **Settings → Input & Display → Default word wrap for new sessions**; changing it here does not rewrite that pref. Lost on reconnect. |
 | **Enter Full Screen** | ⌃⌘F     | Toggles full-screen mode for the world window.                                                                                                                                                               |
 
 ### Audio menu
@@ -991,7 +992,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions.
+**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions. **View → Wrap Lines** toggles wrap immediately for the frontmost session (input and output together) without writing the pref.
 
 ### Session logging
 

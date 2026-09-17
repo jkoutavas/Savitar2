@@ -46,8 +46,9 @@ class Session: NSObject, StreamDelegate {
 
     var didStartupCmd = false
 
-    /// Initial wrap state for this session (from app Settings → Input & Display at connect time).
-    let wordWrapEnabled: Bool
+    /// Wrap state for this session. Starts from app Settings → Input & Display;
+    /// **View → Wrap Lines** can change it live.
+    var wordWrapEnabled: Bool
 
     /// Last time we wrote to the server (user cmds, macros, telnet replies, keepalives).
     private var lastOutboundActivity = Date()

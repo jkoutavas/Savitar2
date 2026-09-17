@@ -1071,7 +1071,7 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 **Context — what 2.0 ships today**
 
-Story 2.3 wires the app-wide **Default word wrap for new sessions** checkbox to `Session.wordWrapEnabled` at connect time. That value is fixed for the life of the session; changing the pref or wanting different wrap per world means closing and reopening the window. Users notice both problems in practice.
+Story 2.3 wires the app-wide **Default word wrap for new sessions** checkbox to `Session.wordWrapEnabled` at connect time. **View → Wrap Lines** now toggles that flag live (Story **20.1** / **20.3** / **20.6**). Per-world defaults and session chrome (**20.4**, **20.5**) remain 2.1.
 
 **v1 behavior (reference)**
 
@@ -1133,12 +1133,12 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 
 ### Tasks
 
-- [ ] **20.1** **`Session.wordWrapEnabled` mutable** — replace `let` with `var`; add `setWordWrap(_:)` that updates input + output via `WindowController` / `WordWrapFormatting` without reconnect.
+- [x] **20.1** **`Session.wordWrapEnabled` mutable** — replace `let` with `var`; add `setWordWrap(_:)` that updates input + output via `WindowController` / `WordWrapFormatting` without reconnect.
 - [ ] **20.2** **Resolve initial wrap** — on session connect: `world.wordWrapDefault ?? app.defaultWordWrap` (exact API TBD in **20.4**).
-- [ ] **20.3** **View menu** — **View → Word Wrap** checkmark bound to frontmost world session; enable only for world document windows. Optional shortcut (e.g. ⌃⌘W if unused).
+- [x] **20.3** **View menu** — **View → Wrap Lines** checkmark bound to frontmost world session; enable only for world document windows.
 - [ ] **20.4** **Per-world default** — new field on `World` / Output settings model; World Settings → Output UI; parse/serialize in `.world` XML; “Use app default” omits or sentinel value for v1 import compatibility.
 - [ ] **20.5** **Session chrome toggle** — title-bar button or input-pane control; VoiceOver label; sync with View menu state.
-- [ ] **20.6** **Output live update** — when toggling off→on or on→off, re-inject `WordWrapFormatting.outputPreCSS` (or equivalent) so existing buffer reflows without clearing.
+- [x] **20.6** **Output live update** — when toggling off→on or on→off, re-inject `WordWrapFormatting.outputPreCSS` (or equivalent) so existing buffer reflows without clearing.
 - [ ] **20.7** **Text document parity (stretch)** — `PlainTextDocument` gets the same toggle + app-pref default as v1 text windows (blue-arrow behavior); can ship as **20.7** follow-up if session work lands first.
 - [ ] **20.8** **Docs** — update `USER_GUIDE.md` (Input & Display + World Settings Output + session window); `HIG.md` session-window section; Story **9.3** output chapter.
 - [ ] **20.9** **Tests** — toggle updates `Session` and both panes; world default overrides app pref at connect; app pref change does not alter open session.

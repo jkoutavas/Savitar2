@@ -135,6 +135,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
         adjustSessionFontSize(by: -1)
     }
 
+    @IBAction func toggleWrapLinesAction(_: Any) {
+        guard let session = (document as? Document)?.session else { return }
+        session.wordWrapEnabled.toggle()
+        applySessionWordWrap(session.wordWrapEnabled)
+    }
+
     @IBAction func toggleScrollLockAction(_ sender: Any) {
         let splitViewController = contentViewController as? SessionViewController
         guard let svc = splitViewController else { return }
@@ -301,6 +307,16 @@ class WindowController: NSWindowController, NSWindowDelegate {
         if let font = NSFont(name: world.fontName, size: world.fontSize) {
             inputVC.font = font
         }
+    }
+
+    private func applySessionWordWrap(_ enabled: Bool) {
+        guard let world = (document as? Document)?.world,
+              let svc = contentViewController as? SessionViewController,
+              let inputVC = svc.inputViewController,
+              let outputVC = svc.outputViewController else { return }
+        inputVC.setWordWrap(enabled)
+        outputVC.setWordWrap(enabled)
+        outputVC.setStyle(world: world)
     }
 
     private func installSplitViewObservationIfNeeded(_ splitView: NSSplitView) {
@@ -644,6 +660,10 @@ extension WindowController: NSMenuItemValidation {
         if menuItem.action == #selector(toggleScrollLockAction(_:)) {
             let splitViewController = contentViewController as? SessionViewController
             menuItem.state = splitViewController?.isScrollLocked == true ? .on : .off
+        }
+        if menuItem.action == #selector(toggleWrapLinesAction(_:)) {
+            guard let session = (document as? Document)?.session else { return false }
+            menuItem.state = session.wordWrapEnabled ? .on : .off
         }
         if menuItem.action == #selector(biggerTextAction(_:))
             || menuItem.action == #selector(smallerTextAction(_:)) {

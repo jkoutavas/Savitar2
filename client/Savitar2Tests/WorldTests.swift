@@ -454,6 +454,14 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertFalse(handler.printedSource)
     }
 
+    func testWordWrapEnabledCanBeToggledAfterConnect() {
+        let session = Session(world: World(), sessionHandler: MockSessionHandler())
+        session.wordWrapEnabled = false
+        XCTAssertFalse(session.wordWrapEnabled)
+        session.wordWrapEnabled.toggle()
+        XCTAssertTrue(session.wordWrapEnabled)
+    }
+
     func testHistoryCommandUsesWorldCommandMarker() {
         let world = World()
         world.cmdMarker = "//"

@@ -287,6 +287,12 @@ CA
                                                 <action selector="toggleScrollLockAction:" target="Ady-hI-5gd" id="bpg-5Z-rgJ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Wrap Lines" id="Vie-Wp-Lin">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleWrapLinesAction:" target="Ady-hI-5gd" id="Vie-Wp-Act"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Vie-Sep-2"/>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>

@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Session font zoom** — **View → Bigger Text** / **Smaller Text** (⌘+ / ⌘-) change a world’s body and code font sizes while the session is open
-- **View menu** — **Scroll Lock** (⌃S) and **Enter Full Screen** (⌃⌘F) live on **View** with the font-size commands; **World** is Events and Settings only
+- **View → Wrap Lines** — live wrap toggle for the session’s input and output panes (starts from the app default; does not change that pref)
+- **View menu** — **Scroll Lock** (⌃S), **Wrap Lines**, and **Enter Full Screen** (⌃⌘F) live on **View** with the font-size commands; **World** is Events and Settings only
 - **`xch_cmd` send mode (`DirectXCMDs`)** — World Settings → Appearance checkbox **Send xch_cmds immediately** (v1 parity / XML `directXCmds`): when on, Pueblo `xch_cmd` clicks submit right away; when off, the command is placed in the input line without sending
 
 ## [2.0.28] - 2026-09-04

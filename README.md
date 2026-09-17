@@ -130,7 +130,7 @@ From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.h
 ```
 √ App-wide appearance — System / Light / Dark on Settings → Input & Display (Story 26; v2-only pref, no v1 import)
 √ Increase/decrease a world's font size — View → Bigger Text / Smaller Text (⌘+ / ⌘-)
-√ View menu — Bigger/Smaller Text, Scroll Lock (⌃S), Enter Full Screen (⌃⌘F)
+√ View menu — Bigger/Smaller Text, Scroll Lock (⌃S), Wrap Lines, Enter Full Screen (⌃⌘F)
 ```
 
 ### Start of beta
