@@ -46,8 +46,15 @@ class Session: NSObject, StreamDelegate {
 
     var didStartupCmd = false
 
-    /// Initial wrap state for this session (from app Settings → Input & Display at connect time).
-    let wordWrapEnabled: Bool
+    /// Wrap state for this session. Matches World Settings → Output and View → Wrap Lines.
+    var wordWrapEnabled: Bool
+
+    /// Re-apply wrap from the current world (World Settings OK).
+    func applyWordWrapFromWorld() {
+        wordWrapEnabled = world.resolvedWordWrapEnabled(
+            appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        )
+    }
 
     /// Last time we wrote to the server (user cmds, macros, telnet replies, keepalives).
     private var lastOutboundActivity = Date()
@@ -62,7 +69,9 @@ class Session: NSObject, StreamDelegate {
     init(world: World, sessionHandler: SessionHandlerProtocol) {
         self.world = world
         self.sessionHandler = sessionHandler
-        wordWrapEnabled = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        wordWrapEnabled = world.resolvedWordWrapEnabled(
+            appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        )
         logger = Logger(label: "savitar2")
         logger[metadataKey: "a"] = "\(world.host):\(world.port)" // "a" is for "address"
         logger[metadataKey: "m"] = "Session" // "m" is for "module"

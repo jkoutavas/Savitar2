@@ -54,6 +54,12 @@ extension WorldFlags: StrOptionSet {
     case color
 }
 
+@objc enum WordWrapDefault: Int {
+    case useAppDefault
+    case on
+    case off
+}
+
 class VariableMan {
     private var variables: [String: String] = [:]
 
@@ -168,6 +174,21 @@ class World: SavitarObject, NSCopying {
     @objc dynamic var fontSize: CGFloat = 9
     @objc dynamic var monoFontName = "Monaco"
     @objc dynamic var monoFontSize: CGFloat = 9
+
+    /// Live session font zoom (View → Bigger/Smaller Text). Matches Appearance size stepper floor.
+    static let minSessionFontSize: CGFloat = 6
+    static let maxSessionFontSize: CGFloat = 96
+
+    /// Adjusts body and code font sizes together. Returns false when already at the limit.
+    @discardableResult
+    func adjustSessionFontSizes(by delta: CGFloat) -> Bool {
+        let body = min(max(fontSize + delta, Self.minSessionFontSize), Self.maxSessionFontSize)
+        let mono = min(max(monoFontSize + delta, Self.minSessionFontSize), Self.maxSessionFontSize)
+        guard body != fontSize || mono != monoFontSize else { return false }
+        fontSize = body
+        monoFontSize = mono
+        return true
+    }
     @objc dynamic var MCPFontName = "Monaco"
     @objc dynamic var MCPFontSize: CGFloat = 9
 
@@ -229,6 +250,24 @@ class World: SavitarObject, NSCopying {
     var logfilePath = ""
     @objc dynamic var loggingEnabled: ObjCBool = false
     @objc dynamic var loggingType = LoggingType.append
+    /// World Settings → Output. Omitted from XML when `.useAppDefault` (v1 import compatible).
+    @objc dynamic var wordWrapDefault = WordWrapDefault.useAppDefault
+
+    func resolvedWordWrapEnabled(appDefault: Bool) -> Bool {
+        switch wordWrapDefault {
+        case .useAppDefault: return appDefault
+        case .on: return true
+        case .off: return false
+        }
+    }
+
+    /// Radios that match the live session without dropping “Use app default” when it still applies.
+    func wordWrapDefaultMatching(sessionEnabled: Bool, appDefault: Bool) -> WordWrapDefault {
+        if wordWrapDefault == .useAppDefault, sessionEnabled == appDefault {
+            return .useAppDefault
+        }
+        return sessionEnabled ? .on : .off
+    }
 
     var flags: WorldFlags = [.ansi, .html]
     @objc dynamic var intensityType = IntensityType.auto
@@ -277,6 +316,7 @@ class World: SavitarObject, NSCopying {
         logfilePath = world.logfilePath
         loggingEnabled = world.loggingEnabled
         loggingType = world.loggingType
+        wordWrapDefault = world.wordWrapDefault
     }
 
     override init() {
@@ -341,6 +381,7 @@ class World: SavitarObject, NSCopying {
         case logfilePath = "LOGFILEPATH"
         case loggingEnabled = "LOGGINGENABLED"
         case loggingType = "LOGGINGTYPE"
+        case wordWrap = "WORDWRAP"
     }
 
     let intensityLabelDict: [String: IntensityType] = [
@@ -353,6 +394,12 @@ class World: SavitarObject, NSCopying {
          "append": .append,
          "overwrite": .overwrite
      ]
+
+    let wordWrapLabelDict: [String: WordWrapDefault] = [
+        "default": .useAppDefault,
+        "on": .on,
+        "off": .off
+    ]
 
     override func parse(xml: XML.Accessor) throws {
          for attribute in xml.attributes {
@@ -501,6 +548,8 @@ class World: SavitarObject, NSCopying {
                  if let type = loggingLabelDict[attribute.value] {
                      loggingType = type
                  }
+            case WorldAttribIdentifier.wordWrap.rawValue:
+                wordWrapDefault = wordWrapLabelDict[attribute.value] ?? .useAppDefault
 
             default:
                 print("skipping world XML attribute \(attribute.key)")
@@ -602,6 +651,10 @@ class World: SavitarObject, NSCopying {
                                stringValue: loggingEnabled.boolValue ? "TRUE" : "FALSE")
         worldElem.addAttribute(name: WorldAttribIdentifier.loggingType.rawValue,
              stringValue: loggingLabelDict.key(from: loggingType)!)
+        if wordWrapDefault != .useAppDefault,
+           let wrapValue = wordWrapLabelDict.key(from: wordWrapDefault) {
+            worldElem.addAttribute(name: WorldAttribIdentifier.wordWrap.rawValue, stringValue: wrapValue)
+        }
 
         if logonCmd.count > 0 {
             worldElem.addChild(XMLElement(name: LogonCmdElemIdentifier, stringValue:

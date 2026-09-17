@@ -9,8 +9,10 @@
 import XCTest
 
 final class EventsWindowControllerTests: XCTestCase {
-    func testDesignedContentSizeMatchesStoryboardLayout() {
-        XCTAssertEqual(EventsWindowController.designedContentSize, NSSize(width: 900, height: 400))
+    func testDesignedContentSizeMatchesTriggersTab() {
+        XCTAssertEqual(EventsWindowController.designedContentSize, NSSize(width: 900, height: 480))
+        XCTAssertEqual(EventsWindowController.macrosContentHeight, 400)
+        XCTAssertEqual(EventsWindowController.triggersContentHeight, 480)
     }
 
     func testHasAutosavedFrameWhenMissing() {

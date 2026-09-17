@@ -9,7 +9,10 @@ import Cocoa
 
 /// Universal and per-world Events utility window chrome ([HIG.md](../../../docs/HIG.md) — Events window; Story 6).
 final class EventsWindowController: NSWindowController, NSWindowDelegate {
-    static let designedContentSize = NSSize(width: 900, height: 400)
+    static let windowWidth: CGFloat = 900
+    static let triggersContentHeight: CGFloat = 480
+    static let macrosContentHeight: CGFloat = 400
+    static let designedContentSize = NSSize(width: windowWidth, height: triggersContentHeight)
 
     var reactionsStore: ReactionsStore? {
         didSet {
@@ -35,16 +38,35 @@ final class EventsWindowController: NSWindowController, NSWindowDelegate {
     func present(autosaveName: String, title: String) {
         window?.title = title
         windowFrameAutosaveName = autosaveName
-        applyDesignedContentSize()
+        updateForSelectedTab(animated: false)
         if !NSWindow.hasAutosavedFrame(named: autosaveName) {
             window?.center()
         }
         showWindow(self)
     }
 
+    func updateForSelectedTab(animated: Bool) {
+        let tabIndex = eventsTabIndex
+        let height = tabIndex == 1 ? Self.macrosContentHeight : Self.triggersContentHeight
+        applyLockedContentSize(NSSize(width: Self.windowWidth, height: height), animate: animated)
+    }
+
+    private var eventsTabIndex: Int {
+        let content = contentViewController as? EventsContentViewController
+        return content?.eventsViewController?.selectedTabViewItemIndex ?? 0
+    }
+
     private func applyDesignedContentSize() {
+        updateForSelectedTab(animated: false)
+    }
+
+    private func applyLockedContentSize(_ size: NSSize, animate: Bool) {
         guard let window else { return }
-        window.fitContentSize(Self.designedContentSize, centerIfNeeded: false)
+        window.contentMinSize = NSSize(width: 1, height: 1)
+        window.contentMaxSize = NSSize(width: 10_000, height: 10_000)
+        window.setContentSizeKeepingTitleBar(size, animate: animate)
+        window.contentMinSize = size
+        window.contentMaxSize = size
     }
 
     func windowWillReturnUndoManager(_: NSWindow) -> UndoManager? {

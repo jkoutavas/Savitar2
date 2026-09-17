@@ -876,7 +876,7 @@ Gw
             <objects>
                 <viewController title="Output" id="LSE-x8-mPF" customClass="OutputSettingsController" customModule="Savitar2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GBc-Re-jLb">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="520"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-Ex-TVS">

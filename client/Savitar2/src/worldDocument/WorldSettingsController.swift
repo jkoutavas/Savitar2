@@ -87,7 +87,7 @@ class WorldSettingsController: NSViewController {
             tabView.layoutSubtreeIfNeeded()
             let fitted = tabView.fittingSize
             if fitted.height > 1 {
-                tabHeight = max(fitted.height, preferredTabHeight)
+                tabHeight = fitted.height
             }
         }
         return NSSize(width: max(width, tabViewWidth(for: tab)), height: tabHeight + footerHeight)
@@ -147,7 +147,7 @@ private extension SavitarHelp.WorldSettingsTab {
         case .starting: return 400
         case .appearance: return 580
         case .input: return 480
-        case .output: return 300
+        case .output: return 520
         case .closing: return 380
         }
     }

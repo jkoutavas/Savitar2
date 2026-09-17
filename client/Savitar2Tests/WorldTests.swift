@@ -454,6 +454,45 @@ class SessionLocalCommandTests: XCTestCase {
         XCTAssertFalse(handler.printedSource)
     }
 
+    func testWordWrapEnabledCanBeToggledAfterConnect() {
+        let session = Session(world: World(), sessionHandler: MockSessionHandler())
+        session.wordWrapEnabled = false
+        XCTAssertFalse(session.wordWrapEnabled)
+        session.wordWrapEnabled.toggle()
+        XCTAssertTrue(session.wordWrapEnabled)
+    }
+
+    func testSessionHonorsWorldWrapOffEvenIfAppPrefWouldWrap() {
+        let world = World()
+        world.wordWrapDefault = .off
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+        XCTAssertFalse(session.wordWrapEnabled)
+    }
+
+    func testChangingWorldWrapDefaultResolvesOntoExistingSession() {
+        let world = World()
+        world.wordWrapDefault = .on
+        let session = Session(world: world, sessionHandler: MockSessionHandler())
+        XCTAssertTrue(session.wordWrapEnabled)
+        world.wordWrapDefault = .off
+        session.world = world
+        session.applyWordWrapFromWorld()
+        XCTAssertFalse(session.wordWrapEnabled)
+    }
+
+    func testWordWrapDefaultMatchingKeepsAppDefaultWhenSessionAgrees() {
+        let world = World()
+        world.wordWrapDefault = .useAppDefault
+        XCTAssertEqual(
+            world.wordWrapDefaultMatching(sessionEnabled: true, appDefault: true),
+            .useAppDefault
+        )
+        XCTAssertEqual(
+            world.wordWrapDefaultMatching(sessionEnabled: false, appDefault: true),
+            .off
+        )
+    }
+
     func testHistoryCommandUsesWorldCommandMarker() {
         let world = World()
         world.cmdMarker = "//"
@@ -873,6 +912,55 @@ class OutputViewCaptureTests: XCTestCase {
         let captured = try String(contentsOf: tempURL, encoding: .utf8)
         XCTAssertTrue(captured.contains("Welcome"))
         XCTAssertTrue(captured.contains("Savitar"))
+    }
+
+    func testAdjustSessionFontSizesClampsAndStepsBothFaces() {
+        let world = World()
+        world.fontSize = 9
+        world.monoFontSize = 11
+
+        XCTAssertTrue(world.adjustSessionFontSizes(by: 1))
+        XCTAssertEqual(world.fontSize, 10)
+        XCTAssertEqual(world.monoFontSize, 12)
+
+        world.fontSize = World.minSessionFontSize
+        world.monoFontSize = World.minSessionFontSize
+        XCTAssertFalse(world.adjustSessionFontSizes(by: -1))
+        XCTAssertEqual(world.fontSize, World.minSessionFontSize)
+
+        world.fontSize = World.maxSessionFontSize
+        world.monoFontSize = World.maxSessionFontSize
+        XCTAssertFalse(world.adjustSessionFontSizes(by: 1))
+        XCTAssertEqual(world.fontSize, World.maxSessionFontSize)
+    }
+
+    func testWordWrapDefaultOmittedFromXMLWhenUsingAppDefault() throws {
+        let world = World()
+        world.wordWrapDefault = .useAppDefault
+        let xml = try world.toXMLElement().xmlString
+        XCTAssertFalse(xml.contains("WORDWRAP"))
+        XCTAssertTrue(world.resolvedWordWrapEnabled(appDefault: true))
+        XCTAssertFalse(world.resolvedWordWrapEnabled(appDefault: false))
+    }
+
+    func testWordWrapDefaultOnOffRoundTripAndOverridesAppPref() throws {
+        let world = World()
+        world.wordWrapDefault = .off
+        XCTAssertFalse(world.resolvedWordWrapEnabled(appDefault: true))
+        var xml = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xml.contains("WORDWRAP=\"off\""))
+
+        let parsedOff = World()
+        try parsedOff.parse(xml: try XML.parse(xml)[WorldElemIdentifier])
+        XCTAssertEqual(parsedOff.wordWrapDefault, .off)
+
+        world.wordWrapDefault = .on
+        XCTAssertTrue(world.resolvedWordWrapEnabled(appDefault: false))
+        xml = try world.toXMLElement().xmlString.prettyXMLFormat()
+        XCTAssertTrue(xml.contains("WORDWRAP=\"on\""))
+        let parsedOn = World()
+        try parsedOn.parse(xml: try XML.parse(xml)[WorldElemIdentifier])
+        XCTAssertEqual(parsedOn.wordWrapDefault, .on)
     }
 }
 

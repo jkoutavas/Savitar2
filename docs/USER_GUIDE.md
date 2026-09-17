@@ -52,7 +52,7 @@ The session window has separate **output** (top) and **input** (bottom) panes. R
 
 **Tip:** Open **Help → Savitar Help** (⌘?) anytime to return to this guide offline. Use **Edit → Find…** (⌘F) to search within the guide.
 
-**Contextual help:** Major windows show a **?** that opens this guide to the relevant section — **World Picker**, **world session window**, **Events**, **Settings** (per toolbar pane), and **World Settings** (per tab, top-right of the sheet).
+**Contextual help:** A **?** on major windows opens this guide for that window or Settings pane.
 
 ### Migrating from Savitar 1
 
@@ -64,7 +64,7 @@ If you used Savitar 1 on an older Mac:
 | **World files**      | Open legacy `.world` documents; they are **read-only** until you **Save** as a Savitar 2 world                                        |
 | **Universal events** | v1 "universal" triggers and macros appear in **Window → Show App-wide Events Window** (⇧⌘E)                                           |
 | **Menus**            | **Edit → Speech → Speak Selected Text** replaces v1 **Start Speaking**; **Audio → Flush Speech Buffer** (⌘L) clears queued speech     |
-| **Settings**         | Scattered v1 preference dialogs are now **Settings…** (⌘,) toolbar panes—see [Settings reference](#settings-reference)                |
+| **Settings**         | Scattered v1 preference dialogs are now **Settings…** (⌘,)—see [Settings reference](#settings-reference)                |
 
 Savitar 2 does not include **MCP** (Multi-Client Protocol) World Settings that Savitar 1 offered.
 
@@ -116,7 +116,7 @@ Continuous speech is the feature most users mean when they turn speech on for a 
 **How to turn it on**
 
 1. Open **Settings…** (⌘,) or **Audio → Speech Settings…**
-2. Select the **Speech** toolbar tab
+2. Select the **Speech** pane
 3. Check **Continuous speech enabled**
 4. Choose a **Voice** and adjust **Rate** if desired
 5. Click the speaker icon next to the voice menu to hear a sample phrase
@@ -198,7 +198,7 @@ MUDs and telnet hosts send **ANSI escape codes** to color and style text in the 
 
 ### Opening the Colors pane
 
-1. Open **Settings…** (⌘,) and select the **Colors** toolbar tab, or
+1. Open **Settings…** (⌘,) and select **Colors**, or
 2. Choose **Edit → ANSI Colors…**
 
 Changes apply immediately to every open world window; you do not need to reconnect.
@@ -230,7 +230,7 @@ Speech and printing strip or ignore ANSI styling: continuous speech reads plain 
 
 ## Input & Display
 
-Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. These options apply **app-wide** and save immediately.
+Open **Settings…** (⌘,) and select **Input & Display**. These options apply **app-wide** and save immediately.
 
 ### App appearance vs world appearance
 
@@ -244,10 +244,10 @@ Open **Settings…** (⌘,) and select the **Input & Display** toolbar tab. Thes
 
 | Option                                 | What it does                                                                                                                                                                                                              |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **App appearance**                     | **System** follows macOS; **Light** or **Dark** forces app chrome regardless of system setting. Does not change MUD session colors in world windows.                                                                      |
+| **App appearance**                     | **System** follows macOS; **Light** or **Dark** forces Savitar’s windows regardless of the system setting. Does not change MUD session colors in world windows. |
 | **Use keypad for macro entry**         | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
 | **Mono fonts only (in font menus)**    | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.                                                          |
-| **Default word wrap for new sessions** | When on, new world sessions start with word wrap in the **input** and **output** panes. Long lines wrap to the pane width instead of scrolling horizontally. Does not change wrap on sessions already open.               |
+| **Default word wrap for new sessions** | When on, new world sessions (and new **text documents**) start wrapped unless the world overrides it. Does not change wrap on sessions already open—use **View → Wrap Lines** for that. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -255,7 +255,7 @@ Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-wo
 
 ## Audio
 
-Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute flags apply **app-wide** and save immediately. The same two cue toggles are available from the menu bar **Audio** menu while a session is open—Settings and the menu stay in sync.
+Open **Settings…** (⌘,) and select **Audio**. These mute flags apply **app-wide** and save immediately. The same two cue toggles are available from the menu bar **Audio** menu while a session is open—Settings and the menu stay in sync.
 
 | Option                  | What it does                                                                                                                                                          |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -270,7 +270,7 @@ Open **Settings…** (⌘,) and select the **Audio** toolbar tab. These mute fla
 
 ## Updates
 
-Official Savitar builds check for newer versions using [Sparkle](https://sparkle-project.org/). Open **Settings…** (⌘,) and select the **Updates** toolbar tab.
+Official Savitar builds check for newer versions using [Sparkle](https://sparkle-project.org/). Open **Settings…** (⌘,) and select **Updates**.
 
 | Option                              | What it does                                                                                                                                                       |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -288,7 +288,7 @@ Your automatic-update preference is saved in app preferences and survives relaun
 
 ## Startup
 
-Open **Settings…** (⌘,) and select the **Startup** toolbar tab. These options control what Savitar opens when you launch the app.
+Open **Settings…** (⌘,) and select **Startup**. These options control what Savitar opens when you launch the app.
 
 | Option                            | What it does                                                                                                                                               |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -302,7 +302,7 @@ Startup flags save immediately like other app Settings. They do not affect world
 
 ## Advanced
 
-Open **Settings…** (⌘,) and select the **Advanced** toolbar tab for rare maintenance actions.
+Open **Settings…** (⌘,) and select **Advanced** for rare maintenance actions.
 
 ### Restore Factory Defaults
 
@@ -332,14 +332,14 @@ World document windows, the **World Picker**, and the **Events** windows each en
 | ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **About Savitar**      | —        | Shows the About box with the classic medallion, version info, and scrolling credits (“Special Heynows”). Click anywhere (or press Escape) to dismiss.                              |
 | **Check for Updates…** | —        | Looks for a newer Savitar release (Sparkle). See [Updates](#updates).                                                                                                              |
-| **Settings…**          | ⌘,       | Opens the app **Settings** window (toolbar panes: Startup, Input & Display, **Colors**, Audio, Updates, Speech, **Advanced**). Changes apply immediately; there is no Save button. |
+| **Settings…**          | ⌘,       | Opens **Settings** (Startup, Input & Display, **Colors**, Audio, Updates, Speech, **Advanced**). Changes apply immediately; there is no Save button. |
 | **Services**           | —        | Standard macOS Services submenu for the current selection (when a supporting service is installed).                                                                                |
 | **Hide Savitar**       | ⌘H       | Hides all Savitar windows.                                                                                                                                                         |
 | **Hide Others**        | ⌥⌘H      | Hides every app except Savitar.                                                                                                                                                    |
 | **Show All**           | —        | Un-hides other applications.                                                                                                                                                       |
 | **Quit Savitar**       | ⌘Q       | Quits the app. Open world documents are closed according to each window’s save state.                                                                                              |
 
-See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), [Updates](#updates), and [Advanced](#advanced) for the other Settings toolbar panes.
+See [Speech settings reference](#speech-speech-settings-reference) for **Speech**, [ANSI colors](#ansi-colors) for **Colors**, [Input & Display](#input-display), [Audio](#audio), [Updates](#updates), and [Advanced](#advanced) for the other Settings panes.
 
 ### File menu
 
@@ -370,6 +370,7 @@ See [Speech settings reference](#speech-speech-settings-reference) for **Speech*
 Plain-text windows are separate from world sessions. Use them to view or edit log files, notes, or other text outside a live connection.
 
 - **New Text Document** (⇧⌘T) opens an empty editor with a fixed-pitch font.
+- **View → Wrap Lines** starts from the app default word-wrap pref and can be toggled per window.
 - **Open…** accepts `.txt`, `.text`, and `.log` files in addition to `.world` documents.
 - Standard **Save**, **Duplicate**, **Print**, and **Edit** commands apply. Find uses the system find panel.
 - Window position and size are remembered between launches (shared across all text document windows).
@@ -389,7 +390,7 @@ The in-game `@printsource` command is separate: it is a debug/logging action, no
 
 | Menu item                        | Shortcut | What it does                                                                                                                                                                  |
 | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Undo**                         | ⌘Z       | Undoes the last edit in the focused text field or Events editor. World settings changes made in **World Settings** are also undoable.                                         |
+| **Undo**                         | ⌘Z       | Undoes the last edit in the focused text field or Events editor. World settings changes (including **View → Bigger/Smaller Text**) are also undoable.                         |
 | **Redo**                         | ⇧⌘Z      | Re-applies the last undone edit.                                                                                                                                              |
 | **Clear Output**                 | ⌘K       | Clears all text in the **output** pane of the frontmost **world** document. Disabled for plain-text document windows.                                                         |
 | **New Trigger** / **New Macro**  | ⇧⌘N      | When an **Events** window is frontmost, adds a new trigger or macro depending on the active tab. The menu label changes automatically. Disabled when no Events window is key. |
@@ -422,12 +423,22 @@ Available when a **world document** window is frontmost.
 
 | Menu item                | Shortcut | What it does                                                                                                                                                                                                                                                           |
 | ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Enter Full Screen**    | ⌃⌘F      | Toggles full-screen mode for the world window.                                                                                                                                                                                                                         |
 | **Show World Events…**   | —        | Opens the **Events** window for this world document—triggers and macros stored in the `.world` file. If the window is already open, brings it forward. The title includes the world document name.                                                                     |
-| **Show World Settings…** | ⇧⌘J      | Opens the **World Settings** sheet for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard.                                                                                                                        |
-| **Scroll Lock**          | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom—useful for reading back while the session continues. Also available from the scroll-lock button in the window title bar. |
+| **Show World Settings…** | ⇧⌘J      | Opens **World Settings** for this world. See [World Settings](#world-settings) below. Click **OK** to apply or **Cancel** to discard.                                                                                                                        |
 
 The same **World Settings** and **Events** commands are available from buttons in the world window’s title bar.
+
+### View menu
+
+Available when a **world document** window is frontmost. These affect how the session is shown, not which world is open.
+
+| Menu item            | Shortcut | What it does                                                                                                                                                                                                 |
+| -------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Bigger Text**      | ⌘+       | Increases the world’s body and code font sizes by one point (also ⌘=). Same values as **World Settings → Appearance**. Disabled at the maximum size or for read-only v1 worlds.                              |
+| **Smaller Text**     | ⌘-       | Decreases those font sizes by one point. Disabled at the minimum size or for read-only v1 worlds.                                                                                                            |
+| **Scroll Lock**      | ⌃S       | Toggles **scroll lock** on the output pane. When on (checkmark shown), new text still arrives but the view does not auto-scroll to the bottom. Also available from the scroll-lock button in the title bar. |
+| **Wrap Lines**       | —        | Checkmark when long lines wrap in **both** the input and output panes. Same setting as **World Settings → Output → Word wrap**. Also a title-bar button. |
+| **Enter Full Screen** | ⌃⌘F     | Toggles full-screen mode for the world window.                                                                                                                                                               |
 
 ### Audio menu
 
@@ -494,7 +505,7 @@ While a session is **connecting**, the bottom area briefly shows a **Connecting*
 
 - Sizes are most accurate with a **monospace** font (see **World Settings → Appearance**). Proportional fonts make row/column counts approximate.
 - **Default word wrap** (Settings → Input & Display) affects how long lines behave inside the pane width; it does not change the column count.
-- **Scroll lock** (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the [World menu](#world-menu) table.
+- **Scroll lock** (⌃S or the title-bar lock button) stops the output pane from auto-scrolling when new text arrives. See the [View menu](#view-menu) table.
 
 ### Navigating output
 
@@ -503,7 +514,7 @@ The **output** pane is a web view showing styled session text. You can:
 | Action                        | How                                                                                                                              |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | **Scroll**                    | Trackpad, mouse wheel, or scrollbar                                                                                              |
-| **Scroll lock**               | **World → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
+| **Scroll lock**               | **View → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
 | **Select & copy**             | Drag to select; **Edit → Copy** (⌘C), or right-click and choose **Copy**                                                         |
 | **Search or speak selection** | Select text, then right-click and choose **Search Selection** or **Speak Selected Text**                                         |
 | **Clear**                     | **Edit → Clear Output** (⌘K), or right-click and choose **Clear**                                                                |
@@ -552,7 +563,7 @@ You manage events in an **Events** window:
 - **Per-world** — **World → Show World Events…** (or the events button in the world window title bar). Triggers and macros here are saved in that world’s `.world` document.
 - **App-wide** — **Window → Show App-wide Events Window** (⇧⌘E). Triggers and macros here apply to **every** world—useful for universal gags, sounds, or shortcuts you always want. Stored in app preferences.
 
-Each Events window has two tabs: **Triggers** and **Macros**. The left side lists items in a table (440pt wide—all columns visible); the right side is the detail editor for the selected trigger or macro. There is no draggable split divider—the window is a fixed 900×400 utility panel, so column widths are tuned for that size. Events windows are **close-only** (no resize or minimize); Savitar remembers their position between sessions.
+Each Events window has two tabs: **Triggers** and **Macros**. Select an item in the list to edit it on the right.
 
 When an Events window is frontmost, **Edit → New Trigger** or **New Macro** (⇧⌘N) adds an item to the active tab.
 
@@ -982,7 +993,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 ### Word wrap
 
-**Settings → Input & Display → Default word wrap for new sessions** sets the initial wrap state at connect time. Changing the pref does not affect already-open sessions.
+**Settings → Input & Display → Default word wrap for new sessions** is the fallback when a world uses **Use app default**. **World Settings → Output → Word wrap** and **View → Wrap Lines** (and the title-bar wrap button) stay in sync for the open session.
 
 ### Session logging
 
@@ -1004,7 +1015,7 @@ If output feels laggy during very fast spam, use **Help → Send Feedback…** s
 
 ### World Picker
 
-The **World Picker** is Savitar’s front door — a modeless utility window listing worlds from your app preferences (bundled defaults, imported worlds, or ones you added).
+The **World Picker** is Savitar’s front door — a list of worlds (bundled defaults, imported worlds, or ones you added).
 
 | Action              | How                                                                                             |
 | ------------------- | ----------------------------------------------------------------------------------------------- |
@@ -1071,7 +1082,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | [Speech](#speech-speech-settings-reference) | Continuous speech, voice, rate                                                |
 | [Advanced](#advanced)                       | Restore factory defaults                                                      |
 
-### World Settings sheet (⇧⌘J)
+### World Settings (⇧⌘J)
 
 | Savitar 2 tab                 | v1 equivalent                |
 | ----------------------------- | ---------------------------- |
@@ -1129,7 +1140,7 @@ When in doubt: **Help → Savitar Help** (⌘?) for the chapter, then **Help →
 
 **World Settings** holds options for the **active world document**—connection details, fonts and colors, input behavior, and logging. Open it with **World → Show World Settings…** (⇧⌘J) or the settings button in the world window title bar.
 
-Changes are staged in the sheet until you click **OK** (or **Cancel** to discard). World settings edits are **undoable** (⌘Z) like other document changes.
+Changes apply when you click **OK** (**Cancel** discards them). World settings edits are **undoable** (⌘Z) like other document changes.
 
 ### Tabs
 
@@ -1166,7 +1177,7 @@ How **this world** renders text in the session window:
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Fore / Back / Link color** | Default text, background, and hyperlink colors for the output pane.                                                                                                        |
 | **Intense**                  | How ANSI **bold / intense** (SGR `1`) is shown: **Auto** uses each hue’s intense palette color; **Bold** keeps normal palette colors and applies bold weight; **Color** uses the intense color swatch (enabled only in Color mode). Bright codes (`90–97`) still use intense palette colors. |
-| **Body font** and **size**   | Proportional font for normal output text.                                                                                                                                  |
+| **Body font** and **size**   | Proportional font for normal output text. **View → Bigger Text** / **Smaller Text** (⌘+/⌘-) also change this size (and **Code font** size) while a session is open. |
 | **Interpret ANSI codes**     | When on, ANSI color and style sequences from the server are shown using the global palette from **Settings → Colors**. When off, raw escape codes may appear as gibberish. |
 | **Interpret HTML tags**      | When on, simple HTML in output is rendered. Enables **Code font** and size for `<code>` regions.                                                                           |
 | **Code font** and **size**   | Monospace font for HTML code blocks (only when HTML interpretation is on).                                                                                                 |
@@ -1233,6 +1244,7 @@ See also [Session window](#session-window) for resizing by dragging the window o
 | **Columns**            | Width of the output and input panes in monospace character columns (default **80**). Changing this resizes the session window when you click **OK**. |
 | **Output rows**        | Height of the output pane in text rows (default **24**).                                                                                             |
 | **Logging Enabled**    | When on, Savitar writes session output to a log file in the background                                                                               |
+| **Word wrap**          | **Use app default**, **On**, or **Off**. Matches **View → Wrap Lines** for this session and is saved with the world. |
 | **Append / Overwrite** | Whether each session adds to the file or replaces it                                                                                                 |
 | **Log file path**      | Where the log is stored; use **Set now** to pick a location                                                                                          |
 

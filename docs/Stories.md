@@ -10,7 +10,7 @@ Savitar 1 spread settings across three surfaces:
 | **Speech** | `DoSpeechPreferences()` | Done — Settings → Speech pane (Story 4) |
 | **ANSI Color Settings** | `EditColors()` | Done — Settings → Colors pane (Story 5) |
 
-The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) and **Story 6** (Events Window HIG) are complete. **Story 2** is partially complete (see below). **Story 8** tracks SwiftUI Settings exploration; **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (v2.1) improves word-wrap UX beyond v1 pref parity. **Story 28** (v2.1) adds the echo-back color swatch Savitar 1 never shipped. **Story 21** restores the scrolling-credits About box.
+The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5, and 23** (app Settings HIG) are complete; **Story 7** (World Picker HIG) and **Story 6** (Events Window HIG) are complete. **Story 2** is partially complete (see below). **Story 8** tracks SwiftUI Settings exploration; **Story 25** (Window menu HIG) is complete. **Story 24** tracks Settings → Advanced maintenance backlog. **Story 26** adds app-wide light/dark appearance (complete). **Stories 9–19** cover the user guide, feature backlog, analytics, help delivery, and web cross-links. **Story 20** (session word wrap) is complete. **Story 28** (v2.1) adds the echo-back color swatch Savitar 1 never shipped. **Story 21** restores the scrolling-credits About box.
 
 ---
 
@@ -68,7 +68,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 - [x] **2.1** **Use keypad** — honor `useKeypad` in macro hotkey / input handling (v1: keypad chord entry)
 - [x] **2.2** **Mono fonts only** — filter font menus when `monoFontsOnly` is set (v1: `UFontMenu::Initialize`)
-- [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`). *v2.0 scope: v1 pref parity only; per-session toggle and live updates → [Story 20](#story-20--session-word-wrap-v21)*
+- [x] **2.3** **Default word wrap** — apply `defaultWordWrap` to new session input/output panes at connect time (`Session.wordWrapEnabled`, `WordWrapFormatting`). Live toggle and per-world default: [Story 20](#story-20--session-word-wrap-v21) ✅
 - [x] **2.4** **Mute terminal bell** — suppress or pass through BEL when `muteBell` is set
 - [x] **2.5** **Mute clicker** — `muteClicker` pref honored when Macro Clicker button fires (Story 11)
 - [x] **2.6** **`trigsClosed` / `varsClosed`** — **won't do.** In v1 these flags remembered whether **Universal** and **per-world** outline groups were collapsed in a single Events table (Triggers tab and Macros tab each had disclosure triangles for every connected world). v2 splits that into a **universal** Events window and **per-document** Events windows, each a flat trigger/macro list with no outline groups — window choice replaces group collapse. Flags stay in `PrefsFlags` so v1 prefs XML still loads; no behavior to wire.
@@ -1063,15 +1063,15 @@ Ship an **Apple Help Book** (`.help` bundle) generated from `docs/USER_GUIDE.md`
 
 ---
 
-## Story 20 — Session word wrap (v2.1)
+## Story 20 — Session word wrap ✅
 
 **Goal:** Make word wrap practical for daily use — toggle it live per session, optionally remember a per-world default, without requiring close/reopen. Keeps Story **2.3** as v1 **`TVPrefFlag_t_DefaultWordWrap`** parity for 2.0.
 
-**Target release:** Savitar **2.1** (post–feature-matching beta). Not a 2.0 blocker.
+**Status:** Complete.
 
-**Context — what 2.0 ships today**
+**Context — shipped**
 
-Story 2.3 wires the app-wide **Default word wrap for new sessions** checkbox to `Session.wordWrapEnabled` at connect time. That value is fixed for the life of the session; changing the pref or wanting different wrap per world means closing and reopening the window. Users notice both problems in practice.
+Story 2.3 wires the app-wide **Default word wrap for new sessions** checkbox. **View → Wrap Lines**, a session title-bar wrap button, per-world **Output** default (`WORDWRAP`), and text-document wrap complete Story **20**.
 
 **v1 behavior (reference)**
 
@@ -1133,15 +1133,15 @@ Input and output wrap stay **linked** in a session (one toggle) — v1 session U
 
 ### Tasks
 
-- [ ] **20.1** **`Session.wordWrapEnabled` mutable** — replace `let` with `var`; add `setWordWrap(_:)` that updates input + output via `WindowController` / `WordWrapFormatting` without reconnect.
-- [ ] **20.2** **Resolve initial wrap** — on session connect: `world.wordWrapDefault ?? app.defaultWordWrap` (exact API TBD in **20.4**).
-- [ ] **20.3** **View menu** — **View → Word Wrap** checkmark bound to frontmost world session; enable only for world document windows. Optional shortcut (e.g. ⌃⌘W if unused).
-- [ ] **20.4** **Per-world default** — new field on `World` / Output settings model; World Settings → Output UI; parse/serialize in `.world` XML; “Use app default” omits or sentinel value for v1 import compatibility.
-- [ ] **20.5** **Session chrome toggle** — title-bar button or input-pane control; VoiceOver label; sync with View menu state.
-- [ ] **20.6** **Output live update** — when toggling off→on or on→off, re-inject `WordWrapFormatting.outputPreCSS` (or equivalent) so existing buffer reflows without clearing.
-- [ ] **20.7** **Text document parity (stretch)** — `PlainTextDocument` gets the same toggle + app-pref default as v1 text windows (blue-arrow behavior); can ship as **20.7** follow-up if session work lands first.
-- [ ] **20.8** **Docs** — update `USER_GUIDE.md` (Input & Display + World Settings Output + session window); `HIG.md` session-window section; Story **9.3** output chapter.
-- [ ] **20.9** **Tests** — toggle updates `Session` and both panes; world default overrides app pref at connect; app pref change does not alter open session.
+- [x] **20.1** **`Session.wordWrapEnabled` mutable** — replace `let` with `var`; add `setWordWrap(_:)` that updates input + output via `WindowController` / `WordWrapFormatting` without reconnect.
+- [x] **20.2** **Resolve initial wrap** — on session connect: `world.wordWrapDefault` vs app `defaultWordWrap`.
+- [x] **20.3** **View menu** — **View → Wrap Lines** checkmark bound to frontmost world session; enable only for world document windows.
+- [x] **20.4** **Per-world default** — new field on `World` / Output settings model; World Settings → Output UI; parse/serialize in `.world` XML; “Use app default” omits or sentinel value for v1 import compatibility.
+- [x] **20.5** **Session chrome toggle** — title-bar button or input-pane control; VoiceOver label; sync with View menu state.
+- [x] **20.6** **Output live update** — when toggling off→on or on→off, re-inject `WordWrapFormatting.outputPreCSS` (or equivalent) so existing buffer reflows without clearing.
+- [x] **20.7** **Text document parity (stretch)** — `PlainTextDocument` gets the same toggle + app-pref default as v1 text windows (blue-arrow behavior); can ship as **20.7** follow-up if session work lands first.
+- [x] **20.8** **Docs** — update `USER_GUIDE.md` (Input & Display + World Settings Output + session window); `HIG.md` session-window section; Story **9.3** output chapter.
+- [x] **20.9** **Tests** — toggle updates `Session` and both panes; world default overrides app pref at connect; app pref change does not alter open session.
 
 ### Touchpoints
 
@@ -1430,7 +1430,7 @@ Echo back color   [■]
 19. ~~**Story 26 — App-wide appearance**~~ ✅ — System / Light / Dark on **Input & Display**; Savitar Help dark-mode CSS
 20. Story 10 — Command aliases
 21. ~~Story 11 — Macro Clicker~~ ✅
-22. **Story 20 — Session word wrap (v2.1)** — live per-session toggle, per-world default; after 2.0 ships
+22. ~~**Story 20 — Session word wrap**~~ ✅ — live toggle, per-world default, title-bar + text documents
 23. **Story 28 — Echo back color (v2.1)** — World Settings → Appearance swatch for `ECHOBGCOLOR`; v1 never shipped the control
 24. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
 25. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)

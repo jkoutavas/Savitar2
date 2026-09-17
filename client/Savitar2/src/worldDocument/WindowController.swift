@@ -12,10 +12,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
     private static let scrollLockButtonTag = 1001
     private static let eventsButtonTag = 1002
     private static let settingsButtonTag = 1003
+    private static let wrapLinesButtonTag = 1004
 
     internal var reallyClosing = false
     private var eventsWindowController: EventsWindowController?
     private weak var scrollLockButton: NSButton?
+    private weak var wrapLinesButton: NSButton?
     private var windowTitle = ""
     private let resolutionOverlay = ResolutionOverlay()
     private weak var observedSplitView: NSSplitView?
@@ -127,6 +129,19 @@ class WindowController: NSWindowController, NSWindowDelegate {
         outputVC.outputView.clear()
     }
 
+    @IBAction func biggerTextAction(_: Any) {
+        adjustSessionFontSize(by: 1)
+    }
+
+    @IBAction func smallerTextAction(_: Any) {
+        adjustSessionFontSize(by: -1)
+    }
+
+    @IBAction func toggleWrapLinesAction(_: Any) {
+        guard let session = (document as? Document)?.session else { return }
+        persistSessionWordWrap(enabled: !session.wordWrapEnabled)
+    }
+
     @IBAction func toggleScrollLockAction(_ sender: Any) {
         let splitViewController = contentViewController as? SessionViewController
         guard let svc = splitViewController else { return }
@@ -176,16 +191,26 @@ class WindowController: NSWindowController, NSWindowDelegate {
         guard let vc = settingsWC.contentViewController as? WorldSettingsController else { return }
         settingsWC.settingsController = vc
         vc.sheetWindowController = settingsWC
+        let wrapSnapshot = doc.session?.wordWrapEnabled
         vc.completionHandler = { [weak self] apply, editedWorld in
             guard let self else { return }
             if apply == true {
                 self.worldDidChange(from: editedWorld!)
+            } else if let wrapSnapshot {
+                self.applyLiveWordWrap(enabled: wrapSnapshot, persistToWorld: false)
             }
             settingsWC.dismissModal()
         }
 
         settingsWC.loadWindow()
         vc.world = doc.world
+        let appDefault = AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+        if let edited = vc.world, let wrapSnapshot {
+            edited.wordWrapDefault = edited.wordWrapDefaultMatching(
+                sessionEnabled: wrapSnapshot,
+                appDefault: appDefault
+            )
+        }
         settingsWC.presentModally()
     }
 
@@ -202,7 +227,11 @@ class WindowController: NSWindowController, NSWindowDelegate {
 
         doc.undoManager?.setActionName(NSLocalizedString("Change World Settings",
                                                          comment: "Change World Settings"))
+        let previousWrapDefault = doc.world?.wordWrapDefault
         doc.worldDidChange(fromWorld: fromWorld)
+        if let session = doc.session, previousWrapDefault != fromWorld.wordWrapDefault {
+            session.applyWordWrapFromWorld()
+        }
         let wordWrap = doc.session?.wordWrapEnabled ?? false
         updateViews(fromWorld, wordWrap: wordWrap, applyPaneLayout: true)
     }
@@ -259,6 +288,81 @@ class WindowController: NSWindowController, NSWindowDelegate {
         // two rows), so do not enable AppKit's competing global persistence.
         svc.splitView.autosaveName = nil
         updateScrollLockControl(locked: svc.isScrollLocked)
+        updateWrapLinesControl(enabled: (document as? Document)?.session?.wordWrapEnabled ?? false)
+    }
+
+    private func adjustSessionFontSize(by delta: CGFloat) {
+        guard let world = (document as? Document)?.world else { return }
+        applySessionFontSizes(body: world.fontSize + delta, mono: world.monoFontSize + delta)
+    }
+
+    private func applySessionFontSizes(body: CGFloat, mono: CGFloat) {
+        guard let doc = document as? Document, let world = doc.world, world.editable else { return }
+        let previousBody = world.fontSize
+        let previousMono = world.monoFontSize
+        let nextBody = min(max(body, World.minSessionFontSize), World.maxSessionFontSize)
+        let nextMono = min(max(mono, World.minSessionFontSize), World.maxSessionFontSize)
+        guard nextBody != previousBody || nextMono != previousMono else { return }
+        world.fontSize = nextBody
+        world.monoFontSize = nextMono
+
+        doc.undoManager?.registerUndo(withTarget: self, handler: { controller in
+            controller.applySessionFontSizes(body: previousBody, mono: previousMono)
+        })
+        doc.undoManager?.setActionName(NSLocalizedString("Change Font Size", comment: "Change Font Size"))
+        doc.updateChangeCount(.changeDone)
+        applySessionFonts(from: world)
+    }
+
+    private func applySessionFonts(from world: World) {
+        guard let svc = contentViewController as? SessionViewController,
+              let inputVC = svc.inputViewController,
+              let outputVC = svc.outputViewController else { return }
+        outputVC.setStyle(world: world)
+        svc.applyStatusBarStyle(world: world)
+        if let font = NSFont(name: world.fontName, size: world.fontSize) {
+            inputVC.font = font
+        }
+    }
+
+    func applyEditedWorldWordWrap(_ world: World) {
+        applyLiveWordWrap(
+            enabled: world.resolvedWordWrapEnabled(
+                appDefault: AppContext.shared.prefs.flags.contains(.defaultWordWrap)
+            ),
+            persistToWorld: false
+        )
+    }
+
+    private func persistSessionWordWrap(enabled: Bool) {
+        applyLiveWordWrap(enabled: enabled, persistToWorld: true)
+    }
+
+    private func applyLiveWordWrap(enabled: Bool, persistToWorld: Bool) {
+        guard let doc = document as? Document, let session = doc.session else { return }
+        session.wordWrapEnabled = enabled
+        applySessionWordWrap(enabled)
+        updateWrapLinesControl(enabled: enabled)
+        guard persistToWorld, let world = doc.world, world.editable else { return }
+        let previous = world.wordWrapDefault
+        let next: WordWrapDefault = enabled ? .on : .off
+        guard previous != next else { return }
+        world.wordWrapDefault = next
+        doc.undoManager?.registerUndo(withTarget: self, handler: { controller in
+            controller.applyLiveWordWrap(enabled: !enabled, persistToWorld: true)
+        })
+        doc.undoManager?.setActionName(NSLocalizedString("Wrap Lines", comment: "Wrap Lines"))
+        doc.updateChangeCount(.changeDone)
+    }
+
+    private func applySessionWordWrap(_ enabled: Bool) {
+        guard let world = (document as? Document)?.world,
+              let svc = contentViewController as? SessionViewController,
+              let inputVC = svc.inputViewController,
+              let outputVC = svc.outputViewController else { return }
+        inputVC.setWordWrap(enabled)
+        outputVC.setWordWrap(enabled)
+        outputVC.setStyle(world: world)
     }
 
     private func installSplitViewObservationIfNeeded(_ splitView: NSSplitView) {
@@ -388,6 +492,17 @@ class WindowController: NSWindowController, NSWindowDelegate {
         scrollLockButton = button
         updateScrollLockControl(locked: false)
 
+        if let wrapButton = titlebarView.viewWithTag(Self.wrapLinesButtonTag) as? NSButton {
+            configureTitlebarButton(wrapButton,
+                                    action: #selector(toggleWrapLinesAction(_:)),
+                                    image: Self.wrapLinesIcon(enabled: false),
+                                    alternateImage: Self.wrapLinesIcon(enabled: true),
+                                    label: "Wrap Lines")
+            wrapButton.setButtonType(.toggle)
+            wrapLinesButton = wrapButton
+            updateWrapLinesControl(enabled: false)
+        }
+
         if let eventsButton = titlebarView.viewWithTag(Self.eventsButtonTag) as? NSButton {
             configureTitlebarButton(eventsButton,
                                     action: #selector(showWorldEvents(_:)),
@@ -420,6 +535,12 @@ class WindowController: NSWindowController, NSWindowDelegate {
         button.setAccessibilityLabel(label)
         button.bezelStyle = .texturedRounded
         button.imageScaling = .scaleProportionallyDown
+    }
+
+    private func updateWrapLinesControl(enabled: Bool) {
+        wrapLinesButton?.state = enabled ? .on : .off
+        wrapLinesButton?.toolTip = enabled ? "Wrap lines is on" : "Wrap lines is off"
+        wrapLinesButton?.setAccessibilityValue(enabled ? "On" : "Off")
     }
 
     private func updateScrollLockControl(locked: Bool) {
@@ -456,6 +577,26 @@ class WindowController: NSWindowController, NSWindowDelegate {
                           controlPoint2: NSPoint(x: locked ? 11 : 13.2, y: 14))
             shackle.line(to: NSPoint(x: locked ? 11 : 13.2, y: locked ? 8.4 : 10.4))
             shackle.stroke()
+        }
+    }
+
+    private static func wrapLinesIcon(enabled: Bool) -> NSImage {
+        return iconImage { _ in
+            let path = NSBezierPath()
+            path.lineWidth = 1.6
+            path.lineCapStyle = .round
+            path.move(to: NSPoint(x: 2.5, y: 12.5))
+            path.line(to: NSPoint(x: 13.5, y: 12.5))
+            path.move(to: NSPoint(x: 2.5, y: 8.5))
+            path.line(to: NSPoint(x: enabled ? 10.5 : 13.5, y: 8.5))
+            if enabled {
+                path.move(to: NSPoint(x: 2.5, y: 4.5))
+                path.line(to: NSPoint(x: 8.5, y: 4.5))
+            } else {
+                path.move(to: NSPoint(x: 2.5, y: 4.5))
+                path.line(to: NSPoint(x: 13.5, y: 4.5))
+            }
+            path.stroke()
         }
     }
 
@@ -602,6 +743,20 @@ extension WindowController: NSMenuItemValidation {
         if menuItem.action == #selector(toggleScrollLockAction(_:)) {
             let splitViewController = contentViewController as? SessionViewController
             menuItem.state = splitViewController?.isScrollLocked == true ? .on : .off
+        }
+        if menuItem.action == #selector(toggleWrapLinesAction(_:)) {
+            guard let session = (document as? Document)?.session else { return false }
+            menuItem.state = session.wordWrapEnabled ? .on : .off
+        }
+        if menuItem.action == #selector(biggerTextAction(_:))
+            || menuItem.action == #selector(smallerTextAction(_:)) {
+            guard let world = (document as? Document)?.world, world.editable else { return false }
+            if menuItem.action == #selector(biggerTextAction(_:)) {
+                return world.fontSize < World.maxSessionFontSize
+                    || world.monoFontSize < World.maxSessionFontSize
+            }
+            return world.fontSize > World.minSessionFontSize
+                || world.monoFontSize > World.minSessionFontSize
         }
         return true
     }

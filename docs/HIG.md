@@ -77,7 +77,7 @@ Per-world options belong in **World Settings** (modal dialog on the world docume
 | **World → Show World Settings…** (⇧⌘J) or title-bar control | `WindowController` + `WorldSettings.storyboard` |
 | Modal; blocks parent until dismissed; **OK** / **Cancel** | Child window + `runModal`; changes staged until OK; **Escape** cancels |
 | Settings window title = document name + tab | e.g. `Alter Aeon — Starting`; document window title unchanged |
-| Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)` |
+| Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)`; height animates with the title bar fixed |
 | Toolbar tab style (macOS 11+) | `WorldSettingsTabViewController`; `toolbarStyle = .preference` on settings window |
 | Tabs: Starting, Appearance, Input, Output, Closing | `NSTabView` + toolbar; MCP deferred |
 | Contextual **?** per tab | `SavitarHelpButton.installInTopTrailingCorner` |
@@ -98,7 +98,7 @@ Triggers, macros, and (when shipped) aliases. Universal (app-wide) and per-world
 | **Window → Show App-wide Events Window** (⇧⌘E) | ✅ | — |
 | Contextual **?** in title bar | ✅ | — |
 | Frame autosave | `EventsWindowFrame` | ✅ Center on first open when no saved frame; restore full frame thereafter |
-| Window chrome | Close-only, fixed 900×400 | ✅ `EventsWindowController` (universal + per-world) |
+| Window chrome | Close-only, 900pt wide; height fits Triggers vs Macros | ✅ `EventsWindowController`; tab height animates with the title bar fixed |
 | Layout | Fixed two columns (440pt list + detail) | ✅ `EventsContentViewController`; no split divider (fixed window made draggable split unnecessary) |
 | **Window** menu listing when open | ✅ | Standard window list + **Show App-wide Events Window** (⇧⌘E) |
 | v1 outline disclosure (`trigsClosed` / `varsClosed`) | N/A — import-only | **Won't do** — v2 uses separate universal/per-world Events windows with flat lists ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
@@ -147,7 +147,7 @@ World sessions are **document windows** (one `.world` per window). Plain-text no
 
 - World-specific appearance and connection options → **World Settings**, not app Settings.
 - Session window exposes contextual **?** → [Session window](USER_GUIDE.md#session-window) help anchor.
-- **Scroll lock** (⌃S) and title-bar control; see [USER_GUIDE.md](USER_GUIDE.md) Menus chapter.
+- **Scroll lock** (⌃S) and **Wrap Lines** title-bar controls; see [USER_GUIDE.md](USER_GUIDE.md) Menus chapter.
 - Output pane (`WKWebView`) — no v1 buffer/flush Settings; `FLUSHTICKS` dead; `OUTPUTMAX`/`OUTPUTMIN` honored internally at beta ([OutputPerformance.md](OutputPerformance.md), Story 27).
 
 ---
@@ -211,6 +211,23 @@ Savitar does **not** use tabbed document windows: `NSWindow.allowsAutomaticWindo
 | **Show App-wide Events Window** | ⇧⌘E | Opens or brings forward universal Events |
 
 **⌘N** (**File → New World Document…**) opens the **World Picker** rather than an untitled document — choosing a world *is* the new-document step. **Show World Picker** in the Window menu reopens it after it has been closed (no keyboard shortcut assigned; TBD).
+
+### View menu
+
+How the frontmost **world document** is shown (not window zoom, and not which world is open):
+
+| Item | Shortcut | Behavior |
+|------|----------|----------|
+| **Bigger Text** | ⌘+ (also ⌘=) | Increase body and code font sizes by 1pt; persist on the world |
+| **Smaller Text** | ⌘- | Decrease those sizes by 1pt |
+| **Scroll Lock** | ⌃S | Checkmark when output auto-scroll is locked; same as the title-bar lock |
+| **Wrap Lines** | — | Checkmark when input and output wrap; stays in sync with World Settings → Output. Title-bar wrap button too. |
+| **Enter Full Screen** | ⌃⌘F | Standard; last item on View |
+| *(font items disabled)* | | Read-only v1 worlds, or min (6pt) / max (96pt) |
+
+Do **not** put font size on **Window** — **Window → Zoom** already means grow/shrink the window frame.
+
+Touchpoint: `WindowController` + `Main.storyboard`.
 
 ### Help menu
 
