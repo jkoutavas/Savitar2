@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.29] - 2026-09-17
+
 ### Added
 
 - **Session font zoom** — **View → Bigger Text** / **Smaller Text** (⌘+ / ⌘-) change a world’s body and code font sizes while the session is open
@@ -246,7 +248,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.28...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.29...HEAD
+[2.0.29]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.29
 [2.0.28]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.28
 [2.0.27]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.27
 [2.0.26]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.26
