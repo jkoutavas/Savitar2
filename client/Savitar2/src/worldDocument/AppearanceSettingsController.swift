@@ -193,10 +193,26 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
     /// v1 Appearance checkbox `bDirectXCMDs` ("Send xch_cmds immediately").
     private func installDirectXCmdsControlIfNeeded() {
         guard !didInstallDirectXCmdsControl else { return }
-        // Place just above the Interpret HTML box (v1 Appearance panel, near HTML).
+        guard let ansiCheckbox = view.subviews.compactMap({ $0 as? NSButton }).first(where: {
+            $0.title == "Interpret ANSI codes"
+        }) else { return }
         guard let htmlBox = view.subviews.first(where: {
             ($0 as? NSBox)?.title.contains("Interpret HTML") == true
-        }) else { return }
+        }) as? NSBox else { return }
+        let htmlCheckbox = view.constraints.compactMap { constraint -> NSButton? in
+            guard constraint.firstAttribute == .top, constraint.secondAttribute == .top else { return nil }
+            if (constraint.firstItem as? NSView) === htmlBox {
+                return constraint.secondItem as? NSButton
+            }
+            if (constraint.secondItem as? NSView) === htmlBox {
+                return constraint.firstItem as? NSButton
+            }
+            return nil
+        }.first
+        guard let htmlCheckbox else { return }
+
+        htmlBox.setContentCompressionResistancePriority(.required, for: .vertical)
+        htmlBox.heightAnchor.constraint(greaterThanOrEqualToConstant: 75).isActive = true
 
         didInstallDirectXCmdsControl = true
         let button = NSButton(
@@ -210,9 +226,19 @@ class AppearanceSettingsController: OutputViewNavigationDelegate {
         view.addSubview(button)
         directXCmdsButton = button
 
+        for constraint in view.constraints where
+            (constraint.firstItem as? NSView) === htmlCheckbox &&
+            constraint.firstAttribute == .top &&
+            (constraint.secondItem as? NSView) === ansiCheckbox &&
+            constraint.secondAttribute == .bottom {
+            constraint.isActive = false
+            break
+        }
+
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: htmlBox.leadingAnchor, constant: 4),
-            button.bottomAnchor.constraint(equalTo: htmlBox.topAnchor, constant: -6)
+            button.leadingAnchor.constraint(equalTo: ansiCheckbox.leadingAnchor),
+            button.topAnchor.constraint(equalTo: ansiCheckbox.bottomAnchor, constant: 8),
+            htmlCheckbox.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 8)
         ])
 
         if let world = representedObject as? World {
