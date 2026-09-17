@@ -77,7 +77,7 @@ Per-world options belong in **World Settings** (modal dialog on the world docume
 | **World → Show World Settings…** (⇧⌘J) or title-bar control | `WindowController` + `WorldSettings.storyboard` |
 | Modal; blocks parent until dismissed; **OK** / **Cancel** | Child window + `runModal`; changes staged until OK; **Escape** cancels |
 | Settings window title = document name + tab | e.g. `Alter Aeon — Starting`; document window title unchanged |
-| Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)` |
+| Sheet resizes per tab | `WorldSettingsWindowController` + `fittingContentSize(for:)`; height animates with the title bar fixed |
 | Toolbar tab style (macOS 11+) | `WorldSettingsTabViewController`; `toolbarStyle = .preference` on settings window |
 | Tabs: Starting, Appearance, Input, Output, Closing | `NSTabView` + toolbar; MCP deferred |
 | Contextual **?** per tab | `SavitarHelpButton.installInTopTrailingCorner` |

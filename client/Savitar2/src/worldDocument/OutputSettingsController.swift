@@ -148,10 +148,7 @@ class OutputSettingsController: NSViewController {
         view.addSubview(wrapBox)
 
         NSLayoutConstraint.activate([
-            loggingEnabledButton.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
-            loggingEnabledButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
-
-            wrapBox.topAnchor.constraint(equalTo: loggingEnabledButton.bottomAnchor, constant: spacing),
+            wrapBox.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
             wrapBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             wrapBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
 
@@ -169,7 +166,10 @@ class OutputSettingsController: NSViewController {
             paneContent.topAnchor.constraint(equalTo: paneSizeBox.contentView!.topAnchor, constant: 14),
             paneContent.bottomAnchor.constraint(equalTo: paneSizeBox.contentView!.bottomAnchor, constant: -14),
 
-            logFileBox.topAnchor.constraint(equalTo: paneSizeBox.bottomAnchor, constant: spacing),
+            loggingEnabledButton.topAnchor.constraint(equalTo: paneSizeBox.bottomAnchor, constant: spacing),
+            loggingEnabledButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+
+            logFileBox.topAnchor.constraint(equalTo: loggingEnabledButton.bottomAnchor, constant: spacing),
             logFileBox.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
             logFileBox.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
             logFileBox.heightAnchor.constraint(greaterThanOrEqualToConstant: 152),
