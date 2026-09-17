@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Minimum macOS is 12.0** — Xcode 27 no longer accepts a 11.0 deployment target (supported range is 12.0–27.x)
+
 ## [2.0.29] - 2026-09-17
 
 ### Added
