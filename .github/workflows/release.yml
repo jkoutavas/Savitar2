@@ -43,7 +43,15 @@ jobs:
 
       - name: Install Ruby tooling (fastlane)
         working-directory: client
-        run: bundle install
+        run: |
+          set -euo pipefail
+          # macos-26 images ship Bundler 4. A bare `bundle` sees Gemfile.lock's
+          # BUNDLED WITH (2.5.22) and stops to install that version and restart.
+          # Install the locked Bundler first, then invoke it by version.
+          version=$(awk '/^BUNDLED WITH/{getline; gsub(/[[:space:]]/,""); print; exit}' Gemfile.lock)
+          gem install bundler -v "$version" --no-document
+          echo "BUNDLER_VERSION_SWITCH=_${version}_" >> "$GITHUB_ENV"
+          bundle "_${version}_" install
 
       - name: Import Developer ID signing certificate
         env:
@@ -89,7 +97,8 @@ jobs:
           RELEASE_VERSION: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
           TELEMETRYDECK_APP_ID: ${{ secrets.TELEMETRYDECK_APP_ID }}
           # APP_STORE_CONNECT_KEY_PATH is exported by the previous step.
-        run: bundle exec fastlane release
+          # BUNDLER_VERSION_SWITCH selects the Bundler version recorded in Gemfile.lock.
+        run: bundle "$BUNDLER_VERSION_SWITCH" exec fastlane release
 
       - name: Upload release artifact to the workflow run
         uses: actions/upload-artifact@v7

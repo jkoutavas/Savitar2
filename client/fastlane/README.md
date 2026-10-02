@@ -97,7 +97,10 @@ client/fastlane/release/Savitar.zip
 
 The `.github/workflows/release.yml` workflow runs the `release` lane on a
 GitHub-hosted `macos-26` runner and attaches the signed, notarized zip to the
-GitHub Release.
+GitHub Release. Those images ship Bundler 4, so the job installs the Bundler
+version recorded in `client/Gemfile.lock` (`BUNDLED WITH`) and invokes that
+version directly. A bare `bundle` would otherwise stop, install Bundler 2.5.22,
+and restart.
 
 It is locked down so that only the repository owner can produce an official
 signed build:
