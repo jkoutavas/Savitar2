@@ -527,7 +527,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 
 - [x] **9.3** **Output & appearance** — ANSI, HTML stub, word wrap, logging; v1 buffer/flush UI won't do ([OutputPerformance.md](OutputPerformance.md))
 - [x] **9.4** **Triggers in depth** — order, types, matching, wildcards, appearance, audio, reply
-- [x] **9.4b** **Editing events** — new/rename/reorder/undo; per-world vs app-wide
+- [x] **9.4b** **Editing events** — new/rename/reorder/undo; drag output text onto Triggers; per-world vs app-wide
 - [x] **9.5** **Settings reference** — v1 → v2 mapping tables; Startup pane; MCP deferred; Closing tab shipped
 - [x] **9.6** **Worlds & connection** — World Picker, wizard, multi-session, troubleshooting
 - [x] **9.7** **Tips & troubleshooting** — short chapter with cross-links
@@ -541,7 +541,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 |-------|-------------------|------------|----------------|
 | MCP SimpleEdit | §4 MCP, §5 MCP tab | README `_ MCP` | One paragraph "not in v2 yet" until shipped |
 | File upload / capture | §4 Upload/Download, §6 `upload` / `capture` | Next PR (`##upload`, `##capture` + logging QA) | Guide § planned next |
-| Text drag-and-drop to Events | §4 Text Drag and Drop | Verify v2 parity | **9.4b** if implemented |
+| ~~Text drag-and-drop to Events~~ | §4 Text Drag and Drop | ✅ Drag selected output onto the Triggers list creates a trigger | **9.4b** [Editing events](USER_GUIDE.md#editing-events) |
 | HTML / xch_cmd links | §4 HTML, xch_cmd | README `_ xch_cmd` | **9.3** stub |
 | ~~Status bar / divider~~ | §4 Status Bar | ✅ Shipped July 2026 (`##set status`, inverse colors; styling setting → 2.1) | **9.2** [Status bars](USER_GUIDE.md#status-bars) |
 | ~~Web interaction text~~ | §4 Web Interaction | ✅ `telnet://` helper + output hand-off | **9.6** [Opening `telnet://` links](USER_GUIDE.md#opening-telnet-links) |

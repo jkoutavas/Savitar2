@@ -102,6 +102,16 @@ private enum TriggerPatternPart {
 class Trigger: SavitarObject, NSCopying {
     public static let defaultName = "<new trigger>"
 
+    /// Output trigger whose match pattern is the first line of text dragged from session output.
+    /// Empty or whitespace-only drops return nil.
+    static func fromDroppedOutputText(_ text: String) -> Trigger? {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let line = trimmed.split(whereSeparator: \.isNewline).first else { return nil }
+        let pattern = String(line).trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !pattern.isEmpty else { return nil }
+        return Trigger(name: pattern)
+    }
+
     // default settings
     var audioType: TrigAudioType = .silent
     var appearance: TrigAppearance = .dontUseStyle

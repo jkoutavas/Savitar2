@@ -32,6 +32,12 @@ class OutputView: WKWebView {
                 y: event.clientY
             });
         }, true);
+        document.addEventListener('dragstart', function(event) {
+            var text = window.getSelection().toString();
+            if (!text || !event.dataTransfer) { return; }
+            event.dataTransfer.setData('text/plain', text);
+            event.dataTransfer.effectAllowed = 'copy';
+        }, true);
     }
     """
 

@@ -28,22 +28,31 @@ extension TriggerTableDataSource: NSTableViewDataSource {
         return TriggerPasteboardWriter(object: object, at: row)
     }
 
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow _: Int,
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
                    proposedDropOperation _: NSTableView.DropOperation) -> NSDragOperation {
         if let source = info.draggingSource as? NSTableView, source === tableView {
             // We're moving an item within the same tableview
+            tableView.setDropRow(row, dropOperation: .above)
             tableView.draggingDestinationFeedbackStyle = .gap
             return .move
-        } else {
+        }
+        if info.draggingPasteboard.types?.contains(.trigger) == true {
             // We're copying an item from another table view
             tableView.draggingDestinationFeedbackStyle = .regular
             return .copy
         }
+        if Self.trigger(fromDroppedOutputTextOn: info.draggingPasteboard) != nil {
+            // Selected session output (or other plain text) becomes a new trigger
+            tableView.setDropRow(row, dropOperation: .above)
+            tableView.draggingDestinationFeedbackStyle = .gap
+            return .copy
+        }
+        return []
     }
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int,
                    dropOperation _: NSTableView.DropOperation) -> Bool {
-        guard let items = info.draggingPasteboard.pasteboardItems else { return false }
+        let items = info.draggingPasteboard.pasteboardItems ?? []
 
         if let source = info.draggingSource as? NSTableView, source === tableView {
             // We're moving an item within the same tableview
@@ -72,7 +81,42 @@ extension TriggerTableDataSource: NSTableViewDataSource {
             }
         }
 
+        if let trigger = Self.trigger(fromDroppedOutputTextOn: info.draggingPasteboard),
+           let index = insertTrigger(trigger, at: row) {
+            tableView.scrollRowToVisible(index)
+            return true
+        }
+
         return false
+    }
+
+    /// Inserts `trigger` at the proposed drop row and selects it. Returns the index used.
+    func insertTrigger(_ trigger: Trigger, at row: Int) -> Int? {
+        guard let store else { return nil }
+        let index = Self.insertionIndex(proposedRow: row, itemCount: store.state?.triggerList.items.count ?? 0)
+        store.dispatch(InsertTriggerAction(trigger: trigger, atIndex: index))
+        store.dispatch(SelectTriggerAction(selection: index))
+        return index
+    }
+
+    static func trigger(fromDroppedOutputTextOn pasteboard: NSPasteboard) -> Trigger? {
+        if let text = pasteboard.string(forType: .string) {
+            return Trigger.fromDroppedOutputText(text)
+        }
+        // WebKit selection drags sometimes offer rich text that AppKit can still read as a string.
+        let strings = pasteboard.readObjects(forClasses: [NSString.self], options: nil) as? [String]
+        guard let text = strings?.first else { return nil }
+        return Trigger.fromDroppedOutputText(text)
+    }
+
+    static func insertionIndex(proposedRow row: Int, itemCount: Int) -> Int {
+        if row < 1 {
+            return 0
+        }
+        if row < itemCount {
+            return row
+        }
+        return itemCount
     }
 }
 

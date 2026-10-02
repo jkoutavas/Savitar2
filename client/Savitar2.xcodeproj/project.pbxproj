@@ -163,6 +163,7 @@
 		69E1A1012A535A900736894 /* AppSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1A1022A535A900736894 /* AppSettingsWindowController.swift */; };
 		69E660082F0A100100AB6BA6 /* EventsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660072F0A100100AB6BA6 /* EventsWindowController.swift */; };
 		69E6600A2F0A100100AB6BA6 /* EventsWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */; };
+		69TD00112F100200AB6BA6 /* TriggerTextDropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69TD00102F100200AB6BA6 /* TriggerTextDropTests.swift */; };
 		69E6600C2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */; };
 		69E7SPK224B203CB00058D02 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 69E7SPK124B203CB00058D01 /* Sparkle */; };
 		69E7SPK324B203CB00058D03 /* SavitarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */; };
@@ -388,6 +389,7 @@
 		69E1A1022A535A900736894 /* AppSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsWindowController.swift; sourceTree = "<group>"; };
 		69E660072F0A100100AB6BA6 /* EventsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsWindowController.swift; sourceTree = "<group>"; };
 		69E660092F0A100100AB6BA6 /* EventsWindowControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsWindowControllerTests.swift; sourceTree = "<group>"; };
+		69TD00102F100200AB6BA6 /* TriggerTextDropTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTextDropTests.swift; sourceTree = "<group>"; };
 		69E6600B2F0A200100AB6BA6 /* NSTextField+SavitarFormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+SavitarFormField.swift"; sourceTree = "<group>"; };
 		69E7SPK424B203CB00058D04 /* SavitarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavitarUpdater.swift; sourceTree = "<group>"; };
 		69F620DE204B86E700301A8D /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				69071B3A23A55796001C58B1 /* SwiftyXMLParserTests.swift */,
 				69071B3823A52A7B001C58B1 /* TriggerManTests.swift */,
 				697D14A5239D828900BBF33C /* TriggerTests.swift */,
+				69TD00102F100200AB6BA6 /* TriggerTextDropTests.swift */,
 				69071B3E23A6EA51001C58B1 /* WorldTests.swift */,
 			);
 			path = Savitar2Tests;
@@ -1241,6 +1244,7 @@
 				69071B3B23A55796001C58B1 /* SwiftyXMLParserTests.swift in Sources */,
 				69CEEDD823B4064D00E9F087 /* ColorManTests.swift in Sources */,
 				697D14A6239D828900BBF33C /* TriggerTests.swift in Sources */,
+				69TD00112F100200AB6BA6 /* TriggerTextDropTests.swift in Sources */,
 				69071B3F23A6EA51001C58B1 /* WorldTests.swift in Sources */,
 				6952048D24B1EFB2004BDBE2 /* HotKeyTests.swift in Sources */,
 				6968381C255B6FF800F0BC20 /* Ansi2HtmlParserTests.swift in Sources */,
