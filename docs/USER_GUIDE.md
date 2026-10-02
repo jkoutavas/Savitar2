@@ -516,6 +516,7 @@ The **output** pane is a web view showing styled session text. You can:
 | **Scroll**                    | Trackpad, mouse wheel, or scrollbar                                                                                              |
 | **Scroll lock**               | **View → Scroll Lock** (⌃S) or the lock button in the title bar—new text still arrives but the view does not jump to the bottom |
 | **Select & copy**             | Drag to select; **Edit → Copy** (⌘C), or right-click and choose **Copy**                                                         |
+| **Make a trigger**            | Select text, then drag it onto the **Triggers** list in an Events window — see [Editing events](#editing-events)                  |
 | **Search or speak selection** | Select text, then right-click and choose **Search Selection** or **Speak Selected Text**                                         |
 | **Clear**                     | **Edit → Clear Output** (⌘K), or right-click and choose **Clear**                                                                |
 | **Find**                      | **Edit → Find…** (⌘F) when the output pane is active—see [Find](#find) under Edit menu                                           |
@@ -580,6 +581,7 @@ The Events window is where you create and maintain triggers and macros:
 | Action               | How                                                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | **New item**         | **Edit → New Trigger** or **New Macro** (⇧⌘N) when an Events window is frontmost—the label matches the active tab |
+| **From output**      | Select text in a session’s output pane and drag it onto the **Triggers** list. The first line becomes a new output trigger’s pattern, inserted where you drop it and selected so you can edit it |
 | **Rename**           | Click the name in the list and type (in-place editing)                                                            |
 | **Reorder**          | Drag items in the list to change processing order (**triggers**—order matters; see [Triggers](#triggers))         |
 | **Enable / disable** | Checkbox in the list                                                                                              |

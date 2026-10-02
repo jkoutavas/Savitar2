@@ -27,7 +27,7 @@ class TriggersTabController: EventsTabController {
 
         tableView.dataSource = dataSource.tableDataSource
         tableView.delegate = self
-        tableView.registerForDraggedTypes([.trigger, .tableViewIndex])
+        tableView.registerForDraggedTypes([.trigger, .tableViewIndex, .string])
         subscriber = TriggersSubscriber<ItemListState<Trigger>>(self)
     }
 
