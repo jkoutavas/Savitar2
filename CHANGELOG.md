@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.30] - 2026-10-02
+
 ### Added
 
 - **Drag output text to Events** — select text in the session output pane and drop it on an Events window’s Triggers list to create an output trigger. The pattern is the first line of the selection, inserted at the drop position
@@ -256,7 +258,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.29...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.30...HEAD
+[2.0.30]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.30
 [2.0.29]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.29
 [2.0.28]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.28
 [2.0.27]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.27
