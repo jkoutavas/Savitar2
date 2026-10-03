@@ -8,6 +8,7 @@
 
 import Cocoa
 import ReSwift
+import UniformTypeIdentifiers
 
 private struct CheckboxBinding {
     let button: NSButton
@@ -38,6 +39,13 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
     private var colorsSettingsViewController: ColorsSettingsViewController?
     private var checkboxBindings: [CheckboxBinding] = []
     private var appearancePopupBinding: AppearancePopupBinding?
+    private var captureEditorPopup: NSPopUpButton?
+
+    private enum CaptureEditorTag: Int {
+        case savitar = 0
+        case chosenApp = 1
+        case chooseOther = 2
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +66,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         unbindCheckboxes()
         representedObject = AppPrefsPresenter(store: store!)
         bindCheckboxes()
+        refreshCaptureEditorPopup()
     }
 
     func showPane(_ pane: AppSettingsPane) {
@@ -96,6 +105,7 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
         view.subviews.forEach { $0.removeFromSuperview() }
         checkboxBindings.removeAll()
         appearancePopupBinding = nil
+        captureEditorPopup = nil
         paneViews.removeAll()
         speechPrefsViewController = nil
         colorsSettingsViewController = nil
@@ -211,6 +221,36 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
             stack.addArrangedSubview(checkbox)
         }
 
+        stack.addArrangedSubview(sectionHeader("Capture Files"))
+
+        let editorRow = NSStackView()
+        editorRow.orientation = .horizontal
+        editorRow.alignment = .centerY
+        editorRow.spacing = 8
+        editorRow.translatesAutoresizingMaskIntoConstraints = false
+
+        let editorLabel = NSTextField(labelWithString: "Open capture files with:")
+        editorLabel.setContentHuggingPriority(.required, for: .horizontal)
+
+        let editorPopup = NSPopUpButton(frame: .zero, pullsDown: false)
+        editorPopup.identifier = NSUserInterfaceItemIdentifier("captureEditor")
+        editorPopup.target = self
+        editorPopup.action = #selector(captureEditorChanged(_:))
+        captureEditorPopup = editorPopup
+        refreshCaptureEditorPopup()
+
+        editorRow.addArrangedSubview(editorLabel)
+        editorRow.addArrangedSubview(editorPopup)
+        stack.addArrangedSubview(editorRow)
+
+        let editorFootnote = NSTextField(wrappingLabelWithString:
+            "Used when you click the file link that ##capture prints in the output pane."
+        )
+        editorFootnote.font = NSFont.systemFont(ofSize: 11)
+        editorFootnote.textColor = .secondaryLabelColor
+        editorFootnote.preferredMaxLayoutWidth = 420
+        stack.addArrangedSubview(editorFootnote)
+
         paneView.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.leadingAnchor.constraint(equalTo: paneView.leadingAnchor),
@@ -219,6 +259,77 @@ class AppPrefsViewController: NSViewController, StoreSubscriber {
             stack.bottomAnchor.constraint(lessThanOrEqualTo: paneView.bottomAnchor)
         ])
         return paneView
+    }
+
+    // MARK: - Capture file editor (Story 24.5)
+
+    private func refreshCaptureEditorPopup() {
+        guard let popup = captureEditorPopup else { return }
+        let prefs = store?.state.prefs ?? AppContext.shared.prefs
+        let iconSize = NSSize(width: 16, height: 16)
+
+        popup.removeAllItems()
+        popup.addItem(withTitle: AppPreferences.savitarLogEditorName)
+        popup.lastItem?.tag = CaptureEditorTag.savitar.rawValue
+        let savitarIcon = NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath)
+        savitarIcon.size = iconSize
+        popup.lastItem?.image = savitarIcon
+
+        if !prefs.usesSavitarLogEditor {
+            popup.menu?.addItem(.separator())
+            let appURL = SavitarFileLinkProcessor.editorApplicationURL(name: prefs.logEditorName,
+                                                                       path: prefs.logEditorPath)
+            let title = prefs.logEditorName.isEmpty
+                ? URL(fileURLWithPath: prefs.logEditorPath).deletingPathExtension().lastPathComponent
+                : prefs.logEditorName
+            popup.addItem(withTitle: title)
+            popup.lastItem?.tag = CaptureEditorTag.chosenApp.rawValue
+            if let appURL = appURL {
+                let icon = NSWorkspace.shared.icon(forFile: appURL.path)
+                icon.size = iconSize
+                popup.lastItem?.image = icon
+                popup.lastItem?.toolTip = appURL.path
+            } else {
+                popup.lastItem?.toolTip = "Not found on this Mac. Captures open in Savitar."
+            }
+        }
+
+        popup.menu?.addItem(.separator())
+        popup.addItem(withTitle: "Other…")
+        popup.lastItem?.tag = CaptureEditorTag.chooseOther.rawValue
+
+        let selected: CaptureEditorTag = prefs.usesSavitarLogEditor ? .savitar : .chosenApp
+        popup.selectItem(withTag: selected.rawValue)
+    }
+
+    @objc private func captureEditorChanged(_ sender: NSPopUpButton) {
+        switch CaptureEditorTag(rawValue: sender.selectedTag()) {
+        case .savitar:
+            store?.dispatch(SetLogEditorAction(name: AppPreferences.savitarLogEditorName, path: ""))
+        case .chooseOther:
+            chooseCaptureEditor()
+        case .chosenApp, .none:
+            break
+        }
+        refreshCaptureEditorPopup()
+    }
+
+    private func chooseCaptureEditor() {
+        let panel = NSOpenPanel()
+        panel.title = "Choose an app for capture files"
+        panel.prompt = "Choose"
+        panel.allowedContentTypes = [.application]
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.directoryURL = URL(fileURLWithPath: "/Applications", isDirectory: true)
+
+        guard panel.runModal() == .OK, let appURL = panel.url else { return }
+        let name = appURL.deletingPathExtension().lastPathComponent
+        if Bundle(url: appURL)?.bundleIdentifier == Bundle.main.bundleIdentifier {
+            store?.dispatch(SetLogEditorAction(name: AppPreferences.savitarLogEditorName, path: ""))
+        } else {
+            store?.dispatch(SetLogEditorAction(name: name, path: appURL.path))
+        }
     }
 
     private func sectionHeader(_ title: String) -> NSTextField {

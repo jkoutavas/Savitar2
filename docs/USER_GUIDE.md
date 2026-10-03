@@ -34,10 +34,10 @@ For the story behind the rewrite, see [JOURNEY.md](JOURNEY.md) in the repository
 
 | Requirement   | Detail                                                                                                                                    |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **macOS**     | **10.12 (Sierra)** or later for Savitar 2                                                                                                 |
+| **macOS**     | **12.0 (Monterey)** or later for Savitar 2                                                                                                |
 | **Savitar 1** | Runs only on **32-bit** macOS through **10.14 Mojave**. It does **not** run on **Catalina (10.15)** or later—that is why Savitar 2 exists |
 | **Network**   | TCP connection to your world's host and port (typical MUD ports: 3000, 4000, 23)                                                          |
-| **Speech**    | Optional; continuous speech requires **macOS 10.15+** and an English voice installed                                                      |
+| **Speech**    | Optional; continuous speech requires an English voice installed                                                                           |
 
 Official builds are **free downloads** from [GitHub Releases](https://github.com/jkoutavas/Savitar2/releases). Savitar is open source; you may also build from source for your own use.
 
@@ -248,6 +248,7 @@ Open **Settings…** (⌘,) and select **Input & Display**. These options apply 
 | **Use keypad for macro entry**         | When on, the numeric **keypad** can be used when assigning or firing **macro** hotkeys (for example `KP8`). When off, keypad keys are ignored for macros—useful if another app or the system uses the keypad differently. |
 | **Mono fonts only (in font menus)**    | When on, font pop-up menus in **World Settings → Appearance** list **monospace** faces only—handy for MUD sessions where fixed-width fonts keep columns aligned.                                                          |
 | **Default word wrap for new sessions** | When on, new world sessions (and new **text documents**) start wrapped unless the world overrides it. Does not change wrap on sessions already open—use **View → Wrap Lines** for that. |
+| **Open capture files with**            | Which app opens the file link **`##capture`** prints. **Savitar** (the default) opens a Savitar text window; **Other…** lets you pick any app, such as TextEdit or BBEdit. A capture editor set in Savitar 1 carries over. If the chosen app is missing, Savitar opens the file itself. |
 
 Macro hotkeys are edited in the **Events** window; see [Macros](#macros). Per-world fonts and colors are in [World Settings](#world-settings).
 
@@ -760,7 +761,7 @@ Examples below use the default `##` marker; substitute your world's marker if yo
 | `##link <url> "label" #RRGGBB` | Inserts a clickable hyperlink in the **output** pane (v1 syntax: angle brackets around the URL)                                                                                                           |
 | `##help`                       | HTML list of local commands by category; click a command for syntax and details                                                                                                                           |
 | `##help <command>`             | Detail for one command — for example `##help upload`                                                                                                                                                      |
-| `##capture`                    | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window. |
+| `##capture`                    | Toggles ad-hoc capture of session output to a plain-text file (save panel on start; run again to stop). The file path in the output pane is a link—click it to open the capture in a Savitar text window, or in the app chosen under **Settings → Input & Display → Open capture files with**. |
 | `##upload <file-path>`         | Sends a local text file to the connected world as raw bytes (not parsed by Savitar). Use a POSIX path or `~`; quote paths with spaces.                                                                    |
 
 `##help` works even when **Interpret HTML tags** is off. Commands in the list are clickable (Pueblo-style `xch_cmd` links) and run `##help <command>` for you.
@@ -1001,13 +1002,13 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 **World Settings → Output** can append or overwrite a log file on disk—separate from **File → Print…**, from **New Text Document** windows, and from ad-hoc **`##capture`**.
 
-**`##capture`** toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run **`##capture`** again to stop; Savitar confirms the file path in the output pane. Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.
+**`##capture`** toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run **`##capture`** again to stop; Savitar confirms the file path in the output pane as a link; click it to open the capture in the app set under **Settings → Input & Display → Open capture files with** (Savitar by default). Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.
 
 See [Local commands → Session and output](#session-and-output) for syntax.
 
 ### Output scrollback (differences from Savitar 1)
 
-Savitar 1 exposed output **buffer size** and **flush period** in World Settings. Savitar 2 **does not** offer these controls. At **beta**, Savitar will silently trim scrollback using imported `OUTPUTMAX` and `OUTPUTMIN` from each world file (defaults ~100KB / ~25KB); **flush period** (`FLUSHTICKS`) is not used. Output uses a `WKWebView` with internal optimizations documented for developers in [OutputPerformance.md](OutputPerformance.md).
+Savitar 1 exposed output **buffer size** and **flush period** in World Settings. Savitar 2 **does not** offer these controls. A future update may silently trim scrollback using imported `OUTPUTMAX` and `OUTPUTMIN` from each world file (defaults ~100KB / ~25KB); **flush period** (`FLUSHTICKS`) is not used. Output uses a `WKWebView` with internal optimizations documented for developers in [OutputPerformance.md](OutputPerformance.md).
 
 If output feels laggy during very fast spam, use **Help → Send Feedback…** so we can profile scrollback behavior.
 
@@ -1077,7 +1078,7 @@ Quick map from **Savitar 1 preferences** dialogs to **Savitar 2** surfaces.
 | Savitar 2 pane                              | v1 equivalent (approx.)                                                       |
 | ------------------------------------------- | ----------------------------------------------------------------------------- |
 | [Startup](#startup)                         | World Picker / Events / Clicker at launch                                     |
-| [Input & Display](#input-display)           | App appearance (System / Light / Dark), keypad, mono fonts, default word wrap |
+| [Input & Display](#input-display)           | App appearance (System / Light / Dark), keypad, mono fonts, default word wrap, capture file editor |
 | [Colors](#ansi-colors)                      | ANSI Color Settings                                                           |
 | [Audio](#audio)                             | Mute sound / speaking / bell / clicker                                        |
 | [Updates](#updates)                         | Check for updates                                                             |
