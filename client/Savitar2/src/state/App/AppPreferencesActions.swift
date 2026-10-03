@@ -111,6 +111,20 @@ struct SetUpdatingEnabledAction: AppPreferencesAction {
     }
 }
 
+/// Story 24.5 — which app opens capture/log file links. Pass the Savitar name and an empty path for Savitar itself.
+struct SetLogEditorAction: AppPreferencesAction {
+    let name: String
+    let path: String
+
+    func apply(oldState: AppPreferencesState) -> AppPreferencesState {
+        let result = oldState
+        result.prefs.logEditorName = name
+        result.prefs.logEditorPath = path
+        result.prefs.save()
+        return result
+    }
+}
+
 struct SetAppAppearanceModeAction: AppPreferencesAction {
     let mode: AppAppearanceMode
 
