@@ -1394,6 +1394,74 @@ Echo back color   [■]
 
 ---
 
+## Story 29 — Blind & screen-reader accessibility (v2.1)
+
+**Goal:** Make Savitar 2 a MUD client blind players choose on the Mac, not just one VoiceOver can technically read. That would set it apart: blind MUD players mostly use Windows (MUSHclient + soundpacks, VIPMud), and the Mac has few real options.
+
+**Target release:** Savitar **2.1**. Not a 2.0 blocker.
+
+**Context:** The bar comes from [Lanie's Erion accessibility review](https://lanie.work/gaming/erion-accessibility-review/) (Aug 2026). Most of what she praises is server-side (Erion's `screenreader` mode, `runto` / `dirs`, condensed combat), and any client gets that for free. What she needs from the client:
+- New output spoken reliably.
+- Message history she can review and replay with keystrokes, without scrolling the buffer.
+- Status hotkeys that keep working when speech is muted.
+- Sound cues with fine-grained control (MSP soundpacks).
+
+What Savitar already has:
+- Continuous speech with rate and voice prefs.
+- Trigger speech and sounds, plus Audio-menu mutes.
+- VoiceOver labels on title-bar buttons and ? help buttons (Stories 15.4, 17.4, 20.5).
+
+**Constraint:** The output pane is a `WKWebView` (`OutputView`), so VoiceOver behavior there depends on the HTML we generate. Treat 29.1 as the gate: measure first, then build.
+
+### Tasks
+
+- [ ] **29.1** **VoiceOver audit** — Run VoiceOver against a live session (Erion `erionmud.com:1234` and Alter Aeon, both with blind communities) and the utility windows. Record the following, then write findings back into this story before starting 29.2+:
+  - Is new output announced?
+  - Can the user reach the input line and output with standard VO keys?
+  - What happens with ANSI color spans and Pueblo links?
+  - Are there unlabeled controls in World Picker, Events, Macro Clicker, Settings, and World Settings?
+- [ ] **29.2** **Announce new output to VoiceOver** — new session lines are spoken by the user's own VoiceOver voice and rate.
+  - Approaches to try: an ARIA live region (`aria-live="polite"`, appended text only) in the output HTML, or `NSAccessibility.post(element:notification:.announcementRequested)` from `OutputViewController` with the plain-text line.
+  - Must not double-speak when Savitar continuous speech is also on. Pick a clear rule, e.g. continuous speech auto-pauses while VoiceOver is running, or a pref chooses which one speaks.
+  - Strip ANSI and HTML, and never announce our own echo-back of typed commands unless the user wants it.
+- [ ] **29.3** **Review buffer & replay keys** — keystrokes, while focus stays in the input line, to step through recent output without scrolling. Modeled on the MUSHclient accelerator keys in the review:
+  - Previous/next line.
+  - Read Nth latest (⌥1–⌥0).
+  - Repeat current.
+  - Copy current.
+  - Jump 10.
+  
+  Reads go through VoiceOver announcements (or Savitar speech when VO is off). Bindings must not collide with VO's ⌃⌥ keys or macro hotkeys; make them remappable if needed.
+- [ ] **29.4** **Category buffers from triggers** — a trigger option such as "Also add to review buffer: Tells", so tells, channels, and combat can each be reviewed on their own (⌥←/→ switches buffers). Reuses the existing trigger engine; no new matching language.
+- [ ] **29.5** **Speak-variable macros that ignore mute** — a macro action that speaks a variable or expression (e.g. `HP %%hp of %%maxhp`). It always speaks, even when continuous speech or speaking cues are muted, like Erion's F1/F2 hotkeys. Builds on trigger variable capture.
+- [ ] **29.6** **Screen-reader output filters (per world)** — optional per-world cleanups that help when the MUD has no screen-reader mode:
+  - Collapse runs of repeated lines.
+  - Drop lines that are mostly box-drawing or ASCII-art characters from speech (still shown on screen).
+  - Speak selected punctuation as words.
+  
+  Off by default.
+- [ ] **29.7** **MSP (MUD Sound Protocol)** — parse `!!SOUND(...)` / `!!MUSIC(...)` (and negotiate MSP over telnet), and play from a per-world sound folder. Volume per category (sound effects / ambiance / music) plus a "what's playing" readout and per-sound mute. Biggest task; this is what lets Savitar run an Erion-style soundpack world instead of MUSHclient. Consider MSDP/GMCP status vars as a follow-up for 29.5.
+- [ ] **29.8** **Full keyboard & VoiceOver pass on utility windows** — fix everything 29.1 found:
+  - Labels, roles, and logical tab order in World Picker, Events (outline + editors), Macro Clicker, Settings, and World Settings.
+  - No mouse-only actions (e.g. drag-to-Events has a menu/keyboard equivalent).
+- [ ] **29.9** **Docs & outreach** — a USER_GUIDE "Playing with VoiceOver" chapter (setup, keys, recommended worlds) and an accessibility note on heynow.com/savitar (Heynow Sites). Reach out to blind MUD communities (the Erion `client` channel, AudioGames.net forum) for testers.
+
+### Acceptance
+
+- A VoiceOver user can do all of this without sighted help or the mouse:
+  - Pick a world, connect, hear new output, and review the last 10 lines.
+  - Hear HP on a hotkey while speech is muted.
+  - Edit a trigger.
+- No double-speaking between VoiceOver and Savitar speech.
+- At least one blind tester confirms it's playable on a screen-reader-friendly MUD.
+
+### Out of scope
+
+- Server-side features (pathfinding, screen-reader modes) — those belong to the MUD.
+- Windows / NVDA support.
+
+---
+
 ## Deferred (blocked on other epics)
 
 | Item | Blocked by | v1 reference | Prefs UI |
@@ -1436,6 +1504,8 @@ Echo back color   [■]
 25. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
 26. Story 8 — SwiftUI Settings spike (optional, post-beta)
 27. **Story 27 — Output scrollback & performance** — **beta kickoff**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
+28. Story 28 — Echo back color (2.1)
+29. **Story 29 — Blind & screen-reader accessibility (2.1)** — 29.1 audit first; 29.2–29.5 are the core differentiator, 29.7 MSP is the big one
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).

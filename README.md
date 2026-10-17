@@ -159,6 +159,7 @@ _ New `##say` local command for voicing text
 _ Status bar styling — per-world setting (match session / inverse / custom colors)
 _ Trigger notifications — optional macOS notification action when a trigger event fires
 _ Echo back color — World Settings → Appearance swatch for `ECHOBGCOLOR` (Story 28; v1 stored the color but never shipped the control)
+_ Blind & screen-reader accessibility — VoiceOver output announcements, review keys, MSP sounds (Story 29)
 _ SSL support
 _ Text to emoji support
 _ Javascript scripting?
