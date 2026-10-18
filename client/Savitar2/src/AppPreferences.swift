@@ -37,6 +37,9 @@ struct PrefsFlags: OptionSet {
 }
 
 class AppPreferences: SavitarXMLProtocol {
+    /// v1 `CPreferences` default for `LOGEDITOR_NAME`: capture/log files open in Savitar itself.
+    static let savitarLogEditorName = "Savitar"
+
     let v1PrefsPath = "~/Library/Preferences/Savitar 2.0 Prefs"
     let v2PrefsPath = "~/Library/Preferences/Savitar2 Prefs"
 
@@ -51,6 +54,17 @@ class AppPreferences: SavitarXMLProtocol {
     var lastUpdateSecs = 0
     var updatingEnabled = true
     var appearanceMode: AppAppearanceMode = .system
+
+    /// Story 24.5 — app that opens capture/log file links (v1 `LOGEDITOR_NAME`). "Savitar" means a Savitar text window.
+    var logEditorName = AppPreferences.savitarLogEditorName
+    /// Full path to the chosen editor app; empty when imported from v1 (resolved by name at open time).
+    var logEditorPath = ""
+
+    var usesSavitarLogEditor: Bool {
+        let name = logEditorName.trimmingCharacters(in: .whitespacesAndNewlines)
+        return logEditorPath.isEmpty
+            && (name.isEmpty || name.caseInsensitiveCompare(AppPreferences.savitarLogEditorName) == .orderedSame)
+    }
 
     // TODO: this is deprecating
     var colorMan = ColorMan()
@@ -157,6 +171,10 @@ class AppPreferences: SavitarXMLProtocol {
         case continuousSpeechRate = "CONTINUOUS_SPEECH_RATE"
         case continuousSpeechVoice = "CONTINUOUS_SPEECH_VOICE"
         case appAppearance = "APPAPPEARANCE"
+        case logEditorName = "LOGEDITOR_NAME"
+        case logEditorPath = "LOGEDITOR_PATH"
+        /// v1 classic Mac OS creator code for the log editor; no meaning on modern macOS.
+        case logEditorCreator = "LOGEDITOR_CREATOR"
     }
 
     func parse(xml: XML.Accessor) throws {
@@ -193,6 +211,12 @@ class AppPreferences: SavitarXMLProtocol {
                 if let mode = AppAppearanceMode.from(xmlValue: attribute.value) {
                     prefs.appearanceMode = mode
                 }
+            case PrefsAttribIdentifier.logEditorName.rawValue:
+                prefs.logEditorName = attribute.value
+            case PrefsAttribIdentifier.logEditorPath.rawValue:
+                prefs.logEditorPath = attribute.value
+            case PrefsAttribIdentifier.logEditorCreator.rawValue:
+                break
             default:
                 print("skipping prefs attribute \(attribute.key)")
             }
@@ -247,6 +271,15 @@ class AppPreferences: SavitarXMLProtocol {
         if appearanceMode != .system {
             prefsElem.addAttribute(name: PrefsAttribIdentifier.appAppearance.rawValue,
                                    stringValue: appearanceMode.xmlValue)
+        }
+
+        if !usesSavitarLogEditor {
+            prefsElem.addAttribute(name: PrefsAttribIdentifier.logEditorName.rawValue,
+                                   stringValue: logEditorName)
+            if !logEditorPath.isEmpty {
+                prefsElem.addAttribute(name: PrefsAttribIdentifier.logEditorPath.rawValue,
+                                       stringValue: logEditorPath)
+            }
         }
 
         if let worlds = AppContext.shared.worldPickerStore.state?.worldList.items {

@@ -320,7 +320,7 @@ The prefs **data model** already imports v1 flags and values. **Stories 1, 4, 5,
 - [ ] **24.2** **Import Savitar 1 Preferences…** — re-read `~/Library/Preferences/Savitar 2.0 Prefs` on demand (triggers, macros, colors, worlds); merge or replace with user choice — *no v1 install required if file still exists*
 - [ ] **24.3** **Export preferences…** — write current `Savitar2 Prefs` XML to a user-chosen file (backup / support)
 - [ ] **24.4** **Import preferences…** — load a previously exported Savitar 2 prefs file
-- [ ] **24.5** **Capture file editor** — `logEditorName` app pref UI when session logging / external editor ships (v1: `DoPreferences` capture editor field)
+- [x] **24.5** **Capture file editor** — **Settings → Input & Display → Open capture files with:** popup (Savitar / chosen app / Other…). Persists `LOGEDITOR_NAME` + `LOGEDITOR_PATH`; v1 `LOGEDITOR_NAME` imports and resolves by app name, `LOGEDITOR_CREATOR` ignored. `##capture` file links open in that app, falling back to a Savitar text window (v1: `DoPreferences` capture editor popup)
 - [x] **24.6** **`trigsClosed` / `varsClosed`** — **won't do**; no Advanced-pane UI or wiring — see [2.6](#story-2--wire-preference-flags-to-behavior)
 
 ### Touchpoints
@@ -904,7 +904,7 @@ Help
 
 - In-app bug tracker, screenshot attachment automation, or automatic log upload (consider later with explicit consent).
 - GitHub Issues as the in-app destination.
-- Sentry crash reporting (README beta item — separate story).
+- Sentry crash reporting (README post-release item — separate story).
 
 ---
 
@@ -1256,9 +1256,9 @@ Copy should align with the in-app alpha announcement: define alpha briefly, ment
 
 **Context:** Output renders in `WKWebView` (`OutputView`). Engineering watchpoints, phased plan, and diagnostics sketch: **[OutputPerformance.md](OutputPerformance.md)**.
 
-**Schedule:** **Start of beta** — Savitar 2 is practically v1 feature-complete on the 2.0 track; this epic gates comfortable long-session dogfooding during beta (before wider release).
+**Schedule:** **Post-release, on evidence** — moved out of the beta list in October 2026. Beta dogfooding showed no output performance problems on modern Macs, so this waits until real sessions show a need.
 
-**Status:** Documented; implementation queued for beta kickoff.
+**Status:** Documented; not scheduled.
 
 ### Policy
 
@@ -1402,7 +1402,7 @@ Echo back color   [■]
 | Default word wrap | Story 2.3 ✅ | `TVPrefFlag_t_DefaultWordWrap` | Enabled |
 | Mute clicker sounds | — ✅ | `cmd_MuteClicker` | Enabled (Story 11) |
 | Check for updates | Story 12 (Sparkle) ✅ | `CUpdateChecker`, `updatingEnabled` | Enabled |
-| Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | Not in UI |
+| Capture file editor popup | File upload / capture (README beta) | `GetLogEditorName()` in `DoPreferences()` | ✅ Settings → Input & Display (Story 24.5) |
 | Internet Config button | Obsolete (Classic Mac OS) | `cmd_InternetConfig` | Not in UI |
 
 ---
@@ -1435,7 +1435,7 @@ Echo back color   [■]
 24. ~~Story 19 — Savitar privacy page on heynow.com (cross-repo **W9**)~~ ✅
 25. ~~Story 22 — Alpha news banner on heynow.com/savitar (cross-repo **W10**)~~ ✅ (*deploy* via W5 when ready)
 26. Story 8 — SwiftUI Settings spike (optional, post-beta)
-27. **Story 27 — Output scrollback & performance** — **beta kickoff**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
+27. **Story 27 — Output scrollback & performance** — **post-release, on evidence**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).
@@ -1459,6 +1459,6 @@ Story 3 is retained for reference only; implement Story 5 instead.
 | Mute terminal bell | `muteBell` | Done |
 | Mute clicker | `muteClicker` | Done — Story 11 |
 | Check for updates | `updatingEnabled` | Done — Story 12 |
-| Capture file editor | `logEditorName` | Deferred — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |
+| Capture file editor | `logEditorName` | ✅ `LOGEDITOR_NAME` / `LOGEDITOR_PATH` — [Story 24.5](Stories.md#story-24--settings-advanced-maintenance) |
 | Events outline disclosure (v1 only) | `trigsClosed`, `varsClosed` | Import-only — won't do ([Story 2.6](Stories.md#story-2--wire-preference-flags-to-behavior)) |
 | Output buffer / flush (v1 only) | `outputMax`, `outputMin`, `flushTicks` | `flushTicks` import-only, dead at runtime; `outputMax`/`outputMin` honored internally at beta ([Story 27](Stories.md#story-27--output-scrollback--performance), [OutputPerformance.md](OutputPerformance.md)) |

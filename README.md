@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated October 2nd, 2026_
+_README last updated October 3rd, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -21,7 +21,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutav
 | [docs/Stories.md](docs/Stories.md)                     | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
 | [docs/HIG.md](docs/HIG.md)                             | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE                                                             |
 | [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md)   | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
-| [docs/OutputPerformance.md](docs/OutputPerformance.md) | Developers | Session output scrollback, beta perf plan, diagnostics overlay ([Story 27](docs/Stories.md#story-27--output-scrollback--performance))         |
+| [docs/OutputPerformance.md](docs/OutputPerformance.md) | Developers | Session output scrollback, post-release perf plan, diagnostics overlay ([Story 27](docs/Stories.md#story-27--output-scrollback--performance))         |
 
 ## Current state of the application
 
@@ -35,7 +35,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 
 ```
 √ Started a private github repo
-√ App is 64bit only, runs on macOS 10.12 and later, including Catalina
+√ App is 64bit only, runs on macOS 12.0 (Monterey) and later
 √ Reading Sav 1.x world settings, opening sessions
 √ Integrated WKWebView as the output pane
 √ Rewrite Aha (ANSI to HTML parser)
@@ -103,7 +103,7 @@ Although the first release targets feature parity with production Savitar v1.6.3
 √ Macro pop-ups — type-ahead variable/macro completion while typing in the input pane (v1 `CTVVarPopup`)
 √ Drag selected output text into Events to create a new trigger
 √ `xch_cmd` send mode — v1 “send immediately” vs put-in-input (`DirectXCMDs` / Appearance “Send xch_cmds immediately”)
-_ Capture / log file editor binding — open capture/log files in a chosen app (Story 24.5)
+√ Capture file editor — open capture files in a chosen app (Story 24.5; Settings → Input & Display, v1 `LOGEDITOR_NAME`)
 √ `telnet://` / Web Interaction helper — open or hand off world URLs from outside the app
 √ Release alpha to select testers, start getting feedback
 √ Move github repo to public
@@ -136,13 +136,12 @@ From the [Savitar 1.4 manual](http://heynow.com/savitar/manual140/_mancontent6.h
 
 ### Completion of 2.0 beta
 
+Beta is complete as of October 3rd, 2026: v1.6.3 feature parity is done. Crash reporting, output performance work, and MCP moved to post-release because nobody has asked for them and there's no evidence they're needed yet.
+
 ```
 √ Anonymous usage analytics via TelemetryDeck (Story 14; official release builds only)
-_ Crash reporting (Sentry — separate from TelemetryDeck analytics)
-_ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md) — honor `OUTPUTMAX`/`OUTPUTMIN`, coalesce appends, session metrics strip)
-√  Start promoting the beta test
+√ Start promoting the beta test
 √ User guide — remaining chapters (Story 9; in-app delivery ✅ Stories 16–17; speech, menus, settings panes documented)
-_ MCP (? does anyone use this?)
 √ Polish, address beta test issues
 ```
 
@@ -151,7 +150,10 @@ _ MCP (? does anyone use this?)
 These features take Savitar 2.1 beyond what 1.6.x provides:
 
 ```
-- macOS 11 and beyond capabilities
+- macOS 12 and beyond capabilities
+_ Crash reporting (Sentry — separate from TelemetryDeck analytics), if crash reports show a need
+_ Output scrollback optimizations + diagnostics overlay (Story 27; [OutputPerformance.md](docs/OutputPerformance.md)), if long sessions show a need
+_ MCP, if anyone asks for it
 _ Implement next gen startup commands (trigger based)
 _ Alias support (Story 10)
 _ New `##dump` aliases local command (Story 10)
