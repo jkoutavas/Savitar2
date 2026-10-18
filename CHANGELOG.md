@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.31] - 2026-10-17
+
 ### Added
 
 - **Capture file editor** — **Settings → Input & Display → Open capture files with** picks the app that opens the file link `##capture` prints (Savitar by default, or any app via **Other…**). Savitar 1’s capture editor setting carries over; if the app is missing, Savitar opens the file itself (Story 24.5, last v1.6.3 parity item)
@@ -266,7 +268,8 @@ _Manual alpha build; never git-tagged (reconstructed from history)._
 
 - Initial first alpha test build
 
-[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.30...HEAD
+[Unreleased]: https://github.com/jkoutavas/Savitar2/compare/v2.0.31...HEAD
+[2.0.31]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.31
 [2.0.30]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.30
 [2.0.29]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.29
 [2.0.28]: https://github.com/jkoutavas/Savitar2/releases/tag/v2.0.28
