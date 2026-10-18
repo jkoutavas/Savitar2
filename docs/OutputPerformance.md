@@ -2,7 +2,7 @@
 
 Internal engineering notes for Savitar 2 session **output** (`OutputView` / `WKWebView`).
 
-**Schedule:** Implement at **start of beta** (Savitar 2 is practically v1 feature-complete on the 2.0 track; this work gates comfortable long-session play during beta dogfooding). Track tasks in [Story 27](Stories.md#story-27--output-scrollback--performance).
+**Schedule:** **Post-release, on evidence.** Originally planned for the start of beta; moved out in October 2026 because beta dogfooding showed no output performance problems on modern Macs. Pick it up if long sessions or combat spam show a need. Track tasks in [Story 27](Stories.md#story-27--output-scrollback--performance).
 
 ---
 

@@ -187,4 +187,78 @@ class AppPreferencesTests: XCTestCase {
         XCTAssertFalse(resolved.isEmpty)
         XCTAssertTrue(names.contains(resolved))
     }
+
+    // MARK: - Story 24.5 capture file editor
+
+    func testLogEditorDefaultsToSavitarAndIsNotSerialized() throws {
+        let prefs = AppPreferences()
+        XCTAssertEqual(prefs.logEditorName, AppPreferences.savitarLogEditorName)
+        XCTAssertTrue(prefs.usesSavitarLogEditor)
+        let xml = try prefs.toXMLElement().xmlString
+        XCTAssertFalse(xml.contains("LOGEDITOR_NAME"))
+        XCTAssertFalse(xml.contains("LOGEDITOR_PATH"))
+    }
+
+    func testLogEditorXMLRoundTrip() throws {
+        let prefs = AppPreferences()
+        prefs.logEditorName = "BBEdit"
+        prefs.logEditorPath = "/Applications/BBEdit.app"
+        let xml = try prefs.toXMLElement().xmlString
+        XCTAssertTrue(xml.contains("LOGEDITOR_NAME=\"BBEdit\""))
+        XCTAssertTrue(xml.contains("LOGEDITOR_PATH=\"/Applications/BBEdit.app\""))
+
+        let loaded = AppPreferences()
+        try loaded.parse(xml: XML.parse(xml)[PreferencesElemIdentifier])
+        XCTAssertEqual(loaded.logEditorName, "BBEdit")
+        XCTAssertEqual(loaded.logEditorPath, "/Applications/BBEdit.app")
+        XCTAssertFalse(loaded.usesSavitarLogEditor)
+    }
+
+    func testLogEditorImportsV1NameAndIgnoresCreator() throws {
+        let v1 = "<PREFERENCES FLAGS=\"3\" LOGEDITOR_NAME=\"TextEdit\" LOGEDITOR_CREATOR=\"1953068140\"></PREFERENCES>"
+        let prefs = AppPreferences()
+        try prefs.parse(xml: XML.parse(v1)[PreferencesElemIdentifier])
+        XCTAssertEqual(prefs.logEditorName, "TextEdit")
+        XCTAssertEqual(prefs.logEditorPath, "")
+        XCTAssertFalse(prefs.usesSavitarLogEditor)
+    }
+
+    func testSetLogEditorAction() {
+        let store = AppContext.shared.appPrefsStore
+        store.dispatch(SetLogEditorAction(name: "BBEdit", path: "/Applications/BBEdit.app"))
+        XCTAssertEqual(AppContext.shared.prefs.logEditorName, "BBEdit")
+        XCTAssertEqual(AppContext.shared.prefs.logEditorPath, "/Applications/BBEdit.app")
+        store.dispatch(SetLogEditorAction(name: AppPreferences.savitarLogEditorName, path: ""))
+        XCTAssertTrue(AppContext.shared.prefs.usesSavitarLogEditor)
+    }
+
+    func testEditorApplicationURLResolution() throws {
+        let fileManager = FileManager.default
+        let root = fileManager.temporaryDirectory.appendingPathComponent("CaptureEditorTests-\(UUID().uuidString)")
+        let fakeApp = root.appendingPathComponent("FakeEditor.app", isDirectory: true)
+        try fileManager.createDirectory(at: fakeApp, withIntermediateDirectories: true)
+        defer { try? fileManager.removeItem(at: root) }
+
+        // Savitar (or empty) means "open in Savitar".
+        XCTAssertNil(SavitarFileLinkProcessor.editorApplicationURL(name: "Savitar", path: "",
+                                                                   searchDirectories: [root]))
+        XCTAssertNil(SavitarFileLinkProcessor.editorApplicationURL(name: "", path: "", searchDirectories: [root]))
+
+        // A saved path wins.
+        XCTAssertEqual(SavitarFileLinkProcessor.editorApplicationURL(name: "Whatever", path: fakeApp.path,
+                                                                     searchDirectories: []),
+                       fakeApp)
+
+        // A v1-style bare name is looked up in the app folders.
+        XCTAssertEqual(SavitarFileLinkProcessor.editorApplicationURL(name: "FakeEditor", path: "",
+                                                                     searchDirectories: [root])?.path,
+                       fakeApp.path)
+
+        // A missing path falls back to the name lookup; a missing app falls back to Savitar.
+        XCTAssertEqual(SavitarFileLinkProcessor.editorApplicationURL(name: "FakeEditor", path: "/nope/Gone.app",
+                                                                     searchDirectories: [root])?.path,
+                       fakeApp.path)
+        XCTAssertNil(SavitarFileLinkProcessor.editorApplicationURL(name: "NoSuchEditor", path: "",
+                                                                   searchDirectories: [root]))
+    }
 }
