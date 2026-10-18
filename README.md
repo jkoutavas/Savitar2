@@ -1,6 +1,6 @@
 # Savitar v2.0
 
-_README last updated October 3rd, 2026_
+_README last updated October 17th, 2026_
 
 Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutavas/savitar140). For the story of how a 32-bit Carbon client became a modern rewrite—and where that journey stands today—see **[From Savitar 1 to Savitar 2](docs/JOURNEY.md)**.
 
@@ -21,7 +21,7 @@ Savitar 2 is the next major version of [Savitar v1.x](https://github.com/jkoutav
 | [docs/Stories.md](docs/Stories.md)                     | Developers | Settings, prefs, and HIG backlog as user stories                                                                                              |
 | [docs/HIG.md](docs/HIG.md)                             | Developers | macOS UI requirements — windows, menus, controls; scope vs Stories and USER_GUIDE                                                             |
 | [docs/Savitar2DevNotes.md](docs/Savitar2DevNotes.md)   | Developers | Chronological software design notes (2019–2020); see [JOURNEY.md](docs/JOURNEY.md) for the narrative arc                                      |
-| [docs/OutputPerformance.md](docs/OutputPerformance.md) | Developers | Session output scrollback, post-release perf plan, diagnostics overlay ([Story 27](docs/Stories.md#story-27--output-scrollback--performance))         |
+| [docs/OutputPerformance.md](docs/OutputPerformance.md) | Developers | Session output scrollback, post-release perf plan, diagnostics overlay ([Story 27](docs/Stories.md#story-27--output-scrollback--performance)) |
 
 ## Current state of the application
 
