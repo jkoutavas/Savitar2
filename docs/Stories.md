@@ -1410,11 +1410,36 @@ What Savitar already has:
 - Continuous speech with rate and voice prefs.
 - Trigger speech and sounds, plus Audio-menu mutes.
 - VoiceOver labels on title-bar buttons and ? help buttons (Stories 15.4, 17.4, 20.5).
+- One plain-text path for continuous speech, session logs, and `##capture` (29.0, [#133](https://github.com/jkoutavas/Savitar2/issues/133)). VoiceOver announcements are not wired to it yet.
 
-**Constraint:** The output pane is a `WKWebView` (`OutputView`), so VoiceOver behavior there depends on the HTML we generate. Treat 29.1 as the gate: measure first, then build.
+**Constraint:** The output pane is a `WKWebView` (`OutputView`), so VoiceOver behavior there depends on the HTML we generate. 29.0 is the speech-quality foundation and does not wait on the audit. Treat 29.1 as the gate before 29.2+: measure first, then build announcements and review controls.
+
+### 2.1 sequence
+
+Internal order for this story. Not a website or marketing announcement.
+
+1. **Speech and plain-text cleanup** — 29.0, [#133](https://github.com/jkoutavas/Savitar2/issues/133). Code is in tree. Helper checks ran on Linux; macOS `xcodebuild test` did not (no shared macOS pool).
+2. **Blind-player VoiceOver audit** — 29.1. Not started. No tester notes.
+3. **Announcements and review controls** — 29.2–29.5, after the audit.
+4. **OSC 8 hyperlinks** — [#134](https://github.com/jkoutavas/Savitar2/issues/134). Separate from 29.0. Not in the speech-cleanup change.
+5. **Targeted beta** — after the audit and the announcement/review work, to blind players who opt in.
 
 ### Tasks
 
+- [x] **29.0** **Speech and plain-text cleanup** — continuous speech, session logging, and `##capture` share `OutputPlainText`. Logging or capture being open does not change the spoken string ([#133](https://github.com/jkoutavas/Savitar2/issues/133)).
+  - HTML tags and entities are interpreted only when the world **Interpret HTML tags** flag is on.
+  - With HTML off, a literal prompt such as `<HP 100/100>` stays intact in speech, the log, and capture.
+  - ANSI is stripped and CR/LF is normalized to `\n` on that path.
+  - The display parse still owns `Ansi2HtmlParser.buffer`. Plain text uses a copy taken before that parse, so a second pass cannot eat a split CSI sequence.
+  - Mute, voice, rate, `skipCapture`, trigger speech, and settings behavior stay as they were. Echo-back is still not spoken. OSC 8 is [#134](https://github.com/jkoutavas/Savitar2/issues/134), not this task.
+  - **Automated:** `OutputPlainTextTests` covers the helper and the logging/capture/speech path (HTML on and off, tags, entities, literal brackets, ANSI, newlines, mute, skip-capture, split ANSI, echo-back). The helper cases were run on Linux with Swift 6.4.2. The `OutputView` pipeline cases and `xcodebuild test` have not been run (no macOS toolchain here). SwiftLint 0.65.0 `--strict` reported 0 violations; its `statement_position` rule was skipped because this host has no SourceKit.
+  - **Manual (not done):**
+    - [ ] HTML off: `<HP 100/100>` is spoken the same with logging off, logging on, and `##capture` on, and the log/capture contain the brackets.
+    - [ ] HTML on: `<b>Hello</b> &amp; welcome` is spoken as "Hello & welcome", and the log/capture match.
+    - [ ] An ANSI-colored word is spoken without escape codes, logging on and off.
+    - [ ] **Mute Speaking Cues** silences that line but the log still gets it. Voice and rate still come from **Settings → Speech**.
+    - [ ] The `##capture` confirmation line is not written into the capture file; the next server line is.
+    - [ ] A trigger set to speak still uses its own voice. No VoiceOver pass and no blind-player session yet.
 - [ ] **29.1** **VoiceOver audit** — Run VoiceOver against a live session (Erion `erionmud.com:1234` and Alter Aeon, both with blind communities) and the utility windows. Record the following, then write findings back into this story before starting 29.2+:
   - Is new output announced?
   - Can the user reach the input line and output with standard VO keys?
@@ -1447,6 +1472,8 @@ What Savitar already has:
 - [ ] **29.9** **Docs & outreach** — a USER_GUIDE "Playing with VoiceOver" chapter (setup, keys, recommended worlds) and an accessibility note on heynow.com/savitar (Heynow Sites). Reach out to blind MUD communities (the Erion `client` channel, AudioGames.net forum) for testers.
 
 ### Acceptance
+
+29.0's plain-text cleanup is required for the items below and does not by itself meet them. The VoiceOver audit and blind-player testing are still open. No tester feedback is recorded here.
 
 - A VoiceOver user can do all of this without sighted help or the mouse:
   - Pick a world, connect, hear new output, and review the last 10 lines.
@@ -1505,7 +1532,7 @@ What Savitar already has:
 26. Story 8 — SwiftUI Settings spike (optional, post-beta)
 27. **Story 27 — Output scrollback & performance** — **post-release, on evidence**; phases 1–3 in [OutputPerformance.md](OutputPerformance.md) (honor `OUTPUTMAX`/`OUTPUTMIN`; `FLUSHTICKS` dead; diagnostics overlay)
 28. Story 28 — Echo back color (2.1)
-29. **Story 29 — Blind & screen-reader accessibility (2.1)** — 29.1 audit first; 29.2–29.5 are the core differentiator, 29.7 MSP is the big one
+29. **Story 29 — Blind & screen-reader accessibility (2.1)** — 29.0 speech/plain-text cleanup done in code ([#133](https://github.com/jkoutavas/Savitar2/issues/133)); 29.1 VoiceOver audit next and still the gate before 29.2+; then announcements/review, OSC 8 ([#134](https://github.com/jkoutavas/Savitar2/issues/134)), targeted beta. No blind-player results yet.
 
 Stories 10 and 11 are independent tracks; either can ship first.
 **Stories 15 + 16** satisfy README *Add bug reporting support* (both ✅).

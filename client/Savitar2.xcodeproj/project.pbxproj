@@ -44,6 +44,8 @@
 		695F5AB225899EFD00AB6BA6 /* ConnectionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5A9F25899EFD00AB6BA6 /* ConnectionStatusViewController.swift */; };
 		695F5AB325899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */; };
 		695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA125899EFD00AB6BA6 /* OutputView.swift */; };
+		69PT00012F11010100AB6BA6 /* OutputPlainText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69PT00022F11010100AB6BA6 /* OutputPlainText.swift */; };
+		69PT00032F11010200AB6BA6 /* OutputPlainTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69PT00042F11010200AB6BA6 /* OutputPlainTextTests.swift */; };
 		695F5AB525899EFD00AB6BA6 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA225899EFD00AB6BA6 /* Session.swift */; };
 		695F5AB725899EFD00AB6BA6 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */; };
 		695F5AB825899EFD00AB6BA6 /* TelnetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */; };
@@ -273,6 +275,8 @@
 		695F5A9F25899EFD00AB6BA6 /* ConnectionStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusViewController.swift; sourceTree = "<group>"; };
 		695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputViewNavigationDelegate.swift; sourceTree = "<group>"; };
 		695F5AA125899EFD00AB6BA6 /* OutputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
+		69PT00022F11010100AB6BA6 /* OutputPlainText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputPlainText.swift; sourceTree = "<group>"; };
+		69PT00042F11010200AB6BA6 /* OutputPlainTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputPlainTextTests.swift; sourceTree = "<group>"; };
 		695F5AA225899EFD00AB6BA6 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		695F5AA425899EFD00AB6BA6 /* SessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		695F5AA525899EFD00AB6BA6 /* TelnetParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelnetParser.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 				69CR00042F0E020100AB6BA6 /* SessionConnectRetryTests.swift */,
 				69SM00122F0C070500AB6BA6 /* SpeakerManSoundTests.swift */,
 				69EB00122F0C080600AB6BA6 /* OutputEchoBackTests.swift */,
+				69PT00042F11010200AB6BA6 /* OutputPlainTextTests.swift */,
 				69XC00122F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift */,
 				69HP00122F0C030400AB6BA6 /* SessionLocalCommandHelpTests.swift */,
 				69SW00122F0C040400AB6BA6 /* SavitarWelcomeTests.swift */,
@@ -653,6 +658,7 @@
 				695F5AA925899EFD00AB6BA6 /* OutputViewController.swift */,
 				695F5AA025899EFD00AB6BA6 /* OutputViewNavigationDelegate.swift */,
 				695F5AA125899EFD00AB6BA6 /* OutputView.swift */,
+				69PT00022F11010100AB6BA6 /* OutputPlainText.swift */,
 				695F5AA225899EFD00AB6BA6 /* Session.swift */,
 				69SB00202F0C010200AB6BA6 /* SessionLocalCommands.swift */,
 				69SB00402F0C010400AB6BA6 /* SessionLocalCommandExecutor.swift */,
@@ -1231,6 +1237,7 @@
 				695F5A6F25899CE100AB6BA6 /* SavitarXMLProtocol.swift in Sources */,
 				695F5B47258EE73800AB6BA6 /* WorldsActions.swift in Sources */,
 				695F5AB425899EFD00AB6BA6 /* OutputView.swift in Sources */,
+				69PT00012F11010100AB6BA6 /* OutputPlainText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,6 +1270,7 @@
 				69CR00032F0E020100AB6BA6 /* SessionConnectRetryTests.swift in Sources */,
 				69SM00112F0C070500AB6BA6 /* SpeakerManSoundTests.swift in Sources */,
 				69EB00112F0C080600AB6BA6 /* OutputEchoBackTests.swift in Sources */,
+				69PT00032F11010200AB6BA6 /* OutputPlainTextTests.swift in Sources */,
 				69XC00112F0C020400AB6BA6 /* XchCmdLinkProcessorTests.swift in Sources */,
 				69HP00112F0C030400AB6BA6 /* SessionLocalCommandHelpTests.swift in Sources */,
 				69SW00112F0C040400AB6BA6 /* SavitarWelcomeTests.swift in Sources */,
