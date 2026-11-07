@@ -109,7 +109,7 @@ Continuous speech is the feature most users mean when they turn speech on for a 
 **What it does**
 
 - When enabled, each chunk of text that arrives in the **output** pane is spoken aloud.
-- ANSI color and style codes are stripped before speaking; you hear plain text.
+- ANSI color and style codes are stripped before speaking. When the world has **Interpret HTML tags** on, HTML tags are removed and entities are spoken as characters (`&amp;` as `&`). When it is off, literal angle brackets such as `<HP 100>` are spoken as written. A session log or `##capture` does not change what is spoken.
 - Continuous speech uses the **voice** and **rate** from app Speech settings (see below). These are **global** app preferences—not per-world settings.
 - Text you type in the **input** line is **not** spoken unless the world echoes it back as output.
 
@@ -1002,7 +1002,7 @@ When **Interpret HTML tags** is on, simple HTML in server text is rendered; **Co
 
 **World Settings → Output** can append or overwrite a log file on disk—separate from **File → Print…**, from **New Text Document** windows, and from ad-hoc **`##capture`**.
 
-**`##capture`** toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run **`##capture`** again to stop; Savitar confirms the file path in the output pane as a link; click it to open the capture in the app set under **Settings → Input & Display → Open capture files with** (Savitar by default). Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging: ANSI stripped, HTML reduced to readable text, Unix line endings.
+**`##capture`** toggles on-the-fly capture of session output to a plain-text file you choose in a save panel. Run **`##capture`** again to stop; Savitar confirms the file path in the output pane as a link; click it to open the capture in the app set under **Settings → Input & Display → Open capture files with** (Savitar by default). Capture begins at the toggle point (earlier output is not retroactively written). The capture file uses the same plain-text rules as continuous logging and continuous speech: ANSI stripped, Unix line endings, and HTML reduced to readable text only when **Interpret HTML tags** is on. Literal `<…>` prompts are kept when that setting is off.
 
 See [Local commands → Session and output](#session-and-output) for syntax.
 

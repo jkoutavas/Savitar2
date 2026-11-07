@@ -188,6 +188,9 @@ class OutputView: WKWebView {
                 attributes _: [NSAttributedString.Key: Any]? = nil) {
         let mutedBell = AppContext.shared.prefs.flags.contains(.muteBell)
         let displayString = TerminalBell.process(string, muted: mutedBell)
+        // Copy before the display parse. ansiToHtml.buffer resumes a CSI sequence split
+        // across reads; parsing plain text on that same value would consume the resume.
+        let plainTextParser = ansiToHtml
 
         // Clean-up incoming string by replacing carriage returns and linefeeds with HTML <br> elements
         var cleanString = displayString
@@ -212,25 +215,27 @@ class OutputView: WKWebView {
             output(html: htmlStr, makeAppend: makeAppend, appending: appending, appendID: appendID)
         }
 
-        var plainText: String?
-        if loggingFileHandle != nil || (!skipCapture && captureFileHandle != nil) {
-            plainText = plainTextForLogging(displayString)
-            if let text = plainText {
-                appendPlainTextToOutputFiles(text, capture: !skipCapture)
+        let captureThisLine = !skipCapture && captureFileHandle != nil
+        let writePlainText = loggingFileHandle != nil || captureThisLine
+        let speak = Self.shouldSpeakIncomingOutput()
+        if writePlainText || speak {
+            let plainText = OutputPlainText.string(from: displayString,
+                                                   interpretHTML: useHTML,
+                                                   ansiParser: plainTextParser)
+            if writePlainText {
+                appendPlainTextToOutputFiles(plainText, capture: captureThisLine)
             }
-        }
-
-        if AppContext.hasContinuousSpeech(),
-           AppContext.shared.prefs.continuousSpeechEnabled,
-           !AppContext.shared.prefs.flags.contains(.muteSpeaking) {
-            if plainText == nil {
-                plainText = ansiToHtml.parse(ansi: displayString, hideANSI: true)
-            }
-            if let text = plainText {
+            if speak {
                 let voice = AppContext.shared.speakerMan.resolvedContinuousSpeechVoiceName()
-                AppContext.shared.speakerMan.speak(text: text, voiceName: voice)
+                AppContext.shared.speakerMan.speak(text: plainText, voiceName: voice)
             }
         }
+    }
+
+    private static func shouldSpeakIncomingOutput() -> Bool {
+        return AppContext.hasContinuousSpeech()
+            && AppContext.shared.prefs.continuousSpeechEnabled
+            && !AppContext.shared.prefs.flags.contains(.muteSpeaking)
     }
 
     func outputEchoBack(string: String,
@@ -247,7 +252,12 @@ class OutputView: WKWebView {
                            skipCapture: skipCapture)
 
         if loggingFileHandle != nil || (!skipCapture && captureFileHandle != nil) {
-            let plainText = plainTextForLogging(displayString)
+            // Echo is shown with brackets escaped, so the log keeps typed characters
+            // even when the world interprets HTML. A fresh parser avoids the session
+            // CSI resume buffer, which belongs to server output.
+            let plainText = OutputPlainText.string(from: displayString,
+                                                   interpretHTML: false,
+                                                   ansiParser: Ansi2HtmlParser())
             appendPlainTextToOutputFiles(plainText, capture: !skipCapture)
         }
     }
@@ -558,20 +568,6 @@ class OutputView: WKWebView {
         #if DEBUG_WKWEBKIT
 //        printDOM(element: "document.head.innerHTML")
         #endif
-    }
-
-    private func plainTextForLogging(_ displayString: String) -> String {
-        let normalized = displayString
-            .replacingOccurrences(of: "\r\n", with: "\n")
-            .replacingOccurrences(of: "\r", with: "\n")
-        var text = ansiToHtml.parse(ansi: normalized, hideANSI: true)
-        if text.contains("<") {
-            let wrapped = "<!DOCTYPE html><html><body>\(text)</body></html>"
-            if let plain = wrapped.html2AttributedString {
-                text = plain
-            }
-        }
-        return text
     }
 
     private func appendPlainTextToOutputFiles(_ text: String, capture: Bool = true) {

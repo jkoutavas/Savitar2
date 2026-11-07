@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Continuous speech, logs, and capture** — plain text no longer depends on whether a session log or `##capture` is open. HTML tags and entities are removed only when **Interpret HTML tags** is on, so a literal `<HP …>` prompt is kept when that setting is off (#133)
+
 ## [2.0.31] - 2026-10-17
 
 ### Added
